@@ -1,0 +1,14 @@
+import { Paper } from '@mui/material';
+import React from 'react';
+
+export type ContainerProps = {
+  // Provide a hexcode for the element background color
+  background: string;
+  // Padding in pixels.
+  padding?: number | string;
+  children: React.ReactNode;
+};
+
+export function Container({ background, padding = 0, children }: ContainerProps) {
+  return <Paper style={{ margin: '5px 0', background, padding: `${padding}px` }}>{children}</Paper>;
+}
