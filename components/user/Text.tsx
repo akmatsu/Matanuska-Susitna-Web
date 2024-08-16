@@ -1,14 +1,12 @@
 'use client';
+import { useEditorDragAndDrop } from '@/hooks/useEditorDragAndDrop';
 import React from 'react';
-import { useNode } from '@craftjs/core';
 
 export const Text = ({ text, fontSize }: { text: string; fontSize: string }) => {
-  const {
-    connectors: { connect, drag },
-  } = useNode();
+  const editorDragAndDrop = useEditorDragAndDrop();
 
   return (
-    <div ref={(ref) => (ref ? connect(drag(ref)) : undefined)}>
+    <div ref={editorDragAndDrop}>
       <p style={{ fontSize }}>{text}</p>
     </div>
   );

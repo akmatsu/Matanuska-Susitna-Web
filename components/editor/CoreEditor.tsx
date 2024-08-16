@@ -1,14 +1,14 @@
 'use client';
 import { Grid, Paper } from '@mui/material';
 import { TopBar } from './TopBar';
-import { Btn, Card, Container, Text } from '../user';
+import { Btn, Card, CardBottom, CardTop, Container, Text } from '../user';
 import { Toolbox } from './Toolbox';
 import { SettingsPanel } from './SettingsPanel';
 import { Editor, Frame, Element } from '@craftjs/core';
 
 export function CoreEditor() {
   return (
-    <Editor resolver={{ Card, Btn, Text, Container }}>
+    <Editor resolver={{ Card, Btn, Text, Container, CardBottom, CardTop }}>
       <Grid container direction="column" spacing={3} style={{ paddingTop: '10px' }}>
         <TopBar />
         <Grid container spacing={3}>

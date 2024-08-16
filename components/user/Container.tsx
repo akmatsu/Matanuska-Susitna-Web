@@ -1,3 +1,5 @@
+'use client';
+import { useEditorDragAndDrop } from '@/hooks/useEditorDragAndDrop';
 import { Paper } from '@mui/material';
 import React from 'react';
 
@@ -10,5 +12,10 @@ export type ContainerProps = {
 };
 
 export function Container({ background, padding = 0, children }: ContainerProps) {
-  return <Paper style={{ margin: '5px 0', background, padding: `${padding}px` }}>{children}</Paper>;
+  const editorDragAndDrop = useEditorDragAndDrop();
+  return (
+    <Paper ref={editorDragAndDrop} style={{ margin: '5px 0', background, padding: `${padding}px` }}>
+      {children}
+    </Paper>
+  );
 }
