@@ -2,7 +2,7 @@
 import { useEditorDragAndDrop } from '@/hooks/useEditorDragAndDrop';
 import React from 'react';
 
-export const Text = ({ text, fontSize }: { text: string; fontSize: string }) => {
+export const Text = ({ text, fontSize = '16' }: { text: string; fontSize?: string }) => {
   const editorDragAndDrop = useEditorDragAndDrop();
 
   return (

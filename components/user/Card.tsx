@@ -1,9 +1,10 @@
 'use client';
-import { Element, useNode } from '@craftjs/core';
+import { Element } from '@craftjs/core';
 import { Btn } from './Btn';
 import { Container } from './Container';
 import { Text } from './Text';
-import React, { Children } from 'react';
+import React from 'react';
+import { useEditorCanvas } from '@/hooks/useEditorCanvas';
 
 export type CardProps = {
   background?: string;
@@ -11,12 +12,10 @@ export type CardProps = {
 };
 
 export const CardTop = ({ children }: { children: React.ReactNode }) => {
-  const {
-    connectors: { connect },
-  } = useNode();
+  const canvas = useEditorCanvas();
 
   return (
-    <div ref={connect} className="text-only">
+    <div ref={canvas} className="text-only">
       {children}
     </div>
   );
@@ -30,11 +29,9 @@ CardTop.craft = {
 };
 
 export const CardBottom = ({ children }: { children: React.ReactNode }) => {
-  const {
-    connectors: { connect },
-  } = useNode();
+  const canvas = useEditorCanvas();
 
-  return <div ref={connect}>{children}</div>;
+  return <div ref={canvas}>{children}</div>;
 };
 
 CardBottom.craft = {
@@ -51,7 +48,7 @@ export const Card = ({ background = 'default', padding = 20 }: CardProps) => {
         <Text text="Title" fontSize="20" />
         <Text text="Subtitle" fontSize="15" />
       </Element>
-      <Element id="btns" is={CardBottom} canvas>
+      <Element id="buttons" is={CardBottom} canvas>
         <Btn size="small" variant="contained" color="primary">
           Learn More
         </Btn>
