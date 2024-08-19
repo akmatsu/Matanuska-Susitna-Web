@@ -4,16 +4,19 @@ import { Box, Button, Chip, FormControl, FormLabel, Grid, Slider, Typography } f
 import React from 'react';
 
 export const SettingsPanel = () => {
-  const { selected } = useEditor((state) => {
-    const [currentlySelectedId] = Array.from(state.events.selected);
+  const { actions, selected } = useEditor((state, query) => {
+    const [currentNodeId] = Array.from(state.events.selected);
     let selected;
-    if (currentlySelectedId) {
+
+    if (currentNodeId) {
       selected = {
-        id: currentlySelectedId,
-        name: state.nodes[currentlySelectedId].data.name,
-        settings: state.nodes[currentlySelectedId].related?.settings,
+        id: currentNodeId,
+        name: state.nodes[currentNodeId].data.name,
+        settings: state.nodes[currentNodeId].related?.settings,
+        isDeletable: query.node(currentNodeId).isDeletable(),
       };
     }
+
     return {
       selected,
     };
@@ -35,13 +38,11 @@ export const SettingsPanel = () => {
           </Box>
         </Grid>
         {selected.settings && React.createElement(selected.settings)}
-        <FormControl size="small" component="fieldset">
-          <FormLabel component="legend">Prop</FormLabel>
-          <Slider defaultValue={0} step={1} min={7} max={50} valueLabelDisplay="auto" />
-        </FormControl>
-        <Button variant="contained" color="inherit">
-          Delete
-        </Button>
+        {selected.isDeletable ? (
+          <Button variant="contained" color="error" onClick={() => actions.delete(selected.id)}>
+            Delete
+          </Button>
+        ) : null}
       </Grid>
     </Box>
   ) : null;
