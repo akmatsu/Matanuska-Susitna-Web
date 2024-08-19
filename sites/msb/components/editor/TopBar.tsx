@@ -45,6 +45,10 @@ export const TopBar = () => {
     }
   }
 
+  function logState() {
+    console.log(q);
+  }
+
   return (
     <Box px={1} py={1} mt={3} mb={1} bgcolor="#cbe8e7">
       <Grid container alignItems="center">
@@ -56,6 +60,15 @@ export const TopBar = () => {
           />
         </Grid>
         <Grid item>
+          <Button
+            className="copy-state-btn"
+            size="small"
+            variant="outlined"
+            color="secondary"
+            onClick={logState}
+          >
+            console log current state
+          </Button>
           <Button
             className="copy-state-btn"
             size="small"
