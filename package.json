@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "msb:dev": "pnpm -F msb run dev"
+    "msb:dev": "pnpm -F msb run dev",
+    "cms:dev": "pnpm -F cms run develop"
   },
   "keywords": [],
   "author": "",
