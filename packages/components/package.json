@@ -1,0 +1,24 @@
+{
+  "name": "components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "next": "14.2.5",
+    "react": "^18.3.1"
+  },
+  "peerDependencies": {
+    "next": "14.2.5",
+    "react": "^18.3.1"
+  }
+}
