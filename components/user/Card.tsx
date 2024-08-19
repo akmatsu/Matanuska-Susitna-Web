@@ -1,7 +1,7 @@
 'use client';
 import { Element } from '@craftjs/core';
 import { Btn } from './Btn';
-import { Container } from './Container';
+import { Container, ContainerDefaultProps, ContainerSettings } from './Container';
 import { Text } from './Text';
 import React from 'react';
 import { useEditorCanvas } from '@/hooks/useEditorCanvas';
@@ -55,4 +55,11 @@ export const Card = ({ background = 'default', padding = 20 }: CardProps) => {
       </Element>
     </Container>
   );
+};
+
+Card.craft = {
+  props: ContainerDefaultProps,
+  related: {
+    settings: ContainerSettings,
+  },
 };
