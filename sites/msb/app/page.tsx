@@ -1,5 +1,5 @@
-import { CoreEditor } from '@/components';
 import { Typography } from '@mui/material';
+import { MButton } from 'components';
 
 export default function Home() {
   return (
@@ -7,7 +7,7 @@ export default function Home() {
       <Typography variant="h5" align="center">
         A super simple page editor
       </Typography>
-      <CoreEditor />
+      <MButton>Yeehaw</MButton>
     </main>
   );
 }
