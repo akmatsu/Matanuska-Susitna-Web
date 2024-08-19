@@ -1,6 +1,6 @@
 'use client';
 import { useEditor } from '@craftjs/core';
-import { Box, Button, Chip, FormControl, FormLabel, Grid, Slider, Typography } from '@mui/material';
+import { Box, Button, Chip, Grid, Typography } from '@mui/material';
 import React from 'react';
 
 export const SettingsPanel = () => {
