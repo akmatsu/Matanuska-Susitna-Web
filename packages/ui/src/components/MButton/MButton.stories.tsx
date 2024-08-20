@@ -4,6 +4,7 @@ import { MButton } from './MButton';
 
 const meta = {
   component: MButton,
+  tags: ['autodocs'],
 } satisfies Meta<typeof MButton>;
 
 export default meta;
@@ -14,5 +15,4 @@ export const Default: Story = {
   args: {
     children: 'muffins',
   },
-  tags: ['autodocs'],
 };

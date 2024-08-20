@@ -1,1 +1,6 @@
-module.exports = require('@matsugov/configs/postcss.config');
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};

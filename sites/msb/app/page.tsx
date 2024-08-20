@@ -7,7 +7,7 @@ export default function Home() {
       <Typography variant="h5" align="center">
         A super simple page editor
       </Typography>
-      <MButton>Yeehaw</MButton>
+      <MButton>Click me</MButton>
     </main>
   );
 }

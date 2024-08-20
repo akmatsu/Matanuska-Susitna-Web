@@ -8,5 +8,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@matsugov/ui": "workspace:^"
+  },
+  "peerDependencies": {
+    "@matsugov/ui": "workspace:^"
+  }
 }
