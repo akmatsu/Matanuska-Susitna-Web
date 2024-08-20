@@ -1,6 +1,2 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  theme: {
-    // ... your theme configuration
-  },
-};
+module.exports = require('@matsugov/configs/tailwind.config');

@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { MButton } from 'components';
+import { MButton } from '@matsugov/ui';
 
 export default function Home() {
   return (

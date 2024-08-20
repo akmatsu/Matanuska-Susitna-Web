@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
+    "@matsugov/configs": "workspace:^",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
     "@storybook/addon-links": "^8.2.9",
