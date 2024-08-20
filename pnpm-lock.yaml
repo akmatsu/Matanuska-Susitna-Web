@@ -33,7 +33,7 @@ importers:
         specifier: ^8.2.0
         version: 8.2.0(eslint@8.57.0)(typescript@5.5.4)
 
-  packages/components:
+  packages/ui:
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^1.6.1
@@ -144,12 +144,12 @@ importers:
       '@emotion/styled':
         specifier: ^11.13.0
         version: 11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@18.3.1))(@types/react@18.3.3)(react@18.3.1)
+      '@matsugov/ui':
+        specifier: workspace:^
+        version: link:../../packages/ui
       '@mui/material':
         specifier: ^5.16.7
         version: 5.16.7(@emotion/react@11.13.0(@types/react@18.3.3)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@18.3.1))(@types/react@18.3.3)(react@18.3.1))(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      components:
-        specifier: workspace:^
-        version: link:../../packages/components
       copy-to-clipboard:
         specifier: ^3.3.3
         version: 3.3.3
@@ -190,6 +190,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.3.1
         version: 4.3.1(vite@5.2.8(@types/node@20.16.1)(terser@5.31.6))
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.4.20(postcss@8.4.41)
       eslint-config-next:
         specifier: 14.2.5
         version: 14.2.5(eslint@8.57.0)(typescript@5.5.4)
@@ -197,10 +200,10 @@ importers:
         specifier: ^24.1.1
         version: 24.1.1
       postcss:
-        specifier: ^8
+        specifier: ^8.4.41
         version: 8.4.41
       tailwindcss:
-        specifier: ^3.4.1
+        specifier: ^3.4.10
         version: 3.4.10
       vitest:
         specifier: ^2.0.5
@@ -3981,6 +3984,13 @@ packages:
     engines: {node: '>= 4.5.0'}
     hasBin: true
 
+  autoprefixer@10.4.20:
+    resolution: {integrity: sha512-XY25y5xSv/wEoqzDyXXME4AFfkZI0P23z6Fs3YgymDnKJkCGOnkL0iTxCa85UTqaSgfcqyf3UA6+c7wUvx/16g==}
+    engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
+    peerDependencies:
+      postcss: ^8.1.0
+
   available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
@@ -5474,6 +5484,9 @@ packages:
   forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
+
+  fraction.js@4.3.7:
+    resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
   fractional-indexing@3.2.0:
     resolution: {integrity: sha512-PcOxmqwYCW7O2ovKRU8OoQQj2yqTfEB/yeTYk4gPid6dN5ODRfU1hXd9tTVZzax/0NkO7AxpHykvZnT1aYp/BQ==}
@@ -7133,6 +7146,10 @@ packages:
 
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
+    engines: {node: '>=0.10.0'}
+
+  normalize-range@0.1.2:
+    resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
 
   normalize-url@6.1.0:
@@ -11603,6 +11620,23 @@ snapshots:
       type-fest: 4.25.0
       webpack-hot-middleware: 2.26.1
 
+  '@pmmmwh/react-refresh-webpack-plugin@0.5.11(react-refresh@0.14.2)(type-fest@4.25.0)(webpack-hot-middleware@2.26.1)(webpack@5.93.0(esbuild@0.21.3))':
+    dependencies:
+      ansi-html-community: 0.0.8
+      common-path-prefix: 3.0.0
+      core-js-pure: 3.38.0
+      error-stack-parser: 2.1.4
+      find-up: 5.0.0
+      html-entities: 2.5.2
+      loader-utils: 2.0.4
+      react-refresh: 0.14.2
+      schema-utils: 3.3.0
+      source-map: 0.7.4
+      webpack: 5.93.0(esbuild@0.21.3)
+    optionalDependencies:
+      type-fest: 4.25.0
+      webpack-hot-middleware: 2.26.1
+
   '@pnpm/config.env-replace@1.1.0': {}
 
   '@pnpm/network.ca-file@1.0.2':
@@ -12514,7 +12548,7 @@ snapshots:
       process: 0.11.10
       recast: 0.23.9
       util: 0.12.5
-      ws: 8.13.0
+      ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -12562,7 +12596,7 @@ snapshots:
       '@babel/preset-react': 7.24.7(@babel/core@7.25.2)
       '@babel/preset-typescript': 7.24.7(@babel/core@7.25.2)
       '@babel/runtime': 7.25.0
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.11(react-refresh@0.14.0)(type-fest@4.25.0)(webpack-hot-middleware@2.26.1)(webpack@5.93.0(esbuild@0.21.3))
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.11(react-refresh@0.14.2)(type-fest@4.25.0)(webpack-hot-middleware@2.26.1)(webpack@5.93.0(esbuild@0.21.3))
       '@storybook/builder-webpack5': 8.2.9(esbuild@0.21.3)(storybook@8.2.9(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)
       '@storybook/preset-react-webpack': 8.2.9(esbuild@0.21.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)
       '@storybook/react': 8.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.9(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)
@@ -12582,7 +12616,7 @@ snapshots:
       postcss-loader: 8.1.1(postcss@8.4.41)(typescript@5.5.4)(webpack@5.93.0(esbuild@0.21.3))
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-refresh: 0.14.0
+      react-refresh: 0.14.2
       resolve-url-loader: 5.0.0
       sass-loader: 12.6.0(webpack@5.93.0(esbuild@0.21.3))
       semver: 7.6.3
@@ -14752,6 +14786,16 @@ snapshots:
 
   atob@2.1.2: {}
 
+  autoprefixer@10.4.20(postcss@8.4.41):
+    dependencies:
+      browserslist: 4.23.3
+      caniuse-lite: 1.0.30001651
+      fraction.js: 4.3.7
+      normalize-range: 0.1.2
+      picocolors: 1.0.1
+      postcss: 8.4.41
+      postcss-value-parser: 4.2.0
+
   available-typed-arrays@1.0.7:
     dependencies:
       possible-typed-array-names: 1.0.0
@@ -16242,16 +16286,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.8.1(@typescript-eslint/parser@8.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint@8.57.0):
-    dependencies:
-      debug: 3.2.7
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.2.0(eslint@8.57.0)(typescript@5.5.4)
-      eslint: 8.57.0
-      eslint-import-resolver-node: 0.3.9
-    transitivePeerDependencies:
-      - supports-color
-
   eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0):
     dependencies:
       array-includes: 3.1.8
@@ -16262,7 +16296,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@8.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint@8.57.0)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
       hasown: 2.0.2
       is-core-module: 2.15.0
       is-glob: 4.0.3
@@ -16751,6 +16785,8 @@ snapshots:
       tslib: 2.6.3
 
   forwarded@0.2.0: {}
+
+  fraction.js@4.3.7: {}
 
   fractional-indexing@3.2.0: {}
 
@@ -18579,6 +18615,8 @@ snapshots:
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
+
+  normalize-range@0.1.2: {}
 
   normalize-url@6.1.0: {}
 
