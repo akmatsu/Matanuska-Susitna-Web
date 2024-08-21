@@ -1,16 +1,17 @@
 import React from 'react';
+import { Button } from '@headlessui/react';
 
 export type MButtonProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
+/**
+ * Primary
+ */
 export const MButton = ({ children }: MButtonProps) => {
   return (
-    <button
-      style={{ border: 'none' }}
-      className="bg-primary px-4 py-2 rounded shadow-lg hover:bg-red-400 transition-colors active:bg-red-300 active:transition-none"
-    >
+    <Button className="bg-primary-default px-4 py-2 rounded shadow-lg hover:bg-primary-hover transition-colors active:bg-primary-active active:transition-none text-white">
       {children}
-    </button>
+    </Button>
   );
 };

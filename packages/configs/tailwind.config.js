@@ -15,7 +15,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.blue['500'],
+        primary: {
+          default: colors.blue['500'],
+          hover: colors.blue['400'],
+          active: colors.blue['300'],
+        },
       },
     },
   },

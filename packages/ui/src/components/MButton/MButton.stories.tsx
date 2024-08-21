@@ -4,7 +4,6 @@ import { MButton } from './MButton';
 
 const meta = {
   component: MButton,
-  tags: ['autodocs'],
 } satisfies Meta<typeof MButton>;
 
 export default meta;
