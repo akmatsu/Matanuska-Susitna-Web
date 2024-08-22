@@ -1,0 +1,31 @@
+{
+  "name": "@matsugov/ui-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@matsugov/configs": "workspace:^",
+    "@matsugov/ui": "workspace:^",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "react": "^18.3.1",
+    "tailwindcss": "^3.4.10"
+  },
+  "peerDependencies": {
+    "@matsugov/ui": "workspace:^",
+    "react": "^18.3.1"
+  },
+  "dependencies": {
+    "@craftjs/core": "^0.2.10",
+    "@types/react": "^18",
+    "copy-to-clipboard": "^3.3.3",
+    "lzutf8": "^0.6.3",
+    "react-contenteditable": "^3.3.7"
+  }
+}

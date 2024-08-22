@@ -1,13 +1,10 @@
-import { Typography } from '@mui/material';
 import { MButton } from '@matsugov/ui';
+import { CoreEditor } from '@matsugov/ui-editor';
 
 export default function Home() {
   return (
     <main style={{ margin: '0 auto', width: '800px' }}>
-      <Typography variant="h5" align="center">
-        A super simple page editor
-      </Typography>
-      <MButton>Click me</MButton>
+      <CoreEditor />
     </main>
   );
 }

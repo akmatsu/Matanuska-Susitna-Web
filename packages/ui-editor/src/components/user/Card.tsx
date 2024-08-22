@@ -1,10 +1,10 @@
 'use client';
 import { Element } from '@craftjs/core';
 import { Btn } from './Btn';
-import { Container, ContainerDefaultProps, ContainerSettings } from './Container';
+import { Container, ContainerDefaultProps } from './Container';
 import { Text } from './Text';
 import React from 'react';
-import { useEditorCanvas } from '@/hooks/useEditorCanvas';
+import { useEditorCanvas } from '../../hooks/useEditorCanvas';
 
 export type CardProps = {
   background?: string;
@@ -24,7 +24,9 @@ export const CardTop = ({ children }: { children: React.ReactNode }) => {
 CardTop.craft = {
   rules: {
     canMoveIn: (incomingNodes: any) =>
-      incomingNodes.every((incomingNode: any) => incomingNode.data.type === Text),
+      incomingNodes.every(
+        (incomingNode: any) => incomingNode.data.type === Text,
+      ),
   },
 };
 
@@ -37,7 +39,9 @@ export const CardBottom = ({ children }: { children: React.ReactNode }) => {
 CardBottom.craft = {
   rules: {
     canMoveIn: (incomingNodes: any) =>
-      incomingNodes.every((incomingNode: any) => incomingNode.data.type === Btn),
+      incomingNodes.every(
+        (incomingNode: any) => incomingNode.data.type === Btn,
+      ),
   },
 };
 
@@ -49,9 +53,7 @@ export const Card = ({ background = 'default', padding = 20 }: CardProps) => {
         <Text text="Subtitle" fontSize="15" />
       </Element>
       <Element id="buttons" is={CardBottom} canvas>
-        <Btn size="small" variant="contained" color="primary">
-          Learn More
-        </Btn>
+        <Btn color="primary">Learn More</Btn>
       </Element>
     </Container>
   );
@@ -60,6 +62,6 @@ export const Card = ({ background = 'default', padding = 20 }: CardProps) => {
 Card.craft = {
   props: ContainerDefaultProps,
   related: {
-    settings: ContainerSettings,
+    // settings: ContainerSettings,
   },
 };

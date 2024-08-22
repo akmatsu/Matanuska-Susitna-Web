@@ -21,16 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "../../packages/ui-editor/src/components/user/Btn.tsx",
-    "../../packages/ui-editor/src/components/user/Card.tsx",
-    "../../packages/ui-editor/src/components/user/Container.tsx",
-    "../../packages/ui-editor/src/components/user/index.ts",
-    "../../packages/ui-editor/src/components/user/Text.tsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

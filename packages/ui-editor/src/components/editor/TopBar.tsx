@@ -1,19 +1,5 @@
 'use client';
 import { useEditor } from '@craftjs/core';
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  FormControlLabel,
-  FormControlLabelProps,
-  Grid,
-  Snackbar,
-  Switch,
-  TextField,
-} from '@mui/material';
 import copy from 'copy-to-clipboard';
 import lz from 'lzutf8';
 import { useState } from 'react';
@@ -87,7 +73,12 @@ export const TopBar = () => {
           >
             Load
           </Button>
-          <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} fullWidth maxWidth="md">
+          <Dialog
+            open={dialogOpen}
+            onClose={() => setDialogOpen(false)}
+            fullWidth
+            maxWidth="md"
+          >
             <DialogTitle id="alert-dialog-title">Load state</DialogTitle>
             <DialogContent>
               <TextField
