@@ -3,6 +3,7 @@ import { useEditor } from '@craftjs/core';
 import copy from 'copy-to-clipboard';
 import lz from 'lzutf8';
 import { useState } from 'react';
+import { MCard, MButton } from '@matsugov/ui';
 
 export const TopBar = () => {
   const { actions, query, enabled } = useEditor((state) => ({
@@ -36,44 +37,38 @@ export const TopBar = () => {
   }
 
   return (
-    <Box px={1} py={1} mt={3} mb={1} bgcolor="#cbe8e7">
-      <Grid container alignItems="center">
-        <Grid item xs>
-          <FormControlLabel
+    <MCard>
+      <div className="flex items-center justify-between">
+        <div>
+          {/* <FormControlLabel
             className="enable-disable-toggle"
             control={<Switch checked={enabled} onChange={setEnable} />}
             label="enable"
-          />
-        </Grid>
-        <Grid item>
-          <Button
+          /> */}
+        </div>
+        <div>
+          <MButton
             className="copy-state-btn"
-            size="small"
-            variant="outlined"
             color="secondary"
             onClick={logState}
           >
             console log current state
-          </Button>
-          <Button
+          </MButton>
+          <MButton
             className="copy-state-btn"
-            size="small"
-            variant="outlined"
             color="secondary"
             onClick={copyState}
           >
             Copy current state
-          </Button>
-          <Button
+          </MButton>
+          <MButton
             className="copy-state-btn"
-            size="small"
-            variant="outlined"
             color="secondary"
             onClick={() => setDialogOpen(true)}
           >
             Load
-          </Button>
-          <Dialog
+          </MButton>
+          {/* <Dialog
             open={dialogOpen}
             onClose={() => setDialogOpen(false)}
             fullWidth
@@ -105,9 +100,9 @@ export const TopBar = () => {
             open={!!message}
             onClose={() => setMessage(undefined)}
             message={<span>{message}</span>}
-          />
-        </Grid>
-      </Grid>
-    </Box>
+          /> */}
+        </div>
+      </div>
+    </MCard>
   );
 };

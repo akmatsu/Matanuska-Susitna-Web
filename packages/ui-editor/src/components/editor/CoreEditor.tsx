@@ -9,7 +9,7 @@ import { MCard } from '@matsugov/ui';
 export function CoreEditor() {
   return (
     <Editor resolver={{ Card, Btn, Text, Container, CardBottom, CardTop }}>
-      {/* <TopBar /> */}
+      <TopBar />
 
       <div className="flex w-full gap-6">
         <div className="w-full flex-grow">

@@ -10,11 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@matsugov/ui": "workspace:^",
-    "tailwindcss": "^3.4.10"
+    "@matsugov/ui": "workspace:^"
   },
   "peerDependencies": {
-    "@matsugov/ui": "workspace:^",
-    "tailwindcss": "^3.4.10"
+    "@matsugov/ui": "workspace:^"
   }
 }

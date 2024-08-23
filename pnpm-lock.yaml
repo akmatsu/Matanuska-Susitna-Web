@@ -11,6 +11,9 @@ importers:
       '@eslint/js':
         specifier: ^9.9.0
         version: 9.9.0
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.4.20(postcss@8.4.41)
       eslint:
         specifier: ^8
         version: 8.57.0
@@ -20,9 +23,15 @@ importers:
       globals:
         specifier: ^15.9.0
         version: 15.9.0
+      postcss:
+        specifier: ^8.4.41
+        version: 8.4.41
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
+      tailwindcss:
+        specifier: ^3.4.10
+        version: 3.4.10
       turbo:
         specifier: ^2.0.14
         version: 2.0.14
@@ -38,9 +47,6 @@ importers:
       '@matsugov/ui':
         specifier: workspace:^
         version: link:../ui
-      tailwindcss:
-        specifier: ^3.4.10
-        version: 3.4.10
 
   packages/ui:
     dependencies:
@@ -139,18 +145,9 @@ importers:
       '@matsugov/ui':
         specifier: workspace:^
         version: link:../ui
-      autoprefixer:
-        specifier: ^10.4.20
-        version: 10.4.20(postcss@8.4.41)
-      postcss:
-        specifier: ^8.4.41
-        version: 8.4.41
       react:
         specifier: ^18.3.1
         version: 18.3.1
-      tailwindcss:
-        specifier: ^3.4.10
-        version: 3.4.10
 
   sites/cms:
     dependencies:

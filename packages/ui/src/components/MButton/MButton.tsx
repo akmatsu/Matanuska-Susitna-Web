@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@headlessui/react';
-import Link, { LinkProps } from 'next/link';
+import Link from 'next/link';
 
 export type MButtonProps = {
   children?: React.ReactNode;
