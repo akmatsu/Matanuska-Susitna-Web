@@ -7,10 +7,10 @@ module.exports = {
       path.dirname(require.resolve('@matsugov/ui')),
       '**/*.{js,ts,jsx,tsx}',
     ),
-    // path.join(
-    //   path.dirname(require.resolve('@matsugov/ui-editor')),
-    //   '**/*.{js,ts,jsx,tsx}',
-    // ),
+    path.join(
+      path.dirname(require.resolve('@matsugov/ui-editor')),
+      '**/*.{js,ts,jsx,tsx}',
+    ),
   ],
   presets: [require('@matsugov/configs/tailwind.config')],
 };

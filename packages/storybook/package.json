@@ -13,7 +13,6 @@
   "license": "ISC",
   "devDependencies": {
     "@chromatic-com/storybook": "^1.7.0",
-    "@matsugov/ui-editor": "workspace:^",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
     "@storybook/addon-links": "^8.2.9",
@@ -26,6 +25,7 @@
   },
   "dependencies": {
     "@matsugov/ui": "workspace:^",
+    "@matsugov/ui-editor": "workspace:^",
     "next": "14.2.5",
     "react": "^18.3.1"
   }

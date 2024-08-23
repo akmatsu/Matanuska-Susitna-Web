@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { MButton } from '../../../ui/src/components/MButton/MButton';
+import { MButton } from '@matsugov/ui';
 
 const meta = {
   component: MButton,

@@ -4,7 +4,7 @@ import React, { ForwardedRef } from 'react';
 export type MSwitchProps = {
   checked: boolean;
   label?: string;
-  onChange: () => void;
+  onChange?: () => void;
 };
 
 /**

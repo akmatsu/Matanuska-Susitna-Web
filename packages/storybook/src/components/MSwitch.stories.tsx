@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MSwitch } from '../../../ui/src/components/MSwitch/MSwitch';
+import { MSwitch } from '@matsugov/ui';
 
 const meta = {
   component: MSwitch,
@@ -10,5 +10,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    checked: true,
+  },
 };
