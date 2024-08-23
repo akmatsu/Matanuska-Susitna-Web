@@ -7,14 +7,6 @@ module.exports = {
     './components/**/*.{tsx,ts,jsx,js}',
     './app/**/*.{ts,tsx,js,jsx}',
     './src/**/*.{ts,tsx,js,jsx',
-    path.join(
-      path.dirname(require.resolve('@matsugov/ui')),
-      '**/*.{js,ts,jsx,tsx}',
-    ),
-    path.join(
-      path.dirname(require.resolve('@matsugov/ui-editor')),
-      '**/*.{js,ts,jsx,tsx}',
-    ),
   ],
   theme: {
     extend: {
