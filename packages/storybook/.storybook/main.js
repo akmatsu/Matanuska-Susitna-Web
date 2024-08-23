@@ -22,6 +22,5 @@ const config = {
     name: getAbsolutePath('@storybook/nextjs'),
     options: {},
   },
-  tags: ['autodoc'],
 };
 export default config;

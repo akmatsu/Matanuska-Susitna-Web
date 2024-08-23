@@ -7,7 +7,7 @@
     "dev": "turbo dev --filter=\"./sites\"",
     "msb:dev": "pnpm -F msb run dev",
     "cms:dev": "pnpm -F cms run dev",
-    "ui:sb": "pnpm -F @matsugov/ui storybook"
+    "storybook": "pnpm -F storybook storybook"
   },
   "keywords": [],
   "author": "",

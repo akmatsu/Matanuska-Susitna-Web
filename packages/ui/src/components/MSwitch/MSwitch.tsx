@@ -24,11 +24,11 @@ export const MSwitch = React.forwardRef(function MSwitch(
       >
         <span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />
       </Switch>
-      {props.label && (
+      {/* {props.label && (
         <Label className="flex items-center justify-center">
           {props.label}
         </Label>
-      )}
+      )} */}
     </Field>
   );
 });

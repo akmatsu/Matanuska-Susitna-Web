@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MCard } from './MCard';
+import { MCard } from '@matsugov/ui';
 
 const meta = {
   component: MCard,

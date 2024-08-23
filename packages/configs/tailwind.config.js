@@ -1,13 +1,7 @@
-const path = require('path');
 const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './components/**/*.{tsx,ts,jsx,js}',
-    './app/**/*.{ts,tsx,js,jsx}',
-    './src/**/*.{ts,tsx,js,jsx',
-  ],
   theme: {
     extend: {
       colors: {

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MSwitch } from './MSwitch';
+import { MSwitch } from '../../../ui/src/components/MSwitch/MSwitch';
 
 const meta = {
   component: MSwitch,

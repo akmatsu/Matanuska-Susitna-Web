@@ -4,27 +4,16 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "test": "vitest",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@chromatic-com/storybook": "^1.6.1",
     "@matsugov/configs": "workspace:^",
-    "@storybook/addon-essentials": "^8.2.9",
-    "@storybook/addon-interactions": "^8.2.9",
-    "@storybook/addon-links": "^8.2.9",
-    "@storybook/addon-onboarding": "^8.2.9",
-    "@storybook/blocks": "^8.2.9",
-    "@storybook/nextjs": "^8.2.9",
-    "@storybook/react": "^8.2.9",
-    "@storybook/test": "^8.2.9",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.0.0",
-    "@types/node": "^20",
+    "@types/node": "^20.16.1",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4.3.1",
@@ -32,6 +21,7 @@
     "next": "14.2.5",
     "react": "^18.3.1",
     "storybook": "^8.2.9",
+    "vite": "^5.4.2",
     "vitest": "^2.0.5"
   },
   "peerDependencies": {
