@@ -11,19 +11,19 @@
     "deploy": "strapi deploy"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/node": "^22.5.0",
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18.3.0"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.0.0-rc.7",
     "@strapi/plugin-users-permissions": "5.0.0-rc.7",
     "@strapi/strapi": "5.0.0-rc.7",
     "better-sqlite3": "9.4.3",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "^6.0.0",
-    "styled-components": "^6.0.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.1",
+    "styled-components": "^6.1.12"
   },
   "author": {
     "name": "A Strapi developer"

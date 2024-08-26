@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@craftjs/core": "^0.2.10",
-    "@types/react": "^18",
+    "@types/react": "^18.3.4",
     "copy-to-clipboard": "^3.3.3",
     "lzutf8": "^0.6.3",
     "react-contenteditable": "^3.3.7"

@@ -22,3 +22,24 @@
     @apply text-xl mb-4;
   }
 }
+
+@layer components {
+  .m-button-default {
+    @apply bg-surface-default hover:bg-surface-hover active:bg-surface-active text-surface-on;
+  }
+  .m-button-primary {
+    @apply bg-primary-default hover:bg-primary-hover active:bg-primary-active text-primary-on;
+  }
+  .m-button-secondary {
+    @apply bg-secondary-default hover:bg-secondary-hover active:bg-secondary-active text-secondary-on;
+  }
+  .m-button-warning {
+    @apply bg-warning-default hover:bg-warning-hover active:bg-primary-active text-warning-on;
+  }
+  .m-button-danger {
+    @apply bg-danger-default hover:bg-danger-hover active:bg-danger-active text-danger-on;
+  }
+  .m-button-success {
+    @apply bg-success-default hover:bg-success-hover active:bg-success-active text-success-on;
+  }
+}

@@ -23,6 +23,13 @@ export const SettingsPanel = () => {
     };
   });
 
+  function handleDelete() {
+    console.log('ran');
+    if (selected) {
+      actions.delete(selected.id);
+    }
+  }
+
   return selected ? (
     <div>
       {/* <Grid container direction="column" spacing={0}> */}
@@ -40,7 +47,7 @@ export const SettingsPanel = () => {
       {/* </Grid> */}
       {selected.settings && React.createElement(selected.settings)}
       {selected.isDeletable ? (
-        <MButton color="danger" onClick={() => actions.delete(selected.id)}>
+        <MButton color="danger" onClick={handleDelete}>
           Delete
         </MButton>
       ) : null}

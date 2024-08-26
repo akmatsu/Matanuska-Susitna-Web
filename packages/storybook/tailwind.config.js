@@ -5,7 +5,7 @@ module.exports = {
   content: [
     path.join(
       path.dirname(require.resolve('@matsugov/ui')),
-      '**/*.{js,ts,jsx,tsx}',
+      '**/*.{js,ts,jsx,tsx,css}',
     ),
     path.join(
       path.dirname(require.resolve('@matsugov/ui-editor')),
