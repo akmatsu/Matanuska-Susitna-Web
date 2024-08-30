@@ -32,7 +32,7 @@ jobs:
       run: |
         npm install -g pnpm
         pnpm install
-        pnpm run build
+        pnpm run msb:build
 
     - name: Deploy to AWS Amplify
       run: |
