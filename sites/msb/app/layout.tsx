@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 
-import '@matsugov/ui/src/styles/globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
+import '@trussworks/react-uswds/lib/index.css';
+import '../styles/index.scss';
+import { OfficialGovSiteNotice } from '@/components/OfficialGovSiteNotice';
+import { TopNavigation } from '@/components/TopNavigation';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <OfficialGovSiteNotice />
+        <TopNavigation />
+        <main>{children}</main>
+      </body>
     </html>
   );
 }

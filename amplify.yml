@@ -1,0 +1,20 @@
+version: 1
+applications:
+  - frontend:
+      phases:
+        preBuild:
+          commands:
+            - npx pnpm install
+        build:
+          commands:
+            - npm run msb:build
+      artifacts:
+        baseDirectory: sites/msb/.next
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - .next/cache/**/*
+          - node_modules/**/*
+      buildPath: /
+    appRoot: sites/msb
