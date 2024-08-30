@@ -7,7 +7,7 @@ applications:
             - npx pnpm install
         build:
           commands:
-            - npm run msb:build
+            - pnpm run msb:build
       artifacts:
         baseDirectory: sites/msb/.next
         files:
