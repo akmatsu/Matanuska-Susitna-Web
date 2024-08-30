@@ -10,7 +10,6 @@
     "postinstall": "node ./scripts/postinstall.cjs"
   },
   "dependencies": {
-    "@matsugov/ui-editor": "workspace:^",
     "@trussworks/react-uswds": "^9.1.0",
     "@uswds/uswds": "^3.8.2",
     "next": "14.2.7",

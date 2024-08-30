@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "msb:dev": "pnpm -F msb run dev",
+    "msb:build": "pnpm -F msb run build",
     "cms:dev": "pnpm -F cms run dev",
     "sb": "pnpm -F storybook storybook"
   },
