@@ -4,7 +4,8 @@ applications:
       phases:
         preBuild:
           commands:
-            - npx pnpm install
+            - npm install -g pnpm
+            - pnpm install
         build:
           commands:
             - pnpm run msb:build
