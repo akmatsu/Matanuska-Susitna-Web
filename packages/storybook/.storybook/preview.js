@@ -1,4 +1,4 @@
-import '@matsugov/ui/src/styles/globals.css';
+import '@matsugov/ui/src/styles/globals.scss';
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
