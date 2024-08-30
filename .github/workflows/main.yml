@@ -36,6 +36,4 @@ jobs:
 
     - name: Deploy to AWS Amplify
       run: |
-        aws amplify start-job --app-id ${{ secrets.AWS_AMPLIFY_APP_ID }} \
-          --branch-name main \  # Replace with your branch name
-          --job-type RELEASE
+        aws amplify start-job --app-id ${{ secrets.AWS_AMPLIFY_APP_ID }} --branch-name main --job-type RELEASE
