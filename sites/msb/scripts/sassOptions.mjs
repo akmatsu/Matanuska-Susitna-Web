@@ -8,9 +8,10 @@ import * as sass from 'sass';
  */
 export default function sassOptions(basePath = '') {
   return {
+    // ! This only need to go out 2 directories because it is relative to next.config.mjs not to the location of this file.
     includePaths: [
-      './node_modules/@uswds',
-      './node_modules/@uswds/uswds/packages',
+      '../../node_modules/@uswds',
+      '../../node_modules/@uswds/uswds/packages',
     ],
     functions: {
       'add-base-path($path)': (path) => {
