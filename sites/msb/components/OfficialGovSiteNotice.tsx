@@ -1,4 +1,5 @@
 'use client';
+import { appConfig } from '@/configs/config';
 import {
   Banner,
   BannerGuidance,
@@ -14,8 +15,7 @@ import { useState } from 'react';
 
 export function OfficialGovSiteNotice() {
   const [isOpen, setIsOpen] = useState(false);
-  const officialNoticeText =
-    'An official website of the United States government';
+  const officialNoticeText = `An official website of the ${appConfig.orgName}`;
 
   const dotGovIcon =
     "data:image/svg+xml,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><title>icon-dot-gov</title><path fill='%232378C3' fill-rule='evenodd' d='m32 0c17.7 0 32 14.3 32 32s-14.3 32-32 32-32-14.3-32-32 14.3-32 32-32zm0 1.2c-17 0-30.8 13.8-30.8 30.8s13.8 30.8 30.8 30.8 30.8-13.8 30.8-30.8-13.8-30.8-30.8-30.8zm11.4 38.9c.5 0 .9.4.9.8v1.6h-24.6v-1.6c0-.5.4-.8.9-.8zm-17.1-12.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h.8c.5 0 .9.4.9.8v.8h-21.4v-.8c0-.5.4-.8.9-.8h.8v-9.8zm5.7-8.2 12.3 4.9v1.6h-1.6c0 .5-.4.8-.9.8h-19.6c-.5 0-.9-.4-.9-.8h-1.6v-1.6s12.3-4.9 12.3-4.9z'/></svg>";
@@ -55,9 +55,9 @@ export function OfficialGovSiteNotice() {
             <BannerIcon src={dotGovIcon} alt="" />
             <MediaBlockBody>
               <p>
-                <strong>Official websites use .gov</strong>
-                <br />A <strong>.gov</strong> website belongs to an official
-                government organization in the United States.
+                <strong>Official Borough Websites use matsu.gov</strong>
+                <br />A <strong>matsu.gov</strong> website belongs to an
+                official government organization in the {appConfig.orgName}.
               </p>
             </MediaBlockBody>
           </BannerGuidance>
@@ -65,14 +65,14 @@ export function OfficialGovSiteNotice() {
             <BannerIcon src={httpsIcon} alt="" />
             <MediaBlockBody>
               <p>
-                <strong>Secure .gov websites use HTTPS</strong>
+                <strong>Secure websites use HTTPS</strong>
                 <br />A{' '}
                 <strong>
                   lock (<Icon.Lock aria-label="Locked padlock icon" />)
                 </strong>{' '}
                 or <strong>https://</strong> means you&apos;ve safely connected
-                to the .gov website. Share sensitive information only on
-                official, secure websites.
+                to the the website. Share sensitive information only on secure
+                websites.
               </p>
             </MediaBlockBody>
           </BannerGuidance>

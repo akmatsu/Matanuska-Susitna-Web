@@ -1,4 +1,5 @@
 'use client';
+import { appConfig } from '@/configs/config';
 import {
   Header,
   NavMenuButton,
@@ -15,16 +16,16 @@ export function TopNavigation() {
       Services
     </Link>,
     <Link href="#three" key="three" className="usa-nav__link">
-      Departments
-    </Link>,
-    <Link href="#three" key="three" className="usa-nav__link">
       Communities
     </Link>,
     <Link href="#three" key="three" className="usa-nav__link">
       Government
     </Link>,
     <Link href="#three" key="three" className="usa-nav__link">
-      Projects
+      Departments
+    </Link>,
+    <Link href="#three" key="three" className="usa-nav__link">
+      Property & Maps
     </Link>,
   ];
 
@@ -32,7 +33,7 @@ export function TopNavigation() {
     <Header basic showMobileOverlay={isOpen}>
       <div className="usa-nav-container">
         <div className="usa-navbar">
-          <Title>The Matanuska Susitna Borough</Title>
+          <Title>{appConfig.orgName}</Title>
           <NavMenuButton
             label="Menu"
             onClick={() => setIsOpen((val) => !val)}
