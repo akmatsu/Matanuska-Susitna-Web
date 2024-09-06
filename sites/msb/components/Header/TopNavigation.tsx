@@ -1,9 +1,10 @@
 'use client';
-import { appConfig } from '@/configs/config';
+import { appConfig, primaryNav } from '@/configs/config';
 import {
   Header,
   NavMenuButton,
   PrimaryNav,
+  Search,
   Title,
 } from '@trussworks/react-uswds';
 import Link from 'next/link';
@@ -13,33 +14,32 @@ import { NavLink, NavLinkProps } from './NavLink';
 export function TopNavigation() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks: NavLinkProps[] = [
-    { href: '#services', children: 'Services' },
-    { href: '#communities', children: 'Communities' },
-    { href: '#government', children: 'Government' },
-    { href: '#departments', children: 'Departments' },
-    { href: '#projects', children: 'Projects' },
-  ];
+  function handleSearch() {
+    console.log('ran');
+  }
 
   return (
-    <Header basic showMobileOverlay={isOpen}>
+    <Header showMobileOverlay={isOpen} basic>
       <div className="usa-nav-container">
         <div className="usa-navbar">
-          <Link href="/" className="text-base-darkest text-no-underline">
-            <Title>{appConfig.orgName}</Title>
-          </Link>
+          <Title>{appConfig.orgName}</Title>
+
           <NavMenuButton
             label="Menu"
             onClick={() => setIsOpen((val) => !val)}
           />
         </div>
         <PrimaryNav
-          items={navLinks.map((item) => (
-            <NavLink {...item} key={item.href} />
+          items={primaryNav.map((item) => (
+            <NavLink href={item.href} key={item.href}>
+              {item.text}
+            </NavLink>
           ))}
           mobileExpanded={isOpen}
           onToggleMobileNav={() => setIsOpen((val) => !val)}
-        ></PrimaryNav>
+        >
+          <Search size="small" onSubmit={handleSearch}></Search>
+        </PrimaryNav>
       </div>
     </Header>
   );
