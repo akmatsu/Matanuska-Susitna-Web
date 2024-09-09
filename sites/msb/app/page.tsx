@@ -4,9 +4,6 @@ import { GridContainer, Search } from '@trussworks/react-uswds';
 import Link from 'next/link';
 
 export default function Home() {
-  function handleSearch() {
-    console.log('search');
-  }
   return (
     <div>
       <Hero />
