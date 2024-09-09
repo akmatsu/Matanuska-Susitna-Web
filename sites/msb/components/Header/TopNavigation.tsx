@@ -2,6 +2,7 @@
 import { appConfig, primaryNav } from '@/configs/config';
 import {
   Header,
+  Logo,
   NavMenuButton,
   PrimaryNav,
   Search,
@@ -26,7 +27,15 @@ export function TopNavigation() {
     >
       <div className="usa-nav-container ">
         <div className="usa-navbar">
-          <Title>{appConfig.orgName}</Title>
+          <Title className="margin-top-2">
+            <div className="display-flex flex-align-center">
+              <img
+                src={appConfig.orgLogoUrl}
+                className="circle-6 mobile-lg:circle-4 margin-right-1"
+              ></img>
+              <span>{appConfig.orgName}</span>
+            </div>
+          </Title>
 
           <NavMenuButton
             label="Menu"

@@ -59,6 +59,7 @@ export function HighlightGrid() {
                   col: true,
                 }}
                 className="usa-media-block"
+                key={item.title}
               >
                 <img
                   className="usa-media-block__img circle-10"

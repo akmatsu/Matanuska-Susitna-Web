@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <OfficialGovSiteNotice />
-        {process.env.NODE_ENV === 'development' && (
+        {process.env.NODE_ENV === 'production' && (
           <Alert
             type="warning"
             slim
