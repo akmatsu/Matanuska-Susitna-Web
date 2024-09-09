@@ -19,9 +19,17 @@ export function Hero() {
                 Welcome to the
               </p>
               <h1 className="text-black margin-top-0">{appConfig.orgName}</h1>
-              <Link href="#services" className="usa-button">
-                Find a Service
-              </Link>
+              <div className="grid-gap-1">
+                <Link href="#services" className="usa-button margin-bottom-1">
+                  Find a Service
+                </Link>
+                <Link href="#services" className="usa-button margin-bottom-1">
+                  Career Opportunities
+                </Link>
+                <Link href="#services" className="usa-button margin-bottom-1">
+                  Contract Opportunities
+                </Link>
+              </div>
             </section>
           ),
         },
