@@ -1,14 +1,26 @@
 'use client';
-import { Featured, Hero, HighlightGrid, Toolbelt } from '@/components';
-import { GridContainer, Search } from '@trussworks/react-uswds';
+import { Featured, Hero, HighlightGrid } from '@/components';
+import { FeaturedContent } from '@/components/landing/FeatureContent';
+import { GridContainer, Grid } from '@trussworks/react-uswds';
 import Link from 'next/link';
 
 export default function Home() {
   return (
     <div>
       <Hero />
-      {/* <Toolbelt /> */}
       <Featured />
+      <section className="usa-section grid-container position-relative">
+        <Grid row className="usa-list--unstyled" gap>
+          <Grid col={6}>
+            <h2>Public Notices & Announcements</h2>
+            <FeaturedContent />
+          </Grid>
+          <Grid col={6}>
+            <h2>Meetings</h2>
+            <FeaturedContent />
+          </Grid>
+        </Grid>
+      </section>
       <HighlightGrid />
       <section className="usa-section">
         <GridContainer>

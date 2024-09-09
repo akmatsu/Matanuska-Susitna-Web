@@ -1,9 +1,14 @@
+'use client';
 import { appConfig } from '@/configs/config';
 
 import { Carousel } from '../Carousel';
 import Link from 'next/link';
+import { Search } from '@trussworks/react-uswds';
 
 export function Hero() {
+  function handleSubmit() {
+    console.log('ran');
+  }
   return (
     <Carousel
       slides={[
@@ -20,15 +25,7 @@ export function Hero() {
               </p>
               <h1 className="text-black margin-top-0">{appConfig.orgName}</h1>
               <div className="grid-gap-1">
-                <Link href="#services" className="usa-button margin-bottom-1">
-                  Find a Service
-                </Link>
-                <Link href="#services" className="usa-button margin-bottom-1">
-                  Career Opportunities
-                </Link>
-                <Link href="#services" className="usa-button margin-bottom-1">
-                  Contract Opportunities
-                </Link>
+                <Search placeholder="Search..." onSubmit={handleSubmit} />
               </div>
             </section>
           ),

@@ -5,19 +5,19 @@ export function Featured() {
   const featuredItems: FeaturedCardProps[] = [
     {
       icon: 'Campaign',
-      title: 'Public Notices & Announcements',
+      title: 'Career Opportunities',
       text: 'View Latest Updates',
       linkUrl: '#public-notices',
       imageUrl:
-        'https://d1159zutbdy4l.cloudfront.net/public/uploads/c3d08b9f-c8df-4114-ba60-529111438482optimized_images/1000x370_optimized_image.jpg',
+        'https://d1159zutbdy4l.cloudfront.net/public/uploads/05620280-c80f-4f5f-b1f6-14d89f12099foptimized_images/1000x667_optimized_image.jpg',
     },
     {
       icon: 'Event',
-      title: 'Meetings',
+      title: 'Contract Opportunities',
       text: 'View upcoming meetings',
       linkUrl: '#meetings',
       imageUrl:
-        'https://d1159zutbdy4l.cloudfront.net/public/uploads/0043c208-7c1c-45ea-b3d0-7d6ac4c4c0f0optimized_images/1000x370_optimized_image.jpg',
+        'https://d1159zutbdy4l.cloudfront.net/public/uploads/85df212f-98a6-491c-b299-7173692be312optimized_images/1000x664_optimized_image.jpg',
     },
     {
       icon: 'Construction',
@@ -31,7 +31,7 @@ export function Featured() {
 
   return (
     <section className="usa-section grid-container position-relative">
-      <Grid row className="usa-list--unstyled">
+      <Grid row className="usa-list--unstyled" gap>
         {featuredItems.map((item) => (
           <Grid
             col={12}

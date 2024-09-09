@@ -28,5 +28,9 @@ for a full list of available settings.
   $theme-global-paragraph-styles: true,
   $theme-site-margins-breakpoint: 'desktop-lg',
   $theme-site-margins-width: 2,
-  $theme-grid-container-max-width: 1500px
+  $theme-grid-container-max-width: 1500px,
+  $theme-card-border-width: 0,
+  $theme-card-border-radius: 0,
+  $theme-card-gap: 0,
+  $theme-card-margin-bottom: 1rem
 );

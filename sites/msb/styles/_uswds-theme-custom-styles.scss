@@ -38,3 +38,20 @@ i.e.
 p {
   max-width: initial;
 }
+
+.usa-card {
+  .usa-card__container {
+    background-color: color('base-lightest');
+    transition: background-color 0.3s;
+  }
+}
+
+a.usa-card {
+  text-decoration: none;
+  .usa-card__container {
+    border-bottom: 4px solid color('primary');
+  }
+  .usa-card__container:hover {
+    background-color: color('base-lighter');
+  }
+}
