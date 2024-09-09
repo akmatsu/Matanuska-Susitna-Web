@@ -7,9 +7,9 @@ import {
   Search,
   Title,
 } from '@trussworks/react-uswds';
-import Link from 'next/link';
+
 import { useState } from 'react';
-import { NavLink, NavLinkProps } from './NavLink';
+import { NavLink } from './NavLink';
 
 export function TopNavigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,8 +19,12 @@ export function TopNavigation() {
   }
 
   return (
-    <Header showMobileOverlay={isOpen} basic>
-      <div className="usa-nav-container">
+    <Header
+      showMobileOverlay={isOpen}
+      basic
+      className="position-sticky top-0 z-500 bg-white shadow-1"
+    >
+      <div className="usa-nav-container ">
         <div className="usa-navbar">
           <Title>{appConfig.orgName}</Title>
 

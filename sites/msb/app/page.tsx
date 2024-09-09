@@ -1,5 +1,5 @@
 'use client';
-import { Featured, Hero, HighlightGrid } from '@/components';
+import { Featured, Hero, HighlightGrid, Toolbelt } from '@/components';
 import { GridContainer, Search } from '@trussworks/react-uswds';
 import Link from 'next/link';
 
@@ -10,6 +10,7 @@ export default function Home() {
   return (
     <div>
       <Hero />
+      {/* <Toolbelt /> */}
       <Featured />
       <HighlightGrid />
       <section className="usa-section">
@@ -18,12 +19,6 @@ export default function Home() {
           <p className="usa-intro">
             Use the search bar or reach out to us directly — we're here to help.
           </p>
-
-          <Search
-            onSubmit={handleSearch}
-            size="big"
-            className="margin-bottom-4"
-          />
 
           <Link href="#" className="usa-button">
             Contact us

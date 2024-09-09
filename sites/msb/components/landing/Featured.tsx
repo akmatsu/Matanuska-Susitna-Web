@@ -30,7 +30,7 @@ export function Featured() {
   ];
 
   return (
-    <section className="usa-section grid-container">
+    <section className="usa-section grid-container position-relative">
       <Grid row className="usa-list--unstyled">
         {featuredItems.map((item) => (
           <Grid col={12} tablet={{ col: 4 }} className="margin-bottom-2">

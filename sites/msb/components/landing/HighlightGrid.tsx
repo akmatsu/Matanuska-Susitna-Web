@@ -1,3 +1,4 @@
+import { appConfig } from '@/configs/config';
 import { Grid, GridContainer, MediaBlockBody } from '@trussworks/react-uswds';
 import Link from 'next/link';
 
@@ -14,8 +15,8 @@ export function HighlightGrid() {
         title: 'Borough Legislation',
         imageUrl:
           'https://d1159zutbdy4l.cloudfront.net/public/uploads/cecd6a1d-d448-43de-bfa3-0e88db96c989optimized_images/500x185_optimized_image.jpg',
-        imageAlt: 'Stack of documents',
-        text: '',
+        imageAlt: 'A stack of documents',
+        text: `Explore recent legislation passed by the ${appConfig.orgName}. Stay informed and see how local decisions affect you.`,
         linkUrl: '',
       },
       {
@@ -34,7 +35,7 @@ export function HighlightGrid() {
         imageUrl:
           'https://d1159zutbdy4l.cloudfront.net/public/uploads/152e1e73-40bf-4250-afeb-5523330b54b5optimized_images/500x185_optimized_image.jpg',
         imageAlt: 'Image of a ferret',
-        text: 'While uncommon, there are disasters that citizens of the borough should be prepared for. Learn how to make sure you, your family, and your business can bne ready in the event of an emergency',
+        text: "Disasters can strike at any time. Learn how to prepare and protect your family, home, and business, ensuring you're ready for any emergency.",
         linkUrl: 'https://animalcare.matsugov.us/',
       },
       {
@@ -42,7 +43,7 @@ export function HighlightGrid() {
         imageUrl:
           'https://d1159zutbdy4l.cloudfront.net/public/uploads/42819dcd-aeda-4b37-b44b-63e87ff7a054optimized_images/500x332_optimized_image.jpg',
         imageAlt: 'A road with an intersection and moderate traffic',
-        text: 'Report non-emergency problems related to road maintenance, abandoned vehicles, trash cleanup, or animal care.',
+        text: "Help keep our community safe and clean. Report non-emergency issues like road maintenance, abandoned vehicles, or animal concerns, and we'll take care of the rest.",
         linkUrl: '',
       },
     ],
