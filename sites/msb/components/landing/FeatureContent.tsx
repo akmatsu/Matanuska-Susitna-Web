@@ -8,7 +8,7 @@ export function FeaturedContent() {
       <Grid col={7}>
         <LinkCard href="#" className="minh-15">
           <CardHeader>
-            <h3 className="usa-card__heading">This is the title!</h3>
+            <h3 className="usa-card__heading">Magna ad ad eu ipsum.</h3>
           </CardHeader>
           <CardMedia>
             <img src="https://d1159zutbdy4l.cloudfront.net/public/uploads/c3d08b9f-c8df-4114-ba60-529111438482optimized_images/1000x370_optimized_image.jpg"></img>
