@@ -3,3 +3,9 @@
 @forward 'uswds-theme-custom-styles';
 
 @import '~@trussworks/react-uswds/lib/index.css';
+
+.truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

@@ -23,10 +23,35 @@ i.e.
 @use 'uswds-core' as *;
 
 .usa-hero {
-  background-image: url('https://d1159zutbdy4l.cloudfront.net/public/uploads/9a6d51bb-9b20-4008-ac82-4100120ed080/Butte-Fall-jumbo2.jpg');
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url('https://d1159zutbdy4l.cloudfront.net/public/uploads/9a6d51bb-9b20-4008-ac82-4100120ed080/Butte-Fall-jumbo2.jpg');
   background-position: top;
 }
 
 .usa-hero__callout {
   max-width: 25rem;
+}
+
+p {
+  max-width: initial;
+}
+
+.usa-card {
+  .usa-card__container {
+    background-color: color('base-lightest');
+    transition: background-color 0.3s;
+  }
+}
+
+a.usa-card {
+  text-decoration: none;
+  .usa-card__container {
+    border-bottom: 4px solid color('primary');
+  }
+  .usa-card__container:hover {
+    background-color: color('base-lighter');
+  }
 }

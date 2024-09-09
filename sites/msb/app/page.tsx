@@ -1,93 +1,38 @@
 'use client';
-import { appConfig } from '@/configs/config';
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardGroup,
-  CardHeader,
-  Grid,
-  GridContainer,
-  Icon,
-} from '@trussworks/react-uswds';
+import { Featured, Hero, HighlightGrid } from '@/components';
+import { FeaturedContent } from '@/components/landing/FeatureContent';
+import { GridContainer, Grid } from '@trussworks/react-uswds';
 import Link from 'next/link';
 
 export default function Home() {
   return (
     <div>
-      <section className="usa-hero" aria-label="introduction">
-        <GridContainer>
-          <div className="usa-hero__callout">
-            <h1 className="usa-hero__heading">
-              The
-              <span className="usa-hero__heading--alt">
-                {appConfig.orgName}
-              </span>
-              Welcomes you
-            </h1>
-            <p>We'd love to help you. Start l ooking for a service.</p>
-            <Link href="/" className="usa-button">
-              Find a Service
-            </Link>
-          </div>
-        </GridContainer>
-      </section>
-      <section className="usa-section grid-container">
-        <Grid row gap="lg" className="usa-list--unstyled">
-          <Grid col={12} tablet={{ col: 4 }}>
-            <Card className="height-full">
-              <CardHeader>
-                <h3 className="display-flex flex-align-center">
-                  <div>
-                    <Icon.Campaign size={3} className="margin-right-05" />
-                  </div>
-                  Public Notices & Announcements
-                </h3>
-              </CardHeader>
-              <CardBody></CardBody>
-              <CardFooter>
-                <Link href="#public-notices" className="usa-button">
-                  View Latest Updates
-                </Link>
-              </CardFooter>
-            </Card>
+      <Hero />
+      <Featured />
+      <section className="usa-section grid-container position-relative">
+        <Grid row className="usa-list--unstyled" gap>
+          <Grid col={6}>
+            <h2>Public Notices & Announcements</h2>
+            <FeaturedContent />
           </Grid>
-          <Grid col={12} tablet={{ col: 4 }}>
-            <Card className="height-full">
-              <CardHeader>
-                <h3 className="display-flex flex-align-center">
-                  <Icon.Event
-                    size={3}
-                    className="margin-right-05 flex-align-center"
-                  />
-                  Meetings
-                </h3>
-              </CardHeader>
-              <CardBody></CardBody>
-              <CardFooter>
-                <Link href="#public-notices" className="usa-button margin-x-0 ">
-                  View upcoming meetings
-                </Link>
-              </CardFooter>
-            </Card>
-          </Grid>
-          <Grid col={12} tablet={{ col: 4 }}>
-            <Card className="height-full">
-              <CardHeader>
-                <h3 className="display-flex">
-                  <Icon.Construction size={3} className="margin-right-05" />
-                  Projects
-                </h3>
-              </CardHeader>
-              <CardBody></CardBody>
-              <CardFooter>
-                <Link href="#public-notices" className="usa-button margin-x-0">
-                  View planned projects
-                </Link>
-              </CardFooter>
-            </Card>
+          <Grid col={6}>
+            <h2>Meetings</h2>
+            <FeaturedContent />
           </Grid>
         </Grid>
+      </section>
+      <HighlightGrid />
+      <section className="usa-section">
+        <GridContainer>
+          <h2>Can't find what you need?</h2>
+          <p className="usa-intro">
+            Use the search bar or reach out to us directly — we're here to help.
+          </p>
+
+          <Link href="#" className="usa-button">
+            Contact us
+          </Link>
+        </GridContainer>
       </section>
     </div>
   );

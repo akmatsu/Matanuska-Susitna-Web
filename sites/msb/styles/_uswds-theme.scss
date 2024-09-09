@@ -17,11 +17,20 @@ for a full list of available settings.
   $theme-image-path: add-base-path('/uswds/img'),
   // Ensure utility classes always override other styles
   $utilities-use-important: true,
+  $theme-header-max-width: 100%,
+  $theme-footer-max-width: 1500px,
 
   // Use USWDS defaults for typography
   $theme-style-body-element: true,
   $theme-font-type-sans: 'public-sans',
   $theme-global-content-styles: true,
   $theme-global-link-styles: true,
-  $theme-global-paragraph-styles: true
+  $theme-global-paragraph-styles: true,
+  $theme-site-margins-breakpoint: 'desktop-lg',
+  $theme-site-margins-width: 2,
+  $theme-grid-container-max-width: 1500px,
+  $theme-card-border-width: 0,
+  $theme-card-border-radius: 0,
+  $theme-card-gap: 0,
+  $theme-card-margin-bottom: 1rem
 );
