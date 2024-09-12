@@ -260,6 +260,74 @@ input TagCreateInput {
   posts: PostRelateToManyForCreateInput
 }
 
+type Alert {
+  id: ID!
+  title: String
+  message: Alert_message_Document
+  urgency: Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Alert_message_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input AlertWhereUniqueInput {
+  id: ID
+}
+
+input AlertWhereInput {
+  AND: [AlertWhereInput!]
+  OR: [AlertWhereInput!]
+  NOT: [AlertWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  urgency: IntFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntFilter
+}
+
+input AlertOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  urgency: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input AlertUpdateInput {
+  title: String
+  message: JSON
+  urgency: Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input AlertUpdateArgs {
+  where: AlertWhereUniqueInput!
+  data: AlertUpdateInput!
+}
+
+input AlertCreateInput {
+  title: String
+  message: JSON
+  urgency: Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -284,6 +352,12 @@ type Mutation {
   updateTags(data: [TagUpdateArgs!]!): [Tag]
   deleteTag(where: TagWhereUniqueInput!): Tag
   deleteTags(where: [TagWhereUniqueInput!]!): [Tag]
+  createAlert(data: AlertCreateInput!): Alert
+  createAlerts(data: [AlertCreateInput!]!): [Alert]
+  updateAlert(where: AlertWhereUniqueInput!, data: AlertUpdateInput!): Alert
+  updateAlerts(data: [AlertUpdateArgs!]!): [Alert]
+  deleteAlert(where: AlertWhereUniqueInput!): Alert
+  deleteAlerts(where: [AlertWhereUniqueInput!]!): [Alert]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -316,6 +390,9 @@ type Query {
   tag(where: TagWhereUniqueInput!): Tag
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int
+  alert(where: AlertWhereUniqueInput!): Alert
+  alerts(where: AlertWhereInput! = {}, orderBy: [AlertOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AlertWhereUniqueInput): [Alert!]
+  alertsCount(where: AlertWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

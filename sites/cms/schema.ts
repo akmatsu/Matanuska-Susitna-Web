@@ -5,8 +5,8 @@
 // If you want to learn more about how lists are configured, please read
 // - https://keystonejs.com/docs/config/lists
 
-import { list } from '@keystone-6/core'
-import { allowAll } from '@keystone-6/core/access'
+import { list } from '@keystone-6/core';
+import { allowAll } from '@keystone-6/core/access';
 
 // see https://keystonejs.com/docs/fields/overview for the full list of fields
 //   this is a few common fields for an example
@@ -16,15 +16,16 @@ import {
   password,
   timestamp,
   select,
-} from '@keystone-6/core/fields'
+} from '@keystone-6/core/fields';
 
 // the document field is a more complicated field, so it has it's own package
-import { document } from '@keystone-6/fields-document'
+import { document } from '@keystone-6/fields-document';
 // if you want to make your own fields, see https://keystonejs.com/docs/guides/custom-fields
 
 // when using Typescript, you can refine your types to a stricter subset by importing
 // the generated types from '.keystone/types'
-import { type Lists } from '.keystone/types'
+import { type Lists } from '.keystone/types';
+import { timestamps } from './fieldUtils';
 
 export const lists = {
   User: list({
@@ -146,4 +147,60 @@ export const lists = {
       posts: relationship({ ref: 'Post.tags', many: true }),
     },
   }),
-} satisfies Lists
+
+  Alert: list({
+    access: allowAll,
+    hooks: {},
+    ui: {},
+    fields: {
+      title: text({
+        validation: {
+          isRequired: true,
+          length: {
+            max: 100,
+            min: 2,
+          },
+        },
+        ui: {
+          displayMode: 'input',
+          description:
+            'The title of your alert. Titles should be short and descriptive.',
+        },
+      }),
+
+      message: document({
+        relationships: {
+          post: {
+            listKey: 'Post',
+            label: 'Link to post',
+            selection: 'id title',
+          },
+        },
+        links: true,
+        formatting: {
+          inlineMarks: {
+            bold: true,
+            italic: true,
+            underline: true,
+          },
+        },
+      }),
+
+      urgency: select({
+        type: 'integer',
+        options: [
+          { label: 'Low', value: 1 },
+          { label: 'Standard', value: 2 },
+          { label: 'Important', value: 3 },
+          { label: 'Urgent', value: 4 },
+          { label: 'Emergency', value: 5 },
+        ],
+        validation: {
+          isRequired: true,
+        },
+      }),
+
+      ...timestamps,
+    },
+  }),
+} satisfies Lists;
