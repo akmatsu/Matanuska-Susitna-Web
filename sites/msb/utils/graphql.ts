@@ -16,6 +16,7 @@ export async function fetchGraphQL(
     const resJson = res.json();
     return resJson;
   } catch (err: any) {
-    throw new Error(`GraphQL errors occurred\n${err.message}`);
+    // throw new Error(`GraphQL errors occurred\n${err.message}`);
+    console.error(err.message);
   }
 }
