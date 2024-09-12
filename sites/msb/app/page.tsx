@@ -1,4 +1,3 @@
-'use client';
 import { Featured, Hero, HighlightGrid } from '@/components';
 import { FeaturedContent } from '@/components/landing/FeatureContent';
 import { GridContainer, Grid } from '@trussworks/react-uswds';
