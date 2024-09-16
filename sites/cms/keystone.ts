@@ -23,6 +23,13 @@ export default withAuth(
       //   see https://keystonejs.com/docs/guides/choosing-a-database#title
       provider: appConfig.database.provider,
       url: `${appConfig.database.protocol}://${appConfig.database.user}:${appConfig.database.password}@${appConfig.database.host}:${appConfig.database.port}/${appConfig.database.name}`,
+      extendPrismaSchema(schema) {
+        return schema.replace(
+          `generator client {`,
+          `generator client {
+            binaryTargets = ["native", "debian-openssl-3.0.x","rhel-openssl-3.0.x"]`,
+        );
+      },
     },
     server: {
       cors: { origin: ['*'], credentials: true },

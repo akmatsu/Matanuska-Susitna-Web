@@ -3,15 +3,16 @@
   "version": "1.0.3",
   "private": true,
   "scripts": {
-    "dev": "keystone dev",
-    "start": "keystone start",
-    "build": "keystone build"
+    "dev": "dotenvx run --env-file=.env.development -- keystone dev",
+    "start": "dotenvx run --env-file=.env.production -- keystone start --with-migrations",
+    "build": "dotenvx run --env-file=.env.production -- keystone build",
+    "db:migrate": "dotenv run --env-file=.env.production -- keystone migrate"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.14.1",
     "@keystone-6/auth": "^8.0.0",
     "@keystone-6/core": "^6.3.0",
     "@keystone-6/fields-document": "^9.1.0",
-    "dotenv": "^16.4.5",
     "typescript": "^5.6.2"
   }
 }

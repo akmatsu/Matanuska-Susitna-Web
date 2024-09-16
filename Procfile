@@ -1,1 +1,1 @@
-web: "npm run cms:start"
+web: npm run cms:start

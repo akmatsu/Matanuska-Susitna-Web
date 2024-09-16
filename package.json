@@ -8,7 +8,8 @@
     "msb:build": "turbo run build --filter=msb",
     "cms:dev": "turbo run dev --filter=cms",
     "cms:build": "turbo run build --filter=cms",
-    "cms:start": "turbo run start --filter=cms"
+    "cms:start": "turbo run start --filter=cms",
+    "cms:migrate": "turbo run db:migrate --filter=cms"
   },
   "keywords": [],
   "author": "",
