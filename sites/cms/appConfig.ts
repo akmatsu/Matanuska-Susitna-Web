@@ -1,7 +1,7 @@
 import { DatabaseProvider } from '@keystone-6/core/types';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV}.local` });
 
 export const appConfig = {
   database: {
