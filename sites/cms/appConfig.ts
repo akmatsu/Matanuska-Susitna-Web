@@ -11,6 +11,7 @@ export const appConfig = {
     host: process.env.DATABASE_HOST,
     port: process.env.DATABASE_PORT,
     name: process.env.DATABASE,
+    protocol: process.env.DATABASE_PROTOCOL,
   },
   server: {
     port: process.env.WEB_PORT ? parseInt(process.env.WEB_PORT) : 3333,
