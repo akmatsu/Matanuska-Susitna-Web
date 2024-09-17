@@ -27,7 +27,7 @@ export default withAuth(
         return schema.replace(
           `generator client {`,
           `generator client {
-            binaryTargets = ["native", "debian-openssl-3.0.x","rhel-openssl-3.0.x"]`,
+            binaryTargets = ["native", "rhel-openssl-3.0.x"]`,
         );
       },
     },
