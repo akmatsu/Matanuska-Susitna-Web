@@ -1,0 +1,13 @@
+name: Build and Deploy CMS to EC2
+
+on:
+  push:
+    - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
