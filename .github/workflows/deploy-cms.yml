@@ -22,11 +22,11 @@ jobs:
           role-to-assume: ${{secrets.EC2_DEPLOY_ROLE_ARN}}
           role-session-name: github-actions-deploy-cms-session
           aws-region: us-west-2
-          
+
       - name: Get runner IP address
         id: ip
         uses: haythem/public-ip@v1.3
-          
+
       - name: Whitelist GitHub action IP address
         run: |
           aws ec2 authorize-security-group-ingress \
@@ -34,7 +34,7 @@ jobs:
             --protocol tcp \
             --port 22 \
             --cidr ${{steps.ip.outputs.ipv4}}/32
-            
+
       - name: Add SSH Key
         uses: kielabokkie/ssh-key-and-known-hosts-action@v1.4.1
         with:
@@ -43,7 +43,7 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Zip the required files
         run: |
           zip -r cms.zip . \
@@ -55,7 +55,7 @@ jobs:
             -x ".env.*.local" \
             -x "sites/msb/*" \
             -x "packages/*"
-      
+
       - name: Upload zipped repo to server
         run: |
           scp cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}:/home/${{secrets.EC2_SERVER_USER}}/cms
@@ -88,11 +88,15 @@ jobs:
             echo "WEB_PORT=8080" >> ./sites/cms/.env.production
 
             # Install repo dependencies
+            npm i -g pm2
             npm ci --workspace=cms --include-workspace-root
 
             # Build the application for production
             npm run cms:build
 
+
+            pm2 reload cms || pm2 start npm --name cms -- run cms:start
+            # Remove temporary folders.
             rm -rf ../cms.zip
             rm -rf ../backup
           EOF
@@ -103,4 +107,3 @@ jobs:
             --protocol tcp \
             --port 22 \
             --cidr ${{steps.ip.outputs.ipv4}}/32
-            
