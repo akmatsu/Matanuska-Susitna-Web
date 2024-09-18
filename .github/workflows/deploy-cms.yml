@@ -92,7 +92,6 @@ jobs:
             # Build the application for production
             npm run cms:build
 
-
             rm -rf ../temp/cms.zip
             rm -rf ../backup
           EOF
