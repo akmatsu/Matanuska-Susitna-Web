@@ -28,7 +28,7 @@ jobs:
           
       - name: Get runner IP address
         id: ip
-        uses: heythem/public-ip@v1.3
+        uses: haythem/public-ip@v1.3
           
       - name: Whitelist runner ip address
         run: |
