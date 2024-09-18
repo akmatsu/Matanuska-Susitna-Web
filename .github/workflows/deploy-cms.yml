@@ -16,10 +16,7 @@ jobs:
     env:
       AWS_INSTANCE_SG_ID: ${{secrets.AWS_INSTANCE_SG_ID}}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Configure AWS Credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{secrets.EC2_DEPLOY_ROLE_ARN}}
@@ -30,13 +27,26 @@ jobs:
         id: ip
         uses: haythem/public-ip@v1.3
           
-      - name: Whitelist runner ip address
+      - name: Whitelist GitHub action IP address
         run: |
           aws ec2 authorize-security-group-ingress \
             --group-id $AWS_INSTANCE_SG_ID \
             --protocol tcp \
             --port 22 \
             --cidr ${{steps.ip.outputs.ipv4}}/32
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
       - name: Zip the required files
         run: |
           zip -r cms.zip . -x node_modules/* -x ".git/*" -x "*.log" -x ".env" -x ".env.*" -x ".env.*.local" -x "sites/*" -x "!sites/cms/*"
+          
+      - name: Remove GitHub actions IP from security group
+        run: |
+          aws ec2 revoke-security-group-ingress \
+            --group-id $AWS_INSTANCE_SG_ID \
+            --protocol tcp \
+            --port 22 \
+            --cidr ${{steps.ip.outputs.ipv4}}/32
+            
