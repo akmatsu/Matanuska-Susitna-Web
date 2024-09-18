@@ -54,10 +54,11 @@ jobs:
             -x ".env.*" \
             -x ".env.*.local" \
             -x "sites/msb/*" \
+            -x "packakages/*" \
       
       - name: Upload zipped repo to server
         run: |
-          scp -o StrictHostKeyChecking=no -P 22 cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}
+          scp cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}
           
       - name: Remove GitHub actions IP from security group
         run: |
