@@ -13,7 +13,7 @@ jobs:
       AWS_INSTANCE_SG_ID: ${{secrets.AWS_INSTANCE_SG_ID}}
     steps:
       - name: Checkout code
-        uses: actions/checkout@4
+        uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
