@@ -27,8 +27,8 @@ jobs:
           aws-region: us-west-2
           
       - name: Get runner IP address
-        id: get_ip
-        run: echo "IP=$(curl -s ifconfig.me)" >> $GITHUB_ENV
+        id: ip
+        uses: heythem/public-ip@v1.3
           
       - name: Whitelist runner ip address
         run: |
@@ -36,7 +36,7 @@ jobs:
             --group-id $AWS_INSTANCE_SG_ID
             --protocol tcp \
             --port 22 \
-            --cidr ${{env.IP}}/32
+            --cidr ${{steps.ip.outputs.ipv4}}/32
       - name: Zip the required files
         run: |
           zip -r cms.zip . -x node_modules/* -x ".git/*" -x "*.log" -x ".env" -x ".env.*" -x ".env.*.local" -x "sites/*" -x "!sites/cms/*"
