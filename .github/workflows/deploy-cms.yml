@@ -54,7 +54,7 @@ jobs:
             -x ".env.*" \
             -x ".env.*.local" \
             -x "sites/msb/*" \
-            -x "packakages/*" \
+            -x "packages/*"
       
       - name: Upload zipped repo to server
         run: |
@@ -74,6 +74,7 @@ jobs:
 
             # Move the active folder to backup
             mv ./active ./backup
+            
             mv ./temp ./active
 
             cd ./active
