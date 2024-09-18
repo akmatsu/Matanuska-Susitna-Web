@@ -1,0 +1,30 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    env:
+      AWS_INSTANCE_SG_ID: <aws-security-group-id>
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: <aws-access-key-id>
+          aws-secret-access-key: <aws-secret-acces-key>
+          aws-region: us-west-2
+      - name: Whitelist runner ip address
+        run: |
+          aws ec2 authorize-security-group-ingress \
+            --group-id $AWS_INSTANCE_SG_ID
+            --protocol tcp \
+            --port 22 \
+            --cidr ${{steps.ip.outputs.ipv4}}/32
