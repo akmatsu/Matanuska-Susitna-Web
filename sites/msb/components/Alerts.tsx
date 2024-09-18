@@ -1,5 +1,4 @@
 import { fetchGraphQL, gql } from '@/utils/graphql';
-import { Alert } from '@trussworks/react-uswds';
 import { DocumentRenderer } from './DocumentRenderer';
 import Link from 'next/link';
 

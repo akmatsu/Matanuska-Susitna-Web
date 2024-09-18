@@ -10,7 +10,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      AWS_INSTANCE_SG_ID: <aws-security-group-id>
+      AWS_INSTANCE_SG_ID: ${{}}
     steps:
       - name: Checkout code
         uses: actions/checkout@4
@@ -28,3 +28,6 @@ jobs:
             --protocol tcp \
             --port 22 \
             --cidr ${{steps.ip.outputs.ipv4}}/32
+      - name: Zip the required files
+        run: |
+          zip -r cms.zip . -x node_modules/* -x ".git/*" -x "*.log" -x ".env" -x ".env.*" -x ".env.*.local" -x "sites/*" -x "!sites/cms/*"
