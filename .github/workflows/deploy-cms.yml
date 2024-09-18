@@ -82,7 +82,7 @@ jobs:
             echo "DATABASE=${{secrets.DB_NAME}}" >> ./sites/cms/.env.production
             echo "DATABASE_USER=${{secrets.DB_USER}}" >> ./sites/cms/.env.production
             echo "DATABASE_HOST=${{secrets.DB_HOST}}" >> ./sites/cms/.env.production
-            echo "DATABASE_POST=5432" >> ./sites/cms/.env.production
+            echo "DATABASE_PORT=5432" >> ./sites/cms/.env.production
             echo "DATABASE_PROVIDER=postgresql" >> ./sites/cms/.env.production
             echo "DATABASE_PROTOCOL=postgres" >> ./sites/cms/.env.production
             echo "WEB_PORT=8080" >> ./sites/cms/.env.production
