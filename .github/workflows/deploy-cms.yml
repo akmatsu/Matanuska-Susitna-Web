@@ -88,7 +88,6 @@ jobs:
             echo "WEB_PORT=8080" >> ./sites/cms/.env.production
 
             # Install repo dependencies
-            npm i -g pm2
             npm ci --workspace=cms --include-workspace-root
 
             # Build the application for production
