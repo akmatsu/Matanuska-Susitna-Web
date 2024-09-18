@@ -1,4 +1,4 @@
-name: Deploy to EC2
+name: Deploy CMS to EC2
 
 on:
   push:
@@ -58,8 +58,35 @@ jobs:
       
       - name: Upload zipped repo to server
         run: |
-          scp cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}:/home/${{secrets.EC2_SERVER_USER}}/
-          
+          scp cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}:/home/${{secrets.EC2_SERVER_USER}}/cms/temp
+
+      - name: SSH into the server and deploy
+        run: |
+          ssh ${{secrets.EC2_SERVER_USER}}@$P{{secrets.EC2_SERVER_HOST}} << 'EOF'
+            set -e
+            # Create temp and backup directory if they don't exist
+            cd cms
+            mkdir -p ./temp
+            mkdir -p ./active
+
+            # Unzip the files in the temp folder
+            unzip -o ./temp/cms.zip -d ./home/user/temp
+
+            # Move the active folder to backup
+            mv ./active ./backup
+            mv ./temp ./active
+
+            cd ./active
+
+            # Install repo dependencies
+            npm ci --workspace=cms --include-workspace-root
+
+            # Build the application for production
+            npm run cms:build
+
+            rm -rf ../temp/cms.zip
+            rm -rf ../backup
+          EOF
       - name: Remove GitHub actions IP from security group
         run: |
           aws ec2 revoke-security-group-ingress \
