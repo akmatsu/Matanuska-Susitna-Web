@@ -58,7 +58,7 @@ jobs:
       
       - name: Upload zipped repo to server
         run: |
-          scp cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}
+          scp cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}:/home/${{secrets.EC2_SERVER_USER}}/
           
       - name: Remove GitHub actions IP from security group
         run: |
