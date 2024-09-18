@@ -44,6 +44,7 @@ jobs:
         uses: kielabokkie/ssh-key-and-known-hosts-action@v1.4.1
         with:
           ssh-private-key: ${{secrets.EC2_SSH_PRIVATE_KEY}}
+          ssh-host: ${{secrets.EC2_SERVER_HOST}}
 
       - name: Checkout code
         uses: actions/checkout@v4
