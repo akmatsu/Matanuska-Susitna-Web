@@ -58,7 +58,7 @@ jobs:
       
       - name: Upload zipped repo to server
         run: |
-          scp cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}:/home/${{secrets.EC2_SERVER_USER}}/cms/temp
+          scp cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}:/home/${{secrets.EC2_SERVER_USER}}/cms
 
       - name: SSH into the server and deploy
         run: |
@@ -70,7 +70,7 @@ jobs:
             mkdir -p ./active
 
             # Unzip the files in the temp folder
-            unzip -o ./temp/cms.zip -d ./temp
+            unzip -o ./cms.zip -d ./temp
 
             # Move the active folder to backup
             mv ./active ./backup
@@ -92,7 +92,7 @@ jobs:
             # Build the application for production
             npm run cms:build
 
-            rm -rf ../temp/cms.zip
+            rm -rf ../cms.zip
             rm -rf ../backup
           EOF
       - name: Remove GitHub actions IP from security group
