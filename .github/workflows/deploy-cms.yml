@@ -77,12 +77,21 @@ jobs:
             mv ./temp ./active
 
             cd ./active
+            touch .env.production
+            echo "DATABASE=${{secrets.DB_NAME}}" >> .env.production
+            echo "DATABASE_USER=${{secrets.DB_USER}}" >> .env.production
+            echo "DATABASE_HOST=${{secrets.DB_HOST}}" >> .env.production
+            echo "DATABASE_POST=5432" >> .env.production
+            echo "DATABASE_PROVIDER=postgresql" >> .env.production
+            echo "DATABASE_PROTOCOL=postgres" >> .env.production
+            echo "WEB_PORT=8080" >> .env.production
 
             # Install repo dependencies
             npm ci --workspace=cms --include-workspace-root
 
             # Build the application for production
             npm run cms:build
+
 
             rm -rf ../temp/cms.zip
             rm -rf ../backup
