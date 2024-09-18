@@ -10,7 +10,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      AWS_INSTANCE_SG_ID: ${{}}
+      AWS_INSTANCE_SG_ID: ${{secrets.AWS_INSTANCE_SG_ID}}
     steps:
       - name: Checkout code
         uses: actions/checkout@4
@@ -18,9 +18,10 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: <aws-access-key-id>
-          aws-secret-access-key: <aws-secret-acces-key>
+          role-to-assume: ${{secrets.EC2_DEPLOY_ROLE_ARN}}
+          role-session-name: github-actions-deploy-cms-session
           aws-region: us-west-2
+          
       - name: Whitelist runner ip address
         run: |
           aws ec2 authorize-security-group-ingress \
