@@ -62,7 +62,7 @@ jobs:
 
       - name: SSH into the server and deploy
         run: |
-          ssh ${{secrets.EC2_SERVER_USER}}@$P{{secrets.EC2_SERVER_HOST}} << 'EOF'
+          ssh ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}} << 'EOF'
             set -e
             # Create temp and backup directory if they don't exist
             cd cms
