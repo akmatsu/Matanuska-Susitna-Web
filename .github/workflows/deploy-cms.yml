@@ -70,7 +70,7 @@ jobs:
             mkdir -p ./active
 
             # Unzip the files in the temp folder
-            unzip -o ./temp/cms.zip -d ./home/user/temp
+            unzip -o ./temp/cms.zip -d ./temp
 
             # Move the active folder to backup
             mv ./active ./backup
