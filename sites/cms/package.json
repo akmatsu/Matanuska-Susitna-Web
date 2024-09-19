@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "dotenvx run --env-file=.env.development -- keystone dev",
     "start": "dotenvx run --env-file=.env.production -- keystone start",
-    "build": "dotenvx run --env-file=.env.production -- keystone build && dotenvx run --env-file=.env.production keystone prisma migrate deploy",
+    "build": "dotenvx run --env-file=.env.production -- keystone build && dotenvx run --env-file=.env.production -- keystone prisma migrate deploy",
     "db:migrate": "dotenvx run --env-file=.env.production -- keystone migrate",
     "fix": "dotenvx run --env-file=.env.production -- keystone postinstall --fix",
     "db:generate": "dotenvx run --env-file=.env.production -- keystone prisma generate --binary-targets native,rhel-openssl-3.0.x"
