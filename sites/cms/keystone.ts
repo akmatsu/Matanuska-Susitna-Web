@@ -35,6 +35,7 @@ export default withAuth(
       cors: { origin: ['*'], credentials: true },
       port: appConfig.server.port,
     },
+
     lists,
     session,
     telemetry: false,
