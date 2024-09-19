@@ -75,9 +75,11 @@ jobs:
             # Move the active folder to backup
             mv ./active ./backup
             
+            # Move the temp folder to active
             mv ./temp ./active
-
             cd ./active
+
+            # Setup Environment variables
             touch ./sites/cms/.env.production
             echo "DATABASE=${{secrets.DB_NAME}}" >> ./sites/cms/.env.production
             echo "DATABASE_USER=${{secrets.DB_USER}}" >> ./sites/cms/.env.production
@@ -94,8 +96,9 @@ jobs:
             # Build the application for production
             npm run cms:build
 
-
+            # Start the production server
             pm2 reload cms || pm2 start npm --name cms -- run cms:start
+            
             # Remove temporary folders.
             rm -rf ../cms.zip
             rm -rf ../backup
