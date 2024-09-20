@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { DatabaseProvider } from '@keystone-6/core/types';
 
 export const appConfig = {
