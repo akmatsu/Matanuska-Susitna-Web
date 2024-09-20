@@ -3,13 +3,12 @@
   "version": "1.0.3",
   "private": true,
   "scripts": {
-    "dev": "dotenvx run --env-file=.env.development -- keystone dev --no-db-push",
-    "start": "dotenvx run --env-file=.env.production -- keystone start",
-    "build": "dotenvx run --env-file=.env.production -- keystone build && dotenvx run --env-file=.env.production -- keystone prisma migrate deploy",
-    "db:migrate:diff": "dotenvx run --env-file=.env.production -- keystone prisma migrate create",
-    "db:migrate:dev": "dotenvx run --env-file=.env.production -- keystone prisma migrate dev",
-    "fix": "dotenvx run --env-file=.env.production -- keystone postinstall --fix",
-    "db:generate": "dotenvx run --env-file=.env.production -- keystone prisma generate --binary-targets native,rhel-openssl-3.0.x"
+    "dev": "keystone dev --no-db-push",
+    "start": "keystone start",
+    "build": "keystone build && keystone prisma migrate deploy",
+    "fix": "keystone postinstall --fix",
+    "db:generate": "keystone prisma generate --binary-targets native,rhel-openssl-3.0.x",
+    "db:migrations": "keystone prisma migrate dev"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.14.1",
