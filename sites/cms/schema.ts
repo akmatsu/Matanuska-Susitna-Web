@@ -25,7 +25,12 @@ import { document } from '@keystone-6/fields-document';
 // when using Typescript, you can refine your types to a stricter subset by importing
 // the generated types from '.keystone/types'
 import { type Lists } from '.keystone/types';
-import { timestamps } from './fieldUtils';
+import {
+  pageContentEditor,
+  publishable,
+  timestamps,
+  titleAndDescription,
+} from './fieldUtils';
 
 export const lists = {
   User: list({
@@ -124,6 +129,16 @@ export const lists = {
           inlineCreate: { fields: ['name'] },
         },
       }),
+    },
+  }),
+
+  Service: list({
+    access: allowAll,
+    fields: {
+      ...titleAndDescription(),
+      ...publishable,
+      ...pageContentEditor,
+      ...timestamps,
     },
   }),
 

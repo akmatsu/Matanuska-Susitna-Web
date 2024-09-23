@@ -32,6 +32,17 @@ model Post {
   @@index([authorId])
 }
 
+model Service {
+  id          String    @id @default(cuid())
+  title       String    @default("")
+  description String    @default("")
+  publishAt   DateTime?
+  unpublishAt DateTime?
+  content     Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+}
+
 model Tag {
   id    String @id @default(cuid())
   name  String @default("")
