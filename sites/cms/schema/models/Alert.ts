@@ -23,13 +23,6 @@ export const Alert: ListConfig<any> = list({
     }),
 
     message: document({
-      relationships: {
-        post: {
-          listKey: 'Post',
-          label: 'Link to post',
-          selection: 'id title',
-        },
-      },
       links: true,
       formatting: {
         inlineMarks: {
