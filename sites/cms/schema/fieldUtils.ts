@@ -1,7 +1,7 @@
 import { BaseFields } from '@keystone-6/core';
 import { text, timestamp } from '@keystone-6/core/fields';
 import { document } from '@keystone-6/fields-document';
-import { componentBlocks } from './component-blocks';
+import { componentBlocks } from '../component-blocks';
 
 export const urlRegex = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/;
 
@@ -21,13 +21,13 @@ export const publishable: BaseFields<any> = {
   publishAt: timestamp({
     ui: {
       description:
-        "This field is required to publish the item on the website. Articles without a 'Publish At' date are treated as drafts and won't be visible until the specified date is reached. To publish immediately, set this date to today.",
+        "Articles without a 'Publish At' date are treated as drafts. To publish immediately, set this date to today.",
     },
   }),
   unpublishAt: timestamp({
     ui: {
       description:
-        "This field is optional. If an 'Unpublish At' date is set, the item will automatically be removed from the website once that date is reached.",
+        "If an 'Unpublish At' date is set, the item will automatically be removed from the website once that date is reached.",
     },
   }),
 };
