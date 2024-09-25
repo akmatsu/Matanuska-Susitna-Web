@@ -26,6 +26,16 @@ export const Service: ListConfig<any> = list({
         inlineCreate: { fields: ['label', 'url'] },
       },
     }),
+    tags: relationship({
+      ref: 'Tag.services',
+      many: true,
+      ui: {
+        displayMode: 'cards',
+        cardFields: ['name'],
+        inlineCreate: { fields: ['name'] },
+        inlineEdit: { fields: ['name'] },
+      },
+    }),
     ...timestamps,
   },
 });

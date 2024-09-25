@@ -9,7 +9,8 @@
     "migrate": "keystone prisma migrate deploy",
     "fix": "keystone postinstall --fix",
     "generate": "keystone prisma generate --binary-targets native,rhel-openssl-3.0.x",
-    "migrations": "keystone prisma migrate dev"
+    "migrations": "keystone prisma migrate dev",
+    "reset": "keystone prisma migrate reset"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.14.1",

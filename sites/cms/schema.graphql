@@ -131,6 +131,8 @@ type Service {
   content: Service_content_Document
   externalLinks(where: ExternalLinkWhereInput! = {}, orderBy: [ExternalLinkOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ExternalLinkWhereUniqueInput): [ExternalLink!]
   externalLinksCount(where: ExternalLinkWhereInput! = {}): Int
+  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
+  tagsCount(where: TagWhereInput! = {}): Int
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -153,6 +155,7 @@ input ServiceWhereInput {
   publishAt: DateTimeNullableFilter
   unpublishAt: DateTimeNullableFilter
   externalLinks: ExternalLinkManyRelationFilter
+  tags: TagManyRelationFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
 }
@@ -161,6 +164,12 @@ input ExternalLinkManyRelationFilter {
   every: ExternalLinkWhereInput
   some: ExternalLinkWhereInput
   none: ExternalLinkWhereInput
+}
+
+input TagManyRelationFilter {
+  every: TagWhereInput
+  some: TagWhereInput
+  none: TagWhereInput
 }
 
 input ServiceOrderByInput {
@@ -180,6 +189,7 @@ input ServiceUpdateInput {
   unpublishAt: DateTime
   content: JSON
   externalLinks: ExternalLinkRelateToManyForUpdateInput
+  tags: TagRelateToManyForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -189,6 +199,13 @@ input ExternalLinkRelateToManyForUpdateInput {
   set: [ExternalLinkWhereUniqueInput!]
   create: [ExternalLinkCreateInput!]
   connect: [ExternalLinkWhereUniqueInput!]
+}
+
+input TagRelateToManyForUpdateInput {
+  disconnect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  create: [TagCreateInput!]
+  connect: [TagWhereUniqueInput!]
 }
 
 input ServiceUpdateArgs {
@@ -203,6 +220,7 @@ input ServiceCreateInput {
   unpublishAt: DateTime
   content: JSON
   externalLinks: ExternalLinkRelateToManyForCreateInput
+  tags: TagRelateToManyForCreateInput
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -210,6 +228,11 @@ input ServiceCreateInput {
 input ExternalLinkRelateToManyForCreateInput {
   create: [ExternalLinkCreateInput!]
   connect: [ExternalLinkWhereUniqueInput!]
+}
+
+input TagRelateToManyForCreateInput {
+  create: [TagCreateInput!]
+  connect: [TagWhereUniqueInput!]
 }
 
 type ExternalLink {
@@ -265,6 +288,8 @@ input ExternalLinkCreateInput {
 type Tag {
   id: ID!
   name: String
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
 }
 
 input TagWhereUniqueInput {
@@ -277,6 +302,13 @@ input TagWhereInput {
   NOT: [TagWhereInput!]
   id: IDFilter
   name: StringFilter
+  services: ServiceManyRelationFilter
+}
+
+input ServiceManyRelationFilter {
+  every: ServiceWhereInput
+  some: ServiceWhereInput
+  none: ServiceWhereInput
 }
 
 input TagOrderByInput {
@@ -286,6 +318,14 @@ input TagOrderByInput {
 
 input TagUpdateInput {
   name: String
+  services: ServiceRelateToManyForUpdateInput
+}
+
+input ServiceRelateToManyForUpdateInput {
+  disconnect: [ServiceWhereUniqueInput!]
+  set: [ServiceWhereUniqueInput!]
+  create: [ServiceCreateInput!]
+  connect: [ServiceWhereUniqueInput!]
 }
 
 input TagUpdateArgs {
@@ -295,6 +335,12 @@ input TagUpdateArgs {
 
 input TagCreateInput {
   name: String
+  services: ServiceRelateToManyForCreateInput
+}
+
+input ServiceRelateToManyForCreateInput {
+  create: [ServiceCreateInput!]
+  connect: [ServiceWhereUniqueInput!]
 }
 
 type Alert {
