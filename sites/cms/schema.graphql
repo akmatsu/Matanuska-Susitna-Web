@@ -227,6 +227,8 @@ type Service {
   publishAt: DateTime
   unpublishAt: DateTime
   content: Service_content_Document
+  externalLinks(where: ExternalLinkWhereInput! = {}, orderBy: [ExternalLinkOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ExternalLinkWhereUniqueInput): [ExternalLink!]
+  externalLinksCount(where: ExternalLinkWhereInput! = {}): Int
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -248,8 +250,15 @@ input ServiceWhereInput {
   description: StringFilter
   publishAt: DateTimeNullableFilter
   unpublishAt: DateTimeNullableFilter
+  externalLinks: ExternalLinkManyRelationFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
+}
+
+input ExternalLinkManyRelationFilter {
+  every: ExternalLinkWhereInput
+  some: ExternalLinkWhereInput
+  none: ExternalLinkWhereInput
 }
 
 input ServiceOrderByInput {
@@ -268,8 +277,16 @@ input ServiceUpdateInput {
   publishAt: DateTime
   unpublishAt: DateTime
   content: JSON
+  externalLinks: ExternalLinkRelateToManyForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+input ExternalLinkRelateToManyForUpdateInput {
+  disconnect: [ExternalLinkWhereUniqueInput!]
+  set: [ExternalLinkWhereUniqueInput!]
+  create: [ExternalLinkCreateInput!]
+  connect: [ExternalLinkWhereUniqueInput!]
 }
 
 input ServiceUpdateArgs {
@@ -283,6 +300,62 @@ input ServiceCreateInput {
   publishAt: DateTime
   unpublishAt: DateTime
   content: JSON
+  externalLinks: ExternalLinkRelateToManyForCreateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ExternalLinkRelateToManyForCreateInput {
+  create: [ExternalLinkCreateInput!]
+  connect: [ExternalLinkWhereUniqueInput!]
+}
+
+type ExternalLink {
+  id: ID!
+  label: String
+  url: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ExternalLinkWhereUniqueInput {
+  id: ID
+}
+
+input ExternalLinkWhereInput {
+  AND: [ExternalLinkWhereInput!]
+  OR: [ExternalLinkWhereInput!]
+  NOT: [ExternalLinkWhereInput!]
+  id: IDFilter
+  label: StringFilter
+  url: StringFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input ExternalLinkOrderByInput {
+  id: OrderDirection
+  label: OrderDirection
+  url: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input ExternalLinkUpdateInput {
+  label: String
+  url: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ExternalLinkUpdateArgs {
+  where: ExternalLinkWhereUniqueInput!
+  data: ExternalLinkUpdateInput!
+}
+
+input ExternalLinkCreateInput {
+  label: String
+  url: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -419,6 +492,12 @@ type Mutation {
   updateServices(data: [ServiceUpdateArgs!]!): [Service]
   deleteService(where: ServiceWhereUniqueInput!): Service
   deleteServices(where: [ServiceWhereUniqueInput!]!): [Service]
+  createExternalLink(data: ExternalLinkCreateInput!): ExternalLink
+  createExternalLinks(data: [ExternalLinkCreateInput!]!): [ExternalLink]
+  updateExternalLink(where: ExternalLinkWhereUniqueInput!, data: ExternalLinkUpdateInput!): ExternalLink
+  updateExternalLinks(data: [ExternalLinkUpdateArgs!]!): [ExternalLink]
+  deleteExternalLink(where: ExternalLinkWhereUniqueInput!): ExternalLink
+  deleteExternalLinks(where: [ExternalLinkWhereUniqueInput!]!): [ExternalLink]
   createTag(data: TagCreateInput!): Tag
   createTags(data: [TagCreateInput!]!): [Tag]
   updateTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): Tag
@@ -463,6 +542,9 @@ type Query {
   service(where: ServiceWhereUniqueInput!): Service
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
+  externalLink(where: ExternalLinkWhereUniqueInput!): ExternalLink
+  externalLinks(where: ExternalLinkWhereInput! = {}, orderBy: [ExternalLinkOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ExternalLinkWhereUniqueInput): [ExternalLink!]
+  externalLinksCount(where: ExternalLinkWhereInput! = {}): Int
   tag(where: TagWhereUniqueInput!): Tag
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int

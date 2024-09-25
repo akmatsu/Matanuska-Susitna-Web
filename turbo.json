@@ -5,6 +5,8 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "dist/**", "!.next/cache/**", ".keystone/**"]
     },
+    "migrate": {},
+    "migrations": {},
     "dev": {
       "cache": false,
       "persistent": true

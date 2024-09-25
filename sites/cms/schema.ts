@@ -7,6 +7,7 @@
 
 import { list } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
+import { componentBlocks } from './component-blocks';
 
 // see https://keystonejs.com/docs/fields/overview for the full list of fields
 //   this is a few common fields for an example
@@ -30,6 +31,7 @@ import {
   publishable,
   timestamps,
   titleAndDescription,
+  urlRegex,
 } from './fieldUtils';
 
 export const lists = {
@@ -137,7 +139,63 @@ export const lists = {
     fields: {
       ...titleAndDescription(),
       ...publishable,
+      // contacts: relationship({ ref: 'user', many: true, isOrderable: true }),
       ...pageContentEditor,
+      externalLinks: relationship({
+        ref: 'ExternalLink',
+        many: true,
+        isOrderable: true,
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['label', 'url'],
+          inlineEdit: { fields: ['label', 'url'] },
+          inlineConnect: true,
+          inlineCreate: { fields: ['label', 'url'] },
+        },
+      }),
+      ...timestamps,
+    },
+  }),
+
+  ExternalLink: list({
+    access: allowAll,
+    ui: {
+      isHidden: true,
+    },
+    fields: {
+      label: text({
+        validation: {
+          isRequired: true,
+          length: {
+            min: 2,
+            max: 50,
+          },
+        },
+        ui: {
+          displayMode: 'input',
+          description: 'Label to be used on link.',
+          itemView: {
+            fieldPosition: 'sidebar',
+          },
+        },
+      }),
+      url: text({
+        validation: {
+          isRequired: true,
+          length: {
+            min: 7,
+          },
+          match: {
+            regex: urlRegex,
+            explanation:
+              'You must provide a valid URL. Valid urls start with http:// or https:// and end with something like .com or .org etc.',
+          },
+        },
+        ui: {
+          displayMode: 'input',
+          description: 'Please provide a URL to the external web page',
+        },
+      }),
       ...timestamps,
     },
   }),

@@ -10,7 +10,7 @@ import { config } from '@keystone-6/core';
 // to keep this file tidy, we define our schema in a different file
 import { lists } from './schema';
 
-// authentately here too, but you might move this elsewhere
+// authentately*  here too, but you might move this elsewhere
 // when you write your list-level accication is configured separess control functions, as they typically rely on session data
 import { withAuth, session } from './auth';
 import { appConfig } from './appConfig';
@@ -35,6 +35,8 @@ export default withAuth(
       cors: { origin: ['*'], credentials: true },
       port: appConfig.server.port,
     },
+
+    ui: {},
 
     lists,
     session,

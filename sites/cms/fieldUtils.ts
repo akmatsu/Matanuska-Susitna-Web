@@ -1,6 +1,9 @@
 import { BaseFields } from '@keystone-6/core';
 import { text, timestamp } from '@keystone-6/core/fields';
 import { document } from '@keystone-6/fields-document';
+import { componentBlocks } from './component-blocks';
+
+export const urlRegex = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/;
 
 export const timestamps: BaseFields<any> = {
   createdAt: timestamp({
@@ -107,6 +110,8 @@ export const pageContentEditor: BaseFields<any> = {
     ui: {
       description:
         'This is a rich text editor for the page contents. It supports basic Markdown editing. Additionally it supports internal links and some component blocks. Be aware that heading 1 has been intentionally disabled. This is because every page in a website should only have a single header 1 and our page templates use the title has the header 1 for every page.',
+      views: './component-blocks',
     },
+    componentBlocks,
   }),
 };

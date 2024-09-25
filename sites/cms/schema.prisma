@@ -33,14 +33,24 @@ model Post {
 }
 
 model Service {
-  id          String    @id @default(cuid())
-  title       String    @default("")
-  description String    @default("")
-  publishAt   DateTime?
-  unpublishAt DateTime?
-  content     Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  createdAt   DateTime? @default(now())
-  updatedAt   DateTime? @default(now()) @updatedAt
+  id            String         @id @default(cuid())
+  title         String         @default("")
+  description   String         @default("")
+  publishAt     DateTime?
+  unpublishAt   DateTime?
+  content       Json           @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  externalLinks ExternalLink[] @relation("Service_externalLinks")
+  createdAt     DateTime?      @default(now())
+  updatedAt     DateTime?      @default(now()) @updatedAt
+}
+
+model ExternalLink {
+  id                         String    @id @default(cuid())
+  label                      String    @default("")
+  url                        String    @default("")
+  createdAt                  DateTime? @default(now())
+  updatedAt                  DateTime? @default(now()) @updatedAt
+  from_Service_externalLinks Service[] @relation("Service_externalLinks")
 }
 
 model Tag {
