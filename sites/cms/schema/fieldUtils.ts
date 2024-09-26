@@ -22,12 +22,18 @@ export const publishable: BaseFields<any> = {
     ui: {
       description:
         "Articles without a 'Publish At' date are treated as drafts.",
+      itemView: {
+        fieldPosition: 'sidebar',
+      },
     },
   }),
   unpublishAt: timestamp({
     ui: {
       description:
         "If an 'Unpublish At' date is set, the item will automatically be removed from the website on that date.",
+      itemView: {
+        fieldPosition: 'sidebar',
+      },
     },
   }),
 };
