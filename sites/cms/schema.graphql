@@ -131,6 +131,8 @@ type Service {
   content: Service_content_Document
   externalLinks(where: ExternalLinkWhereInput! = {}, orderBy: [ExternalLinkOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ExternalLinkWhereUniqueInput): [ExternalLink!]
   externalLinksCount(where: ExternalLinkWhereInput! = {}): Int
+  processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
+  processesCount(where: ProcessWhereInput! = {}): Int
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int
   createdAt: DateTime
@@ -155,6 +157,7 @@ input ServiceWhereInput {
   publishAt: DateTimeNullableFilter
   unpublishAt: DateTimeNullableFilter
   externalLinks: ExternalLinkManyRelationFilter
+  processes: ProcessManyRelationFilter
   tags: TagManyRelationFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
@@ -164,6 +167,12 @@ input ExternalLinkManyRelationFilter {
   every: ExternalLinkWhereInput
   some: ExternalLinkWhereInput
   none: ExternalLinkWhereInput
+}
+
+input ProcessManyRelationFilter {
+  every: ProcessWhereInput
+  some: ProcessWhereInput
+  none: ProcessWhereInput
 }
 
 input TagManyRelationFilter {
@@ -189,6 +198,7 @@ input ServiceUpdateInput {
   unpublishAt: DateTime
   content: JSON
   externalLinks: ExternalLinkRelateToManyForUpdateInput
+  processes: ProcessRelateToManyForUpdateInput
   tags: TagRelateToManyForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
@@ -199,6 +209,13 @@ input ExternalLinkRelateToManyForUpdateInput {
   set: [ExternalLinkWhereUniqueInput!]
   create: [ExternalLinkCreateInput!]
   connect: [ExternalLinkWhereUniqueInput!]
+}
+
+input ProcessRelateToManyForUpdateInput {
+  disconnect: [ProcessWhereUniqueInput!]
+  set: [ProcessWhereUniqueInput!]
+  create: [ProcessCreateInput!]
+  connect: [ProcessWhereUniqueInput!]
 }
 
 input TagRelateToManyForUpdateInput {
@@ -220,6 +237,7 @@ input ServiceCreateInput {
   unpublishAt: DateTime
   content: JSON
   externalLinks: ExternalLinkRelateToManyForCreateInput
+  processes: ProcessRelateToManyForCreateInput
   tags: TagRelateToManyForCreateInput
   createdAt: DateTime
   updatedAt: DateTime
@@ -228,6 +246,11 @@ input ServiceCreateInput {
 input ExternalLinkRelateToManyForCreateInput {
   create: [ExternalLinkCreateInput!]
   connect: [ExternalLinkWhereUniqueInput!]
+}
+
+input ProcessRelateToManyForCreateInput {
+  create: [ProcessCreateInput!]
+  connect: [ProcessWhereUniqueInput!]
 }
 
 input TagRelateToManyForCreateInput {
@@ -411,6 +434,156 @@ input AlertCreateInput {
   updatedAt: DateTime
 }
 
+type Process {
+  id: ID!
+  name: String
+  service: Service
+  steps(where: StepWhereInput! = {}, orderBy: [StepOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StepWhereUniqueInput): [Step!]
+  stepsCount(where: StepWhereInput! = {}): Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ProcessWhereUniqueInput {
+  id: ID
+}
+
+input ProcessWhereInput {
+  AND: [ProcessWhereInput!]
+  OR: [ProcessWhereInput!]
+  NOT: [ProcessWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  service: ServiceWhereInput
+  steps: StepManyRelationFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input StepManyRelationFilter {
+  every: StepWhereInput
+  some: StepWhereInput
+  none: StepWhereInput
+}
+
+input ProcessOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input ProcessUpdateInput {
+  name: String
+  service: ServiceRelateToOneForUpdateInput
+  steps: StepRelateToManyForUpdateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ServiceRelateToOneForUpdateInput {
+  create: ServiceCreateInput
+  connect: ServiceWhereUniqueInput
+  disconnect: Boolean
+}
+
+input StepRelateToManyForUpdateInput {
+  disconnect: [StepWhereUniqueInput!]
+  set: [StepWhereUniqueInput!]
+  create: [StepCreateInput!]
+  connect: [StepWhereUniqueInput!]
+}
+
+input ProcessUpdateArgs {
+  where: ProcessWhereUniqueInput!
+  data: ProcessUpdateInput!
+}
+
+input ProcessCreateInput {
+  name: String
+  service: ServiceRelateToOneForCreateInput
+  steps: StepRelateToManyForCreateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ServiceRelateToOneForCreateInput {
+  create: ServiceCreateInput
+  connect: ServiceWhereUniqueInput
+}
+
+input StepRelateToManyForCreateInput {
+  create: [StepCreateInput!]
+  connect: [StepWhereUniqueInput!]
+}
+
+type Step {
+  id: ID!
+  label: String
+  process: Process
+  content: Step_content_Document
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Step_content_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input StepWhereUniqueInput {
+  id: ID
+}
+
+input StepWhereInput {
+  AND: [StepWhereInput!]
+  OR: [StepWhereInput!]
+  NOT: [StepWhereInput!]
+  id: IDFilter
+  label: StringFilter
+  process: ProcessWhereInput
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input StepOrderByInput {
+  id: OrderDirection
+  label: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input StepUpdateInput {
+  label: String
+  process: ProcessRelateToOneForUpdateInput
+  content: JSON
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ProcessRelateToOneForUpdateInput {
+  create: ProcessCreateInput
+  connect: ProcessWhereUniqueInput
+  disconnect: Boolean
+}
+
+input StepUpdateArgs {
+  where: StepWhereUniqueInput!
+  data: StepUpdateInput!
+}
+
+input StepCreateInput {
+  label: String
+  process: ProcessRelateToOneForCreateInput
+  content: JSON
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ProcessRelateToOneForCreateInput {
+  create: ProcessCreateInput
+  connect: ProcessWhereUniqueInput
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -447,6 +620,18 @@ type Mutation {
   updateAlerts(data: [AlertUpdateArgs!]!): [Alert]
   deleteAlert(where: AlertWhereUniqueInput!): Alert
   deleteAlerts(where: [AlertWhereUniqueInput!]!): [Alert]
+  createProcess(data: ProcessCreateInput!): Process
+  createProcesses(data: [ProcessCreateInput!]!): [Process]
+  updateProcess(where: ProcessWhereUniqueInput!, data: ProcessUpdateInput!): Process
+  updateProcesses(data: [ProcessUpdateArgs!]!): [Process]
+  deleteProcess(where: ProcessWhereUniqueInput!): Process
+  deleteProcesses(where: [ProcessWhereUniqueInput!]!): [Process]
+  createStep(data: StepCreateInput!): Step
+  createSteps(data: [StepCreateInput!]!): [Step]
+  updateStep(where: StepWhereUniqueInput!, data: StepUpdateInput!): Step
+  updateSteps(data: [StepUpdateArgs!]!): [Step]
+  deleteStep(where: StepWhereUniqueInput!): Step
+  deleteSteps(where: [StepWhereUniqueInput!]!): [Step]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -485,6 +670,12 @@ type Query {
   alert(where: AlertWhereUniqueInput!): Alert
   alerts(where: AlertWhereInput! = {}, orderBy: [AlertOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AlertWhereUniqueInput): [Alert!]
   alertsCount(where: AlertWhereInput! = {}): Int
+  process(where: ProcessWhereUniqueInput!): Process
+  processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
+  processesCount(where: ProcessWhereInput! = {}): Int
+  step(where: StepWhereUniqueInput!): Step
+  steps(where: StepWhereInput! = {}, orderBy: [StepOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StepWhereUniqueInput): [Step!]
+  stepsCount(where: StepWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

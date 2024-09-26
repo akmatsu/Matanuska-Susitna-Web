@@ -29,6 +29,7 @@ model Service {
   unpublishAt   DateTime?
   content       Json           @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   externalLinks ExternalLink[] @relation("Service_externalLinks")
+  processes     Process[]      @relation("Process_service")
   tags          Tag[]          @relation("Service_tags")
   createdAt     DateTime?      @default(now())
   updatedAt     DateTime?      @default(now()) @updatedAt
@@ -56,4 +57,28 @@ model Alert {
   urgency   Int
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now()) @updatedAt
+}
+
+model Process {
+  id        String    @id @default(cuid())
+  name      String    @default("")
+  service   Service?  @relation("Process_service", fields: [serviceId], references: [id])
+  serviceId String?   @map("service")
+  steps     Step[]    @relation("Step_process")
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+
+  @@index([serviceId])
+}
+
+model Step {
+  id        String    @id @default(cuid())
+  label     String    @default("")
+  process   Process?  @relation("Step_process", fields: [processId], references: [id])
+  processId String?   @map("process")
+  content   Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+
+  @@index([processId])
 }

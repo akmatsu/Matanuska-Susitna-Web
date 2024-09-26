@@ -22,8 +22,20 @@ export const Service: ListConfig<any> = list({
         displayMode: 'cards',
         cardFields: ['label', 'url'],
         inlineEdit: { fields: ['label', 'url'] },
-        inlineConnect: true,
         inlineCreate: { fields: ['label', 'url'] },
+      },
+    }),
+    processes: relationship({
+      ref: 'Process.service',
+      many: true,
+      isOrderable: true,
+      ui: {
+        displayMode: 'cards',
+        cardFields: ['name'],
+        linkToItem: true,
+        removeMode: 'none',
+        inlineCreate: { fields: ['name'] },
+        // inlineEdit: { fields: ['name', 'steps'] },
       },
     }),
     tags: relationship({
@@ -32,6 +44,9 @@ export const Service: ListConfig<any> = list({
       ui: {
         displayMode: 'cards',
         cardFields: ['name'],
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
         inlineCreate: { fields: ['name'] },
         inlineEdit: { fields: ['name'] },
       },

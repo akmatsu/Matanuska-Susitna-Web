@@ -1,5 +1,13 @@
 import { type Lists } from '.keystone/types';
-import { Service, ExternalLink, User, Alert, Tag } from './schema/models';
+import {
+  Service,
+  ExternalLink,
+  User,
+  Alert,
+  Tag,
+  Process,
+  Step,
+} from './schema/models';
 
 export const lists = {
   User,
@@ -7,4 +15,6 @@ export const lists = {
   ExternalLink,
   Tag,
   Alert,
+  Process,
+  Step,
 } satisfies Lists;

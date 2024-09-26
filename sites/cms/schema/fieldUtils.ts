@@ -21,13 +21,13 @@ export const publishable: BaseFields<any> = {
   publishAt: timestamp({
     ui: {
       description:
-        "Articles without a 'Publish At' date are treated as drafts. To publish immediately, set this date to today.",
+        "Articles without a 'Publish At' date are treated as drafts.",
     },
   }),
   unpublishAt: timestamp({
     ui: {
       description:
-        "If an 'Unpublish At' date is set, the item will automatically be removed from the website once that date is reached.",
+        "If an 'Unpublish At' date is set, the item will automatically be removed from the website on that date.",
     },
   }),
 };
@@ -108,10 +108,10 @@ export const pageContentEditor: BaseFields<any> = {
       [1, 1, 1],
     ],
     ui: {
-      description:
-        'This is a rich text editor for the page contents. It supports basic Markdown editing. Additionally it supports internal links and some component blocks. Be aware that heading 1 has been intentionally disabled. This is because every page in a website should only have a single header 1 and our page templates use the title has the header 1 for every page.',
+      description: 'Be aware that heading 1 has been intentionally disabled.',
       views: './component-blocks',
     },
+
     componentBlocks,
   }),
 };
