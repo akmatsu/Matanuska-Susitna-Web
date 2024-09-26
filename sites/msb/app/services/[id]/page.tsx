@@ -1,9 +1,7 @@
+import { CoreDocumentRenderer } from '@/components/CoreDocumentRenderer';
 import { CoreSideNav } from '@/components/CoreSideNav';
 import { fetchGraphQL, gql } from '@/utils/graphql';
-import {
-  DocumentRenderer,
-  DocumentRendererProps,
-} from '@keystone-6/document-renderer';
+import { DocumentRendererProps } from '@keystone-6/document-renderer';
 import {
   ProcessList,
   ProcessListItem,
@@ -76,47 +74,8 @@ export default async function Service({ params }: { params: { id: string } }) {
             </Grid>
             <Grid desktop={{ col: 6 }}>
               <h1>{data?.data?.service?.title}</h1>
-              <DocumentRenderer
+              <CoreDocumentRenderer
                 document={data.data.service.content.document}
-                componentBlocks={{
-                  table: (props: {
-                    headers: { props: { node: { children: [] } } }[];
-                    rows: {
-                      columns: { props: { node: { children: [] } } }[];
-                    }[];
-                  }) => {
-                    return (
-                      <table style={{ width: '100%' }}>
-                        <thead>
-                          {props.headers.map((header) => {
-                            return (
-                              <th>
-                                <DocumentRenderer
-                                  document={header.props.node.children}
-                                />
-                              </th>
-                            );
-                          })}
-                        </thead>
-                        <tbody>
-                          {props.rows.map((row) => {
-                            return (
-                              <tr>
-                                {row.columns.map((col) => (
-                                  <td>
-                                    <DocumentRenderer
-                                      document={col.props.node.children}
-                                    />
-                                  </td>
-                                ))}
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    );
-                  },
-                }}
               />
               {data.data.service.processes.map((process) => (
                 <>
@@ -127,7 +86,9 @@ export default async function Service({ params }: { params: { id: string } }) {
                         <ProcessListHeading type="h4">
                           {step.label}
                         </ProcessListHeading>
-                        <DocumentRenderer document={step.content.document} />
+                        <CoreDocumentRenderer
+                          document={step.content.document}
+                        />
                       </ProcessListItem>
                     ))}
                   </ProcessList>
