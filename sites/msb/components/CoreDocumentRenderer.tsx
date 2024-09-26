@@ -1,11 +1,14 @@
-import { DocumentRendererProps } from '@keystone-6/document-renderer';
+import {
+  DocumentRenderer,
+  DocumentRendererProps,
+} from '@keystone-6/document-renderer';
 
 export function CoreDocumentRenderer({
   componentBlocks,
   ...p
 }: DocumentRendererProps) {
   return (
-    <CoreDocumentRenderer
+    <DocumentRenderer
       {...p}
       componentBlocks={{
         ...componentBlocks,
