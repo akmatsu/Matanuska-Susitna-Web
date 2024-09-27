@@ -9,3 +9,11 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+html {
+  scroll-padding-top: 144px;
+}
+
+* {
+  scroll-behavior: smooth;
+}
