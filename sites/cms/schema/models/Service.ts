@@ -4,6 +4,7 @@ import { relationship } from '@keystone-6/core/fields';
 import {
   pageContentEditor,
   publishable,
+  slug,
   timestamps,
   titleAndDescription,
 } from '../fieldUtils';
@@ -13,18 +14,8 @@ export const Service: ListConfig<any> = list({
   fields: {
     ...titleAndDescription(),
     ...publishable,
+    slug,
     ...pageContentEditor,
-    externalLinks: relationship({
-      ref: 'ExternalLink',
-      many: true,
-      isOrderable: true,
-      ui: {
-        displayMode: 'cards',
-        cardFields: ['label', 'url'],
-        inlineEdit: { fields: ['label', 'url'] },
-        inlineCreate: { fields: ['label', 'url'] },
-      },
-    }),
     processes: relationship({
       ref: 'Process.service',
       many: true,
@@ -35,7 +26,6 @@ export const Service: ListConfig<any> = list({
         linkToItem: true,
         removeMode: 'none',
         inlineCreate: { fields: ['name'] },
-        // inlineEdit: { fields: ['name', 'steps'] },
       },
     }),
     tags: relationship({

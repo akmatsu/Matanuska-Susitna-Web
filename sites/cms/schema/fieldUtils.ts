@@ -20,8 +20,6 @@ export const timestamps: BaseFields<any> = {
 export const publishable: BaseFields<any> = {
   publishAt: timestamp({
     ui: {
-      description:
-        "Articles without a 'Publish At' date are treated as drafts.",
       itemView: {
         fieldPosition: 'sidebar',
       },
@@ -29,8 +27,6 @@ export const publishable: BaseFields<any> = {
   }),
   unpublishAt: timestamp({
     ui: {
-      description:
-        "If an 'Unpublish At' date is set, the item will automatically be removed from the website on that date.",
       itemView: {
         fieldPosition: 'sidebar',
       },
@@ -121,3 +117,28 @@ export const pageContentEditor: BaseFields<any> = {
     componentBlocks,
   }),
 };
+
+export const slug = text({
+  isIndexed: 'unique',
+  validation: {
+    match: {
+      regex: /^[a-zA-Z0-9][a-zA-Z0-9-]*$/,
+      explanation: 'Valid slugs only consist of letters, numbers, and dashes.',
+    },
+  },
+  hooks: {
+    resolveInput: ({ resolvedData, operation, item }) => {
+      if (operation === 'create' && item !== undefined) {
+        console.log(resolvedData);
+      } else if (operation === 'update' && item !== undefined) {
+        const { title } = item;
+        const slug = resolvedData.slug
+          ? resolvedData.slug
+          : title.toLowerCase().replace(' ', '-');
+        return slug;
+      } else {
+        return resolvedData.slug?.toLowerCase();
+      }
+    },
+  },
+});

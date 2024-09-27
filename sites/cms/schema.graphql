@@ -128,9 +128,8 @@ type Service {
   description: String
   publishAt: DateTime
   unpublishAt: DateTime
+  slug: String
   content: Service_content_Document
-  externalLinks(where: ExternalLinkWhereInput! = {}, orderBy: [ExternalLinkOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ExternalLinkWhereUniqueInput): [ExternalLink!]
-  externalLinksCount(where: ExternalLinkWhereInput! = {}): Int
   processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
   processesCount(where: ProcessWhereInput! = {}): Int
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
@@ -145,6 +144,7 @@ type Service_content_Document {
 
 input ServiceWhereUniqueInput {
   id: ID
+  slug: String
 }
 
 input ServiceWhereInput {
@@ -156,17 +156,11 @@ input ServiceWhereInput {
   description: StringFilter
   publishAt: DateTimeNullableFilter
   unpublishAt: DateTimeNullableFilter
-  externalLinks: ExternalLinkManyRelationFilter
+  slug: StringFilter
   processes: ProcessManyRelationFilter
   tags: TagManyRelationFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
-}
-
-input ExternalLinkManyRelationFilter {
-  every: ExternalLinkWhereInput
-  some: ExternalLinkWhereInput
-  none: ExternalLinkWhereInput
 }
 
 input ProcessManyRelationFilter {
@@ -187,6 +181,7 @@ input ServiceOrderByInput {
   description: OrderDirection
   publishAt: OrderDirection
   unpublishAt: OrderDirection
+  slug: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
 }
@@ -196,19 +191,12 @@ input ServiceUpdateInput {
   description: String
   publishAt: DateTime
   unpublishAt: DateTime
+  slug: String
   content: JSON
-  externalLinks: ExternalLinkRelateToManyForUpdateInput
   processes: ProcessRelateToManyForUpdateInput
   tags: TagRelateToManyForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
-}
-
-input ExternalLinkRelateToManyForUpdateInput {
-  disconnect: [ExternalLinkWhereUniqueInput!]
-  set: [ExternalLinkWhereUniqueInput!]
-  create: [ExternalLinkCreateInput!]
-  connect: [ExternalLinkWhereUniqueInput!]
 }
 
 input ProcessRelateToManyForUpdateInput {
@@ -235,17 +223,12 @@ input ServiceCreateInput {
   description: String
   publishAt: DateTime
   unpublishAt: DateTime
+  slug: String
   content: JSON
-  externalLinks: ExternalLinkRelateToManyForCreateInput
   processes: ProcessRelateToManyForCreateInput
   tags: TagRelateToManyForCreateInput
   createdAt: DateTime
   updatedAt: DateTime
-}
-
-input ExternalLinkRelateToManyForCreateInput {
-  create: [ExternalLinkCreateInput!]
-  connect: [ExternalLinkWhereUniqueInput!]
 }
 
 input ProcessRelateToManyForCreateInput {
