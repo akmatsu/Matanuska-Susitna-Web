@@ -17,25 +17,36 @@ model User {
   name      String    @default("")
   email     String    @unique @default("")
   password  String
-  posts     Post[]    @relation("Post_author")
   createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
 }
 
-model Post {
-  id       String  @id @default(cuid())
-  title    String  @default("")
-  content  Json    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  author   User?   @relation("Post_author", fields: [authorId], references: [id])
-  authorId String? @map("author")
-  tags     Tag[]   @relation("Post_tags")
+model Service {
+  id          String    @id @default(cuid())
+  title       String    @default("")
+  description String    @default("")
+  publishAt   DateTime?
+  unpublishAt DateTime?
+  slug        String    @unique @default("")
+  content     Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  processes   Process[] @relation("Process_service")
+  tags        Tag[]     @relation("Service_tags")
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+}
 
-  @@index([authorId])
+model ExternalLink {
+  id        String    @id @default(cuid())
+  label     String    @default("")
+  url       String    @default("")
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
 }
 
 model Tag {
-  id    String @id @default(cuid())
-  name  String @default("")
-  posts Post[] @relation("Post_tags")
+  id       String    @id @default(cuid())
+  name     String    @default("")
+  services Service[] @relation("Service_tags")
 }
 
 model Alert {
@@ -45,4 +56,28 @@ model Alert {
   urgency   Int
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now()) @updatedAt
+}
+
+model Process {
+  id        String    @id @default(cuid())
+  name      String    @default("")
+  service   Service?  @relation("Process_service", fields: [serviceId], references: [id])
+  serviceId String?   @map("service")
+  steps     Step[]    @relation("Step_process")
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+
+  @@index([serviceId])
+}
+
+model Step {
+  id        String    @id @default(cuid())
+  label     String    @default("")
+  process   Process?  @relation("Step_process", fields: [processId], references: [id])
+  processId String?   @map("process")
+  content   Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+
+  @@index([processId])
 }

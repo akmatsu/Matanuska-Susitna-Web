@@ -6,9 +6,11 @@
     "dev": "keystone dev --no-db-push",
     "start": "keystone start",
     "build": "keystone build && keystone prisma migrate deploy",
+    "migrate": "keystone prisma migrate deploy",
     "fix": "keystone postinstall --fix",
-    "db:generate": "keystone prisma generate --binary-targets native,rhel-openssl-3.0.x",
-    "db:migrations": "keystone prisma migrate dev"
+    "generate": "keystone prisma generate --binary-targets native,rhel-openssl-3.0.x",
+    "migrations": "keystone prisma migrate dev",
+    "reset": "keystone prisma migrate reset"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.14.1",
@@ -16,6 +18,11 @@
     "@keystone-6/core": "^6.3.0",
     "@keystone-6/fields-document": "^9.1.0",
     "dotenv": "^16.4.5",
+    "passport": "^0.7.0",
+    "passport-azure-ad": "^4.3.5",
     "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@types/passport": "^1.0.16"
   }
 }

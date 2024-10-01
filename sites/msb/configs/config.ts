@@ -7,7 +7,7 @@ export const appConfig = {
 };
 
 export const primaryNav = [
-  { href: '#services', text: 'Services' },
+  { href: '/services', text: 'Services' },
   { href: '#communities', text: 'Communities' },
   { href: '#government', text: 'Government' },
   { href: '#departments', text: 'Departments' },

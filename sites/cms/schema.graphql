@@ -6,9 +6,8 @@ type User {
   name: String
   email: String
   password: PasswordState
-  posts(where: PostWhereInput! = {}, orderBy: [PostOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PostWhereUniqueInput): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
   createdAt: DateTime
+  updatedAt: DateTime
 }
 
 type PasswordState {
@@ -29,8 +28,8 @@ input UserWhereInput {
   id: IDFilter
   name: StringFilter
   email: StringFilter
-  posts: PostManyRelationFilter
   createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
 }
 
 input IDFilter {
@@ -78,12 +77,6 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
-input PostManyRelationFilter {
-  every: PostWhereInput
-  some: PostWhereInput
-  none: PostWhereInput
-}
-
 input DateTimeNullableFilter {
   equals: DateTime
   in: [DateTime!]
@@ -100,6 +93,7 @@ input UserOrderByInput {
   name: OrderDirection
   email: OrderDirection
   createdAt: OrderDirection
+  updatedAt: OrderDirection
 }
 
 enum OrderDirection {
@@ -111,15 +105,8 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
-  posts: PostRelateToManyForUpdateInput
   createdAt: DateTime
-}
-
-input PostRelateToManyForUpdateInput {
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  create: [PostCreateInput!]
-  connect: [PostWhereUniqueInput!]
+  updatedAt: DateTime
 }
 
 input UserUpdateArgs {
@@ -131,40 +118,55 @@ input UserCreateInput {
   name: String
   email: String
   password: String
-  posts: PostRelateToManyForCreateInput
   createdAt: DateTime
+  updatedAt: DateTime
 }
 
-input PostRelateToManyForCreateInput {
-  create: [PostCreateInput!]
-  connect: [PostWhereUniqueInput!]
-}
-
-type Post {
+type Service {
   id: ID!
   title: String
-  content: Post_content_Document
-  author: User
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  slug: String
+  content: Service_content_Document
+  processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
+  processesCount(where: ProcessWhereInput! = {}): Int
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
-type Post_content_Document {
+type Service_content_Document {
   document(hydrateRelationships: Boolean! = false): JSON!
 }
 
-input PostWhereUniqueInput {
+input ServiceWhereUniqueInput {
   id: ID
+  slug: String
 }
 
-input PostWhereInput {
-  AND: [PostWhereInput!]
-  OR: [PostWhereInput!]
-  NOT: [PostWhereInput!]
+input ServiceWhereInput {
+  AND: [ServiceWhereInput!]
+  OR: [ServiceWhereInput!]
+  NOT: [ServiceWhereInput!]
   id: IDFilter
   title: StringFilter
-  author: UserWhereInput
+  description: StringFilter
+  publishAt: DateTimeNullableFilter
+  unpublishAt: DateTimeNullableFilter
+  slug: StringFilter
+  processes: ProcessManyRelationFilter
   tags: TagManyRelationFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input ProcessManyRelationFilter {
+  every: ProcessWhereInput
+  some: ProcessWhereInput
+  none: ProcessWhereInput
 }
 
 input TagManyRelationFilter {
@@ -173,22 +175,35 @@ input TagManyRelationFilter {
   none: TagWhereInput
 }
 
-input PostOrderByInput {
+input ServiceOrderByInput {
   id: OrderDirection
   title: OrderDirection
+  description: OrderDirection
+  publishAt: OrderDirection
+  unpublishAt: OrderDirection
+  slug: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
 }
 
-input PostUpdateInput {
+input ServiceUpdateInput {
   title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  slug: String
   content: JSON
-  author: UserRelateToOneForUpdateInput
+  processes: ProcessRelateToManyForUpdateInput
   tags: TagRelateToManyForUpdateInput
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
-input UserRelateToOneForUpdateInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  disconnect: Boolean
+input ProcessRelateToManyForUpdateInput {
+  disconnect: [ProcessWhereUniqueInput!]
+  set: [ProcessWhereUniqueInput!]
+  create: [ProcessCreateInput!]
+  connect: [ProcessWhereUniqueInput!]
 }
 
 input TagRelateToManyForUpdateInput {
@@ -198,21 +213,27 @@ input TagRelateToManyForUpdateInput {
   connect: [TagWhereUniqueInput!]
 }
 
-input PostUpdateArgs {
-  where: PostWhereUniqueInput!
-  data: PostUpdateInput!
+input ServiceUpdateArgs {
+  where: ServiceWhereUniqueInput!
+  data: ServiceUpdateInput!
 }
 
-input PostCreateInput {
+input ServiceCreateInput {
   title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  slug: String
   content: JSON
-  author: UserRelateToOneForCreateInput
+  processes: ProcessRelateToManyForCreateInput
   tags: TagRelateToManyForCreateInput
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
-input UserRelateToOneForCreateInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
+input ProcessRelateToManyForCreateInput {
+  create: [ProcessCreateInput!]
+  connect: [ProcessWhereUniqueInput!]
 }
 
 input TagRelateToManyForCreateInput {
@@ -220,11 +241,61 @@ input TagRelateToManyForCreateInput {
   connect: [TagWhereUniqueInput!]
 }
 
+type ExternalLink {
+  id: ID!
+  label: String
+  url: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ExternalLinkWhereUniqueInput {
+  id: ID
+}
+
+input ExternalLinkWhereInput {
+  AND: [ExternalLinkWhereInput!]
+  OR: [ExternalLinkWhereInput!]
+  NOT: [ExternalLinkWhereInput!]
+  id: IDFilter
+  label: StringFilter
+  url: StringFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input ExternalLinkOrderByInput {
+  id: OrderDirection
+  label: OrderDirection
+  url: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input ExternalLinkUpdateInput {
+  label: String
+  url: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ExternalLinkUpdateArgs {
+  where: ExternalLinkWhereUniqueInput!
+  data: ExternalLinkUpdateInput!
+}
+
+input ExternalLinkCreateInput {
+  label: String
+  url: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
 type Tag {
   id: ID!
   name: String
-  posts(where: PostWhereInput! = {}, orderBy: [PostOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PostWhereUniqueInput): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
 }
 
 input TagWhereUniqueInput {
@@ -237,7 +308,13 @@ input TagWhereInput {
   NOT: [TagWhereInput!]
   id: IDFilter
   name: StringFilter
-  posts: PostManyRelationFilter
+  services: ServiceManyRelationFilter
+}
+
+input ServiceManyRelationFilter {
+  every: ServiceWhereInput
+  some: ServiceWhereInput
+  none: ServiceWhereInput
 }
 
 input TagOrderByInput {
@@ -247,7 +324,14 @@ input TagOrderByInput {
 
 input TagUpdateInput {
   name: String
-  posts: PostRelateToManyForUpdateInput
+  services: ServiceRelateToManyForUpdateInput
+}
+
+input ServiceRelateToManyForUpdateInput {
+  disconnect: [ServiceWhereUniqueInput!]
+  set: [ServiceWhereUniqueInput!]
+  create: [ServiceCreateInput!]
+  connect: [ServiceWhereUniqueInput!]
 }
 
 input TagUpdateArgs {
@@ -257,7 +341,12 @@ input TagUpdateArgs {
 
 input TagCreateInput {
   name: String
-  posts: PostRelateToManyForCreateInput
+  services: ServiceRelateToManyForCreateInput
+}
+
+input ServiceRelateToManyForCreateInput {
+  create: [ServiceCreateInput!]
+  connect: [ServiceWhereUniqueInput!]
 }
 
 type Alert {
@@ -328,6 +417,156 @@ input AlertCreateInput {
   updatedAt: DateTime
 }
 
+type Process {
+  id: ID!
+  name: String
+  service: Service
+  steps(where: StepWhereInput! = {}, orderBy: [StepOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StepWhereUniqueInput): [Step!]
+  stepsCount(where: StepWhereInput! = {}): Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ProcessWhereUniqueInput {
+  id: ID
+}
+
+input ProcessWhereInput {
+  AND: [ProcessWhereInput!]
+  OR: [ProcessWhereInput!]
+  NOT: [ProcessWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  service: ServiceWhereInput
+  steps: StepManyRelationFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input StepManyRelationFilter {
+  every: StepWhereInput
+  some: StepWhereInput
+  none: StepWhereInput
+}
+
+input ProcessOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input ProcessUpdateInput {
+  name: String
+  service: ServiceRelateToOneForUpdateInput
+  steps: StepRelateToManyForUpdateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ServiceRelateToOneForUpdateInput {
+  create: ServiceCreateInput
+  connect: ServiceWhereUniqueInput
+  disconnect: Boolean
+}
+
+input StepRelateToManyForUpdateInput {
+  disconnect: [StepWhereUniqueInput!]
+  set: [StepWhereUniqueInput!]
+  create: [StepCreateInput!]
+  connect: [StepWhereUniqueInput!]
+}
+
+input ProcessUpdateArgs {
+  where: ProcessWhereUniqueInput!
+  data: ProcessUpdateInput!
+}
+
+input ProcessCreateInput {
+  name: String
+  service: ServiceRelateToOneForCreateInput
+  steps: StepRelateToManyForCreateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ServiceRelateToOneForCreateInput {
+  create: ServiceCreateInput
+  connect: ServiceWhereUniqueInput
+}
+
+input StepRelateToManyForCreateInput {
+  create: [StepCreateInput!]
+  connect: [StepWhereUniqueInput!]
+}
+
+type Step {
+  id: ID!
+  label: String
+  process: Process
+  content: Step_content_Document
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Step_content_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input StepWhereUniqueInput {
+  id: ID
+}
+
+input StepWhereInput {
+  AND: [StepWhereInput!]
+  OR: [StepWhereInput!]
+  NOT: [StepWhereInput!]
+  id: IDFilter
+  label: StringFilter
+  process: ProcessWhereInput
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input StepOrderByInput {
+  id: OrderDirection
+  label: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input StepUpdateInput {
+  label: String
+  process: ProcessRelateToOneForUpdateInput
+  content: JSON
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ProcessRelateToOneForUpdateInput {
+  create: ProcessCreateInput
+  connect: ProcessWhereUniqueInput
+  disconnect: Boolean
+}
+
+input StepUpdateArgs {
+  where: StepWhereUniqueInput!
+  data: StepUpdateInput!
+}
+
+input StepCreateInput {
+  label: String
+  process: ProcessRelateToOneForCreateInput
+  content: JSON
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ProcessRelateToOneForCreateInput {
+  create: ProcessCreateInput
+  connect: ProcessWhereUniqueInput
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -340,12 +579,18 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
-  createPost(data: PostCreateInput!): Post
-  createPosts(data: [PostCreateInput!]!): [Post]
-  updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
-  updatePosts(data: [PostUpdateArgs!]!): [Post]
-  deletePost(where: PostWhereUniqueInput!): Post
-  deletePosts(where: [PostWhereUniqueInput!]!): [Post]
+  createService(data: ServiceCreateInput!): Service
+  createServices(data: [ServiceCreateInput!]!): [Service]
+  updateService(where: ServiceWhereUniqueInput!, data: ServiceUpdateInput!): Service
+  updateServices(data: [ServiceUpdateArgs!]!): [Service]
+  deleteService(where: ServiceWhereUniqueInput!): Service
+  deleteServices(where: [ServiceWhereUniqueInput!]!): [Service]
+  createExternalLink(data: ExternalLinkCreateInput!): ExternalLink
+  createExternalLinks(data: [ExternalLinkCreateInput!]!): [ExternalLink]
+  updateExternalLink(where: ExternalLinkWhereUniqueInput!, data: ExternalLinkUpdateInput!): ExternalLink
+  updateExternalLinks(data: [ExternalLinkUpdateArgs!]!): [ExternalLink]
+  deleteExternalLink(where: ExternalLinkWhereUniqueInput!): ExternalLink
+  deleteExternalLinks(where: [ExternalLinkWhereUniqueInput!]!): [ExternalLink]
   createTag(data: TagCreateInput!): Tag
   createTags(data: [TagCreateInput!]!): [Tag]
   updateTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): Tag
@@ -358,6 +603,18 @@ type Mutation {
   updateAlerts(data: [AlertUpdateArgs!]!): [Alert]
   deleteAlert(where: AlertWhereUniqueInput!): Alert
   deleteAlerts(where: [AlertWhereUniqueInput!]!): [Alert]
+  createProcess(data: ProcessCreateInput!): Process
+  createProcesses(data: [ProcessCreateInput!]!): [Process]
+  updateProcess(where: ProcessWhereUniqueInput!, data: ProcessUpdateInput!): Process
+  updateProcesses(data: [ProcessUpdateArgs!]!): [Process]
+  deleteProcess(where: ProcessWhereUniqueInput!): Process
+  deleteProcesses(where: [ProcessWhereUniqueInput!]!): [Process]
+  createStep(data: StepCreateInput!): Step
+  createSteps(data: [StepCreateInput!]!): [Step]
+  updateStep(where: StepWhereUniqueInput!, data: StepUpdateInput!): Step
+  updateSteps(data: [StepUpdateArgs!]!): [Step]
+  deleteStep(where: StepWhereUniqueInput!): Step
+  deleteSteps(where: [StepWhereUniqueInput!]!): [Step]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -384,15 +641,24 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserWhereUniqueInput): [User!]
   usersCount(where: UserWhereInput! = {}): Int
-  post(where: PostWhereUniqueInput!): Post
-  posts(where: PostWhereInput! = {}, orderBy: [PostOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: PostWhereUniqueInput): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
+  service(where: ServiceWhereUniqueInput!): Service
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
+  externalLink(where: ExternalLinkWhereUniqueInput!): ExternalLink
+  externalLinks(where: ExternalLinkWhereInput! = {}, orderBy: [ExternalLinkOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ExternalLinkWhereUniqueInput): [ExternalLink!]
+  externalLinksCount(where: ExternalLinkWhereInput! = {}): Int
   tag(where: TagWhereUniqueInput!): Tag
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int
   alert(where: AlertWhereUniqueInput!): Alert
   alerts(where: AlertWhereInput! = {}, orderBy: [AlertOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AlertWhereUniqueInput): [Alert!]
   alertsCount(where: AlertWhereInput! = {}): Int
+  process(where: ProcessWhereUniqueInput!): Process
+  processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
+  processesCount(where: ProcessWhereInput! = {}): Int
+  step(where: StepWhereUniqueInput!): Step
+  steps(where: StepWhereInput! = {}, orderBy: [StepOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StepWhereUniqueInput): [Step!]
+  stepsCount(where: StepWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

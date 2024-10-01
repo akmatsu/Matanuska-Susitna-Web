@@ -23,7 +23,9 @@ export default async function RootLayout({
         <Alerts />
 
         <TopNavigation />
-        <main id="main-content">{children}</main>
+        <main id="main-content" className="position-relative">
+          {children}
+        </main>
         <MainFooter />
       </body>
     </html>
