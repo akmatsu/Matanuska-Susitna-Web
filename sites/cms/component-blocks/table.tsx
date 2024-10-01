@@ -21,36 +21,40 @@ export const table = component({
     ),
   },
   preview: function MyTable(props) {
-    const [rows, setRows] = useState(0);
-    const [cols, setCols] = useState(2);
+    const [rowCount, setRowCount] = useState(
+      props.fields.tableRows.elements.length || 0,
+    );
+    const [colCount, setColCount] = useState(
+      props.fields.headers.elements.length || 2,
+    );
 
     useEffect(() => {
       adjustTableRows();
-    }, [rows]);
+    }, [rowCount]);
 
     useEffect(() => {
       adjustTableCols();
-    }, [cols]);
+    }, [colCount]);
 
     function adjustTableRows() {
       const tableRows = props.fields.tableRows;
-      if (tableRows.elements.length < rows) {
+      if (tableRows.elements.length < rowCount) {
         addTableRow();
       }
 
-      if (tableRows.elements.length > rows) {
+      if (tableRows.elements.length > rowCount) {
         removeTableRow();
       }
     }
 
     function adjustTableCols() {
-      const tooFewHeaders = props.fields.headers.elements.length < cols;
-      const tooManyHeaders = props.fields.headers.elements.length > cols;
+      const tooFewHeaders = props.fields.headers.elements.length < colCount;
+      const tooManyHeaders = props.fields.headers.elements.length > colCount;
       const tooFewBodyCols = props.fields.tableRows.elements.some(
-        (x) => x.elements.length < cols,
+        (x) => x.elements.length < colCount,
       );
       const tooManyBodyCols = props.fields.tableRows.elements.some(
-        (x) => x.elements.length > cols,
+        (x) => x.elements.length > colCount,
       );
 
       props.onChange({
@@ -67,7 +71,7 @@ export const table = component({
           key: r.key,
           value: [
             ...r.elements,
-            ...Array.from({ length: cols - r.elements.length }, () => ({
+            ...Array.from({ length: colCount - r.elements.length }, () => ({
               key: undefined,
             })),
           ],
@@ -79,7 +83,7 @@ export const table = component({
       return {
         tableRows: props.fields.tableRows.elements.map((r) => ({
           key: r.key,
-          value: r.elements.slice(0, cols),
+          value: r.elements.slice(0, colCount),
         })),
       };
     }
@@ -89,7 +93,7 @@ export const table = component({
         headers: [
           ...props.fields.headers.elements,
           ...Array.from(
-            { length: cols - props.fields.headers.elements.length },
+            { length: colCount - props.fields.headers.elements.length },
             () => ({ key: undefined }),
           ),
         ],
@@ -98,18 +102,18 @@ export const table = component({
 
     function removeHeaderCol() {
       return {
-        headers: props.fields.headers.elements.slice(0, cols),
+        headers: props.fields.headers.elements.slice(0, colCount),
       };
     }
 
     function addTableRow() {
       props.fields.tableRows.onChange([
-        ...props.fields.tableRows.elements.map((x) => ({ key: x.key })), // Keep existing rows
+        ...props.fields.tableRows.elements.map((x) => ({ key: x.key })), // Keep existing rowCount
         ...Array.from(
-          { length: rows - props.fields.tableRows.elements.length },
+          { length: rowCount - props.fields.tableRows.elements.length },
           () => ({
             key: undefined,
-            value: Array.from({ length: cols }, () => ({ key: undefined })),
+            value: Array.from({ length: colCount }, () => ({ key: undefined })),
           }),
         ),
       ]);
@@ -117,7 +121,7 @@ export const table = component({
 
     function removeTableRow() {
       props.fields.tableRows.onChange([
-        ...props.fields.tableRows.elements.slice(0, rows),
+        ...props.fields.tableRows.elements.slice(0, rowCount),
       ]);
     }
 
@@ -159,12 +163,22 @@ export const table = component({
               gap: '8px',
             }}
           >
-            <button onClick={() => setRows(rows + 1)}>Add a row</button>
-            <button onClick={() => setRows(rows > 0 ? rows - 1 : rows)}>
+            <button onClick={() => setRowCount(rowCount + 1)}>Add a row</button>
+            <button
+              onClick={() =>
+                setRowCount(rowCount > 0 ? rowCount - 1 : rowCount)
+              }
+            >
               Remove a row
             </button>
-            <button onClick={() => setCols(cols + 1)}>Add a column</button>
-            <button onClick={() => setCols(cols > 0 ? cols - 1 : cols)}>
+            <button onClick={() => setColCount(colCount + 1)}>
+              Add a column
+            </button>
+            <button
+              onClick={() =>
+                setColCount(colCount > 0 ? colCount - 1 : colCount)
+              }
+            >
               Remove a column
             </button>
           </div>
