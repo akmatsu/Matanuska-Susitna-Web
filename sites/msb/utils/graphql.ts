@@ -1,5 +1,4 @@
-const API_URL = `${process.env.API_URL || 'http://localhost:3333'}/api/graphql`;
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const gql = ([content]: TemplateStringsArray) => content;
 
 export async function fetchGraphQL<T = any>(
@@ -7,7 +6,7 @@ export async function fetchGraphQL<T = any>(
   variables?: Record<string, any>,
 ): Promise<T | undefined> {
   try {
-    const res = await fetch(API_URL, {
+    const res = await fetch(`${API_URL}/api/graphql`, {
       method: 'POST',
       body: JSON.stringify({ query, variables }),
       headers: { 'Content-Type': 'application/json' },

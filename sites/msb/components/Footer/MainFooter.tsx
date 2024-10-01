@@ -24,7 +24,11 @@ export function MainFooter() {
           aria-label="Footer navigation"
           size="medium"
           links={primaryNav.map((item) => (
-            <Link href={item.href} className="usa-footer__primary-link">
+            <Link
+              href={item.href}
+              className="usa-footer__primary-link"
+              key={item.href}
+            >
               {item.text}
             </Link>
           ))}

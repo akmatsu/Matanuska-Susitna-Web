@@ -1,7 +1,7 @@
 import { list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
 import { relationship, text } from '@keystone-6/core/fields';
-import { pageContentEditor, timestamps } from '../fieldUtils';
+import { timestamps } from '../fieldUtils';
 
 export const Process: ListConfig<any> = list({
   access: allowAll,

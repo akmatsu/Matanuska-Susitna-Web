@@ -1,8 +1,6 @@
 'use client';
 import { appConfig } from '@/configs/config';
-
 import { Carousel } from '../Carousel';
-import Link from 'next/link';
 import { Search } from '@trussworks/react-uswds';
 
 export function Hero() {
