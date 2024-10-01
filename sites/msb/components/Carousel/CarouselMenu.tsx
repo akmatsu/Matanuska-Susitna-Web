@@ -10,7 +10,7 @@ export function CarouselMenu(props: { slides: string[] }) {
   return (
     <div className="position-absolute bottom-0 width-full z-100 padding-1 display-flex flex-justify-center flex-align-center">
       {props.slides.map((slide, index) => (
-        <Button type="button" onClick={() => slideTo(index)}>
+        <Button type="button" onClick={() => slideTo(index)} key={index}>
           {slide}
         </Button>
       ))}

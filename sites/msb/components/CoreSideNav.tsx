@@ -48,12 +48,12 @@ const TreeRenderer = ({
     <SideNav
       isSubnav={isSubnav}
       items={nodes.map((node) => (
-        <>
+        <div key={node.id}>
           <Link href={`#${node.id}`}>{node.text}</Link>
           {!!node.children?.length && (
             <TreeRenderer nodes={node.children} isSubnav />
           )}
-        </>
+        </div>
       ))}
     />
   );

@@ -79,7 +79,7 @@ export default async function Service({ params }: { params: { id: string } }) {
                 document={data.data.service.content.document}
               />
               {data.data.service.processes.map((process) => (
-                <>
+                <div key={process.id}>
                   <h2>{process.name}</h2>
                   <ProcessList>
                     {process.steps.map((step) => (
@@ -93,7 +93,7 @@ export default async function Service({ params }: { params: { id: string } }) {
                       </ProcessListItem>
                     ))}
                   </ProcessList>
-                </>
+                </div>
               ))}
             </Grid>
           </Grid>

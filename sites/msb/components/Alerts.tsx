@@ -10,7 +10,6 @@ export async function Alerts() {
         title
         updatedAt
         urgency
-        externalLinkTo
         createdAt
         message {
           document(hydrateRelationships: true)
