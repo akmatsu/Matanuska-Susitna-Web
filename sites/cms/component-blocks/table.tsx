@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   component,
   fields,
@@ -6,76 +6,106 @@ import {
 } from '@keystone-6/fields-document/component-blocks';
 
 export const table = component({
-  preview: function MyTable(props) {
-    // Determine the maximum number of columns across all rows
-    const getMaxColumns = (rows: typeof props.fields.rows) => {
-      let maxColumns = 1;
-      for (const row of rows.elements) {
-        if (row.elements.length > maxColumns) {
-          maxColumns = row.elements.length;
-        }
-      }
-      return maxColumns;
-    };
+  label: 'Table',
 
-    // Adjust rows to ensure all rows have the same number of columns
-    const adjustRowsForMaxColumns = (
-      rows: typeof props.fields.rows,
-      maxColumns: number,
-    ) => {
-      if (rows.elements.some((x) => x.elements.length !== maxColumns)) {
-        rows.onChange(
-          rows.elements.map((element) => {
-            return {
-              key: element.key,
-              value: [
-                ...element.elements.map((x) => ({ key: x.key })), // Keep existing columns
-                ...Array.from(
-                  { length: maxColumns - element.elements.length }, // Add empty columns
-                  () => ({
-                    key: undefined, // Undefined key for new/empty columns
-                  }),
-                ),
-              ],
-            };
-          }),
-        );
-      }
-    };
-
-    // Handle inserting a new column
-    const handleInsertColumn = () => {
-      props.fields.rows.onChange(
-        props.fields.rows.elements.map((element) => {
-          return {
-            key: element.key,
-            value: [
-              ...element.elements.map((x) => ({ key: x.key })), // Keep existing columns
-              { key: undefined }, // Add a new empty column
-            ],
-          };
+  schema: {
+    rows: fields.array(
+      fields.array(
+        fields.object({
+          content: fields.child({ kind: 'block', placeholder: 'Cell...' }),
         }),
-      );
+      ),
+    ),
+    headers: fields.array(
+      fields.child({ kind: 'block', placeholder: 'Header...' }),
+    ),
+  },
+  preview: function MyTable(props) {
+    const [rows, setRows] = useState(0);
+    const [cols, setCols] = useState(2);
+
+    const adjustRowsForMaxRows = () => {
+      const tableRows = props.fields.rows;
+      if (tableRows.elements.length < rows) {
+        addRow();
+      }
+
+      if (tableRows.elements.length > rows) {
+        removeRow();
+      }
     };
 
-    const handleRemoveColumn = () => {
-      props.fields.rows.onChange();
-    };
-
-    // Handle inserting a new row
-    const handleInsertRow = () => {
+    const addRow = () => {
       props.fields.rows.onChange([
         ...props.fields.rows.elements.map((x) => ({ key: x.key })), // Keep existing rows
-        { key: undefined }, // Add a new empty row
+        ...Array.from(
+          { length: rows - props.fields.rows.elements.length },
+          () => ({
+            key: undefined,
+            value: Array.from({ length: cols }, () => ({ key: undefined })),
+          }),
+        ),
       ]);
     };
 
-    // useEffect to adjust rows when component is mounted/updated
+    const removeRow = () => {
+      props.fields.rows.onChange([
+        ...props.fields.rows.elements.slice(0, rows),
+      ]);
+    };
+
+    const adjustTableCols = () => {
+      props.onChange({
+        // Add headers cells if length is less than cols
+        ...(props.fields.headers.elements.length < cols && {
+          headers: [
+            ...props.fields.headers.elements,
+            ...Array.from(
+              { length: cols - props.fields.headers.elements.length },
+              () => ({ key: undefined }),
+            ),
+          ],
+        }),
+
+        // Remove header cells if length is greater than cols
+        ...(props.fields.headers.elements.length > cols && {
+          headers: props.fields.headers.elements.slice(0, cols),
+        }),
+
+        // Add row cells if length is less than cols
+        ...(props.fields.rows.elements.some(
+          (x) => x.elements.length < cols,
+        ) && {
+          rows: props.fields.rows.elements.map((r) => ({
+            key: r.key,
+            value: [
+              ...r.elements,
+              ...Array.from({ length: cols - r.elements.length }, () => ({
+                key: undefined,
+              })),
+            ],
+          })),
+        }),
+
+        // Remove row cells if length is greater than cols.
+        ...(props.fields.rows.elements.some(
+          (x) => x.elements.length > cols,
+        ) && {
+          rows: props.fields.rows.elements.map((r) => ({
+            key: r.key,
+            value: r.elements.slice(0, cols),
+          })),
+        }),
+      });
+    };
+
     useEffect(() => {
-      const rows = props.fields.rows;
-      const maxColumns = getMaxColumns(rows);
-      adjustRowsForMaxColumns(rows, maxColumns);
-    }, [props.fields.rows]);
+      adjustRowsForMaxRows();
+    }, [rows]);
+
+    useEffect(() => {
+      adjustTableCols();
+    }, [cols]);
 
     // Render table rows and cells
     const renderTableRows = () => {
@@ -86,40 +116,37 @@ export const table = component({
               {column.fields.content.element}
             </td>
           ))}
-          {rowIndex === 0 && (
-            <NotEditable>
-              <button onClick={handleInsertColumn}>+</button>
-              <button onClick={handleRemoveColumn}>-</button>
-            </NotEditable>
-          )}
         </tr>
       ));
     };
 
+    const renderTableHeaders = () => {
+      return props.fields.headers.elements.map((row, rowIndex) => (
+        <th key={row.key} style={{ border: '1px solid black' }}>
+          {row.element}
+        </th>
+      ));
+    };
+
     return (
-      <div>
-        <table style={{ width: '100%' }}>
+      <>
+        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr>{renderTableHeaders()}</tr>
+          </thead>
           <tbody>{renderTableRows()}</tbody>
         </table>
         <NotEditable>
-          <button onClick={handleInsertRow}>+</button>
+          <button onClick={() => setRows(rows + 1)}>Add a row</button>
+          <button onClick={() => setRows(rows > 0 ? rows - 1 : rows)}>
+            Remove a row
+          </button>
+          <button onClick={() => setCols(cols + 1)}>Add a column</button>
+          <button onClick={() => setCols(cols > 0 ? cols - 1 : cols)}>
+            Remove a column
+          </button>
         </NotEditable>
-      </div>
+      </>
     );
-  },
-  label: 'Table',
-  chromeless: true,
-  schema: {
-    rows: fields.array(
-      fields.array(
-        fields.object({
-          content: fields.child({ kind: 'block', placeholder: '' }),
-        }),
-      ),
-    ),
-    headers: fields.object({
-      row: fields.checkbox({ label: 'Header Row' }),
-      column: fields.checkbox({ label: 'Header Column' }),
-    }),
   },
 });
