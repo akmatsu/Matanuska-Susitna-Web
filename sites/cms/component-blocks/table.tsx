@@ -9,7 +9,7 @@ export const table = component({
   label: 'Table',
   chromeless: true,
   schema: {
-    rows: fields.array(
+    tableRows: fields.array(
       fields.array(
         fields.object({
           content: fields.child({ kind: 'block', placeholder: 'Field...' }),
@@ -25,31 +25,31 @@ export const table = component({
     const [cols, setCols] = useState(2);
 
     useEffect(() => {
-      adjustRowsForMaxRows();
+      adjustTableRows();
     }, [rows]);
 
     useEffect(() => {
       adjustTableCols();
     }, [cols]);
 
-    function adjustRowsForMaxRows() {
-      const tableRows = props.fields.rows;
+    function adjustTableRows() {
+      const tableRows = props.fields.tableRows;
       if (tableRows.elements.length < rows) {
-        addRow();
+        addTableRow();
       }
 
       if (tableRows.elements.length > rows) {
-        removeRow();
+        removeTableRow();
       }
     }
 
     function adjustTableCols() {
       const tooFewHeaders = props.fields.headers.elements.length < cols;
       const tooManyHeaders = props.fields.headers.elements.length > cols;
-      const tooFewBodyCols = props.fields.rows.elements.some(
+      const tooFewBodyCols = props.fields.tableRows.elements.some(
         (x) => x.elements.length < cols,
       );
-      const tooManyBodyCols = props.fields.rows.elements.some(
+      const tooManyBodyCols = props.fields.tableRows.elements.some(
         (x) => x.elements.length > cols,
       );
 
@@ -63,7 +63,7 @@ export const table = component({
 
     function addBodyCol() {
       return {
-        rows: props.fields.rows.elements.map((r) => ({
+        tableRows: props.fields.tableRows.elements.map((r) => ({
           key: r.key,
           value: [
             ...r.elements,
@@ -77,7 +77,7 @@ export const table = component({
 
     function removeBodyCol() {
       return {
-        rows: props.fields.rows.elements.map((r) => ({
+        tableRows: props.fields.tableRows.elements.map((r) => ({
           key: r.key,
           value: r.elements.slice(0, cols),
         })),
@@ -102,11 +102,11 @@ export const table = component({
       };
     }
 
-    function addRow() {
-      props.fields.rows.onChange([
-        ...props.fields.rows.elements.map((x) => ({ key: x.key })), // Keep existing rows
+    function addTableRow() {
+      props.fields.tableRows.onChange([
+        ...props.fields.tableRows.elements.map((x) => ({ key: x.key })), // Keep existing rows
         ...Array.from(
-          { length: rows - props.fields.rows.elements.length },
+          { length: rows - props.fields.tableRows.elements.length },
           () => ({
             key: undefined,
             value: Array.from({ length: cols }, () => ({ key: undefined })),
@@ -115,14 +115,14 @@ export const table = component({
       ]);
     }
 
-    function removeRow() {
-      props.fields.rows.onChange([
-        ...props.fields.rows.elements.slice(0, rows),
+    function removeTableRow() {
+      props.fields.tableRows.onChange([
+        ...props.fields.tableRows.elements.slice(0, rows),
       ]);
     }
 
     const renderTableHeaders = () => {
-      return props.fields.headers.elements.map((row, rowIndex) => (
+      return props.fields.headers.elements.map((row) => (
         <th key={row.key} style={{ border: '1px solid black' }}>
           {row.element}
         </th>
@@ -130,10 +130,10 @@ export const table = component({
     };
 
     function renderTableRows() {
-      return props.fields.rows.elements.map((row, rowIndex) => (
-        <tr key={rowIndex} style={{ border: '1px solid black' }}>
-          {row.elements.map((column, colIndex) => (
-            <td key={colIndex} style={{ border: '1px solid black' }}>
+      return props.fields.tableRows.elements.map((row) => (
+        <tr key={row.key} style={{ border: '1px solid black' }}>
+          {row.elements.map((column) => (
+            <td key={column.key} style={{ border: '1px solid black' }}>
               {column.fields.content.element}
             </td>
           ))}
