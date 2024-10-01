@@ -2,7 +2,6 @@
 import { appConfig, primaryNav } from '@/configs/config';
 import {
   Header,
-  Logo,
   NavMenuButton,
   PrimaryNav,
   Search,
@@ -11,6 +10,7 @@ import {
 
 import { useState } from 'react';
 import { NavLink } from './NavLink';
+import Link from 'next/link';
 
 export function TopNavigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,13 +28,15 @@ export function TopNavigation() {
       <div className="usa-nav-container ">
         <div className="usa-navbar">
           <Title className="margin-top-2">
-            <div className="display-flex flex-align-center">
-              <img
-                src={appConfig.orgLogoUrl}
-                className="circle-6 mobile-lg:circle-4 margin-right-1"
-              ></img>
-              <span>{appConfig.orgName}</span>
-            </div>
+            <Link href="/">
+              <div className="display-flex flex-align-center">
+                <img
+                  src={appConfig.orgLogoUrl}
+                  className="circle-6 mobile-lg:circle-4 margin-right-1"
+                ></img>
+                <span>{appConfig.orgName}</span>
+              </div>
+            </Link>
           </Title>
 
           <NavMenuButton

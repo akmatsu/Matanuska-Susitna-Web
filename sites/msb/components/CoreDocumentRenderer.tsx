@@ -37,35 +37,44 @@ export function CoreDocumentRenderer({
         ...componentBlocks,
 
         table: (props: {
-          headers: { props: { node: { children: [] } } }[];
-          rows: {
-            columns: { props: { node: { children: [] } } }[];
-          }[];
+          headers: { key: string; props: { node: { children: [] } } }[];
+          tableRows: {
+            content: {
+              key: string;
+              props: {
+                node: { children: [] };
+              };
+            };
+          }[][];
         }) => {
           return (
             <table style={{ width: '100%' }}>
               <thead>
-                {props.headers.map((header) => {
-                  return (
-                    <th>
-                      <CoreDocumentRenderer
-                        document={header.props.node.children}
-                      />
-                    </th>
-                  );
-                })}
+                <tr>
+                  {props.headers.map((header) => {
+                    return (
+                      <th key={header.key}>
+                        <CoreDocumentRenderer
+                          document={header.props.node.children}
+                        />
+                      </th>
+                    );
+                  })}
+                </tr>
               </thead>
               <tbody>
-                {props.rows.map((row) => {
+                {props.tableRows.map((row, index) => {
                   return (
-                    <tr>
-                      {row.columns.map((col) => (
-                        <td>
-                          <CoreDocumentRenderer
-                            document={col.props.node.children}
-                          />
-                        </td>
-                      ))}
+                    <tr key={index}>
+                      {row.map((cell) => {
+                        return (
+                          <td key={cell.content.key}>
+                            <CoreDocumentRenderer
+                              document={cell.content.props.node.children}
+                            />
+                          </td>
+                        );
+                      })}
                     </tr>
                   );
                 })}

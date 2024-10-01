@@ -1,3 +1,4 @@
+import React from 'react';
 import { CoreDocumentRenderer } from '@/components/CoreDocumentRenderer';
 import { CoreSideNav } from '@/components/CoreSideNav';
 import { fetchGraphQL, gql } from '@/utils/graphql';
