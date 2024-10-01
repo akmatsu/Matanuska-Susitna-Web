@@ -126,19 +126,19 @@ export const slug = text({
       explanation: 'Valid slugs only consist of letters, numbers, and dashes.',
     },
   },
-  hooks: {
-    resolveInput: ({ resolvedData, operation, item }) => {
-      if (operation === 'create' && item !== undefined) {
-        console.log(resolvedData);
-      } else if (operation === 'update' && item !== undefined) {
-        const { title } = item;
-        const slug = resolvedData.slug
-          ? resolvedData.slug
-          : title.toLowerCase().replace(' ', '-');
-        return slug;
-      } else {
-        return resolvedData.slug?.toLowerCase();
-      }
-    },
-  },
+  // hooks: {
+  //   resolveInput: ({ resolvedData, operation, item }) => {
+  //     if (operation === 'create' && item !== undefined) {
+  //       console.log(resolvedData);
+  //     } else if (operation === 'update' && item !== undefined) {
+  //       const { title } = item;
+  //       const slug = resolvedData.slug
+  //         ? resolvedData.slug
+  //         : title.toLowerCase().replace(' ', '-');
+  //       return slug;
+  //     } else {
+  //       return resolvedData.slug?.toLowerCase();
+  //     }
+  //   },
+  // },
 });
