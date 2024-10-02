@@ -7,9 +7,8 @@ import {
   ProcessList,
   ProcessListItem,
   ProcessListHeading,
-  GridContainer,
-  Grid,
 } from '@trussworks/react-uswds';
+import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 
 export default async function Service({ params }: { params: { id: string } }) {
   const data = await fetchGraphQL<{
@@ -62,42 +61,35 @@ export default async function Service({ params }: { params: { id: string } }) {
   return (
     <section className="usa-section">
       {data?.data?.service && (
-        <GridContainer>
-          <Grid row gap>
-            <Grid className="usa-layout-docs__sidenav" desktop={{ col: 3 }}>
-              <nav
-                aria-label="Secondary navigation"
-                className="position-sticky"
-                style={{ top: '144px' }}
-              >
-                <CoreSideNav />
-              </nav>
-            </Grid>
-            <Grid desktop={{ col: 6 }}>
-              <h1>{data?.data?.service?.title}</h1>
-              <CoreDocumentRenderer
-                document={data.data.service.content.document}
-              />
-              {data.data.service.processes.map((process) => (
-                <div key={process.id}>
-                  <h2>{process.name}</h2>
-                  <ProcessList>
-                    {process.steps.map((step) => (
-                      <ProcessListItem key={step.id}>
-                        <ProcessListHeading type="h4">
-                          {step.label}
-                        </ProcessListHeading>
-                        <CoreDocumentRenderer
-                          document={step.content.document}
-                        />
-                      </ProcessListItem>
-                    ))}
-                  </ProcessList>
-                </div>
-              ))}
-            </Grid>
-          </Grid>
-        </GridContainer>
+        <ThreeColumnLayout
+          left={
+            <nav
+              aria-label="Secondary navigation"
+              className="position-sticky"
+              style={{ top: '144px' }}
+            >
+              <CoreSideNav />
+            </nav>
+          }
+        >
+          <h1>{data?.data?.service?.title}</h1>
+          <CoreDocumentRenderer document={data.data.service.content.document} />
+          {data.data.service.processes.map((process) => (
+            <div key={process.id}>
+              <h2>{process.name}</h2>
+              <ProcessList>
+                {process.steps.map((step) => (
+                  <ProcessListItem key={step.id}>
+                    <ProcessListHeading type="h4">
+                      {step.label}
+                    </ProcessListHeading>
+                    <CoreDocumentRenderer document={step.content.document} />
+                  </ProcessListItem>
+                ))}
+              </ProcessList>
+            </div>
+          ))}
+        </ThreeColumnLayout>
       )}
     </section>
   );

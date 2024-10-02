@@ -9,7 +9,9 @@ export function ThreeColumnLayout(props: {
   return (
     <GridContainer>
       <Grid row gap>
-        <Grid desktop={{ col: 3 }}>{props.left}</Grid>
+        <Grid desktop={{ col: 3 }} className="margin-bottom-4">
+          {props.left}
+        </Grid>
         <Grid desktop={{ col: 6 }}>{props.children}</Grid>
         <Grid desktop={{ col: 3 }}>{props.right}</Grid>
       </Grid>

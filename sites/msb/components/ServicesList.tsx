@@ -73,6 +73,7 @@ export function ServicesList() {
   if (loading) {
     return (
       <>
+        <h1>Services</h1>
         <ul className="usa-list--unstyled">
           {Array.from({ length: limit }, (_, index) => (
             <Card key={index} className="usa-card margin-bottom-2">
@@ -105,6 +106,7 @@ export function ServicesList() {
 
   return (
     <>
+      <h1>Services</h1>
       <ul className="usa-list--unstyled">
         {services.map((service) => (
           <LinkCard
