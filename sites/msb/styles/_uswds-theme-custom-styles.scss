@@ -47,6 +47,12 @@ p {
   }
 }
 
+.usa-pagination {
+  ul li:last-child {
+    margin-bottom: 4px;
+  }
+}
+
 a.usa-card {
   text-decoration: none;
   .usa-card__container {

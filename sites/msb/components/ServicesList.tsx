@@ -75,29 +75,27 @@ export function ServicesList() {
       <>
         <ul className="usa-list--unstyled">
           {Array.from({ length: limit }, (_, index) => (
-            <li key={index} className="usa-card margin-bottom-2">
-              <div className="usa-card__container">
-                <CardHeader className="padding-top-2">
+            <Card key={index} className="usa-card margin-bottom-2">
+              <CardHeader className="padding-top-2">
+                <Skeleton
+                  className="usa-card__heading margin-top-0"
+                  baseColor="#ccc"
+                  highlightColor="#f0f0f0"
+                  borderRadius={0}
+                />
+              </CardHeader>
+
+              <CardBody>
+                <p>
                   <Skeleton
-                    className="usa-card__heading margin-top-0"
+                    count={2}
                     baseColor="#ccc"
                     highlightColor="#f0f0f0"
                     borderRadius={0}
                   />
-                </CardHeader>
-
-                <CardBody>
-                  <p>
-                    <Skeleton
-                      count={2}
-                      baseColor="#ccc"
-                      highlightColor="#f0f0f0"
-                      borderRadius={0}
-                    />
-                  </p>
-                </CardBody>
-              </div>
-            </li>
+                </p>
+              </CardBody>
+            </Card>
           ))}
         </ul>
         <CorePagination currentPage={page} />
