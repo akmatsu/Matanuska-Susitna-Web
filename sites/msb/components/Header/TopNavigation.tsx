@@ -53,7 +53,11 @@ export function TopNavigation() {
           mobileExpanded={isOpen}
           onToggleMobileNav={() => setIsOpen((val) => !val)}
         >
-          <Search size="small" onSubmit={handleSearch}></Search>
+          <Search
+            size="small"
+            onSubmit={handleSearch}
+            placeholder="Search website..."
+          ></Search>
         </PrimaryNav>
       </div>
     </Header>

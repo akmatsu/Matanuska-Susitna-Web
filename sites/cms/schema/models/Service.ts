@@ -11,6 +11,9 @@ import {
 
 export const Service: ListConfig<any> = list({
   access: allowAll,
+  graphql: {
+    maxTake: 100,
+  },
   fields: {
     ...titleAndDescription(),
     ...publishable,
