@@ -13,5 +13,6 @@ export const appConfig = {
   },
   server: {
     port: process.env.WEB_PORT ? parseInt(process.env.WEB_PORT) : 3333,
+    originHost: process.env.ORIGIN_HOST,
   },
 };

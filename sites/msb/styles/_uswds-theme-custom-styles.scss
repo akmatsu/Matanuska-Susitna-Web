@@ -43,6 +43,7 @@ p {
   .usa-card__container {
     background-color: color('base-lightest');
     transition: background-color 0.3s;
+    border-bottom: 4px solid color('primary');
   }
 }
 

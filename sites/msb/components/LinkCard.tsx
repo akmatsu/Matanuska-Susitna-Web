@@ -9,7 +9,7 @@ export type LinkCardProps = {
 
 export function LinkCard(props: LinkCardProps) {
   return (
-    <Link {...props} className={`${props.className} usa-card`}>
+    <Link {...props} className={`${props.className} usa-card display-block`}>
       <div className="usa-card__container">{props.children}</div>
     </Link>
   );

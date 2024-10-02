@@ -1,53 +1,134 @@
 'use client';
+import React from 'react';
 import { fetchGraphQL, gql } from '@/utils/graphql';
-import { CardHeader } from '@trussworks/react-uswds';
+import { Card, CardBody, CardHeader } from '@trussworks/react-uswds';
 import { LinkCard } from './LinkCard';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { CorePagination } from './CorePagination/CorePagination';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-export async function ServicesList() {
+type Service = { id: string; title: string; description: string };
+
+export function ServicesList() {
   const params = useSearchParams();
   const pageParam = params.get('page');
-  const limit = 25;
+  const limit = 15;
   const page = pageParam ? parseInt(pageParam) : 1;
+  const [services, setServices] = useState<Service[]>([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  const skip = page * 25;
+  const skip = (page - 1) * limit;
 
-  const services = await fetchGraphQL<{
-    data: {
-      services: { id: string; title: string; description: string }[];
-    };
-  }>(
-    gql`
-      query GetServices($take: int, $skip: int!) {
-        services(take: $take, skip: $skip) {
-          id
-          title
-          description
-        }
-        servicesCount
+  useEffect(() => {
+    getServices();
+  }, [page]);
+
+  function startLoading() {
+    setLoading(true);
+  }
+
+  function stopLoading() {
+    setLoading(false);
+  }
+
+  async function getServices() {
+    try {
+      startLoading();
+      const res = await fetchGraphQL<{
+        data: {
+          services: Service[];
+          servicesCount: number;
+        };
+      }>(
+        gql`
+          query GetServices($take: Int, $skip: Int!) {
+            services(take: $take, skip: $skip) {
+              id
+              title
+              description
+            }
+            servicesCount
+          }
+        `,
+        {
+          take: limit,
+          skip,
+        },
+      );
+
+      if (res) {
+        setServices(res.data.services);
+        setTotal(res.data.servicesCount);
       }
-    `,
-    {
-      take: limit,
-      skip,
-    },
-  );
+    } catch {
+      console.error('An error ocurred.');
+    } finally {
+      stopLoading();
+    }
+  }
+
+  if (loading) {
+    return (
+      <>
+        <ul className="usa-list--unstyled">
+          {Array.from({ length: limit }, (_, index) => (
+            <li key={index} className="usa-card margin-bottom-2">
+              <div className="usa-card__container">
+                <CardHeader className="padding-top-2">
+                  <Skeleton
+                    className="usa-card__heading margin-top-0"
+                    baseColor="#ccc"
+                    highlightColor="#f0f0f0"
+                    borderRadius={0}
+                  />
+                </CardHeader>
+
+                <CardBody>
+                  <p>
+                    <Skeleton
+                      count={2}
+                      baseColor="#ccc"
+                      highlightColor="#f0f0f0"
+                      borderRadius={0}
+                    />
+                  </p>
+                </CardBody>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <CorePagination currentPage={page} />
+      </>
+    );
+  }
 
   return (
-    <ul className="usa-list--unstyled">
-      {services?.data?.services.map((service) => (
-        <li className="margin-bottom-2">
-          <LinkCard href={`/services/${service.id}`}>
+    <>
+      <ul className="usa-list--unstyled">
+        {services.map((service) => (
+          <LinkCard
+            className="margin-bottom-2"
+            href={`/services/${service.id}`}
+            key={service.id}
+          >
             <CardHeader className="padding-top-2">
-              <h4 className="usa-card__heading margin-top-0">
+              <h4 className="usa-card__heading margin-bottom-0">
                 {service.title}
               </h4>
-              <p>{service.description}</p>
+              <CardBody>
+                <p>{service.description}</p>
+              </CardBody>
             </CardHeader>
           </LinkCard>
-        </li>
-      ))}
-    </ul>
+        ))}
+      </ul>
+      <CorePagination
+        currentPage={page}
+        totalPages={Math.ceil(total / limit)}
+      />
+    </>
   );
 }
