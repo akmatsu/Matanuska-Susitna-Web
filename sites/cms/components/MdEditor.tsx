@@ -1,8 +1,7 @@
 'use client';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import React, { useState, useEffect } from 'react';
-import Editor from '@toast-ui/editor';
-import { createRoot } from 'react-dom/client';
+import React, { useState, useEffect, useRef } from 'react';
+import TuiEditor, { TuiEditorRef } from './TuiEditor';
 
 export type MdEditorProps = {
   initialValue?: string;
@@ -11,50 +10,15 @@ export type MdEditorProps = {
 
 export default function MdEditor({ initialValue, onChange }: MdEditorProps) {
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [editor, setEditor] = useState<Editor>();
+  const editor = useRef<TuiEditorRef>(null);
 
-  useEffect(() => {
-    const $el = document.querySelector('#MdEditor');
-    if ($el !== null)
-      setEditor(
-        new Editor({
-          el: $el as HTMLElement,
-          height: '100%',
-          initialEditType: 'wysiwyg',
-          previewStyle: 'vertical',
-          initialValue: initialValue,
-          usageStatistics: false,
-          toolbarItems: [
-            ['heading', 'bold', 'italic', 'strike'],
-            ['hr', 'quote'],
-            ['ul', 'ol', 'task', 'indent', 'outdent'],
-            ['table', 'image', 'link'],
-            ['code', 'codeblock'],
-          ],
-          events: {
-            change() {
-              onChange?.(editor?.getMarkdown());
-            },
-          },
-        }),
-      );
-  }, []);
+  function handleChange() {
+    onChange?.(editor.current?.getInstance()?.getMarkdown());
+  }
 
   const toggleFullScreen = () => {
     setIsFullScreen(!isFullScreen);
   };
-
-  // function mySpecialButton() {
-  //   const button = document.createElement('div');
-
-  //   const root = createRoot(button);
-  //   root.render(
-  //     <button onClick={toggleFullScreen}>
-  //       {isFullScreen ? 'Exit Fullscreen' : 'Go Fullscreen'}
-  //     </button>,
-  //   );
-  //   return button;
-  // }
 
   return (
     <div
@@ -73,12 +37,14 @@ export default function MdEditor({ initialValue, onChange }: MdEditorProps) {
       <button onClick={toggleFullScreen}>
         {isFullScreen ? 'Exit Fullscreen' : 'Go Fullscreen'}
       </button>
-      <div
-        id="MdEditor"
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
+      <TuiEditor
+        height="100%"
+        initialEditType="wysiwyg"
+        onChange={handleChange}
+        initialValue={initialValue}
+        previewStyle="vertical"
+        usageStatistics={false}
+        ref={editor}
       />
     </div>
   );
