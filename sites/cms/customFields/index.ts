@@ -40,7 +40,7 @@ export function customText<ListTypeInfo extends BaseListTypeInfo>({
           return value;
         },
       }),
-      views: './views.tsx',
+      views: './customFields/views.tsx',
       getAdminMeta() {
         return {};
       },

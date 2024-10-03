@@ -3,6 +3,7 @@ import { allowAll } from '@keystone-6/core/access';
 import { timestamps } from '../fieldUtils';
 import { select, text } from '@keystone-6/core/fields';
 import { document } from '@keystone-6/fields-document';
+import { customText } from '../../customFields';
 
 export const Alert: ListConfig<any> = list({
   access: allowAll,
@@ -22,16 +23,7 @@ export const Alert: ListConfig<any> = list({
       },
     }),
 
-    message: document({
-      links: true,
-      formatting: {
-        inlineMarks: {
-          bold: true,
-          italic: true,
-          underline: true,
-        },
-      },
-    }),
+    body: customText(),
 
     urgency: select({
       type: 'integer',

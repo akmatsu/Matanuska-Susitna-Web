@@ -9,7 +9,7 @@
     "migrate": "keystone prisma migrate deploy",
     "fix": "keystone postinstall --fix",
     "generate": "keystone prisma generate --binary-targets native,rhel-openssl-3.0.x",
-    "migrations": "keystone prisma migrate dev",
+    "migrations": "keystone prisma migrate dev --create-only",
     "reset": "keystone prisma migrate reset"
   },
   "dependencies": {
@@ -17,7 +17,7 @@
     "@keystone-6/auth": "^8.0.0",
     "@keystone-6/core": "^6.3.0",
     "@keystone-6/fields-document": "^9.1.0",
-    "@toast-ui/react-editor": "^3.2.3",
+    "@toast-ui/editor": "^3.2.2",
     "dotenv": "^16.4.5",
     "passport": "^0.7.0",
     "passport-azure-ad": "^4.3.5",

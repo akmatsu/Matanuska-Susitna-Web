@@ -19,7 +19,7 @@ export const Service: ListConfig<any> = list({
     ...titleAndDescription(),
     ...publishable,
     slug,
-    customText: customText({}),
+    body: customText(),
     ...pageContentEditor,
     processes: relationship({
       ref: 'Process.service',

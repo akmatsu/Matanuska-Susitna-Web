@@ -28,7 +28,7 @@ model Service {
   publishAt   DateTime?
   unpublishAt DateTime?
   slug        String    @unique @default("")
-  customText  String?
+  body        String?
   content     Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   processes   Process[] @relation("Process_service")
   tags        Tag[]     @relation("Service_tags")
@@ -53,7 +53,7 @@ model Tag {
 model Alert {
   id        String    @id @default(cuid())
   title     String    @default("")
-  message   Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  body      String?
   urgency   Int
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now()) @updatedAt
@@ -76,7 +76,7 @@ model Step {
   label     String    @default("")
   process   Process?  @relation("Step_process", fields: [processId], references: [id])
   processId String?   @map("process")
-  content   Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  body      String?
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now()) @updatedAt
 
