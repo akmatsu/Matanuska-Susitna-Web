@@ -140,7 +140,6 @@ export const slug = text({
 
   hooks: {
     resolveInput: ({ operation, resolvedData, fieldKey }) => {
-      console.log('ran');
       if (operation === 'create') {
         if (resolvedData['title']) {
           const title = resolvedData['title'] as string;
