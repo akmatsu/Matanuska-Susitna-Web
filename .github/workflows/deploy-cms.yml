@@ -94,7 +94,7 @@ jobs:
             echo "DATABASE_PROVIDER=postgresql" >> ./sites/cms/.env
             echo "DATABASE_PROTOCOL=postgres" >> ./sites/cms/.env
             echo "WEB_PORT=3333" >> ./sites/cms/.env
-            echo "ORIGIN_HOST=*" >> ./sites/cms/.env
+            echo "ORIGIN_HOST=https://www.matsu.gov" >> ./sites/cms/.env
 
             # Install repo dependencies
             npm ci --workspace=cms --include-workspace-root
