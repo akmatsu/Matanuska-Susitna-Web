@@ -28,6 +28,7 @@ model Service {
   publishAt   DateTime?
   unpublishAt DateTime?
   slug        String    @unique @default("")
+  customText  String?
   content     Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   processes   Process[] @relation("Process_service")
   tags        Tag[]     @relation("Service_tags")

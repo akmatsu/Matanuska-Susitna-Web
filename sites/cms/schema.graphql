@@ -129,6 +129,7 @@ type Service {
   publishAt: DateTime
   unpublishAt: DateTime
   slug: String
+  customText: String
   content: Service_content_Document
   processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
   processesCount(where: ProcessWhereInput! = {}): Int
@@ -182,6 +183,7 @@ input ServiceOrderByInput {
   publishAt: OrderDirection
   unpublishAt: OrderDirection
   slug: OrderDirection
+  customText: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
 }
@@ -192,6 +194,7 @@ input ServiceUpdateInput {
   publishAt: DateTime
   unpublishAt: DateTime
   slug: String
+  customText: String
   content: JSON
   processes: ProcessRelateToManyForUpdateInput
   tags: TagRelateToManyForUpdateInput
@@ -224,6 +227,7 @@ input ServiceCreateInput {
   publishAt: DateTime
   unpublishAt: DateTime
   slug: String
+  customText: String
   content: JSON
   processes: ProcessRelateToManyForCreateInput
   tags: TagRelateToManyForCreateInput

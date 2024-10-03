@@ -8,6 +8,7 @@ import {
   timestamps,
   titleAndDescription,
 } from '../fieldUtils';
+import { customText } from '../../customFields';
 
 export const Service: ListConfig<any> = list({
   access: allowAll,
@@ -18,6 +19,7 @@ export const Service: ListConfig<any> = list({
     ...titleAndDescription(),
     ...publishable,
     slug,
+    customText: customText({}),
     ...pageContentEditor,
     processes: relationship({
       ref: 'Process.service',

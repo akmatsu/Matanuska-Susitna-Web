@@ -9,7 +9,7 @@ import { CorePagination } from './CorePagination/CorePagination';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-type Service = { id: string; title: string; description: string };
+type Service = { id: string;, slug: string, title: string; description: string };
 
 export function ServicesList() {
   const params = useSearchParams();
@@ -48,6 +48,7 @@ export function ServicesList() {
             services(take: $take, skip: $skip) {
               id
               title
+              slug
               description
             }
             servicesCount
@@ -111,7 +112,7 @@ export function ServicesList() {
         {services.map((service) => (
           <LinkCard
             className="margin-bottom-2"
-            href={`/services/${service.id}`}
+            href={`/services/${service.slug}`}
             key={service.id}
           >
             <CardHeader className="padding-top-2">

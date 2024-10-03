@@ -10,7 +10,11 @@ import {
 } from '@trussworks/react-uswds';
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 
-export default async function Service({ params }: { params: { id: string } }) {
+export default async function Service({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const data = await fetchGraphQL<{
     data: {
       service: {
@@ -53,7 +57,7 @@ export default async function Service({ params }: { params: { id: string } }) {
     `,
     {
       where: {
-        id: params.id,
+        slug: params.slug,
       },
     },
   );
