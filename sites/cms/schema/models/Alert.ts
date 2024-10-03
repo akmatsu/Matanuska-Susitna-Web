@@ -37,7 +37,6 @@ export const Alert: ListConfig<any> = list({
         isRequired: true,
       },
     }),
-
     ...timestamps,
   },
 });
