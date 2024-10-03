@@ -8,12 +8,21 @@ export const urlRegex = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/;
 export const timestamps: BaseFields<any> = {
   createdAt: timestamp({
     defaultValue: { kind: 'now' },
-    ui: { itemView: { fieldMode: 'read', fieldPosition: 'sidebar' } },
+    ui: {
+      itemView: {
+        fieldMode: 'read',
+        fieldPosition: 'sidebar',
+      },
+      createView: { fieldMode: 'hidden' },
+    },
   }),
   updatedAt: timestamp({
     defaultValue: { kind: 'now' },
     db: { updatedAt: true },
-    ui: { itemView: { fieldMode: 'read', fieldPosition: 'sidebar' } },
+    ui: {
+      itemView: { fieldMode: 'read', fieldPosition: 'sidebar' },
+      createView: { fieldMode: 'hidden' },
+    },
   }),
 };
 
@@ -120,25 +129,25 @@ export const pageContentEditor: BaseFields<any> = {
 
 export const slug = text({
   isIndexed: 'unique',
-  validation: {
-    match: {
-      regex: /^[a-zA-Z0-9][a-zA-Z0-9-]*$/,
-      explanation: 'Valid slugs only consist of letters, numbers, and dashes.',
+  ui: {
+    createView: {
+      fieldMode: 'hidden',
+    },
+    itemView: {
+      fieldPosition: 'sidebar',
     },
   },
-  // hooks: {
-  //   resolveInput: ({ resolvedData, operation, item }) => {
-  //     if (operation === 'create' && item !== undefined) {
-  //       console.log(resolvedData);
-  //     } else if (operation === 'update' && item !== undefined) {
-  //       const { title } = item;
-  //       const slug = resolvedData.slug
-  //         ? resolvedData.slug
-  //         : title.toLowerCase().replace(' ', '-');
-  //       return slug;
-  //     } else {
-  //       return resolvedData.slug?.toLowerCase();
-  //     }
-  //   },
-  // },
+
+  hooks: {
+    resolveInput: ({ operation, resolvedData, fieldKey }) => {
+      console.log('ran');
+      if (operation === 'create') {
+        if (resolvedData['title']) {
+          const title = resolvedData['title'] as string;
+          return title.toLowerCase().replace(/\s/gi, '-');
+        }
+      }
+      return resolvedData[fieldKey];
+    },
+  },
 });

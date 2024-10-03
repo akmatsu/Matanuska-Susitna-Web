@@ -8,13 +8,18 @@ import {
   timestamps,
   titleAndDescription,
 } from '../fieldUtils';
+import { customText } from '../../customFields';
 
 export const Service: ListConfig<any> = list({
   access: allowAll,
+  graphql: {
+    maxTake: 100,
+  },
   fields: {
     ...titleAndDescription(),
     ...publishable,
     slug,
+    body: customText(),
     ...pageContentEditor,
     processes: relationship({
       ref: 'Process.service',

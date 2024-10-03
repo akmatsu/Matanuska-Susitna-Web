@@ -129,6 +129,7 @@ type Service {
   publishAt: DateTime
   unpublishAt: DateTime
   slug: String
+  body: String
   content: Service_content_Document
   processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
   processesCount(where: ProcessWhereInput! = {}): Int
@@ -182,6 +183,7 @@ input ServiceOrderByInput {
   publishAt: OrderDirection
   unpublishAt: OrderDirection
   slug: OrderDirection
+  body: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
 }
@@ -192,6 +194,7 @@ input ServiceUpdateInput {
   publishAt: DateTime
   unpublishAt: DateTime
   slug: String
+  body: String
   content: JSON
   processes: ProcessRelateToManyForUpdateInput
   tags: TagRelateToManyForUpdateInput
@@ -224,6 +227,7 @@ input ServiceCreateInput {
   publishAt: DateTime
   unpublishAt: DateTime
   slug: String
+  body: String
   content: JSON
   processes: ProcessRelateToManyForCreateInput
   tags: TagRelateToManyForCreateInput
@@ -294,7 +298,7 @@ input ExternalLinkCreateInput {
 type Tag {
   id: ID!
   name: String
-  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
 }
 
@@ -352,14 +356,10 @@ input ServiceRelateToManyForCreateInput {
 type Alert {
   id: ID!
   title: String
-  message: Alert_message_Document
+  body: String
   urgency: Int
   createdAt: DateTime
   updatedAt: DateTime
-}
-
-type Alert_message_Document {
-  document(hydrateRelationships: Boolean! = false): JSON!
 }
 
 input AlertWhereUniqueInput {
@@ -391,6 +391,7 @@ input IntFilter {
 input AlertOrderByInput {
   id: OrderDirection
   title: OrderDirection
+  body: OrderDirection
   urgency: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
@@ -398,7 +399,7 @@ input AlertOrderByInput {
 
 input AlertUpdateInput {
   title: String
-  message: JSON
+  body: String
   urgency: Int
   createdAt: DateTime
   updatedAt: DateTime
@@ -411,7 +412,7 @@ input AlertUpdateArgs {
 
 input AlertCreateInput {
   title: String
-  message: JSON
+  body: String
   urgency: Int
   createdAt: DateTime
   updatedAt: DateTime
@@ -504,13 +505,9 @@ type Step {
   id: ID!
   label: String
   process: Process
-  content: Step_content_Document
+  body: String
   createdAt: DateTime
   updatedAt: DateTime
-}
-
-type Step_content_Document {
-  document(hydrateRelationships: Boolean! = false): JSON!
 }
 
 input StepWhereUniqueInput {
@@ -531,6 +528,7 @@ input StepWhereInput {
 input StepOrderByInput {
   id: OrderDirection
   label: OrderDirection
+  body: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
 }
@@ -538,7 +536,7 @@ input StepOrderByInput {
 input StepUpdateInput {
   label: String
   process: ProcessRelateToOneForUpdateInput
-  content: JSON
+  body: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -557,7 +555,7 @@ input StepUpdateArgs {
 input StepCreateInput {
   label: String
   process: ProcessRelateToOneForCreateInput
-  content: JSON
+  body: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -642,7 +640,7 @@ type Query {
   users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserWhereUniqueInput): [User!]
   usersCount(where: UserWhereInput! = {}): Int
   service(where: ServiceWhereUniqueInput!): Service
-  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
   externalLink(where: ExternalLinkWhereUniqueInput!): ExternalLink
   externalLinks(where: ExternalLinkWhereInput! = {}, orderBy: [ExternalLinkOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ExternalLinkWhereUniqueInput): [ExternalLink!]

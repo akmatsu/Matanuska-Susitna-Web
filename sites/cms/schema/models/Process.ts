@@ -21,8 +21,8 @@ export const Process: ListConfig<any> = list({
       ui: {
         displayMode: 'cards',
         cardFields: ['label'],
-        inlineCreate: { fields: ['label', 'content'] },
-        inlineEdit: { fields: ['label', 'content'] },
+        inlineCreate: { fields: ['label', 'body'] },
+        inlineEdit: { fields: ['label', 'body'] },
       },
     }),
     ...timestamps,

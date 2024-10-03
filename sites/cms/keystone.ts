@@ -32,7 +32,11 @@ export default withAuth(
       },
     },
     server: {
-      cors: { origin: ['*'], credentials: true },
+      cors: {
+        origin: [appConfig.server.originHost],
+        credentials: true,
+        methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS', 'PATCH'],
+      },
       port: appConfig.server.port,
     },
 

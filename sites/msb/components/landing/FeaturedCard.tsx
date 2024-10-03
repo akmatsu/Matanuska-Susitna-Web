@@ -1,15 +1,5 @@
 'use client';
-import {
-  Card,
-  CardHeader,
-  Icon,
-  CardBody,
-  CardFooter,
-  CardMedia,
-} from '@trussworks/react-uswds';
-import Image from 'next/image';
-
-import Link from 'next/link';
+import { CardHeader, Icon, CardMedia } from '@trussworks/react-uswds';
 import { LinkCard } from '../LinkCard';
 
 export type FeaturedCardProps = {
