@@ -1,14 +1,14 @@
 import React from 'react';
-import { CoreDocumentRenderer } from '@/components/CoreDocumentRenderer';
+
 import { CoreSideNav } from '@/components/CoreSideNav';
 import { fetchGraphQL, gql } from '@/utils/graphql';
-import { DocumentRendererProps } from '@keystone-6/document-renderer';
 import {
   ProcessList,
   ProcessListItem,
   ProcessListHeading,
 } from '@trussworks/react-uswds';
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
+import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 
 export default async function Service({
   params,
@@ -20,14 +20,15 @@ export default async function Service({
       service: {
         id: string;
         title: string;
-        content: { document: DocumentRendererProps['document'] };
+        body: string;
+
         processes: {
           id: string;
           name: string;
           steps: {
             id: string;
             label: string;
-            content: { document: DocumentRendererProps['document'] };
+            body: string;
           }[];
         }[];
       };
@@ -37,19 +38,16 @@ export default async function Service({
       query GetServices($where: ServiceWhereUniqueInput!) {
         service(where: $where) {
           id
+          slug
           title
-          content {
-            document(hydrateRelationships: true)
-          }
+          body
           processes {
             id
             name
             steps {
               id
               label
-              content {
-                document(hydrateRelationships: true)
-              }
+              body
             }
           }
         }
@@ -77,7 +75,11 @@ export default async function Service({
           }
         >
           <h1>{data?.data?.service?.title}</h1>
-          <CoreDocumentRenderer document={data.data.service.content.document} />
+          {/* <Markdown remarkPlugins={[remarkGfm]}>
+            {data?.data?.service?.body}
+          </Markdown> */}
+          <MarkdownRenderer>{data?.data?.service?.body}</MarkdownRenderer>
+
           {data.data.service.processes.map((process) => (
             <div key={process.id}>
               <h2>{process.name}</h2>
@@ -87,7 +89,7 @@ export default async function Service({
                     <ProcessListHeading type="h4">
                       {step.label}
                     </ProcessListHeading>
-                    <CoreDocumentRenderer document={step.content.document} />
+                    <MarkdownRenderer>{step.body}</MarkdownRenderer>
                   </ProcessListItem>
                 ))}
               </ProcessList>

@@ -9,7 +9,7 @@ import { CorePagination } from './CorePagination/CorePagination';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-type Service = { id: string;, slug: string, title: string; description: string };
+type Service = { id: string; slug: string; title: string; description: string };
 
 export function ServicesList() {
   const params = useSearchParams();
