@@ -1,7 +1,12 @@
 'use client';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import TuiEditor, { TuiEditorRef } from './TuiEditor';
+import chartPlugin from '@toast-ui/editor-plugin-chart';
+import umlPlugin from '@toast-ui/editor-plugin-uml';
+import colorPlugin from '@toast-ui/editor-plugin-color-syntax';
+import tableMergedCellPlugin from '@toast-ui/editor-plugin-table-merged-cell';
+import codeSyntaxHighlightPlugin from '@toast-ui/editor-plugin-code-syntax-highlight';
 
 export type MdEditorProps = {
   initialValue?: string;
@@ -45,6 +50,13 @@ export default function MdEditor({ initialValue, onChange }: MdEditorProps) {
         previewStyle="vertical"
         usageStatistics={false}
         ref={editor}
+        plugins={[
+          chartPlugin,
+          umlPlugin,
+          colorPlugin,
+          tableMergedCellPlugin,
+          codeSyntaxHighlightPlugin,
+        ]}
       />
     </div>
   );
