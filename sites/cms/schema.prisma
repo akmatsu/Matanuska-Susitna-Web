@@ -23,21 +23,22 @@ model User {
 }
 
 model Service {
-  id               String    @id @default(cuid())
-  title            String    @default("")
-  description      String    @default("")
-  publishAt        DateTime?
-  unpublishAt      DateTime?
-  slug             String    @unique @default("")
-  body             String?
-  content          Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  processes        Process[] @relation("Process_service")
-  tags             Tag[]     @relation("Service_tags")
-  primaryContact   Contact?  @relation("Service_primaryContact", fields: [primaryContactId], references: [id])
-  primaryContactId String?   @map("primaryContact")
-  contacts         Contact[] @relation("Contact_services")
-  createdAt        DateTime? @default(now())
-  updatedAt        DateTime? @default(now()) @updatedAt
+  id                 String    @id @default(cuid())
+  title              String    @default("")
+  description        String    @default("")
+  publishAt          DateTime?
+  unpublishAt        DateTime?
+  slug               String    @unique @default("")
+  primaryAction      String    @default("")
+  primaryActionLabel String    @default("")
+  body               String?
+  processes          Process[] @relation("Process_service")
+  tags               Tag[]     @relation("Service_tags")
+  primaryContact     Contact?  @relation("Service_primaryContact", fields: [primaryContactId], references: [id])
+  primaryContactId   String?   @map("primaryContact")
+  contacts           Contact[] @relation("Contact_services")
+  createdAt          DateTime? @default(now())
+  updatedAt          DateTime? @default(now()) @updatedAt
 
   @@index([primaryContactId])
 }

@@ -1,12 +1,13 @@
 import { list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
-import { relationship } from '@keystone-6/core/fields';
+import { relationship, text } from '@keystone-6/core/fields';
 import {
   pageContentEditor,
   publishable,
   slug,
   timestamps,
   titleAndDescription,
+  urlRegex,
 } from '../fieldUtils';
 import { customText } from '../../customFields';
 
@@ -19,8 +20,22 @@ export const Service: ListConfig<any> = list({
     ...titleAndDescription(),
     ...publishable,
     slug,
+    primaryAction: text({
+      validation: {
+        match: {
+          regex: urlRegex,
+        },
+      },
+    }),
+    primaryActionLabel: text({
+      validation: {
+        length: {
+          max: 100,
+        },
+      },
+    }),
     body: customText(),
-    ...pageContentEditor,
+
     processes: relationship({
       ref: 'Process.service',
       many: true,
@@ -46,6 +61,7 @@ export const Service: ListConfig<any> = list({
         inlineEdit: { fields: ['name'] },
       },
     }),
+
     primaryContact: relationship({ ref: 'Contact.primaryServices' }),
     contacts: relationship({ ref: 'Contact.services', many: true }),
     ...timestamps,
