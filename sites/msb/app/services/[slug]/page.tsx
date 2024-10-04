@@ -92,7 +92,6 @@ export default async function Service({
   );
 
   const service = data?.data?.service;
-  console.log(service?.primaryAction);
 
   return (
     <section className="usa-section">
