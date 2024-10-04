@@ -17,23 +17,29 @@ model User {
   name      String    @default("")
   email     String    @unique @default("")
   password  String
+  contact   Contact?  @relation("Contact_user")
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now()) @updatedAt
 }
 
 model Service {
-  id          String    @id @default(cuid())
-  title       String    @default("")
-  description String    @default("")
-  publishAt   DateTime?
-  unpublishAt DateTime?
-  slug        String    @unique @default("")
-  body        String?
-  content     Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  processes   Process[] @relation("Process_service")
-  tags        Tag[]     @relation("Service_tags")
-  createdAt   DateTime? @default(now())
-  updatedAt   DateTime? @default(now()) @updatedAt
+  id               String    @id @default(cuid())
+  title            String    @default("")
+  description      String    @default("")
+  publishAt        DateTime?
+  unpublishAt      DateTime?
+  slug             String    @unique @default("")
+  body             String?
+  content          Json      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  processes        Process[] @relation("Process_service")
+  tags             Tag[]     @relation("Service_tags")
+  primaryContact   Contact?  @relation("Service_primaryContact", fields: [primaryContactId], references: [id])
+  primaryContactId String?   @map("primaryContact")
+  contacts         Contact[] @relation("Contact_services")
+  createdAt        DateTime? @default(now())
+  updatedAt        DateTime? @default(now()) @updatedAt
+
+  @@index([primaryContactId])
 }
 
 model ExternalLink {
@@ -81,4 +87,15 @@ model Step {
   updatedAt DateTime? @default(now()) @updatedAt
 
   @@index([processId])
+}
+
+model Contact {
+  id              String    @id @default(cuid())
+  name            String    @default("")
+  phone           String?
+  email           String?
+  primaryServices Service[] @relation("Service_primaryContact")
+  services        Service[] @relation("Contact_services")
+  user            User?     @relation("Contact_user", fields: [userId], references: [id])
+  userId          String?   @unique @map("user")
 }

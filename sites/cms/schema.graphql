@@ -6,6 +6,7 @@ type User {
   name: String
   email: String
   password: PasswordState
+  contact: Contact
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -28,6 +29,7 @@ input UserWhereInput {
   id: IDFilter
   name: StringFilter
   email: StringFilter
+  contact: ContactWhereInput
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
 }
@@ -105,8 +107,15 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  contact: ContactRelateToOneForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+input ContactRelateToOneForUpdateInput {
+  create: ContactCreateInput
+  connect: ContactWhereUniqueInput
+  disconnect: Boolean
 }
 
 input UserUpdateArgs {
@@ -118,8 +127,14 @@ input UserCreateInput {
   name: String
   email: String
   password: String
+  contact: ContactRelateToOneForCreateInput
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+input ContactRelateToOneForCreateInput {
+  create: ContactCreateInput
+  connect: ContactWhereUniqueInput
 }
 
 type Service {
@@ -135,6 +150,9 @@ type Service {
   processesCount(where: ProcessWhereInput! = {}): Int
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int
+  primaryContact: Contact
+  contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
+  contactsCount(where: ContactWhereInput! = {}): Int
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -160,6 +178,8 @@ input ServiceWhereInput {
   slug: StringFilter
   processes: ProcessManyRelationFilter
   tags: TagManyRelationFilter
+  primaryContact: ContactWhereInput
+  contacts: ContactManyRelationFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
 }
@@ -174,6 +194,12 @@ input TagManyRelationFilter {
   every: TagWhereInput
   some: TagWhereInput
   none: TagWhereInput
+}
+
+input ContactManyRelationFilter {
+  every: ContactWhereInput
+  some: ContactWhereInput
+  none: ContactWhereInput
 }
 
 input ServiceOrderByInput {
@@ -198,6 +224,8 @@ input ServiceUpdateInput {
   content: JSON
   processes: ProcessRelateToManyForUpdateInput
   tags: TagRelateToManyForUpdateInput
+  primaryContact: ContactRelateToOneForUpdateInput
+  contacts: ContactRelateToManyForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -216,6 +244,13 @@ input TagRelateToManyForUpdateInput {
   connect: [TagWhereUniqueInput!]
 }
 
+input ContactRelateToManyForUpdateInput {
+  disconnect: [ContactWhereUniqueInput!]
+  set: [ContactWhereUniqueInput!]
+  create: [ContactCreateInput!]
+  connect: [ContactWhereUniqueInput!]
+}
+
 input ServiceUpdateArgs {
   where: ServiceWhereUniqueInput!
   data: ServiceUpdateInput!
@@ -231,6 +266,8 @@ input ServiceCreateInput {
   content: JSON
   processes: ProcessRelateToManyForCreateInput
   tags: TagRelateToManyForCreateInput
+  primaryContact: ContactRelateToOneForCreateInput
+  contacts: ContactRelateToManyForCreateInput
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -243,6 +280,11 @@ input ProcessRelateToManyForCreateInput {
 input TagRelateToManyForCreateInput {
   create: [TagCreateInput!]
   connect: [TagWhereUniqueInput!]
+}
+
+input ContactRelateToManyForCreateInput {
+  create: [ContactCreateInput!]
+  connect: [ContactWhereUniqueInput!]
 }
 
 type ExternalLink {
@@ -565,6 +607,91 @@ input ProcessRelateToOneForCreateInput {
   connect: ProcessWhereUniqueInput
 }
 
+type Contact {
+  id: ID!
+  name: String
+  phone: String
+  email: String
+  primaryServices(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  primaryServicesCount(where: ServiceWhereInput! = {}): Int
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
+  user: User
+}
+
+input ContactWhereUniqueInput {
+  id: ID
+}
+
+input ContactWhereInput {
+  AND: [ContactWhereInput!]
+  OR: [ContactWhereInput!]
+  NOT: [ContactWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  phone: StringNullableFilter
+  email: StringNullableFilter
+  primaryServices: ServiceManyRelationFilter
+  services: ServiceManyRelationFilter
+  user: UserWhereInput
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: StringNullableFilter
+}
+
+input ContactOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  phone: OrderDirection
+  email: OrderDirection
+}
+
+input ContactUpdateInput {
+  name: String
+  phone: String
+  email: String
+  primaryServices: ServiceRelateToManyForUpdateInput
+  services: ServiceRelateToManyForUpdateInput
+  user: UserRelateToOneForUpdateInput
+}
+
+input UserRelateToOneForUpdateInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+}
+
+input ContactUpdateArgs {
+  where: ContactWhereUniqueInput!
+  data: ContactUpdateInput!
+}
+
+input ContactCreateInput {
+  name: String
+  phone: String
+  email: String
+  primaryServices: ServiceRelateToManyForCreateInput
+  services: ServiceRelateToManyForCreateInput
+  user: UserRelateToOneForCreateInput
+}
+
+input UserRelateToOneForCreateInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -613,6 +740,12 @@ type Mutation {
   updateSteps(data: [StepUpdateArgs!]!): [Step]
   deleteStep(where: StepWhereUniqueInput!): Step
   deleteSteps(where: [StepWhereUniqueInput!]!): [Step]
+  createContact(data: ContactCreateInput!): Contact
+  createContacts(data: [ContactCreateInput!]!): [Contact]
+  updateContact(where: ContactWhereUniqueInput!, data: ContactUpdateInput!): Contact
+  updateContacts(data: [ContactUpdateArgs!]!): [Contact]
+  deleteContact(where: ContactWhereUniqueInput!): Contact
+  deleteContacts(where: [ContactWhereUniqueInput!]!): [Contact]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -657,6 +790,9 @@ type Query {
   step(where: StepWhereUniqueInput!): Step
   steps(where: StepWhereInput! = {}, orderBy: [StepOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StepWhereUniqueInput): [Step!]
   stepsCount(where: StepWhereInput! = {}): Int
+  contact(where: ContactWhereUniqueInput!): Contact
+  contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
+  contactsCount(where: ContactWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

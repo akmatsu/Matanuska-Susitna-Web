@@ -7,6 +7,7 @@ import {
   Tag,
   Process,
   Step,
+  Contact,
 } from './schema/models';
 
 export const lists = {
@@ -17,4 +18,5 @@ export const lists = {
   Alert,
   Process,
   Step,
+  Contact,
 } satisfies Lists;

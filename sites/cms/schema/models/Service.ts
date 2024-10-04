@@ -46,6 +46,8 @@ export const Service: ListConfig<any> = list({
         inlineEdit: { fields: ['name'] },
       },
     }),
+    primaryContact: relationship({ ref: 'Contact.primaryServices' }),
+    contacts: relationship({ ref: 'Contact.services', many: true }),
     ...timestamps,
   },
 });
