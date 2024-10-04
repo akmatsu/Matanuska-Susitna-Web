@@ -6,9 +6,13 @@ import {
   ProcessList,
   ProcessListItem,
   ProcessListHeading,
+  Button,
 } from '@trussworks/react-uswds';
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { MarkdownRenderer } from '@/components/MarkdownRenderer';
+
+import { ContactCard } from '@/components/ContactCard';
+import Link from 'next/link';
 
 export default async function Service({
   params,
@@ -21,7 +25,20 @@ export default async function Service({
         id: string;
         title: string;
         body: string;
-
+        primaryAction?: string;
+        primaryActionLabel?: string;
+        primaryContact?: {
+          id: string;
+          name: string;
+          phone?: string;
+          email?: string;
+        };
+        contacts: {
+          id: string;
+          name: string;
+          phone?: string;
+          email?: string;
+        }[];
         processes: {
           id: string;
           name: string;
@@ -41,6 +58,20 @@ export default async function Service({
           slug
           title
           body
+          primaryAction
+          primaryActionLabel
+          primaryContact {
+            id
+            name
+            phone
+            email
+          }
+          contacts {
+            id
+            name
+            phone
+            email
+          }
           processes {
             id
             name
@@ -60,6 +91,9 @@ export default async function Service({
     },
   );
 
+  const service = data?.data?.service;
+  console.log(service?.primaryAction);
+
   return (
     <section className="usa-section">
       {data?.data?.service && (
@@ -73,11 +107,38 @@ export default async function Service({
               <CoreSideNav />
             </nav>
           }
+          right={
+            <>
+              <ul
+                className="usa-list--unstyled display-flex flex-column"
+                style={{ gap: '8px' }}
+              >
+                {service?.primaryAction && (
+                  <Link
+                    href={service.primaryAction}
+                    className="margin-right-0 usa-button usa-button--big usa-link--external"
+                    target="_blank"
+                  >
+                    {service.primaryActionLabel || 'Primary Action'}
+                  </Link>
+                )}
+                {service?.primaryContact && (
+                  <ContactCard contact={service?.primaryContact} isPrimary />
+                )}
+                {service?.contacts.map((contact) => (
+                  <ContactCard
+                    key={contact.id}
+                    contact={contact}
+                    isPrimary={
+                      service.contacts.length === 1 && !service.primaryContact
+                    }
+                  />
+                ))}
+              </ul>
+            </>
+          }
         >
           <h1>{data?.data?.service?.title}</h1>
-          {/* <Markdown remarkPlugins={[remarkGfm]}>
-            {data?.data?.service?.body}
-          </Markdown> */}
           <MarkdownRenderer>{data?.data?.service?.body}</MarkdownRenderer>
 
           {data.data.service.processes.map((process) => (
