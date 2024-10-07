@@ -1,53 +1,50 @@
 import { Router } from 'express';
-
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
 import { statelessSessions } from '@keystone-6/core/session';
 import { type KeystoneContext } from '@keystone-6/core/types';
 
 import { Passport } from 'passport';
-import { type VerifyCallback } from 'passport-oauth2';
 import {
-  OIDCStrategy,
-  IProfile,
-  IOIDCStrategyOptionWithRequest,
-} from 'passport-azure-ad';
+  BaseClient,
+  Issuer,
+  Strategy as OpenIDConnectStrategy,
+} from 'openid-client';
 
 import { type User as PrismaUser } from '.prisma/client';
 import { type TypeInfo } from '.keystone/types';
 
 export type Session = PrismaUser;
 
-export const session = statelessSessions<Session>({
+export const sessionConfig = statelessSessions<Session>({
   maxAge: 60 * 60 * 24 * 30,
   secret: process.env.SESSION_SECRET!,
 });
 
 declare global {
   namespace Express {
-    // Augment the global user added by Passport to be the same as the Prisma Author
     interface User extends PrismaUser {}
   }
 }
 
-const options: IOIDCStrategyOptionWithRequest = {
-  identityMetadata: `https://login.microsoftonline.com/${process.env.AD_TENANT_ID}/v2.0/.well-known/openid-configuration`,
-  clientID: process.env.AD_CLIENT_ID!,
-  clientSecret: process.env.AD_CLIENT_SECRET_ID!,
-  responseType: 'code',
-  responseMode: 'query',
-  redirectUrl: 'http://localhost:3333/auth/azure/callback',
-  allowHttpForRedirectUrl: true, // Use HTTPS in production
-  scope: ['openid', 'profile', 'email'],
-  loggingLevel: 'warn',
-  passReqToCallback: true,
+// Global client variable
+let azureADClient: BaseClient;
 
-  nonceLifetime: 600,
-  nonceMaxAmount: 5,
-  useCookieInsteadOfSession: true,
-  cookieEncryptionKeys: [
-    { key: '12345678901234567890123456789012', iv: '123456789012' },
-  ],
+const setupAzureADClient = async () => {
+  const issuer = await Issuer.discover(
+    `https://login.microsoftonline.com/${process.env.AD_TENANT_ID}/v2.0`,
+  );
+  azureADClient = new issuer.Client({
+    client_id: process.env.AD_CLIENT_ID!,
+    client_secret: process.env.AD_CLIENT_SECRET!,
+    redirect_uris: ['http://localhost:3333/auth/azure/callback'],
+    response_types: ['code'],
+  });
 };
+
+setupAzureADClient().catch((err) => {
+  console.error('Error setting up Azure AD Client:', err);
+});
 
 export function passportMiddleware(
   commonContext: KeystoneContext<TypeInfo<Session>>,
@@ -56,111 +53,98 @@ export function passportMiddleware(
   const instance = new Passport();
 
   router.use(cookieParser());
+  router.use(
+    session({
+      secret: process.env.SESSION_SECRET!,
+      resave: false,
+      saveUninitialized: false,
+      cookie: { secure: false },
+    }),
+  );
 
-  const strategy = new OIDCStrategy(
-    options,
-    async (
-      req: Express.Request,
-      _iss: string,
-      _sub: string,
-      profile: IProfile,
-      _accessToken: string,
-      _refreshToken: string,
-      done: VerifyCallback,
-    ) => {
-      console.log('OIDC Strategy invoked');
+  // Define serialization and deserialization logic
+  instance.serializeUser((user, done) => {
+    done(null, user.id); // Serialize user by ID (or another identifier)
+  });
+
+  instance.deserializeUser(async (id: any, done) => {
+    try {
+      const user = await commonContext.prisma.user.findUnique({
+        where: { id: id },
+      });
+      done(null, user);
+    } catch (error) {
+      done(error);
+    }
+  });
+
+  if (!azureADClient) {
+    throw new Error(
+      'Azure AD Client is not set up. Make sure `setupAzureADClient` is called before initializing middleware.',
+    );
+  }
+
+  const strategy = new OpenIDConnectStrategy(
+    {
+      client: azureADClient,
+      params: {
+        scope: 'openid profile email',
+        response_mode: 'query',
+      },
+      passReqToCallback: true,
+    },
+    async (req, tokenSet, userInfo, done) => {
       try {
-        const email = profile._json?.email || profile.emails?.[0]?.value;
+        const email = userInfo.email || userInfo.preferred_username;
         if (!email) {
-          console.log('No email found in the profile!');
           return done(new Error('No email found in the profile.'));
         }
 
-        console.log('email: ', email);
-        console.log('OID: ', profile.oid);
-
         const user = await commonContext.prisma.user.upsert({
-          where: { authId: profile.oid },
-          update: { name: profile.displayName, email },
-          create: { authId: profile.oid, name: profile.displayName, email },
+          where: { authId: userInfo.sub },
+          update: { name: userInfo.name, email },
+          create: {
+            authId: userInfo.sub,
+            name: userInfo.name,
+            email,
+            password: 'PLACEHOLDER_PASSWORD',
+          },
         });
-
-        console.log('user upserted: ', user);
 
         return done(null, user);
       } catch (error) {
-        console.log('Error, during user upsert: ', error);
         return done(error);
       }
     },
   );
 
-  instance.use(strategy);
+  instance.use('openid-client', strategy);
 
-  router.get(
-    '/auth/azure',
-    (req, res, next) => {
-      console.log('Request to /auth/azure');
-      next();
-    },
-    instance.authenticate('azuread-openidconnect', {
-      session: false,
-      failureRedirect: '/',
-      failWithError: true,
-    }),
-  );
+  router.get('/auth/azure', instance.authenticate('openid-client'));
+
   router.get(
     '/auth/azure/callback',
-    (req, res, next) => {
-      console.log('Callback route hit');
-
-      next();
-    },
-    instance.authenticate('azuread-openidconnect', {
-      session: false,
+    instance.authenticate('openid-client', {
       failureRedirect: '/auth/unauthorized',
     }),
     async (req, res) => {
-      console.log('Callback successful');
       if (!req.user) {
-        console.log('No user in the request.');
-        res.status(401).send('Authentication failed');
-        return;
+        return res.status(401).send('Authentication failed');
       }
 
       const context = await commonContext.withRequest(req, res);
 
-      // Starts the session, and sets the cookie on context.res
       await context.sessionStrategy?.start({
         context,
         data: req.user,
       });
 
-      res.redirect('/auth/session');
+      res.redirect('/');
     },
   );
 
-  // Show the current session object
-  //   WARNING: this is for demonstration purposes only, probably don't do this
-  router.get('/auth/session', async (req, res) => {
-    console.log('Request to /auth/session');
-    console.log('Session:', req.session);
-    console.log('Session ID:', req.sessionID);
-
-    const context = await commonContext.withRequest(req, res);
-    const session = await context.sessionStrategy?.get({ context });
-
-    console.log('Keystone session:', session);
-
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(session));
-    res.end();
-  });
-
   router.get('/auth/unauthorized', (req, res) => {
-    console.log('Unauthorized access detected');
-
-    res.status(401).send();
+    res.status(401).send('Unauthorized!');
   });
 
   return router;
