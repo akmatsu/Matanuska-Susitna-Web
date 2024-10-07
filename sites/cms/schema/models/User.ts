@@ -6,12 +6,19 @@ import { timestamps } from '../fieldUtils';
 export const User: ListConfig<any> = list({
   access: allowAll,
   fields: {
+    authId: text({
+      isIndexed: 'unique',
+      ui: {
+        itemView: { fieldMode: 'hidden' },
+        createView: { fieldMode: 'hidden' },
+      },
+    }),
     name: text({ validation: { isRequired: true } }),
     email: text({
       validation: { isRequired: true },
       isIndexed: 'unique',
     }),
-    password: password({ validation: { isRequired: true } }),
+    password: password({ validation: { isRequired: false } }),
     contact: relationship({ ref: 'Contact.user' }),
     ...timestamps,
   },

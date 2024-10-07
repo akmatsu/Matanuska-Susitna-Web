@@ -14,36 +14,38 @@ import { lists } from './schema';
 // when you write your list-level accication is configured separess control functions, as they typically rely on session data
 import { withAuth, session } from './auth';
 import { appConfig } from './appConfig';
+import { passportMiddleware } from './customAuth';
 
-export default withAuth(
-  config({
-    db: {
-      // we're using sqlite for the fastest startup experience
-      //   for more information on what database might be appropriate for you
-      //   see https://keystonejs.com/docs/guides/choosing-a-database#title
-      provider: appConfig.database.provider,
-      url: `${appConfig.database.protocol}://${appConfig.database.user}:${appConfig.database.password}@${appConfig.database.host}:${appConfig.database.port}/${appConfig.database.name}`,
-      extendPrismaSchema(schema) {
-        return schema.replace(
-          `generator client {`,
-          `generator client {
+export default config({
+  db: {
+    // we're using sqlite for the fastest startup experience
+    //   for more information on what database might be appropriate for you
+    //   see https://keystonejs.com/docs/guides/choosing-a-database#title
+    provider: appConfig.database.provider,
+    url: `${appConfig.database.protocol}://${appConfig.database.user}:${appConfig.database.password}@${appConfig.database.host}:${appConfig.database.port}/${appConfig.database.name}`,
+    extendPrismaSchema(schema) {
+      return schema.replace(
+        `generator client {`,
+        `generator client {
             binaryTargets = ["native", "rhel-openssl-3.0.x"]`,
-        );
-      },
+      );
     },
-    server: {
-      cors: {
-        origin: [appConfig.server.originHost],
-        credentials: true,
-        methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS', 'PATCH'],
-      },
-      port: appConfig.server.port,
+  },
+  server: {
+    cors: {
+      origin: [appConfig.server.originHost],
+      credentials: true,
+      methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS', 'PATCH'],
     },
+    extendExpressApp(app, context) {
+      app.use(passportMiddleware(context));
+    },
+    port: appConfig.server.port,
+  },
 
-    ui: {},
+  ui: {},
 
-    lists,
-    session,
-    telemetry: false,
-  }),
-);
+  lists,
+  session,
+  telemetry: false,
+});
