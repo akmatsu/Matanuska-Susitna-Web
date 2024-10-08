@@ -15,7 +15,6 @@ import { type User as PrismaUser } from '.prisma/client';
 import { type TypeInfo } from '.keystone/types';
 
 export type Session = PrismaUser;
-let oidcClient;
 
 export const sessionConfig = statelessSessions<Session>({
   maxAge: 60 * 60 * 24 * 30,
@@ -39,7 +38,7 @@ export async function setupAzureADClient() {
     azureADClient = new issuer.Client({
       client_id: process.env.AD_CLIENT_ID!,
       client_secret: process.env.AD_CLIENT_SECRET!,
-      redirect_uris: ['http://localhost:3333/auth/azure/callback'],
+      redirect_uris: [`${process.env.AD_REDIRECT_HOST}/auth/azure/callback`],
       response_types: ['code'],
     });
   } catch (err) {
