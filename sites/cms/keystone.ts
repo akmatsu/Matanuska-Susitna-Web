@@ -43,7 +43,16 @@ export default config({
     port: appConfig.server.port,
   },
 
-  ui: {},
+  ui: {
+    async pageMiddleware({ wasAccessAllowed }) {
+      if (!wasAccessAllowed) {
+        return {
+          kind: 'redirect',
+          to: '/auth/azure',
+        };
+      }
+    },
+  },
 
   lists,
   session,
