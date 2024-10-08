@@ -42,7 +42,7 @@ export async function setupAzureADClient() {
       response_types: ['code'],
     });
   } catch (err) {
-    console.error('Error settings up Azure AD client: ', err);
+    console.error('Error settings up Azure AD client:', err);
     throw new Error('Azure AD Client setup failed.');
   }
 }
