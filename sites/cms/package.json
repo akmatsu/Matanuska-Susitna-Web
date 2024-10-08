@@ -13,7 +13,6 @@
     "reset": "keystone prisma migrate reset"
   },
   "dependencies": {
-    "@dotenvx/dotenvx": "^1.14.1",
     "@keystone-6/auth": "^8.0.0",
     "@keystone-6/core": "^6.3.0",
     "@keystone-6/fields-document": "^9.1.0",
