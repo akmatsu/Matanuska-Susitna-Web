@@ -15,6 +15,7 @@ import { type User as PrismaUser } from '.prisma/client';
 import { type TypeInfo } from '.keystone/types';
 
 export type Session = PrismaUser;
+let oidcClient;
 
 export const sessionConfig = statelessSessions<Session>({
   maxAge: 60 * 60 * 24 * 30,
@@ -30,21 +31,22 @@ declare global {
 // Global client variable
 let azureADClient: BaseClient;
 
-const setupAzureADClient = async () => {
-  const issuer = await Issuer.discover(
-    `https://login.microsoftonline.com/${process.env.AD_TENANT_ID}/v2.0`,
-  );
-  azureADClient = new issuer.Client({
-    client_id: process.env.AD_CLIENT_ID!,
-    client_secret: process.env.AD_CLIENT_SECRET!,
-    redirect_uris: ['http://localhost:3333/auth/azure/callback'],
-    response_types: ['code'],
-  });
-};
-
-setupAzureADClient().catch((err) => {
-  console.error('Error setting up Azure AD Client:', err);
-});
+export async function setupAzureADClient() {
+  try {
+    const issuer = await Issuer.discover(
+      `https://login.microsoftonline.com/${process.env.AD_TENANT_ID}/v2.0`,
+    );
+    azureADClient = new issuer.Client({
+      client_id: process.env.AD_CLIENT_ID!,
+      client_secret: process.env.AD_CLIENT_SECRET!,
+      redirect_uris: ['http://localhost:3333/auth/azure/callback'],
+      response_types: ['code'],
+    });
+  } catch (err) {
+    console.error('Error settings up Azure AD client: ', err);
+    throw new Error('Azure AD Client setup failed.');
+  }
+}
 
 export function passportMiddleware(
   commonContext: KeystoneContext<TypeInfo<Session>>,

@@ -14,7 +14,7 @@ import { lists } from './schema';
 // when you write your list-level accication is configured separess control functions, as they typically rely on session data
 import { withAuth, session } from './auth';
 import { appConfig } from './appConfig';
-import { passportMiddleware } from './customAuth';
+import { passportMiddleware, setupAzureADClient } from './customAuth';
 
 export default config({
   db: {
@@ -37,7 +37,8 @@ export default config({
       credentials: true,
       methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS', 'PATCH'],
     },
-    extendExpressApp(app, context) {
+    async extendExpressApp(app, context) {
+      await setupAzureADClient();
       app.use(passportMiddleware(context));
     },
     port: appConfig.server.port,
