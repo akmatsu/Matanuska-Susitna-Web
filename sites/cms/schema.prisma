@@ -14,9 +14,10 @@ generator client {
 
 model User {
   id        String    @id @default(cuid())
+  authId    String    @unique @default("")
   name      String    @default("")
   email     String    @unique @default("")
-  password  String
+  password  String?
   contact   Contact?  @relation("Contact_user")
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now()) @updatedAt
