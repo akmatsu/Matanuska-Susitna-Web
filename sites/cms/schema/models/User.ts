@@ -11,6 +11,7 @@ export const User: ListConfig<any> = list({
       ui: {
         itemView: { fieldMode: 'hidden' },
         createView: { fieldMode: 'hidden' },
+        listView: { fieldMode: 'hidden' },
       },
     }),
     name: text({ validation: { isRequired: true } }),
