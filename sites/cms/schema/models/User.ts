@@ -18,7 +18,10 @@ export const User: ListConfig<any> = list({
       validation: { isRequired: true },
       isIndexed: 'unique',
     }),
-    password: password({ validation: { isRequired: false } }),
+    password: password({
+      validation: { isRequired: false },
+      db: { isNullable: true },
+    }),
     contact: relationship({ ref: 'Contact.user' }),
     ...timestamps,
   },

@@ -107,7 +107,6 @@ export function passportMiddleware(
             authId: userInfo.sub,
             name: userInfo.name,
             email,
-            password: 'PLACEHOLDER_PASSWORD',
           },
         });
 
