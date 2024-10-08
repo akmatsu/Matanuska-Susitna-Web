@@ -95,10 +95,10 @@ jobs:
             echo "DATABASE_PROTOCOL=postgres" >> ./sites/cms/.env
             echo "WEB_PORT=3333" >> ./sites/cms/.env
             echo "ORIGIN_HOST=https://www.matsu.gov" >> ./sites/cms/.env
-            echo "SESSION_SECRET=${{secrets.SESSION_SECRET}}" >> './sites/cms.env'
-            echo "AD_TENANT_ID=${{secrets.AD_TENANT_ID}}" >> './sites/cms.env'
-            echo "AD_CLIENT_ID=${{secrets.AD_CLIENT_ID}}" >> './sites/cms.env'
-            echo "AD_CLIENT_SECRET=${{secrets.AD_CLIENT_SECRET}}" >> './sites/cms.env'
+            echo "SESSION_SECRET=${{secrets.SESSION_SECRET}}" >> ./sites/cms/.env
+            echo "AD_TENANT_ID=${{secrets.AD_TENANT_ID}}" >> ./sites/cms/.env
+            echo "AD_CLIENT_ID=${{secrets.AD_CLIENT_ID}}" >> ./sites/cms/.env
+            echo "AD_CLIENT_SECRET=${{secrets.AD_CLIENT_SECRET}}" >> ./sites/cms/.env
             
             
 
