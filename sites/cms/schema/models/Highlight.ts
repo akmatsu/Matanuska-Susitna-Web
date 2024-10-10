@@ -12,7 +12,19 @@ export const Highlight: ListConfig<any> = list({
   fields: {
     title: text({ validation: { isRequired: true } }),
     ...publishable,
-    image: text(),
+    image: text({
+      ui: {
+        description:
+          'URL to a web hosted image. See images.matsu.gov for internal Borough images.',
+      },
+      validation: {
+        isRequired: true,
+        match: {
+          regex: urlRegex,
+          explanation: 'Use a valid URL to a web hosted image.',
+        },
+      },
+    }),
     ...group({
       label: 'Call to Action',
       description:
