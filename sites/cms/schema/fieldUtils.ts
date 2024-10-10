@@ -1,4 +1,4 @@
-import { BaseFields } from '@keystone-6/core';
+import { BaseFields, group } from '@keystone-6/core';
 import { text, timestamp } from '@keystone-6/core/fields';
 
 export const urlRegex = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/;
@@ -25,44 +25,52 @@ export const timestamps: BaseFields<any> = {
 };
 
 export const publishable: BaseFields<any> = {
-  publishAt: timestamp({
-    ui: {
-      itemView: {
-        fieldPosition: 'sidebar',
-      },
-      description:
-        'When page should be visible. If blank, page is treated as a draft. Set to today if you want to publish now.',
-    },
-  }),
-  unpublishAt: timestamp({
-    ui: {
-      itemView: {
-        fieldPosition: 'sidebar',
-      },
-      description:
-        'When the page should be hidden from website. If blank, page will never be hidden.',
-    },
-    hooks: {
-      validate: ({ resolvedData, item, addValidationError }) => {
-        const publishAt = resolvedData['publishAt'] || item['publishAt'];
-        const unpublishAt = resolvedData['unpublishAt'];
+  ...group({
+    label: 'Publishing',
+    description:
+      'These fields are used for managing the public visibility of this page.',
+    fields: {
+      publishAt: timestamp({
+        ui: {
+          itemView: {
+            fieldPosition: 'sidebar',
+          },
 
-        if (!publishAt && unpublishAt) {
-          addValidationError(
-            'You have set an Unpublish date but no Publish date. Either remove the Unpublish date or add a Publish date.',
-          );
-        }
+          description:
+            'When page should be visible. If blank, page is treated as a draft. Set to today if you want to publish now.',
+        },
+      }),
+      unpublishAt: timestamp({
+        ui: {
+          itemView: {
+            fieldPosition: 'sidebar',
+          },
+          description:
+            'When the page should be hidden from website. If blank, page will never be hidden.',
+        },
+        hooks: {
+          validate: ({ resolvedData, item, addValidationError }) => {
+            const publishAt = resolvedData['publishAt'] || item['publishAt'];
+            const unpublishAt = resolvedData['unpublishAt'];
 
-        if (publishAt && unpublishAt) {
-          const pub = new Date(publishAt);
-          const unPub = new Date(unpublishAt);
-          if (unPub <= pub) {
-            addValidationError(
-              'Invalid unpublish date. Please select an unpublish date that is after the publish date.',
-            );
-          }
-        }
-      },
+            if (!publishAt && unpublishAt) {
+              addValidationError(
+                'You have set an Unpublish date but no Publish date. Either remove the Unpublish date or add a Publish date.',
+              );
+            }
+
+            if (publishAt && unpublishAt) {
+              const pub = new Date(publishAt);
+              const unPub = new Date(unpublishAt);
+              if (unPub <= pub) {
+                addValidationError(
+                  'Invalid unpublish date. Please select an unpublish date that is after the publish date.',
+                );
+              }
+            }
+          },
+        },
+      }),
     },
   }),
 };

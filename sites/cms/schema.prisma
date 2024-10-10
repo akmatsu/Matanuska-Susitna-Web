@@ -103,10 +103,12 @@ model Contact {
 }
 
 model Highlight {
-  id          String    @id @default(cuid())
-  title       String    @default("")
-  publishAt   DateTime?
-  unpublishAt DateTime?
-  link        String?
-  image       String    @default("")
+  id           String    @id @default(cuid())
+  title        String    @default("")
+  publishAt    DateTime?
+  unpublishAt  DateTime?
+  image        String    @default("")
+  message      String    @default("")
+  internalLink String?
+  externalLink String?
 }

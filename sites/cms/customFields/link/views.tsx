@@ -1,16 +1,12 @@
-import React, { ChangeEvent, Suspense } from 'react';
+import React from 'react';
+import AsyncSelect from 'react-select/async';
 
-import {
-  CellContainer,
-  CellLink,
-  NavigationContainer,
-} from '@keystone-6/core/admin-ui/components';
+import { CellContainer, CellLink } from '@keystone-6/core/admin-ui/components';
 
 import {
   FieldContainer,
   FieldLabel,
   FieldDescription,
-  TextInput,
 } from '@keystone-ui/fields';
 
 import {
@@ -22,13 +18,14 @@ import {
 } from '@keystone-6/core/types';
 
 import { gql, useQuery } from '@keystone-6/core/admin-ui/apollo';
+import { StylesConfig, CSSObjectWithLabel } from 'react-select';
 
 export function Field({
   field,
   value,
   onChange,
 }: FieldProps<typeof controller>) {
-  const { loading, error, data, refetch } = useQuery(
+  const { data, refetch } = useQuery(
     gql`
       query GetServices($where: ServiceWhereInput!) {
         services(where: $where) {
@@ -42,22 +39,40 @@ export function Field({
       variables: {
         where: {
           title: {
-            contains: value,
+            contains: value || '',
+            mode: 'insensitive',
           },
         },
       },
     },
   );
 
-  async function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  async function handleChange(newValue: string) {
     await refetch({
       where: {
         title: {
-          contains: e.target.value,
+          contains: newValue || '',
+          mode: 'insensitive',
         },
       },
     });
+
+    return data?.services?.map((service: any) => {
+      return {
+        label: service.title,
+        value: `/service/${service.slug}`,
+      };
+    });
   }
+
+  const styles: StylesConfig = {
+    menu(base, props) {
+      return {
+        ...base,
+        zIndex: 100,
+      };
+    },
+  };
 
   return (
     <FieldContainer as="fieldset">
@@ -65,17 +80,16 @@ export function Field({
       <FieldDescription id={`${field.path}-description`}>
         {field.description}
       </FieldDescription>
-      {/* <Select value={value} onChange={onChange}></Select> */}
-      <TextInput onChange={handleChange} />
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {data?.services?.map((service: any) => (
-            <li key={service.id}>{service.title}</li>
-          ))}
-        </ul>
-      )}
+      <AsyncSelect
+        loadOptions={handleChange}
+        defaultOptions
+        defaultValue={{ label: value, value }}
+        onChange={(newValue: { label: string; value: string }) => {
+          onChange?.(newValue?.value || null);
+        }}
+        isClearable
+        styles={styles}
+      />
     </FieldContainer>
   );
 }

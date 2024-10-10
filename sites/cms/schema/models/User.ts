@@ -5,6 +5,9 @@ import { timestamps } from '../fieldUtils';
 
 export const User: ListConfig<any> = list({
   access: allowAll,
+  ui: {
+    hideCreate: true,
+  },
   fields: {
     authId: text({
       isIndexed: 'unique',

@@ -711,8 +711,10 @@ type Highlight {
   title: String
   publishAt: DateTime
   unpublishAt: DateTime
-  link: String
   image: String
+  message: String
+  internalLink: String
+  externalLink: String
 }
 
 input HighlightWhereUniqueInput {
@@ -728,6 +730,8 @@ input HighlightWhereInput {
   publishAt: DateTimeNullableFilter
   unpublishAt: DateTimeNullableFilter
   image: StringFilter
+  message: StringFilter
+  externalLink: StringNullableFilter
 }
 
 input HighlightOrderByInput {
@@ -735,16 +739,20 @@ input HighlightOrderByInput {
   title: OrderDirection
   publishAt: OrderDirection
   unpublishAt: OrderDirection
-  link: OrderDirection
   image: OrderDirection
+  message: OrderDirection
+  internalLink: OrderDirection
+  externalLink: OrderDirection
 }
 
 input HighlightUpdateInput {
   title: String
   publishAt: DateTime
   unpublishAt: DateTime
-  link: String
   image: String
+  message: String
+  internalLink: String
+  externalLink: String
 }
 
 input HighlightUpdateArgs {
@@ -756,8 +764,10 @@ input HighlightCreateInput {
   title: String
   publishAt: DateTime
   unpublishAt: DateTime
-  link: String
   image: String
+  message: String
+  internalLink: String
+  externalLink: String
 }
 
 """
