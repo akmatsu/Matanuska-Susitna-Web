@@ -155,9 +155,9 @@ type Service {
   publishAt: DateTime
   unpublishAt: DateTime
   slug: String
-  primaryAction: String
-  primaryActionLabel: String
   body: String
+  actionLabel: String
+  actionUrl: String
   processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
   processesCount(where: ProcessWhereInput! = {}): Int
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
@@ -184,14 +184,29 @@ input ServiceWhereInput {
   publishAt: DateTimeNullableFilter
   unpublishAt: DateTimeNullableFilter
   slug: StringFilter
-  primaryAction: StringFilter
-  primaryActionLabel: StringFilter
+  actionLabel: StringNullableFilter
+  actionUrl: StringNullableFilter
   processes: ProcessManyRelationFilter
   tags: TagManyRelationFilter
   primaryContact: ContactWhereInput
   contacts: ContactManyRelationFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: StringNullableFilter
 }
 
 input ProcessManyRelationFilter {
@@ -219,9 +234,9 @@ input ServiceOrderByInput {
   publishAt: OrderDirection
   unpublishAt: OrderDirection
   slug: OrderDirection
-  primaryAction: OrderDirection
-  primaryActionLabel: OrderDirection
   body: OrderDirection
+  actionLabel: OrderDirection
+  actionUrl: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
 }
@@ -232,9 +247,9 @@ input ServiceUpdateInput {
   publishAt: DateTime
   unpublishAt: DateTime
   slug: String
-  primaryAction: String
-  primaryActionLabel: String
   body: String
+  actionLabel: String
+  actionUrl: String
   processes: ProcessRelateToManyForUpdateInput
   tags: TagRelateToManyForUpdateInput
   primaryContact: ContactRelateToOneForUpdateInput
@@ -275,9 +290,9 @@ input ServiceCreateInput {
   publishAt: DateTime
   unpublishAt: DateTime
   slug: String
-  primaryAction: String
-  primaryActionLabel: String
   body: String
+  actionLabel: String
+  actionUrl: String
   processes: ProcessRelateToManyForCreateInput
   tags: TagRelateToManyForCreateInput
   primaryContact: ContactRelateToOneForCreateInput
@@ -650,21 +665,6 @@ input ContactWhereInput {
   user: UserWhereInput
 }
 
-input StringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  mode: QueryMode
-  not: StringNullableFilter
-}
-
 input ContactOrderByInput {
   id: OrderDirection
   name: OrderDirection
@@ -704,6 +704,70 @@ input ContactCreateInput {
 input UserRelateToOneForCreateInput {
   create: UserCreateInput
   connect: UserWhereUniqueInput
+}
+
+type Highlight {
+  id: ID!
+  title: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  image: String
+  message: String
+  internalLink: String
+  externalLink: String
+}
+
+input HighlightWhereUniqueInput {
+  id: ID
+}
+
+input HighlightWhereInput {
+  AND: [HighlightWhereInput!]
+  OR: [HighlightWhereInput!]
+  NOT: [HighlightWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  publishAt: DateTimeNullableFilter
+  unpublishAt: DateTimeNullableFilter
+  image: StringFilter
+  message: StringFilter
+  externalLink: StringNullableFilter
+}
+
+input HighlightOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  publishAt: OrderDirection
+  unpublishAt: OrderDirection
+  image: OrderDirection
+  message: OrderDirection
+  internalLink: OrderDirection
+  externalLink: OrderDirection
+}
+
+input HighlightUpdateInput {
+  title: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  image: String
+  message: String
+  internalLink: String
+  externalLink: String
+}
+
+input HighlightUpdateArgs {
+  where: HighlightWhereUniqueInput!
+  data: HighlightUpdateInput!
+}
+
+input HighlightCreateInput {
+  title: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  image: String
+  message: String
+  internalLink: String
+  externalLink: String
 }
 
 """
@@ -760,6 +824,12 @@ type Mutation {
   updateContacts(data: [ContactUpdateArgs!]!): [Contact]
   deleteContact(where: ContactWhereUniqueInput!): Contact
   deleteContacts(where: [ContactWhereUniqueInput!]!): [Contact]
+  createHighlight(data: HighlightCreateInput!): Highlight
+  createHighlights(data: [HighlightCreateInput!]!): [Highlight]
+  updateHighlight(where: HighlightWhereUniqueInput!, data: HighlightUpdateInput!): Highlight
+  updateHighlights(data: [HighlightUpdateArgs!]!): [Highlight]
+  deleteHighlight(where: HighlightWhereUniqueInput!): Highlight
+  deleteHighlights(where: [HighlightWhereUniqueInput!]!): [Highlight]
   endSession: Boolean!
 }
 
@@ -788,6 +858,9 @@ type Query {
   contact(where: ContactWhereUniqueInput!): Contact
   contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
   contactsCount(where: ContactWhereInput! = {}): Int
+  highlight(where: HighlightWhereUniqueInput!): Highlight
+  highlights(where: HighlightWhereInput! = {}, orderBy: [HighlightOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: HighlightWhereUniqueInput): [Highlight!]
+  highlightsCount(where: HighlightWhereInput! = {}): Int
   keystone: KeystoneMeta!
 }
 

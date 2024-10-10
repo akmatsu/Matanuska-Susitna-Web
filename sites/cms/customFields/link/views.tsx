@@ -1,14 +1,13 @@
-import '@toast-ui/editor/dist/toastui-editor.css';
 import React from 'react';
-import { Suspense, lazy } from 'react';
+import AsyncSelect from 'react-select/async';
+
+import { CellContainer, CellLink } from '@keystone-6/core/admin-ui/components';
+
 import {
   FieldContainer,
-  FieldDescription,
   FieldLabel,
-  // TextInput,
+  FieldDescription,
 } from '@keystone-ui/fields';
-import { CellLink, CellContainer } from '@keystone-6/core/admin-ui/components';
-const MdEditor = lazy(() => import('../components/MdEditor'));
 
 import {
   type CardValueComponent,
@@ -18,13 +17,62 @@ import {
   type FieldProps,
 } from '@keystone-6/core/types';
 
+import { gql, useQuery } from '@keystone-6/core/admin-ui/apollo';
+import { StylesConfig, CSSObjectWithLabel } from 'react-select';
+
 export function Field({
   field,
   value,
   onChange,
-  autoFocus,
 }: FieldProps<typeof controller>) {
-  const disabled = onChange === undefined;
+  const { data, refetch } = useQuery(
+    gql`
+      query GetServices($where: ServiceWhereInput!) {
+        services(where: $where) {
+          title
+          slug
+          id
+        }
+      }
+    `,
+    {
+      variables: {
+        where: {
+          title: {
+            contains: value || '',
+            mode: 'insensitive',
+          },
+        },
+      },
+    },
+  );
+
+  async function handleChange(newValue: string) {
+    await refetch({
+      where: {
+        title: {
+          contains: newValue || '',
+          mode: 'insensitive',
+        },
+      },
+    });
+
+    return data?.services?.map((service: any) => {
+      return {
+        label: service.title,
+        value: `/service/${service.slug}`,
+      };
+    });
+  }
+
+  const styles: StylesConfig = {
+    menu(base, props) {
+      return {
+        ...base,
+        zIndex: 100,
+      };
+    },
+  };
 
   return (
     <FieldContainer as="fieldset">
@@ -32,18 +80,16 @@ export function Field({
       <FieldDescription id={`${field.path}-description`}>
         {field.description}
       </FieldDescription>
-      <div>
-        <Suspense fallback={<div>Loading editor...</div>}>
-          <MdEditor
-            initialValue={value || ''}
-            onChange={(value) => {
-              if (value) {
-                onChange?.(value);
-              }
-            }}
-          />
-        </Suspense>
-      </div>
+      <AsyncSelect
+        loadOptions={handleChange}
+        defaultOptions
+        defaultValue={{ label: value, value }}
+        onChange={(newValue: { label: string; value: string }) => {
+          onChange?.(newValue?.value || null);
+        }}
+        isClearable
+        styles={styles}
+      />
     </FieldContainer>
   );
 }

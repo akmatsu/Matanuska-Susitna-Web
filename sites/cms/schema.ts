@@ -8,6 +8,7 @@ import {
   Process,
   Step,
   Contact,
+  Highlight,
 } from './schema/models';
 
 export const lists = {
@@ -19,4 +20,5 @@ export const lists = {
   Process,
   Step,
   Contact,
+  Highlight,
 } satisfies Lists;
