@@ -1,14 +1,17 @@
-import '@toast-ui/editor/dist/toastui-editor.css';
-import React from 'react';
-import { Suspense, lazy } from 'react';
+import React, { ChangeEvent, Suspense } from 'react';
+
+import {
+  CellContainer,
+  CellLink,
+  NavigationContainer,
+} from '@keystone-6/core/admin-ui/components';
+
 import {
   FieldContainer,
-  FieldDescription,
   FieldLabel,
-  // TextInput,
+  FieldDescription,
+  TextInput,
 } from '@keystone-ui/fields';
-import { CellLink, CellContainer } from '@keystone-6/core/admin-ui/components';
-const MdEditor = lazy(() => import('../components/MdEditor'));
 
 import {
   type CardValueComponent,
@@ -18,13 +21,43 @@ import {
   type FieldProps,
 } from '@keystone-6/core/types';
 
+import { gql, useQuery } from '@keystone-6/core/admin-ui/apollo';
+
 export function Field({
   field,
   value,
   onChange,
-  autoFocus,
 }: FieldProps<typeof controller>) {
-  const disabled = onChange === undefined;
+  const { loading, error, data, refetch } = useQuery(
+    gql`
+      query GetServices($where: ServiceWhereInput!) {
+        services(where: $where) {
+          title
+          slug
+          id
+        }
+      }
+    `,
+    {
+      variables: {
+        where: {
+          title: {
+            contains: value,
+          },
+        },
+      },
+    },
+  );
+
+  async function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    await refetch({
+      where: {
+        title: {
+          contains: e.target.value,
+        },
+      },
+    });
+  }
 
   return (
     <FieldContainer as="fieldset">
@@ -32,18 +65,17 @@ export function Field({
       <FieldDescription id={`${field.path}-description`}>
         {field.description}
       </FieldDescription>
-      <div>
-        <Suspense fallback={<div>Loading editor...</div>}>
-          <MdEditor
-            initialValue={value || ''}
-            onChange={(value) => {
-              if (value) {
-                onChange?.(value);
-              }
-            }}
-          />
-        </Suspense>
-      </div>
+      {/* <Select value={value} onChange={onChange}></Select> */}
+      <TextInput onChange={handleChange} />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {data?.services?.map((service: any) => (
+            <li key={service.id}>{service.title}</li>
+          ))}
+        </ul>
+      )}
     </FieldContainer>
   );
 }

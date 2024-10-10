@@ -1,7 +1,5 @@
 import { BaseFields } from '@keystone-6/core';
 import { text, timestamp } from '@keystone-6/core/fields';
-import { document } from '@keystone-6/fields-document';
-import { componentBlocks } from '../component-blocks';
 
 export const urlRegex = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/;
 
@@ -32,12 +30,38 @@ export const publishable: BaseFields<any> = {
       itemView: {
         fieldPosition: 'sidebar',
       },
+      description:
+        'When page should be visible. If blank, page is treated as a draft. Set to today if you want to publish now.',
     },
   }),
   unpublishAt: timestamp({
     ui: {
       itemView: {
         fieldPosition: 'sidebar',
+      },
+      description:
+        'When the page should be hidden from website. If blank, page will never be hidden.',
+    },
+    hooks: {
+      validate: ({ resolvedData, item, addValidationError }) => {
+        const publishAt = resolvedData['publishAt'] || item['publishAt'];
+        const unpublishAt = resolvedData['unpublishAt'];
+
+        if (!publishAt && unpublishAt) {
+          addValidationError(
+            'You have set an Unpublish date but no Publish date. Either remove the Unpublish date or add a Publish date.',
+          );
+        }
+
+        if (publishAt && unpublishAt) {
+          const pub = new Date(publishAt);
+          const unPub = new Date(unpublishAt);
+          if (unPub <= pub) {
+            addValidationError(
+              'Invalid unpublish date. Please select an unpublish date that is after the publish date.',
+            );
+          }
+        }
       },
     },
   }),
@@ -67,7 +91,9 @@ export function titleAndDescription(opts?: {
       },
       ui: {
         displayMode: 'input',
-        description: opts?.title?.description,
+        description:
+          opts?.title?.description ||
+          'Title is used as the fist header of the page and used in Page meta data for search engines and social media.',
       },
     }),
     description: text({
@@ -78,54 +104,13 @@ export function titleAndDescription(opts?: {
       },
       ui: {
         displayMode: 'textarea',
-        description: opts?.description?.description,
+        description:
+          opts?.description?.description ||
+          'THIS IS NOT DISPLAYED ON THE PAGE. Description is only displayed on lists, and used in Page meta data for search engines and social media.',
       },
     }),
   };
 }
-
-export const pageContentEditor: BaseFields<any> = {
-  content: document({
-    formatting: {
-      inlineMarks: {
-        bold: true,
-        italic: true,
-        underline: true,
-        strikethrough: true,
-        code: true,
-        superscript: true,
-        subscript: true,
-        keyboard: true,
-      },
-      listTypes: {
-        ordered: true,
-        unordered: true,
-      },
-      alignment: {
-        center: true,
-        end: true,
-      },
-      headingLevels: [2, 3, 4, 5, 6],
-      blockTypes: {
-        blockquote: true,
-        code: true,
-      },
-      softBreaks: true,
-    },
-    dividers: true,
-    links: true,
-    layouts: [
-      [1, 1],
-      [1, 1, 1],
-    ],
-    ui: {
-      description: 'Be aware that heading 1 has been intentionally disabled.',
-      views: './component-blocks',
-    },
-
-    componentBlocks,
-  }),
-};
 
 export const slug = text({
   isIndexed: 'unique',
@@ -136,6 +121,8 @@ export const slug = text({
     itemView: {
       fieldPosition: 'sidebar',
     },
+    description:
+      'A slug is used to uniquely identify a page in the website and used in web page URLs.',
   },
 
   hooks: {

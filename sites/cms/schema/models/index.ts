@@ -6,3 +6,4 @@ export * from './User';
 export * from './Step';
 export * from './Process';
 export * from './Contact';
+export * from './Highlight';

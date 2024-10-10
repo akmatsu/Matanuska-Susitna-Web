@@ -1,27 +1,27 @@
+import { graphql } from '@keystone-6/core';
 import {
-  type BaseListTypeInfo,
+  BaseListTypeInfo,
+  CommonFieldConfig,
   fieldType,
-  type FieldTypeFunc,
-  type CommonFieldConfig,
+  FieldTypeFunc,
   orderDirectionEnum,
 } from '@keystone-6/core/types';
-import { graphql } from '@keystone-6/core';
 
-type TextFieldConfig<ListTypeInfo extends BaseListTypeInfo> =
+type LinkFieldConfig<ListTypeInfo extends BaseListTypeInfo> =
   CommonFieldConfig<ListTypeInfo> & {
-    isIndexed?: boolean | 'unique';
+    isIndex?: boolean | 'unique';
   };
 
-export function customText<ListTypeInfo extends BaseListTypeInfo>({
-  isIndexed,
+export function linkField<ListTypeInfo extends BaseListTypeInfo>({
+  isIndex,
   ...config
-}: TextFieldConfig<ListTypeInfo> = {}): FieldTypeFunc<ListTypeInfo> {
+}: LinkFieldConfig<ListTypeInfo> = {}): FieldTypeFunc<ListTypeInfo> {
   return (meta) =>
     fieldType({
       kind: 'scalar',
       mode: 'optional',
       scalar: 'String',
-      index: isIndexed === true ? 'index' : isIndexed || undefined,
+      index: isIndex === true ? 'index' : isIndex || undefined,
     })({
       ...config,
       input: {
@@ -36,11 +36,11 @@ export function customText<ListTypeInfo extends BaseListTypeInfo>({
       },
       output: graphql.field({
         type: graphql.String,
-        resolve({ value, item }, args, context, info) {
+        resolve({ value }) {
           return value;
         },
       }),
-      views: './customFields/views.tsx',
+      views: './customFields/link/views.tsx',
       getAdminMeta() {
         return {};
       },

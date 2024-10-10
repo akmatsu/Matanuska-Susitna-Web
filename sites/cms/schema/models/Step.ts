@@ -2,7 +2,7 @@ import { list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
 import { relationship, text } from '@keystone-6/core/fields';
 import { timestamps } from '../fieldUtils';
-import { customText } from '../../customFields';
+import { customText } from '../../customFields/Markdown';
 
 export const Step: ListConfig<any> = list({
   access: allowAll,
