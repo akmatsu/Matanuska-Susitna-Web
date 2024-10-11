@@ -15,19 +15,35 @@ export interface GetServicesData {
 export interface GetServicesVariables {
   take: number;
   skip: number;
+  where: {
+    OR: [
+      {
+        description?: {
+          contains?: string | null;
+          mode?: 'insensitive' | 'default' | null;
+        };
+      },
+      {
+        title?: {
+          contains?: string | null;
+          mode?: 'insensitive' | 'default' | null;
+        };
+      },
+    ];
+  };
 }
 
 export const GET_SERVICES_QUERY: TypedDocumentNode<
   GetServicesData,
   GetServicesVariables
 > = gql`
-  query GetServices($take: Int, $skip: Int!) {
-    services(take: $take, skip: $skip) {
+  query GetServices($take: Int, $skip: Int!, $where: ServiceWhereInput!) {
+    services(take: $take, skip: $skip, where: $where) {
       id
       title
       slug
       description
     }
-    servicesCount
+    servicesCount(where: $where)
   }
 `;

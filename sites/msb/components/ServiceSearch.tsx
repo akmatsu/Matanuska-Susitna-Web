@@ -1,5 +1,7 @@
 'use client';
+import { usePageParam } from '@/hooks/usePageParam';
 import { Search } from '@trussworks/react-uswds';
+import { useRouter } from 'next/navigation';
 import React, { HTMLAttributes } from 'react';
 
 export type ServiceSearchProps = {
@@ -7,9 +9,14 @@ export type ServiceSearchProps = {
 };
 
 export function ServiceSearch(props: ServiceSearchProps) {
+  const router = useRouter();
+  const { search } = usePageParam();
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('search');
+
+    if (e.target?.[0]?.value) {
+      router.push(`?search=${e.target[0].value}`);
+    }
   }
 
   return (
@@ -19,6 +26,7 @@ export function ServiceSearch(props: ServiceSearchProps) {
         onSubmit={handleSearch}
         size="small"
         placeholder="Search services..."
+        defaultValue={search || ''}
       />
     </div>
   );

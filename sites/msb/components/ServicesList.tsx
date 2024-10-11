@@ -11,12 +11,21 @@ import { GET_SERVICES_QUERY } from '@/utils/apollo/gqlQueries/getServices';
 import { usePageParam } from '@/hooks/usePageParam';
 
 export function ServicesList() {
-  const page = usePageParam();
-  const limit = 2;
+  const { page, search } = usePageParam();
+  const limit = 15;
   const skip = (page - 1) * limit;
 
   const { data } = useSuspenseQuery(GET_SERVICES_QUERY, {
-    variables: { take: limit, skip },
+    variables: {
+      take: limit,
+      skip,
+      where: {
+        OR: [
+          { description: { contains: search || '', mode: 'insensitive' } },
+          { title: { contains: search || '', mode: 'insensitive' } },
+        ],
+      },
+    },
   });
 
   return (
@@ -49,7 +58,7 @@ export function ServicesList() {
 }
 
 export function ServicesListLoading() {
-  const page = usePageParam();
+  const { page } = usePageParam();
 
   return (
     <>
