@@ -1,5 +1,5 @@
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
-import { ServicesList } from '@/components/ServicesList';
+import { ServicesList, ServicesListLoading } from '@/components/ServicesList';
 import { Button } from '@trussworks/react-uswds';
 import { ServiceSearch } from '@/components/ServiceSearch';
 import { Suspense } from 'react';
@@ -18,7 +18,7 @@ export default async function Services() {
           </div>
         }
       >
-        <Suspense>
+        <Suspense fallback={<ServicesListLoading />}>
           <ServicesList />
         </Suspense>
       </ThreeColumnLayout>
