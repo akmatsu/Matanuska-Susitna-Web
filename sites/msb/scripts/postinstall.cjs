@@ -15,7 +15,7 @@ const publicPath = path.resolve(__dirname, '../public/uswds');
 
 function copyDir(src, dest) {
   if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest);
+    fs.mkdirSync(dest, { recursive: true });
   }
   fs.readdirSync(src).forEach((file) => {
     const srcPath = path.join(src, file);
