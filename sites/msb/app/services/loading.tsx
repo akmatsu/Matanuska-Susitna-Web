@@ -1,19 +1,13 @@
-'use client';
-import { Suspense } from 'react';
-import { Button } from '@trussworks/react-uswds';
-import { usePageParam } from '@/hooks/usePageParam';
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
-import { ServicesList } from '@/components/Services/ServicesList';
 import { ServiceSearch } from '@/components/Services/ServiceSearch';
+import { Button } from '@trussworks/react-uswds';
 import { ServicesLoading } from '@/components/Services/ServicesLoading';
 
-export default function Services() {
-  const { page, search } = usePageParam();
-
+export default function Loading() {
   return (
     <section className="usa-section">
       <ThreeColumnLayout
-        left={<ServiceSearch search={search} />}
+        left={<ServiceSearch />}
         right={
           <div className="display-flex flex-column">
             <h3>Get Help</h3>
@@ -23,9 +17,7 @@ export default function Services() {
           </div>
         }
       >
-        <Suspense key={`${page}-${search}`} fallback={<ServicesLoading />}>
-          <ServicesList page={page} search={search || ''} />
-        </Suspense>
+        <ServicesLoading />
       </ThreeColumnLayout>
     </section>
   );

@@ -57,7 +57,7 @@ export default async function Service({
                 {service?.primaryContact && (
                   <ContactCard contact={service?.primaryContact} isPrimary />
                 )}
-                {service?.contacts.map((contact) => (
+                {service?.contacts.map((contact: any) => (
                   <ContactCard
                     key={contact.id}
                     contact={contact}
@@ -73,11 +73,11 @@ export default async function Service({
           <h1>{data?.service?.title}</h1>
           <MarkdownRenderer>{data?.service?.body}</MarkdownRenderer>
 
-          {data.service.processes.map((process) => (
+          {data.service.processes.map((process: any) => (
             <div key={process.id}>
               <h2>{process.name}</h2>
               <ProcessList>
-                {process.steps.map((step) => (
+                {process.steps.map((step: any) => (
                   <ProcessListItem key={step.id}>
                     <ProcessListHeading type="h4">
                       {step.label}
