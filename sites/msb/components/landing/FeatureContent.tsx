@@ -1,6 +1,6 @@
 import { CardBody, CardHeader, CardMedia, Grid } from '@trussworks/react-uswds';
 import Link from 'next/link';
-import { LinkCard } from '../LinkCard';
+import { LinkCard } from '../LinkCard/LinkCard';
 
 export function FeaturedContent() {
   return (

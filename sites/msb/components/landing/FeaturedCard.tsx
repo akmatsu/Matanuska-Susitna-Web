@@ -1,6 +1,6 @@
 'use client';
 import { CardHeader, Icon, CardMedia } from '@trussworks/react-uswds';
-import { LinkCard } from '../LinkCard';
+import { LinkCard } from '../LinkCard/LinkCard';
 
 export type FeaturedCardProps = {
   icon: keyof typeof Icon;
@@ -32,6 +32,7 @@ export function FeaturedCard(props: FeaturedCardProps) {
           <MyIcon
             size={3}
             className="margin-right-1 bg-secondary text-white padding-1 circle-5"
+            aria-label={props.title}
           />
           <h3 className="usa-card__heading margin-top-0">{props.title}</h3>
         </div>

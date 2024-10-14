@@ -1,9 +1,8 @@
-import type { Metadata } from 'next';
-
 import '@trussworks/react-uswds/lib/index.css';
 import '../styles/index.scss';
-import { OfficialGovSiteNotice, TopNavigation, MainFooter } from '@/components';
-import { Alerts } from '@/components/Alerts';
+import type { Metadata } from 'next';
+import { TopNavigation, MainFooter } from '@/components';
+import { SiteInfo } from '@/components/Header/SiteInfo';
 
 export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',
@@ -19,9 +18,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <OfficialGovSiteNotice />
-        <Alerts />
-
+        <SiteInfo />
         <TopNavigation />
         <main id="main-content" className="position-relative">
           {children}

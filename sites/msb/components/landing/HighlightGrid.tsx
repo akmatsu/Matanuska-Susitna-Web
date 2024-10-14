@@ -52,7 +52,12 @@ export function HighlightGrid() {
     <section className="usa-graphic-list usa-section usa-section--dark">
       <GridContainer>
         {highlights.map((row) => (
-          <Grid row gap className="usa-graphic-list__row">
+          <Grid
+            row
+            gap
+            className="usa-graphic-list__row"
+            key={crypto.randomUUID()}
+          >
             {row.map((item) => (
               <Grid
                 tablet={{

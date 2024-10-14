@@ -1,11 +1,5 @@
 import Link from 'next/link';
-import { ReactNode } from 'react';
-
-export type LinkCardProps = {
-  children: ReactNode;
-  href: string;
-  className?: string;
-};
+import { LinkCardProps } from './types';
 
 export function LinkCard(props: LinkCardProps) {
   return (

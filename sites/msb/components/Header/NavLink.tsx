@@ -1,12 +1,5 @@
 import Link from 'next/link';
-import { ReactNode } from 'react';
-
-export type NavLinkProps = {
-  href: string;
-  // key?: string | number;
-  className?: string;
-  children?: ReactNode;
-};
+import { NavLinkProps } from './types';
 
 export function NavLink({ className = '', ...props }: NavLinkProps) {
   const classes = className + ' usa-nav__link';
