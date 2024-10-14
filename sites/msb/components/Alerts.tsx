@@ -1,22 +1,26 @@
-'use client';
-import { GET_ALERTS_QUERY } from '@/utils/apollo/gqlQueries/getAlerts';
+// 'use client';
+import { GET_ALERTS_QUERY } from '@/utils/gql/queries/getAlerts';
 import { MarkdownRenderer } from './MarkdownRenderer';
-import { useSuspenseQuery } from '@apollo/client';
+import { fetchGraphQL } from '@/utils/gql/fetchGraphQL';
 
-export function Alerts() {
-  const { data } = useSuspenseQuery(GET_ALERTS_QUERY);
+export async function Alerts() {
+  const data = await fetchGraphQL(GET_ALERTS_QUERY);
 
   return (
-    <ul className="usa-list--unstyled">
-      {data.alerts.map((alert: any) => (
-        <li key={alert.id}>
-          <div className="usa-alert usa-alert--warning usa-alert--slim">
-            <div className="usa-alert__body">
-              <MarkdownRenderer>{alert.body}</MarkdownRenderer>
-            </div>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <>
+      {data && (
+        <ul className="usa-list--unstyled">
+          {data.alerts.map((alert: any) => (
+            <li key={alert.id}>
+              <div className="usa-alert usa-alert--warning usa-alert--slim">
+                <div className="usa-alert__body">
+                  <MarkdownRenderer>{alert.body}</MarkdownRenderer>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }

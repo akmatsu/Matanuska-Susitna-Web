@@ -1,4 +1,4 @@
-import { gql, TypedDocumentNode } from '@apollo/client';
+import { gql, GraphQLQuery } from '../fetchGraphQL';
 
 export interface GetServiceContact {
   id: string;
@@ -40,10 +40,7 @@ export interface GetServiceVariables {
   };
 }
 
-export const GET_SERVICE_QUERY: TypedDocumentNode<
-  GetServiceData,
-  GetServiceVariables
-> = gql`
+export const GET_SERVICE_QUERY = gql`
   query GetService($where: ServiceWhereUniqueInput!) {
     service(where: $where) {
       id

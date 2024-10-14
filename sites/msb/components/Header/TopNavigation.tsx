@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { appConfig, primaryNav } from '@/configs/config';
 import {
   Header,
@@ -7,10 +8,8 @@ import {
   Search,
   Title,
 } from '@trussworks/react-uswds';
-
 import { useState } from 'react';
 import { NavLink } from './NavLink';
-import Link from 'next/link';
 
 export function TopNavigation() {
   const [isOpen, setIsOpen] = useState(false);

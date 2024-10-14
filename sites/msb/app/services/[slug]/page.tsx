@@ -12,17 +12,16 @@ import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 
 import { ContactCard } from '@/components/ContactCard';
 import Link from 'next/link';
-import { getClient } from '@/utils/apollo/apolloClient';
-import { GET_SERVICE_QUERY } from '@/utils/apollo/gqlQueries/GetService';
+import { fetchGraphQL } from '@/utils/gql/fetchGraphQL';
+import { GET_SERVICE_QUERY } from '@/utils/gql/queries/GetService';
 
 export default async function Service({
   params,
 }: {
   params: { slug: string };
 }) {
-  const { data } = await getClient().query({
-    query: GET_SERVICE_QUERY,
-    variables: { where: { slug: params.slug } },
+  const data = await fetchGraphQL(GET_SERVICE_QUERY, {
+    where: { slug: params.slug },
   });
 
   const service = data?.service;

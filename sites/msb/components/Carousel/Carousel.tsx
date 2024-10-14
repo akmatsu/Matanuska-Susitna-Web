@@ -1,12 +1,8 @@
 'use client';
-import { ReactNode } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { CarouselMenu } from './CarouselMenu';
 import 'swiper/css';
-
-export type CarouselProps = {
-  slides: { title: string; content: ReactNode }[];
-};
+import { CarouselProps } from './types';
 
 export function Carousel(props: CarouselProps) {
   return (

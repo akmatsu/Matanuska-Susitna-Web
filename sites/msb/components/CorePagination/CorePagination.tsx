@@ -1,14 +1,10 @@
 import { CorePaginationPageNum } from './CorePaginationPageNum';
-
-export type CorePagination = {
-  currentPage?: number;
-  totalPages?: number;
-};
+import { CorePaginationProps } from './types';
 
 export function CorePagination({
   currentPage = 1,
   totalPages = 1,
-}: CorePagination) {
+}: CorePaginationProps) {
   const maxSlots = 3;
   const showOverflow = totalPages > maxSlots;
   const pageList = Array.from({ length: totalPages }, (_, i) => i + 1);
