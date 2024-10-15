@@ -1,4 +1,4 @@
-import { gql, GraphQLQuery } from '../fetchGraphQL';
+import { gql } from '../fetchGraphQL';
 
 export interface GetServiceContact {
   id: string;
@@ -39,6 +39,15 @@ export interface GetServiceVariables {
     slug: string;
   };
 }
+
+export const GET_SERVICE_META_QUERY = gql`
+  query GetServiceMetaQuery($where: ServiceWhereUniqueInput!) {
+    service(where: $where) {
+      title
+      description
+    }
+  }
+`;
 
 export const GET_SERVICE_QUERY = gql`
   query GetService($where: ServiceWhereUniqueInput!) {

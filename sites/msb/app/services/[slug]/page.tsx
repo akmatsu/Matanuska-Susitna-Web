@@ -13,7 +13,30 @@ import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 import { ContactCard } from '@/components/ContactCard';
 import Link from 'next/link';
 import { fetchGraphQL } from '@/utils/gql/fetchGraphQL';
-import { GET_SERVICE_QUERY } from '@/utils/gql/queries/GetService';
+import {
+  GET_SERVICE_META_QUERY,
+  GET_SERVICE_QUERY,
+} from '@/utils/gql/queries/GetService';
+import { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data = await fetchGraphQL(
+    GET_SERVICE_META_QUERY,
+    {
+      where: { slug: params.slug },
+    },
+    true,
+  );
+
+  return {
+    title: `MSB - ${data?.service.title}`,
+    description: data?.service.description,
+  };
+}
 
 export default async function Service({
   params,
