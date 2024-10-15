@@ -24,13 +24,9 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const data = await fetchGraphQL(
-    GET_SERVICE_META_QUERY,
-    {
-      where: { slug: params.slug },
-    },
-    true,
-  );
+  const data = await fetchGraphQL(GET_SERVICE_META_QUERY, {
+    where: { slug: params.slug },
+  });
 
   return {
     title: `MSB - ${data?.service.title}`,

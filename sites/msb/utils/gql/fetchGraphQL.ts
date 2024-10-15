@@ -28,16 +28,16 @@ export async function fetchGraphQL<
 >(
   gqlQuery: T,
   variables?: T['__typename']['variables'],
-  log?: boolean,
+
+  cache?: RequestInit['cache'],
 ): Promise<T['__typename']['data'] | undefined> {
-  if (log) console.log(gqlQuery, variables);
   try {
     const res = await fetch(`${API_URL}/api/graphql`, {
       method: 'POST',
       body: JSON.stringify({ query: gqlQuery.query, variables }),
       headers: { 'Content-Type': 'application/json' },
+      cache,
     });
-    if (log) console.log(res);
 
     const resJson = await res.json();
     return resJson.data as T['__typename']['data'];
