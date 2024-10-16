@@ -2,10 +2,11 @@
 import Link from 'next/link';
 import { appConfig, primaryNav } from '@/configs/config';
 import {
+  Button,
   Header,
+  Icon,
   NavMenuButton,
   PrimaryNav,
-  Search,
   Title,
 } from '@trussworks/react-uswds';
 import { useState } from 'react';
@@ -19,11 +20,7 @@ export function TopNavigation() {
   }
 
   return (
-    <Header
-      showMobileOverlay={isOpen}
-      basic
-      className="position-sticky top-0 z-500 bg-white shadow-1"
-    >
+    <Header showMobileOverlay={isOpen} basic className="bg-white shadow-1">
       <div className="usa-nav-container ">
         <div className="usa-navbar">
           <Title className="margin-top-2">
@@ -52,11 +49,9 @@ export function TopNavigation() {
           mobileExpanded={isOpen}
           onToggleMobileNav={() => setIsOpen((val) => !val)}
         >
-          <Search
-            size="small"
-            onSubmit={handleSearch}
-            placeholder="Search website..."
-          ></Search>
+          <Button type="button" className="padding-05">
+            <Icon.Search size={3} />
+          </Button>
         </PrimaryNav>
       </div>
     </Header>

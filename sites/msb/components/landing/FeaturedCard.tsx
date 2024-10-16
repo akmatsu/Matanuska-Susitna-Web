@@ -1,6 +1,6 @@
-'use client';
 import { CardHeader, Icon, CardMedia } from '@trussworks/react-uswds';
 import { LinkCard } from '../LinkCard/LinkCard';
+import { CoreIcon } from '../CoreIcon';
 
 export type FeaturedCardProps = {
   icon: keyof typeof Icon;
@@ -12,8 +12,6 @@ export type FeaturedCardProps = {
 };
 
 export function FeaturedCard(props: FeaturedCardProps) {
-  const MyIcon = Icon[props.icon] as (typeof Icon)['Add'];
-
   return (
     <LinkCard href={props.linkUrl} className="height-full border-0">
       {props.imageUrl && (
@@ -29,10 +27,11 @@ export function FeaturedCard(props: FeaturedCardProps) {
 
       <CardHeader className="padding-top-2">
         <div className="display-flex flex-align-center width-full">
-          <MyIcon
-            size={3}
+          <CoreIcon
+            icon={props.icon}
             className="margin-right-1 bg-secondary text-white padding-1 circle-5"
-            aria-label={props.title}
+            size={3}
+            ariaLabel={props.title}
           />
           <h3 className="usa-card__heading margin-top-0">{props.title}</h3>
         </div>

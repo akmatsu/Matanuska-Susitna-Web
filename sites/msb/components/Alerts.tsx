@@ -4,7 +4,9 @@ import { MarkdownRenderer } from './MarkdownRenderer';
 import { fetchGraphQL } from '@/utils/gql/fetchGraphQL';
 
 export async function Alerts() {
-  const data = await fetchGraphQL(GET_ALERTS_QUERY, undefined, 'no-store');
+  const data = await fetchGraphQL(GET_ALERTS_QUERY, undefined, {
+    cache: 'no-store',
+  });
 
   return (
     <>

@@ -4,7 +4,7 @@ import { FeaturedCard, FeaturedCardProps } from './FeaturedCard';
 export function Featured() {
   const featuredItems: FeaturedCardProps[] = [
     {
-      icon: 'Campaign',
+      icon: 'ConstructionWorker',
       title: 'Career Opportunities',
       text: 'View Latest Updates',
       linkUrl: '#public-notices',
@@ -13,11 +13,11 @@ export function Featured() {
     },
     {
       icon: 'Event',
-      title: 'Contract Opportunities',
+      title: 'Legislation',
       text: 'View upcoming meetings',
       linkUrl: '#meetings',
       imageUrl:
-        'https://d1159zutbdy4l.cloudfront.net/public/uploads/85df212f-98a6-491c-b299-7173692be312optimized_images/1000x664_optimized_image.jpg',
+        'https://d1159zutbdy4l.cloudfront.net/public/uploads/d34162a6-3bbd-4356-9e61-7f9f0e2e11c4optimized_images/500x185_optimized_image.jpg',
     },
     {
       icon: 'Construction',
