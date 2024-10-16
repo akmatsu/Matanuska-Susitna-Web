@@ -81,6 +81,6 @@ a.usa-card {
   border-radius: 4px;
 }
 
-.usa-search--big {
+.usa-search--big[data-testid='searchField'] {
   width: 100%;
 }
