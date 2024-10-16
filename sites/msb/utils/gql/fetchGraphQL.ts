@@ -28,15 +28,15 @@ export async function fetchGraphQL<
 >(
   gqlQuery: T,
   variables?: T['__typename']['variables'],
-
-  cache?: RequestInit['cache'],
+  opts?: { cache?: RequestInit['cache']; next?: RequestInit['next'] },
 ): Promise<T['__typename']['data'] | undefined> {
   try {
     const res = await fetch(`${API_URL}/api/graphql`, {
       method: 'POST',
       body: JSON.stringify({ query: gqlQuery.query, variables }),
       headers: { 'Content-Type': 'application/json' },
-      cache,
+      cache: opts?.cache,
+      next: opts?.next,
     });
 
     const resJson = await res.json();

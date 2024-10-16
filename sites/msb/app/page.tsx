@@ -8,19 +8,13 @@ export default function Home() {
     <div>
       <Hero />
       <Featured />
-      <section className="usa-section grid-container position-relative">
-        <Grid row className="usa-list--unstyled" gap>
-          <Grid col={6}>
-            <h2>Public Notices & Announcements</h2>
-            <FeaturedContent />
-          </Grid>
-          <Grid col={6}>
-            <h2>Meetings</h2>
-            <FeaturedContent />
-          </Grid>
-        </Grid>
+
+      <section className="usa-section grid-container">
+        <h2>Meetings</h2>
+        <FeaturedContent />
       </section>
-      <HighlightGrid />
+      {/* <HighlightGrid /> */}
+
       <section className="usa-section">
         <GridContainer>
           <h2>Can't find what you need?</h2>

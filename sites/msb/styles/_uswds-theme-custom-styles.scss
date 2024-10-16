@@ -53,6 +53,10 @@ p {
   }
 }
 
+ul.usa-button-group li:last-child {
+  margin-bottom: 4px;
+}
+
 a.usa-card {
   text-decoration: none;
   .usa-card__container {
@@ -61,4 +65,22 @@ a.usa-card {
   .usa-card__container:hover {
     background-color: color('base-lighter');
   }
+}
+
+[type='search'],
+.usa-search__input {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border: none;
+  width: 100%;
+  // max-width: 100%;
+}
+
+.usa-search {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+}
+
+.usa-search--big {
+  width: 100%;
 }

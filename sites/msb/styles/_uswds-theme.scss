@@ -21,16 +21,26 @@ for a full list of available settings.
   $theme-footer-max-width: 1500px,
 
   // Use USWDS defaults for typography
+  $theme-font-role-heading: 'sans',
   $theme-style-body-element: true,
-  $theme-font-type-sans: 'public-sans',
+  // $theme-font-type-sans: 'public-sans',
   $theme-global-content-styles: true,
   $theme-global-link-styles: true,
   $theme-global-paragraph-styles: true,
   $theme-site-margins-breakpoint: 'desktop-lg',
   $theme-site-margins-width: 2,
-  $theme-grid-container-max-width: 1500px,
+  $theme-grid-container-max-width: 1200px,
   $theme-card-border-width: 0,
   $theme-card-border-radius: 0,
   $theme-card-gap: 0,
-  $theme-card-margin-bottom: 1rem
+  $theme-card-margin-bottom: 1rem,
+
+  $theme-color-primary-family: 'blue',
+  $theme-color-primary-lightest: false,
+  $theme-color-primary-lighter: 'blue-10',
+  $theme-color-primary-light: 'blue-30',
+  $theme-color-primary: 'blue-warm-60v',
+  $theme-color-primary-dark: 'blue-warm-70v',
+  $theme-color-primary-darker: 'blue-warm-80v',
+  $theme-color-primary-darkest: false
 );
