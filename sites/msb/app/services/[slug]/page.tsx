@@ -12,29 +12,32 @@ import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 
 import { ContactCard } from '@/components/ContactCard';
 import Link from 'next/link';
-import { fetchGraphQL } from '@/utils/gql/fetchGraphQL';
+
 import {
   GET_SERVICE_META_QUERY,
   GET_SERVICE_QUERY,
-} from '@/utils/gql/queries/GetService';
+} from '@/utils/apollo/queries/GetService';
 import { Metadata } from 'next';
+import { getClient } from '@/utils/apollo/ApolloClient';
 
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const data = await fetchGraphQL(
-    GET_SERVICE_META_QUERY,
-    {
+  const { data } = await getClient().query({
+    query: GET_SERVICE_META_QUERY,
+    variables: {
       where: { slug: params.slug },
     },
-    {
-      next: {
-        revalidate: 300,
+    context: {
+      fetchOptions: {
+        next: {
+          revalidate: 300,
+        },
       },
     },
-  );
+  });
 
   return {
     title: `MSB - ${data?.service.title}`,
@@ -47,17 +50,20 @@ export default async function Service({
 }: {
   params: { slug: string };
 }) {
-  const data = await fetchGraphQL(
-    GET_SERVICE_QUERY,
-    {
+  const { data } = await getClient().query({
+    query: GET_SERVICE_QUERY,
+    variables: {
       where: { slug: params.slug },
     },
-    {
-      next: {
-        revalidate: 300,
+
+    context: {
+      fetchOptions: {
+        next: {
+          revalidate: 300,
+        },
       },
     },
-  );
+  });
 
   const service = data?.service;
 

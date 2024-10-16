@@ -1,33 +1,37 @@
 import { CorePagination } from '../CorePagination';
-import { GET_SERVICES_QUERY } from '@/utils/gql/queries/getServices';
-import { fetchGraphQL } from '@/utils/gql/fetchGraphQL';
+import { GET_SERVICES_QUERY } from '@/utils/apollo/queries/getServices';
+
 import { ServiceListItem } from './ServiceListItem';
+import { getClient } from '@/utils/apollo/ApolloClient';
 
 export async function ServicesList({ limit = 15, page = 1, search = '' }) {
-  const res = await fetchGraphQL(GET_SERVICES_QUERY, {
-    take: limit,
-    skip: (page - 1) * limit,
-    where: {
-      OR: [
-        { description: { contains: search, mode: 'insensitive' } },
-        { title: { contains: search, mode: 'insensitive' } },
-      ],
+  const { data } = await getClient().query({
+    query: GET_SERVICES_QUERY,
+    variables: {
+      take: limit,
+      skip: (page - 1) * limit,
+      where: {
+        OR: [
+          { description: { contains: search, mode: 'insensitive' } },
+          { title: { contains: search, mode: 'insensitive' } },
+        ],
+      },
     },
   });
 
   return (
     <>
       <h1>Services</h1>
-      {res.services?.length ? (
+      {data.services?.length ? (
         <>
           <ul className="usa-list--unstyled">
-            {res.services.map((service: any) => (
+            {data.services.map((service: any) => (
               <ServiceListItem service={service} key={service.id} />
             ))}
           </ul>
           <CorePagination
             currentPage={1}
-            totalPages={Math.ceil(res.servicesCount / limit)}
+            totalPages={Math.ceil(data.servicesCount / limit)}
           />
         </>
       ) : (
