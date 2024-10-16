@@ -5,7 +5,7 @@ export function Featured() {
   const featuredItems: FeaturedCardProps[] = [
     {
       icon: 'ConstructionWorker',
-      title: 'Work Opportunities',
+      title: 'Career Opportunities',
       text: 'View Latest Updates',
       linkUrl: '#public-notices',
       imageUrl:
