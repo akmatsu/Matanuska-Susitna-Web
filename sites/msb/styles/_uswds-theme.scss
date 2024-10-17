@@ -30,11 +30,10 @@ for a full list of available settings.
   $theme-site-margins-breakpoint: 'desktop-lg',
   $theme-site-margins-width: 2,
   $theme-grid-container-max-width: 1200px,
-  $theme-card-border-width: 0,
-  $theme-card-border-radius: 0,
+  $theme-card-border-width: 1px,
+  $theme-card-border-radius: 4px,
   $theme-card-gap: 0,
   $theme-card-margin-bottom: 1rem,
-
   $theme-color-primary-family: 'blue',
   $theme-color-primary-lightest: false,
   $theme-color-primary-lighter: 'blue-10',

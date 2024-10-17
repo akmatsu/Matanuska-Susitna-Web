@@ -3,6 +3,7 @@ import '../styles/index.scss';
 import type { Metadata } from 'next';
 import { TopNavigation, MainFooter } from '@/components';
 import { SiteInfo } from '@/components/Header/SiteInfo';
+import { ApolloWrapper } from './ApolloWrapper';
 
 export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',
@@ -18,12 +19,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SiteInfo />
-        <TopNavigation />
-        <main id="main-content" className="position-relative">
-          {children}
-        </main>
-        <MainFooter />
+        <ApolloWrapper>
+          <SiteInfo />
+          <TopNavigation />
+          <main id="main-content" className="position-relative">
+            {children}
+          </main>
+          <MainFooter />
+        </ApolloWrapper>
       </body>
     </html>
   );

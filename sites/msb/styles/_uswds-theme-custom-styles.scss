@@ -35,14 +35,6 @@ p {
   max-width: initial;
 }
 
-.usa-card {
-  .usa-card__container {
-    background-color: color('base-lightest');
-    transition: background-color 0.3s;
-    border-bottom: 4px solid color('primary');
-  }
-}
-
 .usa-pagination {
   ul li:last-child {
     margin-bottom: 4px;
@@ -53,14 +45,25 @@ ul.usa-button-group li:last-child {
   margin-bottom: 4px;
 }
 
-a.usa-card {
+a.usa-card,
+link-card.usa-card {
   text-decoration: none;
+
   .usa-card__container {
+    transition: background-color 0.3s;
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
     border-bottom: 4px solid color('primary');
+    background-color: color('base-lightest');
+    box-shadow: none;
   }
   .usa-card__container:hover {
     background-color: color('base-lighter');
   }
+  box-shadow: none;
+  border: none;
 }
 
 [type='search'],
@@ -69,14 +72,17 @@ a.usa-card {
   border-bottom-left-radius: 4px;
   border: none;
   width: 100%;
-  // max-width: 100%;
 }
 
 .usa-search {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
 }
 
 [data-testid='searchField'] {
   width: 100%;
+}
+
+.shadow-1 {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }

@@ -31,6 +31,16 @@ export function Hero() {
       text: 'Parcel Viewer',
       url: 'https://mapping.matsugov.us/Html5Viewer/index.html?viewer=MSB_Parcel_Viewer',
     },
+    // {
+    //   icon: 'Home',
+    //   text: 'myProperty Lookup',
+    //   url: 'https://myproperty.matsugov.us/',
+    // },
+    // {
+    //   icon: 'Map',
+    //   text: 'Parcel Viewer',
+    //   url: 'https://mapping.matsugov.us/Html5Viewer/index.html?viewer=MSB_Parcel_Viewer',
+    // },
   ];
   return (
     <Carousel
@@ -51,7 +61,7 @@ export function Hero() {
                   style={{ width: '500px' }}
                 />
               </section>
-              <section className="display-flex padding-y-3 flex-justify-center usa-section--light">
+              <section className="display-flex  padding-top-2 padding-bottom-1 flex-justify-center usa-section--light">
                 <div
                   className="grid-container width-full"
                   style={{ maxWidth: '900px' }}
@@ -59,18 +69,19 @@ export function Hero() {
                   <Grid row gap>
                     {links.map((link) => (
                       <Grid
-                        col={6}
-                        tablet={{ col: 3 }}
+                        col={12}
+                        mobileLg={{ col: 6 }}
+                        desktop={{ col: 3 }}
                         key={crypto.randomUUID()}
                       >
                         <Link
                           href="https://matsugov.us/animalcare"
-                          className="usa-button shadow-2 width-full bg-white hover:bg-base-lightest text-base-darkest"
+                          className="usa-button shadow-2 width-full bg-white hover:bg-base-lightest text-base-darkest margin-bottom-2"
                         >
                           <div className="display-flex flex-column flex-align-center">
                             <CoreIcon
                               icon={link.icon}
-                              size={4}
+                              size={5}
                               className="margin-bottom-1"
                               color="green"
                             />

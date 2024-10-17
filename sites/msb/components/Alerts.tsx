@@ -1,16 +1,13 @@
-// 'use client';
-import { GET_ALERTS_QUERY } from '@/utils/gql/queries/getAlerts';
+import { GET_ALERTS_QUERY } from '@/utils/apollo/queries/getAlerts';
 import { MarkdownRenderer } from './MarkdownRenderer';
-import { fetchGraphQL } from '@/utils/gql/fetchGraphQL';
+import { getClient } from '@/utils/apollo/ApolloClient';
 
 export async function Alerts() {
-  const data = await fetchGraphQL(GET_ALERTS_QUERY, undefined, {
-    cache: 'no-store',
-  });
+  const { data } = await getClient().query({ query: GET_ALERTS_QUERY });
 
   return (
     <>
-      {data && (
+      {!!data.alerts.length && (
         <ul className="usa-list--unstyled">
           {data.alerts.map((alert: any) => (
             <li key={alert.id}>

@@ -1,4 +1,4 @@
-import { gql } from '../fetchGraphQL';
+import { gql, TypedDocumentNode } from '@apollo/client';
 
 export interface GetServiceContact {
   id: string;
@@ -30,6 +30,15 @@ export interface GetServiceItem {
   processes: GetServiceProcess[];
 }
 
+export interface GetServiceItemMeta {
+  title: string;
+  description: string;
+}
+
+export interface GetServiceItemMetaData {
+  service: GetServiceItemMeta;
+}
+
 export interface GetServiceData {
   service: GetServiceItem;
 }
@@ -40,7 +49,10 @@ export interface GetServiceVariables {
   };
 }
 
-export const GET_SERVICE_META_QUERY = gql`
+export const GET_SERVICE_META_QUERY: TypedDocumentNode<
+  GetServiceItemMetaData,
+  GetServiceVariables
+> = gql`
   query GetServiceMetaQuery($where: ServiceWhereUniqueInput!) {
     service(where: $where) {
       title
@@ -49,7 +61,10 @@ export const GET_SERVICE_META_QUERY = gql`
   }
 `;
 
-export const GET_SERVICE_QUERY = gql`
+export const GET_SERVICE_QUERY: TypedDocumentNode<
+  GetServiceData,
+  GetServiceVariables
+> = gql`
   query GetService($where: ServiceWhereUniqueInput!) {
     service(where: $where) {
       id
