@@ -1,4 +1,5 @@
 import { Featured, Hero, HighlightGrid } from '@/components';
+import { FeaturedContent } from '@/components/landing/FeatureContent';
 import { Meetings } from '@/components/Meetings';
 import { GridContainer, Grid } from '@trussworks/react-uswds';
 import Link from 'next/link';
@@ -10,9 +11,14 @@ export default function Home() {
       <Featured />
 
       <section className="usa-section grid-container">
-        <h2>Meetings</h2>
+        <h2>Upcoming Meetings</h2>
 
         <Meetings />
+      </section>
+      <section className="usa-section grid-container">
+        <h2>Announcement & Public Notices</h2>
+
+        <FeaturedContent />
       </section>
 
       <section className="usa-section">

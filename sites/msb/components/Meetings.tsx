@@ -1,58 +1,72 @@
-import Link from 'next/link';
-import { Grid, CardHeader, CardMedia, CardBody } from '@trussworks/react-uswds';
-import { LinkCard } from './LinkCard';
+import {
+  Grid,
+  CardHeader,
+  CardMedia,
+  CardBody,
+  Card,
+  CardFooter,
+  Button,
+} from '@trussworks/react-uswds';
 
 export function Meetings() {
-  // const meetings: {date: string, location: string, title: string, description: string, } = [{
-  //   date: Date.now(),
-  //   location: ''
-  // }]
+  const meetings: {
+    date: string | number;
+    location: string;
+    title: string;
+  }[] = [
+    {
+      date: Date.now(),
+      location: '350 E Dahlia Ave, Assembly Chambers',
+      title: 'Abbreviated Plat',
+    },
+    {
+      date: Date.now(),
+      location:
+        'Lower Level Conference Room, 350 E Dahlia Ave, Palmer, AK 99645, USA',
+      title: 'Agriculture Advisory Board',
+    },
+    {
+      date: Date.now(),
+      location: '680 N Seward Meridian Parkway, Wasilla Casey L',
+      title: 'Local Emergency Planning Committee',
+    },
+    {
+      date: Date.now(),
+      location: 'Latitude 62, Talkeetna',
+      title: 'Chase Community Council',
+    },
+  ];
+
+  function formatDate(d: string | number) {
+    const date = new Date(d);
+    return date.toLocaleDateString();
+  }
   return (
-    <Grid row gap="sm">
-      {/* {meetings.map((meeting) =>  <Grid col={3}></Grid>)} */}
-      {/* <Grid col={7}>
-        <LinkCard href="#" className="minh-15">
-          <CardHeader>
-            <h3 className="usa-card__heading">Magna ad ad eu ipsum.</h3>
-          </CardHeader>
-          <CardMedia>
-            <img src="https://d1159zutbdy4l.cloudfront.net/public/uploads/c3d08b9f-c8df-4114-ba60-529111438482optimized_images/1000x370_optimized_image.jpg"></img>
-          </CardMedia>
-          <CardBody>
-            <p>
-              Magna ad ad eu ipsum. Aliqua pariatur deserunt amet anim et. Enim
-              eu reprehenderit sit cupidatat sunt ipsum quis ea labore
-              reprehenderit in eu ad aliquip. Exercitation officia culpa
-              consequat enim labore in pariatur.
-            </p>
-          </CardBody>
-        </LinkCard>
-      </Grid>
-      <Grid col={5} className="display-flex flex-column">
-        <LinkCard href="#">
-          <CardHeader>
-            <h4>Tempor non aliquip in fugiat nulla tempor.</h4>
-          </CardHeader>
-        </LinkCard>
-
-        <LinkCard href="#">
-          <CardHeader>
-            <h4>Tempor non aliquip in fugiat nulla tempor.</h4>
-          </CardHeader>
-        </LinkCard>
-        <LinkCard href="#">
-          <CardHeader>
-            <h4>Tempor non aliquip in fugiat nulla tempor.</h4>
-          </CardHeader>
-        </LinkCard>
-
-        <Link
-          href="#see-all"
-          className="radius-0 usa-button usa-button--big width-full"
+    <Grid row gap="md">
+      {meetings.map((meeting) => (
+        <Grid
+          col={12}
+          tablet={{ col: 6 }}
+          key={crypto.randomUUID()}
+          className="margin-bottom-2"
         >
-          See all
-        </Link> */}
-      {/* </Grid> */}
+          <Card className="usa-list--unstyled height-full">
+            <CardHeader>
+              <h4>{meeting.title}</h4>
+              <span className="font-body-sm">{formatDate(meeting.date)}</span>
+            </CardHeader>
+            <CardBody>{meeting.location}</CardBody>
+            <CardFooter>
+              <Button type="button">Add to Calendar</Button>
+            </CardFooter>
+          </Card>
+        </Grid>
+      ))}
+      <div className="display-flex flex-row flex-justify-center flex-align-center width-full">
+        <Button type="button" className="display-block" size="big" outline>
+          View all
+        </Button>
+      </div>
     </Grid>
   );
 }
