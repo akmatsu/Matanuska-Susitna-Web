@@ -75,7 +75,7 @@ export function Hero() {
                         key={crypto.randomUUID()}
                       >
                         <Link
-                          href="https://matsugov.us/animalcare"
+                          href={link.url}
                           className="usa-button shadow-2 width-full bg-white hover:bg-base-lightest text-base-darkest margin-bottom-2"
                         >
                           <div className="display-flex flex-column flex-align-center">
