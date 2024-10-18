@@ -1,6 +1,3 @@
-// THis is
-
-import cookieParser from 'cookie-parser';
 import expressSession from 'express-session';
 import { Router } from 'express';
 import { statelessSessions } from '@keystone-6/core/session';
@@ -53,7 +50,6 @@ export function passportMiddleware(
   const router = Router();
   const instance = new Passport();
 
-  router.use(cookieParser());
   router.use(
     expressSession({
       secret: process.env.SESSION_SECRET!,

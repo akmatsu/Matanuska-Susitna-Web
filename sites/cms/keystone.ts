@@ -24,6 +24,9 @@ export default config<TypeInfo<Session>>({
     },
   },
 
+  // https://keystonejs.com/docs/config/lists
+  lists,
+
   // https://keystonejs.com/docs/config/config#server
   server: {
     cors: {
@@ -38,9 +41,18 @@ export default config<TypeInfo<Session>>({
     port: appConfig.server.port,
   },
 
+  // https://keystonejs.com/docs/config/session
+  session,
+
+  // https://keystonejs.com/docs/guides/images-and-files
+  storage: appConfig.storage,
+
+  // https://keystonejs.com/docs/reference/telemetry#how-to-opt-out
+  telemetry: false,
+
   // https://keystonejs.com/docs/config/config#ui
   ui: {
-    async pageMiddleware({ wasAccessAllowed, context }) {
+    async pageMiddleware({ wasAccessAllowed }) {
       if (!wasAccessAllowed) {
         return {
           kind: 'redirect',
@@ -49,16 +61,4 @@ export default config<TypeInfo<Session>>({
       }
     },
   },
-
-  // https://keystonejs.com/docs/config/lists
-  lists,
-
-  // https://keystonejs.com/docs/config/session
-  session,
-
-  // https://keystonejs.com/docs/reference/telemetry#how-to-opt-out
-  telemetry: false,
-
-  // https://keystonejs.com/docs/guides/images-and-files
-  storage: {},
 });
