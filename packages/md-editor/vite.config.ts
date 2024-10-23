@@ -11,7 +11,7 @@ export default defineConfig({
       fileName: 'md-editor',
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', '@keystone-6/core'],
       output: {
         globals: {
           react: 'React',

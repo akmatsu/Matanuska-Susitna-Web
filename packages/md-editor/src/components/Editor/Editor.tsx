@@ -1,29 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { gfm } from '@milkdown/kit/preset/gfm';
 import { listenerCtx, listener } from '@milkdown/kit/plugin/listener';
 import { MdEditorProps } from './types';
-import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/react';
+import {
+  ProsemirrorAdapterProvider,
+  useNodeViewFactory,
+} from '@prosemirror-adapter/react';
 import { Crepe } from '@milkdown/crepe';
 import {
   iframeInputRule,
   iframeNode,
   remarkDirective,
 } from './features/iframe';
+import { IframeView } from './features/iframe/IFrame';
+import { $view } from '@milkdown/kit/utils';
+import { Milkdown, MilkdownProvider, useEditor } from '@milkdown/react';
+// import { slashMenuConfig } from '@milkdown/kit/component/slashmenu';
 
 export function Editor(props: MdEditorProps) {
-  const [instance, setInstance] = useState<Crepe>();
-  const rootEl = useRef<HTMLDivElement>();
+  const nodeViewFactory = useNodeViewFactory();
 
-  useEffect(() => {
-    if (instance) instance.destroy();
+  const { get } = useEditor((root) => {
     const crepe = new Crepe({
-      root: document.getElementById('custom-editor'),
+      root,
       defaultValue: props.initialValue,
+      featureConfigs: {
+        'block-edit': {},
+      },
     });
-
     crepe.create();
-
-    crepe.editor
+    return crepe.editor
       .config((ctx) => {
         ctx.get(listenerCtx).markdownUpdated((_, md) => {
           props.onChange?.(md);
@@ -31,18 +37,27 @@ export function Editor(props: MdEditorProps) {
       })
       .use(listener)
       .use(gfm)
-      .use([...remarkDirective, iframeNode, iframeInputRule]);
+      .use([...remarkDirective])
+      .use(iframeNode)
+      .use(iframeInputRule)
+      .use(
+        $view(iframeNode, () =>
+          nodeViewFactory({
+            component: IframeView,
+          }),
+        ),
+      );
+  });
 
-    setInstance(crepe);
-  }, [rootEl]);
-
-  return <div id="custom-editor" ref={rootEl}></div>;
+  return <Milkdown />;
 }
 
 export function MdEditor(props: MdEditorProps) {
   return (
-    <ProsemirrorAdapterProvider>
-      <Editor {...props} />
-    </ProsemirrorAdapterProvider>
+    <MilkdownProvider>
+      <ProsemirrorAdapterProvider>
+        <Editor {...props} />
+      </ProsemirrorAdapterProvider>
+    </MilkdownProvider>
   );
 }

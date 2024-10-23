@@ -2,44 +2,48 @@ import { $inputRule, $node, $remark } from '@milkdown/kit/utils';
 import { InputRule } from '@milkdown/kit/prose/inputrules';
 import directive from 'remark-directive';
 
-const remarkPluginId = 'iframe-plugin';
+const remarkPluginId = 'doc-collection-plugin';
 export const remarkDirective = $remark(remarkPluginId, () => directive);
 
 const AST = {
-  name: 'iframe',
+  name: 'doc-collection',
   attributes: { src: 'https://saul-mirone.github.io' },
   type: 'leafDirective',
 };
 
-export const iframeNode = $node('iframe', () => ({
+export const iframeNode = $node('doc-collection', () => ({
   group: 'block',
   atom: true,
   isolating: true,
   marks: '',
   attrs: {
-    src: { default: null },
+    id: { default: null },
   },
   parseDOM: [
     {
-      tag: 'iframe',
+      tag: 'div',
       getAttrs: (dom) => ({
-        src: (dom as HTMLElement).getAttribute('src'),
+        id: (dom as HTMLElement).getAttribute('id'),
       }),
     },
   ],
-  toDOM: (node) => ['iframe', { ...node.attrs, contenteditable: false }],
+  toDOM: (node) => [
+    'doc-collection',
+    { ...node.attrs, contenteditable: false },
+  ],
   parseMarkdown: {
-    match: (node) => node.type === 'leafDirective' && node.name === 'iframe',
+    match: (node) =>
+      node.type === 'leafDirective' && node.name === 'doc-collection',
     runner: (state, node, type) => {
-      state.addNode(type, { src: (node.attributes as { src: string }).src });
+      state.addNode(type, { id: (node.attributes as { id: string }).id });
     },
   },
   toMarkdown: {
-    match: (node) => node.type.name === 'iframe',
+    match: (node) => node.type.name === 'doc-collection',
     runner: (state, node) => {
       state.addNode('leafDirective', undefined, undefined, {
-        name: 'iframe',
-        attributes: { src: node.attrs.src },
+        name: 'doc-collection',
+        attributes: { id: node.attrs.id },
       });
     },
   },
@@ -48,12 +52,12 @@ export const iframeNode = $node('iframe', () => ({
 export const iframeInputRule = $inputRule(
   (ctx) =>
     new InputRule(
-      /::iframe\{src\="(?<src>[^"]+)?"?\}/,
+      /::doc-collection\{id\="(?<id>[^"]+)?"?\}/,
       (state, match, start, end) => {
-        const [okay, src = ''] = match;
+        const [okay, id = ''] = match;
         const { tr } = state;
         if (okay) {
-          tr.replaceWith(start - 1, end, iframeNode.type(ctx).create({ src }));
+          tr.replaceWith(start - 1, end, iframeNode.type(ctx).create({ id }));
         }
         return tr;
       },
