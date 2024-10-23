@@ -3,40 +3,58 @@ import { useNodeViewContext } from '@prosemirror-adapter/react';
 import { gql, useQuery } from '@keystone-6/core/admin-ui/apollo';
 
 export function IframeView() {
-  const { contentRef, node } = useNodeViewContext();
+  const { contentRef, node, selected, setAttrs } = useNodeViewContext();
+
+  const { data, refetch, loading } = useQuery(
+    gql`
+      query DocumentCollection($where: DocumentCollectionWhereUniqueInput!) {
+        documentCollection(where: $where) {
+          id
+          title
+          documents {
+            id
+            file {
+              filename
+              filesize
+              url
+            }
+          }
+        }
+      }
+    `,
+    {
+      variables: {
+        where: {
+          id: node.attrs.id || '',
+        },
+      },
+    },
+  );
+
   useEffect(() => {
-    console.log(node);
-  });
-  // const { data, refetch } = useQuery(
-  //   gql`
-  //     query DocumentCollections($where: DocumentCollectionWhereInput!) {
-  //       documentCollection(where: $where) {
-  //         documents {
-  //           title
-  //           id
-  //           file {
-  //             url
-  //             filename
-  //             filesize
-  //           }
-  //         }
-  //         id
-  //         title
-  //       }
-  //     }
-  //   `,
-  //   {
-  //     variables: {
-  //       where: {
-  //         id: node.attrs.id,
-  //       },
-  //     },
-  //   },
-  // );
+    refetch();
+  }, [node.attrs.id]);
 
   return (
-    <div ref={contentRef} id={node.attrs.id}>
-      Doc Collection! {node.attrs.id}
-    </div>
+    <>
+      {selected && (
+        <div>
+          <button
+            className="p-2 rounded-lg bg-slate-200 shadow-md"
+            onClick={() => setAttrs({ id: 'cm2m8yqsv000113vbdi4fq9k3' })}
+          >
+            Click me!
+          </button>
+        </div>
+      )}
+
+      {loading ? (
+        <div>loading...</div>
+      ) : data ? (
+        <data>{data.documentCollection?.title || 'No title'}</data>
+      ) : (
+        <div>Collection not found</div>
+      )}
+    </>
   );
 }
