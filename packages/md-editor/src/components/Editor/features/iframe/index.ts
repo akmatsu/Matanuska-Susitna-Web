@@ -63,3 +63,5 @@ export const iframeInputRule = $inputRule(
       },
     ),
 );
+
+export * from './IFrame';
