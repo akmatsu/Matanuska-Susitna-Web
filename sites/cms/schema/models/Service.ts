@@ -25,6 +25,7 @@ export const Service: ListConfig<any> = list({
           'The body is the main body of the page. You can use this for writing more information about the service.',
       },
     }),
+
     ...group({
       label: 'Primary Action',
       description:
@@ -75,17 +76,16 @@ export const Service: ListConfig<any> = list({
           'A process is step based instructions on how to apply for or receive a service. These will be displayed in the main body of the page.',
       },
     }),
+
     tags: relationship({
       ref: 'Tag.services',
       many: true,
       ui: {
-        displayMode: 'cards',
-        cardFields: ['name'],
+        displayMode: 'select',
+        searchFields: ['name'],
         itemView: {
           fieldPosition: 'sidebar',
         },
-        inlineCreate: { fields: ['name'] },
-        inlineEdit: { fields: ['name'] },
       },
     }),
 
@@ -95,6 +95,7 @@ export const Service: ListConfig<any> = list({
         description: 'This contact will be displayed prominently on the page.',
       },
     }),
+
     contacts: relationship({
       ref: 'Contact.services',
       many: true,

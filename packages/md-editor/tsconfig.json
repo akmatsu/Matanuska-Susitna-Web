@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true, // Generate .d.ts files for types
+    "declarationDir": "./dist/types", // Store .d.ts in the dist folder
+    "outDir": "./dist", // Output compiled code to dist folder
+    "sourceMap": true // Generate source maps
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

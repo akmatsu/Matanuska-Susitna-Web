@@ -1,0 +1,45 @@
+{
+  "name": "@msb/md-editor",
+  "version": "1.0.0",
+  "description": "Custom rich markdown editor",
+  "type": "module",
+  "main": "./dist/md-editor.umd.cjs",
+  "module": "./dist/md-editor.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/md-editor.js",
+      "require": "./dist/md-editor.umd.cjs"
+    },
+    "./styles.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.9",
+    "vite-plugin-dts": "^4.2.4"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "dependencies": {
+    "@milkdown/crepe": "^7.5.7",
+    "@milkdown/kit": "^7.5.5",
+    "@milkdown/react": "^7.5.0",
+    "@milkdown/theme-nord": "^7.5.0",
+    "@prosemirror-adapter/react": "^0.2.6",
+    "remark-directive": "^3.0.0"
+  }
+}

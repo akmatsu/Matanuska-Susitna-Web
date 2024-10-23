@@ -800,6 +800,8 @@ type Document {
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int
   file: FileFieldOutput
+  collections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
+  collectionsCount(where: DocumentCollectionWhereInput! = {}): Int
 }
 
 type FileFieldOutput {
@@ -820,6 +822,13 @@ input DocumentWhereInput {
   title: StringFilter
   description: StringFilter
   tags: TagManyRelationFilter
+  collections: DocumentCollectionManyRelationFilter
+}
+
+input DocumentCollectionManyRelationFilter {
+  every: DocumentCollectionWhereInput
+  some: DocumentCollectionWhereInput
+  none: DocumentCollectionWhereInput
 }
 
 input DocumentOrderByInput {
@@ -833,6 +842,7 @@ input DocumentUpdateInput {
   description: String
   tags: TagRelateToManyForUpdateInput
   file: FileFieldInput
+  collections: DocumentCollectionRelateToManyForUpdateInput
 }
 
 input FileFieldInput {
@@ -841,6 +851,13 @@ input FileFieldInput {
 
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
+
+input DocumentCollectionRelateToManyForUpdateInput {
+  disconnect: [DocumentCollectionWhereUniqueInput!]
+  set: [DocumentCollectionWhereUniqueInput!]
+  create: [DocumentCollectionCreateInput!]
+  connect: [DocumentCollectionWhereUniqueInput!]
+}
 
 input DocumentUpdateArgs {
   where: DocumentWhereUniqueInput!
@@ -852,6 +869,52 @@ input DocumentCreateInput {
   description: String
   tags: TagRelateToManyForCreateInput
   file: FileFieldInput
+  collections: DocumentCollectionRelateToManyForCreateInput
+}
+
+input DocumentCollectionRelateToManyForCreateInput {
+  create: [DocumentCollectionCreateInput!]
+  connect: [DocumentCollectionWhereUniqueInput!]
+}
+
+type DocumentCollection {
+  id: ID!
+  title: String
+  documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
+  documentsCount(where: DocumentWhereInput! = {}): Int
+}
+
+input DocumentCollectionWhereUniqueInput {
+  id: ID
+}
+
+input DocumentCollectionWhereInput {
+  AND: [DocumentCollectionWhereInput!]
+  OR: [DocumentCollectionWhereInput!]
+  NOT: [DocumentCollectionWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  documents: DocumentManyRelationFilter
+}
+
+input DocumentCollectionOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+}
+
+input DocumentCollectionUpdateInput {
+  title: String
+  documents: DocumentRelateToManyForUpdateInput
+}
+
+input DocumentCollectionUpdateArgs {
+  where: DocumentCollectionWhereUniqueInput!
+  data: DocumentCollectionUpdateInput!
+}
+
+input DocumentCollectionCreateInput {
+  title: String
+  documents: DocumentRelateToManyForCreateInput
 }
 
 """
@@ -920,6 +983,12 @@ type Mutation {
   updateDocuments(data: [DocumentUpdateArgs!]!): [Document]
   deleteDocument(where: DocumentWhereUniqueInput!): Document
   deleteDocuments(where: [DocumentWhereUniqueInput!]!): [Document]
+  createDocumentCollection(data: DocumentCollectionCreateInput!): DocumentCollection
+  createDocumentCollections(data: [DocumentCollectionCreateInput!]!): [DocumentCollection]
+  updateDocumentCollection(where: DocumentCollectionWhereUniqueInput!, data: DocumentCollectionUpdateInput!): DocumentCollection
+  updateDocumentCollections(data: [DocumentCollectionUpdateArgs!]!): [DocumentCollection]
+  deleteDocumentCollection(where: DocumentCollectionWhereUniqueInput!): DocumentCollection
+  deleteDocumentCollections(where: [DocumentCollectionWhereUniqueInput!]!): [DocumentCollection]
   endSession: Boolean!
 }
 
@@ -954,6 +1023,9 @@ type Query {
   document(where: DocumentWhereUniqueInput!): Document
   documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
   documentsCount(where: DocumentWhereInput! = {}): Int
+  documentCollection(where: DocumentCollectionWhereUniqueInput!): DocumentCollection
+  documentCollections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
+  documentCollectionsCount(where: DocumentCollectionWhereInput! = {}): Int
   keystone: KeystoneMeta!
 }
 

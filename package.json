@@ -6,6 +6,7 @@
   "scripts": {
     "msb:dev": "turbo run dev --filter=msb",
     "msb:build": "turbo run build --filter=msb",
+    "mde:build": "turbo run build --filter=@msb/md-editor",
     "cms:dev": "turbo run dev --filter=cms",
     "cms:build": "turbo run build --filter=cms",
     "cms:start": "turbo run start --filter=cms",

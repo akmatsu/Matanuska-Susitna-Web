@@ -9,6 +9,7 @@ import { Step } from './Step';
 import { Contact } from './Contact';
 import { Highlight } from './Highlight';
 import { Document } from './Document';
+import { DocumentCollection } from './DocumentCollection';
 
 export const lists = {
   User,
@@ -21,4 +22,5 @@ export const lists = {
   Contact,
   Highlight,
   Document,
+  DocumentCollection,
 } satisfies Lists;
