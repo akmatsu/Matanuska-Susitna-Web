@@ -40,7 +40,7 @@ export function IframeView() {
       {selected && (
         <div>
           <button
-            className="p-2 rounded-lg bg-slate-200 shadow-md"
+            className="btn btn--default"
             onClick={() => setAttrs({ id: 'cm2m8yqsv000113vbdi4fq9k3' })}
           >
             Click me!

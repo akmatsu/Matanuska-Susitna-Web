@@ -54,6 +54,8 @@ import {
   BlockView,
   slash,
   SlashView,
+  toolbar,
+  ToolbarView,
 } from './features';
 import { MdEditorProps } from './types';
 import { IframeView } from './features/iframe/IFrame';
@@ -75,6 +77,11 @@ export function Editor(props: MdEditorProps) {
         ctx.set(slash.key, {
           view: pluginViewFactory({
             component: SlashView,
+          }),
+        });
+        ctx.set(toolbar.key, {
+          view: pluginViewFactory({
+            component: ToolbarView,
           }),
         });
         ctx.get(listenerCtx).markdownUpdated((_, md) => {
@@ -104,6 +111,8 @@ export function Editor(props: MdEditorProps) {
       .use(indent)
       .use(clipboard)
       .use(slash)
+      .use(toolbar)
+
       .use(
         $view(iframeNode, () =>
           nodeViewFactory({
