@@ -29,7 +29,7 @@ export function BlockView() {
   return (
     <div
       ref={ref}
-      className="absolute w-6 bg-slate-200 rounded hover:bg-slate-300 cursor-grab"
+      className="absolute w-6 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-grab transition-all"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

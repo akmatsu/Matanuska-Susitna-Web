@@ -12,6 +12,7 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ['react', 'react-dom', '@keystone-6/core'],
+      treeshake: 'smallest',
       output: {
         globals: {
           react: 'React',
@@ -20,5 +21,11 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react(), dts()],
+  plugins: [
+    react(),
+    dts({
+      exclude: ['./node_modules', './dist', '**/*.stories.*'],
+      include: ['./src'],
+    }),
+  ],
 });

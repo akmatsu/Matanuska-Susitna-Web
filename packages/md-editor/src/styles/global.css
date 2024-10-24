@@ -2,23 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-.milkdown {
-  --crepe-font-default: inherit;
-  --crepe-font-title: inherit;
-  /* --crepe-color-background: #fafbfc; */
+@layer base {
+  .milkdown {
+    --crepe-font-default: inherit;
+    --crepe-font-title: inherit;
+  }
+
+  .milkdown .ProseMirror {
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    padding: 0 !important;
+  }
+
+  .milkdown button {
+    background-color: unset;
+    background: unset;
+  }
+
+  .milkdown milkdown-slash-menu {
+    z-index: 1;
+  }
 }
 
-.milkdown .ProseMirror {
-  /* padding: 12px; */
-  border: 1px solid #e1e5e9;
-  border-radius: 8px;
-}
+@layer components {
+  button,
+  .btn,
+  button.btn,
+  milkdown button,
+  milkdown button.btn {
+    @apply px-2 py-1 rounded transition-colors;
+  }
 
-.milkdown button {
-  background-color: unset;
-  background: unset;
-}
+  .btn--default,
+  button.btn--default,
+  button.btn.btn--default,
+  .milkdown button.btn--default,
+  milkdown button.btn.btn--default {
+    @apply bg-slate-200 hover:bg-slate-300;
+  }
 
-.milkdown milkdown-slash-menu {
-  z-index: 1;
+  button.btn.btn--focused,
+  .milkdown button.btn.btn--focused {
+    @apply bg-blue-200 hover:bg-blue-300;
+  }
+
+  .menu,
+  milkdown .menu,
+  milkdown div.menu {
+    @apply bg-white shadow-lg rounded flex flex-col min-w-52;
+    padding: 0.5rem !important;
+    gap: 0.5rem;
+  }
 }

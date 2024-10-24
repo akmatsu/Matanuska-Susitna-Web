@@ -43,6 +43,7 @@ import { listenerCtx, listener } from '@milkdown/kit/plugin/listener';
 import { clipboard } from '@milkdown/kit/plugin/clipboard';
 
 // Milkdown Styles
+// import '@milkdown/theme-nord/style.css';
 import '@milkdown/theme-nord/style.css';
 
 // Internal imports
