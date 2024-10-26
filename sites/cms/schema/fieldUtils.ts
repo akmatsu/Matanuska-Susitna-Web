@@ -31,6 +31,9 @@ export const publishable: BaseFields<any> = {
       'These fields are used for managing the public visibility of this page.',
     fields: {
       publishAt: timestamp({
+        db: {
+          isNullable: true,
+        },
         ui: {
           itemView: {
             fieldPosition: 'sidebar',
@@ -48,10 +51,14 @@ export const publishable: BaseFields<any> = {
           description:
             'When the page should be hidden from website. If blank, page will never be hidden.',
         },
+        db: {
+          isNullable: true,
+        },
         hooks: {
           validate: ({ resolvedData, item, addValidationError }) => {
-            const publishAt = resolvedData['publishAt'] || item['publishAt'];
-            const unpublishAt = resolvedData['unpublishAt'];
+            const publishAt =
+              resolvedData?.['publishAt'] || item?.['publishAt'];
+            const unpublishAt = resolvedData?.['unpublishAt'];
 
             if (!publishAt && unpublishAt) {
               addValidationError(

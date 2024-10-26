@@ -16,18 +16,29 @@ export interface GetServicesVariables {
   take: number;
   skip: number;
   where: {
-    OR: [
+    AND: [
+      { publishAt: { lte: string } },
       {
-        description?: {
-          contains?: string | null;
-          mode?: 'insensitive' | 'default' | null;
-        };
+        OR: [
+          { unpublishAt: { gt: string } },
+          { unpublishAt: { equals: null } },
+        ];
       },
       {
-        title?: {
-          contains?: string | null;
-          mode?: 'insensitive' | 'default' | null;
-        };
+        OR: [
+          {
+            description?: {
+              contains?: string | null;
+              mode?: 'insensitive' | 'default' | null;
+            };
+          },
+          {
+            title?: {
+              contains?: string | null;
+              mode?: 'insensitive' | 'default' | null;
+            };
+          },
+        ];
       },
     ];
   };

@@ -4,7 +4,6 @@ import { TooltipProvider } from '@milkdown/kit/plugin/tooltip';
 import {
   toggleStrongCommand,
   toggleEmphasisCommand,
-  toggleLinkCommand,
   linkSchema,
 } from '@milkdown/kit/preset/commonmark';
 import { useInstance } from '@milkdown/react';
@@ -14,7 +13,7 @@ import { callCommand } from '@milkdown/kit/utils';
 import { toggleStrikethroughCommand } from '@milkdown/kit/preset/gfm';
 import { linkTooltipAPI } from '@milkdown/kit/component/link-tooltip';
 import { MarkType } from '@milkdown/kit/prose/model';
-import { editorViewCtx } from '@milkdown/kit/core';
+import { TextSelection } from '@milkdown/kit/prose/state';
 
 export const ToolbarView = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -37,6 +36,35 @@ export const ToolbarView = () => {
     }
     tooltipProvider.current = new TooltipProvider({
       content: div,
+      shouldShow(view) {
+        const { doc, selection } = view.state;
+        const { empty, from, to } = selection;
+
+        const isEmptyTextBlock =
+          !doc.textBetween(from, to).length &&
+          selection instanceof TextSelection;
+
+        const isNotTextBlock = !(selection instanceof TextSelection);
+
+        const activeElement = (view.dom.getRootNode() as ShadowRoot | Document)
+          .activeElement;
+        const isTooltipChildren = div.contains(activeElement);
+
+        const notHasFocus = !view.hasFocus() && !isTooltipChildren;
+
+        const isReadonly = !view.editable;
+
+        if (
+          notHasFocus ||
+          isNotTextBlock ||
+          empty ||
+          isEmptyTextBlock ||
+          isReadonly
+        )
+          return false;
+
+        return true;
+      },
     });
 
     return () => {

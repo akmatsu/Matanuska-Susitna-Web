@@ -52,16 +52,23 @@ export const Highlight: ListConfig<any> = list({
             isNullable: true,
           },
           hooks: {
-            validate: ({ addValidationError, item, resolvedData }) => {
-              const internalLink =
-                resolvedData['internalLink'] || item['internalLink'];
-              const externalLink =
-                resolvedData['externalLink'] || item['externalLink'];
+            validate: ({
+              addValidationError,
+              item,
+              resolvedData,
+              operation,
+            }) => {
+              if (operation === 'create' || operation === 'update') {
+                const internalLink =
+                  resolvedData?.['internalLink'] || item?.['internalLink'];
+                const externalLink =
+                  resolvedData?.['externalLink'] || item?.['externalLink'];
 
-              if (internalLink && externalLink) {
-                addValidationError(
-                  'A highlight can only have one link but there is both an external and internal link. Remove one.',
-                );
+                if (internalLink && externalLink) {
+                  addValidationError(
+                    'A highlight can only have one link but there is both an external and internal link. Remove one.',
+                  );
+                }
               }
             },
           },

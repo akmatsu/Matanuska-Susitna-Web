@@ -5,13 +5,7 @@ import directive from 'remark-directive';
 const remarkPluginId = 'doc-collection-plugin';
 export const remarkDirective = $remark(remarkPluginId, () => directive);
 
-const AST = {
-  name: 'doc-collection',
-  attributes: { src: 'https://saul-mirone.github.io' },
-  type: 'leafDirective',
-};
-
-export const iframeNode = $node('doc-collection', () => ({
+export const DocCollectionNode = $node('doc-collection', () => ({
   group: 'block',
   atom: true,
   isolating: true,
@@ -49,7 +43,7 @@ export const iframeNode = $node('doc-collection', () => ({
   },
 }));
 
-export const iframeInputRule = $inputRule(
+export const DocCollectionInputRule = $inputRule(
   (ctx) =>
     new InputRule(
       /::doc-collection\{id\="(?<id>[^"]+)?"?\}/,
@@ -57,11 +51,15 @@ export const iframeInputRule = $inputRule(
         const [okay, id = ''] = match;
         const { tr } = state;
         if (okay) {
-          tr.replaceWith(start - 1, end, iframeNode.type(ctx).create({ id }));
+          tr.replaceWith(
+            start - 1,
+            end,
+            DocCollectionNode.type(ctx).create({ id }),
+          );
         }
         return tr;
       },
     ),
 );
 
-export * from './IFrame';
+export * from './DocCollectionView';

@@ -28,10 +28,6 @@ import {
   linkTooltipPlugin,
   configureLinkTooltip,
 } from '@milkdown/kit/component/link-tooltip';
-import {
-  codeBlockComponent,
-  codeBlockConfig,
-} from '@milkdown/kit/component/code-block';
 
 // Milkdown Plugins
 import { history } from '@milkdown/kit/plugin/history';
@@ -43,13 +39,13 @@ import { listenerCtx, listener } from '@milkdown/kit/plugin/listener';
 import { clipboard } from '@milkdown/kit/plugin/clipboard';
 
 // Milkdown Styles
-// import '@milkdown/theme-nord/style.css';
 import '@milkdown/theme-nord/style.css';
 
 // Internal imports
 import {
-  iframeInputRule,
-  iframeNode,
+  DocCollectionNode,
+  DocCollectionInputRule,
+  DocCollectionView,
   remarkDirective,
   BlockView,
   slash,
@@ -58,7 +54,10 @@ import {
   ToolbarView,
 } from './features';
 import { MdEditorProps } from './types';
-import { IframeView } from './features/iframe/IFrame';
+import {
+  DocCollectionSearchView,
+  docSearch,
+} from './features/DocCollection/DocuCollectonSearchView';
 
 export function Editor(props: MdEditorProps) {
   const nodeViewFactory = useNodeViewFactory();
@@ -84,12 +83,14 @@ export function Editor(props: MdEditorProps) {
             component: ToolbarView,
           }),
         });
+        ctx.set(docSearch.key, {
+          view: pluginViewFactory({
+            component: DocCollectionSearchView,
+          }),
+        });
         ctx.get(listenerCtx).markdownUpdated((_, md) => {
           props.onChange?.(md);
         });
-        ctx.update(codeBlockConfig.key, (defaultConfig) => ({
-          ...defaultConfig,
-        }));
       })
       .config(nord)
       .config(configureLinkTooltip)
@@ -98,9 +99,8 @@ export function Editor(props: MdEditorProps) {
       .use(history)
       .use(listener)
       .use([...remarkDirective])
-      .use(iframeNode)
-      .use(iframeInputRule)
-      .use(codeBlockComponent)
+      .use(DocCollectionNode)
+      .use(DocCollectionInputRule)
       .use(imageBlockComponent)
       .use(linkTooltipPlugin)
       .use(listItemBlockComponent)
@@ -112,11 +112,11 @@ export function Editor(props: MdEditorProps) {
       .use(clipboard)
       .use(slash)
       .use(toolbar)
-
+      .use(docSearch)
       .use(
-        $view(iframeNode, () =>
+        $view(DocCollectionNode, () =>
           nodeViewFactory({
-            component: IframeView,
+            component: DocCollectionView,
           }),
         ),
       );

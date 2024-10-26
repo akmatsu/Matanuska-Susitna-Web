@@ -48,11 +48,13 @@
     "react-dom": "^18.3.1"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
     "@milkdown/crepe": "^7.5.7",
     "@milkdown/kit": "^7.5.5",
     "@milkdown/react": "^7.5.0",
     "@milkdown/theme-nord": "^7.5.0",
     "@prosemirror-adapter/react": "^0.2.6",
+    "clsx": "^2.1.1",
     "remark-directive": "^3.0.0"
   }
 }
