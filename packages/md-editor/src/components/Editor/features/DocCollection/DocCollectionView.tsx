@@ -41,11 +41,8 @@ export function DocCollectionView() {
       {loading ? (
         <div>loading...</div>
       ) : data ? (
-        <div
-          ref={contentRef}
-          className=" border drop-shadow-md rounded overflow-hidden my-2"
-        >
-          <div className="flex p-2 bg-slate-300 border-bottom justify-between">
+        <div ref={contentRef} className="border shadow-sm overflow-hidden my-4">
+          <div className="flex p-2 bg-zinc-100 border-b justify-between">
             <span className="text-2xl">{data.documentCollection.title}</span>{' '}
             <a href={`/document-collections/${data.documentCollection.id}`}>
               Manage collection
@@ -54,7 +51,7 @@ export function DocCollectionView() {
           <ul>
             {data.documentCollection.documents.map((doc, index) => (
               <li
-                className={`p-2 ${index % 2 === 0 ? 'bg-slate-100' : 'bg-white'}`}
+                className={`p-2 ${index % 2 === 0 ? 'bg-white' : 'bg-zinc-50'}`}
                 key={doc.id}
               >
                 <span>{doc.title}</span>

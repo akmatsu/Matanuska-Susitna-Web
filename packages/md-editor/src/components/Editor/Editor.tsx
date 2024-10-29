@@ -14,7 +14,6 @@ import {
 
 // Milkdown Presets
 import { gfm } from '@milkdown/kit/preset/gfm';
-import { nord } from '@milkdown/theme-nord';
 import { commonmark } from '@milkdown/kit/preset/commonmark';
 
 // Milkdown Utils
@@ -22,7 +21,10 @@ import { $view } from '@milkdown/kit/utils';
 
 // Milkdown components
 import { imageBlockComponent } from '@milkdown/kit/component/image-block';
-import { tableBlock } from '@milkdown/kit/component/table-block';
+import {
+  tableBlock,
+  tableBlockConfig,
+} from '@milkdown/kit/component/table-block';
 import { listItemBlockComponent } from '@milkdown/kit/component/list-item-block';
 import {
   linkTooltipPlugin,
@@ -39,7 +41,9 @@ import { listenerCtx, listener } from '@milkdown/kit/plugin/listener';
 import { clipboard } from '@milkdown/kit/plugin/clipboard';
 
 // Milkdown Styles
-import '@milkdown/theme-nord/style.css';
+import '@milkdown/kit/prose/view/style/prosemirror.css';
+import '@milkdown/prose/tables/style/tables.css';
+// import '@milkdown/theme-nord/style.css';
 
 // Internal imports
 import {
@@ -58,6 +62,13 @@ import {
   DocCollectionSearchView,
   docSearch,
 } from './features/DocCollection/DocuCollectonSearchView';
+import {
+  processSchema,
+  wrapInProcessInputRule,
+} from './features/step/ProcessNode';
+import { stepSchema, StepView } from './features/step';
+import { ProcessView } from './features/step/ProcessView';
+// import { StepNode, StepNodeInputRule, StepView } from './features/step';
 
 export function Editor(props: MdEditorProps) {
   const nodeViewFactory = useNodeViewFactory();
@@ -66,6 +77,9 @@ export function Editor(props: MdEditorProps) {
   const { get } = useEditor((root) => {
     return MilkEditor.make()
       .config((ctx) => {
+        ctx.update(tableBlockConfig.key, (defaultConfig) => ({
+          ...defaultConfig,
+        }));
         ctx.set(rootCtx, root);
         ctx.set(defaultValueCtx, props.initialValue);
         ctx.set(block.key, {
@@ -83,16 +97,16 @@ export function Editor(props: MdEditorProps) {
             component: ToolbarView,
           }),
         });
-        ctx.set(docSearch.key, {
-          view: pluginViewFactory({
-            component: DocCollectionSearchView,
-          }),
-        });
+        // ctx.set(docSearch.key, {
+        //   view: pluginViewFactory({
+        //     component: DocCollectionSearchView,
+        //   }),
+        // });
         ctx.get(listenerCtx).markdownUpdated((_, md) => {
           props.onChange?.(md);
         });
       })
-      .config(nord)
+
       .config(configureLinkTooltip)
       .use(commonmark)
       .use(gfm)
@@ -112,11 +126,20 @@ export function Editor(props: MdEditorProps) {
       .use(clipboard)
       .use(slash)
       .use(toolbar)
-      .use(docSearch)
+      .use(processSchema)
+      .use(wrapInProcessInputRule)
       .use(
-        $view(DocCollectionNode, () =>
+        $view(processSchema.node, () =>
           nodeViewFactory({
-            component: DocCollectionView,
+            component: ProcessView,
+          }),
+        ),
+      )
+      .use(stepSchema)
+      .use(
+        $view(stepSchema.node, () =>
+          nodeViewFactory({
+            component: StepView,
           }),
         ),
       );
