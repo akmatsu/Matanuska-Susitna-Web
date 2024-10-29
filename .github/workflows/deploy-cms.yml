@@ -106,6 +106,9 @@ jobs:
             # Install repo dependencies
             npm ci --workspace=cms --include-workspace-root
 
+            # Build UI Library
+            npm run mde:build
+
             # Build the application for production
             npm run cms:build
 
