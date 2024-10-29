@@ -1,27 +1,14 @@
 import { wrappingInputRule } from '@milkdown/kit/prose/inputrules';
-import { $command, $inputRule, $nodeSchema } from '@milkdown/kit/utils';
+import { $command, $inputRule, $node } from '@milkdown/kit/utils';
 import { wrapIn } from '@milkdown/kit/prose/commands';
 
-export const processSchema = $nodeSchema('process', (ctx) => ({
+export const processSchema = $node('process', (ctx) => ({
   content: 'step+', // Process will contain multiple Step nodes
   group: 'block', // Group this as a block node
-  attrs: {
-    order: {
-      default: 1,
-    },
-  },
+  attrs: {},
   parseDOM: [
     {
       tag: 'ol.process',
-      getAttrs: (dom) => {
-        if (!(dom instanceof HTMLElement)) throw new Error('DOM type error');
-        return {
-          order: dom.hasAttribute('start')
-            ? Number(dom.getAttribute('start'))
-            : 1,
-          // spread: dom.dataset.spread === 'true', // Convert spread attribute to boolean
-        };
-      },
     },
   ],
 
@@ -37,20 +24,17 @@ export const processSchema = $nodeSchema('process', (ctx) => ({
   ],
 
   parseMarkdown: {
-    match: ({ type }) => type === 'process',
+    match: ({ type, name }) => type === 'list' && name === 'process',
     runner: (state, node, type) => {
-      const spread = node.spread != null ? `${node.spread}` : 'true';
-      state.openNode(type, { spread }).next(node.children).closeNode();
+      state.openNode(type).next(node.children).closeNode();
     },
   },
 
   toMarkdown: {
     match: (node) => node.type.name === 'process',
     runner: (state, node) => {
-      state.openNode('process', undefined, {
-        ordered: true,
-        start: node.attrs.order,
-        spread: node.attrs.spread === 'true',
+      state.openNode('list', undefined, {
+        name: 'process',
       });
       state.next(node.content);
       state.closeNode();
@@ -60,12 +44,7 @@ export const processSchema = $nodeSchema('process', (ctx) => ({
 
 // Input rule to wrap a block into a process node
 export const wrapInProcessInputRule = $inputRule((ctx) =>
-  wrappingInputRule(
-    /^\s*(step)\.\s$/,
-    processSchema.type(ctx),
-
-    // (match, node) => node.childCount + node.attrs.order === Number(match[1]),
-  ),
+  wrappingInputRule(/^\s*(step)\.\s$/, processSchema.type(ctx)),
 );
 
 export const wrapInProcessCommand = $command(

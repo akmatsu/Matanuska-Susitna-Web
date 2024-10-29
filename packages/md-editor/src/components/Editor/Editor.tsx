@@ -43,7 +43,6 @@ import { clipboard } from '@milkdown/kit/plugin/clipboard';
 // Milkdown Styles
 import '@milkdown/kit/prose/view/style/prosemirror.css';
 import '@milkdown/prose/tables/style/tables.css';
-// import '@milkdown/theme-nord/style.css';
 
 // Internal imports
 import {
@@ -62,89 +61,78 @@ import {
   DocCollectionSearchView,
   docSearch,
 } from './features/DocCollection/DocuCollectonSearchView';
+
 import {
+  stepSchema,
   processSchema,
   wrapInProcessInputRule,
-} from './features/step/ProcessNode';
-import { stepSchema, StepView } from './features/step';
-import { ProcessView } from './features/step/ProcessView';
-// import { StepNode, StepNodeInputRule, StepView } from './features/step';
+} from './features/step';
 
 export function Editor(props: MdEditorProps) {
   const nodeViewFactory = useNodeViewFactory();
   const pluginViewFactory = usePluginViewFactory();
 
   const { get } = useEditor((root) => {
-    return (
-      MilkEditor.make()
-        .config((ctx) => {
-          ctx.update(tableBlockConfig.key, (defaultConfig) => ({
-            ...defaultConfig,
-          }));
-          ctx.set(rootCtx, root);
-          ctx.set(defaultValueCtx, props.initialValue);
-          ctx.set(block.key, {
-            view: pluginViewFactory({
-              component: BlockView,
-            }),
-          });
-          ctx.set(slash.key, {
-            view: pluginViewFactory({
-              component: SlashView,
-            }),
-          });
-          ctx.set(toolbar.key, {
-            view: pluginViewFactory({
-              component: ToolbarView,
-            }),
-          });
-          // ctx.set(docSearch.key, {
-          //   view: pluginViewFactory({
-          //     component: DocCollectionSearchView,
-          //   }),
-          // });
-          ctx.get(listenerCtx).markdownUpdated((_, md) => {
-            props.onChange?.(md);
-          });
-        })
+    return MilkEditor.make()
+      .config((ctx) => {
+        ctx.update(tableBlockConfig.key, (defaultConfig) => ({
+          ...defaultConfig,
+        }));
+        ctx.set(rootCtx, root);
+        ctx.set(defaultValueCtx, props.initialValue);
+        ctx.set(block.key, {
+          view: pluginViewFactory({
+            component: BlockView,
+          }),
+        });
+        ctx.set(slash.key, {
+          view: pluginViewFactory({
+            component: SlashView,
+          }),
+        });
+        ctx.set(toolbar.key, {
+          view: pluginViewFactory({
+            component: ToolbarView,
+          }),
+        });
+        ctx.set(docSearch.key, {
+          view: pluginViewFactory({
+            component: DocCollectionSearchView,
+          }),
+        });
+        ctx.get(listenerCtx).markdownUpdated((_, md) => {
+          props.onChange?.(md);
+        });
+      })
 
-        .config(configureLinkTooltip)
-        .use(commonmark)
-        .use(gfm)
-        .use(history)
-        .use(listener)
-        .use([...remarkDirective])
-        .use(DocCollectionNode)
-        .use(DocCollectionInputRule)
-        .use(imageBlockComponent)
-        .use(linkTooltipPlugin)
-        .use(listItemBlockComponent)
-        .use(tableBlock)
-        .use(trailing)
-        .use(cursor)
-        .use(block)
-        .use(indent)
-        .use(clipboard)
-        .use(slash)
-        .use(toolbar)
-        .use(processSchema)
-        .use(wrapInProcessInputRule)
-        // .use(
-        //   $view(processSchema.node, () =>
-        //     nodeViewFactory({
-        //       component: ProcessView,
-        //     }),
-        //   ),
-        // )
-        .use(stepSchema)
-      // .use(
-      //   $view(stepSchema.node, () =>
-      //     nodeViewFactory({
-      //       component: StepView,
-      //     }),
-      //   ),
-      // )
-    );
+      .config(configureLinkTooltip)
+      .use(commonmark)
+      .use(gfm)
+      .use(history)
+      .use(listener)
+      .use([...remarkDirective])
+      .use(DocCollectionNode)
+      .use(DocCollectionInputRule)
+      .use(docSearch)
+      .use(
+        $view(DocCollectionNode, () =>
+          nodeViewFactory({ component: DocCollectionView }),
+        ),
+      )
+      .use(imageBlockComponent)
+      .use(linkTooltipPlugin)
+      .use(listItemBlockComponent)
+      .use(tableBlock)
+      .use(trailing)
+      .use(cursor)
+      .use(block)
+      .use(indent)
+      .use(clipboard)
+      .use(slash)
+      .use(toolbar)
+      .use(stepSchema)
+      .use(processSchema)
+      .use(wrapInProcessInputRule);
   });
 
   return <Milkdown />;

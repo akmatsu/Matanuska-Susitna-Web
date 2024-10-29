@@ -1,6 +1,6 @@
-import { $nodeSchema } from '@milkdown/kit/utils';
+import { $node } from '@milkdown/kit/utils';
 
-export const stepSchema = $nodeSchema('step', (ctx) => ({
+export const stepSchema = $node('step', (ctx) => ({
   content: 'block+',
   group: 'step',
   defining: true,
@@ -15,7 +15,7 @@ export const stepSchema = $nodeSchema('step', (ctx) => ({
   ],
   toDOM: (node) => ['li', { class: 'step' }, 0], // Render as <li> with "step" class
   parseMarkdown: {
-    match: ({ type }) => type === 'step',
+    match: ({ type, name }) => type === 'listItem' && name === 'step',
     runner: (state, node, type) => {
       state.openNode(type).next(node.children).closeNode();
     },
@@ -23,7 +23,7 @@ export const stepSchema = $nodeSchema('step', (ctx) => ({
   toMarkdown: {
     match: (node) => node.type.name === 'step',
     runner: (state, node) => {
-      state.openNode('step');
+      state.openNode('listItem', undefined, { name: 'step' });
       state.next(node.content);
       state.closeNode();
     },
