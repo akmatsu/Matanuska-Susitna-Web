@@ -13,7 +13,7 @@ export const stepSchema = $nodeSchema('step', (ctx) => ({
       },
     },
   ],
-  // toDOM: (node) => ['li', { class: 'step' }, 0], // Render as <li> with "step" class
+  toDOM: (node) => ['li', { class: 'step' }, 0], // Render as <li> with "step" class
   parseMarkdown: {
     match: ({ type }) => type === 'step',
     runner: (state, node, type) => {

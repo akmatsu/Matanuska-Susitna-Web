@@ -75,74 +75,76 @@ export function Editor(props: MdEditorProps) {
   const pluginViewFactory = usePluginViewFactory();
 
   const { get } = useEditor((root) => {
-    return MilkEditor.make()
-      .config((ctx) => {
-        ctx.update(tableBlockConfig.key, (defaultConfig) => ({
-          ...defaultConfig,
-        }));
-        ctx.set(rootCtx, root);
-        ctx.set(defaultValueCtx, props.initialValue);
-        ctx.set(block.key, {
-          view: pluginViewFactory({
-            component: BlockView,
-          }),
-        });
-        ctx.set(slash.key, {
-          view: pluginViewFactory({
-            component: SlashView,
-          }),
-        });
-        ctx.set(toolbar.key, {
-          view: pluginViewFactory({
-            component: ToolbarView,
-          }),
-        });
-        // ctx.set(docSearch.key, {
-        //   view: pluginViewFactory({
-        //     component: DocCollectionSearchView,
-        //   }),
-        // });
-        ctx.get(listenerCtx).markdownUpdated((_, md) => {
-          props.onChange?.(md);
-        });
-      })
+    return (
+      MilkEditor.make()
+        .config((ctx) => {
+          ctx.update(tableBlockConfig.key, (defaultConfig) => ({
+            ...defaultConfig,
+          }));
+          ctx.set(rootCtx, root);
+          ctx.set(defaultValueCtx, props.initialValue);
+          ctx.set(block.key, {
+            view: pluginViewFactory({
+              component: BlockView,
+            }),
+          });
+          ctx.set(slash.key, {
+            view: pluginViewFactory({
+              component: SlashView,
+            }),
+          });
+          ctx.set(toolbar.key, {
+            view: pluginViewFactory({
+              component: ToolbarView,
+            }),
+          });
+          // ctx.set(docSearch.key, {
+          //   view: pluginViewFactory({
+          //     component: DocCollectionSearchView,
+          //   }),
+          // });
+          ctx.get(listenerCtx).markdownUpdated((_, md) => {
+            props.onChange?.(md);
+          });
+        })
 
-      .config(configureLinkTooltip)
-      .use(commonmark)
-      .use(gfm)
-      .use(history)
-      .use(listener)
-      .use([...remarkDirective])
-      .use(DocCollectionNode)
-      .use(DocCollectionInputRule)
-      .use(imageBlockComponent)
-      .use(linkTooltipPlugin)
-      .use(listItemBlockComponent)
-      .use(tableBlock)
-      .use(trailing)
-      .use(cursor)
-      .use(block)
-      .use(indent)
-      .use(clipboard)
-      .use(slash)
-      .use(toolbar)
-      .use(processSchema)
-      .use(wrapInProcessInputRule)
-      .use(
-        $view(processSchema.node, () =>
-          nodeViewFactory({
-            component: ProcessView,
-          }),
-        ),
-      )
-      .use(stepSchema)
-      .use(
-        $view(stepSchema.node, () =>
-          nodeViewFactory({
-            component: StepView,
-          }),
-        ),
-      );
+        .config(configureLinkTooltip)
+        .use(commonmark)
+        .use(gfm)
+        .use(history)
+        .use(listener)
+        .use([...remarkDirective])
+        .use(DocCollectionNode)
+        .use(DocCollectionInputRule)
+        .use(imageBlockComponent)
+        .use(linkTooltipPlugin)
+        .use(listItemBlockComponent)
+        .use(tableBlock)
+        .use(trailing)
+        .use(cursor)
+        .use(block)
+        .use(indent)
+        .use(clipboard)
+        .use(slash)
+        .use(toolbar)
+        .use(processSchema)
+        .use(wrapInProcessInputRule)
+        // .use(
+        //   $view(processSchema.node, () =>
+        //     nodeViewFactory({
+        //       component: ProcessView,
+        //     }),
+        //   ),
+        // )
+        .use(stepSchema)
+      // .use(
+      //   $view(stepSchema.node, () =>
+      //     nodeViewFactory({
+      //       component: StepView,
+      //     }),
+      //   ),
+      // )
+    );
   });
 
   return <Milkdown />;

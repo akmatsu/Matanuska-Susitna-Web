@@ -9,9 +9,6 @@ export const processSchema = $nodeSchema('process', (ctx) => ({
     order: {
       default: 1,
     },
-    spread: {
-      default: false,
-    },
   },
   parseDOM: [
     {
@@ -22,7 +19,7 @@ export const processSchema = $nodeSchema('process', (ctx) => ({
           order: dom.hasAttribute('start')
             ? Number(dom.getAttribute('start'))
             : 1,
-          spread: dom.dataset.spread === 'true', // Convert spread attribute to boolean
+          // spread: dom.dataset.spread === 'true', // Convert spread attribute to boolean
         };
       },
     },
@@ -64,12 +61,10 @@ export const processSchema = $nodeSchema('process', (ctx) => ({
 // Input rule to wrap a block into a process node
 export const wrapInProcessInputRule = $inputRule((ctx) =>
   wrappingInputRule(
-    /^\s*step(\d)\.\s$/,
+    /^\s*(step)\.\s$/,
     processSchema.type(ctx),
-    (match) => ({
-      order: Number(match[1]),
-    }),
-    (match, node) => node.childCount + node.attrs.order === Number(match[1]),
+
+    // (match, node) => node.childCount + node.attrs.order === Number(match[1]),
   ),
 );
 
