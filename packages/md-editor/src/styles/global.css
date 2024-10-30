@@ -286,6 +286,32 @@
   z-index: 1;
 }
 
+.milkdown {
+  h1 {
+    @apply text-6xl my-4 !important;
+  }
+
+  h2 {
+    @apply text-5xl my-4 !important;
+  }
+
+  h3 {
+    @apply text-4xl my-3 !important;
+  }
+
+  h4 {
+    @apply text-3xl my-3 !important;
+  }
+
+  h5 {
+    @apply text-2xl my-2 !important;
+  }
+
+  h6 {
+    @apply text-xl my-2 !important;
+  }
+}
+
 @layer components {
   ol.process {
     @apply list-none relative pl-4 my-4 ml-6;

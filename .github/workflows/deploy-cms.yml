@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'sites/cms/**'
+      - 'packages/md-editor/**'
 
 permissions:
   id-token: write
