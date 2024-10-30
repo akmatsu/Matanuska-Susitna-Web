@@ -29,7 +29,7 @@ export const stepSchema = $node('step', (ctx) => ({
       'data-list-type': node.attrs.listType,
     },
     0,
-  ], // Render as <li> with "step" class
+  ],
   parseMarkdown: {
     match: ({ type, name }) => type === 'containerDirective' && name === 'step',
     runner: (state, node, type) => {
