@@ -3,24 +3,24 @@ import { $command, $inputRule, $node } from '@milkdown/kit/utils';
 import { wrapIn } from '@milkdown/kit/prose/commands';
 
 export const processSchema = $node('process', (ctx) => ({
-  content: 'step+', // Process will contain multiple Step nodes
-  group: 'block', // Group this as a block node
+  content: 'step+',
+  group: 'block',
   attrs: {},
+
   parseDOM: [
     {
       tag: 'ol.process',
     },
   ],
 
-  // Render the process node in the DOM
   toDOM: (node) => [
-    'ol', // Ordered list for the process
+    'ol',
     {
-      class: 'process', // Custom class for the process
-      start: node.attrs.order === 1 ? null : node.attrs.order, // Only include "start" attribute if it's not 1
-      'data-spread': node.attrs.spread ? 'true' : 'false', // Set the spread data attribute
+      class: 'process',
+      start: node.attrs.order === 1 ? null : node.attrs.order,
+      'data-spread': node.attrs.spread ? 'true' : 'false',
     },
-    0, // The process will contain steps here
+    0,
   ],
 
   parseMarkdown: {

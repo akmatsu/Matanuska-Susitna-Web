@@ -41,8 +41,10 @@ import { listenerCtx, listener } from '@milkdown/kit/plugin/listener';
 import { clipboard } from '@milkdown/kit/plugin/clipboard';
 
 // Milkdown Styles
-import '@milkdown/kit/prose/view/style/prosemirror.css';
-import '@milkdown/prose/tables/style/tables.css';
+// import '@milkdown/kit/prose/view/style/prosemirror.css';
+// import '@milkdown/prose/tables/style/tables.css';
+import '@milkdown/crepe/theme/common/style.css';
+import '@milkdown/crepe/theme/frame.css';
 
 // Internal imports
 import {

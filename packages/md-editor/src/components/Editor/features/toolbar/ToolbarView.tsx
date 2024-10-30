@@ -36,6 +36,9 @@ export const ToolbarView = () => {
     }
     tooltipProvider.current = new TooltipProvider({
       content: div,
+      offset: {
+        alignmentAxis: 200,
+      },
       shouldShow(view) {
         const { doc, selection } = view.state;
         const { empty, from, to } = selection;
@@ -86,24 +89,24 @@ export const ToolbarView = () => {
   const TOOLBAR_COMMANDS = [
     {
       label: 'Bold',
-      icon: 'icon-bold',
+      icon: 'bold',
       action: () => callCommand(toggleStrongCommand.key),
     },
     {
       label: 'Italic',
-      icon: 'icon-italic',
+      icon: 'italic',
       action: () => callCommand(toggleEmphasisCommand.key),
     },
     {
       label: 'Strikethrough',
-      icon: 'icon-strike',
+      icon: 'strike',
       action: () => callCommand(toggleStrikethroughCommand.key),
     },
   ];
 
   return (
     <div
-      className="absolute card data-[show=false]:hidden flex gap-2"
+      className="absolute card data-[show=false]:hidden flex gap-2 z-10"
       ref={ref}
     >
       {TOOLBAR_COMMANDS.map((cmd) => (
@@ -115,7 +118,7 @@ export const ToolbarView = () => {
             action(cmd.action());
           }}
         >
-          <span className={`${cmd.icon} size-6 m-1`}></span>
+          <span className={`icon ${cmd.icon} size-6 m-1`}></span>
         </button>
       ))}
       <button
@@ -135,7 +138,7 @@ export const ToolbarView = () => {
           });
         }}
       >
-        <span className={`icon-link size-6 m-1`}></span>
+        <span className={`icon link size-6 m-1`}></span>
       </button>
     </div>
   );
