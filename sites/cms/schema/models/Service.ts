@@ -19,16 +19,10 @@ export const Service: ListConfig<any> = list({
     ...titleAndDescription(),
     ...publishable,
     slug,
-    body: customText({
-      ui: {
-        description:
-          'The body is the main body of the page. You can use this for writing more information about the service.',
-      },
-    }),
+    body: customText(),
+
     ...group({
       label: 'Primary Action',
-      description:
-        'The primary action is the main thing you want users to do for this Service and will be displayed prominently on the page.',
       fields: {
         actionLabel: text({
           validation: {
@@ -40,8 +34,9 @@ export const Service: ListConfig<any> = list({
             isNullable: true,
           },
           ui: {
-            description:
-              'This is the text that will be used on the primary action link in the UI',
+            itemView: {
+              fieldPosition: 'sidebar',
+            },
           },
         }),
         actionUrl: text({
@@ -54,8 +49,9 @@ export const Service: ListConfig<any> = list({
             isNullable: true,
           },
           ui: {
-            description:
-              'This is the URL users will be directed to when they click the primary action button in the UI',
+            itemView: {
+              fieldPosition: 'sidebar',
+            },
           },
         }),
       },
@@ -71,36 +67,37 @@ export const Service: ListConfig<any> = list({
         linkToItem: true,
         removeMode: 'none',
         inlineCreate: { fields: ['name'] },
-        description:
-          'A process is step based instructions on how to apply for or receive a service. These will be displayed in the main body of the page.',
       },
     }),
+
     tags: relationship({
       ref: 'Tag.services',
       many: true,
       ui: {
-        displayMode: 'cards',
-        cardFields: ['name'],
+        displayMode: 'select',
+        searchFields: ['name'],
         itemView: {
           fieldPosition: 'sidebar',
         },
-        inlineCreate: { fields: ['name'] },
-        inlineEdit: { fields: ['name'] },
       },
     }),
 
     primaryContact: relationship({
       ref: 'Contact.primaryServices',
       ui: {
-        description: 'This contact will be displayed prominently on the page.',
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
       },
     }),
+
     contacts: relationship({
       ref: 'Contact.services',
       many: true,
       ui: {
-        description:
-          'These are secondary contacts, displayed in a list below the primary contact',
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
       },
     }),
     ...timestamps,

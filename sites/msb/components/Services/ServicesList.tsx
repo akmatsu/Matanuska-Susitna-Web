@@ -4,16 +4,36 @@ import { GET_SERVICES_QUERY } from '@/utils/apollo/queries/getServices';
 import { ServiceListItem } from './ServiceListItem';
 import { getClient } from '@/utils/apollo/ApolloClient';
 
+function getDatetimeISOString(date = new Date(Date.now())): string {
+  return date.toISOString();
+}
+
 export async function ServicesList({ limit = 15, page = 1, search = '' }) {
+  console.log(getDatetimeISOString());
   const { data } = await getClient().query({
     query: GET_SERVICES_QUERY,
     variables: {
       take: limit,
       skip: (page - 1) * limit,
       where: {
-        OR: [
-          { description: { contains: search, mode: 'insensitive' } },
-          { title: { contains: search, mode: 'insensitive' } },
+        AND: [
+          {
+            publishAt: {
+              lte: getDatetimeISOString(),
+            },
+          },
+          {
+            OR: [
+              { unpublishAt: { gt: getDatetimeISOString() } },
+              { unpublishAt: { equals: null } },
+            ],
+          },
+          {
+            OR: [
+              { description: { contains: search, mode: 'insensitive' } },
+              { title: { contains: search, mode: 'insensitive' } },
+            ],
+          },
         ],
       },
     },

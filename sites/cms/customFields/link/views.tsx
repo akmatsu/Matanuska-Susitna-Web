@@ -18,7 +18,7 @@ import {
 } from '@keystone-6/core/types';
 
 import { gql, useQuery } from '@keystone-6/core/admin-ui/apollo';
-import { StylesConfig, CSSObjectWithLabel } from 'react-select';
+import { StylesConfig } from 'react-select';
 
 export function Field({
   field,

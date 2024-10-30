@@ -1,59 +1,148 @@
-// Welcome to some authentication for Keystone
-//
-// This is using @keystone-6/auth to add the following
-// - A sign-in page for your Admin UI
-// - A cookie-based stateless session strategy
-//    - Using a User email as the identifier
-//    - 30 day cookie expiration
-//
-// This file does not configure what Users can do, and the default for this starter
-// project is to allow anyone - logged-in or not - to do anything.
-//
-// If you want to prevent random people on the internet from accessing your data,
-// you can find out how by reading https://keystonejs.com/docs/guides/auth-and-access-control
-//
-// If you want to learn more about how our out-of-the-box authentication works, please
-// read https://keystonejs.com/docs/apis/auth#authentication-api
-
-// import { randomBytes } from 'node:crypto'
-import { createAuth } from '@keystone-6/auth';
-
-// see https://keystonejs.com/docs/apis/session for the session docs
+import expressSession from 'express-session';
+import { Router } from 'express';
 import { statelessSessions } from '@keystone-6/core/session';
+import { type KeystoneContext } from '@keystone-6/core/types';
+import { Passport } from 'passport';
+import {
+  BaseClient,
+  Issuer,
+  Strategy as OpenIDConnectStrategy,
+} from 'openid-client';
 
-// withAuth is a function we can use to wrap our base configuration
-const { withAuth } = createAuth({
-  listKey: 'User',
-  identityField: 'email',
+import { type User as PrismaUser } from '.prisma/client';
+import { type TypeInfo } from '.keystone/types';
 
-  // this is a GraphQL query fragment for fetching what data will be attached to a context.session
-  //   this can be helpful for when you are writing your access control functions
-  //   you can find out more at https://keystonejs.com/docs/guides/auth-and-access-control
-  sessionData: 'name createdAt',
-  secretField: 'password',
+export type Session = PrismaUser;
 
-  // WARNING: remove initFirstItem functionality in production
-  //   see https://keystonejs.com/docs/config/auth#init-first-item for more
-  initFirstItem: {
-    // if there are no items in the database, by configuring this field
-    //   you are asking the Keystone AdminUI to create a new user
-    //   providing inputs for these fields
-    fields: ['name', 'email', 'password'],
-
-    // it uses context.sudo() to do this, which bypasses any access control you might have
-    //   you shouldn't use this in production
-  },
+export const session = statelessSessions<Session>({
+  secret: process.env.SESSION_SECRET!,
 });
 
-// statelessSessions uses cookies for session tracking
-//   these cookies have an expiry, in seconds
-//   we use an expiry of 30 days for this starter
-const sessionMaxAge = 60 * 60 * 24 * 30;
+declare global {
+  namespace Express {
+    interface User extends PrismaUser {}
+  }
+}
 
-// you can find out more at https://keystonejs.com/docs/apis/session#session-api
-const session = statelessSessions({
-  maxAge: sessionMaxAge,
-  secret: process.env.SESSION_SECRET,
-});
+// Global client variable
+let azureADClient: BaseClient;
 
-export { withAuth, session };
+export async function setupAzureADClient() {
+  try {
+    const issuer = await Issuer.discover(
+      `https://login.microsoftonline.com/${process.env.AD_TENANT_ID}/v2.0`,
+    );
+    azureADClient = new issuer.Client({
+      client_id: process.env.AD_CLIENT_ID!,
+      client_secret: process.env.AD_CLIENT_SECRET!,
+      redirect_uris: [`${process.env.AD_REDIRECT_HOST}/auth/azure/callback`],
+      response_types: ['code'],
+    });
+  } catch (err) {
+    console.error('Error settings up Azure AD client:', err);
+    throw new Error('Azure AD Client setup failed.');
+  }
+}
+
+export function passportMiddleware(
+  commonContext: KeystoneContext<TypeInfo<Session>>,
+): Router {
+  const router = Router();
+  const instance = new Passport();
+
+  router.use(
+    expressSession({
+      secret: process.env.SESSION_SECRET!,
+      resave: false,
+      saveUninitialized: false,
+      cookie: { secure: false },
+    }),
+  );
+
+  // Define serialization and deserialization logic
+  instance.serializeUser((user, done) => {
+    done(null, user.id); // Serialize user by ID (or another identifier)
+  });
+
+  instance.deserializeUser(async (id: any, done) => {
+    try {
+      const user = await commonContext.prisma.user.findUnique({
+        where: { id: id },
+      });
+      // if (user) commonContext
+      done(null, user);
+    } catch (error) {
+      done(error);
+    }
+  });
+
+  if (!azureADClient) {
+    throw new Error(
+      'Azure AD Client is not set up. Make sure `setupAzureADClient` is called before initializing middleware.',
+    );
+  }
+
+  const strategy = new OpenIDConnectStrategy(
+    {
+      client: azureADClient,
+      params: {
+        scope: 'openid profile email',
+        response_mode: 'query',
+      },
+      passReqToCallback: true,
+    },
+    async (req, tokenSet, userInfo, done) => {
+      try {
+        const email = userInfo.email || userInfo.preferred_username;
+        if (!email) {
+          return done(new Error('No email found in the profile.'));
+        }
+
+        const user = await commonContext.prisma.user.upsert({
+          where: { authId: userInfo.sub },
+          update: { name: userInfo.name, email },
+          create: {
+            authId: userInfo.sub,
+            name: userInfo.name,
+            email,
+          },
+        });
+
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    },
+  );
+
+  instance.use('openid-client', strategy);
+
+  router.get('/auth/azure', instance.authenticate('openid-client'));
+
+  router.get(
+    '/auth/azure/callback',
+    instance.authenticate('openid-client', {
+      failureRedirect: '/auth/unauthorized',
+    }),
+    async (req, res) => {
+      if (!req.user) {
+        return res.status(401).send('Authentication failed');
+      }
+
+      const context = await commonContext.withRequest(req, res);
+
+      await context.sessionStrategy?.start({
+        context,
+        data: req.user,
+      });
+
+      res.redirect('/');
+    },
+  );
+
+  router.get('/auth/unauthorized', (req, res) => {
+    res.status(401).send('Unauthorized!');
+  });
+
+  return router;
+}

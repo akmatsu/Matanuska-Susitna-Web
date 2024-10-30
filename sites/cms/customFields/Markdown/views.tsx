@@ -1,13 +1,11 @@
-import '@toast-ui/editor/dist/toastui-editor.css';
 import React from 'react';
-import { Suspense, lazy } from 'react';
+import { Suspense } from 'react';
 import {
   FieldContainer,
   FieldDescription,
   FieldLabel,
 } from '@keystone-ui/fields';
 import { CellLink, CellContainer } from '@keystone-6/core/admin-ui/components';
-const MdEditor = lazy(() => import('../../components/MdEditor'));
 
 import {
   type CardValueComponent,
@@ -16,6 +14,7 @@ import {
   type FieldControllerConfig,
   type FieldProps,
 } from '@keystone-6/core/types';
+import { RichEditor } from '../../components/RichEditor';
 
 export function Field({
   field,
@@ -32,14 +31,7 @@ export function Field({
       </FieldDescription>
       <div>
         <Suspense fallback={<div>Loading editor...</div>}>
-          <MdEditor
-            initialValue={value || ''}
-            onChange={(value) => {
-              if (value) {
-                onChange?.(value);
-              }
-            }}
-          />
+          <RichEditor initialValue={value || ''} onChange={onChange} />
         </Suspense>
       </div>
     </FieldContainer>

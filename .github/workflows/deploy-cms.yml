@@ -59,7 +59,7 @@ jobs:
             -x ".env.*" \
             -x ".env.*.local" \
             -x "sites/msb/*" \
-            -x "packages/*"
+            -x "packages/ui/*"
 
       - name: Upload zipped repo to server
         run: |
@@ -105,6 +105,9 @@ jobs:
 
             # Install repo dependencies
             npm ci --workspace=cms --include-workspace-root
+
+            # Build UI Library
+            npm run mde:build
 
             # Build the application for production
             npm run cms:build

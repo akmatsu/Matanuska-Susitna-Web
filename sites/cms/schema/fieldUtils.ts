@@ -8,7 +8,7 @@ export const timestamps: BaseFields<any> = {
     defaultValue: { kind: 'now' },
     ui: {
       itemView: {
-        fieldMode: 'read',
+        fieldMode: 'hidden',
         fieldPosition: 'sidebar',
       },
       createView: { fieldMode: 'hidden' },
@@ -18,7 +18,7 @@ export const timestamps: BaseFields<any> = {
     defaultValue: { kind: 'now' },
     db: { updatedAt: true },
     ui: {
-      itemView: { fieldMode: 'read', fieldPosition: 'sidebar' },
+      itemView: { fieldMode: 'hidden', fieldPosition: 'sidebar' },
       createView: { fieldMode: 'hidden' },
     },
   }),
@@ -27,31 +27,22 @@ export const timestamps: BaseFields<any> = {
 export const publishable: BaseFields<any> = {
   ...group({
     label: 'Publishing',
-    description:
-      'These fields are used for managing the public visibility of this page.',
+
     fields: {
       publishAt: timestamp({
-        ui: {
-          itemView: {
-            fieldPosition: 'sidebar',
-          },
-
-          description:
-            'When page should be visible. If blank, page is treated as a draft. Set to today if you want to publish now.',
+        db: {
+          isNullable: true,
         },
       }),
       unpublishAt: timestamp({
-        ui: {
-          itemView: {
-            fieldPosition: 'sidebar',
-          },
-          description:
-            'When the page should be hidden from website. If blank, page will never be hidden.',
+        db: {
+          isNullable: true,
         },
         hooks: {
           validate: ({ resolvedData, item, addValidationError }) => {
-            const publishAt = resolvedData['publishAt'] || item['publishAt'];
-            const unpublishAt = resolvedData['unpublishAt'];
+            const publishAt =
+              resolvedData?.['publishAt'] || item?.['publishAt'];
+            const unpublishAt = resolvedData?.['unpublishAt'];
 
             if (!publishAt && unpublishAt) {
               addValidationError(
@@ -99,9 +90,6 @@ export function titleAndDescription(opts?: {
       },
       ui: {
         displayMode: 'input',
-        description:
-          opts?.title?.description ||
-          'Title is used as the fist header of the page and used in Page meta data for search engines and social media.',
       },
     }),
     description: text({
@@ -112,9 +100,6 @@ export function titleAndDescription(opts?: {
       },
       ui: {
         displayMode: 'textarea',
-        description:
-          opts?.description?.description ||
-          'THIS IS NOT DISPLAYED ON THE PAGE. Description is only displayed on lists, and used in Page meta data for search engines and social media.',
       },
     }),
   };
@@ -129,8 +114,6 @@ export const slug = text({
     itemView: {
       fieldPosition: 'sidebar',
     },
-    description:
-      'A slug is used to uniquely identify a page in the website and used in web page URLs.',
   },
 
   hooks: {

@@ -53,9 +53,10 @@ model ExternalLink {
 }
 
 model Tag {
-  id       String    @id @default(cuid())
-  name     String    @default("")
-  services Service[] @relation("Service_tags")
+  id        String     @id @default(cuid())
+  name      String     @default("")
+  services  Service[]  @relation("Service_tags")
+  documents Document[] @relation("Document_tags")
 }
 
 model Alert {
@@ -111,4 +112,20 @@ model Highlight {
   message      String    @default("")
   internalLink String?
   externalLink String?
+}
+
+model Document {
+  id            String               @id @default(cuid())
+  title         String               @default("")
+  description   String               @default("")
+  tags          Tag[]                @relation("Document_tags")
+  file_filesize Int?
+  file_filename String?
+  collections   DocumentCollection[] @relation("Document_collections")
+}
+
+model DocumentCollection {
+  id        String     @id @default(cuid())
+  title     String     @default("")
+  documents Document[] @relation("Document_collections")
 }
