@@ -33,7 +33,7 @@ export const processSchema = $node('process', (ctx) => ({
   toMarkdown: {
     match: (node) => node.type.name === 'process',
     runner: (state, node) => {
-      state.openNode('list', undefined, {
+      state.openNode('containerDirective', undefined, {
         name: 'process',
       });
       state.next(node.content);

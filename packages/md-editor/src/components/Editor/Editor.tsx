@@ -63,9 +63,9 @@ import {
 } from './features/DocCollection/DocuCollectonSearchView';
 
 import {
-  stepSchema,
   processSchema,
   wrapInProcessInputRule,
+  stepSchema,
 } from './features/step';
 
 export function Editor(props: MdEditorProps) {
@@ -101,6 +101,7 @@ export function Editor(props: MdEditorProps) {
           }),
         });
         ctx.get(listenerCtx).markdownUpdated((_, md) => {
+          console.log(md);
           props.onChange?.(md);
         });
       })
@@ -131,8 +132,8 @@ export function Editor(props: MdEditorProps) {
       .use(slash)
       .use(toolbar)
       .use(stepSchema)
-      .use(processSchema)
-      .use(wrapInProcessInputRule);
+      .use(wrapInProcessInputRule)
+      .use(processSchema);
   });
 
   return <Milkdown />;

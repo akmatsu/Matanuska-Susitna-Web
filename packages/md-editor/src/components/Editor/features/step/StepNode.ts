@@ -4,6 +4,14 @@ export const stepSchema = $node('step', (ctx) => ({
   content: 'block+',
   group: 'step',
   defining: true,
+  attrs: {
+    label: {
+      default: 'st.',
+    },
+    listType: {
+      default: 'step',
+    },
+  },
   parseDOM: [
     {
       tag: 'li.step',
@@ -13,17 +21,31 @@ export const stepSchema = $node('step', (ctx) => ({
       },
     },
   ],
-  toDOM: (node) => ['li', { class: 'step' }, 0], // Render as <li> with "step" class
+  toDOM: (node) => [
+    'li',
+    {
+      class: 'step',
+      'data-label': node.attrs.label,
+      'data-list-type': node.attrs.listType,
+    },
+    0,
+  ], // Render as <li> with "step" class
   parseMarkdown: {
     match: ({ type, name }) => type === 'listItem' && name === 'step',
     runner: (state, node, type) => {
-      state.openNode(type).next(node.children).closeNode();
+      console.log('ran');
+      const label = node.label ? `${node.label}` : 'step.';
+      const listType = 'step';
+      state.openNode(type, { label, listType }).next(node.children).closeNode();
     },
   },
   toMarkdown: {
     match: (node) => node.type.name === 'step',
     runner: (state, node) => {
-      state.openNode('listItem', undefined, { name: 'step' });
+      state.openNode('containerDirective', undefined, {
+        name: 'step',
+        label: 'step.',
+      });
       state.next(node.content);
       state.closeNode();
     },
