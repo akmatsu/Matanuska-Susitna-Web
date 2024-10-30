@@ -314,12 +314,12 @@
 
 @layer components {
   ol.process {
-    @apply list-none relative pl-4 my-4 ml-6;
+    @apply list-none relative pl-4 my-4;
     counter-reset: muffins;
   }
 
   .step {
-    @apply pl-6 border-l-4;
+    @apply pl-6 border-l-4 min-h-9 ml-2;
     &::before {
       @apply flex items-center justify-center text-xl border-2 border-black rounded-full size-8 absolute bg-white;
       box-shadow: 0 0 0 0.25rem #ffffff;

@@ -31,7 +31,7 @@ export const stepSchema = $node('step', (ctx) => ({
     0,
   ], // Render as <li> with "step" class
   parseMarkdown: {
-    match: ({ type, name }) => type === 'listItem' && name === 'step',
+    match: ({ type, name }) => type === 'containerDirective' && name === 'step',
     runner: (state, node, type) => {
       console.log('ran');
       const label = node.label ? `${node.label}` : 'step.';

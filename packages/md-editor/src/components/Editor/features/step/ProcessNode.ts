@@ -24,7 +24,8 @@ export const processSchema = $node('process', (ctx) => ({
   ],
 
   parseMarkdown: {
-    match: ({ type, name }) => type === 'list' && name === 'process',
+    match: ({ type, name }) =>
+      type === 'containerDirective' && name === 'process',
     runner: (state, node, type) => {
       state.openNode(type).next(node.children).closeNode();
     },
