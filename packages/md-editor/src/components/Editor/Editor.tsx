@@ -35,7 +35,7 @@ import {
 import { history } from '@milkdown/kit/plugin/history';
 import { trailing } from '@milkdown/kit/plugin/trailing';
 import { cursor } from '@milkdown/kit/plugin/cursor';
-import { block } from '@milkdown/kit/plugin/block';
+import { block, blockConfig } from '@milkdown/kit/plugin/block';
 import { indent } from '@milkdown/kit/plugin/indent';
 import { listenerCtx, listener } from '@milkdown/kit/plugin/listener';
 import { clipboard } from '@milkdown/kit/plugin/clipboard';
@@ -78,6 +78,9 @@ export function Editor(props: MdEditorProps) {
     return MilkEditor.make()
       .config((ctx) => {
         ctx.update(tableBlockConfig.key, (defaultConfig) => ({
+          ...defaultConfig,
+        }));
+        ctx.update(blockConfig.key, (defaultConfig) => ({
           ...defaultConfig,
         }));
         ctx.set(rootCtx, root);
