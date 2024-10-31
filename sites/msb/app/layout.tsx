@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { TopNavigation, MainFooter } from '@/components';
 import { SiteInfo } from '@/components/Header/SiteInfo';
 import { ApolloWrapper } from './ApolloWrapper';
+import { FeedbackModal } from '@/components/FeedbackModal';
 
 export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',
@@ -25,6 +26,7 @@ export default async function RootLayout({
           <main id="main-content" className="position-relative">
             {children}
           </main>
+          <FeedbackModal />
           <MainFooter />
         </ApolloWrapper>
       </body>

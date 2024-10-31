@@ -7,18 +7,6 @@ export interface GetServiceContact {
   email?: string;
 }
 
-export interface GetServiceProcessStep {
-  id: string;
-  label: string;
-  body: string;
-}
-
-export interface GetServiceProcess {
-  id: string;
-  name: string;
-  steps: GetServiceProcessStep[];
-}
-
 export interface GetServiceItem {
   id: string;
   title: string;
@@ -27,7 +15,6 @@ export interface GetServiceItem {
   actionLabel?: string;
   primaryContact?: GetServiceContact;
   contacts: GetServiceContact[];
-  processes: GetServiceProcess[];
 }
 
 export interface GetServiceItemMeta {
@@ -84,15 +71,6 @@ export const GET_SERVICE_QUERY: TypedDocumentNode<
         name
         phone
         email
-      }
-      processes {
-        id
-        name
-        steps {
-          id
-          label
-          body
-        }
       }
     }
   }

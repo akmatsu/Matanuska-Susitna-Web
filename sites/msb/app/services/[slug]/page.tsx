@@ -2,11 +2,6 @@ import React from 'react';
 
 import { CoreSideNav } from '@/components/CoreSideNav';
 
-import {
-  ProcessList,
-  ProcessListItem,
-  ProcessListHeading,
-} from '@trussworks/react-uswds';
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 
@@ -111,24 +106,10 @@ export default async function Service({
             </>
           }
         >
-          <h1>{data?.service?.title}</h1>
-          <MarkdownRenderer>{data?.service?.body}</MarkdownRenderer>
-
-          {data.service.processes.map((process: any) => (
-            <div key={process.id}>
-              <h2>{process.name}</h2>
-              <ProcessList>
-                {process.steps.map((step: any) => (
-                  <ProcessListItem key={step.id}>
-                    <ProcessListHeading type="h4">
-                      {step.label}
-                    </ProcessListHeading>
-                    <MarkdownRenderer>{step.body}</MarkdownRenderer>
-                  </ProcessListItem>
-                ))}
-              </ProcessList>
-            </div>
-          ))}
+          <div className="msb-md-body">
+            <h1>{data?.service?.title}</h1>
+            <MarkdownRenderer>{data?.service?.body}</MarkdownRenderer>
+          </div>
         </ThreeColumnLayout>
       )}
     </section>
