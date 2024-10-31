@@ -27,6 +27,7 @@ export function CoreModal(
           height: '100vh',
           top: '0',
           background: 'rgba(0,0,0,0.7)',
+          zIndex: 1000,
         }}
       >
         <Card className="maxw-tablet-lg width-full">
