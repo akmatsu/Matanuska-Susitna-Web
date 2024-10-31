@@ -21,9 +21,7 @@ export const Alert: ListConfig<any> = list({
           'The title of your alert. Titles should be short and descriptive.',
       },
     }),
-
     body: customText(),
-
     urgency: select({
       type: 'integer',
       options: [
