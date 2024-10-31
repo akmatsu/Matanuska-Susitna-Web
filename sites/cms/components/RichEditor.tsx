@@ -37,7 +37,9 @@ export function RichEditor(props: MdEditorProps) {
 
   if (isClient) {
     return (
-      <div className={isFullscreen ? 'fullscreen' : ''}>
+      <div
+        className={`rich-editor-container ${isFullscreen ? 'fullscreen' : ''}`}
+      >
         <div>
           <Button onClick={() => setShowCode(!showCode)}>
             {showCode ? 'Rich Editor' : 'View Markdown'}

@@ -1,5 +1,5 @@
 import { GET_ALERTS_QUERY } from '@/utils/apollo/queries/getAlerts';
-import { MarkdownRenderer } from './MarkdownRenderer';
+import { MarkdownRenderer } from './MarkdownRenderer/MarkdownRenderer';
 import { getClient } from '@/utils/apollo/ApolloClient';
 
 export async function Alerts() {

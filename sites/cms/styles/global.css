@@ -5,7 +5,7 @@
   min-height: 100px;
 }
 
-.fullscreen {
+.rich-editor-container.fullscreen {
   position: fixed;
   top: 0;
   left: 0;
@@ -23,4 +23,9 @@
 .editors {
   width: 100%;
   max-width: 1000px;
+}
+
+.rich-editor-container {
+  transition: all 0.3s;
+  position: relative;
 }
