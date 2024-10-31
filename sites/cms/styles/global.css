@@ -1,0 +1,6 @@
+.markdown-editor-text-area {
+  resize: none !important;
+  overflow: hidden !important;
+  height: auto;
+  min-height: 100px;
+}

@@ -5,16 +5,35 @@ import { MdEditorProps } from '@msb/md-editor/dist/components/Editor/types';
 import { Button } from '@keystone-ui/button';
 import { TextArea } from '@keystone-ui/fields';
 import '@msb/md-editor/styles.css';
+import '../styles/global.css';
 
 const MdEditor = dynamic(
   () => import('@msb/md-editor').then((m) => m.MdEditor),
   { ssr: false },
 );
 
+function adjustEditorHeight() {
+  const tArea: HTMLTextAreaElement | null = document.querySelector(
+    '#markdown-editor-text-area',
+  );
+
+  if (tArea) {
+    tArea.style.height = 'auto';
+    tArea.style.height = tArea.scrollHeight + 'px';
+  }
+}
+
 export function RichEditor(props: MdEditorProps) {
   const [isClient, setIsClient] = useState(false);
   const [showCode, setShowCode] = useState(false);
-  useEffect(() => setIsClient(true));
+  useEffect(() => {
+    setIsClient(true);
+  });
+  useEffect(() => {
+    if (showCode) {
+      adjustEditorHeight();
+    }
+  }, [showCode]);
 
   if (isClient) {
     return (
@@ -29,6 +48,9 @@ export function RichEditor(props: MdEditorProps) {
               props.onChange?.(e.target.value);
             }}
             size="large"
+            className="markdown-editor-text-area"
+            id="markdown-editor-text-area"
+            onInput={adjustEditorHeight}
           />
         ) : (
           <MdEditor {...props} />

@@ -103,7 +103,6 @@ export function Editor(props: MdEditorProps) {
           }),
         });
         ctx.get(listenerCtx).markdownUpdated((_, md) => {
-          console.log(md);
           props.onChange?.(md);
         });
       })
