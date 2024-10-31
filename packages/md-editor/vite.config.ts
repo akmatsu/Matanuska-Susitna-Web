@@ -21,11 +21,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
-    react(),
-    dts({
-      exclude: ['./node_modules', './dist', '**/*.stories.*'],
-      include: ['./src'],
-    }),
-  ],
+  plugins: [react(), dts()],
 });

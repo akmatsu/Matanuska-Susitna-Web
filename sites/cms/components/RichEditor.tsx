@@ -18,7 +18,6 @@ function adjustEditorHeight() {
   );
 
   if (tArea) {
-    tArea.style.height = 'auto';
     tArea.style.height = tArea.scrollHeight + 'px';
   }
 }
@@ -26,6 +25,7 @@ function adjustEditorHeight() {
 export function RichEditor(props: MdEditorProps) {
   const [isClient, setIsClient] = useState(false);
   const [showCode, setShowCode] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   useEffect(() => {
     setIsClient(true);
   });
@@ -37,24 +37,31 @@ export function RichEditor(props: MdEditorProps) {
 
   if (isClient) {
     return (
-      <div>
-        <Button onClick={() => setShowCode(!showCode)}>
-          {showCode ? 'Rich Editor' : 'View Markdown'}
-        </Button>
-        {showCode ? (
-          <TextArea
-            value={props.initialValue}
-            onChange={(e) => {
-              props.onChange?.(e.target.value);
-            }}
-            size="large"
-            className="markdown-editor-text-area"
-            id="markdown-editor-text-area"
-            onInput={adjustEditorHeight}
-          />
-        ) : (
-          <MdEditor {...props} />
-        )}
+      <div className={isFullscreen ? 'fullscreen' : ''}>
+        <div>
+          <Button onClick={() => setShowCode(!showCode)}>
+            {showCode ? 'Rich Editor' : 'View Markdown'}
+          </Button>
+          <Button onClick={() => setIsFullscreen((v) => !v)}>
+            {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+          </Button>
+        </div>
+        <div className="editors">
+          {showCode ? (
+            <TextArea
+              value={props.initialValue}
+              onChange={(e) => {
+                props.onChange?.(e.target.value);
+              }}
+              size="large"
+              className="markdown-editor-text-area"
+              id="markdown-editor-text-area"
+              onInput={adjustEditorHeight}
+            />
+          ) : (
+            <MdEditor {...props} />
+          )}
+        </div>
       </div>
     );
   } else {
