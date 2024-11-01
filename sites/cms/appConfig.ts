@@ -9,6 +9,7 @@ const {
 } = process.env;
 
 export const appConfig = {
+  nodeEnv: process.env.NODE_ENV,
   database: {
     provider: (process.env.DATABASE_PROVIDER as DatabaseProvider) ?? 'sqlite',
     user: process.env.DATABASE_USER,
