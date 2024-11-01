@@ -87,6 +87,7 @@ jobs:
 
             # Setup Environment variables
             touch ./sites/cms/.env
+            echo "NODE_ENV=production" >> ./sites/cms/.env
             echo "DATABASE=${{secrets.DB_NAME}}" >> ./sites/cms/.env
             echo "DATABASE_USER=${{secrets.DB_USER}}" >> ./sites/cms/.env
             echo "DATABASE_HOST=${{secrets.DB_HOST}}" >> ./sites/cms/.env
