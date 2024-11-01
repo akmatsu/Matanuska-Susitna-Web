@@ -30,7 +30,7 @@ export default config<TypeInfo<Session>>({
   // https://keystonejs.com/docs/config/config#server
   server: {
     cors: {
-      origin: [appConfig.server.originHost],
+      origin: ['*'],
       credentials: true,
       methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS', 'PATCH'],
     },

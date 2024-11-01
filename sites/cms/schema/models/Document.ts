@@ -26,15 +26,6 @@ export const Document: ListConfig<any> = list({
     file: file({
       storage:
         appConfig.nodeEnv === 'production' ? 's3Documents' : 'localDocuments',
-      hooks: {
-        beforeOperation: () => {
-          console.log('Starting to update document');
-        },
-
-        afterOperation: () => {
-          console.log('Finished operation');
-        },
-      },
     }),
     collections: relationship({
       ref: 'DocumentCollection.documents',

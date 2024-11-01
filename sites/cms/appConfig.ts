@@ -1,12 +1,6 @@
 import 'dotenv/config';
 import { DatabaseProvider, StorageConfig } from '@keystone-6/core/types';
 export const baseURL = 'http://localhost:3333';
-const {
-  S3_BUCKET_NAME: bucketName = 'keystone-test',
-  S3_REGION: region = 'us-west-2',
-  S3_ACCESS_KEY_ID: accessKeyId = 'keystone',
-  S3_SECRET_ACCESS_KEY: secretAccessKey = 'keystone',
-} = process.env;
 
 export const appConfig = {
   nodeEnv: process.env.NODE_ENV,
@@ -27,10 +21,10 @@ export const appConfig = {
     s3Documents: {
       kind: 's3',
       type: 'file',
-      bucketName,
-      region,
-      accessKeyId,
-      secretAccessKey,
+      bucketName: process.env.S3_BUCKET_NAME,
+      region: process.env.S3_REGION,
+      accessKeyId: process.env.S3_ACCESS_KEY_ID,
+      secretAccessKey: process.env.SECRET_ACCESS_KEY,
     } as StorageConfig,
     s3Images: {
       kind: 's3',
