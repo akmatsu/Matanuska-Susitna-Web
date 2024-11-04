@@ -35,5 +35,10 @@ export const Document: ListConfig<any> = list({
         searchFields: ['title'],
       },
     }),
+    editorNotes: text({
+      ui: {
+        displayMode: 'textarea',
+      },
+    }),
   },
 });

@@ -154,6 +154,7 @@ type Service {
   description: String
   publishAt: DateTime
   unpublishAt: DateTime
+  reviewDate: DateTime
   slug: String
   body: String
   actionLabel: String
@@ -167,6 +168,7 @@ type Service {
   contactsCount(where: ContactWhereInput! = {}): Int
   createdAt: DateTime
   updatedAt: DateTime
+  editorNotes: String
 }
 
 input ServiceWhereUniqueInput {
@@ -183,6 +185,7 @@ input ServiceWhereInput {
   description: StringFilter
   publishAt: DateTimeNullableFilter
   unpublishAt: DateTimeNullableFilter
+  reviewDate: DateTimeNullableFilter
   slug: StringFilter
   actionLabel: StringNullableFilter
   actionUrl: StringNullableFilter
@@ -192,6 +195,7 @@ input ServiceWhereInput {
   contacts: ContactManyRelationFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
+  editorNotes: StringFilter
 }
 
 input StringNullableFilter {
@@ -233,12 +237,14 @@ input ServiceOrderByInput {
   description: OrderDirection
   publishAt: OrderDirection
   unpublishAt: OrderDirection
+  reviewDate: OrderDirection
   slug: OrderDirection
   body: OrderDirection
   actionLabel: OrderDirection
   actionUrl: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
+  editorNotes: OrderDirection
 }
 
 input ServiceUpdateInput {
@@ -246,6 +252,7 @@ input ServiceUpdateInput {
   description: String
   publishAt: DateTime
   unpublishAt: DateTime
+  reviewDate: DateTime
   slug: String
   body: String
   actionLabel: String
@@ -256,6 +263,7 @@ input ServiceUpdateInput {
   contacts: ContactRelateToManyForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
+  editorNotes: String
 }
 
 input ProcessRelateToManyForUpdateInput {
@@ -289,6 +297,7 @@ input ServiceCreateInput {
   description: String
   publishAt: DateTime
   unpublishAt: DateTime
+  reviewDate: DateTime
   slug: String
   body: String
   actionLabel: String
@@ -299,6 +308,7 @@ input ServiceCreateInput {
   contacts: ContactRelateToManyForCreateInput
   createdAt: DateTime
   updatedAt: DateTime
+  editorNotes: String
 }
 
 input ProcessRelateToManyForCreateInput {
@@ -454,6 +464,7 @@ type Alert {
   urgency: Int
   createdAt: DateTime
   updatedAt: DateTime
+  editorNotes: String
 }
 
 input AlertWhereUniqueInput {
@@ -469,6 +480,7 @@ input AlertWhereInput {
   urgency: IntFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
+  editorNotes: StringFilter
 }
 
 input IntFilter {
@@ -489,6 +501,7 @@ input AlertOrderByInput {
   urgency: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
+  editorNotes: OrderDirection
 }
 
 input AlertUpdateInput {
@@ -497,6 +510,7 @@ input AlertUpdateInput {
   urgency: Int
   createdAt: DateTime
   updatedAt: DateTime
+  editorNotes: String
 }
 
 input AlertUpdateArgs {
@@ -510,6 +524,7 @@ input AlertCreateInput {
   urgency: Int
   createdAt: DateTime
   updatedAt: DateTime
+  editorNotes: String
 }
 
 type Process {
@@ -669,6 +684,7 @@ type Contact {
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
   user: User
+  editorNotes: String
 }
 
 input ContactWhereUniqueInput {
@@ -686,6 +702,7 @@ input ContactWhereInput {
   primaryServices: ServiceManyRelationFilter
   services: ServiceManyRelationFilter
   user: UserWhereInput
+  editorNotes: StringFilter
 }
 
 input ContactOrderByInput {
@@ -693,6 +710,7 @@ input ContactOrderByInput {
   name: OrderDirection
   phone: OrderDirection
   email: OrderDirection
+  editorNotes: OrderDirection
 }
 
 input ContactUpdateInput {
@@ -702,6 +720,7 @@ input ContactUpdateInput {
   primaryServices: ServiceRelateToManyForUpdateInput
   services: ServiceRelateToManyForUpdateInput
   user: UserRelateToOneForUpdateInput
+  editorNotes: String
 }
 
 input UserRelateToOneForUpdateInput {
@@ -722,6 +741,7 @@ input ContactCreateInput {
   primaryServices: ServiceRelateToManyForCreateInput
   services: ServiceRelateToManyForCreateInput
   user: UserRelateToOneForCreateInput
+  editorNotes: String
 }
 
 input UserRelateToOneForCreateInput {
@@ -734,10 +754,12 @@ type Highlight {
   title: String
   publishAt: DateTime
   unpublishAt: DateTime
+  reviewDate: DateTime
   image: String
   message: String
   internalLink: String
   externalLink: String
+  editorNotes: String
 }
 
 input HighlightWhereUniqueInput {
@@ -752,9 +774,11 @@ input HighlightWhereInput {
   title: StringFilter
   publishAt: DateTimeNullableFilter
   unpublishAt: DateTimeNullableFilter
+  reviewDate: DateTimeNullableFilter
   image: StringFilter
   message: StringFilter
   externalLink: StringNullableFilter
+  editorNotes: StringFilter
 }
 
 input HighlightOrderByInput {
@@ -762,20 +786,24 @@ input HighlightOrderByInput {
   title: OrderDirection
   publishAt: OrderDirection
   unpublishAt: OrderDirection
+  reviewDate: OrderDirection
   image: OrderDirection
   message: OrderDirection
   internalLink: OrderDirection
   externalLink: OrderDirection
+  editorNotes: OrderDirection
 }
 
 input HighlightUpdateInput {
   title: String
   publishAt: DateTime
   unpublishAt: DateTime
+  reviewDate: DateTime
   image: String
   message: String
   internalLink: String
   externalLink: String
+  editorNotes: String
 }
 
 input HighlightUpdateArgs {
@@ -787,10 +815,12 @@ input HighlightCreateInput {
   title: String
   publishAt: DateTime
   unpublishAt: DateTime
+  reviewDate: DateTime
   image: String
   message: String
   internalLink: String
   externalLink: String
+  editorNotes: String
 }
 
 type Document {
@@ -802,6 +832,7 @@ type Document {
   file: FileFieldOutput
   collections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
   collectionsCount(where: DocumentCollectionWhereInput! = {}): Int
+  editorNotes: String
 }
 
 type FileFieldOutput {
@@ -823,6 +854,7 @@ input DocumentWhereInput {
   description: StringFilter
   tags: TagManyRelationFilter
   collections: DocumentCollectionManyRelationFilter
+  editorNotes: StringFilter
 }
 
 input DocumentCollectionManyRelationFilter {
@@ -835,6 +867,7 @@ input DocumentOrderByInput {
   id: OrderDirection
   title: OrderDirection
   description: OrderDirection
+  editorNotes: OrderDirection
 }
 
 input DocumentUpdateInput {
@@ -843,6 +876,7 @@ input DocumentUpdateInput {
   tags: TagRelateToManyForUpdateInput
   file: FileFieldInput
   collections: DocumentCollectionRelateToManyForUpdateInput
+  editorNotes: String
 }
 
 input FileFieldInput {
@@ -870,6 +904,7 @@ input DocumentCreateInput {
   tags: TagRelateToManyForCreateInput
   file: FileFieldInput
   collections: DocumentCollectionRelateToManyForCreateInput
+  editorNotes: String
 }
 
 input DocumentCollectionRelateToManyForCreateInput {
@@ -882,6 +917,7 @@ type DocumentCollection {
   title: String
   documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
   documentsCount(where: DocumentWhereInput! = {}): Int
+  editorNotes: String
 }
 
 input DocumentCollectionWhereUniqueInput {
@@ -895,16 +931,19 @@ input DocumentCollectionWhereInput {
   id: IDFilter
   title: StringFilter
   documents: DocumentManyRelationFilter
+  editorNotes: StringFilter
 }
 
 input DocumentCollectionOrderByInput {
   id: OrderDirection
   title: OrderDirection
+  editorNotes: OrderDirection
 }
 
 input DocumentCollectionUpdateInput {
   title: String
   documents: DocumentRelateToManyForUpdateInput
+  editorNotes: String
 }
 
 input DocumentCollectionUpdateArgs {
@@ -915,6 +954,7 @@ input DocumentCollectionUpdateArgs {
 input DocumentCollectionCreateInput {
   title: String
   documents: DocumentRelateToManyForCreateInput
+  editorNotes: String
 }
 
 """

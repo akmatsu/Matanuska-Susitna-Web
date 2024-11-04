@@ -75,5 +75,10 @@ export const Highlight: ListConfig<any> = list({
         }),
       },
     }),
+    editorNotes: text({
+      ui: {
+        displayMode: 'textarea',
+      },
+    }),
   },
 });
