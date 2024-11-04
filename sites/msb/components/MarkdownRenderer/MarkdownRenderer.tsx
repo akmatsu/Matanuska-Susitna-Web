@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkDirective from 'remark-directive';
-import { Process, Step } from './components';
+import { Process, Step, DocCollectionWrapper } from './components';
 import remarkDirectiveRehype from 'remark-directive-rehype';
 import { ReactNode } from 'react';
 
@@ -12,6 +12,7 @@ declare global {
     interface IntrinsicElements {
       process: { children: ReactNode };
       step: { children: ReactNode };
+      'doc-collection': { id: string };
     }
   }
 }
@@ -38,6 +39,7 @@ export function MarkdownRenderer(props: { children: string }) {
         },
         process: Process,
         step: Step,
+        'doc-collection': DocCollectionWrapper,
       }}
     >
       {props.children}

@@ -16,6 +16,7 @@ export const DocumentCollection: ListConfig<any> = list({
       many: true,
       ui: {
         displayMode: 'cards',
+        inlineConnect: true,
         cardFields: ['title', 'description', 'file', 'tags'],
         inlineCreate: { fields: ['title', 'description', 'file', 'tags'] },
         inlineEdit: { fields: ['title', 'description', 'file', 'tags'] },
