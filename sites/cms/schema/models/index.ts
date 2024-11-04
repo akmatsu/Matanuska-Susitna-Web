@@ -1,7 +1,6 @@
 import { type Lists } from '.keystone/types';
 import { User } from './User';
 import { Service } from './Service';
-import { ExternalLink } from './ExternalLink';
 import { Tag } from './Tag';
 import { Alert } from './Alert';
 import { Process } from './Process';
@@ -14,7 +13,6 @@ import { DocumentCollection } from './DocumentCollection';
 export const lists = {
   User,
   Service,
-  ExternalLink,
   Tag,
   Alert,
   Process,

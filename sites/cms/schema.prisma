@@ -46,14 +46,6 @@ model Service {
   @@index([primaryContactId])
 }
 
-model ExternalLink {
-  id        String    @id @default(cuid())
-  label     String    @default("")
-  url       String    @default("")
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now()) @updatedAt
-}
-
 model Tag {
   id        String     @id @default(cuid())
   name      String     @default("")
