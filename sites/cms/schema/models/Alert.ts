@@ -36,5 +36,10 @@ export const Alert: ListConfig<any> = list({
       },
     }),
     ...timestamps,
+    editorNotes: text({
+      ui: {
+        displayMode: 'textarea',
+      },
+    }),
   },
 });

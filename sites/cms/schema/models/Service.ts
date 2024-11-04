@@ -101,5 +101,10 @@ export const Service: ListConfig<any> = list({
       },
     }),
     ...timestamps,
+    editorNotes: text({
+      ui: {
+        displayMode: 'textarea',
+      },
+    }),
   },
 });

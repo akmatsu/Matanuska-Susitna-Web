@@ -14,6 +14,7 @@ export const timestamps: BaseFields<any> = {
       createView: { fieldMode: 'hidden' },
     },
   }),
+
   updatedAt: timestamp({
     defaultValue: { kind: 'now' },
     db: { updatedAt: true },
@@ -59,6 +60,24 @@ export const publishable: BaseFields<any> = {
                 );
               }
             }
+          },
+        },
+      }),
+      reviewDate: timestamp({
+        db: {
+          isNullable: true,
+        },
+        ui: {
+          createView: { fieldMode: 'hidden' },
+        },
+        hooks: {
+          resolveInput: ({ operation, resolvedData }) => {
+            if (operation === 'create' && !resolvedData?.reviewDate) {
+              const reviewDate = new Date();
+              reviewDate.setMonth(reviewDate.getMonth() + 6);
+              return reviewDate;
+            }
+            return resolvedData.reviewDate;
           },
         },
       }),

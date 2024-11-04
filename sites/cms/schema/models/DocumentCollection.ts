@@ -22,5 +22,10 @@ export const DocumentCollection: ListConfig<any> = list({
         inlineEdit: { fields: ['title', 'description', 'file', 'tags'] },
       },
     }),
+    editorNotes: text({
+      ui: {
+        displayMode: 'textarea',
+      },
+    }),
   },
 });

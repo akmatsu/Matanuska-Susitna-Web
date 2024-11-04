@@ -1,6 +1,6 @@
 import { group, list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
-import { publishable, titleAndDescription, urlRegex } from '../fieldUtils';
+import { publishable, urlRegex } from '../fieldUtils';
 import { text } from '@keystone-6/core/fields';
 import { linkField } from '../../customFields/link';
 
@@ -73,6 +73,11 @@ export const Highlight: ListConfig<any> = list({
             },
           },
         }),
+      },
+    }),
+    editorNotes: text({
+      ui: {
+        displayMode: 'textarea',
       },
     }),
   },

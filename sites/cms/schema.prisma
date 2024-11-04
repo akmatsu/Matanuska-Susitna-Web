@@ -29,6 +29,7 @@ model Service {
   description      String    @default("")
   publishAt        DateTime?
   unpublishAt      DateTime?
+  reviewDate       DateTime?
   slug             String    @unique @default("")
   body             String?
   actionLabel      String?
@@ -40,16 +41,9 @@ model Service {
   contacts         Contact[] @relation("Contact_services")
   createdAt        DateTime? @default(now())
   updatedAt        DateTime? @default(now()) @updatedAt
+  editorNotes      String    @default("")
 
   @@index([primaryContactId])
-}
-
-model ExternalLink {
-  id        String    @id @default(cuid())
-  label     String    @default("")
-  url       String    @default("")
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now()) @updatedAt
 }
 
 model Tag {
@@ -60,12 +54,13 @@ model Tag {
 }
 
 model Alert {
-  id        String    @id @default(cuid())
-  title     String    @default("")
-  body      String?
-  urgency   Int
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now()) @updatedAt
+  id          String    @id @default(cuid())
+  title       String    @default("")
+  body        String?
+  urgency     Int
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+  editorNotes String    @default("")
 }
 
 model Process {
@@ -101,6 +96,7 @@ model Contact {
   services        Service[] @relation("Contact_services")
   user            User?     @relation("Contact_user", fields: [userId], references: [id])
   userId          String?   @unique @map("user")
+  editorNotes     String    @default("")
 }
 
 model Highlight {
@@ -108,10 +104,12 @@ model Highlight {
   title        String    @default("")
   publishAt    DateTime?
   unpublishAt  DateTime?
+  reviewDate   DateTime?
   image        String    @default("")
   message      String    @default("")
   internalLink String?
   externalLink String?
+  editorNotes  String    @default("")
 }
 
 model Document {
@@ -122,10 +120,12 @@ model Document {
   file_filesize Int?
   file_filename String?
   collections   DocumentCollection[] @relation("Document_collections")
+  editorNotes   String               @default("")
 }
 
 model DocumentCollection {
-  id        String     @id @default(cuid())
-  title     String     @default("")
-  documents Document[] @relation("Document_collections")
+  id          String     @id @default(cuid())
+  title       String     @default("")
+  documents   Document[] @relation("Document_collections")
+  editorNotes String     @default("")
 }

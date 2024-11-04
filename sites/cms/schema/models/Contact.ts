@@ -66,5 +66,10 @@ export const Contact: ListConfig<any> = list({
       ui: { hideCreate: true },
     }),
     user: relationship({ ref: 'User.contact', ui: { hideCreate: true } }),
+    editorNotes: text({
+      ui: {
+        displayMode: 'textarea',
+      },
+    }),
   },
 });
