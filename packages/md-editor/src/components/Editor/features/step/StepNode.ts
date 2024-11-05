@@ -33,7 +33,6 @@ export const stepSchema = $node('step', (ctx) => ({
   parseMarkdown: {
     match: ({ type, name }) => type === 'containerDirective' && name === 'step',
     runner: (state, node, type) => {
-      console.log('ran');
       const label = node.label ? `${node.label}` : 'step.';
       const listType = 'step';
       state.openNode(type, { label, listType }).next(node.children).closeNode();

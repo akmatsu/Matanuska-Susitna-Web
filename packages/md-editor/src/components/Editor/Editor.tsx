@@ -69,6 +69,11 @@ import {
   wrapInProcessInputRule,
   stepSchema,
 } from './features/step';
+import {
+  PrimaryActionButtonNode,
+  PrimaryActionInputRule,
+  PrimaryActionView,
+} from './features/PrimaryAction';
 
 export function Editor(props: MdEditorProps) {
   const nodeViewFactory = useNodeViewFactory();
@@ -137,7 +142,14 @@ export function Editor(props: MdEditorProps) {
       .use(toolbar)
       .use(stepSchema)
       .use(wrapInProcessInputRule)
-      .use(processSchema);
+      .use(processSchema)
+      .use(PrimaryActionButtonNode)
+      .use(PrimaryActionInputRule)
+      .use(
+        $view(PrimaryActionButtonNode, () =>
+          nodeViewFactory({ component: PrimaryActionView }),
+        ),
+      );
   });
 
   return <Milkdown />;
