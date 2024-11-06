@@ -34,6 +34,7 @@ export default config<TypeInfo<Session>>({
       credentials: true,
       methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS', 'PATCH'],
     },
+    maxFileSize: 500 * 1024 * 124,
     async extendExpressApp(app, context) {
       await setupAzureADClient();
       app.use(passportMiddleware(context));
