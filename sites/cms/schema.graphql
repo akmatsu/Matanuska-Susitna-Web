@@ -187,6 +187,7 @@ input ServiceWhereInput {
   unpublishAt: DateTimeNullableFilter
   reviewDate: DateTimeNullableFilter
   slug: StringFilter
+  body: MyStringFilter
   actionLabel: StringNullableFilter
   actionUrl: StringNullableFilter
   processes: ProcessManyRelationFilter
@@ -196,6 +197,35 @@ input ServiceWhereInput {
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
   editorNotes: StringFilter
+}
+
+input MyStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedMyStringFilter
+}
+
+input NestedMyStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedMyStringFilter
 }
 
 input StringNullableFilter {
@@ -427,6 +457,7 @@ input AlertWhereInput {
   NOT: [AlertWhereInput!]
   id: IDFilter
   title: StringFilter
+  body: MyStringFilter
   urgency: IntFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
@@ -580,6 +611,7 @@ input StepWhereInput {
   id: IDFilter
   label: StringFilter
   process: ProcessWhereInput
+  body: MyStringFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
 }
@@ -868,6 +900,7 @@ type DocumentCollection {
   documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
   documentsCount(where: DocumentWhereInput! = {}): Int
   editorNotes: String
+  referencedBy: [Service]
 }
 
 input DocumentCollectionWhereUniqueInput {

@@ -43,6 +43,8 @@ model Service {
   updatedAt        DateTime? @default(now()) @updatedAt
   editorNotes      String    @default("")
 
+  @@index([title])
+  @@index([description])
   @@index([primaryContactId])
 }
 
@@ -121,6 +123,8 @@ model Document {
   file_filename String?
   collections   DocumentCollection[] @relation("Document_collections")
   editorNotes   String               @default("")
+
+  @@index([title])
 }
 
 model DocumentCollection {

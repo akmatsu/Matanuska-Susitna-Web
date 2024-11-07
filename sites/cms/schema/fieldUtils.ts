@@ -110,6 +110,7 @@ export function titleAndDescription(opts?: {
       ui: {
         displayMode: 'input',
       },
+      isIndexed: true,
     }),
     description: text({
       validation: {
@@ -120,6 +121,7 @@ export function titleAndDescription(opts?: {
       ui: {
         displayMode: 'textarea',
       },
+      isIndexed: true,
     }),
   };
 }

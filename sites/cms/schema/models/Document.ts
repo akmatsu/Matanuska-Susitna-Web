@@ -10,7 +10,7 @@ export const Document: ListConfig<any> = list({
     maxTake: 100,
   },
   fields: {
-    title: text({ validation: { isRequired: true } }),
+    title: text({ validation: { isRequired: true }, isIndexed: true }),
     description: text({ validation: { isRequired: false } }),
     tags: relationship({
       ref: 'Tag.documents',

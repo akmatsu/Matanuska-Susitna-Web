@@ -1,10 +1,10 @@
-import { list, ListConfig } from '@keystone-6/core';
+import { graphql, list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
-import { relationship, text } from '@keystone-6/core/fields';
+
+import { relationship, text, virtual } from '@keystone-6/core/fields';
+import { QueryMode } from '@keystone-6/core/types';
 
 export const DocumentCollection: ListConfig<any> = list({
-  // TODO create a relationship between pages a DocumentCollection is used on.
-  // TODO consider a way to search for orphan DocumentCollections.
   access: allowAll,
   graphql: {
     maxTake: 100,
@@ -25,6 +25,31 @@ export const DocumentCollection: ListConfig<any> = list({
     editorNotes: text({
       ui: {
         displayMode: 'textarea',
+      },
+    }),
+
+    referencedBy: virtual({
+      field: (lists) =>
+        graphql.field({
+          type: graphql.list(lists.Service.types.output),
+          async resolve(item, args, context) {
+            // return context.query.Service.findOne({})
+            const res = await context.db.Service.findMany({
+              where: {
+                body: {
+                  contains: item.id.toString(),
+                  mode: 'insensitive',
+                },
+              },
+            });
+
+            return res;
+          },
+        }),
+
+      ui: {
+        query: '{ title id }',
+        views: './customFields/ReferencedBy/views.tsx',
       },
     }),
   },
