@@ -41,10 +41,6 @@ export const SlashView = () => {
     slashProvider.current?.update(view, prevState);
   });
 
-  function show() {
-    slashProvider.current.show();
-  }
-
   // Scroll the menu container to the selected item when selectedIndex changes
   useEffect(() => {
     const selectedButton = buttonsRef.current[selectedIndex];
