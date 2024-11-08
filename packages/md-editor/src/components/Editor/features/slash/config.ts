@@ -3,6 +3,7 @@ import { removeRangeAndRunCommand } from './utils';
 import { insert } from '@milkdown/kit/utils';
 import { editorViewCtx } from '@milkdown/kit/core';
 import { createTable } from '@milkdown/kit/preset/gfm';
+import { MD_PAYMENTS_ALL_STEPS } from './mdTemplates';
 
 export const SLASH_COMMANDS = [
   {
@@ -81,9 +82,24 @@ export const SLASH_COMMANDS = [
     },
   },
   {
+    label: 'Primary Action Button',
+    action: (ctx: Ctx) => {
+      return removeRangeAndRunCommand(
+        ctx,
+        insert('::primary-action-button{label="Primary Action"}'),
+      );
+    },
+  },
+  {
     label: 'Document Collection',
     action: (ctx: Ctx) => {
       return removeRangeAndRunCommand(ctx, insert('::doc-collection{id=""}'));
+    },
+  },
+  {
+    label: 'Step template: Payments',
+    action: (ctx: Ctx) => {
+      return removeRangeAndRunCommand(ctx, insert(MD_PAYMENTS_ALL_STEPS));
     },
   },
 ];
