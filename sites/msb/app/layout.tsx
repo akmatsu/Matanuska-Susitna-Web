@@ -1,10 +1,10 @@
 import '@trussworks/react-uswds/lib/index.css';
 import '../styles/index.scss';
 import type { Metadata } from 'next';
-import { TopNavigation, MainFooter } from '@/components';
-import { SiteInfo } from '@/components/Header/SiteInfo';
 import { ApolloWrapper } from './ApolloWrapper';
-import { FeedbackModal } from '@/components/FeedbackModal';
+import { SiteInfo } from '@/components/Header/SiteInfo';
+import { MainFooter, TopNavigation } from '@/components';
+import { FeedbackButton } from '@/components/FeedbackButton';
 
 export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',
@@ -26,7 +26,7 @@ export default async function RootLayout({
           <main id="main-content" className="position-relative">
             {children}
           </main>
-          <FeedbackModal />
+          <FeedbackButton />
           <MainFooter />
         </ApolloWrapper>
       </body>
