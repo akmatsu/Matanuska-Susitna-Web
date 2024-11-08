@@ -8,12 +8,20 @@ type User {
   email: String
   password: PasswordState
   contact: Contact
+  role: UserRoleType
   createdAt: DateTime
   updatedAt: DateTime
 }
 
 type PasswordState {
   isSet: Boolean!
+}
+
+enum UserRoleType {
+  admin
+  content_manager
+  contributor
+  collaborator
 }
 
 scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
@@ -34,6 +42,7 @@ input UserWhereInput {
   email: StringFilter
   password: PasswordFilter
   contact: ContactWhereInput
+  role: UserRoleTypeNullableFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
 }
@@ -87,6 +96,13 @@ input PasswordFilter {
   isSet: Boolean!
 }
 
+input UserRoleTypeNullableFilter {
+  equals: UserRoleType
+  in: [UserRoleType!]
+  notIn: [UserRoleType!]
+  not: UserRoleTypeNullableFilter
+}
+
 input DateTimeNullableFilter {
   equals: DateTime
   in: [DateTime!]
@@ -103,6 +119,7 @@ input UserOrderByInput {
   authId: OrderDirection
   name: OrderDirection
   email: OrderDirection
+  role: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
 }
@@ -118,6 +135,7 @@ input UserUpdateInput {
   email: String
   password: String
   contact: ContactRelateToOneForUpdateInput
+  role: UserRoleType
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -139,6 +157,7 @@ input UserCreateInput {
   email: String
   password: String
   contact: ContactRelateToOneForCreateInput
+  role: UserRoleType
   createdAt: DateTime
   updatedAt: DateTime
 }

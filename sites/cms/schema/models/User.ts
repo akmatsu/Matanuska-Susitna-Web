@@ -1,6 +1,6 @@
 import { list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
-import { password, relationship, text } from '@keystone-6/core/fields';
+import { password, relationship, select, text } from '@keystone-6/core/fields';
 import { timestamps } from '../fieldUtils';
 
 export const User: ListConfig<any> = list({
@@ -27,6 +27,28 @@ export const User: ListConfig<any> = list({
       db: { isNullable: true },
     }),
     contact: relationship({ ref: 'Contact.user' }),
+    role: select({
+      type: 'enum',
+      options: [
+        {
+          label: 'Admin',
+          value: 'admin',
+        },
+        {
+          label: 'Content Manager',
+          value: 'content_manager',
+        },
+        {
+          label: 'Contributor',
+          value: 'contributor',
+        },
+        {
+          label: 'Collaborator',
+          value: 'collaborator',
+        },
+      ],
+    }),
+
     ...timestamps,
   },
 });
