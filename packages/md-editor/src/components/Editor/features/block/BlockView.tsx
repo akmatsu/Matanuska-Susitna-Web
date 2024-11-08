@@ -19,6 +19,7 @@ export function BlockView() {
       ctx: editor.ctx,
       content: div,
       getOffset: () => 16,
+
       getPlacement: ({ active, blockDom }) => {
         if (active.node.type.name === 'heading') {
           return 'left';
@@ -36,9 +37,13 @@ export function BlockView() {
         const paddingBottom = Number.parseInt(style.paddingBottom, 10) || 0;
         const height = domRect.height - paddingTop - paddingBottom;
         const handleHeight = handleRect.height;
+
         return totalDescendant > 2 || handleHeight < height
           ? 'left-start'
           : 'left';
+      },
+      shouldShow: (view) => {
+        return true;
       },
     });
     tooltipProvider.current?.update();

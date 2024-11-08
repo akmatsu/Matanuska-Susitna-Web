@@ -5,6 +5,10 @@ import remarkDirective from 'remark-directive';
 import { Process, Step, DocCollectionWrapper } from './components';
 import remarkDirectiveRehype from 'remark-directive-rehype';
 import { ReactNode } from 'react';
+import {
+  ActionButtonWrapper,
+  PrimaryActionButton,
+} from './components/PrimaryActionButton';
 
 declare global {
   namespace JSX {
@@ -13,6 +17,7 @@ declare global {
       process: { children: ReactNode };
       step: { children: ReactNode };
       'doc-collection': { id: string };
+      'primary-action-button': { label: string };
     }
   }
 }
@@ -40,6 +45,7 @@ export function MarkdownRenderer(props: { children: string }) {
         process: Process,
         step: Step,
         'doc-collection': DocCollectionWrapper,
+        'primary-action-button': ActionButtonWrapper,
       }}
     >
       {props.children}
