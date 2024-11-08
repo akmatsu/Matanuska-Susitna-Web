@@ -60,9 +60,14 @@ export const Highlight: ListConfig<any> = list({
             }) => {
               if (operation === 'create' || operation === 'update') {
                 const internalLink =
-                  resolvedData?.['internalLink'] || item?.['internalLink'];
+                  resolvedData?.['internalLink'] === undefined
+                    ? item?.['internalLink']
+                    : resolvedData['internalLink'];
+
                 const externalLink =
-                  resolvedData?.['externalLink'] || item?.['externalLink'];
+                  resolvedData?.['externalLink'] === undefined
+                    ? item?.['externalLink']
+                    : resolvedData['externalLink'];
 
                 if (internalLink && externalLink) {
                   addValidationError(
