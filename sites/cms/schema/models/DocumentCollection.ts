@@ -33,7 +33,6 @@ export const DocumentCollection: ListConfig<any> = list({
         graphql.field({
           type: graphql.list(lists.Service.types.output),
           async resolve(item, args, context) {
-            // return context.query.Service.findOne({})
             const res = await context.db.Service.findMany({
               where: {
                 body: {
@@ -50,6 +49,9 @@ export const DocumentCollection: ListConfig<any> = list({
       ui: {
         query: '{ title id }',
         views: './customFields/ReferencedBy/views.tsx',
+        createView: {
+          fieldMode: 'hidden',
+        },
       },
     }),
   },

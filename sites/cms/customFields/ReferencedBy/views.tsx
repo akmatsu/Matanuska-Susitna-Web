@@ -30,7 +30,7 @@ export function Field({ field, value }: FieldProps<typeof controller>) {
         {field.description}
       </FieldDescription>
       <ul>
-        {val.map((ref) => (
+        {val?.map?.((ref) => (
           <li>
             <Link href={`/services/${ref.id}`}>{ref.title}</Link>
           </li>

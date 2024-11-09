@@ -27,24 +27,24 @@ export const Document: ListConfig<any> = list({
       storage:
         appConfig.nodeEnv === 'production' ? 's3Documents' : 'localDocuments',
 
-      hooks: {
-        validate({ operation, addValidationError, resolvedData, fieldKey }) {
-          if (operation === 'create' || operation === 'update') {
-            if (
-              !!resolvedData[fieldKey].filename &&
-              !!resolvedData[fieldKey].filesize
-            ) {
-              if (!/\.(pdf|txt|docx|xlsx)$/.test(resolvedData[fieldKey])) {
-                addValidationError(
-                  'You can only upload pdf, txt, docx, and xlsx files.',
-                );
-                return;
-              }
-            }
-          }
-          return resolvedData[fieldKey];
-        },
-      },
+      // hooks: {
+      //   validate({ operation, addValidationError, resolvedData, fieldKey }) {
+      //     if (operation === 'create' || operation === 'update') {
+      //       if (
+      //         !!resolvedData[fieldKey].filename &&
+      //         !!resolvedData[fieldKey].filesize
+      //       ) {
+      //         if (!/\.(pdf|txt|docx|xlsx)$/.test(resolvedData[fieldKey])) {
+      //           addValidationError(
+      //             'You can only upload pdf, txt, docx, and xlsx files.',
+      //           );
+      //           return;
+      //         }
+      //       }
+      //     }
+      //     return resolvedData[fieldKey];
+      //   },
+      // },
     }),
     collections: relationship({
       ref: 'DocumentCollection.documents',
