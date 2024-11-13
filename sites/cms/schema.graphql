@@ -382,6 +382,8 @@ type Tag {
   servicesCount(where: ServiceWhereInput! = {}): Int
   documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
   documentsCount(where: DocumentWhereInput! = {}): Int
+  documentCollections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
+  documentCollectionsCount(where: DocumentCollectionWhereInput! = {}): Int
 }
 
 input TagWhereUniqueInput {
@@ -396,6 +398,7 @@ input TagWhereInput {
   name: StringFilter
   services: ServiceManyRelationFilter
   documents: DocumentManyRelationFilter
+  documentCollections: DocumentCollectionManyRelationFilter
 }
 
 input ServiceManyRelationFilter {
@@ -410,6 +413,12 @@ input DocumentManyRelationFilter {
   none: DocumentWhereInput
 }
 
+input DocumentCollectionManyRelationFilter {
+  every: DocumentCollectionWhereInput
+  some: DocumentCollectionWhereInput
+  none: DocumentCollectionWhereInput
+}
+
 input TagOrderByInput {
   id: OrderDirection
   name: OrderDirection
@@ -419,6 +428,7 @@ input TagUpdateInput {
   name: String
   services: ServiceRelateToManyForUpdateInput
   documents: DocumentRelateToManyForUpdateInput
+  documentCollections: DocumentCollectionRelateToManyForUpdateInput
 }
 
 input ServiceRelateToManyForUpdateInput {
@@ -435,6 +445,13 @@ input DocumentRelateToManyForUpdateInput {
   connect: [DocumentWhereUniqueInput!]
 }
 
+input DocumentCollectionRelateToManyForUpdateInput {
+  disconnect: [DocumentCollectionWhereUniqueInput!]
+  set: [DocumentCollectionWhereUniqueInput!]
+  create: [DocumentCollectionCreateInput!]
+  connect: [DocumentCollectionWhereUniqueInput!]
+}
+
 input TagUpdateArgs {
   where: TagWhereUniqueInput!
   data: TagUpdateInput!
@@ -444,6 +461,7 @@ input TagCreateInput {
   name: String
   services: ServiceRelateToManyForCreateInput
   documents: DocumentRelateToManyForCreateInput
+  documentCollections: DocumentCollectionRelateToManyForCreateInput
 }
 
 input ServiceRelateToManyForCreateInput {
@@ -454,6 +472,11 @@ input ServiceRelateToManyForCreateInput {
 input DocumentRelateToManyForCreateInput {
   create: [DocumentCreateInput!]
   connect: [DocumentWhereUniqueInput!]
+}
+
+input DocumentCollectionRelateToManyForCreateInput {
+  create: [DocumentCollectionCreateInput!]
+  connect: [DocumentCollectionWhereUniqueInput!]
 }
 
 type Alert {
@@ -858,12 +881,6 @@ input DocumentWhereInput {
   editorNotes: StringFilter
 }
 
-input DocumentCollectionManyRelationFilter {
-  every: DocumentCollectionWhereInput
-  some: DocumentCollectionWhereInput
-  none: DocumentCollectionWhereInput
-}
-
 input DocumentOrderByInput {
   id: OrderDirection
   title: OrderDirection
@@ -887,13 +904,6 @@ input FileFieldInput {
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
 
-input DocumentCollectionRelateToManyForUpdateInput {
-  disconnect: [DocumentCollectionWhereUniqueInput!]
-  set: [DocumentCollectionWhereUniqueInput!]
-  create: [DocumentCollectionCreateInput!]
-  connect: [DocumentCollectionWhereUniqueInput!]
-}
-
 input DocumentUpdateArgs {
   where: DocumentWhereUniqueInput!
   data: DocumentUpdateInput!
@@ -908,16 +918,13 @@ input DocumentCreateInput {
   editorNotes: String
 }
 
-input DocumentCollectionRelateToManyForCreateInput {
-  create: [DocumentCollectionCreateInput!]
-  connect: [DocumentCollectionWhereUniqueInput!]
-}
-
 type DocumentCollection {
   id: ID!
   title: String
   documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
   documentsCount(where: DocumentWhereInput! = {}): Int
+  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
+  tagsCount(where: TagWhereInput! = {}): Int
   editorNotes: String
   referencedBy: [Service]
 }
@@ -933,6 +940,7 @@ input DocumentCollectionWhereInput {
   id: IDFilter
   title: StringFilter
   documents: DocumentManyRelationFilter
+  tags: TagManyRelationFilter
   editorNotes: StringFilter
 }
 
@@ -945,6 +953,7 @@ input DocumentCollectionOrderByInput {
 input DocumentCollectionUpdateInput {
   title: String
   documents: DocumentRelateToManyForUpdateInput
+  tags: TagRelateToManyForUpdateInput
   editorNotes: String
 }
 
@@ -956,6 +965,7 @@ input DocumentCollectionUpdateArgs {
 input DocumentCollectionCreateInput {
   title: String
   documents: DocumentRelateToManyForCreateInput
+  tags: TagRelateToManyForCreateInput
   editorNotes: String
 }
 

@@ -50,10 +50,11 @@ model Service {
 }
 
 model Tag {
-  id        String     @id @default(cuid())
-  name      String     @default("")
-  services  Service[]  @relation("Service_tags")
-  documents Document[] @relation("Document_tags")
+  id                  String               @id @default(cuid())
+  name                String               @default("")
+  services            Service[]            @relation("Service_tags")
+  documents           Document[]           @relation("Document_tags")
+  documentCollections DocumentCollection[] @relation("DocumentCollection_tags")
 }
 
 model Alert {
@@ -132,6 +133,7 @@ model DocumentCollection {
   id          String     @id @default(cuid())
   title       String     @default("")
   documents   Document[] @relation("Document_collections")
+  tags        Tag[]      @relation("DocumentCollection_tags")
   editorNotes String     @default("")
 }
 

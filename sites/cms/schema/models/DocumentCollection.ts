@@ -23,7 +23,7 @@ export const DocumentCollection: ListConfig<any> = list({
     }),
 
     tags: relationship({
-      ref: 'Tag.DocumentCollections',
+      ref: 'Tag.documentCollections',
       many: true,
       ui: {
         displayMode: 'select',
