@@ -2,7 +2,6 @@ import { graphql, list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
 
 import { relationship, text, virtual } from '@keystone-6/core/fields';
-import { QueryMode } from '@keystone-6/core/types';
 
 export const DocumentCollection: ListConfig<any> = list({
   access: allowAll,

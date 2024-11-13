@@ -19,6 +19,7 @@ export function DocCollectionSearchView() {
   const tooltipProvider = useRef<TooltipProvider>();
   const { view, prevState } = usePluginViewContext();
   const [loading] = useInstance();
+  const input = useRef<HTMLInputElement>();
 
   const [search, setSearch] = useState<string>();
   const [selectedCollection, setSelectedCollection] = useState<{
@@ -94,6 +95,12 @@ export function DocCollectionSearchView() {
       },
     });
 
+    tooltipProvider.current.onShow = () => {
+      setTimeout(() => {
+        input.current?.focus();
+      }, 20);
+    };
+
     return () => {
       tooltipProvider.current?.destroy();
     };
@@ -136,6 +143,7 @@ export function DocCollectionSearchView() {
             }
             placeholder="Search Collections..."
             onChange={handleSearch}
+            ref={input}
           />
         </div>
 
