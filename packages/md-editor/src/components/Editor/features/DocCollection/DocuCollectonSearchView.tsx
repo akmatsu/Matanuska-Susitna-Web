@@ -42,10 +42,24 @@ export function DocCollectionSearchView() {
     {
       variables: {
         where: {
-          title: {
-            contains: search,
-            mode: 'insensitive',
-          },
+          OR: [
+            {
+              title: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              tags: {
+                some: {
+                  name: {
+                    contains: search,
+                    mode: 'insensitive',
+                  },
+                },
+              },
+            },
+          ],
         },
       },
     },
