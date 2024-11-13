@@ -21,6 +21,19 @@ export const DocumentCollection: ListConfig<any> = list({
         inlineEdit: { fields: ['title', 'description', 'file', 'tags'] },
       },
     }),
+
+    tags: relationship({
+      ref: 'Tag.DocumentCollections',
+      many: true,
+      ui: {
+        displayMode: 'select',
+        searchFields: ['name'],
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
+      },
+    }),
+
     editorNotes: text({
       ui: {
         displayMode: 'textarea',

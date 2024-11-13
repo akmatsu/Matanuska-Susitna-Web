@@ -11,5 +11,9 @@ export const Tag: ListConfig<any> = list({
     name: text(),
     services: relationship({ ref: 'Service.tags', many: true }),
     documents: relationship({ ref: 'Document.tags', many: true }),
+    documentCollections: relationship({
+      ref: 'DocumentCollection.tags',
+      many: true,
+    }),
   },
 });

@@ -27,6 +27,7 @@ export const Document: ListConfig<any> = list({
       storage:
         appConfig.nodeEnv === 'production' ? 's3Documents' : 'localDocuments',
 
+      // TODO!: Fix file validations.
       // hooks: {
       //   validate({ operation, addValidationError, resolvedData, fieldKey }) {
       //     if (operation === 'create' || operation === 'update') {
