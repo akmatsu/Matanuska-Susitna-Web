@@ -54,6 +54,7 @@ export const User: ListConfig<any> = list({
           value: ROLES.CONTENT_MANAGER,
         },
       ],
+      defaultValue: ROLES.COLLABORATOR,
     }),
 
     ...timestamps,
