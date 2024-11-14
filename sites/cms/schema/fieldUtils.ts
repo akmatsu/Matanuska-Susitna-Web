@@ -1,3 +1,4 @@
+import { type Session } from '../auth';
 import { BaseFields, group } from '@keystone-6/core';
 import { text, timestamp } from '@keystone-6/core/fields';
 

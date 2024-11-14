@@ -1,10 +1,17 @@
 import { list, ListConfig } from '@keystone-6/core';
-import { allowAll } from '@keystone-6/core/access';
 import { password, relationship, select, text } from '@keystone-6/core/fields';
 import { timestamps } from '../fieldUtils';
+import { isAdmin, ROLES } from '../roles';
 
 export const User: ListConfig<any> = list({
-  access: allowAll,
+  access: {
+    operation: {
+      query: ({ session }) => isAdmin(session),
+      create: ({ session }) => isAdmin(session),
+      update: ({ session }) => isAdmin(session),
+      delete: ({ session }) => isAdmin(session),
+    },
+  },
   ui: {
     hideCreate: true,
   },
@@ -28,23 +35,23 @@ export const User: ListConfig<any> = list({
     }),
     contact: relationship({ ref: 'Contact.user' }),
     role: select({
-      type: 'enum',
+      type: 'integer',
       options: [
         {
           label: 'Admin',
-          value: 'admin',
+          value: ROLES.ADMIN,
         },
         {
           label: 'Content Manager',
-          value: 'content_manager',
+          value: ROLES.CONTENT_MANAGER,
         },
         {
           label: 'Contributor',
-          value: 'contributor',
+          value: ROLES.CONTRIBUTOR,
         },
         {
           label: 'Collaborator',
-          value: 'collaborator',
+          value: ROLES.CONTENT_MANAGER,
         },
       ],
     }),
