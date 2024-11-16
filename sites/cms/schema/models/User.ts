@@ -57,6 +57,15 @@ export const User: ListConfig<any> = list({
       ],
       defaultValue: ROLES.COLLABORATOR,
     }),
+    groups: relationship({
+      ref: 'UserGroup.users',
+      many: true,
+      ui: {
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
+      },
+    }),
 
     ...timestamps,
   },

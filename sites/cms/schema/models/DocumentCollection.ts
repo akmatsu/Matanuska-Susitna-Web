@@ -43,6 +43,16 @@ export const DocumentCollection: ListConfig<any> = list({
       },
     }),
 
+    userGroups: relationship({
+      ref: 'UserGroup.documentCollections',
+      many: true,
+      ui: {
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
+      },
+    }),
+
     editorNotes: text({
       ui: {
         displayMode: 'textarea',

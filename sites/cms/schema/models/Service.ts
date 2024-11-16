@@ -108,6 +108,16 @@ export const Service: ListConfig<any> = list({
       },
     }),
 
+    userGroups: relationship({
+      ref: 'UserGroup.services',
+      many: true,
+      ui: {
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
+      },
+    }),
+
     primaryContact: relationship({
       ref: 'Contact.primaryServices',
       ui: {
