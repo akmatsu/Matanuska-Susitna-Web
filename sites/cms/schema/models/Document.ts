@@ -2,10 +2,17 @@ import { list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
 import { file, relationship, text } from '@keystone-6/core/fields';
 import { appConfig } from '../../appConfig';
+import { isCollaborator, isContributor } from '../roles';
 
 export const Document: ListConfig<any> = list({
-  // TODO: Consider a way to search for Orphaned documents.
-  access: allowAll,
+  access: {
+    operation: {
+      query: ({ session }) => true,
+      create: ({ session }) => isContributor(session),
+      update: ({ session }) => isContributor(session),
+      delete: ({ session }) => isContributor(session),
+    },
+  },
   graphql: {
     maxTake: 100,
   },

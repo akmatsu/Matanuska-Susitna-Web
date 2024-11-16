@@ -1,11 +1,19 @@
 import { list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
 import { relationship, text } from '@keystone-6/core/fields';
+import { isAdmin, isCollaborator, isContributor } from '../roles';
 
 export const Tag: ListConfig<any> = list({
-  access: allowAll,
+  access: {
+    operation: {
+      query: ({ session }) => true,
+      create: ({ session }) => isContributor(session),
+      update: ({ session }) => isContributor(session),
+      delete: ({ session }) => isContributor(session),
+    },
+  },
   ui: {
-    isHidden: true,
+    isHidden: ({ session }) => !isAdmin(session),
   },
   fields: {
     name: text(),

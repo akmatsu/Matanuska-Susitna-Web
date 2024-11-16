@@ -19,7 +19,7 @@ model User {
   email     String    @unique @default("")
   password  String?
   contact   Contact?  @relation("Contact_user")
-  role      Int?
+  role      Int?      @default(4)
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now()) @updatedAt
 }
@@ -35,7 +35,6 @@ model Service {
   body             String?
   actionLabel      String?
   actionUrl        String?
-  processes        Process[] @relation("Process_service")
   tags             Tag[]     @relation("Service_tags")
   primaryContact   Contact?  @relation("Service_primaryContact", fields: [primaryContactId], references: [id])
   primaryContactId String?   @map("primaryContact")
@@ -65,30 +64,6 @@ model Alert {
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @default(now()) @updatedAt
   editorNotes String    @default("")
-}
-
-model Process {
-  id        String    @id @default(cuid())
-  name      String    @default("")
-  service   Service?  @relation("Process_service", fields: [serviceId], references: [id])
-  serviceId String?   @map("service")
-  steps     Step[]    @relation("Step_process")
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now()) @updatedAt
-
-  @@index([serviceId])
-}
-
-model Step {
-  id        String    @id @default(cuid())
-  label     String    @default("")
-  process   Process?  @relation("Step_process", fields: [processId], references: [id])
-  processId String?   @map("process")
-  body      String?
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now()) @updatedAt
-
-  @@index([processId])
 }
 
 model Contact {

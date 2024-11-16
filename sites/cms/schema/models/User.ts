@@ -1,12 +1,12 @@
 import { list, ListConfig } from '@keystone-6/core';
 import { password, relationship, select, text } from '@keystone-6/core/fields';
 import { timestamps } from '../fieldUtils';
-import { isAdmin, ROLES } from '../roles';
+import { isAdmin, isContributor, ROLES } from '../roles';
 
 export const User: ListConfig<any> = list({
   access: {
     operation: {
-      query: ({ session }) => isAdmin(session),
+      query: ({ session }) => isContributor(session),
       create: ({ session }) => isAdmin(session),
       update: ({ session }) => isAdmin(session),
       delete: ({ session }) => isAdmin(session),
@@ -14,6 +14,7 @@ export const User: ListConfig<any> = list({
   },
   ui: {
     hideCreate: true,
+    isHidden: ({ session }) => !isAdmin(session),
   },
   fields: {
     authId: text({
@@ -51,7 +52,7 @@ export const User: ListConfig<any> = list({
         },
         {
           label: 'Collaborator',
-          value: ROLES.CONTENT_MANAGER,
+          value: ROLES.COLLABORATOR,
         },
       ],
       defaultValue: ROLES.COLLABORATOR,

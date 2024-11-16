@@ -1,5 +1,4 @@
 import { group, list, ListConfig } from '@keystone-6/core';
-import { allowAll } from '@keystone-6/core/access';
 import { relationship, text } from '@keystone-6/core/fields';
 import {
   publishable,
@@ -9,9 +8,49 @@ import {
   urlRegex,
 } from '../fieldUtils';
 import { customText } from '../../customFields/Markdown';
+import { isContributor } from '../roles';
+
+function getDatetimeISOString(date = new Date(Date.now())): string {
+  return date.toISOString();
+}
 
 export const Service: ListConfig<any> = list({
-  access: allowAll,
+  access: {
+    operation: {
+      query: ({ session }) => true,
+      create: ({ session }) => isContributor(session),
+      update: ({ session }) => isContributor(session),
+      delete: ({ session }) => isContributor(session),
+    },
+    filter: {
+      query: ({ session }) => {
+        if (session) return {};
+        return {
+          AND: [
+            {
+              publishAt: {
+                lte: getDatetimeISOString(),
+              },
+            },
+            {
+              OR: [
+                {
+                  publishAt: {
+                    gte: getDatetimeISOString(),
+                  },
+                },
+                {
+                  unpublishAt: {
+                    equals: null,
+                  },
+                },
+              ],
+            },
+          ],
+        };
+      },
+    },
+  },
   graphql: {
     maxTake: 100,
   },
@@ -54,19 +93,6 @@ export const Service: ListConfig<any> = list({
             },
           },
         }),
-      },
-    }),
-
-    processes: relationship({
-      ref: 'Process.service',
-      many: true,
-      isOrderable: true,
-      ui: {
-        displayMode: 'cards',
-        cardFields: ['name'],
-        linkToItem: true,
-        removeMode: 'none',
-        inlineCreate: { fields: ['name'] },
       },
     }),
 

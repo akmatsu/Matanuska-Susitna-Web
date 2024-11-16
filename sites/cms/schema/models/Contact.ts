@@ -1,12 +1,21 @@
 import { list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
 import { relationship, text } from '@keystone-6/core/fields';
+import { isCollaborator, isContributor } from '../roles';
 
 const phoneNumberRegex =
   /^(\(\d{3}\)\s\d{3}-\d{4}|\d{3}-\d{3}-\d{4}|\d{3}\.\d{3}\.\d{4})$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const Contact: ListConfig<any> = list({
+  access: {
+    operation: {
+      query: ({ session }) => true,
+      create: ({ session }) => isContributor(session),
+      update: ({ session }) => isContributor(session),
+      delete: ({ session }) => isContributor(session),
+    },
+  },
   hooks: {
     validate({ addValidationError, item, resolvedData, operation }) {
       if (operation === 'create' || operation === 'update') {
@@ -21,7 +30,7 @@ export const Contact: ListConfig<any> = list({
       }
     },
   },
-  access: allowAll,
+
   graphql: {
     maxTake: 100,
   },

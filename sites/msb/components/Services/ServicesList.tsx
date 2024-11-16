@@ -9,31 +9,15 @@ function getDatetimeISOString(date = new Date(Date.now())): string {
 }
 
 export async function ServicesList({ limit = 15, page = 1, search = '' }) {
-  console.log(getDatetimeISOString());
   const { data } = await getClient().query({
     query: GET_SERVICES_QUERY,
     variables: {
       take: limit,
       skip: (page - 1) * limit,
       where: {
-        AND: [
-          {
-            publishAt: {
-              lte: getDatetimeISOString(),
-            },
-          },
-          {
-            OR: [
-              { unpublishAt: { gt: getDatetimeISOString() } },
-              { unpublishAt: { equals: null } },
-            ],
-          },
-          {
-            OR: [
-              { description: { contains: search, mode: 'insensitive' } },
-              { title: { contains: search, mode: 'insensitive' } },
-            ],
-          },
+        OR: [
+          { title: { contains: search, mode: 'insensitive' } },
+          { description: { contains: search, mode: 'insensitive' } },
         ],
       },
     },

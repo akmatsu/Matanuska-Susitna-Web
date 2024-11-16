@@ -175,8 +175,6 @@ type Service {
   body: String
   actionLabel: String
   actionUrl: String
-  processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
-  processesCount(where: ProcessWhereInput! = {}): Int
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int
   primaryContact: Contact
@@ -206,7 +204,6 @@ input ServiceWhereInput {
   body: MyStringFilter
   actionLabel: StringNullableFilter
   actionUrl: StringNullableFilter
-  processes: ProcessManyRelationFilter
   tags: TagManyRelationFilter
   primaryContact: ContactWhereInput
   contacts: ContactManyRelationFilter
@@ -259,12 +256,6 @@ input StringNullableFilter {
   not: StringNullableFilter
 }
 
-input ProcessManyRelationFilter {
-  every: ProcessWhereInput
-  some: ProcessWhereInput
-  none: ProcessWhereInput
-}
-
 input TagManyRelationFilter {
   every: TagWhereInput
   some: TagWhereInput
@@ -303,20 +294,12 @@ input ServiceUpdateInput {
   body: String
   actionLabel: String
   actionUrl: String
-  processes: ProcessRelateToManyForUpdateInput
   tags: TagRelateToManyForUpdateInput
   primaryContact: ContactRelateToOneForUpdateInput
   contacts: ContactRelateToManyForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
   editorNotes: String
-}
-
-input ProcessRelateToManyForUpdateInput {
-  disconnect: [ProcessWhereUniqueInput!]
-  set: [ProcessWhereUniqueInput!]
-  create: [ProcessCreateInput!]
-  connect: [ProcessWhereUniqueInput!]
 }
 
 input TagRelateToManyForUpdateInput {
@@ -348,18 +331,12 @@ input ServiceCreateInput {
   body: String
   actionLabel: String
   actionUrl: String
-  processes: ProcessRelateToManyForCreateInput
   tags: TagRelateToManyForCreateInput
   primaryContact: ContactRelateToOneForCreateInput
   contacts: ContactRelateToManyForCreateInput
   createdAt: DateTime
   updatedAt: DateTime
   editorNotes: String
-}
-
-input ProcessRelateToManyForCreateInput {
-  create: [ProcessCreateInput!]
-  connect: [ProcessWhereUniqueInput!]
 }
 
 input TagRelateToManyForCreateInput {
@@ -545,154 +522,6 @@ input AlertCreateInput {
   createdAt: DateTime
   updatedAt: DateTime
   editorNotes: String
-}
-
-type Process {
-  id: ID!
-  name: String
-  service: Service
-  steps(where: StepWhereInput! = {}, orderBy: [StepOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StepWhereUniqueInput): [Step!]
-  stepsCount(where: StepWhereInput! = {}): Int
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input ProcessWhereUniqueInput {
-  id: ID
-}
-
-input ProcessWhereInput {
-  AND: [ProcessWhereInput!]
-  OR: [ProcessWhereInput!]
-  NOT: [ProcessWhereInput!]
-  id: IDFilter
-  name: StringFilter
-  service: ServiceWhereInput
-  steps: StepManyRelationFilter
-  createdAt: DateTimeNullableFilter
-  updatedAt: DateTimeNullableFilter
-}
-
-input StepManyRelationFilter {
-  every: StepWhereInput
-  some: StepWhereInput
-  none: StepWhereInput
-}
-
-input ProcessOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-  createdAt: OrderDirection
-  updatedAt: OrderDirection
-}
-
-input ProcessUpdateInput {
-  name: String
-  service: ServiceRelateToOneForUpdateInput
-  steps: StepRelateToManyForUpdateInput
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input ServiceRelateToOneForUpdateInput {
-  create: ServiceCreateInput
-  connect: ServiceWhereUniqueInput
-  disconnect: Boolean
-}
-
-input StepRelateToManyForUpdateInput {
-  disconnect: [StepWhereUniqueInput!]
-  set: [StepWhereUniqueInput!]
-  create: [StepCreateInput!]
-  connect: [StepWhereUniqueInput!]
-}
-
-input ProcessUpdateArgs {
-  where: ProcessWhereUniqueInput!
-  data: ProcessUpdateInput!
-}
-
-input ProcessCreateInput {
-  name: String
-  service: ServiceRelateToOneForCreateInput
-  steps: StepRelateToManyForCreateInput
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input ServiceRelateToOneForCreateInput {
-  create: ServiceCreateInput
-  connect: ServiceWhereUniqueInput
-}
-
-input StepRelateToManyForCreateInput {
-  create: [StepCreateInput!]
-  connect: [StepWhereUniqueInput!]
-}
-
-type Step {
-  id: ID!
-  label: String
-  process: Process
-  body: String
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input StepWhereUniqueInput {
-  id: ID
-}
-
-input StepWhereInput {
-  AND: [StepWhereInput!]
-  OR: [StepWhereInput!]
-  NOT: [StepWhereInput!]
-  id: IDFilter
-  label: StringFilter
-  process: ProcessWhereInput
-  body: MyStringFilter
-  createdAt: DateTimeNullableFilter
-  updatedAt: DateTimeNullableFilter
-}
-
-input StepOrderByInput {
-  id: OrderDirection
-  label: OrderDirection
-  body: OrderDirection
-  createdAt: OrderDirection
-  updatedAt: OrderDirection
-}
-
-input StepUpdateInput {
-  label: String
-  process: ProcessRelateToOneForUpdateInput
-  body: String
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input ProcessRelateToOneForUpdateInput {
-  create: ProcessCreateInput
-  connect: ProcessWhereUniqueInput
-  disconnect: Boolean
-}
-
-input StepUpdateArgs {
-  where: StepWhereUniqueInput!
-  data: StepUpdateInput!
-}
-
-input StepCreateInput {
-  label: String
-  process: ProcessRelateToOneForCreateInput
-  body: String
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input ProcessRelateToOneForCreateInput {
-  create: ProcessCreateInput
-  connect: ProcessWhereUniqueInput
 }
 
 type Contact {
@@ -996,18 +825,6 @@ type Mutation {
   updateAlerts(data: [AlertUpdateArgs!]!): [Alert]
   deleteAlert(where: AlertWhereUniqueInput!): Alert
   deleteAlerts(where: [AlertWhereUniqueInput!]!): [Alert]
-  createProcess(data: ProcessCreateInput!): Process
-  createProcesses(data: [ProcessCreateInput!]!): [Process]
-  updateProcess(where: ProcessWhereUniqueInput!, data: ProcessUpdateInput!): Process
-  updateProcesses(data: [ProcessUpdateArgs!]!): [Process]
-  deleteProcess(where: ProcessWhereUniqueInput!): Process
-  deleteProcesses(where: [ProcessWhereUniqueInput!]!): [Process]
-  createStep(data: StepCreateInput!): Step
-  createSteps(data: [StepCreateInput!]!): [Step]
-  updateStep(where: StepWhereUniqueInput!, data: StepUpdateInput!): Step
-  updateSteps(data: [StepUpdateArgs!]!): [Step]
-  deleteStep(where: StepWhereUniqueInput!): Step
-  deleteSteps(where: [StepWhereUniqueInput!]!): [Step]
   createContact(data: ContactCreateInput!): Contact
   createContacts(data: [ContactCreateInput!]!): [Contact]
   updateContact(where: ContactWhereUniqueInput!, data: ContactUpdateInput!): Contact
@@ -1048,12 +865,6 @@ type Query {
   alert(where: AlertWhereUniqueInput!): Alert
   alerts(where: AlertWhereInput! = {}, orderBy: [AlertOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AlertWhereUniqueInput): [Alert!]
   alertsCount(where: AlertWhereInput! = {}): Int
-  process(where: ProcessWhereUniqueInput!): Process
-  processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
-  processesCount(where: ProcessWhereInput! = {}): Int
-  step(where: StepWhereUniqueInput!): Step
-  steps(where: StepWhereInput! = {}, orderBy: [StepOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StepWhereUniqueInput): [Step!]
-  stepsCount(where: StepWhereInput! = {}): Int
   contact(where: ContactWhereUniqueInput!): Contact
   contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
   contactsCount(where: ContactWhereInput! = {}): Int

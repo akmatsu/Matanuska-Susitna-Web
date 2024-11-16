@@ -13,6 +13,9 @@ export const Highlight: ListConfig<any> = list({
       delete: ({ session }) => isAdmin(session),
     },
   },
+  ui: {
+    isHidden: ({ session }) => !isAdmin(session),
+  },
   graphql: {
     maxTake: 100,
   },

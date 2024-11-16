@@ -3,9 +3,20 @@ import { allowAll } from '@keystone-6/core/access';
 import { timestamps } from '../fieldUtils';
 import { select, text } from '@keystone-6/core/fields';
 import { customText } from '../../customFields/Markdown';
+import { isContentManager } from '../roles';
 
 export const Alert: ListConfig<any> = list({
-  access: allowAll,
+  access: {
+    operation: {
+      query: () => true,
+      create: ({ session }) => isContentManager(session),
+      update: ({ session }) => isContentManager(session),
+      delete: ({ session }) => isContentManager(session),
+    },
+  },
+  ui: {
+    isHidden: ({ session }) => !isContentManager(session),
+  },
   fields: {
     title: text({
       validation: {
