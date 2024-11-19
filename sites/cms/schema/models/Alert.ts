@@ -1,11 +1,17 @@
 import { list, ListConfig } from '@keystone-6/core';
-import { allowAll } from '@keystone-6/core/access';
 import { timestamps } from '../fieldUtils';
 import { select, text } from '@keystone-6/core/fields';
 import { customText } from '../../customFields/Markdown';
+import { isContentManager } from '../access/roles';
+import { elevatedOperationAccess } from '../access';
 
 export const Alert: ListConfig<any> = list({
-  access: allowAll,
+  access: {
+    operation: elevatedOperationAccess,
+  },
+  ui: {
+    isHidden: ({ session }) => !isContentManager(session),
+  },
   fields: {
     title: text({
       validation: {

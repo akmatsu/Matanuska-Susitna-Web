@@ -8,20 +8,15 @@ type User {
   email: String
   password: PasswordState
   contact: Contact
-  role: UserRoleType
+  role: Int
+  groups(where: UserGroupWhereInput! = {}, orderBy: [UserGroupOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserGroupWhereUniqueInput): [UserGroup!]
+  groupsCount(where: UserGroupWhereInput! = {}): Int
   createdAt: DateTime
   updatedAt: DateTime
 }
 
 type PasswordState {
   isSet: Boolean!
-}
-
-enum UserRoleType {
-  admin
-  content_manager
-  contributor
-  collaborator
 }
 
 scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
@@ -42,7 +37,8 @@ input UserWhereInput {
   email: StringFilter
   password: PasswordFilter
   contact: ContactWhereInput
-  role: UserRoleTypeNullableFilter
+  role: IntNullableFilter
+  groups: UserGroupManyRelationFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
 }
@@ -96,11 +92,21 @@ input PasswordFilter {
   isSet: Boolean!
 }
 
-input UserRoleTypeNullableFilter {
-  equals: UserRoleType
-  in: [UserRoleType!]
-  notIn: [UserRoleType!]
-  not: UserRoleTypeNullableFilter
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
+}
+
+input UserGroupManyRelationFilter {
+  every: UserGroupWhereInput
+  some: UserGroupWhereInput
+  none: UserGroupWhereInput
 }
 
 input DateTimeNullableFilter {
@@ -135,7 +141,8 @@ input UserUpdateInput {
   email: String
   password: String
   contact: ContactRelateToOneForUpdateInput
-  role: UserRoleType
+  role: Int
+  groups: UserGroupRelateToManyForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -144,6 +151,13 @@ input ContactRelateToOneForUpdateInput {
   create: ContactCreateInput
   connect: ContactWhereUniqueInput
   disconnect: Boolean
+}
+
+input UserGroupRelateToManyForUpdateInput {
+  disconnect: [UserGroupWhereUniqueInput!]
+  set: [UserGroupWhereUniqueInput!]
+  create: [UserGroupCreateInput!]
+  connect: [UserGroupWhereUniqueInput!]
 }
 
 input UserUpdateArgs {
@@ -157,7 +171,8 @@ input UserCreateInput {
   email: String
   password: String
   contact: ContactRelateToOneForCreateInput
-  role: UserRoleType
+  role: Int
+  groups: UserGroupRelateToManyForCreateInput
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -167,52 +182,236 @@ input ContactRelateToOneForCreateInput {
   connect: ContactWhereUniqueInput
 }
 
-type Service {
+input UserGroupRelateToManyForCreateInput {
+  create: [UserGroupCreateInput!]
+  connect: [UserGroupWhereUniqueInput!]
+}
+
+type UserGroup {
+  id: ID!
+  name: String
+  owner: User
+  description: String
+  users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserWhereUniqueInput): [User!]
+  usersCount(where: UserWhereInput! = {}): Int
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
+  documentCollections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
+  documentCollectionsCount(where: DocumentCollectionWhereInput! = {}): Int
+}
+
+input UserGroupWhereUniqueInput {
+  id: ID
+}
+
+input UserGroupWhereInput {
+  AND: [UserGroupWhereInput!]
+  OR: [UserGroupWhereInput!]
+  NOT: [UserGroupWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  owner: UserWhereInput
+  description: StringFilter
+  users: UserManyRelationFilter
+  services: ServiceManyRelationFilter
+  documentCollections: DocumentCollectionManyRelationFilter
+}
+
+input UserManyRelationFilter {
+  every: UserWhereInput
+  some: UserWhereInput
+  none: UserWhereInput
+}
+
+input ServiceManyRelationFilter {
+  every: ServiceWhereInput
+  some: ServiceWhereInput
+  none: ServiceWhereInput
+}
+
+input DocumentCollectionManyRelationFilter {
+  every: DocumentCollectionWhereInput
+  some: DocumentCollectionWhereInput
+  none: DocumentCollectionWhereInput
+}
+
+input UserGroupOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  description: OrderDirection
+}
+
+input UserGroupUpdateInput {
+  name: String
+  owner: UserRelateToOneForUpdateInput
+  description: String
+  users: UserRelateToManyForUpdateInput
+  services: ServiceRelateToManyForUpdateInput
+  documentCollections: DocumentCollectionRelateToManyForUpdateInput
+}
+
+input UserRelateToOneForUpdateInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+}
+
+input UserRelateToManyForUpdateInput {
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input ServiceRelateToManyForUpdateInput {
+  disconnect: [ServiceWhereUniqueInput!]
+  set: [ServiceWhereUniqueInput!]
+  create: [ServiceCreateInput!]
+  connect: [ServiceWhereUniqueInput!]
+}
+
+input DocumentCollectionRelateToManyForUpdateInput {
+  disconnect: [DocumentCollectionWhereUniqueInput!]
+  set: [DocumentCollectionWhereUniqueInput!]
+  create: [DocumentCollectionCreateInput!]
+  connect: [DocumentCollectionWhereUniqueInput!]
+}
+
+input UserGroupUpdateArgs {
+  where: UserGroupWhereUniqueInput!
+  data: UserGroupUpdateInput!
+}
+
+input UserGroupCreateInput {
+  name: String
+  owner: UserRelateToOneForCreateInput
+  description: String
+  users: UserRelateToManyForCreateInput
+  services: ServiceRelateToManyForCreateInput
+  documentCollections: DocumentCollectionRelateToManyForCreateInput
+}
+
+input UserRelateToOneForCreateInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input UserRelateToManyForCreateInput {
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input ServiceRelateToManyForCreateInput {
+  create: [ServiceCreateInput!]
+  connect: [ServiceWhereUniqueInput!]
+}
+
+input DocumentCollectionRelateToManyForCreateInput {
+  create: [DocumentCollectionCreateInput!]
+  connect: [DocumentCollectionWhereUniqueInput!]
+}
+
+type Contact {
+  id: ID!
+  name: String
+  phone: String
+  email: String
+  primaryServices(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  primaryServicesCount(where: ServiceWhereInput! = {}): Int
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
+  user: User
+  editorNotes: String
+}
+
+input ContactWhereUniqueInput {
+  id: ID
+}
+
+input ContactWhereInput {
+  AND: [ContactWhereInput!]
+  OR: [ContactWhereInput!]
+  NOT: [ContactWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  phone: StringNullableFilter
+  email: StringNullableFilter
+  primaryServices: ServiceManyRelationFilter
+  services: ServiceManyRelationFilter
+  user: UserWhereInput
+  editorNotes: StringFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: StringNullableFilter
+}
+
+input ContactOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  phone: OrderDirection
+  email: OrderDirection
+  editorNotes: OrderDirection
+}
+
+input ContactUpdateInput {
+  name: String
+  phone: String
+  email: String
+  primaryServices: ServiceRelateToManyForUpdateInput
+  services: ServiceRelateToManyForUpdateInput
+  user: UserRelateToOneForUpdateInput
+  editorNotes: String
+}
+
+input ContactUpdateArgs {
+  where: ContactWhereUniqueInput!
+  data: ContactUpdateInput!
+}
+
+input ContactCreateInput {
+  name: String
+  phone: String
+  email: String
+  primaryServices: ServiceRelateToManyForCreateInput
+  services: ServiceRelateToManyForCreateInput
+  user: UserRelateToOneForCreateInput
+  editorNotes: String
+}
+
+type Alert {
   id: ID!
   title: String
-  description: String
-  publishAt: DateTime
-  unpublishAt: DateTime
-  reviewDate: DateTime
-  slug: String
   body: String
-  actionLabel: String
-  actionUrl: String
-  processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
-  processesCount(where: ProcessWhereInput! = {}): Int
-  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
-  tagsCount(where: TagWhereInput! = {}): Int
-  primaryContact: Contact
-  contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
-  contactsCount(where: ContactWhereInput! = {}): Int
+  urgency: Int
   createdAt: DateTime
   updatedAt: DateTime
   editorNotes: String
 }
 
-input ServiceWhereUniqueInput {
+input AlertWhereUniqueInput {
   id: ID
-  slug: String
 }
 
-input ServiceWhereInput {
-  AND: [ServiceWhereInput!]
-  OR: [ServiceWhereInput!]
-  NOT: [ServiceWhereInput!]
+input AlertWhereInput {
+  AND: [AlertWhereInput!]
+  OR: [AlertWhereInput!]
+  NOT: [AlertWhereInput!]
   id: IDFilter
   title: StringFilter
-  description: StringFilter
-  publishAt: DateTimeNullableFilter
-  unpublishAt: DateTimeNullableFilter
-  reviewDate: DateTimeNullableFilter
-  slug: StringFilter
   body: MyStringFilter
-  actionLabel: StringNullableFilter
-  actionUrl: StringNullableFilter
-  processes: ProcessManyRelationFilter
-  tags: TagManyRelationFilter
-  primaryContact: ContactWhereInput
-  contacts: ContactManyRelationFilter
+  urgency: IntFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
   editorNotes: StringFilter
@@ -245,265 +444,6 @@ input NestedMyStringFilter {
   startsWith: String
   endsWith: String
   not: NestedMyStringFilter
-}
-
-input StringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  mode: QueryMode
-  not: StringNullableFilter
-}
-
-input ProcessManyRelationFilter {
-  every: ProcessWhereInput
-  some: ProcessWhereInput
-  none: ProcessWhereInput
-}
-
-input TagManyRelationFilter {
-  every: TagWhereInput
-  some: TagWhereInput
-  none: TagWhereInput
-}
-
-input ContactManyRelationFilter {
-  every: ContactWhereInput
-  some: ContactWhereInput
-  none: ContactWhereInput
-}
-
-input ServiceOrderByInput {
-  id: OrderDirection
-  title: OrderDirection
-  description: OrderDirection
-  publishAt: OrderDirection
-  unpublishAt: OrderDirection
-  reviewDate: OrderDirection
-  slug: OrderDirection
-  body: OrderDirection
-  actionLabel: OrderDirection
-  actionUrl: OrderDirection
-  createdAt: OrderDirection
-  updatedAt: OrderDirection
-  editorNotes: OrderDirection
-}
-
-input ServiceUpdateInput {
-  title: String
-  description: String
-  publishAt: DateTime
-  unpublishAt: DateTime
-  reviewDate: DateTime
-  slug: String
-  body: String
-  actionLabel: String
-  actionUrl: String
-  processes: ProcessRelateToManyForUpdateInput
-  tags: TagRelateToManyForUpdateInput
-  primaryContact: ContactRelateToOneForUpdateInput
-  contacts: ContactRelateToManyForUpdateInput
-  createdAt: DateTime
-  updatedAt: DateTime
-  editorNotes: String
-}
-
-input ProcessRelateToManyForUpdateInput {
-  disconnect: [ProcessWhereUniqueInput!]
-  set: [ProcessWhereUniqueInput!]
-  create: [ProcessCreateInput!]
-  connect: [ProcessWhereUniqueInput!]
-}
-
-input TagRelateToManyForUpdateInput {
-  disconnect: [TagWhereUniqueInput!]
-  set: [TagWhereUniqueInput!]
-  create: [TagCreateInput!]
-  connect: [TagWhereUniqueInput!]
-}
-
-input ContactRelateToManyForUpdateInput {
-  disconnect: [ContactWhereUniqueInput!]
-  set: [ContactWhereUniqueInput!]
-  create: [ContactCreateInput!]
-  connect: [ContactWhereUniqueInput!]
-}
-
-input ServiceUpdateArgs {
-  where: ServiceWhereUniqueInput!
-  data: ServiceUpdateInput!
-}
-
-input ServiceCreateInput {
-  title: String
-  description: String
-  publishAt: DateTime
-  unpublishAt: DateTime
-  reviewDate: DateTime
-  slug: String
-  body: String
-  actionLabel: String
-  actionUrl: String
-  processes: ProcessRelateToManyForCreateInput
-  tags: TagRelateToManyForCreateInput
-  primaryContact: ContactRelateToOneForCreateInput
-  contacts: ContactRelateToManyForCreateInput
-  createdAt: DateTime
-  updatedAt: DateTime
-  editorNotes: String
-}
-
-input ProcessRelateToManyForCreateInput {
-  create: [ProcessCreateInput!]
-  connect: [ProcessWhereUniqueInput!]
-}
-
-input TagRelateToManyForCreateInput {
-  create: [TagCreateInput!]
-  connect: [TagWhereUniqueInput!]
-}
-
-input ContactRelateToManyForCreateInput {
-  create: [ContactCreateInput!]
-  connect: [ContactWhereUniqueInput!]
-}
-
-type Tag {
-  id: ID!
-  name: String
-  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
-  servicesCount(where: ServiceWhereInput! = {}): Int
-  documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
-  documentsCount(where: DocumentWhereInput! = {}): Int
-  documentCollections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
-  documentCollectionsCount(where: DocumentCollectionWhereInput! = {}): Int
-}
-
-input TagWhereUniqueInput {
-  id: ID
-}
-
-input TagWhereInput {
-  AND: [TagWhereInput!]
-  OR: [TagWhereInput!]
-  NOT: [TagWhereInput!]
-  id: IDFilter
-  name: StringFilter
-  services: ServiceManyRelationFilter
-  documents: DocumentManyRelationFilter
-  documentCollections: DocumentCollectionManyRelationFilter
-}
-
-input ServiceManyRelationFilter {
-  every: ServiceWhereInput
-  some: ServiceWhereInput
-  none: ServiceWhereInput
-}
-
-input DocumentManyRelationFilter {
-  every: DocumentWhereInput
-  some: DocumentWhereInput
-  none: DocumentWhereInput
-}
-
-input DocumentCollectionManyRelationFilter {
-  every: DocumentCollectionWhereInput
-  some: DocumentCollectionWhereInput
-  none: DocumentCollectionWhereInput
-}
-
-input TagOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-}
-
-input TagUpdateInput {
-  name: String
-  services: ServiceRelateToManyForUpdateInput
-  documents: DocumentRelateToManyForUpdateInput
-  documentCollections: DocumentCollectionRelateToManyForUpdateInput
-}
-
-input ServiceRelateToManyForUpdateInput {
-  disconnect: [ServiceWhereUniqueInput!]
-  set: [ServiceWhereUniqueInput!]
-  create: [ServiceCreateInput!]
-  connect: [ServiceWhereUniqueInput!]
-}
-
-input DocumentRelateToManyForUpdateInput {
-  disconnect: [DocumentWhereUniqueInput!]
-  set: [DocumentWhereUniqueInput!]
-  create: [DocumentCreateInput!]
-  connect: [DocumentWhereUniqueInput!]
-}
-
-input DocumentCollectionRelateToManyForUpdateInput {
-  disconnect: [DocumentCollectionWhereUniqueInput!]
-  set: [DocumentCollectionWhereUniqueInput!]
-  create: [DocumentCollectionCreateInput!]
-  connect: [DocumentCollectionWhereUniqueInput!]
-}
-
-input TagUpdateArgs {
-  where: TagWhereUniqueInput!
-  data: TagUpdateInput!
-}
-
-input TagCreateInput {
-  name: String
-  services: ServiceRelateToManyForCreateInput
-  documents: DocumentRelateToManyForCreateInput
-  documentCollections: DocumentCollectionRelateToManyForCreateInput
-}
-
-input ServiceRelateToManyForCreateInput {
-  create: [ServiceCreateInput!]
-  connect: [ServiceWhereUniqueInput!]
-}
-
-input DocumentRelateToManyForCreateInput {
-  create: [DocumentCreateInput!]
-  connect: [DocumentWhereUniqueInput!]
-}
-
-input DocumentCollectionRelateToManyForCreateInput {
-  create: [DocumentCollectionCreateInput!]
-  connect: [DocumentCollectionWhereUniqueInput!]
-}
-
-type Alert {
-  id: ID!
-  title: String
-  body: String
-  urgency: Int
-  createdAt: DateTime
-  updatedAt: DateTime
-  editorNotes: String
-}
-
-input AlertWhereUniqueInput {
-  id: ID
-}
-
-input AlertWhereInput {
-  AND: [AlertWhereInput!]
-  OR: [AlertWhereInput!]
-  NOT: [AlertWhereInput!]
-  id: IDFilter
-  title: StringFilter
-  body: MyStringFilter
-  urgency: IntFilter
-  createdAt: DateTimeNullableFilter
-  updatedAt: DateTimeNullableFilter
-  editorNotes: StringFilter
 }
 
 input IntFilter {
@@ -550,227 +490,222 @@ input AlertCreateInput {
   editorNotes: String
 }
 
-type Process {
+type Tag {
   id: ID!
   name: String
-  service: Service
-  steps(where: StepWhereInput! = {}, orderBy: [StepOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StepWhereUniqueInput): [Step!]
-  stepsCount(where: StepWhereInput! = {}): Int
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input ProcessWhereUniqueInput {
-  id: ID
-}
-
-input ProcessWhereInput {
-  AND: [ProcessWhereInput!]
-  OR: [ProcessWhereInput!]
-  NOT: [ProcessWhereInput!]
-  id: IDFilter
-  name: StringFilter
-  service: ServiceWhereInput
-  steps: StepManyRelationFilter
-  createdAt: DateTimeNullableFilter
-  updatedAt: DateTimeNullableFilter
-}
-
-input StepManyRelationFilter {
-  every: StepWhereInput
-  some: StepWhereInput
-  none: StepWhereInput
-}
-
-input ProcessOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-  createdAt: OrderDirection
-  updatedAt: OrderDirection
-}
-
-input ProcessUpdateInput {
-  name: String
-  service: ServiceRelateToOneForUpdateInput
-  steps: StepRelateToManyForUpdateInput
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input ServiceRelateToOneForUpdateInput {
-  create: ServiceCreateInput
-  connect: ServiceWhereUniqueInput
-  disconnect: Boolean
-}
-
-input StepRelateToManyForUpdateInput {
-  disconnect: [StepWhereUniqueInput!]
-  set: [StepWhereUniqueInput!]
-  create: [StepCreateInput!]
-  connect: [StepWhereUniqueInput!]
-}
-
-input ProcessUpdateArgs {
-  where: ProcessWhereUniqueInput!
-  data: ProcessUpdateInput!
-}
-
-input ProcessCreateInput {
-  name: String
-  service: ServiceRelateToOneForCreateInput
-  steps: StepRelateToManyForCreateInput
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input ServiceRelateToOneForCreateInput {
-  create: ServiceCreateInput
-  connect: ServiceWhereUniqueInput
-}
-
-input StepRelateToManyForCreateInput {
-  create: [StepCreateInput!]
-  connect: [StepWhereUniqueInput!]
-}
-
-type Step {
-  id: ID!
-  label: String
-  process: Process
-  body: String
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input StepWhereUniqueInput {
-  id: ID
-}
-
-input StepWhereInput {
-  AND: [StepWhereInput!]
-  OR: [StepWhereInput!]
-  NOT: [StepWhereInput!]
-  id: IDFilter
-  label: StringFilter
-  process: ProcessWhereInput
-  body: MyStringFilter
-  createdAt: DateTimeNullableFilter
-  updatedAt: DateTimeNullableFilter
-}
-
-input StepOrderByInput {
-  id: OrderDirection
-  label: OrderDirection
-  body: OrderDirection
-  createdAt: OrderDirection
-  updatedAt: OrderDirection
-}
-
-input StepUpdateInput {
-  label: String
-  process: ProcessRelateToOneForUpdateInput
-  body: String
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input ProcessRelateToOneForUpdateInput {
-  create: ProcessCreateInput
-  connect: ProcessWhereUniqueInput
-  disconnect: Boolean
-}
-
-input StepUpdateArgs {
-  where: StepWhereUniqueInput!
-  data: StepUpdateInput!
-}
-
-input StepCreateInput {
-  label: String
-  process: ProcessRelateToOneForCreateInput
-  body: String
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-input ProcessRelateToOneForCreateInput {
-  create: ProcessCreateInput
-  connect: ProcessWhereUniqueInput
-}
-
-type Contact {
-  id: ID!
-  name: String
-  phone: String
-  email: String
-  primaryServices(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
-  primaryServicesCount(where: ServiceWhereInput! = {}): Int
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
-  user: User
+  documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
+  documentsCount(where: DocumentWhereInput! = {}): Int
+  documentCollections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
+  documentCollectionsCount(where: DocumentCollectionWhereInput! = {}): Int
+}
+
+input TagWhereUniqueInput {
+  id: ID
+}
+
+input TagWhereInput {
+  AND: [TagWhereInput!]
+  OR: [TagWhereInput!]
+  NOT: [TagWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  services: ServiceManyRelationFilter
+  documents: DocumentManyRelationFilter
+  documentCollections: DocumentCollectionManyRelationFilter
+}
+
+input DocumentManyRelationFilter {
+  every: DocumentWhereInput
+  some: DocumentWhereInput
+  none: DocumentWhereInput
+}
+
+input TagOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+}
+
+input TagUpdateInput {
+  name: String
+  services: ServiceRelateToManyForUpdateInput
+  documents: DocumentRelateToManyForUpdateInput
+  documentCollections: DocumentCollectionRelateToManyForUpdateInput
+}
+
+input DocumentRelateToManyForUpdateInput {
+  disconnect: [DocumentWhereUniqueInput!]
+  set: [DocumentWhereUniqueInput!]
+  create: [DocumentCreateInput!]
+  connect: [DocumentWhereUniqueInput!]
+}
+
+input TagUpdateArgs {
+  where: TagWhereUniqueInput!
+  data: TagUpdateInput!
+}
+
+input TagCreateInput {
+  name: String
+  services: ServiceRelateToManyForCreateInput
+  documents: DocumentRelateToManyForCreateInput
+  documentCollections: DocumentCollectionRelateToManyForCreateInput
+}
+
+input DocumentRelateToManyForCreateInput {
+  create: [DocumentCreateInput!]
+  connect: [DocumentWhereUniqueInput!]
+}
+
+type Service {
+  id: ID!
+  title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  reviewDate: DateTime
+  slug: String
+  owner: User
+  body: String
+  actionLabel: String
+  actionUrl: String
+  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
+  tagsCount(where: TagWhereInput! = {}): Int
+  userGroups(where: UserGroupWhereInput! = {}, orderBy: [UserGroupOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserGroupWhereUniqueInput): [UserGroup!]
+  userGroupsCount(where: UserGroupWhereInput! = {}): Int
+  primaryContact: Contact
+  contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
+  contactsCount(where: ContactWhereInput! = {}): Int
+  createdAt: DateTime
+  updatedAt: DateTime
   editorNotes: String
 }
 
-input ContactWhereUniqueInput {
+input ServiceWhereUniqueInput {
   id: ID
+  slug: String
 }
 
-input ContactWhereInput {
-  AND: [ContactWhereInput!]
-  OR: [ContactWhereInput!]
-  NOT: [ContactWhereInput!]
+input ServiceWhereInput {
+  AND: [ServiceWhereInput!]
+  OR: [ServiceWhereInput!]
+  NOT: [ServiceWhereInput!]
   id: IDFilter
-  name: StringFilter
-  phone: StringNullableFilter
-  email: StringNullableFilter
-  primaryServices: ServiceManyRelationFilter
-  services: ServiceManyRelationFilter
-  user: UserWhereInput
+  title: StringFilter
+  description: StringFilter
+  publishAt: DateTimeNullableFilter
+  unpublishAt: DateTimeNullableFilter
+  reviewDate: DateTimeNullableFilter
+  slug: StringFilter
+  owner: UserWhereInput
+  body: MyStringFilter
+  actionLabel: StringNullableFilter
+  actionUrl: StringNullableFilter
+  tags: TagManyRelationFilter
+  userGroups: UserGroupManyRelationFilter
+  primaryContact: ContactWhereInput
+  contacts: ContactManyRelationFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
   editorNotes: StringFilter
 }
 
-input ContactOrderByInput {
+input TagManyRelationFilter {
+  every: TagWhereInput
+  some: TagWhereInput
+  none: TagWhereInput
+}
+
+input ContactManyRelationFilter {
+  every: ContactWhereInput
+  some: ContactWhereInput
+  none: ContactWhereInput
+}
+
+input ServiceOrderByInput {
   id: OrderDirection
-  name: OrderDirection
-  phone: OrderDirection
-  email: OrderDirection
+  title: OrderDirection
+  description: OrderDirection
+  publishAt: OrderDirection
+  unpublishAt: OrderDirection
+  reviewDate: OrderDirection
+  slug: OrderDirection
+  body: OrderDirection
+  actionLabel: OrderDirection
+  actionUrl: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
   editorNotes: OrderDirection
 }
 
-input ContactUpdateInput {
-  name: String
-  phone: String
-  email: String
-  primaryServices: ServiceRelateToManyForUpdateInput
-  services: ServiceRelateToManyForUpdateInput
-  user: UserRelateToOneForUpdateInput
+input ServiceUpdateInput {
+  title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  reviewDate: DateTime
+  slug: String
+  owner: UserRelateToOneForUpdateInput
+  body: String
+  actionLabel: String
+  actionUrl: String
+  tags: TagRelateToManyForUpdateInput
+  userGroups: UserGroupRelateToManyForUpdateInput
+  primaryContact: ContactRelateToOneForUpdateInput
+  contacts: ContactRelateToManyForUpdateInput
+  createdAt: DateTime
+  updatedAt: DateTime
   editorNotes: String
 }
 
-input UserRelateToOneForUpdateInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  disconnect: Boolean
+input TagRelateToManyForUpdateInput {
+  disconnect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  create: [TagCreateInput!]
+  connect: [TagWhereUniqueInput!]
 }
 
-input ContactUpdateArgs {
-  where: ContactWhereUniqueInput!
-  data: ContactUpdateInput!
+input ContactRelateToManyForUpdateInput {
+  disconnect: [ContactWhereUniqueInput!]
+  set: [ContactWhereUniqueInput!]
+  create: [ContactCreateInput!]
+  connect: [ContactWhereUniqueInput!]
 }
 
-input ContactCreateInput {
-  name: String
-  phone: String
-  email: String
-  primaryServices: ServiceRelateToManyForCreateInput
-  services: ServiceRelateToManyForCreateInput
-  user: UserRelateToOneForCreateInput
+input ServiceUpdateArgs {
+  where: ServiceWhereUniqueInput!
+  data: ServiceUpdateInput!
+}
+
+input ServiceCreateInput {
+  title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  reviewDate: DateTime
+  slug: String
+  owner: UserRelateToOneForCreateInput
+  body: String
+  actionLabel: String
+  actionUrl: String
+  tags: TagRelateToManyForCreateInput
+  userGroups: UserGroupRelateToManyForCreateInput
+  primaryContact: ContactRelateToOneForCreateInput
+  contacts: ContactRelateToManyForCreateInput
+  createdAt: DateTime
+  updatedAt: DateTime
   editorNotes: String
 }
 
-input UserRelateToOneForCreateInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
+input TagRelateToManyForCreateInput {
+  create: [TagCreateInput!]
+  connect: [TagWhereUniqueInput!]
+}
+
+input ContactRelateToManyForCreateInput {
+  create: [ContactCreateInput!]
+  connect: [ContactWhereUniqueInput!]
 }
 
 type Highlight {
@@ -921,10 +856,13 @@ input DocumentCreateInput {
 type DocumentCollection {
   id: ID!
   title: String
+  owner: User
   documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
   documentsCount(where: DocumentWhereInput! = {}): Int
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int
+  userGroups(where: UserGroupWhereInput! = {}, orderBy: [UserGroupOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserGroupWhereUniqueInput): [UserGroup!]
+  userGroupsCount(where: UserGroupWhereInput! = {}): Int
   editorNotes: String
   referencedBy: [Service]
 }
@@ -939,8 +877,10 @@ input DocumentCollectionWhereInput {
   NOT: [DocumentCollectionWhereInput!]
   id: IDFilter
   title: StringFilter
+  owner: UserWhereInput
   documents: DocumentManyRelationFilter
   tags: TagManyRelationFilter
+  userGroups: UserGroupManyRelationFilter
   editorNotes: StringFilter
 }
 
@@ -952,8 +892,10 @@ input DocumentCollectionOrderByInput {
 
 input DocumentCollectionUpdateInput {
   title: String
+  owner: UserRelateToOneForUpdateInput
   documents: DocumentRelateToManyForUpdateInput
   tags: TagRelateToManyForUpdateInput
+  userGroups: UserGroupRelateToManyForUpdateInput
   editorNotes: String
 }
 
@@ -964,8 +906,10 @@ input DocumentCollectionUpdateArgs {
 
 input DocumentCollectionCreateInput {
   title: String
+  owner: UserRelateToOneForCreateInput
   documents: DocumentRelateToManyForCreateInput
   tags: TagRelateToManyForCreateInput
+  userGroups: UserGroupRelateToManyForCreateInput
   editorNotes: String
 }
 
@@ -981,42 +925,36 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
-  createService(data: ServiceCreateInput!): Service
-  createServices(data: [ServiceCreateInput!]!): [Service]
-  updateService(where: ServiceWhereUniqueInput!, data: ServiceUpdateInput!): Service
-  updateServices(data: [ServiceUpdateArgs!]!): [Service]
-  deleteService(where: ServiceWhereUniqueInput!): Service
-  deleteServices(where: [ServiceWhereUniqueInput!]!): [Service]
-  createTag(data: TagCreateInput!): Tag
-  createTags(data: [TagCreateInput!]!): [Tag]
-  updateTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): Tag
-  updateTags(data: [TagUpdateArgs!]!): [Tag]
-  deleteTag(where: TagWhereUniqueInput!): Tag
-  deleteTags(where: [TagWhereUniqueInput!]!): [Tag]
-  createAlert(data: AlertCreateInput!): Alert
-  createAlerts(data: [AlertCreateInput!]!): [Alert]
-  updateAlert(where: AlertWhereUniqueInput!, data: AlertUpdateInput!): Alert
-  updateAlerts(data: [AlertUpdateArgs!]!): [Alert]
-  deleteAlert(where: AlertWhereUniqueInput!): Alert
-  deleteAlerts(where: [AlertWhereUniqueInput!]!): [Alert]
-  createProcess(data: ProcessCreateInput!): Process
-  createProcesses(data: [ProcessCreateInput!]!): [Process]
-  updateProcess(where: ProcessWhereUniqueInput!, data: ProcessUpdateInput!): Process
-  updateProcesses(data: [ProcessUpdateArgs!]!): [Process]
-  deleteProcess(where: ProcessWhereUniqueInput!): Process
-  deleteProcesses(where: [ProcessWhereUniqueInput!]!): [Process]
-  createStep(data: StepCreateInput!): Step
-  createSteps(data: [StepCreateInput!]!): [Step]
-  updateStep(where: StepWhereUniqueInput!, data: StepUpdateInput!): Step
-  updateSteps(data: [StepUpdateArgs!]!): [Step]
-  deleteStep(where: StepWhereUniqueInput!): Step
-  deleteSteps(where: [StepWhereUniqueInput!]!): [Step]
+  createUserGroup(data: UserGroupCreateInput!): UserGroup
+  createUserGroups(data: [UserGroupCreateInput!]!): [UserGroup]
+  updateUserGroup(where: UserGroupWhereUniqueInput!, data: UserGroupUpdateInput!): UserGroup
+  updateUserGroups(data: [UserGroupUpdateArgs!]!): [UserGroup]
+  deleteUserGroup(where: UserGroupWhereUniqueInput!): UserGroup
+  deleteUserGroups(where: [UserGroupWhereUniqueInput!]!): [UserGroup]
   createContact(data: ContactCreateInput!): Contact
   createContacts(data: [ContactCreateInput!]!): [Contact]
   updateContact(where: ContactWhereUniqueInput!, data: ContactUpdateInput!): Contact
   updateContacts(data: [ContactUpdateArgs!]!): [Contact]
   deleteContact(where: ContactWhereUniqueInput!): Contact
   deleteContacts(where: [ContactWhereUniqueInput!]!): [Contact]
+  createAlert(data: AlertCreateInput!): Alert
+  createAlerts(data: [AlertCreateInput!]!): [Alert]
+  updateAlert(where: AlertWhereUniqueInput!, data: AlertUpdateInput!): Alert
+  updateAlerts(data: [AlertUpdateArgs!]!): [Alert]
+  deleteAlert(where: AlertWhereUniqueInput!): Alert
+  deleteAlerts(where: [AlertWhereUniqueInput!]!): [Alert]
+  createTag(data: TagCreateInput!): Tag
+  createTags(data: [TagCreateInput!]!): [Tag]
+  updateTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): Tag
+  updateTags(data: [TagUpdateArgs!]!): [Tag]
+  deleteTag(where: TagWhereUniqueInput!): Tag
+  deleteTags(where: [TagWhereUniqueInput!]!): [Tag]
+  createService(data: ServiceCreateInput!): Service
+  createServices(data: [ServiceCreateInput!]!): [Service]
+  updateService(where: ServiceWhereUniqueInput!, data: ServiceUpdateInput!): Service
+  updateServices(data: [ServiceUpdateArgs!]!): [Service]
+  deleteService(where: ServiceWhereUniqueInput!): Service
+  deleteServices(where: [ServiceWhereUniqueInput!]!): [Service]
   createHighlight(data: HighlightCreateInput!): Highlight
   createHighlights(data: [HighlightCreateInput!]!): [Highlight]
   updateHighlight(where: HighlightWhereUniqueInput!, data: HighlightUpdateInput!): Highlight
@@ -1042,24 +980,21 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserWhereUniqueInput): [User!]
   usersCount(where: UserWhereInput! = {}): Int
-  service(where: ServiceWhereUniqueInput!): Service
-  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
-  servicesCount(where: ServiceWhereInput! = {}): Int
-  tag(where: TagWhereUniqueInput!): Tag
-  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
-  tagsCount(where: TagWhereInput! = {}): Int
-  alert(where: AlertWhereUniqueInput!): Alert
-  alerts(where: AlertWhereInput! = {}, orderBy: [AlertOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AlertWhereUniqueInput): [Alert!]
-  alertsCount(where: AlertWhereInput! = {}): Int
-  process(where: ProcessWhereUniqueInput!): Process
-  processes(where: ProcessWhereInput! = {}, orderBy: [ProcessOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProcessWhereUniqueInput): [Process!]
-  processesCount(where: ProcessWhereInput! = {}): Int
-  step(where: StepWhereUniqueInput!): Step
-  steps(where: StepWhereInput! = {}, orderBy: [StepOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StepWhereUniqueInput): [Step!]
-  stepsCount(where: StepWhereInput! = {}): Int
+  userGroup(where: UserGroupWhereUniqueInput!): UserGroup
+  userGroups(where: UserGroupWhereInput! = {}, orderBy: [UserGroupOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserGroupWhereUniqueInput): [UserGroup!]
+  userGroupsCount(where: UserGroupWhereInput! = {}): Int
   contact(where: ContactWhereUniqueInput!): Contact
   contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
   contactsCount(where: ContactWhereInput! = {}): Int
+  alert(where: AlertWhereUniqueInput!): Alert
+  alerts(where: AlertWhereInput! = {}, orderBy: [AlertOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AlertWhereUniqueInput): [Alert!]
+  alertsCount(where: AlertWhereInput! = {}): Int
+  tag(where: TagWhereUniqueInput!): Tag
+  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
+  tagsCount(where: TagWhereInput! = {}): Int
+  service(where: ServiceWhereUniqueInput!): Service
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
   highlight(where: HighlightWhereUniqueInput!): Highlight
   highlights(where: HighlightWhereInput! = {}, orderBy: [HighlightOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: HighlightWhereUniqueInput): [Highlight!]
   highlightsCount(where: HighlightWhereInput! = {}): Int

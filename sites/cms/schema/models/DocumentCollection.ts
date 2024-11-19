@@ -1,15 +1,18 @@
 import { graphql, list, ListConfig } from '@keystone-6/core';
-import { allowAll } from '@keystone-6/core/access';
-
 import { relationship, text, virtual } from '@keystone-6/core/fields';
+import { generalOperationAccess } from '../access';
+import { owner, userGroups } from '../fieldUtils';
 
 export const DocumentCollection: ListConfig<any> = list({
-  access: allowAll,
+  access: {
+    operation: generalOperationAccess,
+  },
   graphql: {
     maxTake: 100,
   },
   fields: {
     title: text({ validation: { isRequired: true } }),
+    owner,
     documents: relationship({
       ref: 'Document.collections',
       many: true,
@@ -33,6 +36,8 @@ export const DocumentCollection: ListConfig<any> = list({
         },
       },
     }),
+
+    userGroups: userGroups('documentCollections'),
 
     editorNotes: text({
       ui: {

@@ -13,82 +13,32 @@ generator client {
 }
 
 model User {
-  id        String        @id @default(cuid())
-  authId    String        @unique @default("")
-  name      String        @default("")
-  email     String        @unique @default("")
-  password  String?
-  contact   Contact?      @relation("Contact_user")
-  role      UserRoleType?
-  createdAt DateTime?     @default(now())
-  updatedAt DateTime?     @default(now()) @updatedAt
+  id                            String               @id @default(cuid())
+  authId                        String               @unique @default("")
+  name                          String               @default("")
+  email                         String               @unique @default("")
+  password                      String?
+  contact                       Contact?             @relation("Contact_user")
+  role                          Int?                 @default(4)
+  groups                        UserGroup[]          @relation("User_groups")
+  createdAt                     DateTime?            @default(now())
+  updatedAt                     DateTime?            @default(now()) @updatedAt
+  from_UserGroup_owner          UserGroup[]          @relation("UserGroup_owner")
+  from_Service_owner            Service[]            @relation("Service_owner")
+  from_DocumentCollection_owner DocumentCollection[] @relation("DocumentCollection_owner")
 }
 
-model Service {
-  id               String    @id @default(cuid())
-  title            String    @default("")
-  description      String    @default("")
-  publishAt        DateTime?
-  unpublishAt      DateTime?
-  reviewDate       DateTime?
-  slug             String    @unique @default("")
-  body             String?
-  actionLabel      String?
-  actionUrl        String?
-  processes        Process[] @relation("Process_service")
-  tags             Tag[]     @relation("Service_tags")
-  primaryContact   Contact?  @relation("Service_primaryContact", fields: [primaryContactId], references: [id])
-  primaryContactId String?   @map("primaryContact")
-  contacts         Contact[] @relation("Contact_services")
-  createdAt        DateTime? @default(now())
-  updatedAt        DateTime? @default(now()) @updatedAt
-  editorNotes      String    @default("")
-
-  @@index([title])
-  @@index([description])
-  @@index([primaryContactId])
-}
-
-model Tag {
+model UserGroup {
   id                  String               @id @default(cuid())
   name                String               @default("")
-  services            Service[]            @relation("Service_tags")
-  documents           Document[]           @relation("Document_tags")
-  documentCollections DocumentCollection[] @relation("DocumentCollection_tags")
-}
+  owner               User?                @relation("UserGroup_owner", fields: [ownerId], references: [id])
+  ownerId             String?              @map("owner")
+  description         String               @default("")
+  users               User[]               @relation("User_groups")
+  services            Service[]            @relation("Service_userGroups")
+  documentCollections DocumentCollection[] @relation("DocumentCollection_userGroups")
 
-model Alert {
-  id          String    @id @default(cuid())
-  title       String    @default("")
-  body        String?
-  urgency     Int
-  createdAt   DateTime? @default(now())
-  updatedAt   DateTime? @default(now()) @updatedAt
-  editorNotes String    @default("")
-}
-
-model Process {
-  id        String    @id @default(cuid())
-  name      String    @default("")
-  service   Service?  @relation("Process_service", fields: [serviceId], references: [id])
-  serviceId String?   @map("service")
-  steps     Step[]    @relation("Step_process")
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now()) @updatedAt
-
-  @@index([serviceId])
-}
-
-model Step {
-  id        String    @id @default(cuid())
-  label     String    @default("")
-  process   Process?  @relation("Step_process", fields: [processId], references: [id])
-  processId String?   @map("process")
-  body      String?
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now()) @updatedAt
-
-  @@index([processId])
+  @@index([ownerId])
 }
 
 model Contact {
@@ -101,6 +51,52 @@ model Contact {
   user            User?     @relation("Contact_user", fields: [userId], references: [id])
   userId          String?   @unique @map("user")
   editorNotes     String    @default("")
+}
+
+model Alert {
+  id          String    @id @default(cuid())
+  title       String    @default("")
+  body        String?
+  urgency     Int
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+  editorNotes String    @default("")
+}
+
+model Tag {
+  id                  String               @id @default(cuid())
+  name                String               @default("")
+  services            Service[]            @relation("Service_tags")
+  documents           Document[]           @relation("Document_tags")
+  documentCollections DocumentCollection[] @relation("DocumentCollection_tags")
+}
+
+model Service {
+  id               String      @id @default(cuid())
+  title            String      @default("")
+  description      String      @default("")
+  publishAt        DateTime?
+  unpublishAt      DateTime?
+  reviewDate       DateTime?
+  slug             String      @unique @default("")
+  owner            User?       @relation("Service_owner", fields: [ownerId], references: [id])
+  ownerId          String?     @map("owner")
+  body             String?
+  actionLabel      String?
+  actionUrl        String?
+  tags             Tag[]       @relation("Service_tags")
+  userGroups       UserGroup[] @relation("Service_userGroups")
+  primaryContact   Contact?    @relation("Service_primaryContact", fields: [primaryContactId], references: [id])
+  primaryContactId String?     @map("primaryContact")
+  contacts         Contact[]   @relation("Contact_services")
+  createdAt        DateTime?   @default(now())
+  updatedAt        DateTime?   @default(now()) @updatedAt
+  editorNotes      String      @default("")
+
+  @@index([title])
+  @@index([description])
+  @@index([ownerId])
+  @@index([primaryContactId])
 }
 
 model Highlight {
@@ -130,16 +126,14 @@ model Document {
 }
 
 model DocumentCollection {
-  id          String     @id @default(cuid())
-  title       String     @default("")
-  documents   Document[] @relation("Document_collections")
-  tags        Tag[]      @relation("DocumentCollection_tags")
-  editorNotes String     @default("")
-}
+  id          String      @id @default(cuid())
+  title       String      @default("")
+  owner       User?       @relation("DocumentCollection_owner", fields: [ownerId], references: [id])
+  ownerId     String?     @map("owner")
+  documents   Document[]  @relation("Document_collections")
+  tags        Tag[]       @relation("DocumentCollection_tags")
+  userGroups  UserGroup[] @relation("DocumentCollection_userGroups")
+  editorNotes String      @default("")
 
-enum UserRoleType {
-  admin
-  content_manager
-  contributor
-  collaborator
+  @@index([ownerId])
 }

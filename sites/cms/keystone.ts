@@ -53,8 +53,20 @@ export default config<TypeInfo<Session>>({
 
   // https://keystonejs.com/docs/config/config#ui
   ui: {
-    async pageMiddleware({ wasAccessAllowed }) {
-      if (!wasAccessAllowed) {
+    async pageMiddleware({ wasAccessAllowed, context }) {
+      if (wasAccessAllowed) {
+        const user = await context.prisma.user.findUnique({
+          where: { id: context.session?.id },
+        });
+
+        if (user) {
+          context.sessionStrategy?.start({
+            context,
+            data: user,
+          });
+          return;
+        }
+      } else {
         return {
           kind: 'redirect',
           to: '/auth/azure',

@@ -69,7 +69,6 @@ export function passportMiddleware(
       const user = await commonContext.prisma.user.findUnique({
         where: { id: id },
       });
-      // if (user) commonContext
       done(null, user);
     } catch (error) {
       done(error);

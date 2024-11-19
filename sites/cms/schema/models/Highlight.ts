@@ -1,11 +1,17 @@
 import { group, list, ListConfig } from '@keystone-6/core';
-import { allowAll } from '@keystone-6/core/access';
 import { publishable, urlRegex } from '../fieldUtils';
 import { text } from '@keystone-6/core/fields';
 import { linkField } from '../../customFields/link';
+import { isAdmin } from '../access/roles';
+import { adminOnlyOperationAccess } from '../access';
 
 export const Highlight: ListConfig<any> = list({
-  access: allowAll,
+  access: {
+    operation: adminOnlyOperationAccess,
+  },
+  ui: {
+    isHidden: ({ session }) => !isAdmin(session),
+  },
   graphql: {
     maxTake: 100,
   },

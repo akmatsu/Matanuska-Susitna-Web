@@ -1,5 +1,8 @@
 import { BaseFields, group } from '@keystone-6/core';
-import { text, timestamp } from '@keystone-6/core/fields';
+import { relationship, text, timestamp } from '@keystone-6/core/fields';
+import { KeystoneContextFromListTypeInfo } from '@keystone-6/core/types';
+import { isAdmin } from './access/roles';
+import { isOwner } from './access/group';
 
 export const urlRegex = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/;
 
@@ -149,3 +152,50 @@ export const slug = text({
     },
   },
 });
+
+export const owner = relationship({
+  ref: 'User',
+  ui: {
+    createView: {
+      fieldMode: 'hidden',
+    },
+  },
+  hooks: {
+    resolveInput: relateActiveUser,
+  },
+  access: {
+    update: ({ session, item }) => isAdmin(session) || isOwner(session, item),
+  },
+});
+
+export function relateActiveUser({
+  operation,
+  resolvedData,
+  context,
+  fieldKey,
+}: {
+  operation: 'create' | 'update';
+  resolvedData: any;
+  context: KeystoneContextFromListTypeInfo<any>;
+  fieldKey: any;
+}) {
+  if (operation === 'create') {
+    return context.session?.id ? { connect: { id: context.session.id } } : null;
+  }
+  return resolvedData?.[fieldKey];
+}
+
+export function userGroups(listKey: string) {
+  return relationship({
+    ref: `UserGroup.${listKey}`,
+    many: true,
+    ui: {
+      itemView: {
+        fieldPosition: 'sidebar',
+      },
+    },
+    access: {
+      update: ({ session, item }) => isAdmin(session) || isOwner(session, item),
+    },
+  });
+}

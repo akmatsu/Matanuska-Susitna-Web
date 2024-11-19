@@ -1,12 +1,18 @@
 import { list, ListConfig } from '@keystone-6/core';
-import { allowAll } from '@keystone-6/core/access';
 import { password, relationship, select, text } from '@keystone-6/core/fields';
 import { timestamps } from '../fieldUtils';
+import { isAdmin, ROLES } from '../access/roles';
+import { internalMaxOperationAccess } from '../access';
+import { allowAll } from '@keystone-6/core/access';
 
 export const User: ListConfig<any> = list({
   access: allowAll,
+  // access: {
+  //   operation: internalMaxOperationAccess,
+  // },
   ui: {
     hideCreate: true,
+    // isHidden: ({ session }) => !isAdmin(session),
   },
   fields: {
     authId: text({
@@ -28,25 +34,35 @@ export const User: ListConfig<any> = list({
     }),
     contact: relationship({ ref: 'Contact.user' }),
     role: select({
-      type: 'enum',
+      type: 'integer',
       options: [
         {
           label: 'Admin',
-          value: 'admin',
+          value: ROLES.ADMIN,
         },
         {
           label: 'Content Manager',
-          value: 'content_manager',
+          value: ROLES.CONTENT_MANAGER,
         },
         {
           label: 'Contributor',
-          value: 'contributor',
+          value: ROLES.CONTRIBUTOR,
         },
         {
           label: 'Collaborator',
-          value: 'collaborator',
+          value: ROLES.COLLABORATOR,
         },
       ],
+      defaultValue: ROLES.COLLABORATOR,
+    }),
+    groups: relationship({
+      ref: 'UserGroup.users',
+      many: true,
+      ui: {
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
+      },
     }),
 
     ...timestamps,
