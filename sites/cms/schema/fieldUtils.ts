@@ -1,6 +1,8 @@
 import { BaseFields, group } from '@keystone-6/core';
 import { relationship, text, timestamp } from '@keystone-6/core/fields';
 import { KeystoneContextFromListTypeInfo } from '@keystone-6/core/types';
+import { isAdmin } from './access/roles';
+import { isOwner } from './access/group';
 
 export const urlRegex = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/;
 
@@ -161,6 +163,9 @@ export const owner = relationship({
   hooks: {
     resolveInput: relateActiveUser,
   },
+  access: {
+    update: ({ session, item }) => isAdmin(session) || isOwner(session, item),
+  },
 });
 
 export function relateActiveUser({
@@ -178,4 +183,19 @@ export function relateActiveUser({
     return context.session?.id ? { connect: { id: context.session.id } } : null;
   }
   return resolvedData?.[fieldKey];
+}
+
+export function userGroups(listKey: string) {
+  return relationship({
+    ref: `UserGroup.${listKey}`,
+    many: true,
+    ui: {
+      itemView: {
+        fieldPosition: 'sidebar',
+      },
+    },
+    access: {
+      update: ({ session, item }) => isAdmin(session) || isOwner(session, item),
+    },
+  });
 }

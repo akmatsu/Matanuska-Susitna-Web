@@ -1,20 +1,18 @@
 import { list, ListConfig } from '@keystone-6/core';
 import { password, relationship, select, text } from '@keystone-6/core/fields';
 import { timestamps } from '../fieldUtils';
-import { isAdmin, isContributor, ROLES } from '../access/roles';
+import { isAdmin, ROLES } from '../access/roles';
+import { internalMaxOperationAccess } from '../access';
+import { allowAll } from '@keystone-6/core/access';
 
 export const User: ListConfig<any> = list({
-  access: {
-    operation: {
-      query: ({ session }) => isContributor(session),
-      create: ({ session }) => isAdmin(session),
-      update: ({ session }) => isAdmin(session),
-      delete: ({ session }) => isAdmin(session),
-    },
-  },
+  access: allowAll,
+  // access: {
+  //   operation: internalMaxOperationAccess,
+  // },
   ui: {
     hideCreate: true,
-    isHidden: ({ session }) => !isAdmin(session),
+    // isHidden: ({ session }) => !isAdmin(session),
   },
   fields: {
     authId: text({

@@ -856,6 +856,7 @@ input DocumentCreateInput {
 type DocumentCollection {
   id: ID!
   title: String
+  owner: User
   documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
   documentsCount(where: DocumentWhereInput! = {}): Int
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
@@ -876,6 +877,7 @@ input DocumentCollectionWhereInput {
   NOT: [DocumentCollectionWhereInput!]
   id: IDFilter
   title: StringFilter
+  owner: UserWhereInput
   documents: DocumentManyRelationFilter
   tags: TagManyRelationFilter
   userGroups: UserGroupManyRelationFilter
@@ -890,6 +892,7 @@ input DocumentCollectionOrderByInput {
 
 input DocumentCollectionUpdateInput {
   title: String
+  owner: UserRelateToOneForUpdateInput
   documents: DocumentRelateToManyForUpdateInput
   tags: TagRelateToManyForUpdateInput
   userGroups: UserGroupRelateToManyForUpdateInput
@@ -903,6 +906,7 @@ input DocumentCollectionUpdateArgs {
 
 input DocumentCollectionCreateInput {
   title: String
+  owner: UserRelateToOneForCreateInput
   documents: DocumentRelateToManyForCreateInput
   tags: TagRelateToManyForCreateInput
   userGroups: UserGroupRelateToManyForCreateInput

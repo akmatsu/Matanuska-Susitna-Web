@@ -13,18 +13,19 @@ generator client {
 }
 
 model User {
-  id                   String      @id @default(cuid())
-  authId               String      @unique @default("")
-  name                 String      @default("")
-  email                String      @unique @default("")
-  password             String?
-  contact              Contact?    @relation("Contact_user")
-  role                 Int?        @default(4)
-  groups               UserGroup[] @relation("User_groups")
-  createdAt            DateTime?   @default(now())
-  updatedAt            DateTime?   @default(now()) @updatedAt
-  from_UserGroup_owner UserGroup[] @relation("UserGroup_owner")
-  from_Service_owner   Service[]   @relation("Service_owner")
+  id                            String               @id @default(cuid())
+  authId                        String               @unique @default("")
+  name                          String               @default("")
+  email                         String               @unique @default("")
+  password                      String?
+  contact                       Contact?             @relation("Contact_user")
+  role                          Int?                 @default(4)
+  groups                        UserGroup[]          @relation("User_groups")
+  createdAt                     DateTime?            @default(now())
+  updatedAt                     DateTime?            @default(now()) @updatedAt
+  from_UserGroup_owner          UserGroup[]          @relation("UserGroup_owner")
+  from_Service_owner            Service[]            @relation("Service_owner")
+  from_DocumentCollection_owner DocumentCollection[] @relation("DocumentCollection_owner")
 }
 
 model UserGroup {
@@ -127,8 +128,12 @@ model Document {
 model DocumentCollection {
   id          String      @id @default(cuid())
   title       String      @default("")
+  owner       User?       @relation("DocumentCollection_owner", fields: [ownerId], references: [id])
+  ownerId     String?     @map("owner")
   documents   Document[]  @relation("Document_collections")
   tags        Tag[]       @relation("DocumentCollection_tags")
   userGroups  UserGroup[] @relation("DocumentCollection_userGroups")
   editorNotes String      @default("")
+
+  @@index([ownerId])
 }

@@ -3,15 +3,11 @@ import { publishable, urlRegex } from '../fieldUtils';
 import { text } from '@keystone-6/core/fields';
 import { linkField } from '../../customFields/link';
 import { isAdmin } from '../access/roles';
+import { adminOnlyOperationAccess } from '../access';
 
 export const Highlight: ListConfig<any> = list({
   access: {
-    operation: {
-      query: ({ session }) => isAdmin(session),
-      create: ({ session }) => isAdmin(session),
-      update: ({ session }) => isAdmin(session),
-      delete: ({ session }) => isAdmin(session),
-    },
+    operation: adminOnlyOperationAccess,
   },
   ui: {
     isHidden: ({ session }) => !isAdmin(session),

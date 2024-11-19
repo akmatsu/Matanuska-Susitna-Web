@@ -1,16 +1,12 @@
 import { list, ListConfig } from '@keystone-6/core';
-import { isContributor } from '../access/roles';
 import { relationship, text } from '@keystone-6/core/fields';
 import { owner } from '../fieldUtils';
+import { generalItemAccess, generalOperationAccess } from '../access';
 
 export const UserGroup: ListConfig<any> = list({
   access: {
-    operation: {
-      query: ({ session }) => isContributor(session),
-      create: ({ session }) => isContributor(session),
-      update: ({ session }) => isContributor(session),
-      delete: ({ session }) => isContributor(session),
-    },
+    operation: generalOperationAccess,
+    item: generalItemAccess,
   },
   fields: {
     name: text({ validation: { isRequired: true } }),

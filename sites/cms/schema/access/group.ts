@@ -50,7 +50,7 @@ async function getItemsGroups(id: string, lk: string, ctx: KeystoneContext) {
     query: 'userGroups { id }',
   });
 
-  return res.itemGroups as { id: string }[];
+  return res.userGroups as { id: string }[];
 }
 
 function checkIfUserHasItemGroup(
@@ -59,8 +59,12 @@ function checkIfUserHasItemGroup(
 ): boolean {
   for (let i = 0, l = ug.length; i < l; i++) {
     const t = ug[i];
-    if (ig.includes(t)) {
-      return true;
+
+    for (let j = 0, k = ig.length; j < k; j++) {
+      const it = ig[j];
+      if (it.id === t.id) {
+        return true;
+      }
     }
   }
   return false;
