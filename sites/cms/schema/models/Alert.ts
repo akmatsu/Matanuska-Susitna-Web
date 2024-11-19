@@ -3,7 +3,7 @@ import { allowAll } from '@keystone-6/core/access';
 import { timestamps } from '../fieldUtils';
 import { select, text } from '@keystone-6/core/fields';
 import { customText } from '../../customFields/Markdown';
-import { isContentManager } from '../roles';
+import { isContentManager } from '../access/roles';
 
 export const Alert: ListConfig<any> = list({
   access: {

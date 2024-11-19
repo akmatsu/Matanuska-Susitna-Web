@@ -24,6 +24,7 @@ model User {
   createdAt            DateTime?   @default(now())
   updatedAt            DateTime?   @default(now()) @updatedAt
   from_UserGroup_owner UserGroup[] @relation("UserGroup_owner")
+  from_Service_owner   Service[]   @relation("Service_owner")
 }
 
 model UserGroup {
@@ -77,6 +78,8 @@ model Service {
   unpublishAt      DateTime?
   reviewDate       DateTime?
   slug             String      @unique @default("")
+  owner            User?       @relation("Service_owner", fields: [ownerId], references: [id])
+  ownerId          String?     @map("owner")
   body             String?
   actionLabel      String?
   actionUrl        String?
@@ -91,6 +94,7 @@ model Service {
 
   @@index([title])
   @@index([description])
+  @@index([ownerId])
   @@index([primaryContactId])
 }
 

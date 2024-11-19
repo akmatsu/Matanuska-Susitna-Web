@@ -2,7 +2,7 @@ import { list, ListConfig } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
 import { file, relationship, text } from '@keystone-6/core/fields';
 import { appConfig } from '../../appConfig';
-import { isCollaborator, isContributor } from '../roles';
+import { isCollaborator, isContributor } from '../access/roles';
 
 export const Document: ListConfig<any> = list({
   access: {

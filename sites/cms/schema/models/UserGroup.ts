@@ -1,6 +1,7 @@
 import { list, ListConfig } from '@keystone-6/core';
-import { isContributor } from '../roles';
+import { isContributor } from '../access/roles';
 import { relationship, text } from '@keystone-6/core/fields';
+import { owner } from '../fieldUtils';
 
 export const UserGroup: ListConfig<any> = list({
   access: {
@@ -13,7 +14,7 @@ export const UserGroup: ListConfig<any> = list({
   },
   fields: {
     name: text({ validation: { isRequired: true } }),
-    owner: relationship({ ref: 'User' }),
+    owner,
     description: text({ ui: { displayMode: 'textarea' } }),
     users: relationship({ ref: 'User.groups', many: true }),
     services: relationship({ ref: 'Service.userGroups', many: true }),

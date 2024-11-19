@@ -566,6 +566,7 @@ type Service {
   unpublishAt: DateTime
   reviewDate: DateTime
   slug: String
+  owner: User
   body: String
   actionLabel: String
   actionUrl: String
@@ -597,6 +598,7 @@ input ServiceWhereInput {
   unpublishAt: DateTimeNullableFilter
   reviewDate: DateTimeNullableFilter
   slug: StringFilter
+  owner: UserWhereInput
   body: MyStringFilter
   actionLabel: StringNullableFilter
   actionUrl: StringNullableFilter
@@ -644,6 +646,7 @@ input ServiceUpdateInput {
   unpublishAt: DateTime
   reviewDate: DateTime
   slug: String
+  owner: UserRelateToOneForUpdateInput
   body: String
   actionLabel: String
   actionUrl: String
@@ -682,6 +685,7 @@ input ServiceCreateInput {
   unpublishAt: DateTime
   reviewDate: DateTime
   slug: String
+  owner: UserRelateToOneForCreateInput
   body: String
   actionLabel: String
   actionUrl: String

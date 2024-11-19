@@ -1,4 +1,4 @@
-import { Session } from '../auth';
+import { Session } from '../../auth';
 
 export const ROLES = {
   /**

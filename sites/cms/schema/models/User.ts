@@ -1,7 +1,7 @@
 import { list, ListConfig } from '@keystone-6/core';
 import { password, relationship, select, text } from '@keystone-6/core/fields';
 import { timestamps } from '../fieldUtils';
-import { isAdmin, isContributor, ROLES } from '../roles';
+import { isAdmin, isContributor, ROLES } from '../access/roles';
 
 export const User: ListConfig<any> = list({
   access: {

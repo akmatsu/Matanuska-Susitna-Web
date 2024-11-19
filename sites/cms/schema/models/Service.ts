@@ -1,6 +1,7 @@
 import { group, list, ListConfig } from '@keystone-6/core';
 import { relationship, text } from '@keystone-6/core/fields';
 import {
+  owner,
   publishable,
   slug,
   timestamps,
@@ -8,7 +9,8 @@ import {
   urlRegex,
 } from '../fieldUtils';
 import { customText } from '../../customFields/Markdown';
-import { isContributor } from '../roles';
+import { isContentManager, isContributor } from '../access/roles';
+import { belongsToGroup, isOwner } from '../access/group';
 
 function getDatetimeISOString(date = new Date(Date.now())): string {
   return date.toISOString();
@@ -17,10 +19,21 @@ function getDatetimeISOString(date = new Date(Date.now())): string {
 export const Service: ListConfig<any> = list({
   access: {
     operation: {
-      query: ({ session }) => true,
+      query: () => true,
       create: ({ session }) => isContributor(session),
       update: ({ session }) => isContributor(session),
       delete: ({ session }) => isContributor(session),
+    },
+    item: {
+      update: async ({ session, item, context }) =>
+        // isContentManager(session) ||
+        // isOwner(session, item) ||
+        belongsToGroup(session, item, context, 'Service'),
+
+      delete: async ({ session, item, context }) =>
+        isContentManager(session) ||
+        isOwner(session, item) ||
+        belongsToGroup(session, item, context, 'Service'),
     },
     filter: {
       query: ({ session }) => {
@@ -58,6 +71,7 @@ export const Service: ListConfig<any> = list({
     ...titleAndDescription(),
     ...publishable,
     slug,
+    owner,
     body: customText(),
 
     ...group({
