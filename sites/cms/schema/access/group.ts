@@ -1,40 +1,67 @@
 import { KeystoneContext } from '@keystone-6/core/types';
 import { Session } from '../../auth';
 
+/**
+ * Checks if the user is the owner of the item.
+ */
 export function isOwner(user: Session, item: any) {
   return user.id === item.ownerId;
 }
 
-// TODO! Finish setting up group filters
+/**
+ * Checks if the user belongs to any groups that have access to the given item.
+ */
 export async function belongsToGroup(
   user: Session,
   item: any,
   context: KeystoneContext,
   listKey: string,
-) {
-  const [u, g, i] = await Promise.all([
-    context.query.User.findOne({
-      where: { id: user.id },
-      query: `groups { id }`,
-    }),
-    context.query.UserGroup.findMany({
-      where: { owner: { id: { equals: user.id } } },
-      query: 'id',
-    }),
-    context.query[listKey].findOne({
-      where: { id: item.id },
-      query: 'userGroups { id }',
-    }),
+): Promise<boolean> {
+  const [userGroups, ownedGroups, itemGroups] = await Promise.all([
+    getActiveUserGroups(user.id, context),
+    getActiveUserOwnedGroups(user.id, context),
+    getItemsGroups(item.id, listKey, context),
   ]);
 
-  const userGroups = [...u.groups, ...g] as { id: string }[];
-  const itemGroups = i.userGroups as { id: string }[];
+  const combinedGroups = [...userGroups, ...ownedGroups];
+  return checkIfUserHasItemGroup(combinedGroups, itemGroups);
+}
 
-  if (
-    userGroups.some((item) => {
-      return itemGroups.includes(item);
-    })
-  )
-    return true;
+async function getActiveUserGroups(id: string, ctx: KeystoneContext) {
+  const res = await ctx.query.User.findOne({
+    where: { id: id },
+    query: 'groups { id }',
+  });
+
+  return res.groups as { id: string }[];
+}
+
+async function getActiveUserOwnedGroups(id: string, ctx: KeystoneContext) {
+  const res = await ctx.query.UserGroup.findMany({
+    where: { owner: { id: { equals: id } } },
+  });
+
+  return res as { id: string }[];
+}
+
+async function getItemsGroups(id: string, lk: string, ctx: KeystoneContext) {
+  const res = await ctx.query?.[lk].findOne({
+    where: { id: id },
+    query: 'userGroups { id }',
+  });
+
+  return res.itemGroups as { id: string }[];
+}
+
+function checkIfUserHasItemGroup(
+  ug: { id: string }[],
+  ig: { id: string }[],
+): boolean {
+  for (let i = 0, l = ug.length; i < l; i++) {
+    const t = ug[i];
+    if (ig.includes(t)) {
+      return true;
+    }
+  }
   return false;
 }

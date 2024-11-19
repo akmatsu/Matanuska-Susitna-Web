@@ -26,8 +26,8 @@ export const Service: ListConfig<any> = list({
     },
     item: {
       update: async ({ session, item, context }) =>
-        // isContentManager(session) ||
-        // isOwner(session, item) ||
+        isContentManager(session) ||
+        isOwner(session, item) ||
         belongsToGroup(session, item, context, 'Service'),
 
       delete: async ({ session, item, context }) =>
