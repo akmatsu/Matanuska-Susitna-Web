@@ -8,6 +8,7 @@ export function useMenuNavControls(
     label: string;
     action: (...args: any) => void;
   }[],
+
   isVisible: boolean,
 ) {
   const [loading, get] = useInstance();
@@ -64,6 +65,10 @@ export function useMenuNavControls(
       });
     };
   }, [isVisible, handleKeyDown]);
+
+  useEffect(() => {
+    if (selectedIndex > items.length - 1) setSelectedIndex(items.length - 1);
+  }, [items]);
 
   return { runAction, loading, get, selectedIndex };
 }

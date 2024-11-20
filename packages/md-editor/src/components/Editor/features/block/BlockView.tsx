@@ -1,6 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { MouseEventHandler, useEffect, useRef } from 'react';
 import { BlockProvider } from '@milkdown/kit/plugin/block';
 import { useInstance } from '@milkdown/react';
+import { editorViewCtx } from '@milkdown/kit/core';
+import { paragraphSchema } from '@milkdown/kit/preset/commonmark';
+import { slash } from '../slash';
 
 export function BlockView() {
   const ref = useRef<HTMLDivElement>(null);
@@ -53,25 +56,44 @@ export function BlockView() {
     };
   }, [loading]);
 
+  function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const ctx = get().ctx;
+    const view = ctx.get(editorViewCtx);
+    if (!view.hasFocus()) view.focus();
+
+    const { state, dispatch } = view;
+    const active = tooltipProvider.current.active;
+    if (!active) return;
+
+    const $pos = active.$pos;
+    const pos = $pos.pos + active.node.nodeSize;
+    let tr = state.tr.insert(pos, paragraphSchema.type(ctx).create());
+
+    dispatch(tr.scrollIntoView());
+    tooltipProvider.current.hide();
+    ctx.get(slash.key).show(tr.selection.from);
+  }
+
+  function handleMouseUp(e: React.MouseEvent<HTMLDivElement>) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
   return (
-    <div
-      ref={ref}
-      className="absolute w-6 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-grab transition-all"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-6 h-6"
+    <div ref={ref} className="absolute flex gap-2 transition-all">
+      <div
+        className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-grab transition-all flex flex-col justify-center"
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-        />
-      </svg>
+        <span className="icon-[ri--add-fill] size-6"></span>
+      </div>
+      <div className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-grab transition-all flex flex-col justify-center">
+        <span className="icon-[icon-park-outline--drag] size-6"></span>
+      </div>
     </div>
   );
 }
