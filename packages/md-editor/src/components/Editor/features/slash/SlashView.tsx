@@ -1,22 +1,21 @@
-import { slashFactory, SlashProvider } from '@milkdown/kit/plugin/slash';
-import { usePluginViewContext } from '@prosemirror-adapter/react';
+import { slashFactory } from '@milkdown/kit/plugin/slash';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { SLASH_COMMANDS } from './commands';
 import { useMenuNavControls } from '../../../../hooks/useMenuNavControls';
-import { useInstance } from '@milkdown/react';
-import { Selection } from '@milkdown/kit/prose/state';
-
-export const slash = slashFactory('Commands');
+import { useSlashProvider } from './hooks/useSlashProvider';
 
 export const SlashView = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const slashProvider = useRef<SlashProvider>();
   const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
-  const { view, prevState } = usePluginViewContext();
   const [isVisible, setIsVisible] = useState(false);
-  const [iLoading, get] = useInstance();
-  const [filter, setFilter] = useState<string>('');
-  const [programmaticallyPos, setProgrammaticallyPos] = useState<number>();
+  const { filter } = useSlashProvider(
+    ref,
+    () => setIsVisible(true),
+    () => {
+      setIsVisible(false);
+      setSelectedIndex(0);
+    },
+  );
 
   const items = useMemo(() => {
     return SLASH_COMMANDS.filter((item) =>
@@ -24,98 +23,16 @@ export const SlashView = () => {
     );
   }, [filter]);
 
-  const { loading, selectedIndex, runAction, setSelectedIndex } =
-    useMenuNavControls(items, isVisible);
-
-  function isInCodeBlock(selection: Selection) {
-    const type = selection.$from.node(selection.$from.depth - 1)?.type;
-    return type?.name === 'code_block';
-  }
-  function isInList(selection: Selection) {
-    const type = selection.$from.node(selection.$from.depth - 1)?.type;
-    return type?.name === 'list_item';
-  }
+  const { selectedIndex, runAction, setSelectedIndex } = useMenuNavControls(
+    items,
+    isVisible,
+  );
 
   useEffect(() => {
-    const div = ref.current;
-    if (loading || !div) {
-      return;
-    }
-    slashProvider.current = new SlashProvider({
-      content: div,
-      shouldShow(this: SlashProvider) {
-        if (
-          isInCodeBlock(view.state.selection) ||
-          isInList(view.state.selection)
-        )
-          return false;
+    scrollSlashMenu();
+  }, [selectedIndex]);
 
-        const currentText = this.getContent(view, (node) =>
-          ['paragraph', 'heading'].includes(node.type.name),
-        );
-
-        if (currentText == null) {
-          return false;
-        }
-
-        setFilter(
-          currentText.startsWith('/') ? currentText.slice(1) : currentText,
-        );
-
-        const pos = programmaticallyPos;
-        if (typeof pos === 'number') {
-          if (
-            view.state.doc.resolve(pos).node() !==
-            view.state.doc.resolve(view.state.selection.from).node()
-          ) {
-            setProgrammaticallyPos(undefined);
-            return false;
-          }
-          return true;
-        }
-        if (!currentText.startsWith('/')) return false;
-        return true;
-      },
-      offset: 10,
-    });
-
-    slashProvider.current.onShow = () => {
-      setIsVisible(true);
-    };
-
-    slashProvider.current.onHide = () => {
-      setIsVisible(false);
-      setSelectedIndex(0);
-    };
-
-    const ctx = get().ctx;
-    ctx.set(slash.key, {
-      show: (pos: number) => show(pos),
-      hide: () => hide(),
-    });
-
-    return () => {
-      slashProvider.current?.destroy();
-    };
-  }, [loading]);
-
-  useEffect(() => {
-    slashProvider.current?.update(view, prevState);
-  });
-
-  function show(pos: number) {
-    setProgrammaticallyPos(pos);
-    setFilter('');
-    slashProvider.current.show();
-  }
-
-  function hide() {
-    setProgrammaticallyPos(undefined);
-    slashProvider.current.hide();
-  }
-
-  // Scroll the menu container to the selected item when selectedIndex changes
-  useEffect(() => {
+  function scrollSlashMenu() {
     const selectedButton = buttonsRef.current[selectedIndex];
     const menuDiv = ref.current;
 
@@ -134,7 +51,7 @@ export const SlashView = () => {
         menuDiv.scrollTop = buttonBottom - menuHeight + 8;
       }
     }
-  }, [selectedIndex]);
+  }
 
   return (
     <div

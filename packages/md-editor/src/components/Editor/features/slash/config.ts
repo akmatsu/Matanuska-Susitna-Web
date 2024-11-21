@@ -1,6 +1,8 @@
 import { Editor } from '@milkdown/kit/core';
 import { PluginViewFactoryFn } from '../../types';
-import { slash, SlashView } from './SlashView';
+import { SlashView } from './SlashView';
+import { slashFactory } from '@milkdown/kit/plugin/slash';
+export const slash = slashFactory('Commands');
 
 export function configureSlashFeature(
   editor: Editor,

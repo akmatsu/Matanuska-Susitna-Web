@@ -1,9 +1,19 @@
 import { editorViewCtx } from '@milkdown/kit/core';
 import { Ctx } from '@milkdown/kit/ctx';
 import { NodeType, Attrs } from '@milkdown/kit/prose/model';
-import { Command, Transaction } from '@milkdown/kit/prose/state';
+import { Command, Selection, Transaction } from '@milkdown/kit/prose/state';
 import { findWrapping } from '@milkdown/kit/prose/transform';
 import { insert } from '@milkdown/kit/utils';
+
+export function isInCodeBlock(selection: Selection) {
+  const type = selection.$from.node(selection.$from.depth - 1)?.type;
+  return type?.name === 'code_block';
+}
+
+export function isInList(selection: Selection) {
+  const type = selection.$from.node(selection.$from.depth - 1)?.type;
+  return type?.name === 'list_item';
+}
 
 export function runCommand(ctx: Ctx, fn: Command) {
   const view = ctx.get(editorViewCtx);
