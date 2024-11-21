@@ -10,7 +10,7 @@ import {
 import { $view } from '@milkdown/kit/utils';
 import { DocCollectionView } from './DocCollectionView';
 
-export function configDocCollectionFeature(
+export function configureDocCollectionFeature(
   editor: Editor,
   pluginViewFactory: PluginViewFactoryFn,
   nodeViewFactory: NodeViewFactoryFn,

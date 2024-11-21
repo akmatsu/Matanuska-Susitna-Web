@@ -3,12 +3,11 @@ import { block, blockConfig } from '@milkdown/kit/plugin/block';
 import { ReactPluginViewUserOptions } from '@prosemirror-adapter/react';
 import { BlockView } from './BlockView';
 import { PluginSpec } from '@milkdown/kit/prose/state';
+import { PluginViewFactoryFn } from '../../types';
 
 export function configureBlockFeature(
   editor: Editor,
-  pluginViewFactory: (
-    options: ReactPluginViewUserOptions,
-  ) => PluginSpec<any>['view'],
+  pluginViewFactory: PluginViewFactoryFn,
 ) {
   editor.config((ctx) => {
     ctx.update(blockConfig.key, (defaultConfig) => ({

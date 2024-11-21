@@ -6,7 +6,7 @@ import {
   usePluginViewFactory,
 } from '@prosemirror-adapter/react';
 import {
-  configDocCollectionFeature,
+  configureDocCollectionFeature,
   configureBaseFeatures,
   configureBlockFeature,
   configureLinkTooltipFeature,
@@ -41,7 +41,7 @@ export function useEditorConfig({
       configureBlockFeature(editor, pluginViewFactory);
     }
     if (documentCollections) {
-      configDocCollectionFeature(editor, pluginViewFactory, nodeViewFactory);
+      configureDocCollectionFeature(editor, pluginViewFactory, nodeViewFactory);
     }
     if (slash) {
       configureSlashFeature(editor, pluginViewFactory);
