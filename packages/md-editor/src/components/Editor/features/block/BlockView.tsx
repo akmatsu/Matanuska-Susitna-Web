@@ -4,7 +4,7 @@ import { useInstance } from '@milkdown/react';
 import { editorViewCtx } from '@milkdown/kit/core';
 import { paragraphSchema } from '@milkdown/kit/preset/commonmark';
 import { slash } from '../slash';
-import { useBlockProvider } from './hooks/useBlockProvider';
+import { useBlockProvider } from './hooks';
 
 export function BlockView() {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,6 +31,7 @@ export function BlockView() {
     dispatch(tr.scrollIntoView());
     provider.current.hide();
     ctx.get(slash.key).show(tr.selection.from);
+    console.log('ran');
   }
 
   function handleMouseUp(e: React.MouseEvent<HTMLDivElement>) {
@@ -39,16 +40,16 @@ export function BlockView() {
   }
 
   return (
-    <div ref={ref} className="absolute flex gap-2 transition-all">
+    <div ref={ref} className="absolute flex flex-col gap-2 transition-all">
+      <div className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-grab transition-all flex flex-col justify-center">
+        <span className="icon-[icon-park-outline--drag] size-4"></span>
+      </div>
       <div
-        className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-grab transition-all flex flex-col justify-center"
+        className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-pointer transition-all flex flex-col justify-center"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
       >
-        <span className="icon-[ri--add-fill] size-6"></span>
-      </div>
-      <div className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-grab transition-all flex flex-col justify-center">
-        <span className="icon-[icon-park-outline--drag] size-6"></span>
+        <span className="icon-[ri--add-fill] size-4"></span>
       </div>
     </div>
   );

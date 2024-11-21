@@ -26,14 +26,17 @@ export function useSlashProvider(
         if (
           isInCodeBlock(view.state.selection) ||
           isInList(view.state.selection)
-        )
+        ) {
+          console.log('IN AN INVALID LOCATION!');
           return false;
+        }
 
         const currentText = this.getContent(view, (node) =>
           ['paragraph', 'heading'].includes(node.type.name),
         );
 
         if (currentText == null) {
+          console.log('CURRENT TEXT NULL!');
           return false;
         }
 
@@ -47,12 +50,16 @@ export function useSlashProvider(
             view.state.doc.resolve(pos).node() !==
             view.state.doc.resolve(view.state.selection.from).node()
           ) {
+            console.log('SOMETHING WRONG!');
             setProgrammaticallyPos(undefined);
             return false;
           }
           return true;
         }
-        if (!currentText.startsWith('/')) return false;
+        if (!currentText.startsWith('/')) {
+          console.log('CURRENT TEXT DOES NOT START WITH /');
+          return false;
+        }
         return true;
       },
       offset: 10,

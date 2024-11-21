@@ -1,14 +1,13 @@
 import { Ctx } from '@milkdown/kit/ctx';
 import { useInstance } from '@milkdown/react';
 import { useCallback, useEffect, useState } from 'react';
-import { limit } from '../utils';
+import { limit } from '../../../../../utils';
 
 export function useMenuNavControls(
   items: {
     label: string;
     action: (...args: any) => void;
   }[],
-
   isVisible: boolean,
 ) {
   const [loading, get] = useInstance();
@@ -40,12 +39,13 @@ export function useMenuNavControls(
             limit(prevIndex - 1, 0, items.length - 1),
           );
         } else if (e.key === 'Enter') {
+          console.log(items);
           e.preventDefault();
           runAction(e, items[selectedIndex].action);
         }
       }
     },
-    [isVisible, selectedIndex, runAction],
+    [isVisible, selectedIndex, runAction, items],
   );
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export function useMenuNavControls(
     if (selectedIndex > max) {
       setSelectedIndex(max);
     }
-  }, [items.length]);
+  }, [items, selectedIndex]);
 
   return { runAction, loading, get, selectedIndex, setSelectedIndex };
 }

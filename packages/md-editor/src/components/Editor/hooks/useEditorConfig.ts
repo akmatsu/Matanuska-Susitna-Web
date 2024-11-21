@@ -1,4 +1,4 @@
-import { type MdEditorProps } from '../components/Editor';
+import { type MdEditorProps } from '../types';
 import { Editor as MilkEditor } from '@milkdown/kit/core';
 import { useEditor } from '@milkdown/react';
 import {
@@ -16,7 +16,7 @@ import {
   configureStepFeature,
   configureTableFeature,
   configureToolbarFeature,
-} from '../components/Editor/features';
+} from '../features';
 
 export function useEditorConfig({
   block = true,

@@ -1,8 +1,6 @@
-import { slashFactory } from '@milkdown/kit/plugin/slash';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { SLASH_COMMANDS } from './commands';
-import { useMenuNavControls } from '../../../../hooks/useMenuNavControls';
-import { useSlashProvider } from './hooks/useSlashProvider';
+import { useSlashProvider, useMenuNavControls } from './hooks';
 
 export const SlashView = () => {
   const ref = useRef<HTMLDivElement>(null);
