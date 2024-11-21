@@ -67,8 +67,12 @@ export function useMenuNavControls(
   }, [isVisible, handleKeyDown]);
 
   useEffect(() => {
-    if (selectedIndex > items.length - 1) setSelectedIndex(items.length - 1);
-  }, [items]);
+    let max = items.length - 1;
+    max = max >= 0 ? max : 0;
+    if (selectedIndex > max) {
+      setSelectedIndex(max);
+    }
+  }, [items.length]);
 
-  return { runAction, loading, get, selectedIndex };
+  return { runAction, loading, get, selectedIndex, setSelectedIndex };
 }

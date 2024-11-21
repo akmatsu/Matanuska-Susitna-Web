@@ -1,1 +1,1 @@
-export * from './SlashView';
+export * from './config';

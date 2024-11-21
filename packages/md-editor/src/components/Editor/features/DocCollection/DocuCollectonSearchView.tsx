@@ -12,8 +12,6 @@ import {
 import clsx from 'clsx';
 import { gql, useQuery } from '@keystone-6/core/admin-ui/apollo';
 
-export const docSearch = tooltipFactory('docSearch');
-
 export function DocCollectionSearchView() {
   const content = useRef<HTMLDivElement>();
   const tooltipProvider = useRef<TooltipProvider>();

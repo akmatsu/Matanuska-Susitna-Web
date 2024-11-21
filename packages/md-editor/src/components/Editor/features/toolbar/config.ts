@@ -1,10 +1,19 @@
-import { linkTooltipAPI } from '@milkdown/kit/component/link-tooltip';
-import { Ctx } from '@milkdown/kit/ctx';
-import {
-  toggleEmphasisCommand,
-  toggleLinkCommand,
-  toggleStrongCommand,
-  insertHrCommand,
-} from '@milkdown/kit/preset/commonmark';
-import { toggleStrikethroughCommand } from '@milkdown/kit/preset/gfm';
-import { callCommand } from '@milkdown/kit/utils';
+import { Editor } from '@milkdown/kit/core';
+import { tooltipFactory } from '@milkdown/kit/plugin/tooltip';
+import { PluginViewFactoryFn } from '../../types';
+import { ToolbarView } from './ToolbarView';
+
+export const toolbar = tooltipFactory('toolbar');
+
+export function configureToolbarFeature(
+  editor: Editor,
+  pluginViewFactory: PluginViewFactoryFn,
+) {
+  editor
+    .config((ctx) => {
+      ctx.set(toolbar.key, {
+        view: pluginViewFactory({ component: ToolbarView }),
+      });
+    })
+    .use(toolbar);
+}

@@ -1,9 +1,9 @@
-import React, { MouseEventHandler, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BlockProvider } from '@milkdown/kit/plugin/block';
 import { useInstance } from '@milkdown/react';
 import { editorViewCtx } from '@milkdown/kit/core';
 import { paragraphSchema } from '@milkdown/kit/preset/commonmark';
-import { slash } from '../slash';
+import { slash } from '../slash/SlashView';
 
 export function BlockView() {
   const ref = useRef<HTMLDivElement>(null);

@@ -1,11 +1,10 @@
 import { slashFactory, SlashProvider } from '@milkdown/kit/plugin/slash';
 import { usePluginViewContext } from '@prosemirror-adapter/react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { SLASH_COMMANDS } from './config';
+import { SLASH_COMMANDS } from './commands';
 import { useMenuNavControls } from '../../../../hooks/useMenuNavControls';
 import { useInstance } from '@milkdown/react';
 import { Selection } from '@milkdown/kit/prose/state';
-import { paragraphAttr } from '@milkdown/kit/preset/commonmark';
 
 export const slash = slashFactory('Commands');
 
@@ -25,10 +24,8 @@ export const SlashView = () => {
     );
   }, [filter]);
 
-  const { loading, selectedIndex, runAction } = useMenuNavControls(
-    items,
-    isVisible,
-  );
+  const { loading, selectedIndex, runAction, setSelectedIndex } =
+    useMenuNavControls(items, isVisible);
 
   function isInCodeBlock(selection: Selection) {
     const type = selection.$from.node(selection.$from.depth - 1)?.type;
@@ -88,6 +85,7 @@ export const SlashView = () => {
 
     slashProvider.current.onHide = () => {
       setIsVisible(false);
+      setSelectedIndex(0);
     };
 
     const ctx = get().ctx;
