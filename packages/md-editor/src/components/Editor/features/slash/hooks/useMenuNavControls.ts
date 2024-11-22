@@ -2,6 +2,7 @@ import { Ctx } from '@milkdown/kit/ctx';
 import { useInstance } from '@milkdown/react';
 import { useCallback, useEffect, useState } from 'react';
 import { limit } from '../../../../../utils';
+import { slash } from '../config';
 
 export function useMenuNavControls(
   items: {
@@ -28,6 +29,11 @@ export function useMenuNavControls(
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (isVisible) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          const ctx = get().ctx;
+          ctx.get(slash.key).hide();
+        }
         if (e.key === 'ArrowDown') {
           e.preventDefault();
           setSelectedIndex((prevIndex) =>
@@ -39,9 +45,10 @@ export function useMenuNavControls(
             limit(prevIndex - 1, 0, items.length - 1),
           );
         } else if (e.key === 'Enter') {
-          console.log(items);
           e.preventDefault();
           runAction(e, items[selectedIndex].action);
+          const ctx = get().ctx;
+          ctx.get(slash.key).hide();
         }
       }
     },

@@ -27,14 +27,7 @@ export function useBlockProvider(contentRef: MutableRefObject<HTMLDivElement>) {
           totalDescendant += node.childCount;
         });
 
-        const dom = active.el;
-        const domRect = dom.getBoundingClientRect();
-        const handleRect = blockDom.getBoundingClientRect();
-        const style = window.getComputedStyle(dom);
-        const paddingTop = Number.parseInt(style.paddingTop, 10) || 0;
-        const paddingBottom = Number.parseInt(style.paddingBottom, 10) || 0;
-        const height = domRect.height - paddingTop - paddingBottom;
-        const handleHeight = handleRect.height;
+        const { handleHeight, height } = getHandleHeight(active.el, blockDom);
 
         return totalDescendant > 2 || handleHeight < height
           ? 'left-start'
@@ -52,4 +45,16 @@ export function useBlockProvider(contentRef: MutableRefObject<HTMLDivElement>) {
   }, [loading]);
 
   return { provider };
+}
+
+function getHandleHeight(dom: HTMLElement, blockDom: HTMLElement) {
+  const domRect = dom.getBoundingClientRect();
+  const handleRect = blockDom.getBoundingClientRect();
+  const style = window.getComputedStyle(dom);
+  const paddingTop = Number.parseInt(style.paddingTop, 10) || 0;
+  const paddingBottom = Number.parseInt(style.paddingBottom, 10) || 0;
+  const height = domRect.height - paddingTop - paddingBottom;
+  const handleHeight = handleRect.height;
+
+  return { height, handleHeight };
 }

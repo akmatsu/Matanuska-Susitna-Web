@@ -5,19 +5,26 @@ import { editorViewCtx } from '@milkdown/kit/core';
 import { paragraphSchema } from '@milkdown/kit/preset/commonmark';
 import { slash } from '../slash';
 import { useBlockProvider } from './hooks';
+import { usePluginViewContext } from '@prosemirror-adapter/react';
+import { TextSelection } from '@milkdown/kit/prose/state';
 
 export function BlockView() {
   const ref = useRef<HTMLDivElement>(null);
 
   const [_, get] = useInstance();
   const { provider } = useBlockProvider(ref);
+  const { view } = usePluginViewContext();
 
   function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
     e.preventDefault();
     e.stopPropagation();
+  }
+
+  function handleMouseUp(e: React.MouseEvent<HTMLDivElement>) {
+    e.preventDefault();
+    e.stopPropagation();
 
     const ctx = get().ctx;
-    const view = ctx.get(editorViewCtx);
     if (!view.hasFocus()) view.focus();
 
     const { state, dispatch } = view;
@@ -26,17 +33,13 @@ export function BlockView() {
 
     const $pos = active.$pos;
     const pos = $pos.pos + active.node.nodeSize;
-    let tr = state.tr.insert(pos, paragraphSchema.type(ctx).create());
 
+    let tr = state.tr.insert(pos, paragraphSchema.type(ctx).create(null));
+    tr = tr.setSelection(TextSelection.near(tr.doc.resolve(pos)));
     dispatch(tr.scrollIntoView());
+
     provider.current.hide();
     ctx.get(slash.key).show(tr.selection.from);
-    console.log('ran');
-  }
-
-  function handleMouseUp(e: React.MouseEvent<HTMLDivElement>) {
-    e.preventDefault();
-    e.stopPropagation();
   }
 
   return (

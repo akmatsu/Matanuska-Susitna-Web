@@ -2,7 +2,10 @@ import { SlashProvider } from '@milkdown/kit/plugin/slash';
 import { useInstance } from '@milkdown/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { isInCodeBlock, isInList } from '../utils';
-import { usePluginViewContext } from '@prosemirror-adapter/react';
+import {
+  PluginViewContext,
+  usePluginViewContext,
+} from '@prosemirror-adapter/react';
 import { slash } from '../config';
 
 export function useSlashProvider(
@@ -14,7 +17,7 @@ export function useSlashProvider(
   const { view, prevState } = usePluginViewContext();
   const [loading, get] = useInstance();
   const [filter, setFilter] = useState<string>('');
-  const [programmaticallyPos, setProgrammaticallyPos] = useState<number>();
+  const [programmaticPos, setPos] = useState<number>(null);
 
   useEffect(() => {
     const content = contentRef.current;
@@ -23,43 +26,17 @@ export function useSlashProvider(
     slashProvider.current = new SlashProvider({
       content,
       shouldShow(this: SlashProvider) {
-        if (
-          isInCodeBlock(view.state.selection) ||
-          isInList(view.state.selection)
-        ) {
-          console.log('IN AN INVALID LOCATION!');
-          return false;
-        }
+        if (checkIfSelectionValid(view)) return false;
 
-        const currentText = this.getContent(view, (node) =>
-          ['paragraph', 'heading'].includes(node.type.name),
-        );
+        const text = getContent(this, view);
+        if (text == null) return false;
 
-        if (currentText == null) {
-          console.log('CURRENT TEXT NULL!');
-          return false;
-        }
+        setFilter(text.startsWith('/') ? text.slice(1) : text);
 
-        setFilter(
-          currentText.startsWith('/') ? currentText.slice(1) : currentText,
-        );
+        if (typeof programmaticPos === 'number') {
+          return checkIfPosValid(programmaticPos, view, () => setPos(null));
+        } else if (!text.startsWith('/')) return false;
 
-        const pos = programmaticallyPos;
-        if (typeof pos === 'number') {
-          if (
-            view.state.doc.resolve(pos).node() !==
-            view.state.doc.resolve(view.state.selection.from).node()
-          ) {
-            console.log('SOMETHING WRONG!');
-            setProgrammaticallyPos(undefined);
-            return false;
-          }
-          return true;
-        }
-        if (!currentText.startsWith('/')) {
-          console.log('CURRENT TEXT DOES NOT START WITH /');
-          return false;
-        }
         return true;
       },
       offset: 10,
@@ -76,20 +53,20 @@ export function useSlashProvider(
       show,
       hide,
     });
-  }, [loading]);
+  }, [loading, programmaticPos]);
 
   useEffect(() => {
     slashProvider.current?.update(view, prevState);
   });
 
-  function show(pos: number) {
-    setProgrammaticallyPos(pos);
+  function show(p: number) {
+    setPos(p);
     setFilter('');
     slashProvider.current.show();
   }
 
   function hide() {
-    setProgrammaticallyPos(undefined);
+    setPos(null);
     slashProvider.current.hide();
   }
 
@@ -97,4 +74,29 @@ export function useSlashProvider(
     filter,
     slashProvider,
   };
+}
+
+function checkIfSelectionValid(view: PluginViewContext['view']) {
+  return isInCodeBlock(view.state.selection) || isInList(view.state.selection);
+}
+
+function getContent(provider: SlashProvider, view: PluginViewContext['view']) {
+  return provider.getContent(view, (node) =>
+    ['paragraph', 'heading'].includes(node.type.name),
+  );
+}
+
+function checkIfPosValid(
+  pos: number,
+  view: PluginViewContext['view'],
+  onFail: () => void,
+) {
+  if (
+    view.state.doc.resolve(pos).node() !==
+    view.state.doc.resolve(view.state.selection.from).node()
+  ) {
+    onFail();
+    return false;
+  }
+  return true;
 }
