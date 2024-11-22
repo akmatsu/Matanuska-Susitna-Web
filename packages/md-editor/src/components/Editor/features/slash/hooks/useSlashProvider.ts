@@ -91,12 +91,21 @@ function checkIfPosValid(
   view: PluginViewContext['view'],
   onFail: () => void,
 ) {
-  if (
-    view.state.doc.resolve(pos).node() !==
-    view.state.doc.resolve(view.state.selection.from).node()
-  ) {
-    onFail();
-    return false;
+  try {
+    if (
+      view.state.doc.resolve(pos).node() !==
+      view.state.doc.resolve(view.state.selection.from).node()
+    ) {
+      onFail();
+      return false;
+    }
+  } catch (err) {
+    if (/^Position\s\d+\sout\sof\srange$/.test(err.message)) {
+      onFail();
+      return false;
+    } else {
+      throw err;
+    }
   }
   return true;
 }

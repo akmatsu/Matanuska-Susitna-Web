@@ -33,16 +33,16 @@ export function useBlockProvider(contentRef: MutableRefObject<HTMLDivElement>) {
           ? 'left-start'
           : 'left';
       },
-      shouldShow: (view) => {
-        return true;
-      },
     });
-    provider.current?.update();
 
     return () => {
       provider.current?.destroy();
     };
   }, [loading]);
+
+  useEffect(() => {
+    provider.current?.update();
+  });
 
   return { provider };
 }

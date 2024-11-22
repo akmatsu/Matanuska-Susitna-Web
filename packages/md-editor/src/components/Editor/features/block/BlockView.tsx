@@ -7,6 +7,7 @@ import { slash } from '../slash';
 import { useBlockProvider } from './hooks';
 import { usePluginViewContext } from '@prosemirror-adapter/react';
 import { TextSelection } from '@milkdown/kit/prose/state';
+import { insert } from '@milkdown/kit/utils';
 
 export function BlockView() {
   const ref = useRef<HTMLDivElement>(null);
@@ -34,17 +35,26 @@ export function BlockView() {
     const $pos = active.$pos;
     const pos = $pos.pos + active.node.nodeSize;
 
-    let tr = state.tr.insert(pos, paragraphSchema.type(ctx).create(null));
-    tr = tr.setSelection(TextSelection.near(tr.doc.resolve(pos)));
-    dispatch(tr.scrollIntoView());
+    const content = active.node.content;
+
+    if (content.content.length) {
+      let tr = state.tr.insert(pos, paragraphSchema.type(ctx).create(null));
+      tr = tr.setSelection(TextSelection.near(tr.doc.resolve(pos)));
+      dispatch(tr.scrollIntoView());
+      ctx.get(slash.key).show(tr.selection.from);
+    } else {
+      insert('/')(ctx);
+    }
 
     provider.current.hide();
-    ctx.get(slash.key).show(tr.selection.from);
   }
 
   return (
-    <div ref={ref} className="absolute flex flex-col gap-2 transition-all">
-      <div className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-grab transition-all flex flex-col justify-center">
+    <div
+      ref={ref}
+      className="absolute flex flex-col gap-2 transition-all data-[show=false]:opacity-0"
+    >
+      <div className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-move transition-all flex flex-col justify-center">
         <span className="icon-[icon-park-outline--drag] size-4"></span>
       </div>
       <div
