@@ -4,11 +4,10 @@ import {
   clearContentAndInsert,
   clearContentAndSetBlockType,
   clearContentAndWrapInBlockType,
-  removeRangeAndRunCommand,
   runCommand,
 } from './utils';
-import { insert } from '@milkdown/kit/utils';
-import { editorViewCtx } from '@milkdown/kit/core';
+
+import { Cmd, editorViewCtx } from '@milkdown/kit/core';
 import { createTable } from '@milkdown/kit/preset/gfm';
 import { MD_PAYMENTS_ALL_STEPS } from './mdTemplates';
 import {
@@ -21,6 +20,8 @@ import {
 import { NodeSelection } from '@milkdown/kit/prose/state';
 import { PrimaryActionButtonNode } from '../PrimaryAction';
 import { DocCollectionNode } from '../DocCollection/schema';
+import { $command } from '@milkdown/kit/utils';
+import { toggleMark } from '@milkdown/kit/prose/commands';
 
 export const SLASH_COMMANDS = [
   {

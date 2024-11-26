@@ -2,6 +2,7 @@ import { Editor } from '@milkdown/kit/core';
 import { tooltipFactory } from '@milkdown/kit/plugin/tooltip';
 import { PluginViewFactoryFn } from '../../types';
 import { ToolbarView } from './ToolbarView';
+import { toggleHeaderCommand } from './commands';
 
 export const toolbar = tooltipFactory('toolbar');
 
@@ -15,5 +16,6 @@ export function configureToolbarFeature(
         view: pluginViewFactory({ component: ToolbarView }),
       });
     })
-    .use(toolbar);
+    .use(toolbar)
+    .use(toggleHeaderCommand);
 }
