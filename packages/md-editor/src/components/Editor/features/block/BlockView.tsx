@@ -1,77 +1,69 @@
 import React, { useEffect, useRef } from 'react';
 import { BlockProvider } from '@milkdown/kit/plugin/block';
 import { useInstance } from '@milkdown/react';
+import { editorViewCtx } from '@milkdown/kit/core';
+import { paragraphSchema } from '@milkdown/kit/preset/commonmark';
+import { slash } from '../slash';
+import { useBlockProvider } from './hooks';
+import { usePluginViewContext } from '@prosemirror-adapter/react';
+import { TextSelection } from '@milkdown/kit/prose/state';
+import { insert } from '@milkdown/kit/utils';
 
 export function BlockView() {
   const ref = useRef<HTMLDivElement>(null);
-  const tooltipProvider = useRef<BlockProvider>();
 
-  const [loading, get] = useInstance();
+  const [_, get] = useInstance();
+  const { provider } = useBlockProvider(ref);
+  const { view } = usePluginViewContext();
 
-  useEffect(() => {
-    const div = ref.current;
-    if (loading || !div) return;
+  function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
 
-    const editor = get();
-    if (!editor) return;
+  function handleMouseUp(e: React.MouseEvent<HTMLDivElement>) {
+    e.preventDefault();
+    e.stopPropagation();
 
-    tooltipProvider.current = new BlockProvider({
-      ctx: editor.ctx,
-      content: div,
-      getOffset: () => 16,
+    const ctx = get().ctx;
+    if (!view.hasFocus()) view.focus();
 
-      getPlacement: ({ active, blockDom }) => {
-        if (active.node.type.name === 'heading') {
-          return 'left';
-        }
-        let totalDescendant = 0;
-        active.node.descendants((node) => {
-          totalDescendant += node.childCount;
-        });
+    const { state, dispatch } = view;
+    const active = provider.current.active;
+    if (!active) return;
 
-        const dom = active.el;
-        const domRect = dom.getBoundingClientRect();
-        const handleRect = blockDom.getBoundingClientRect();
-        const style = window.getComputedStyle(dom);
-        const paddingTop = Number.parseInt(style.paddingTop, 10) || 0;
-        const paddingBottom = Number.parseInt(style.paddingBottom, 10) || 0;
-        const height = domRect.height - paddingTop - paddingBottom;
-        const handleHeight = handleRect.height;
+    const $pos = active.$pos;
+    const pos = $pos.pos + active.node.nodeSize;
 
-        return totalDescendant > 2 || handleHeight < height
-          ? 'left-start'
-          : 'left';
-      },
-      shouldShow: (view) => {
-        return true;
-      },
-    });
-    tooltipProvider.current?.update();
+    const content = active.node.content;
 
-    return () => {
-      tooltipProvider.current?.destroy();
-    };
-  }, [loading]);
+    if (content.content.length) {
+      let tr = state.tr.insert(pos, paragraphSchema.type(ctx).create(null));
+      tr = tr.setSelection(TextSelection.near(tr.doc.resolve(pos)));
+      dispatch(tr.scrollIntoView());
+      ctx.get(slash.key).show(tr.selection.from);
+    } else {
+      insert('/')(ctx);
+    }
+
+    provider.current.hide();
+  }
 
   return (
     <div
       ref={ref}
-      className="absolute w-6 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-grab transition-all"
+      className="absolute flex flex-col gap-2 transition-all data-[show=false]:opacity-0"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-6 h-6"
+      <div className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-move transition-all flex flex-col justify-center">
+        <span className="icon-[icon-park-outline--drag] size-4"></span>
+      </div>
+      <div
+        className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-pointer transition-all flex flex-col justify-center"
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-        />
-      </svg>
+        <span className="icon-[ri--add-fill] size-4"></span>
+      </div>
     </div>
   );
 }

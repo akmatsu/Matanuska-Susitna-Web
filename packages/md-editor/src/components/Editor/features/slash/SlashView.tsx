@@ -1,48 +1,36 @@
-import { SlashProvider } from '@milkdown/kit/plugin/slash';
-import { usePluginViewContext } from '@prosemirror-adapter/react';
-import React, { useEffect, useRef, useState } from 'react';
-import { SLASH_COMMANDS } from './config';
-import { useMenuNavControls } from '../../../../hooks/useMenuNavControls';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { SLASH_COMMANDS } from './commands';
+import { useSlashProvider, useMenuNavControls } from './hooks';
 
 export const SlashView = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const slashProvider = useRef<SlashProvider>();
   const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
-  const { view, prevState } = usePluginViewContext();
   const [isVisible, setIsVisible] = useState(false);
-  const { loading, selectedIndex, runAction } = useMenuNavControls(
-    SLASH_COMMANDS,
+  const { filter } = useSlashProvider(
+    ref,
+    () => setIsVisible(true),
+    () => {
+      setIsVisible(false);
+      setSelectedIndex(0);
+    },
+  );
+
+  const items = useMemo(() => {
+    return SLASH_COMMANDS.filter((item) =>
+      item.label.toLowerCase().includes(filter.toLowerCase()),
+    );
+  }, [filter]);
+
+  const { selectedIndex, runAction, setSelectedIndex } = useMenuNavControls(
+    items,
     isVisible,
   );
 
   useEffect(() => {
-    const div = ref.current;
-    if (loading || !div) {
-      return;
-    }
-    slashProvider.current = new SlashProvider({
-      content: div,
-    });
+    scrollSlashMenu();
+  }, [selectedIndex]);
 
-    slashProvider.current.onShow = () => {
-      setIsVisible(true);
-    };
-
-    slashProvider.current.onHide = () => {
-      setIsVisible(false);
-    };
-
-    return () => {
-      slashProvider.current?.destroy();
-    };
-  }, [loading]);
-
-  useEffect(() => {
-    slashProvider.current?.update(view, prevState);
-  });
-
-  // Scroll the menu container to the selected item when selectedIndex changes
-  useEffect(() => {
+  function scrollSlashMenu() {
     const selectedButton = buttonsRef.current[selectedIndex];
     const menuDiv = ref.current;
 
@@ -61,7 +49,7 @@ export const SlashView = () => {
         menuDiv.scrollTop = buttonBottom - menuHeight + 8;
       }
     }
-  }, [selectedIndex]);
+  }
 
   return (
     <div
@@ -70,7 +58,7 @@ export const SlashView = () => {
       className="absolute data-[show='false']:hidden z-10 menu max-h-72 overflow-auto transition-all scroll-smooth"
       tabIndex={0}
     >
-      {SLASH_COMMANDS.map((item, index) => (
+      {items.map((item, index) => (
         <button
           key={crypto.randomUUID()}
           ref={(el) => (buttonsRef.current[index] = el)}

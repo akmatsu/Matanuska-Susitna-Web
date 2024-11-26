@@ -1,19 +1,15 @@
 import React from 'react';
 import { Ctx } from '@milkdown/kit/ctx';
 import { TooltipProvider } from '@milkdown/kit/plugin/tooltip';
-import {
-  toggleStrongCommand,
-  toggleEmphasisCommand,
-  linkSchema,
-} from '@milkdown/kit/preset/commonmark';
+import { linkSchema } from '@milkdown/kit/preset/commonmark';
 import { useInstance } from '@milkdown/react';
 import { usePluginViewContext } from '@prosemirror-adapter/react';
 import { useCallback, useEffect, useRef } from 'react';
-import { callCommand } from '@milkdown/kit/utils';
-import { toggleStrikethroughCommand } from '@milkdown/kit/preset/gfm';
 import { linkTooltipAPI } from '@milkdown/kit/component/link-tooltip';
 import { MarkType } from '@milkdown/kit/prose/model';
 import { TextSelection } from '@milkdown/kit/prose/state';
+import { TOOLBAR_COMMANDS } from './commands';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 
 export const ToolbarView = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -86,41 +82,50 @@ export const ToolbarView = () => {
     return doc.rangeHasMark(selection.from, selection.to, mark);
   };
 
-  const TOOLBAR_COMMANDS = [
-    {
-      label: 'Bold',
-      icon: 'bold',
-      action: () => callCommand(toggleStrongCommand.key),
-    },
-    {
-      label: 'Italic',
-      icon: 'italic',
-      action: () => callCommand(toggleEmphasisCommand.key),
-    },
-    {
-      label: 'Strikethrough',
-      icon: 'strike',
-      action: () => callCommand(toggleStrikethroughCommand.key),
-    },
-  ];
-
   return (
     <div
       className="absolute card data-[show=false]:hidden flex gap-2 z-10"
       ref={ref}
     >
-      {TOOLBAR_COMMANDS.map((cmd) => (
-        <button
-          key={crypto.randomUUID()}
-          className="btn btn--default rounded-full"
-          onMouseDown={(e) => {
-            e.preventDefault();
-            action(cmd.action());
-          }}
-        >
-          <span className={`icon ${cmd.icon} size-6 m-1`}></span>
-        </button>
-      ))}
+      {TOOLBAR_COMMANDS.map((cmd) =>
+        cmd.children?.length ? (
+          <Menu key={crypto.randomUUID()}>
+            <MenuButton className="btn btn--default rounded-full">
+              <span className={`${cmd.icon} size-6`}></span>
+              <span
+                className={`${cmd.icon} icon-[bi--caret-down-fill] size-2`}
+              ></span>
+            </MenuButton>
+            <MenuItems anchor="bottom" className="card flex flex-col gap-2">
+              {cmd.children.map((child) => (
+                <MenuItem key={crypto.randomUUID()}>
+                  <button
+                    className="btn btn--default rounded-full"
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      action(child.action(view));
+                    }}
+                  >
+                    <span className={`${child.icon} size-4 mr-4`}></span>
+                    {child.label}
+                  </button>
+                </MenuItem>
+              ))}
+            </MenuItems>
+          </Menu>
+        ) : (
+          <button
+            key={crypto.randomUUID()}
+            className="btn btn--default rounded-full"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              action(cmd.action(view));
+            }}
+          >
+            <span className={`${cmd.icon} size-6`}></span>
+          </button>
+        ),
+      )}
       <button
         className="btn btn--default rounded-full"
         onMouseDown={(e) => {
@@ -138,7 +143,7 @@ export const ToolbarView = () => {
           });
         }}
       >
-        <span className={`icon link size-6 m-1`}></span>
+        <span className={`icon-[bi--link] size-6`}></span>
       </button>
     </div>
   );
