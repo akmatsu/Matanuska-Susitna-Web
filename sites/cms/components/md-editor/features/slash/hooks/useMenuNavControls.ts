@@ -1,7 +1,7 @@
 import { Ctx } from '@milkdown/kit/ctx';
 import { useInstance } from '@milkdown/react';
 import { useCallback, useEffect, useState } from 'react';
-import { limit } from '../../../../../utils';
+import { limit } from '../../../utils';
 import { slash } from '../config';
 
 export function useMenuNavControls(
@@ -31,8 +31,8 @@ export function useMenuNavControls(
       if (isVisible) {
         if (e.key === 'Escape') {
           e.preventDefault();
-          const ctx = get().ctx;
-          ctx.get(slash.key).hide();
+          const ctx = get()?.ctx;
+          ctx?.get(slash.key).hide();
         }
         if (e.key === 'ArrowDown') {
           e.preventDefault();

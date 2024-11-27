@@ -1,16 +1,14 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { MdEditorProps } from '@msb/md-editor/dist/components/Editor/types';
+import { MdEditorProps } from './md-editor';
 import { Button } from '@keystone-ui/button';
 import { TextArea } from '@keystone-ui/fields';
-import '@msb/md-editor/styles.css';
 import '../styles/global.css';
 
-const MdEditor = dynamic(
-  () => import('@msb/md-editor').then((m) => m.MdEditor),
-  { ssr: false },
-);
+const MdEditor = dynamic(() => import('./md-editor').then((m) => m.MdEditor), {
+  ssr: false,
+});
 
 function adjustEditorHeight() {
   const tArea: HTMLTextAreaElement | null = document.querySelector(

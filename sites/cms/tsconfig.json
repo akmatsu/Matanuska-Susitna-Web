@@ -1,11 +1,5 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
-    "jsx": "preserve",
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
-  }
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": ["../../tsconfig.json", "@tsconfig/next/tsconfig.json"],
+  "references": [{ "path": "../../packages/tw-config/tsconfig.json" }]
 }
