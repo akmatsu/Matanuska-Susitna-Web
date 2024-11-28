@@ -4,67 +4,14 @@ import tailwindTypography from '@tailwindcss/typography';
 import tailwindAnimate from 'tailwindcss-animate';
 import tailwindContainerQueries from '@tailwindcss/container-queries';
 import plugin from 'tailwindcss/plugin';
+import { Config } from 'tailwindcss/types/config';
 
-const config = {
+const config: Config = {
   content: [],
   corePlugins: {
     fontFamily: false,
   },
   theme: {
-    // fontSize: {
-    //   xs: [
-    //     'calc(0.75rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(1rem * var(--font-normalization))' },
-    //   ],
-    //   sm: [
-    //     'calc(0.875rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(1.25rem * var(--font-normalization))' },
-    //   ],
-    //   base: [
-    //     'calc(1rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(1.5rem * var(--font-normalization))' },
-    //   ],
-    //   lg: [
-    //     'calc(1.125rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(1.75rem * var(--font-normalization))' },
-    //   ],
-    //   xl: [
-    //     'calc(1.25rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(1.75rem * var(--font-normalization))' },
-    //   ],
-    //   '2xl': [
-    //     'calc(1.5rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(2rem * var(--font-normalization))' },
-    //   ],
-    //   '3xl': [
-    //     'calc(1.875rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(2.25rem * var(--font-normalization))' },
-    //   ],
-    //   '4xl': [
-    //     'calc(2.25rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(2.5rem * var(--font-normalization))' },
-    //   ],
-    //   '5xl': [
-    //     'calc(3rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(1 * var(--font-normalization))' },
-    //   ],
-    //   '6xl': [
-    //     'calc(3.75rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(1 * var(--font-normalization))' },
-    //   ],
-    //   '7xl': [
-    //     'calc(4.5rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(1 * var(--font-normalization))' },
-    //   ],
-    //   '8xl': [
-    //     'calc(6rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(1 * var(--font-normalization))' },
-    //   ],
-    //   '9xl': [
-    //     'calc(8rem * var(--font-normalization))',
-    //     { lineHeight: 'calc(1 * var(--font-normalization))' },
-    //   ],
-    // },
     screens: {
       card: '160px',
       'card-lg': '240px',
@@ -88,52 +35,47 @@ const config = {
       widescreen: '1400px',
     },
 
+    fontSize: {
+      xs: ['0.75rem ', { lineHeight: '1rem ' }],
+      sm: ['0.875rem ', { lineHeight: '1.25rem ' }],
+      base: ['1rem ', { lineHeight: '1.5rem ' }],
+      lg: ['1.125rem ', { lineHeight: '1.75rem ' }],
+      xl: ['1.25rem ', { lineHeight: '1.75rem ' }],
+      '2xl': ['1.5rem ', { lineHeight: '2rem ' }],
+      '3xl': ['1.875rem ', { lineHeight: '2.25rem ' }],
+      '4xl': ['2.25rem ', { lineHeight: '2.5rem ' }],
+      '5xl': ['3rem ', { lineHeight: '1rem' }],
+      '6xl': ['3.75rem', { lineHeight: '1rem' }],
+      '7xl': ['4.5rem ', { lineHeight: '1rem' }],
+      '8xl': ['6rem ', { lineHeight: '1rem' }],
+      '9xl': ['8rem ', { lineHeight: '1rem' }],
+    },
+
     extend: {
       fontFamily: {
-        'open-sans': {
-          fontFamily:
-            '"Open Sans Variable", -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto,  Helvetica,  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol"',
-          multiplier: '1.01',
-        },
-        'public-sans': {
-          fontFamily:
-            '"Public Sans Variable", -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol"',
-          multiplier: '1.0',
-        },
-        merriweather: {
-          fontFamily:
-            '"Merriweather", "Georgia", "Cambria", "Times New Roman", "Times", serif',
-          multiplier: '0.98',
-        },
-        'source-sans': {
-          fontFamily:
-            '"Source Sans 3 Variable", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif',
-          multiplier: '1.06',
-        },
-        'roboto-mono': {
-          fontFamily:
-            '"Roboto Mono Variable", "Bitstream Vera Sans Mono", "Consolas", "Courier", monospace',
-          multiplier: '0.95',
-        },
-        georgia: {
-          fontFamily: '"Georgia", "Cambria", "Times New Roman", "Times", serif',
-          multiplier: '1.05',
-        },
-        helvetica: {
-          fontFamily:
-            '"Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif',
-          multiplier: '1.01',
-        },
-        tahoma: {
-          fontFamily:
-            '"Tahoma", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-          multiplier: '1.0',
-        },
-        verdana: {
-          fontFamily:
-            '"Verdana", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-          multiplier: '0.99',
-        },
+        'open-sans':
+          '"Open Sans Variable", -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto,  Helvetica,  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol"',
+
+        'public-sans':
+          '"Public Sans Variable", -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol"',
+        merriweather:
+          '"Merriweather", "Georgia", "Cambria", "Times New Roman", "Times", serif',
+
+        'source-sans':
+          '"Source Sans 3 Variable", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif',
+
+        'roboto-mono':
+          '"Roboto Mono Variable", "Bitstream Vera Sans Mono", "Consolas", "Courier", monospace',
+
+        georgia: '"Georgia", "Cambria", "Times New Roman", "Times", serif',
+        helvetica:
+          '"Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif',
+
+        tahoma:
+          '"Tahoma", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+
+        verdana:
+          '"Verdana", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
       },
       maxWidth: {
         prose: '68ex',
@@ -607,277 +549,261 @@ const config = {
         'gray-warm-80': '#2e2e2a',
         'gray-warm-90': '#171716',
       },
-      // typography: ({ theme }: { theme: any }) => ({
-      //   DEFAULT: {
-      //     css: {
-      //       maxWidth: theme('maxWidth.prose'),
-      //       fontFamily: theme('fontFamily.source-sans').fontFamily,
-      //       '--font-normalization': theme('fontFamily.source-sans').multiplier,
-      //       fontSize: theme('fontSize.base')[0],
-      //       lineHeight: theme('lineHeight.normal'),
-      //       color: theme('colors.black'),
-      //       code: {
-      //         fontFamily: theme('fontFamily.roboto-mono').fontFamily,
-      //         '--font-normalization': theme('fontFamily.roboto-mono')
-      //           .multiplier,
-      //       },
-      //       kbd: {
-      //         fontFamily: theme('fontFamily.roboto-mono').fontFamily,
-      //         '--font-normalization': theme('fontFamily.roboto-mono')
-      //           .multiplier,
-      //         borderRadius: theme('rounded'),
-      //         border: '0.5px solid ' + theme('colors.gray-cool-30'),
-      //         color: theme('colors.black'),
-      //         boxShadow:
-      //           '0 2px 0px ' +
-      //           theme('colors.gray-cool-20') +
-      //           ', 0 3px 2px ' +
-      //           theme('colors.gray-cool-50') +
-      //           ', 0 2px 0 0 ' +
-      //           theme('colors.white') +
-      //           ' inset',
-      //         background: theme('colors.gray-cool-2'),
-      //         backgroundImage:
-      //           'linear-gradient(to bottom, ' +
-      //           theme('colors.gray-cool-5') +
-      //           ', ' +
-      //           theme('colors.gray-cool-1') +
-      //           ')',
-      //       },
-      //       'code::before': {
-      //         content: 'none',
-      //       },
-      //       'code::after': {
-      //         content: 'none',
-      //       },
-      //       a: {
-      //         color: theme('colors.blue-60v'),
-      //         textDecoration: 'underline',
-      //         '&:visited': {
-      //           color: theme('colors.violet-70v'),
-      //         },
-      //       },
+      typography: ({ theme }: { theme: any }) => ({
+        DEFAULT: {
+          css: {
+            maxWidth: theme('maxWidth.prose'),
+            fontFamily: theme('fontFamily.source-sans'),
+            fontSize: theme('fontSize.base')[0],
+            lineHeight: theme('lineHeight.normal'),
+            color: theme('colors.black'),
+            code: {
+              fontFamily: theme('fontFamily.roboto-mono'),
+            },
+            kbd: {
+              fontFamily: theme('fontFamily.roboto-mono'),
+              borderRadius: theme('rounded'),
+              border: '0.5px solid ' + theme('colors.gray-cool-30'),
+              color: theme('colors.black'),
+              boxShadow:
+                '0 2px 0px ' +
+                theme('colors.gray-cool-20') +
+                ', 0 3px 2px ' +
+                theme('colors.gray-cool-50') +
+                ', 0 2px 0 0 ' +
+                theme('colors.white') +
+                ' inset',
+              background: theme('colors.gray-cool-2'),
+              backgroundImage:
+                'linear-gradient(to bottom, ' +
+                theme('colors.gray-cool-5') +
+                ', ' +
+                theme('colors.gray-cool-1') +
+                ')',
+            },
+            'code::before': {
+              content: 'none',
+            },
+            'code::after': {
+              content: 'none',
+            },
+            a: {
+              color: theme('colors.blue-60v'),
+              textDecoration: 'underline',
+              '&:visited': {
+                color: theme('colors.violet-70v'),
+              },
+            },
 
-      //       '> * + *': {
-      //         marginTop: theme('spacing.4'),
-      //         marginBottom: '0',
-      //       },
+            '> * + *': {
+              marginTop: theme('spacing.4'),
+              marginBottom: '0',
+            },
 
-      //       // List style
-      //       ol: {
-      //         listStyle: 'revert',
-      //         marginBottom: theme('spacing.1'),
-      //         marginTop: theme('spacing.4'),
-      //         lineHeight: theme('lineHeight.normal'),
-      //         paddingLeft: theme('spacing.6'),
-      //       },
-      //       ul: {
-      //         listStyle: 'revert',
-      //         marginBottom: theme('spacing.1'),
-      //         marginTop: theme('spacing.4'),
-      //         lineHeight: theme('lineHeight.normal'),
-      //         paddingLeft: theme('spacing.6'),
-      //       },
-      //       li: {
-      //         marginTop: theme('spacing.1'),
-      //         marginBottom: theme('spacing.1'),
-      //       },
-      //       'li::marker': {
-      //         color: 'inherit',
-      //       },
-      //       'ul ul': {
-      //         marginTop: theme('spacing.1'),
-      //         paddingLeft: theme('spacing.10'),
-      //       },
-      //       'ul ol': {
-      //         marginTop: theme('spacing.1'),
-      //         paddingLeft: theme('spacing.10'),
-      //       },
-      //       'ul li': {
-      //         marginBottom: theme('spacing.1'),
-      //         paddingLeft: '0',
-      //       },
-      //       'ol ol': {
-      //         marginTop: theme('spacing.1'),
-      //         paddingLeft: theme('spacing.10'),
-      //       },
-      //       'ol ul': {
-      //         marginTop: theme('spacing.1'),
-      //         paddingLeft: theme('spacing.10'),
-      //       },
-      //       'ol li': {
-      //         marginBottom: theme('spacing.1'),
-      //         paddingLeft: '0',
-      //       },
-      //       'ol:last-child': {
-      //         marginBottom: '0',
-      //       },
-      //       'ul:last-child': {
-      //         marginBottom: '0',
-      //       },
-      //       'li:last-child': {
-      //         marginBottom: '0',
-      //       },
+            // List style
+            ol: {
+              listStyle: 'revert',
+              marginBottom: theme('spacing.1'),
+              marginTop: theme('spacing.4'),
+              lineHeight: theme('lineHeight.normal'),
+              paddingLeft: theme('spacing.6'),
+            },
+            ul: {
+              listStyle: 'revert',
+              marginBottom: theme('spacing.1'),
+              marginTop: theme('spacing.4'),
+              lineHeight: theme('lineHeight.normal'),
+              paddingLeft: theme('spacing.6'),
+            },
+            li: {
+              marginTop: theme('spacing.1'),
+              marginBottom: theme('spacing.1'),
+            },
+            'li::marker': {
+              color: 'inherit',
+            },
+            'ul ul': {
+              marginTop: theme('spacing.1'),
+              paddingLeft: theme('spacing.10'),
+            },
+            'ul ol': {
+              marginTop: theme('spacing.1'),
+              paddingLeft: theme('spacing.10'),
+            },
+            'ul li': {
+              marginBottom: theme('spacing.1'),
+              paddingLeft: '0',
+            },
+            'ol ol': {
+              marginTop: theme('spacing.1'),
+              paddingLeft: theme('spacing.10'),
+            },
+            'ol ul': {
+              marginTop: theme('spacing.1'),
+              paddingLeft: theme('spacing.10'),
+            },
+            'ol li': {
+              marginBottom: theme('spacing.1'),
+              paddingLeft: '0',
+            },
+            'ol:last-child': {
+              marginBottom: '0',
+            },
+            'ul:last-child': {
+              marginBottom: '0',
+            },
+            'li:last-child': {
+              marginBottom: '0',
+            },
 
-      //       // Table styles
-      //       '> table': {
-      //         fontSize: theme('fontSize.base')[0],
-      //         lineHeight: theme('lineHeight.normal'),
-      //         borderCollapse: 'collapse',
-      //         borderSpacing: '0',
-      //         color: theme('colors.gray-90'),
-      //         margin: theme('spacing.5') + ' 0',
-      //         textAlign: 'left',
-      //       },
-      //       '> table th': {
-      //         backgroundColor: theme('colors.white'),
-      //         border: '1px solid ' + theme('colors.gray-90'),
-      //         fontWeight: theme('fontWeight.normal'),
-      //         padding: theme('spacing.2') + ' ' + theme('spacing.4'),
-      //         verticalAlign: 'middle',
-      //       },
-      //       '> table td': {
-      //         backgroundColor: theme('colors.white'),
-      //         border: '1px solid ' + theme('colors.gray-90'),
-      //         fontWeight: theme('fontWeight.normal'),
-      //         padding: theme('spacing.2') + ' ' + theme('spacing.4'),
-      //         verticalAlign: 'middle',
-      //       },
-      //       '> table caption': {
-      //         textAlign: 'left',
-      //         fontSize: theme('fontSize.base')[0],
-      //         fontWeight: theme('fontWeight.bold'),
-      //         marginBottom: theme('spacing.3'),
-      //       },
-      //       '> table th[data-sortable]': {
-      //         paddingRight: theme('spacing.10'),
-      //         position: 'relative',
-      //       },
-      //       '> table th[data-sortable]::after': {
-      //         borderBottomColor: 'transparent',
-      //         borderBottomStyle: 'solid',
-      //         borderBottomWidth: '1px',
-      //         bottom: '0',
-      //         content: '""',
-      //         height: '0',
-      //         left: '0',
-      //         position: 'absolute',
-      //         width: '100%',
-      //       },
-      //       '> table tbody th': {
-      //         textAlign: 'left',
-      //       },
-      //       '> table thead th': {
-      //         backgroundColor: theme('colors.gray-cool-10'),
-      //         color: theme('colors.gray-90'),
-      //         backgroundClip: 'padding-box',
-      //         fontWeight: theme('fontWeight.bold'),
-      //         lineHeight: theme('lineHeight.tight'),
-      //       },
-      //       '> table thead td': {
-      //         backgroundColor: theme('colors.gray-cool-10'),
-      //         color: theme('colors.gray-90'),
-      //       },
+            // Table styles
+            '> table': {
+              fontSize: theme('fontSize.base')[0],
+              lineHeight: theme('lineHeight.normal'),
+              borderCollapse: 'collapse',
+              borderSpacing: '0',
+              color: theme('colors.gray-90'),
+              margin: theme('spacing.5') + ' 0',
+              textAlign: 'left',
+            },
+            '> table th': {
+              backgroundColor: theme('colors.white'),
+              border: '1px solid ' + theme('colors.gray-90'),
+              fontWeight: theme('fontWeight.normal'),
+              padding: theme('spacing.2') + ' ' + theme('spacing.4'),
+              verticalAlign: 'middle',
+            },
+            '> table td': {
+              backgroundColor: theme('colors.white'),
+              border: '1px solid ' + theme('colors.gray-90'),
+              fontWeight: theme('fontWeight.normal'),
+              padding: theme('spacing.2') + ' ' + theme('spacing.4'),
+              verticalAlign: 'middle',
+            },
+            '> table caption': {
+              textAlign: 'left',
+              fontSize: theme('fontSize.base')[0],
+              fontWeight: theme('fontWeight.bold'),
+              marginBottom: theme('spacing.3'),
+            },
+            '> table th[data-sortable]': {
+              paddingRight: theme('spacing.10'),
+              position: 'relative',
+            },
+            '> table th[data-sortable]::after': {
+              borderBottomColor: 'transparent',
+              borderBottomStyle: 'solid',
+              borderBottomWidth: '1px',
+              bottom: '0',
+              content: '""',
+              height: '0',
+              left: '0',
+              position: 'absolute',
+              width: '100%',
+            },
+            '> table tbody th': {
+              textAlign: 'left',
+            },
+            '> table thead th': {
+              backgroundColor: theme('colors.gray-cool-10'),
+              color: theme('colors.gray-90'),
+              backgroundClip: 'padding-box',
+              fontWeight: theme('fontWeight.bold'),
+              lineHeight: theme('lineHeight.tight'),
+            },
+            '> table thead td': {
+              backgroundColor: theme('colors.gray-cool-10'),
+              color: theme('colors.gray-90'),
+            },
 
-      //       // Text styles
-      //       '> p': {
-      //         lineHeight: theme('lineHeight.normal'),
-      //       },
-      //       '> h1': {
-      //         marginBottom: '0',
-      //         marginTop: '0',
-      //       },
-      //       '> h2': {
-      //         marginBottom: '0',
-      //         marginTop: '0',
-      //       },
-      //       '> h3': {
-      //         marginBottom: '0',
-      //         marginTop: '0',
-      //       },
-      //       '> h4': {
-      //         marginBottom: '0',
-      //         marginTop: '0',
-      //       },
-      //       '> h5': {
-      //         marginBottom: '0',
-      //         marginTop: '0',
-      //       },
-      //       '> h6': {
-      //         marginBottom: '0',
-      //         marginTop: '0',
-      //       },
-      //       '> * + h1': {
-      //         marginTop: theme('spacing.8'),
-      //       },
-      //       '> * + h2': {
-      //         marginTop: theme('spacing.8'),
-      //       },
-      //       '> * + h3': {
-      //         marginTop: theme('spacing.8'),
-      //       },
-      //       '> * + h4': {
-      //         marginTop: theme('spacing.8'),
-      //       },
-      //       '> * + h5': {
-      //         marginTop: theme('spacing.8'),
-      //       },
-      //       '> * + h6': {
-      //         marginTop: theme('spacing.8'),
-      //       },
-      //       h1: {
-      //         fontSize: theme('fontSize.4xl')[0],
-      //         fontFamily: theme('fontFamily.merriweather').fontFamily,
-      //         '--font-normalization': theme('fontFamily.merriweather')
-      //           .multiplier,
-      //         lineHeight: theme('lineHeight.tight'),
-      //         fontWeight: theme('fontWeight.bold'),
-      //       },
-      //       h2: {
-      //         fontSize: theme('fontSize.3xl')[0],
-      //         fontFamily: theme('fontFamily.merriweather').fontFamily,
-      //         '--font-normalization': theme('fontFamily.merriweather')
-      //           .multiplier,
-      //         lineHeight: theme('lineHeight.tight'),
-      //         fontWeight: theme('fontWeight.bold'),
-      //       },
-      //       h3: {
-      //         fontSize: theme('fontSize.xl')[0],
-      //         fontFamily: theme('fontFamily.merriweather').fontFamily,
-      //         '--font-normalization': theme('fontFamily.merriweather')
-      //           .multiplier,
-      //         lineHeight: theme('lineHeight.tight'),
-      //         fontWeight: theme('fontWeight.bold'),
-      //       },
-      //       h4: {
-      //         fontSize: theme('fontSize.lg')[0],
-      //         fontFamily: theme('fontFamily.merriweather').fontFamily,
-      //         '--font-normalization': theme('fontFamily.merriweather')
-      //           .multiplier,
-      //         lineHeight: theme('lineHeight.tight'),
-      //         fontWeight: theme('fontWeight.bold'),
-      //       },
-      //       h5: {
-      //         fontSize: theme('fontSize.base')[0],
-      //         fontFamily: theme('fontFamily.public-sans').fontFamily,
-      //         '--font-normalization': theme('fontFamily.public-sans')
-      //           .multiplier,
-      //         lineHeight: theme('lineHeight.tight'),
-      //         fontWeight: theme('fontWeight.bold'),
-      //       },
-      //       h6: {
-      //         fontSize: theme('fontSize.sm')[0],
-      //         fontFamily: theme('fontFamily.source-sans').fontFamily,
-      //         '--font-normalization': theme('fontFamily.source-sans')
-      //           .multiplier,
-      //         lineHeight: theme('lineHeight.none'),
-      //         fontWeight: theme('fontWeight.normal'),
-      //         letterSpacing: theme('letterSpacing.wide'),
-      //         textTransform: 'uppercase',
-      //       },
-      //     },
-      //   },
-      // }),
+            // Text styles
+            '> p': {
+              lineHeight: theme('lineHeight.normal'),
+            },
+            '> h1': {
+              marginBottom: '0',
+              marginTop: '0',
+            },
+            '> h2': {
+              marginBottom: '0',
+              marginTop: '0',
+            },
+            '> h3': {
+              marginBottom: '0',
+              marginTop: '0',
+            },
+            '> h4': {
+              marginBottom: '0',
+              marginTop: '0',
+            },
+            '> h5': {
+              marginBottom: '0',
+              marginTop: '0',
+            },
+            '> h6': {
+              marginBottom: '0',
+              marginTop: '0',
+            },
+            '> * + h1': {
+              marginTop: theme('spacing.8'),
+            },
+            '> * + h2': {
+              marginTop: theme('spacing.8'),
+            },
+            '> * + h3': {
+              marginTop: theme('spacing.8'),
+            },
+            '> * + h4': {
+              marginTop: theme('spacing.8'),
+            },
+            '> * + h5': {
+              marginTop: theme('spacing.8'),
+            },
+            '> * + h6': {
+              marginTop: theme('spacing.8'),
+            },
+            h1: {
+              fontSize: theme('fontSize.4xl')[0],
+              fontFamily: theme('fontFamily.merriweather'),
+              lineHeight: theme('lineHeight.tight'),
+              fontWeight: theme('fontWeight.bold'),
+            },
+            h2: {
+              fontSize: theme('fontSize.3xl')[0],
+              fontFamily: theme('fontFamily.merriweather'),
+              lineHeight: theme('lineHeight.tight'),
+              fontWeight: theme('fontWeight.bold'),
+            },
+            h3: {
+              fontSize: theme('fontSize.xl')[0],
+              fontFamily: theme('fontFamily.merriweather'),
+              lineHeight: theme('lineHeight.tight'),
+              fontWeight: theme('fontWeight.bold'),
+            },
+            h4: {
+              fontSize: theme('fontSize.lg')[0],
+              fontFamily: theme('fontFamily.merriweather'),
+              lineHeight: theme('lineHeight.tight'),
+              fontWeight: theme('fontWeight.bold'),
+            },
+            h5: {
+              fontSize: theme('fontSize.base')[0],
+              fontFamily: theme('fontFamily.public-sans'),
+
+              lineHeight: theme('lineHeight.tight'),
+              fontWeight: theme('fontWeight.bold'),
+            },
+            h6: {
+              fontSize: theme('fontSize.sm')[0],
+              fontFamily: theme('fontFamily.source-sans'),
+              lineHeight: theme('lineHeight.none'),
+              fontWeight: theme('fontWeight.normal'),
+              letterSpacing: theme('letterSpacing.wide'),
+              textTransform: 'uppercase',
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [

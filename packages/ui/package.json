@@ -4,22 +4,40 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.2",
+    "@msb/tw-config": "^0.0.0",
+    "@storybook/addon-essentials": "^8.4.5",
+    "@storybook/addon-interactions": "^8.4.5",
+    "@storybook/addon-onboarding": "^8.4.5",
+    "@storybook/blocks": "^8.4.5",
+    "@storybook/react": "^8.4.5",
+    "@storybook/react-vite": "^8.4.5",
+    "@storybook/test": "^8.4.5",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.0.1",
+    "@tsconfig/vite-react": "^3.4.0",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.6",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
     "jsdom": "^25.0.0",
-    "sass": "^1.78.0",
-    "storybook": "^8.3.0",
+    "postcss": "^8.4.49",
+    "prop-types": "^15.8.1",
+    "storybook": "^8.4.5",
+    "tailwindcss": "^3.4.15",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2",
     "vite": "^5.4.5",
+    "vite-plugin-dts": "^4.3.0",
     "vitest": "^2.1.1"
   },
   "peerDependencies": {
@@ -27,8 +45,10 @@
     "react-dom": "^18.3.1"
   },
   "dependencies": {
-    "@trussworks/react-uswds": "^9.1.0",
-    "@uswds/uswds": "^3.8.2",
-    "focus-trap-react": "^10.2.3"
+    "@fontsource-variable/open-sans": "^5.1.0",
+    "@fontsource-variable/public-sans": "^5.1.1",
+    "@fontsource-variable/roboto-mono": "^5.1.0",
+    "@fontsource-variable/source-sans-3": "^5.1.0",
+    "@fontsource/merriweather": "^5.1.0"
   }
 }
