@@ -9,7 +9,7 @@ import { Config } from 'tailwindcss/types/config';
 const config: Config = {
   content: [],
   corePlugins: {
-    fontFamily: false,
+    // fontFamily: false,
   },
   theme: {
     screens: {
@@ -53,30 +53,38 @@ const config: Config = {
 
     extend: {
       fontFamily: {
-        'open-sans':
-          '"Open Sans Variable", -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto,  Helvetica,  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol"',
-
-        'public-sans':
-          '"Public Sans Variable", -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol"',
-        merriweather:
+        mono: '"Roboto Mono Variable", "Bitstream Vera Sans Mono", "Consolas", "Courier", monospace',
+        sans: '"Open Sans Variable", -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto,  Helvetica,  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol"',
+        serif:
           '"Merriweather", "Georgia", "Cambria", "Times New Roman", "Times", serif',
-
-        'source-sans':
-          '"Source Sans 3 Variable", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif',
-
-        'roboto-mono':
-          '"Roboto Mono Variable", "Bitstream Vera Sans Mono", "Consolas", "Courier", monospace',
-
-        georgia: '"Georgia", "Cambria", "Times New Roman", "Times", serif',
-        helvetica:
-          '"Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif',
-
-        tahoma:
-          '"Tahoma", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-
-        verdana:
-          '"Verdana", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
       },
+      // fontFamily: {
+      //   'open-sans':
+      //     '"Open Sans Variable", -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto,  Helvetica,  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol"',
+
+      //   'public-sans':
+      //     '"Public Sans Variable", -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji","Segoe UI Symbol"',
+      //   merriweather: {
+      //     fontFamily:
+      //       '"Merriweather", "Georgia", "Cambria", "Times New Roman", "Times", serif',
+      //   },
+
+      //   'source-sans':
+      //     '"Source Sans 3 Variable", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif',
+
+      //   'roboto-mono':
+      //     '"Roboto Mono Variable", "Bitstream Vera Sans Mono", "Consolas", "Courier", monospace',
+
+      //   georgia: '"Georgia", "Cambria", "Times New Roman", "Times", serif',
+      //   helvetica:
+      //     '"Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif',
+
+      //   tahoma:
+      //     '"Tahoma", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+
+      //   verdana:
+      //     '"Verdana", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+      // },
       maxWidth: {
         prose: '68ex',
       },
