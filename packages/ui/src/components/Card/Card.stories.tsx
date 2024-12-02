@@ -2,9 +2,20 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Card, CardBody, CardFooter, CardHeader } from './Card';
 import { Button } from '../Button';
 
-function CardExample() {
-  return (
-    <div>
+const meta = {
+  component: Card,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+} satisfies Meta<typeof Card>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  render() {
+    return (
       <Card>
         <CardHeader>Card</CardHeader>
         <CardBody>
@@ -23,20 +34,6 @@ function CardExample() {
           <Button color="primary">Click me!</Button>
         </CardFooter>
       </Card>
-    </div>
-  );
-}
-
-const meta = {
-  title: 'Example/Card',
-  component: CardExample,
-  parameters: {
-    layout: 'centered',
+    );
   },
-  tags: ['autodocs'],
-} satisfies Meta<typeof CardExample>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {};
+};

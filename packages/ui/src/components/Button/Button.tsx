@@ -1,6 +1,6 @@
 import { Button as HButton } from '@headlessui/react';
 import clsx from 'clsx';
-import { MouseEventHandler, PropsWithChildren } from 'react';
+import { ButtonProps } from './types';
 
 export function Button({
   children,
@@ -10,14 +10,7 @@ export function Button({
   disabled = false,
   outlined = false,
   unstyled = false,
-}: PropsWithChildren<{
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  color?: 'base' | 'primary' | 'secondary' | 'primary-cool' | 'secondary-cool';
-  big?: boolean;
-  disabled?: boolean;
-  outlined?: boolean;
-  unstyled?: boolean;
-}>) {
+}: ButtonProps) {
   return (
     <HButton
       className={clsx(
