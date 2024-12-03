@@ -3,9 +3,7 @@ import { Breadcrumb } from './Breadcrumb';
 
 const meta = {
   component: Breadcrumb,
-  parameters: {
-    layout: 'centered',
-  },
+
   tags: ['autodocs'],
 } satisfies Meta<typeof Breadcrumb>;
 
@@ -17,6 +15,8 @@ export const Default: Story = {
     items: [
       { label: 'Label 1', url: '/' },
       { label: 'Label 2', url: '/' },
+      { label: 'Label 3', url: '/' },
+      { label: 'Current location', url: '/' },
     ],
   },
 };
