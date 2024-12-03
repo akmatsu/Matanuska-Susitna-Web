@@ -22,7 +22,7 @@ export function Breadcrumb({ LinkComponent = 'a', ...props }: BreadcrumbProps) {
 
           if (index === props.items.length - 2) {
             return (
-              <li className="inline-flex">
+              <li className="inline-flex" key={crypto.randomUUID()}>
                 <span aria-hidden="true" className="@mobile-lg:hidden">
                   <span className="icon-[material-symbols--arrow-back] align-middle text-gray-50 size-4"></span>
                 </span>
@@ -40,7 +40,10 @@ export function Breadcrumb({ LinkComponent = 'a', ...props }: BreadcrumbProps) {
           }
 
           return (
-            <li className="inline sr-only @mobile-lg:not-sr-only">
+            <li
+              className="inline sr-only @mobile-lg:not-sr-only"
+              key={crypto.randomUUID()}
+            >
               <span role="link" aria-disabled="true" aria-current="page">
                 {item.label}
               </span>
