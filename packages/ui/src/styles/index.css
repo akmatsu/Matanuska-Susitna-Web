@@ -1,0 +1,24 @@
+/* Only import the fonts you need! */
+@import '@fontsource-variable/open-sans';
+@import '@fontsource-variable/public-sans';
+@import '@fontsource-variable/roboto-mono';
+@import '@fontsource-variable/source-sans-3';
+
+@import '@fontsource/merriweather/300.css';
+@import '@fontsource/merriweather/400.css';
+@import '@fontsource/merriweather/700.css';
+@import '@fontsource/merriweather/900.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  a,
+  .usa-link {
+    @apply text-blue-60v visited:text-violet-70v hover:text-blue-70v focus:outline focus:outline-4 focus:outline-blue-40v underline;
+    &.external {
+      @apply after:icon-[bi--box-arrow-up-right] after:size-3  after:ml-1;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
-import { join, relative, dirname, basename } from 'path';
+import { join, relative, basename } from 'path';
 
 export default defineConfig({
   plugins: [react()],
