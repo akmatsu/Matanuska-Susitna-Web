@@ -2,5 +2,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": ["@tsconfig/recommended/tsconfig.json"],
   "exclude": ["node_modules", "**/*/lib", "**/*/dist"],
-  "references": [{ "path": "./packages/tw-config/tsconfig.json" }]
+  "references": [{ "path": "./packages/tw-config/tsconfig.json" }],
+  "outDir": "./dist"
 }

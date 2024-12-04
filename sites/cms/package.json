@@ -27,13 +27,6 @@
     "@milkdown/react": "^7.5.0",
     "@milkdown/theme-nord": "^7.5.0",
     "@prosemirror-adapter/react": "^0.2.6",
-    "@toast-ui/editor": "^3.2.2",
-    "@toast-ui/editor-plugin-chart": "^3.0.1",
-    "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
-    "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
-    "@toast-ui/editor-plugin-table-merged-cell": "^3.1.0",
-    "@toast-ui/editor-plugin-uml": "^3.0.1",
-    "@types/express-session": "^1.18.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "express-session": "^1.18.0",
@@ -41,10 +34,10 @@
     "openid-client": "^5.7.0",
     "passport": "^0.7.0",
     "react-select": "^5.8.1",
-    "remark-directive": "^3.0.0",
-    "typescript": "^5.6.2"
+    "remark-directive": "^3.0.0"
   },
   "devDependencies": {
+    "@types/express-session": "^1.18.0",
     "@msb/tw-config": "^0.0.0",
     "@tsconfig/next": "^2.0.3",
     "@types/cookie-parser": "^1.4.7",
@@ -52,5 +45,8 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14"
+  },
+  "resolutions": {
+    "next": "^14.2.0"
   }
 }
