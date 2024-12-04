@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react';
 import { ButtonGroupProps } from './types';
-import { Button } from '../Button/Button';
-import { L } from 'vitest/dist/chunks/reporters.DAfKSDh5.js';
 import clsx from 'clsx';
 
 export function ButtonGroup({

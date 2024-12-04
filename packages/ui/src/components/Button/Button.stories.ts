@@ -8,7 +8,6 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  args: { onClick: fn(), children: 'Button' },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -17,5 +16,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: 'Button',
+    onClick: fn(),
   },
 };

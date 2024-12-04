@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import { BaseComponentWithChildrenProps, Colors } from '../../types';
+import { BaseComponentWithChildrenProps } from '../../types';
 
 export type ButtonProps = BaseComponentWithChildrenProps<{
   onClick?: MouseEventHandler<HTMLButtonElement>;
