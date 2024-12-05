@@ -27,7 +27,7 @@ export function useEditorConfig({
   steps = true,
   toolbar = true,
   table = true,
-  list,
+  list = true,
   ...props
 }: MdEditorProps) {
   const nodeViewFactory = useNodeViewFactory();
