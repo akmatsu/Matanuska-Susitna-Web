@@ -92,10 +92,12 @@ function checkIfPosValid(
   onFail: () => void,
 ) {
   try {
+    console.log(pos, view.state.selection.from);
     if (
       view.state.doc.resolve(pos).node() !==
       view.state.doc.resolve(view.state.selection.from).node()
     ) {
+      console.log('POSITION INVALID!');
       onFail();
       return false;
     }
