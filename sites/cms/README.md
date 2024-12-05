@@ -16,7 +16,7 @@ We recommend you use this alongside our [getting started walkthrough](https://ke
 
 If you want an overview of all the features Keystone offers, check out our [features](https://keystonejs.com/why-keystone#features) page.
 
-## Some Quick Notes On Getting Started
+## How to Get Started
 
 ### Changing the database
 
