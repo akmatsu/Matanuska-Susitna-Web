@@ -4,6 +4,7 @@ import {
   clearContentAndInsert,
   clearContentAndSetBlockType,
   clearContentAndWrapInBlockType,
+  clearRange,
   runCommand,
 } from './utils';
 
@@ -117,12 +118,10 @@ export const SLASH_COMMANDS = [
     action: (ctx: Ctx) => {
       const view = ctx.get(editorViewCtx);
       const { dispatch, state } = view;
-      const tr = state.tr;
-      const selection = state.selection;
-      const { from } = selection;
-      tr.deleteRange(from - 1, from);
+      const tr = clearRange(state.tr);
       const table = createTable(ctx, 3, 3);
       tr.replaceSelectionWith(table);
+      const { from } = tr.selection;
       const pos = from - table.nodeSize + 2;
       dispatch(tr);
       requestAnimationFrame(() => {

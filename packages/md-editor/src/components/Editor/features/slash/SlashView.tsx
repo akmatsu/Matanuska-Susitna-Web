@@ -6,7 +6,7 @@ export const SlashView = () => {
   const ref = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
   const [isVisible, setIsVisible] = useState(false);
-  const { filter } = useSlashProvider(
+  const { filter, hide } = useSlashProvider(
     ref,
     () => setIsVisible(true),
     () => {
@@ -24,6 +24,7 @@ export const SlashView = () => {
   const { selectedIndex, runAction, setSelectedIndex } = useMenuNavControls(
     items,
     isVisible,
+    hide,
   );
 
   useEffect(() => {
@@ -57,13 +58,18 @@ export const SlashView = () => {
       aria-expanded="false"
       className="absolute data-[show='false']:hidden z-10 menu max-h-72 overflow-auto transition-all scroll-smooth"
       tabIndex={0}
+      onClick={(e) => e.preventDefault()}
     >
       {items.map((item, index) => (
         <button
           key={crypto.randomUUID()}
           ref={(el) => (buttonsRef.current[index] = el)}
           className={`btn ${selectedIndex === index ? 'btn--focused' : 'btn--default'}`}
-          onClick={(e) => runAction(e, item.action)}
+          onClick={(e) => e.preventDefault()}
+          onMouseDown={(e) => e.preventDefault()}
+          onMouseUp={(e) => {
+            runAction(e, item.action);
+          }}
         >
           {item.label}
         </button>

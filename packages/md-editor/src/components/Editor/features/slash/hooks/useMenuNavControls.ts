@@ -1,6 +1,6 @@
 import { Ctx } from '@milkdown/kit/ctx';
 import { useInstance } from '@milkdown/react';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { limit } from '../../../../../utils';
 import { slash } from '../config';
 
@@ -10,6 +10,7 @@ export function useMenuNavControls(
     action: (...args: any) => void;
   }[],
   isVisible: boolean,
+  hide?: () => void,
 ) {
   const [loading, get] = useInstance();
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -22,6 +23,7 @@ export function useMenuNavControls(
       e.preventDefault();
       if (loading) return;
       get().action(fn);
+      hide?.();
     },
     [loading],
   );

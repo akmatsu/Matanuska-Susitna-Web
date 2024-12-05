@@ -1,7 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { BlockProvider } from '@milkdown/kit/plugin/block';
+import React, { useRef } from 'react';
 import { useInstance } from '@milkdown/react';
-import { editorViewCtx } from '@milkdown/kit/core';
 import { paragraphSchema } from '@milkdown/kit/preset/commonmark';
 import { slash } from '../slash';
 import { useBlockProvider } from './hooks';
@@ -43,7 +41,11 @@ export function BlockView() {
       dispatch(tr.scrollIntoView());
       ctx.get(slash.key).show(tr.selection.from);
     } else {
-      insert('/')(ctx);
+      let tr = state.tr;
+
+      tr.setSelection(TextSelection.near(tr.doc.resolve(state.selection.from)));
+      dispatch(tr.scrollIntoView());
+      ctx.get(slash.key).show(tr.selection.from);
     }
 
     provider.current.hide();

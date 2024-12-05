@@ -73,6 +73,8 @@ export function useSlashProvider(
   return {
     filter,
     slashProvider,
+    hide,
+    show,
   };
 }
 
