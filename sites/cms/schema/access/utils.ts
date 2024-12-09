@@ -124,6 +124,6 @@ export const filterByPubDates: Filter = {
   },
 };
 
-function getDatetimeISOString(date = new Date(Date.now())): string {
+export function getDatetimeISOString(date = new Date(Date.now())): string {
   return date.toISOString();
 }

@@ -1,5 +1,5 @@
-import { group, list, ListConfig } from '@keystone-6/core';
-import { relationship, text } from '@keystone-6/core/fields';
+import { graphql, group, list, ListConfig } from '@keystone-6/core';
+import { relationship, text, virtual } from '@keystone-6/core/fields';
 import {
   owner,
   publishable,
@@ -15,6 +15,7 @@ import {
   filterByPubDates,
   generalItemAccess,
   generalOperationAccess,
+  getDatetimeISOString,
 } from '../access/utils';
 
 export const Service: ListConfig<any> = list({
@@ -29,6 +30,34 @@ export const Service: ListConfig<any> = list({
   fields: {
     ...titleAndDescription(),
     ...publishable,
+    liveUrl: virtual({
+      field: graphql.field({
+        type: graphql.String,
+        resolve(baseItem) {
+          return `https://matsugov.us/services/${baseItem.slug}`;
+        },
+      }),
+      ui: {
+        views: './customFields/liveUrl/views.tsx',
+        createView: {
+          fieldMode: 'hidden',
+        },
+        itemView: {
+          fieldPosition: 'sidebar',
+          fieldMode(args) {
+            const now = getDatetimeISOString();
+            const pubAt = args.item.publishAt
+              ? getDatetimeISOString(args.item.publishAt as Date)
+              : false;
+            const unpubAt = args.item.unpublishAt
+              ? getDatetimeISOString(args.item.unpublishAt as Date)
+              : false;
+            if (pubAt <= now && (!unpubAt || unpubAt >= now)) return 'read';
+            else return 'hidden';
+          },
+        },
+      },
+    }),
     slug,
     owner,
     body: customText(),
