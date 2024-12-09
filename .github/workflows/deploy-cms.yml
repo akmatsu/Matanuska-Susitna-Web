@@ -110,7 +110,7 @@ jobs:
           EOT
 
             # Install repo dependencies
-            npm ci --workspace=cms --include-workspace-root
+            npm ci --workspace=cms --include-workspace-root --maxsockets=5
 
             # Build UI Library
             npm run mde:build
