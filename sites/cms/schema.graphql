@@ -565,6 +565,7 @@ type Service {
   publishAt: DateTime
   unpublishAt: DateTime
   reviewDate: DateTime
+  liveUrl: String
   slug: String
   owner: User
   body: String
