@@ -68,7 +68,7 @@ jobs:
 
       - name: SSH into the server and deploy
         run: |
-          ssh -t -o ServerAliveInterval=60 ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}} << 'EOF'
+          ssh -o ServerAliveInterval=60 ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}} << 'EOF'
             set -e
             # Create temp and backup directory if they don't exist
             cd cms
