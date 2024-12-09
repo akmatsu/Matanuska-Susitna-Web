@@ -19,7 +19,7 @@ export function DocCollectionSearchView() {
   const [loading] = useInstance();
   const input = useRef<HTMLInputElement>();
 
-  const [search, setSearch] = useState<string>();
+  const [search, setSearch] = useState<string>('');
   const [selectedCollection, setSelectedCollection] = useState<{
     title: string;
     id: string;
@@ -110,6 +110,7 @@ export function DocCollectionSearchView() {
     tooltipProvider.current.onShow = () => {
       setTimeout(() => {
         input.current?.focus();
+        // refetch();
       }, 20);
     };
 
@@ -140,6 +141,7 @@ export function DocCollectionSearchView() {
   return (
     <div className="absolute card data-[show=false]:hidden" ref={content}>
       <Combobox
+        immediate
         value={selectedCollection}
         onChange={(value) => setSelectedCollection(value)}
         onClose={() => setSearch('')}
@@ -164,22 +166,18 @@ export function DocCollectionSearchView() {
           transition
           className={clsx(
             'w-[var(--input-width)] rounded-xl border border-white/5 bg-white p-1 [--anchor-gap:var(--spacing-1)] empty:invisible card',
-            'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0',
+            'transition duration-100 ease-in',
           )}
         >
-          {searchLoading ? (
-            <span>Loading...</span>
-          ) : (
-            data?.documentCollections?.map((collection) => (
-              <ComboboxOption
-                key={collection.id}
-                value={collection}
-                className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-blue-300"
-              >
-                <div className="text-sm/6">{collection.title}</div>
-              </ComboboxOption>
-            ))
-          )}
+          {data?.documentCollections?.map((collection) => (
+            <ComboboxOption
+              key={collection.id}
+              value={collection}
+              className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-blue-300"
+            >
+              <div className="text-sm/6">{collection.title}</div>
+            </ComboboxOption>
+          ))}
         </ComboboxOptions>
       </Combobox>
     </div>
