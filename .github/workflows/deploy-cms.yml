@@ -7,6 +7,7 @@ on:
     paths:
       - 'sites/cms/**'
       - 'packages/md-editor/**'
+      - '.github/workflows/deploy-cms.yml'
 
 permissions:
   id-token: write
