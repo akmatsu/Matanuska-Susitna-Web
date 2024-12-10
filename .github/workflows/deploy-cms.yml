@@ -85,17 +85,7 @@ jobs:
         run: npm run cms:build
 
       - name: Zip the required files
-        run:
-          zip -r --symlinks cms.zip ./sites/cms/.keystone/ ./sites/cms/migrations/ ./sites/cms/schema.graphql ./sites/cms/schema.prisma ./sites/cms/package.json ./sites/cms/package-lock.json ./sites/cms/node_modules/ ./sites/cms/.env ./packages/md-editor/dist/ ./packages/md-editor/package.json ./node_modules/ ./package.json ./package-lock.json ./turbo.json ./.npmrc
-          # zip -r cms.zip . \
-          #   -x node_modules/* \
-          #   -x ".git/*" \
-          #   -x "*.log" \
-          #   -x ".env" \
-          #   -x ".env.*" \
-          #   -x ".env.*.local" \
-          #   -x "sites/msb/*" \
-          #   -x "packages/ui/*"
+        run: zip -rq --symlinks cms.zip ./sites/cms/.keystone/ ./sites/cms/migrations/ ./sites/cms/schema.graphql ./sites/cms/schema.prisma ./sites/cms/package.json ./sites/cms/package-lock.json ./sites/cms/node_modules/ ./sites/cms/.env ./packages/md-editor/dist/ ./packages/md-editor/package.json ./node_modules/ ./package.json ./package-lock.json ./turbo.json ./.npmrc
 
       - name: Upload zipped repo to server
         run: |
@@ -110,7 +100,7 @@ jobs:
             mkdir -p ./active
 
             # Unzip the files in the temp folder
-            unzip -o ./cms.zip -d ./temp
+            unzip -q -o ./cms.zip -d ./temp
 
             # Stop the pm2 server
             pm2 stop cms
