@@ -79,6 +79,9 @@ jobs:
             # Unzip the files in the temp folder
             unzip -o ./cms.zip -d ./temp
 
+            # Stop the pm2 server
+            pm2 stop cms
+
             # Move the active folder to backup
             mv ./active ./backup
             
