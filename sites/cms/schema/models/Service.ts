@@ -17,6 +17,7 @@ import {
   generalOperationAccess,
   getDatetimeISOString,
 } from '../access/utils';
+import { appConfig } from '../../appConfig';
 
 export const Service: ListConfig<any> = list({
   access: {
@@ -34,7 +35,7 @@ export const Service: ListConfig<any> = list({
       field: graphql.field({
         type: graphql.String,
         resolve(baseItem) {
-          return `https://matsugov.us/services/${baseItem.slug}`;
+          return `${appConfig.siteUrl}/services/${baseItem.slug}`;
         },
       }),
       ui: {

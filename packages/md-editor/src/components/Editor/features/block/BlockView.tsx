@@ -5,7 +5,7 @@ import { slash } from '../slash';
 import { useBlockProvider } from './hooks';
 import { usePluginViewContext } from '@prosemirror-adapter/react';
 import { TextSelection } from '@milkdown/kit/prose/state';
-import { insert } from '@milkdown/kit/utils';
+import { Fragment } from '@milkdown/kit/prose/model';
 
 export function BlockView() {
   const ref = useRef<HTMLDivElement>(null);
@@ -33,7 +33,7 @@ export function BlockView() {
     const $pos = active.$pos;
     const pos = $pos.pos + active.node.nodeSize;
 
-    const content = active.node.content;
+    const content = active.node.content as Fragment & { content: any[] };
 
     if (content.content.length) {
       let tr = state.tr.insert(pos, paragraphSchema.type(ctx).create(null));
@@ -56,11 +56,11 @@ export function BlockView() {
       ref={ref}
       className="absolute flex flex-col gap-2 transition-all data-[show=false]:opacity-0"
     >
-      <div className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-move transition-all flex flex-col justify-center">
+      <div className="h-auto w-auto p-1 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-move transition-all flex flex-col justify-center">
         <span className="icon-[icon-park-outline--drag] size-4"></span>
       </div>
       <div
-        className="h-auto w-auto p-2 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-pointer transition-all flex flex-col justify-center"
+        className="h-auto w-auto p-1 bg-gray-200 rounded hover:bg-gray-300 shadow cursor-pointer transition-all flex flex-col justify-center"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
       >

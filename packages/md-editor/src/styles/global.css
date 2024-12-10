@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.milkdown * {
+  padding: unset;
+  margin: unset;
+}
+
 .card,
 .milkdown .card {
   @apply bg-white drop-shadow-lg rounded p-2;
