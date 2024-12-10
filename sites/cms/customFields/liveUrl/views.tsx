@@ -22,7 +22,9 @@ export function Field({ field, value }: FieldProps<typeof controller>) {
       <FieldDescription id={`${field.path}-description`}>
         {field.description}
       </FieldDescription>
-      <Link href={value}>{value}</Link>
+      <Link href={value} target="_blank">
+        {value}
+      </Link>
     </FieldContainer>
   );
 }
