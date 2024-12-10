@@ -19,7 +19,7 @@ export default config<TypeInfo<Session>>({
       return schema.replace(
         `generator client {`,
         `generator client {
-            binaryTargets = ["native", "rhel-openssl-3.0.x"]`,
+            binaryTargets = ["native", "rhel-openssl-3.0.x", "debian-openssl-3.0.x"]`,
       );
     },
   },
