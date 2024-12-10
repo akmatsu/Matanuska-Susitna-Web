@@ -51,46 +51,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Zip the required files
+      - name: 'Create Env File'
         run: |
-          zip -r cms.zip . \
-            -x node_modules/* \
-            -x ".git/*" \
-            -x "*.log" \
-            -x ".env" \
-            -x ".env.*" \
-            -x ".env.*.local" \
-            -x "sites/msb/*" \
-            -x "packages/ui/*"
-
-      - name: Upload zipped repo to server
-        run: |
-          scp cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}:/home/${{secrets.EC2_SERVER_USER}}/cms
-
-      - name: SSH into the server and deploy
-        run: |
-          ssh -o ServerAliveInterval=60 ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}} << 'EOF'
-            set -e
-            # Create temp and backup directory if they don't exist
-            cd cms
-            mkdir -p ./temp
-            mkdir -p ./active
-
-            # Unzip the files in the temp folder
-            unzip -o ./cms.zip -d ./temp
-
-            # Stop the pm2 server
-            pm2 stop cms
-
-            # Move the active folder to backup
-            mv ./active ./backup
-            
-            # Move the temp folder to active
-            mv ./temp ./active
-            cd ./active
-
-            # Setup Environment variables
-            cat <<EOT > ./sites/cms/.env
+          cat <<EOT > ./sites/cms/.env
           NODE_ENV=production
           DATABASE=${{secrets.DB_NAME}}
           DATABASE_USER=${{secrets.DB_USER}}
@@ -112,14 +75,55 @@ jobs:
           S3_SECRET_ACCESS_KEY=${{secrets.S3_SECRET_ACCESS_KEY}}
           EOT
 
-            # Install repo dependencies
-            npm ci --workspace=cms --include-workspace-root --maxsockets=5
+      - name: Install Dependencies
+        run: npm ci --workspace=cms --include-workspace-root
 
-            # Build UI Library
-            npm run mde:build
+      - name: Build Markdown Editor
+        run: npm run mde:build
 
-            # Build the application for production
-            npm run cms:build
+      - name: Build CMS
+        run: npm run cms:build
+
+      - name: Zip the required files
+        run:
+          zip -r --symlinks cms.zip ./sites/cms/.keystone/ ./sites/cms/migrations/ ./sites/cms/schema.graphql ./sites/cms/schema.prisma ./sites/cms/package.json ./sites/cms/package-lock.json ./sites/cms/node_modules/ ./sites/cms/.env ./packages/md-editor/dist/ ./packages/md-editor/package.json ./node_modules/ ./package.json ./package-lock.json ./turbo.json ./.npmrc
+          # zip -r cms.zip . \
+          #   -x node_modules/* \
+          #   -x ".git/*" \
+          #   -x "*.log" \
+          #   -x ".env" \
+          #   -x ".env.*" \
+          #   -x ".env.*.local" \
+          #   -x "sites/msb/*" \
+          #   -x "packages/ui/*"
+
+      - name: Upload zipped repo to server
+        run: |
+          scp cms.zip ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}}:/home/${{secrets.EC2_SERVER_USER}}/cms
+
+      - name: SSH into the server and deploy
+        run: |
+          ssh -o ServerAliveInterval=60 ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}} << 'EOF'
+            set -e
+            # Create temp and backup directory if they don't exist
+            cd cms
+            mkdir -p ./active
+
+            # Unzip the files in the temp folder
+            unzip -o ./cms.zip -d ./temp
+
+            # Stop the pm2 server
+            pm2 stop cms
+
+            # Move the active folder to backup
+            mv ./active ./backup
+            
+            # Move the temp folder to active
+            mv ./temp ./active
+            cd ./active
+
+            # Run database migrations
+            npm run cms:migrate
 
             # Start the production server
             pm2 reload cms || pm2 start npm --name cms -- run cms:start
