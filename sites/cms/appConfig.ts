@@ -18,7 +18,7 @@ export const appConfig = {
     originHost: process.env.ORIGIN_HOST,
   },
   siteUrl:
-    process.env.NODE_NODE === 'production'
+    process.env.NODE_ENV === 'production'
       ? 'https://matsu.gov'
       : 'http://localhost:3000',
   storage: {
