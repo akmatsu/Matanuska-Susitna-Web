@@ -75,14 +75,23 @@ jobs:
           S3_SECRET_ACCESS_KEY=${{secrets.S3_SECRET_ACCESS_KEY}}
           EOT
 
-      - name: Install Dependencies
-        run: npm ci --workspace=cms --include-workspace-root
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install:false
 
-      - name: Build Markdown Editor
-        run: npm run mde:build
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm install --filter cms --workspace-root
 
       - name: Build CMS
-        run: npm run cms:build
+        run: pnpm run cms:build
 
       - name: Zip the required files
         run: zip -rq --symlinks cms.zip ./sites/cms/.keystone/ ./sites/cms/migrations/ ./sites/cms/schema.graphql ./sites/cms/schema.prisma ./sites/cms/package.json ./sites/cms/package-lock.json ./sites/cms/node_modules/ ./sites/cms/.env ./packages/md-editor/dist/ ./packages/md-editor/package.json ./node_modules/ ./package.json ./package-lock.json ./turbo.json ./.npmrc
@@ -95,6 +104,7 @@ jobs:
         run: |
           ssh -o ServerAliveInterval=60 ${{secrets.EC2_SERVER_USER}}@${{secrets.EC2_SERVER_HOST}} << 'EOF'
             set -e
+
             # Create temp and backup directory if they don't exist
             cd cms
             mkdir -p ./active
@@ -113,10 +123,10 @@ jobs:
             cd ./active
 
             # Run database migrations
-            npm run cms:migrate
+            pnpm run cms:migrate
 
             # Start the production server
-            pm2 reload cms || pm2 start npm --name cms -- run cms:start
+            pm2 reload cms || pm2 start pnpm --name cms -- run cms:start
             
             # Remove temporary folders.
             rm -rf ../cms.zip

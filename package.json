@@ -4,20 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "msb:dev": "turbo run dev --filter=msb",
-    "msb:build": "turbo run build --filter=msb",
-    "mde:build": "turbo run build --filter=@msb/md-editor",
-    "cms:dev": "turbo run dev --filter=cms",
-    "cms:build": "turbo run build --filter=cms",
-    "cms:start": "turbo run start --filter=cms",
-    "cms:fix": "turbo run fix --filter=cms",
-    "cms:migrate": "turbo run migrate --filter=cms",
-    "cms:generate": "turbo run migrations --filter=cms"
+    "msb:dev": "pnpm turbo run dev --filter=msb",
+    "msb:build": "pnpm turbo run build --filter=msb",
+    "mde:build": "pnpm turbo run build --filter=@msb/md-editor",
+    "cms:dev": "pnpm turbo run dev --filter=cms",
+    "cms:build": "pnpm turbo run build --filter=cms",
+    "cms:start": "pnpm turbo run start --filter=cms",
+    "cms:fix": "pnpm turbo run fix --filter=cms",
+    "cms:migrate": "pnpm turbo run migrate --filter=cms",
+    "cms:generate": "pnpm turbo run migrations --filter=cms"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "npm@10.8.3",
   "devDependencies": {
     "@eslint/js": "^9.10.0",
     "eslint": "^9.10.0",
@@ -28,10 +27,7 @@
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.6.0"
   },
-  "workspaces": [
-    "./packages/*",
-    "./sites/*"
-  ],
+  "packageManager": "pnpm@9.15.0",
   "dependencies": {
     "@apollo/client": "^3.11.8",
     "@apollo/experimental-nextjs-app-support": "^0.11.3"
