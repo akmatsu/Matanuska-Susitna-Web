@@ -93,7 +93,7 @@ jobs:
         run: pnpm run cms:build
 
       - name: Zip the required files
-        run: zip -rq --symlinks cms.zip ./sites/cms/.keystone/ ./sites/cms/migrations/ ./sites/cms/schema.graphql ./sites/cms/schema.prisma ./sites/cms/package.json ./sites/cms/package-lock.json ./sites/cms/node_modules/ ./sites/cms/.env ./packages/md-editor/dist/ ./packages/md-editor/package.json ./node_modules/ ./package.json ./package-lock.json ./turbo.json ./.npmrc
+        run: zip -rq --symlinks cms.zip ./sites/cms/.keystone/ ./sites/cms/migrations/ ./sites/cms/schema.graphql ./sites/cms/schema.prisma ./sites/cms/package.json ./sites/cms/package-lock.json ./sites/cms/node_modules/ ./sites/cms/.env ./packages/md-editor/dist/ ./packages/md-editor/package.json ./node_modules/ ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./turbo.json ./.npmrc
 
       - name: Upload zipped repo to server
         run: |
