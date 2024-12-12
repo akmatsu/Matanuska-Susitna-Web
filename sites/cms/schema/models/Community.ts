@@ -16,13 +16,11 @@ import {
   userGroups,
 } from '../fieldUtils';
 import { customText } from '../../customFields/Markdown';
+import { text } from '@keystone-6/core/fields';
 
 /*
 TODO: Fields to add
-Hero Image
-Map Location (What's the difference form Address?)
 Topics
-Address?
 Department(s)?
 Assembly District
   District Rep (bio? contact?)
@@ -35,9 +33,9 @@ Related District(s)
   SPUD(s)
 */
 
-const pluralFieldKey = 'locations'
+const pluralFieldKey = 'Communities';
 
-export const Location: ListConfig<any> = list({
+export const Community: ListConfig<any> = list({
   access: {
     operation: generalOperationAccess,
     item: generalItemAccess,
@@ -51,11 +49,19 @@ export const Location: ListConfig<any> = list({
     ...publishable,
     slug,
     owner,
+    mapId: text({
+      ui: {
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
+      },
+    }),
+    heroImage: text({}),
     body: customText(),
     tags: tags(pluralFieldKey),
     userGroups: userGroups(pluralFieldKey),
     contacts: contacts(pluralFieldKey),
-    services: services(pluralFieldKey)
+    services: services(pluralFieldKey),
     ...timestamps,
   },
 });
