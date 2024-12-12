@@ -25,6 +25,7 @@ model User {
   updatedAt                     DateTime?            @default(now()) @updatedAt
   from_UserGroup_owner          UserGroup[]          @relation("UserGroup_owner")
   from_Service_owner            Service[]            @relation("Service_owner")
+  from_Community_owner          Community[]          @relation("Community_owner")
   from_DocumentCollection_owner DocumentCollection[] @relation("DocumentCollection_owner")
 }
 
@@ -36,21 +37,23 @@ model UserGroup {
   description         String               @default("")
   users               User[]               @relation("User_groups")
   services            Service[]            @relation("Service_userGroups")
+  communities         Community[]          @relation("Community_userGroups")
   documentCollections DocumentCollection[] @relation("DocumentCollection_userGroups")
 
   @@index([ownerId])
 }
 
 model Contact {
-  id              String    @id @default(cuid())
-  name            String    @default("")
+  id              String      @id @default(cuid())
+  name            String      @default("")
   phone           String?
   email           String?
-  primaryServices Service[] @relation("Service_primaryContact")
-  services        Service[] @relation("Contact_services")
-  user            User?     @relation("Contact_user", fields: [userId], references: [id])
-  userId          String?   @unique @map("user")
-  editorNotes     String    @default("")
+  primaryServices Service[]   @relation("Service_primaryContact")
+  services        Service[]   @relation("Contact_services")
+  communities     Community[] @relation("Community_contacts")
+  user            User?       @relation("Contact_user", fields: [userId], references: [id])
+  userId          String?     @unique @map("user")
+  editorNotes     String      @default("")
 }
 
 model Alert {
@@ -67,6 +70,7 @@ model Tag {
   id                  String               @id @default(cuid())
   name                String               @default("")
   services            Service[]            @relation("Service_tags")
+  communities         Community[]          @relation("Community_tags")
   documents           Document[]           @relation("Document_tags")
   documentCollections DocumentCollection[] @relation("DocumentCollection_tags")
 }
@@ -89,6 +93,7 @@ model Service {
   primaryContact   Contact?    @relation("Service_primaryContact", fields: [primaryContactId], references: [id])
   primaryContactId String?     @map("primaryContact")
   contacts         Contact[]   @relation("Contact_services")
+  communities      Community[] @relation("Community_services")
   createdAt        DateTime?   @default(now())
   updatedAt        DateTime?   @default(now()) @updatedAt
   editorNotes      String      @default("")
@@ -97,6 +102,31 @@ model Service {
   @@index([description])
   @@index([ownerId])
   @@index([primaryContactId])
+}
+
+model Community {
+  id          String      @id @default(cuid())
+  title       String      @default("")
+  description String      @default("")
+  publishAt   DateTime?
+  unpublishAt DateTime?
+  reviewDate  DateTime?
+  slug        String      @unique @default("")
+  owner       User?       @relation("Community_owner", fields: [ownerId], references: [id])
+  ownerId     String?     @map("owner")
+  mapId       String      @default("")
+  heroImage   String?
+  body        String?
+  tags        Tag[]       @relation("Community_tags")
+  userGroups  UserGroup[] @relation("Community_userGroups")
+  contacts    Contact[]   @relation("Community_contacts")
+  services    Service[]   @relation("Community_services")
+  createdAt   DateTime?   @default(now())
+  updatedAt   DateTime?   @default(now()) @updatedAt
+
+  @@index([title])
+  @@index([description])
+  @@index([ownerId])
 }
 
 model Highlight {

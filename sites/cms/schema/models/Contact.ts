@@ -71,6 +71,11 @@ export const Contact: ListConfig<any> = list({
       many: true,
       ui: { hideCreate: true },
     }),
+    communities: relationship({
+      ref: 'Community.contacts',
+      many: true,
+      ui: { hideCreate: true },
+    }),
     user: relationship({ ref: 'User.contact', ui: { hideCreate: true } }),
     editorNotes: text({
       ui: {

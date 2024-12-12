@@ -8,6 +8,7 @@ import { Highlight } from './Highlight';
 import { Document } from './Document';
 import { DocumentCollection } from './DocumentCollection';
 import { UserGroup } from './UserGroup';
+import { Community } from './Community';
 
 export const lists = {
   User,
@@ -16,6 +17,7 @@ export const lists = {
   Alert,
   Tag,
   Service,
+  Community,
   Highlight,
   Document,
   DocumentCollection,

@@ -120,6 +120,16 @@ export const Service: ListConfig<any> = list({
         },
       },
     }),
+    communities: relationship({
+      ref: 'Community.services',
+      many: true,
+      ui: {
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
+        hideCreate: true,
+      },
+    }),
     ...timestamps,
     editorNotes: text({
       ui: {

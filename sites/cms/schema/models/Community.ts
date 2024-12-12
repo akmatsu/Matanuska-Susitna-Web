@@ -17,6 +17,7 @@ import {
 } from '../fieldUtils';
 import { customText } from '../../customFields/Markdown';
 import { text } from '@keystone-6/core/fields';
+import { blueHarvestImage } from '../../customFields/blueHarvestImage';
 
 /*
 TODO: Fields to add
@@ -33,7 +34,7 @@ Related District(s)
   SPUD(s)
 */
 
-const pluralFieldKey = 'Communities';
+const pluralFieldKey = 'communities';
 
 export const Community: ListConfig<any> = list({
   access: {
@@ -50,13 +51,16 @@ export const Community: ListConfig<any> = list({
     slug,
     owner,
     mapId: text({
+      label: 'Map ID',
       ui: {
+        description:
+          'You can create a custom map view in ArcGIS online and paste the ID here',
         itemView: {
           fieldPosition: 'sidebar',
         },
       },
     }),
-    heroImage: text({}),
+    heroImage: blueHarvestImage(),
     body: customText(),
     tags: tags(pluralFieldKey),
     userGroups: userGroups(pluralFieldKey),

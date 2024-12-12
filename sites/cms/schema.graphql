@@ -196,6 +196,8 @@ type UserGroup {
   usersCount(where: UserWhereInput! = {}): Int
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
+  communities(where: CommunityWhereInput! = {}, orderBy: [CommunityOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: CommunityWhereUniqueInput): [Community!]
+  communitiesCount(where: CommunityWhereInput! = {}): Int
   documentCollections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
   documentCollectionsCount(where: DocumentCollectionWhereInput! = {}): Int
 }
@@ -214,6 +216,7 @@ input UserGroupWhereInput {
   description: StringFilter
   users: UserManyRelationFilter
   services: ServiceManyRelationFilter
+  communities: CommunityManyRelationFilter
   documentCollections: DocumentCollectionManyRelationFilter
 }
 
@@ -227,6 +230,12 @@ input ServiceManyRelationFilter {
   every: ServiceWhereInput
   some: ServiceWhereInput
   none: ServiceWhereInput
+}
+
+input CommunityManyRelationFilter {
+  every: CommunityWhereInput
+  some: CommunityWhereInput
+  none: CommunityWhereInput
 }
 
 input DocumentCollectionManyRelationFilter {
@@ -247,6 +256,7 @@ input UserGroupUpdateInput {
   description: String
   users: UserRelateToManyForUpdateInput
   services: ServiceRelateToManyForUpdateInput
+  communities: CommunityRelateToManyForUpdateInput
   documentCollections: DocumentCollectionRelateToManyForUpdateInput
 }
 
@@ -270,6 +280,13 @@ input ServiceRelateToManyForUpdateInput {
   connect: [ServiceWhereUniqueInput!]
 }
 
+input CommunityRelateToManyForUpdateInput {
+  disconnect: [CommunityWhereUniqueInput!]
+  set: [CommunityWhereUniqueInput!]
+  create: [CommunityCreateInput!]
+  connect: [CommunityWhereUniqueInput!]
+}
+
 input DocumentCollectionRelateToManyForUpdateInput {
   disconnect: [DocumentCollectionWhereUniqueInput!]
   set: [DocumentCollectionWhereUniqueInput!]
@@ -288,6 +305,7 @@ input UserGroupCreateInput {
   description: String
   users: UserRelateToManyForCreateInput
   services: ServiceRelateToManyForCreateInput
+  communities: CommunityRelateToManyForCreateInput
   documentCollections: DocumentCollectionRelateToManyForCreateInput
 }
 
@@ -306,6 +324,11 @@ input ServiceRelateToManyForCreateInput {
   connect: [ServiceWhereUniqueInput!]
 }
 
+input CommunityRelateToManyForCreateInput {
+  create: [CommunityCreateInput!]
+  connect: [CommunityWhereUniqueInput!]
+}
+
 input DocumentCollectionRelateToManyForCreateInput {
   create: [DocumentCollectionCreateInput!]
   connect: [DocumentCollectionWhereUniqueInput!]
@@ -320,6 +343,8 @@ type Contact {
   primaryServicesCount(where: ServiceWhereInput! = {}): Int
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
+  communities(where: CommunityWhereInput! = {}, orderBy: [CommunityOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: CommunityWhereUniqueInput): [Community!]
+  communitiesCount(where: CommunityWhereInput! = {}): Int
   user: User
   editorNotes: String
 }
@@ -338,6 +363,7 @@ input ContactWhereInput {
   email: StringNullableFilter
   primaryServices: ServiceManyRelationFilter
   services: ServiceManyRelationFilter
+  communities: CommunityManyRelationFilter
   user: UserWhereInput
   editorNotes: StringFilter
 }
@@ -371,6 +397,7 @@ input ContactUpdateInput {
   email: String
   primaryServices: ServiceRelateToManyForUpdateInput
   services: ServiceRelateToManyForUpdateInput
+  communities: CommunityRelateToManyForUpdateInput
   user: UserRelateToOneForUpdateInput
   editorNotes: String
 }
@@ -386,6 +413,7 @@ input ContactCreateInput {
   email: String
   primaryServices: ServiceRelateToManyForCreateInput
   services: ServiceRelateToManyForCreateInput
+  communities: CommunityRelateToManyForCreateInput
   user: UserRelateToOneForCreateInput
   editorNotes: String
 }
@@ -495,6 +523,8 @@ type Tag {
   name: String
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
+  communities(where: CommunityWhereInput! = {}, orderBy: [CommunityOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: CommunityWhereUniqueInput): [Community!]
+  communitiesCount(where: CommunityWhereInput! = {}): Int
   documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
   documentsCount(where: DocumentWhereInput! = {}): Int
   documentCollections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
@@ -512,6 +542,7 @@ input TagWhereInput {
   id: IDFilter
   name: StringFilter
   services: ServiceManyRelationFilter
+  communities: CommunityManyRelationFilter
   documents: DocumentManyRelationFilter
   documentCollections: DocumentCollectionManyRelationFilter
 }
@@ -530,6 +561,7 @@ input TagOrderByInput {
 input TagUpdateInput {
   name: String
   services: ServiceRelateToManyForUpdateInput
+  communities: CommunityRelateToManyForUpdateInput
   documents: DocumentRelateToManyForUpdateInput
   documentCollections: DocumentCollectionRelateToManyForUpdateInput
 }
@@ -549,6 +581,7 @@ input TagUpdateArgs {
 input TagCreateInput {
   name: String
   services: ServiceRelateToManyForCreateInput
+  communities: CommunityRelateToManyForCreateInput
   documents: DocumentRelateToManyForCreateInput
   documentCollections: DocumentCollectionRelateToManyForCreateInput
 }
@@ -578,6 +611,8 @@ type Service {
   primaryContact: Contact
   contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
   contactsCount(where: ContactWhereInput! = {}): Int
+  communities(where: CommunityWhereInput! = {}, orderBy: [CommunityOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: CommunityWhereUniqueInput): [Community!]
+  communitiesCount(where: CommunityWhereInput! = {}): Int
   createdAt: DateTime
   updatedAt: DateTime
   editorNotes: String
@@ -607,6 +642,7 @@ input ServiceWhereInput {
   userGroups: UserGroupManyRelationFilter
   primaryContact: ContactWhereInput
   contacts: ContactManyRelationFilter
+  communities: CommunityManyRelationFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
   editorNotes: StringFilter
@@ -655,6 +691,7 @@ input ServiceUpdateInput {
   userGroups: UserGroupRelateToManyForUpdateInput
   primaryContact: ContactRelateToOneForUpdateInput
   contacts: ContactRelateToManyForUpdateInput
+  communities: CommunityRelateToManyForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
   editorNotes: String
@@ -694,6 +731,7 @@ input ServiceCreateInput {
   userGroups: UserGroupRelateToManyForCreateInput
   primaryContact: ContactRelateToOneForCreateInput
   contacts: ContactRelateToManyForCreateInput
+  communities: CommunityRelateToManyForCreateInput
   createdAt: DateTime
   updatedAt: DateTime
   editorNotes: String
@@ -707,6 +745,115 @@ input TagRelateToManyForCreateInput {
 input ContactRelateToManyForCreateInput {
   create: [ContactCreateInput!]
   connect: [ContactWhereUniqueInput!]
+}
+
+type Community {
+  id: ID!
+  title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  reviewDate: DateTime
+  slug: String
+  owner: User
+  mapId: String
+  heroImage: String
+  body: String
+  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
+  tagsCount(where: TagWhereInput! = {}): Int
+  userGroups(where: UserGroupWhereInput! = {}, orderBy: [UserGroupOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserGroupWhereUniqueInput): [UserGroup!]
+  userGroupsCount(where: UserGroupWhereInput! = {}): Int
+  contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
+  contactsCount(where: ContactWhereInput! = {}): Int
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CommunityWhereUniqueInput {
+  id: ID
+  slug: String
+}
+
+input CommunityWhereInput {
+  AND: [CommunityWhereInput!]
+  OR: [CommunityWhereInput!]
+  NOT: [CommunityWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  description: StringFilter
+  publishAt: DateTimeNullableFilter
+  unpublishAt: DateTimeNullableFilter
+  reviewDate: DateTimeNullableFilter
+  slug: StringFilter
+  owner: UserWhereInput
+  mapId: StringFilter
+  body: MyStringFilter
+  tags: TagManyRelationFilter
+  userGroups: UserGroupManyRelationFilter
+  contacts: ContactManyRelationFilter
+  services: ServiceManyRelationFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input CommunityOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  description: OrderDirection
+  publishAt: OrderDirection
+  unpublishAt: OrderDirection
+  reviewDate: OrderDirection
+  slug: OrderDirection
+  mapId: OrderDirection
+  heroImage: OrderDirection
+  body: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input CommunityUpdateInput {
+  title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  reviewDate: DateTime
+  slug: String
+  owner: UserRelateToOneForUpdateInput
+  mapId: String
+  heroImage: String
+  body: String
+  tags: TagRelateToManyForUpdateInput
+  userGroups: UserGroupRelateToManyForUpdateInput
+  contacts: ContactRelateToManyForUpdateInput
+  services: ServiceRelateToManyForUpdateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CommunityUpdateArgs {
+  where: CommunityWhereUniqueInput!
+  data: CommunityUpdateInput!
+}
+
+input CommunityCreateInput {
+  title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  reviewDate: DateTime
+  slug: String
+  owner: UserRelateToOneForCreateInput
+  mapId: String
+  heroImage: String
+  body: String
+  tags: TagRelateToManyForCreateInput
+  userGroups: UserGroupRelateToManyForCreateInput
+  contacts: ContactRelateToManyForCreateInput
+  services: ServiceRelateToManyForCreateInput
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 type Highlight {
@@ -956,6 +1103,12 @@ type Mutation {
   updateServices(data: [ServiceUpdateArgs!]!): [Service]
   deleteService(where: ServiceWhereUniqueInput!): Service
   deleteServices(where: [ServiceWhereUniqueInput!]!): [Service]
+  createCommunity(data: CommunityCreateInput!): Community
+  createCommunities(data: [CommunityCreateInput!]!): [Community]
+  updateCommunity(where: CommunityWhereUniqueInput!, data: CommunityUpdateInput!): Community
+  updateCommunities(data: [CommunityUpdateArgs!]!): [Community]
+  deleteCommunity(where: CommunityWhereUniqueInput!): Community
+  deleteCommunities(where: [CommunityWhereUniqueInput!]!): [Community]
   createHighlight(data: HighlightCreateInput!): Highlight
   createHighlights(data: [HighlightCreateInput!]!): [Highlight]
   updateHighlight(where: HighlightWhereUniqueInput!, data: HighlightUpdateInput!): Highlight
@@ -996,6 +1149,9 @@ type Query {
   service(where: ServiceWhereUniqueInput!): Service
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
+  community(where: CommunityWhereUniqueInput!): Community
+  communities(where: CommunityWhereInput! = {}, orderBy: [CommunityOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: CommunityWhereUniqueInput): [Community!]
+  communitiesCount(where: CommunityWhereInput! = {}): Int
   highlight(where: HighlightWhereUniqueInput!): Highlight
   highlights(where: HighlightWhereInput! = {}, orderBy: [HighlightOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: HighlightWhereUniqueInput): [Highlight!]
   highlightsCount(where: HighlightWhereInput! = {}): Int
