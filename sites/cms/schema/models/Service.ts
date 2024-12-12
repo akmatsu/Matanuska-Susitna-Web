@@ -4,6 +4,7 @@ import {
   owner,
   publishable,
   slug,
+  tags,
   timestamps,
   titleAndDescription,
   urlRegex,
@@ -99,20 +100,8 @@ export const Service: ListConfig<any> = list({
       },
     }),
 
-    tags: relationship({
-      ref: 'Tag.services',
-      many: true,
-      ui: {
-        displayMode: 'select',
-        searchFields: ['name'],
-        itemView: {
-          fieldPosition: 'sidebar',
-        },
-      },
-    }),
-
+    tags: tags('services'),
     userGroups: userGroups('services'),
-
     primaryContact: relationship({
       ref: 'Contact.primaryServices',
       ui: {

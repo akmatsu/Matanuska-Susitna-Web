@@ -185,6 +185,32 @@ export function relateActiveUser({
   return resolvedData?.[fieldKey];
 }
 
+export function tags(listKey: string) {
+  return relationship({
+    ref: `Tag.${listKey}`,
+    many: true,
+    ui: {
+      displayMode: 'select',
+      searchFields: ['name'],
+      itemView: {
+        fieldPosition: 'sidebar',
+      },
+    },
+  });
+}
+
+export function contacts(listKey: string) {
+  return relationship({
+    ref: `Contact.${listKey}`,
+    many: true,
+    ui: {
+      itemView: {
+        fieldPosition: 'sidebar',
+      },
+    },
+  });
+}
+
 export function userGroups(listKey: string) {
   return relationship({
     ref: `UserGroup.${listKey}`,
@@ -197,5 +223,12 @@ export function userGroups(listKey: string) {
     access: {
       update: ({ session, item }) => isAdmin(session) || isOwner(session, item),
     },
+  });
+}
+
+export function services(listKey: string) {
+  return relationship({
+    ref: `Service.${listKey}`,
+    many: true,
   });
 }
