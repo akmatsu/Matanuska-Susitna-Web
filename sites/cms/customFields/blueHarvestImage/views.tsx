@@ -1,4 +1,5 @@
 import { CellContainer } from '@keystone-6/core/admin-ui/components';
+import Link from 'next/link';
 import {
   CardValueComponent,
   CellComponent,
@@ -24,6 +25,11 @@ export function Field({
       <FieldLabel>{field.label}</FieldLabel>
       <FieldDescription id={`${field.path}-description`}>
         {field.description}
+        Search for an image in{' '}
+        <Link href="https://images.matsu.gov" target="_blank">
+          Blue Harvest
+        </Link>{' '}
+        and paste the URL in the input below.
       </FieldDescription>
       <TextInput
         defaultValue={value || ''}

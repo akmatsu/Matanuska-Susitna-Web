@@ -1,23 +1,19 @@
 import { Suspense } from 'react';
-import { Button } from '@trussworks/react-uswds';
-import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
-import { ServiceSearch } from '@/components/Services/ServiceSearch';
-import { Metadata } from 'next';
 import { PageProps } from '@/.next/types/app/page';
 import { SearchList } from '@/components/SearchList';
-import { GET_SERVICES_QUERY } from '@/utils/apollo/queries/getServices';
 import { SearchListLoading } from '@/components/SearchListLoading';
+import { ServiceSearch } from '@/components/Services/ServiceSearch';
+import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
+import { GET_COMMUNITIES_QUERY } from '@/utils/apollo/queries/getCommunities';
+import { Button } from '@trussworks/react-uswds';
 
-export const metadata: Metadata = {
-  title: 'MSB - Services',
-  description: 'Services offered by the Matanuska-Susitna Borough',
-};
-
-export default function Services({ searchParams }: PageProps) {
+export default function Communities({ searchParams }: PageProps) {
   const { page = '1', search = '' }: { page?: string; search?: string } =
     searchParams;
 
   const pageNum = parseInt(page);
+
+  const pageTitle = 'Communities';
 
   return (
     <section className="usa-section">
@@ -34,14 +30,14 @@ export default function Services({ searchParams }: PageProps) {
       >
         <Suspense
           key={`${page}-${search}`}
-          fallback={<SearchListLoading title="Services" />}
+          fallback={<SearchListLoading title={pageTitle} />}
         >
           <SearchList
             page={pageNum}
             search={search || ''}
-            listKey="services"
-            title="Services"
-            query={GET_SERVICES_QUERY}
+            listKey="communities"
+            title={pageTitle}
+            query={GET_COMMUNITIES_QUERY}
           />
         </Suspense>
       </ThreeColumnLayout>
