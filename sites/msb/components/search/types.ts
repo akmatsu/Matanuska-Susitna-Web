@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 
-export type ServiceSearchProps = {
+export type SearchListInputProps = {
   search?: string | null;
   className?: HTMLAttributes<HTMLDivElement>['className'];
 };

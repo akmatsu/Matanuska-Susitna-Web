@@ -1,5 +1,5 @@
-import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { SearchListInput, SearchListLoading } from '@/components/search';
+import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { Button } from '@trussworks/react-uswds';
 
 export default function Loading() {
@@ -16,7 +16,7 @@ export default function Loading() {
           </div>
         }
       >
-        <SearchListLoading title="Services" />
+        <SearchListLoading title="Communities" />
       </ThreeColumnLayout>
     </section>
   );

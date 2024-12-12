@@ -1,5 +1,5 @@
 import { CardBody, CardHeader } from '@trussworks/react-uswds';
-import { LinkCard } from './LinkCard';
+import { LinkCard } from '../LinkCard';
 
 export function SearchListItem({
   item,

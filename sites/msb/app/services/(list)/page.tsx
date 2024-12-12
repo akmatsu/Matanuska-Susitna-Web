@@ -1,12 +1,14 @@
 import { Suspense } from 'react';
 import { Button } from '@trussworks/react-uswds';
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
-import { ServiceSearch } from '@/components/Services/ServiceSearch';
 import { Metadata } from 'next';
 import { PageProps } from '@/.next/types/app/page';
-import { SearchList } from '@/components/SearchList';
 import { GET_SERVICES_QUERY } from '@/utils/apollo/queries/getServices';
-import { SearchListLoading } from '@/components/SearchListLoading';
+import {
+  SearchList,
+  SearchListInput,
+  SearchListLoading,
+} from '@/components/search';
 
 export const metadata: Metadata = {
   title: 'MSB - Services',
@@ -22,7 +24,7 @@ export default function Services({ searchParams }: PageProps) {
   return (
     <section className="usa-section">
       <ThreeColumnLayout
-        left={<ServiceSearch search={search} />}
+        left={<SearchListInput search={search} />}
         right={
           <div className="display-flex flex-column">
             <h3>Get Help</h3>

@@ -5,7 +5,7 @@ import {
   TypedDocumentNode,
 } from '@apollo/client';
 import { SearchListItem } from './SearchListItem';
-import { CorePagination } from './CorePagination';
+import { CorePagination } from '../CorePagination';
 
 export async function SearchList({
   limit = 15,

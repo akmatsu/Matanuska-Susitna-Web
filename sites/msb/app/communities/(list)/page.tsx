@@ -1,11 +1,13 @@
 import { Suspense } from 'react';
 import { PageProps } from '@/.next/types/app/page';
-import { SearchList } from '@/components/SearchList';
-import { SearchListLoading } from '@/components/SearchListLoading';
-import { ServiceSearch } from '@/components/Services/ServiceSearch';
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { GET_COMMUNITIES_QUERY } from '@/utils/apollo/queries/getCommunities';
 import { Button } from '@trussworks/react-uswds';
+import {
+  SearchList,
+  SearchListInput,
+  SearchListLoading,
+} from '@/components/search';
 
 export default function Communities({ searchParams }: PageProps) {
   const { page = '1', search = '' }: { page?: string; search?: string } =
@@ -18,7 +20,7 @@ export default function Communities({ searchParams }: PageProps) {
   return (
     <section className="usa-section">
       <ThreeColumnLayout
-        left={<ServiceSearch search={search} />}
+        left={<SearchListInput search={search} />}
         right={
           <div className="display-flex flex-column">
             <h3>Get Help</h3>

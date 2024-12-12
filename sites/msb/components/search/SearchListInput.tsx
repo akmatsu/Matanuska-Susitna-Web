@@ -3,9 +3,12 @@
 import React from 'react';
 import { Search } from '@trussworks/react-uswds';
 import { useRouter } from 'next/navigation';
-import { ServiceSearchProps } from './types';
+import { SearchListInputProps } from './types';
 
-export function ServiceSearch({ search = '', className }: ServiceSearchProps) {
+export function SearchListInput({
+  search = '',
+  className,
+}: SearchListInputProps) {
   const router = useRouter();
 
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
