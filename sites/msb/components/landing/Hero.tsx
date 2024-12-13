@@ -31,16 +31,6 @@ export function Hero() {
       text: 'Parcel Viewer',
       url: 'https://mapping.matsugov.us/Html5Viewer/index.html?viewer=MSB_Parcel_Viewer',
     },
-    // {
-    //   icon: 'Home',
-    //   text: 'myProperty Lookup',
-    //   url: 'https://myproperty.matsugov.us/',
-    // },
-    // {
-    //   icon: 'Map',
-    //   text: 'Parcel Viewer',
-    //   url: 'https://mapping.matsugov.us/Html5Viewer/index.html?viewer=MSB_Parcel_Viewer',
-    // },
   ];
   return (
     <Carousel
