@@ -1,5 +1,10 @@
+import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { GET_COMMUNITY_META_QUERY } from '@/utils/apollo/queries/getCommunity';
+import {
+  GET_COMMUNITY_META_QUERY,
+  GET_COMMUNITY_QUERY,
+} from '@/utils/apollo/queries/getCommunity';
+import { GridContainer } from '@trussworks/react-uswds';
 import { Metadata } from 'next';
 import React from 'react';
 
@@ -33,16 +38,55 @@ export default async function Community({
 }: {
   params: { slug: string };
 }) {
+  const { data } = await getClient().query({
+    query: GET_COMMUNITY_QUERY,
+    variables: {
+      where: { slug: params.slug },
+    },
+
+    context: {
+      fetchOptions: {
+        next: {
+          revalidate: 300,
+        },
+      },
+    },
+  });
+
+  const community = data?.community;
+
+  function getImageBaseUrl(value?: string | null) {
+    if (!value) return;
+    const [baseUrl, _] = value.split('?');
+
+    return baseUrl;
+  }
+
+  function getPosition(value?: string | null) {
+    if (!value) return;
+    const [_, search] = value.split('?');
+    const params = new URLSearchParams(search);
+    const position = params.get('position');
+
+    return position || '50% 50%';
+  }
+
   return (
-    <section
-      className="usa-hero display-flex flex-column flex-justify-center flex-align-center text-black text-center"
-      aria-label="introduction"
-      style={{
-        backgroundImage: `url(https://d1159zutbdy4l.cloudfront.net/public/uploads/b166b6bf-6cb2-43c9-9caf-4ada690d9099optimized_images/1920x1489_optimized_image.jpg)`,
-        backgroundPosition: 'center',
-      }}
-    >
-      <div style={{ height: '300px' }}></div>
-    </section>
+    <>
+      <section
+        className="usa-hero display-flex flex-column flex-justify-center flex-align-center text-black text-center"
+        aria-label="introduction"
+        style={{
+          backgroundImage: `url(${getImageBaseUrl(community.heroImage)})`,
+          backgroundPosition: getPosition(community.heroImage),
+          height: '300px',
+        }}
+      ></section>
+      {/* <section className="usa-section">
+        <GridContainer>
+          <MarkdownRenderer>{data?.community?.body}</MarkdownRenderer>
+        </GridContainer>
+      </section> */}
+    </>
   );
 }

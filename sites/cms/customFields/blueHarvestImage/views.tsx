@@ -1,5 +1,8 @@
+'use client';
+
 import { CellContainer } from '@keystone-6/core/admin-ui/components';
 import Link from 'next/link';
+import { useEffect, useState, type MouseEvent } from 'react';
 import {
   CardValueComponent,
   CellComponent,
@@ -20,6 +23,44 @@ export function Field({
   value,
   onChange,
 }: FieldProps<typeof controller>) {
+  const [isDragging, setIsDragging] = useState(false);
+
+  const [backgroundPosition, setBackgroundPosition] = useState(
+    getPosition(value || ''),
+  );
+  const [image, setImage] = useState(getBaseUrl(value || ''));
+
+  function getBaseUrl(value: string) {
+    const [baseUrl, _] = value.split('?');
+
+    return baseUrl;
+  }
+
+  function getPosition(value: string) {
+    const [_, search] = value.split('?');
+    const params = new URLSearchParams(search);
+    const position = params.get('position');
+
+    return position || '50% 50%';
+  }
+
+  function drag(e: MouseEvent<HTMLDivElement>) {
+    if (!isDragging) return;
+
+    const container = e.currentTarget.getBoundingClientRect();
+    const offsetX = e.clientX - container.left;
+    const offsetY = e.clientY - container.top;
+
+    const x = Math.min(100, Math.max(0, (offsetX / container.width) * 100));
+    const y = Math.min(100, Math.max(0, (offsetY / container.height) * 100));
+
+    setBackgroundPosition(`${x}% ${y}%`);
+  }
+
+  useEffect(() => {
+    onChange?.(`${image}?position=${backgroundPosition}`);
+  }, [backgroundPosition]);
+
   return (
     <FieldContainer as="fieldset">
       <FieldLabel>{field.label}</FieldLabel>
@@ -32,10 +73,25 @@ export function Field({
         and paste the URL in the input below.
       </FieldDescription>
       <TextInput
-        defaultValue={value || ''}
+        value={value || ''}
         onChange={(e) => onChange?.(e.target.value)}
       />
-      {value && <img src={value} />}
+      {value && (
+        <div
+          onMouseDown={() => setIsDragging(true)}
+          onMouseUp={() => setIsDragging(false)}
+          onMouseLeave={() => setIsDragging(false)}
+          onMouseMove={drag}
+          style={{
+            backgroundImage: `url(${image})`,
+            width: '100%',
+            backgroundPosition,
+            backgroundSize: 'cover',
+            cursor: 'move',
+            aspectRatio: '6.4/1',
+          }}
+        />
+      )}
     </FieldContainer>
   );
 }

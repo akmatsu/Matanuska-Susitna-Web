@@ -9,6 +9,8 @@ import { Document } from './Document';
 import { DocumentCollection } from './DocumentCollection';
 import { UserGroup } from './UserGroup';
 import { Community } from './Community';
+import { AssemblyDistrict } from './AssemblyDistrict';
+import { Image } from './Image';
 
 export const lists = {
   User,
@@ -18,7 +20,9 @@ export const lists = {
   Tag,
   Service,
   Community,
+  AssemblyDistrict,
   Highlight,
+  Image,
   Document,
   DocumentCollection,
 } satisfies Lists;

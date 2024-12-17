@@ -15,6 +15,7 @@ export const Tag: ListConfig<any> = list({
     services: relationship({ ref: 'Service.tags', many: true }),
     communities: relationship({ ref: 'Community.tags', many: true }),
     documents: relationship({ ref: 'Document.tags', many: true }),
+    images: relationship({ ref: 'Image.tags', many: true }),
     documentCollections: relationship({
       ref: 'DocumentCollection.tags',
       many: true,

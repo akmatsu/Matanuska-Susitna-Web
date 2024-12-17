@@ -6,6 +6,7 @@ import {
 } from '../access';
 import {
   contacts,
+  liveUrl,
   owner,
   publishable,
   services,
@@ -15,8 +16,7 @@ import {
   titleAndDescription,
   userGroups,
 } from '../fieldUtils';
-import { customText } from '../../customFields/Markdown';
-import { text } from '@keystone-6/core/fields';
+import { relationship, text } from '@keystone-6/core/fields';
 import { blueHarvestImage } from '../../customFields/blueHarvestImage';
 
 /*
@@ -28,10 +28,10 @@ Assembly District
 Related Legislation
 Boards
 Related District(s)
-  RSA(s)
-  FSA(s)
-  SSA(s)
-  SPUD(s)
+RSA(s)
+FSA(s)
+SSA(s)
+SPUD(s)
 */
 
 const pluralFieldKey = 'communities';
@@ -46,26 +46,32 @@ export const Community: ListConfig<any> = list({
     maxTake: 100,
   },
   fields: {
+    heroImage: blueHarvestImage(),
     ...titleAndDescription(),
     ...publishable,
+    liveUrl: liveUrl(pluralFieldKey),
     slug,
     owner,
     mapId: text({
       label: 'Map ID',
       ui: {
-        description:
-          'You can create a custom map view in ArcGIS online and paste the ID here',
         itemView: {
           fieldPosition: 'sidebar',
         },
       },
     }),
-    heroImage: blueHarvestImage(),
-    body: customText(),
     tags: tags(pluralFieldKey),
     userGroups: userGroups(pluralFieldKey),
     contacts: contacts(pluralFieldKey),
     services: services(pluralFieldKey),
+    districts: relationship({
+      ref: 'AssemblyDistrict',
+      many: true,
+      ui: {
+        hideCreate: true,
+        inlineConnect: true,
+      },
+    }),
     ...timestamps,
   },
 });

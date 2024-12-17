@@ -26,6 +26,7 @@ model User {
   from_UserGroup_owner          UserGroup[]          @relation("UserGroup_owner")
   from_Service_owner            Service[]            @relation("Service_owner")
   from_Community_owner          Community[]          @relation("Community_owner")
+  from_AssemblyDistrict_owner   AssemblyDistrict[]   @relation("AssemblyDistrict_owner")
   from_DocumentCollection_owner DocumentCollection[] @relation("DocumentCollection_owner")
 }
 
@@ -72,6 +73,7 @@ model Tag {
   services            Service[]            @relation("Service_tags")
   communities         Community[]          @relation("Community_tags")
   documents           Document[]           @relation("Document_tags")
+  images              Image[]              @relation("Image_tags")
   documentCollections DocumentCollection[] @relation("DocumentCollection_tags")
 }
 
@@ -105,28 +107,53 @@ model Service {
 }
 
 model Community {
-  id          String      @id @default(cuid())
-  title       String      @default("")
-  description String      @default("")
+  id          String             @id @default(cuid())
+  heroImage   String?
+  title       String             @default("")
+  description String             @default("")
   publishAt   DateTime?
   unpublishAt DateTime?
   reviewDate  DateTime?
-  slug        String      @unique @default("")
-  owner       User?       @relation("Community_owner", fields: [ownerId], references: [id])
-  ownerId     String?     @map("owner")
-  mapId       String      @default("")
-  heroImage   String?
-  body        String?
-  tags        Tag[]       @relation("Community_tags")
-  userGroups  UserGroup[] @relation("Community_userGroups")
-  contacts    Contact[]   @relation("Community_contacts")
-  services    Service[]   @relation("Community_services")
-  createdAt   DateTime?   @default(now())
-  updatedAt   DateTime?   @default(now()) @updatedAt
+  slug        String             @unique @default("")
+  owner       User?              @relation("Community_owner", fields: [ownerId], references: [id])
+  ownerId     String?            @map("owner")
+  mapId       String             @default("")
+  tags        Tag[]              @relation("Community_tags")
+  userGroups  UserGroup[]        @relation("Community_userGroups")
+  contacts    Contact[]          @relation("Community_contacts")
+  services    Service[]          @relation("Community_services")
+  districts   AssemblyDistrict[] @relation("Community_districts")
+  createdAt   DateTime?          @default(now())
+  updatedAt   DateTime?          @default(now()) @updatedAt
 
   @@index([title])
   @@index([description])
   @@index([ownerId])
+}
+
+model AssemblyDistrict {
+  id                       String      @id @default(cuid())
+  title                    String      @default("")
+  description              String      @default("")
+  slug                     String      @unique @default("")
+  owner                    User?       @relation("AssemblyDistrict_owner", fields: [ownerId], references: [id])
+  ownerId                  String?     @map("owner")
+  photo                    Image?      @relation("AssemblyDistrict_photo", fields: [photoId], references: [id])
+  photoId                  String?     @map("photo")
+  memberName               String      @default("")
+  bio                      String      @default("")
+  address                  String      @default("")
+  email                    String?
+  phone                    String?
+  fax                      String?
+  termStart                DateTime?
+  termEnd                  DateTime?
+  from_Community_districts Community[] @relation("Community_districts")
+
+  @@index([title])
+  @@index([description])
+  @@index([ownerId])
+  @@index([photoId])
 }
 
 model Highlight {
@@ -140,6 +167,22 @@ model Highlight {
   internalLink String?
   externalLink String?
   editorNotes  String    @default("")
+}
+
+model Image {
+  id                          String             @id @default(cuid())
+  title                       String             @default("")
+  description                 String             @default("")
+  tags                        Tag[]              @relation("Image_tags")
+  file_id                     String?
+  file_filesize               Int?
+  file_width                  Int?
+  file_height                 Int?
+  file_extension              String?
+  from_AssemblyDistrict_photo AssemblyDistrict[] @relation("AssemblyDistrict_photo")
+
+  @@index([title])
+  @@index([description])
 }
 
 model Document {

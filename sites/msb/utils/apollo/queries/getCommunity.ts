@@ -10,23 +10,25 @@ export interface GetCommunityItemMetaData {
 }
 
 export interface GetCommunityData {
-  id: string;
-  title: string;
-  body: string;
-  mapId?: string | null;
-  heroImage?: string | null;
-  services: {
+  community: {
     id: string;
-    slug: string;
     title: string;
-    description: string;
-  }[];
-  contacts: {
-    id: string;
-    name: string;
-    phone: string;
-    email: string;
-  }[];
+    body: string;
+    mapId?: string | null;
+    heroImage?: string | null;
+    services: {
+      id: string;
+      slug: string;
+      title: string;
+      description: string;
+    }[];
+    contacts: {
+      id: string;
+      name: string;
+      phone: string;
+      email: string;
+    }[];
+  };
 }
 
 export interface GetCommunityVariables {
