@@ -2,14 +2,18 @@ import React from 'react';
 import clsx from 'clsx';
 
 /**
- * A customizable button component with various color variants and states
+ * A customizable button component that supports multiple color variants, states, and polymorphic rendering
  * @component
  */
-export function Button({
+export function Button<T extends React.ElementType = 'button'>({
   className,
-  color = 'base',
+  color = 'primary',
   type = 'button',
   disabled,
+  as,
+  href,
+  block,
+  big,
   ...props
 }: {
   className?: string;
@@ -26,14 +30,26 @@ export function Button({
     | 'warning'
     | 'success';
   disabled?: boolean;
-}) {
+  as?: T;
+  href?: string;
+  block?: boolean;
+  big?: boolean;
+} & Omit<React.ComponentPropsWithoutRef<T>, 'color'>) {
+  const Component = as || (href ? 'a' : 'button');
+
   return (
-    <button
+    <Component
       {...props}
+      href={href}
+      type={Component === 'button' ? type : undefined}
       disabled={disabled}
       aria-disabled={disabled}
       className={clsx(
-        'rounded px-5 py-3 leading-none font-bold focus-ring',
+        'rounded leading-none font-bold focus-ring block shadow',
+        { 'w-fit': !block },
+        { 'w-full': block },
+        { 'px-5 py-3': !big },
+        { 'px-6 py-4': big },
         {
           'bg-disabled-lighter text-disabled-dark cursor-not-allowed': disabled,
         },
@@ -71,6 +87,8 @@ export function Button({
         },
         className,
       )}
-    ></button>
+    >
+      {props.children}
+    </Component>
   );
 }
