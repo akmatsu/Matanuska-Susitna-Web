@@ -1,13 +1,13 @@
 import { Suspense } from 'react';
 import { PageProps } from '@/.next/types/app/page';
-import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { GET_COMMUNITIES_QUERY } from '@/utils/apollo/queries/getCommunities';
 import { Button } from '@matsugov/ui';
 import {
   SearchList,
   SearchListInput,
   SearchListLoading,
-} from '@/components/search';
+  ThreeColumnLayout,
+} from '@/components';
 
 export default function Communities({ searchParams }: PageProps) {
   const { page = '1', search = '' }: { page?: string; search?: string } =

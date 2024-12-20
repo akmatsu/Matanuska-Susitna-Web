@@ -1,6 +1,6 @@
 import { CardBody, CardHeader, CardMedia, Grid } from '@trussworks/react-uswds';
-import Link from 'next/link';
 import { LinkCard } from '../LinkCard/LinkCard';
+import { LinkButton } from '../LinkButton';
 
 export function FeaturedContent() {
   return (
@@ -50,12 +50,9 @@ export function FeaturedContent() {
           </CardHeader>
         </LinkCard>
 
-        <Link
-          href="#see-all"
-          className="radius-0 usa-button usa-button--big width-full"
-        >
+        <LinkButton href="#see-all" block big>
           See all
-        </Link>
+        </LinkButton>
       </Grid>
     </Grid>
   );

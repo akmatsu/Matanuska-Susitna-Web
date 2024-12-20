@@ -4,6 +4,7 @@ import { Carousel } from '../Carousel';
 import { Grid, Icon, Search } from '@trussworks/react-uswds';
 import React from 'react';
 import { CoreIcon } from '../CoreIcon';
+import { LinkButton } from '../LinkButton';
 
 export function Hero() {
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {

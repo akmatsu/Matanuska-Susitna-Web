@@ -1,5 +1,8 @@
-import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
-import { SearchListInput, SearchListLoading } from '@/components/search';
+import {
+  SearchListInput,
+  SearchListLoading,
+  ThreeColumnLayout,
+} from '@/components';
 import { Button } from '@matsugov/ui';
 
 export default function Loading() {

@@ -1,8 +1,11 @@
-import { Featured, Hero, HighlightGrid } from '@/components';
-import { FeaturedContent } from '@/components/landing/FeatureContent';
-import { Meetings } from '@/components/Meetings';
-import { GridContainer, Grid } from '@trussworks/react-uswds';
-import { LinkButton } from '@/components/LinkButton/LinkButton';
+import { GridContainer } from '@trussworks/react-uswds';
+import {
+  Featured,
+  Hero,
+  FeaturedContent,
+  Meetings,
+  LinkButton,
+} from '@/components';
 
 export default function Home() {
   return (

@@ -1,12 +1,9 @@
-import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import {
   GET_COMMUNITY_META_QUERY,
   GET_COMMUNITY_QUERY,
 } from '@/utils/apollo/queries/getCommunity';
-import { GridContainer } from '@trussworks/react-uswds';
 import { Metadata } from 'next';
-import React from 'react';
 
 export async function generateMetadata({
   params,

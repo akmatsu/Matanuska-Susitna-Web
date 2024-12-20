@@ -1,5 +1,5 @@
 import 'react-loading-skeleton/dist/skeleton.css';
-import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
+import { ThreeColumnLayout } from '@/components';
 import Skeleton from 'react-loading-skeleton';
 
 export default function Loading() {

@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { Button } from '@matsugov/ui';
-import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { Metadata } from 'next';
 import { PageProps } from '@/.next/types/app/page';
 import { GET_SERVICES_QUERY } from '@/utils/apollo/queries/getServices';
@@ -8,7 +7,8 @@ import {
   SearchList,
   SearchListInput,
   SearchListLoading,
-} from '@/components/search';
+  ThreeColumnLayout,
+} from '@/components';
 
 export const metadata: Metadata = {
   title: 'MSB - Services',

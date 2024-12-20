@@ -1,12 +1,10 @@
-import React from 'react';
-
-import { CoreSideNav } from '@/components/CoreSideNav';
-
-import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
-import { MarkdownRenderer } from '@/components/MarkdownRenderer';
-
-import { ContactCard } from '@/components/ContactCard';
-import { LinkButton } from '@/components/LinkButton/LinkButton';
+import {
+  CoreSideNav,
+  ThreeColumnLayout,
+  MarkdownRenderer,
+  ContactCard,
+  LinkButton,
+} from '@/components';
 
 import {
   GET_SERVICE_META_QUERY,
