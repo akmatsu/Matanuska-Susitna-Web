@@ -1,0 +1,11 @@
+@import '@fontsource-variable/public-sans/index.css';
+@import '@fontsource-variable/roboto-mono/index.css';
+/* @import '@fontsource/source-sans-pro/index.css'; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.focus-ring {
+  @apply focus:outline-none focus:ring-4 focus:ring-offset-4 focus:ring-blue-40v;
+}
