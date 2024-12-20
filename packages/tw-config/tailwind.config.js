@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 const uswdsColors = {
   'red-cool-10': '#f3e1e4',
   'red-cool-20': '#ecbec6',
@@ -534,8 +533,10 @@ const uswdsColors = {
   'emergency-dark': '#332d29',
 };
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [],
+  important: true,
   theme: {
     extend: {
       fontFamily: {

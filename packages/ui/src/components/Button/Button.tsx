@@ -45,11 +45,11 @@ export function Button<T extends React.ElementType = 'button'>({
       disabled={disabled}
       aria-disabled={disabled}
       className={clsx(
-        'rounded leading-none font-bold focus-ring block shadow',
+        'rounded leading-none font-bold focus-ring block shadow text-center',
         { 'w-fit': !block },
         { 'w-full': block },
         { 'px-5 py-3': !big },
-        { 'px-6 py-4': big },
+        { 'px-6 py-4 text-xl': big },
         {
           'bg-disabled-lighter text-disabled-dark cursor-not-allowed': disabled,
         },

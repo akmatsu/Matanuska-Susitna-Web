@@ -6,7 +6,7 @@ import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 
 import { ContactCard } from '@/components/ContactCard';
-import Link from 'next/link';
+import { LinkButton } from '@/components/LinkButton/LinkButton';
 
 import {
   GET_SERVICE_META_QUERY,
@@ -82,13 +82,15 @@ export default async function Service({
                 style={{ gap: '8px' }}
               >
                 {service?.actionUrl && (
-                  <Link
+                  <LinkButton
                     href={service.actionUrl}
-                    className="margin-right-0 usa-button usa-button--big usa-link--external"
+                    className="margin-right-0 usa-link--external"
                     target="_blank"
+                    big
+                    block
                   >
                     {service.actionLabel || 'Primary Action'}
-                  </Link>
+                  </LinkButton>
                 )}
                 {service?.primaryContact && (
                   <ContactCard contact={service?.primaryContact} isPrimary />
