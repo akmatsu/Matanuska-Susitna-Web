@@ -2,7 +2,7 @@ import { Featured, Hero, HighlightGrid } from '@/components';
 import { FeaturedContent } from '@/components/landing/FeatureContent';
 import { Meetings } from '@/components/Meetings';
 import { GridContainer, Grid } from '@trussworks/react-uswds';
-import Link from 'next/link';
+import { LinkButton } from '@/components/LinkButton/LinkButton';
 
 export default function Home() {
   return (
@@ -28,9 +28,9 @@ export default function Home() {
             Use the search bar or reach out to us directly — we're here to help.
           </p>
 
-          <Link href="#" className="usa-button">
+          <LinkButton href="#" color="primary">
             Contact us
-          </Link>
+          </LinkButton>
         </GridContainer>
       </section>
     </div>

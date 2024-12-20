@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { PageProps } from '@/.next/types/app/page';
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { GET_COMMUNITIES_QUERY } from '@/utils/apollo/queries/getCommunities';
-import { Button } from '@trussworks/react-uswds';
+import { Button } from '@matsugov/ui';
 import {
   SearchList,
   SearchListInput,
@@ -24,9 +24,7 @@ export default function Communities({ searchParams }: PageProps) {
         right={
           <div className="display-flex flex-column">
             <h3>Get Help</h3>
-            <Button type="button" size="big">
-              Contact us
-            </Button>
+            <Button big>Contact us</Button>
           </div>
         }
       >

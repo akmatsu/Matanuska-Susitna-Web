@@ -1,6 +1,6 @@
 import { SearchListInput, SearchListLoading } from '@/components/search';
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
-import { Button } from '@trussworks/react-uswds';
+import { Button } from '@matsugov/ui';
 
 export default function Loading() {
   return (
@@ -10,9 +10,7 @@ export default function Loading() {
         right={
           <div className="display-flex flex-column">
             <h3>Get Help</h3>
-            <Button type="button" size="big">
-              Contact us
-            </Button>
+            <Button big>Contact us</Button>
           </div>
         }
       >

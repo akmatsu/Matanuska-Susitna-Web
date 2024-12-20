@@ -1,11 +1,10 @@
+import { Button } from '@matsugov/ui';
 import {
   Grid,
   CardHeader,
-  CardMedia,
   CardBody,
   Card,
   CardFooter,
-  Button,
 } from '@trussworks/react-uswds';
 
 export function Meetings() {
@@ -57,15 +56,13 @@ export function Meetings() {
             </CardHeader>
             <CardBody>{meeting.location}</CardBody>
             <CardFooter>
-              <Button type="button">Add to Calendar</Button>
+              <Button>Add to Calendar</Button>
             </CardFooter>
           </Card>
         </Grid>
       ))}
       <div className="display-flex flex-row flex-justify-center flex-align-center width-full">
-        <Button type="button" className="display-block" size="big" outline>
-          View all
-        </Button>
+        <Button big>View all</Button>
       </div>
     </Grid>
   );

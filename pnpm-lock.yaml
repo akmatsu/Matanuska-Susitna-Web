@@ -276,6 +276,9 @@ importers:
 
   sites/msb:
     dependencies:
+      '@matsugov/ui':
+        specifier: workspace:^
+        version: link:../../packages/ui
       '@trussworks/react-uswds':
         specifier: ^9.1.0
         version: 9.1.0(@uswds/uswds@3.10.0)(focus-trap-react@10.3.1(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -284,7 +287,7 @@ importers:
         version: 3.10.0
       next:
         specifier: ^14.2.14
-        version: 14.2.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.82.0)
+        version: 14.2.20(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.82.0)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -6382,7 +6385,7 @@ snapshots:
     dependencies:
       '@apollo/client': 3.12.2(@types/react@18.3.16)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@apollo/client-react-streaming': 0.11.7(@apollo/client@3.12.2(@types/react@18.3.16)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
-      next: 14.2.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.82.0)
+      next: 14.2.20(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.82.0)
       react: 18.3.1
 
   '@apollo/protobufjs@1.2.7':
@@ -8117,7 +8120,7 @@ snapshots:
       inflection: 3.0.0
       intersection-observer: 0.12.2
       meow: 9.0.0
-      next: 14.2.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.82.0)
+      next: 14.2.20(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.82.0)
       pluralize: 8.0.0
       prisma: 5.22.0
       prompts: 2.4.2
@@ -8199,7 +8202,7 @@ snapshots:
       inflection: 3.0.0
       intersection-observer: 0.12.2
       meow: 9.0.0
-      next: 14.2.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.82.0)
+      next: 14.2.20(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.82.0)
       pluralize: 8.0.0
       prisma: 5.22.0
       prompts: 2.4.2
@@ -12467,7 +12470,7 @@ snapshots:
 
   negotiator@0.6.4: {}
 
-  next@14.2.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.82.0):
+  next@14.2.20(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.82.0):
     dependencies:
       '@next/env': 14.2.20
       '@swc/helpers': 0.5.5
@@ -12477,7 +12480,7 @@ snapshots:
       postcss: 8.4.31
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      styled-jsx: 5.1.1(react@18.3.1)
+      styled-jsx: 5.1.1(@babel/core@7.26.0)(react@18.3.1)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.20
       '@next/swc-darwin-x64': 14.2.20
@@ -13581,10 +13584,12 @@ snapshots:
     dependencies:
       inline-style-parser: 0.2.4
 
-  styled-jsx@5.1.1(react@18.3.1):
+  styled-jsx@5.1.1(@babel/core@7.26.0)(react@18.3.1):
     dependencies:
       client-only: 0.0.1
       react: 18.3.1
+    optionalDependencies:
+      '@babel/core': 7.26.0
 
   stylis@4.2.0: {}
 

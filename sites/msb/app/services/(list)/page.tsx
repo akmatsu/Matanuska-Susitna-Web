@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Button } from '@trussworks/react-uswds';
+import { Button } from '@matsugov/ui';
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { Metadata } from 'next';
 import { PageProps } from '@/.next/types/app/page';
@@ -28,9 +28,7 @@ export default function Services({ searchParams }: PageProps) {
         right={
           <div className="display-flex flex-column">
             <h3>Get Help</h3>
-            <Button type="button" size="big">
-              Contact us
-            </Button>
+            <Button big>Contact us</Button>
           </div>
         }
       >

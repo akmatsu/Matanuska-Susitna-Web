@@ -571,7 +571,7 @@ module.exports = {
         ink: uswdsColors['gray-90'],
         'primary-lighter': uswdsColors['blue-10'],
         'primary-light': uswdsColors['blue-30'],
-        primary: uswdsColors['blue-cool-60v'],
+        primary: uswdsColors['blue-warm-60v'],
         'primary-vivid': uswdsColors['blue-warm-60v'],
         'primary-dark': uswdsColors['blue-warm-70v'],
         'primary-darker': uswdsColors['blue-warm-80v'],

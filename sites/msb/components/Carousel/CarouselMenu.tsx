@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@trussworks/react-uswds';
+import { Button } from '@matsugov/ui';
 import { useSwiper } from 'swiper/react';
 
 export function CarouselMenu(props: { slides: string[] }) {
@@ -10,7 +10,7 @@ export function CarouselMenu(props: { slides: string[] }) {
   return (
     <div className="position-absolute bottom-0 width-full z-100 padding-1 display-flex flex-justify-center flex-align-center">
       {props.slides.map((slide, index) => (
-        <Button type="button" onClick={() => slideTo(index)} key={index}>
+        <Button onClick={() => slideTo(index)} key={index}>
           {slide}
         </Button>
       ))}

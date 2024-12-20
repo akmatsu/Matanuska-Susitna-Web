@@ -2,13 +2,13 @@
 import Link from 'next/link';
 import { appConfig, primaryNav } from '@/configs/config';
 import {
-  Button,
   Header,
   Icon,
   NavMenuButton,
   PrimaryNav,
   Title,
 } from '@trussworks/react-uswds';
+import { Button } from '@matsugov/ui';
 import { useState } from 'react';
 import { NavLink } from './NavLink';
 
@@ -49,7 +49,7 @@ export function TopNavigation() {
           mobileExpanded={isOpen}
           onToggleMobileNav={() => setIsOpen((val) => !val)}
         >
-          <Button type="button" className="padding-05">
+          <Button className="padding-05">
             <Icon.Search size={3} />
           </Button>
         </PrimaryNav>
