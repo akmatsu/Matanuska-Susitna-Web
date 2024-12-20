@@ -1,6 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
 
+/**
+ * A customizable button component with various color variants and states
+ * @component
+ */
 export function Button({
   className,
   color = 'base',

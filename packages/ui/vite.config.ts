@@ -9,14 +9,14 @@ export default defineConfig({
       entry: './src/index.ts',
       name: 'ui',
       fileName: 'ui',
-      formats: ['es', 'cjs'],
+      formats: ['es'],
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
       output: {
         preserveModules: true,
         preserveModulesRoot: 'src',
-        sourcemap: true,
+        entryFileNames: '[name].js',
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
