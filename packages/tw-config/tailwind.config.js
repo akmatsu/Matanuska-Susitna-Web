@@ -1,3 +1,5 @@
+import { addIconSelectors } from '@iconify/tailwind';
+
 const uswdsColors = {
   'red-cool-10': '#f3e1e4',
   'red-cool-20': '#ecbec6',
@@ -625,5 +627,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [addIconSelectors(['mdi'])],
 };

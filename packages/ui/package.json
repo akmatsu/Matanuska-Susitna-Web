@@ -56,6 +56,7 @@
     "@fontsource-variable/public-sans": "^5.1.1",
     "@fontsource-variable/roboto-mono": "^5.1.0",
     "@fontsource/source-sans-pro": "^5.1.0",
+    "@headlessui/react": "^2.2.0",
     "clsx": "^2.1.1"
   }
 }
