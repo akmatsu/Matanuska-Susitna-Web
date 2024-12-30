@@ -17,10 +17,10 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     href: 'https://example.com',
+    title: 'Link Card Title',
+    titleAs: 'h4',
     children: (
       <>
-        <h4 className="text-xl font-bold leading-none">Link Card Title</h4>
-
         <div>
           <p>
             This card is a clickable link that navigates to another page. Click

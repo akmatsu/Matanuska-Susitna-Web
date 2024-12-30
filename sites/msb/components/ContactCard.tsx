@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardHeader } from '@trussworks/react-uswds';
+import { Card, CardHeader, CardBody, CardTitle } from '@matsugov/ui';
 import Link from 'next/link';
 
 export function ContactCard({
@@ -18,7 +18,7 @@ export function ContactCard({
   return (
     <Card>
       <CardHeader>
-        <h4>{headerText}</h4>
+        <CardTitle>{headerText}</CardTitle>
       </CardHeader>
       <CardBody>
         <p>

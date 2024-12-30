@@ -1,5 +1,5 @@
-import { CardBody, CardHeader } from '@trussworks/react-uswds';
-import { LinkCard } from '../LinkCard';
+import { LinkCard, CardHeader, CardBody } from '@matsugov/ui';
+import Link from 'next/link';
 
 export function SearchListItem({
   item,
@@ -9,8 +9,8 @@ export function SearchListItem({
   listKey: string;
 }) {
   return (
-    <LinkCard className="margin-bottom-2" href={`/${listKey}/${item.slug}`}>
-      <CardHeader className="padding-top-2">
+    <LinkCard href={`/${listKey}/${item.slug}`} as="li" linkAs={Link}>
+      <CardHeader>
         <h4 className="usa-card__heading margin-bottom-0">{item.title}</h4>
         <CardBody>
           <p>{item.description}</p>

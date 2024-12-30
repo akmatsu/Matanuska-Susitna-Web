@@ -22,6 +22,10 @@ i.e.
 
 @use 'uswds-core' as *;
 
+.border-2 {
+  border-width: 2px !important;
+}
+
 .usa-hero {
   background-image: url('https://d1159zutbdy4l.cloudfront.net/public/uploads/9a6d51bb-9b20-4008-ac82-4100120ed080/Butte-Fall-jumbo2.jpg');
   background-position: top;

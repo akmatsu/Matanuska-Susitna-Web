@@ -1,11 +1,12 @@
-import { Button } from '@matsugov/ui';
 import {
-  Grid,
-  CardHeader,
-  CardBody,
+  Button,
   Card,
+  CardBody,
   CardFooter,
-} from '@trussworks/react-uswds';
+  CardHeader,
+  CardTitle,
+} from '@matsugov/ui';
+import { Grid } from '@trussworks/react-uswds';
 
 export function Meetings() {
   const meetings: {
@@ -49,12 +50,14 @@ export function Meetings() {
           key={crypto.randomUUID()}
           className="margin-bottom-2"
         >
-          <Card className="usa-list--unstyled height-full">
+          <Card>
             <CardHeader>
-              <h4>{meeting.title}</h4>
+              <CardTitle>{meeting.title}</CardTitle>
               <span className="font-body-sm">{formatDate(meeting.date)}</span>
             </CardHeader>
-            <CardBody>{meeting.location}</CardBody>
+            <CardBody>
+              <p>{meeting.location}</p>
+            </CardBody>
             <CardFooter>
               <Button>Add to Calendar</Button>
             </CardFooter>

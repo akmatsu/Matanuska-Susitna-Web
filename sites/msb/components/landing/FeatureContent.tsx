@@ -1,18 +1,26 @@
-import { CardBody, CardHeader, CardMedia, Grid } from '@trussworks/react-uswds';
-import { LinkCard } from '../LinkCard/LinkCard';
+import { Grid } from '@trussworks/react-uswds';
+import {
+  LinkCard,
+  CardHeader,
+  CardBody,
+  CardMedia,
+  CardTitle,
+  CardFooter,
+} from '@matsugov/ui';
 import { LinkButton } from '../LinkButton';
 
 export function FeaturedContent() {
   return (
     <Grid row gap="md" style={{ height: '100%' }}>
       <Grid col={7} style={{ height: '100%' }}>
-        <LinkCard href="#" className="minh-15 height-full">
-          <CardHeader>
-            <h3 className="usa-card__heading">Magna ad ad eu ipsum.</h3>
-          </CardHeader>
+        <LinkCard href="#">
           <CardMedia>
             <img src="https://d1159zutbdy4l.cloudfront.net/public/uploads/c3d08b9f-c8df-4114-ba60-529111438482optimized_images/1000x370_optimized_image.jpg"></img>
           </CardMedia>
+          <CardHeader>
+            <CardTitle>Magna ad ad eu ipsum.</CardTitle>
+          </CardHeader>
+
           <CardBody>
             <p>
               Magna ad ad eu ipsum. Aliqua pariatur deserunt amet anim et. Enim

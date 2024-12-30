@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Card, CardHeader, CardBody, CardFooter } from './Card';
+import { Card, CardBody, CardFooter, CardHeader, CardTitle } from './Card';
 import { Button } from '../Button';
 const meta = {
   component: Card,
@@ -17,9 +17,10 @@ export const Default: Story = {
   args: {
     children: (
       <>
-        <h4 className="text-xl font-bold leading-none">Card Title</h4>
-
-        <div>
+        <CardHeader>
+          <CardTitle>Card Title</CardTitle>
+        </CardHeader>
+        <CardBody>
           <p>
             Sunt minim officia adipisicing deserunt mollit commodo tempor mollit
             reprehenderit proident adipisicing aliqua.
@@ -29,13 +30,13 @@ export const Default: Story = {
             nostrud proident tempor nostrud sit.
           </p>
           <p>Dolore exercitation proident eu id sint.</p>
-        </div>
+        </CardBody>
 
-        <div className="flex gap-2">
+        <CardFooter>
           <Button>Button</Button>
           <Button>Button</Button>
           <Button>Button</Button>
-        </div>
+        </CardFooter>
       </>
     ),
   },

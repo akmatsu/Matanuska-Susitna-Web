@@ -1,5 +1,5 @@
-import { CardHeader, Icon, CardMedia } from '@trussworks/react-uswds';
-import { LinkCard } from '../LinkCard/LinkCard';
+import { Icon } from '@trussworks/react-uswds';
+import { LinkCard, CardHeader, CardMedia } from '@matsugov/ui';
 import { CoreIcon } from '../CoreIcon';
 
 export type FeaturedCardProps = {
@@ -13,7 +13,7 @@ export type FeaturedCardProps = {
 
 export function FeaturedCard(props: FeaturedCardProps) {
   return (
-    <LinkCard href={props.linkUrl} className="height-full border-0">
+    <LinkCard href={props.linkUrl}>
       {props.imageUrl && (
         <CardMedia>
           <img
@@ -25,7 +25,7 @@ export function FeaturedCard(props: FeaturedCardProps) {
         </CardMedia>
       )}
 
-      <CardHeader className="padding-top-2">
+      <CardHeader>
         <div className="display-flex flex-align-center width-full">
           <CoreIcon
             icon={props.icon}
