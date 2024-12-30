@@ -1,4 +1,3 @@
-import { GridContainer } from '@trussworks/react-uswds';
 import {
   Featured,
   Hero,
@@ -25,16 +24,16 @@ export default function Home() {
       </section>
 
       <section className="usa-section">
-        <GridContainer>
-          <h2>Can't find what you need?</h2>
-          <p className="usa-intro">
-            Use the search bar or reach out to us directly — we're here to help.
-          </p>
+        {/* <GridContainer> */}
+        <h2>Can't find what you need?</h2>
+        <p className="usa-intro">
+          Use the search bar or reach out to us directly — we're here to help.
+        </p>
 
-          <LinkButton href="#" color="primary">
-            Contact us
-          </LinkButton>
-        </GridContainer>
+        <LinkButton href="#" color="primary">
+          Contact us
+        </LinkButton>
+        {/* </GridContainer> */}
       </section>
     </div>
   );

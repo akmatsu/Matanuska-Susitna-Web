@@ -1,98 +1,98 @@
-/*
-* * * * * ==============================
-* * * * * ==============================
-* * * * * ==============================
-* * * * * ==============================
-========================================
-========================================
-========================================
-----------------------------------------
-USWDS THEME CUSTOM STYLES
-----------------------------------------
-!! Copy this file to your project's
-    sass root. Don't edit the version
-    in node_modules.
-----------------------------------------
-Custom project SASS goes here.
+// /*
+// * * * * * ==============================
+// * * * * * ==============================
+// * * * * * ==============================
+// * * * * * ==============================
+// ========================================
+// ========================================
+// ========================================
+// ----------------------------------------
+// USWDS THEME CUSTOM STYLES
+// ----------------------------------------
+// !! Copy this file to your project's
+//     sass root. Don't edit the version
+//     in node_modules.
+// ----------------------------------------
+// Custom project SASS goes here.
 
-i.e.
-@include u-padding-right('05');
-----------------------------------------
-*/
+// i.e.
+// @include u-padding-right('05');
+// ----------------------------------------
+// */
 
-@use 'uswds-core' as *;
+// @use 'uswds-core' as *;
 
-.border-2 {
-  border-width: 2px !important;
-}
+// .border-2 {
+//   border-width: 2px !important;
+// }
 
-.usa-hero {
-  background-image: url('https://d1159zutbdy4l.cloudfront.net/public/uploads/9a6d51bb-9b20-4008-ac82-4100120ed080/Butte-Fall-jumbo2.jpg');
-  background-position: top;
-}
+// .usa-hero {
+//   background-image: url('https://d1159zutbdy4l.cloudfront.net/public/uploads/9a6d51bb-9b20-4008-ac82-4100120ed080/Butte-Fall-jumbo2.jpg');
+//   background-position: top;
+// }
 
-.usa-hero__callout {
-  max-width: 25rem;
-}
+// .usa-hero__callout {
+//   max-width: 25rem;
+// }
 
-p {
-  max-width: initial;
-}
+// p {
+//   max-width: initial;
+// }
 
-.usa-pagination {
-  ul li:last-child {
-    margin-bottom: 4px;
-  }
-}
+// .usa-pagination {
+//   ul li:last-child {
+//     margin-bottom: 4px;
+//   }
+// }
 
-ul.usa-button-group li:last-child {
-  margin-bottom: 4px;
-}
+// ul.usa-button-group li:last-child {
+//   margin-bottom: 4px;
+// }
 
-a.usa-card,
-link-card.usa-card {
-  text-decoration: none;
+// a.usa-card,
+// link-card.usa-card {
+//   text-decoration: none;
 
-  .usa-card__container {
-    transition: background-color 0.3s;
-    border-radius: 0;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 4px solid color('primary');
-    background-color: color('base-lightest');
-    box-shadow: none;
-  }
-  .usa-card__container:hover {
-    background-color: color('base-lighter');
-  }
-  box-shadow: none;
-  border: none;
-}
+//   .usa-card__container {
+//     transition: background-color 0.3s;
+//     border-radius: 0;
+//     border-top: none;
+//     border-left: none;
+//     border-right: none;
+//     border-bottom: 4px solid color('primary');
+//     background-color: color('base-lightest');
+//     box-shadow: none;
+//   }
+//   .usa-card__container:hover {
+//     background-color: color('base-lighter');
+//   }
+//   box-shadow: none;
+//   border: none;
+// }
 
-[type='search'],
-.usa-search__input {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  border: none;
-  width: 100%;
-}
+// [type='search'],
+// .usa-search__input {
+//   border-top-left-radius: 4px;
+//   border-bottom-left-radius: 4px;
+//   border: none;
+//   width: 100%;
+// }
 
-.usa-search {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
+// .usa-search {
+//   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+//   border-radius: 4px;
+// }
 
-[data-testid='searchField'] {
-  width: 100%;
-}
+// [data-testid='searchField'] {
+//   width: 100%;
+// }
 
-.shadow-1 {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
+// .shadow-1 {
+//   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+// }
 
-.usa-modal__main {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
+// .usa-modal__main {
+//   margin: 0;
+//   padding: 0;
+//   overflow: hidden;
+// }

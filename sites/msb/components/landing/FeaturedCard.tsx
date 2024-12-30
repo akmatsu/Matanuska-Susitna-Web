@@ -1,9 +1,7 @@
-import { Icon } from '@trussworks/react-uswds';
 import { LinkCard, CardHeader, CardMedia } from '@matsugov/ui';
-import { CoreIcon } from '../CoreIcon';
 
 export type FeaturedCardProps = {
-  icon: keyof typeof Icon;
+  icon: string;
   linkUrl: string;
   title: string;
   text: string;
@@ -27,12 +25,12 @@ export function FeaturedCard(props: FeaturedCardProps) {
 
       <CardHeader>
         <div className="display-flex flex-align-center width-full">
-          <CoreIcon
+          {/* <CoreIcon
             icon={props.icon}
             className="margin-right-1 bg-secondary text-white padding-1 circle-5"
             size={3}
             ariaLabel={props.title}
-          />
+          /> */}
           <h3 className="usa-card__heading margin-top-0">{props.title}</h3>
         </div>
       </CardHeader>

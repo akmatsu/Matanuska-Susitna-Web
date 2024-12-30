@@ -1,6 +1,5 @@
-import '@trussworks/react-uswds/lib/index.css';
 import '@matsugov/ui/styles';
-import '../styles/index.scss';
+import '../styles/index.css';
 import type { Metadata } from 'next';
 import { ApolloWrapper } from './ApolloWrapper';
 import { SiteInfo } from '@/components/Header/SiteInfo';

@@ -1,13 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { appConfig, primaryNav } from '@/configs/config';
-import {
-  Header,
-  Icon,
-  NavMenuButton,
-  PrimaryNav,
-  Title,
-} from '@trussworks/react-uswds';
+
 import { Button } from '@matsugov/ui';
 import { useState } from 'react';
 import { NavLink } from './NavLink';
@@ -20,27 +14,27 @@ export function TopNavigation() {
   }
 
   return (
-    <Header showMobileOverlay={isOpen} basic className="bg-white shadow-1">
-      <div className="usa-nav-container ">
-        <div className="usa-navbar">
-          <Title className="margin-top-2">
-            <Link href="/">
-              <div className="display-flex flex-align-center">
-                <img
-                  src={appConfig.orgLogoUrl}
-                  className="circle-6 mobile-lg:circle-4 margin-right-1"
-                ></img>
-                <span>{appConfig.orgName}</span>
-              </div>
-            </Link>
-          </Title>
+    // <Header showMobileOverlay={isOpen} basic className="bg-white shadow-1">
+    <div className="usa-nav-container ">
+      <div className="usa-navbar">
+        {/* <Title className="margin-top-2"> */}
+        <Link href="/">
+          <div className="display-flex flex-align-center">
+            <img
+              src={appConfig.orgLogoUrl}
+              className="circle-6 mobile-lg:circle-4 margin-right-1"
+            ></img>
+            <span>{appConfig.orgName}</span>
+          </div>
+        </Link>
+        {/* </Title> */}
 
-          <NavMenuButton
+        {/* <NavMenuButton
             label="Menu"
             onClick={() => setIsOpen((val) => !val)}
-          />
-        </div>
-        <PrimaryNav
+          /> */}
+      </div>
+      {/* <PrimaryNav
           items={primaryNav.map((item) => (
             <NavLink href={item.href} key={item.href}>
               {item.text}
@@ -48,12 +42,10 @@ export function TopNavigation() {
           ))}
           mobileExpanded={isOpen}
           onToggleMobileNav={() => setIsOpen((val) => !val)}
-        >
-          <Button className="padding-05">
-            <Icon.Search size={3} />
-          </Button>
-        </PrimaryNav>
-      </div>
-    </Header>
+        > */}
+      <Button className="padding-05">{/* <Icon.Search size={3} /> */}</Button>
+      {/* </PrimaryNav> */}
+    </div>
+    // </Header>
   );
 }

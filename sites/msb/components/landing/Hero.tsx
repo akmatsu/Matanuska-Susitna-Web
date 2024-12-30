@@ -1,9 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { Carousel } from '../Carousel';
-import { Grid, Icon, Search } from '@trussworks/react-uswds';
 import React from 'react';
-import { CoreIcon } from '../CoreIcon';
 import { LinkButton } from '../LinkButton';
 
 export function Hero() {
@@ -11,7 +9,7 @@ export function Hero() {
     e.preventDefault();
   }
 
-  const links: { icon: keyof typeof Icon; text: string; url: string }[] = [
+  const links: { icon: string; text: string; url: string }[] = [
     {
       icon: 'Pets',
       text: 'Animal Care',
@@ -45,43 +43,43 @@ export function Hero() {
                 aria-label="introduction"
                 style={{ minHeight: '300px' }}
               >
-                <Search
+                {/* <Search
                   onSubmit={handleSearch}
                   size="big"
                   placeholder="Search website..."
                   style={{ width: '500px' }}
-                />
+                /> */}
               </section>
               <section className="display-flex  padding-top-2 padding-bottom-1 flex-justify-center usa-section--light">
                 <div
                   className="grid-container width-full"
                   style={{ maxWidth: '900px' }}
                 >
-                  <Grid row gap>
-                    {links.map((link) => (
-                      <Grid
-                        col={12}
-                        mobileLg={{ col: 6 }}
-                        desktop={{ col: 3 }}
-                        key={crypto.randomUUID()}
-                      >
-                        <Link
-                          href={link.url}
-                          className="usa-button shadow-2 width-full bg-white hover:bg-base-lightest text-base-darkest margin-bottom-2"
-                        >
-                          <div className="display-flex flex-column flex-align-center">
-                            <CoreIcon
-                              icon={link.icon}
-                              size={5}
-                              className="margin-bottom-1"
-                              color="green"
-                            />
-                            {link.text}
-                          </div>
-                        </Link>
-                      </Grid>
-                    ))}
-                  </Grid>
+                  {/* <Grid row gap> */}
+                  {links.map((link) => (
+                    // <Grid
+                    //   col={12}
+                    //   mobileLg={{ col: 6 }}
+                    //   desktop={{ col: 3 }}
+                    //   key={crypto.randomUUID()}
+                    // >
+                    <Link
+                      href={link.url}
+                      className="usa-button shadow-2 width-full bg-white hover:bg-base-lightest text-base-darkest margin-bottom-2"
+                    >
+                      <div className="display-flex flex-column flex-align-center">
+                        {/* <CoreIcon
+                          icon={link.icon}
+                          size={5}
+                          className="margin-bottom-1"
+                          color="green"
+                        /> */}
+                        {link.text}
+                      </div>
+                    </Link>
+                    // </Grid>
+                  ))}
+                  {/* </Grid> */}
                 </div>
               </section>
             </>

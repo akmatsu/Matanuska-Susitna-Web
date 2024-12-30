@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Search } from '@trussworks/react-uswds';
+
 import { useRouter } from 'next/navigation';
 import { SearchListInputProps } from './types';
 
@@ -21,12 +21,12 @@ export function SearchListInput({
   return (
     <div className={`display-flex flex-column ${className}`}>
       <h3>Search</h3>
-      <Search
+      {/* <Search
         onSubmit={handleSearch}
         size="small"
         placeholder="Search services..."
         defaultValue={search || ''}
-      />
+      /> */}
     </div>
   );
 }

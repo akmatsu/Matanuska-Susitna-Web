@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@matsugov/ui';
-import { Grid } from '@trussworks/react-uswds';
 
 export function Meetings() {
   const meetings: {
@@ -42,31 +41,33 @@ export function Meetings() {
     return date.toLocaleDateString();
   }
   return (
-    <Grid row gap="md">
+    <>
+      {/* // <Grid row gap="md"> */}
       {meetings.map((meeting) => (
-        <Grid
-          col={12}
-          tablet={{ col: 6 }}
-          key={crypto.randomUUID()}
-          className="margin-bottom-2"
-        >
-          <Card>
-            <CardHeader>
-              <CardTitle>{meeting.title}</CardTitle>
-              <span className="font-body-sm">{formatDate(meeting.date)}</span>
-            </CardHeader>
-            <CardBody>
-              <p>{meeting.location}</p>
-            </CardBody>
-            <CardFooter>
-              <Button>Add to Calendar</Button>
-            </CardFooter>
-          </Card>
-        </Grid>
+        // <Grid
+        //   col={12}
+        //   tablet={{ col: 6 }}
+        //   key={crypto.randomUUID()}
+        //   className="margin-bottom-2"
+        // >
+        <Card>
+          <CardHeader>
+            <CardTitle>{meeting.title}</CardTitle>
+            <span className="font-body-sm">{formatDate(meeting.date)}</span>
+          </CardHeader>
+          <CardBody>
+            <p>{meeting.location}</p>
+          </CardBody>
+          <CardFooter>
+            <Button>Add to Calendar</Button>
+          </CardFooter>
+        </Card>
+        // </Grid>
       ))}
       <div className="display-flex flex-row flex-justify-center flex-align-center width-full">
         <Button big>View all</Button>
       </div>
-    </Grid>
+      {/* </Grid> */}
+    </>
   );
 }

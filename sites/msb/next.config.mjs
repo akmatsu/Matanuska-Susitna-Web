@@ -2,7 +2,7 @@
 import sassOptions from './scripts/sassOptions.mjs';
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
-const appSassOptions = sassOptions(basePath);
+// const appSassOptions = sassOptions(basePath);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -14,7 +14,7 @@ const nextConfig = {
     '@trussworks/react-uswds',
   ],
   reactStrictMode: true,
-  sassOptions: appSassOptions,
+  // sassOptions: appSassOptions,
 };
 
 export default nextConfig;

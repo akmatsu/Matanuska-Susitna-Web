@@ -1,4 +1,3 @@
-import { Grid, GridContainer } from '@trussworks/react-uswds';
 import { ReactNode } from 'react';
 
 export function ThreeColumnLayout(props: {
@@ -6,15 +5,16 @@ export function ThreeColumnLayout(props: {
   children?: ReactNode;
   right?: ReactNode;
 }) {
-  return (
-    <GridContainer>
-      <Grid row gap>
-        <Grid desktop={{ col: 3 }} className="margin-bottom-4">
-          {props.left}
-        </Grid>
-        <Grid desktop={{ col: 6 }}>{props.children}</Grid>
-        <Grid desktop={{ col: 3 }}>{props.right}</Grid>
-      </Grid>
-    </GridContainer>
-  );
+  return <></>;
+  // return (
+  // <GridContainer>
+  //   <Grid row gap>
+  //     <Grid desktop={{ col: 3 }} className="margin-bottom-4">
+  //       {props.left}
+  //     </Grid>
+  //     <Grid desktop={{ col: 6 }}>{props.children}</Grid>
+  //     <Grid desktop={{ col: 3 }}>{props.right}</Grid>
+  //   </Grid>
+  // </GridContainer>
+  // );
 }
