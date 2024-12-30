@@ -3,6 +3,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from '@headlessui/react';
+import { appConfig } from '@matsugov/app-config';
 
 type BannerProps = {
   label?: string;
@@ -10,7 +11,7 @@ type BannerProps = {
 };
 
 export function Banner({
-  orgName = 'Matanuska-Susitna Borough',
+  orgName = appConfig.orgName,
   label = `An official website of the ${orgName}.`,
 }: BannerProps) {
   const dotGovIcon =
