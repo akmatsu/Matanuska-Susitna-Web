@@ -93,7 +93,7 @@ export function Header({
 
         {/* Mobile Nav Drawer */}
         <div
-          className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity lg:hidden ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity lg:hidden z-50 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         >
           <div
             className={`fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform transition-transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
