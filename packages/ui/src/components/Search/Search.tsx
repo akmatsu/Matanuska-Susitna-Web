@@ -10,6 +10,7 @@ export interface SearchProps {
   placeholder?: string;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
   defaultValue?: string;
+  big?: boolean;
 }
 
 export function Search({

@@ -1,4 +1,5 @@
 import { addIconSelectors } from '@iconify/tailwind';
+import typography from '@tailwindcss/typography';
 
 const uswdsColors = {
   'red-cool-10': '#f3e1e4',
@@ -627,5 +628,5 @@ module.exports = {
       },
     },
   },
-  plugins: [addIconSelectors(['mdi'])],
+  plugins: [addIconSelectors(['mdi']), typography],
 };

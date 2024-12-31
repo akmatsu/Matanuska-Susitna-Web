@@ -12,25 +12,22 @@ export async function DocCollection({ id }: { id: string }) {
     },
   });
   return (
-    <div className="border" style={{ borderCollapse: 'collapse' }}>
-      <div className="border-bottom padding-105 bg-base-lighter">
-        <h4>{data?.documentCollection.title}</h4>
-      </div>
-      <ul className="usa-list--unstyled">
+    <table>
+      <thead>
+        <th>
+          <span>{data?.documentCollection.title}</span>
+        </th>
+      </thead>
+      <tbody>
         {data?.documentCollection.documents.map((doc, index) => (
-          <li
-            key={doc.id}
-            className={`${
-              index !== data?.documentCollection.documents.length - 1
-                ? 'border-bottom'
-                : ''
-            } padding-105`}
-          >
-            <Link href={doc.file.url}>{doc.title}</Link>
-          </li>
+          <tr key={doc.id}>
+            <td>
+              <Link href={doc.file.url}>{doc.title}</Link>
+            </td>
+          </tr>
         ))}
-      </ul>
-    </div>
+      </tbody>
+    </table>
   );
 }
 

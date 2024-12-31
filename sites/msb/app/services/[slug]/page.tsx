@@ -1,10 +1,5 @@
-import {
-  CoreSideNav,
-  ThreeColumnLayout,
-  MarkdownRenderer,
-  ContactCard,
-  LinkButton,
-} from '@/components';
+import { ThreeColumnLayout, MarkdownRenderer, ContactCard } from '@/components';
+import Link from 'next/link';
 
 import {
   GET_SERVICE_META_QUERY,
@@ -12,6 +7,7 @@ import {
 } from '@/utils/apollo/queries/GetService';
 import { Metadata } from 'next';
 import { getClient } from '@/utils/apollo/ApolloClient';
+import { Button } from '@matsugov/ui';
 
 export async function generateMetadata({
   params,
@@ -61,7 +57,7 @@ export default async function Service({
   const service = data?.service;
 
   return (
-    <section className="usa-section">
+    <section className="max-w-6xl mx-auto px-4 py-16">
       {data?.service && (
         <ThreeColumnLayout
           left={
@@ -70,17 +66,15 @@ export default async function Service({
               className="position-sticky"
               style={{ top: '144px' }}
             >
-              <CoreSideNav />
+              {/* <CoreSideNav /> */}
             </nav>
           }
           right={
             <>
-              <ul
-                className="usa-list--unstyled display-flex flex-column"
-                style={{ gap: '8px' }}
-              >
+              <ul className="flex flex-col" style={{ gap: '8px' }}>
                 {service?.actionUrl && (
-                  <LinkButton
+                  <Button
+                    as={Link}
                     href={service.actionUrl}
                     className="margin-right-0 usa-link--external"
                     target="_blank"
@@ -88,7 +82,7 @@ export default async function Service({
                     block
                   >
                     {service.actionLabel || 'Primary Action'}
-                  </LinkButton>
+                  </Button>
                 )}
                 {service?.primaryContact && (
                   <ContactCard contact={service?.primaryContact} isPrimary />
@@ -106,10 +100,9 @@ export default async function Service({
             </>
           }
         >
-          <div className="msb-md-body">
-            <h1>{data?.service?.title}</h1>
-            <MarkdownRenderer>{data?.service?.body}</MarkdownRenderer>
-          </div>
+          <MarkdownRenderer title={data?.service?.title}>
+            {data?.service?.body}
+          </MarkdownRenderer>
         </ThreeColumnLayout>
       )}
     </section>
