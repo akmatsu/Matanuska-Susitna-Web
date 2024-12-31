@@ -3,9 +3,8 @@ import '@/styles/index.css';
 import type { Metadata } from 'next';
 import { ApolloWrapper } from './ApolloWrapper';
 import { SiteInfo } from '@/components/Header/SiteInfo';
-import { MainFooter } from '@/components';
 import { FeedbackButton } from '@/components/FeedbackButton';
-import { Header } from '@matsugov/ui';
+import { Header, Footer } from '@matsugov/ui';
 import Link from 'next/link';
 import { primaryNav } from '@/configs/config';
 export const metadata: Metadata = {
@@ -29,7 +28,7 @@ export default async function RootLayout({
             {children}
           </main>
           <FeedbackButton />
-          <MainFooter />
+          <Footer navLinkAs={Link} navItems={primaryNav} />
         </ApolloWrapper>
       </body>
     </html>
