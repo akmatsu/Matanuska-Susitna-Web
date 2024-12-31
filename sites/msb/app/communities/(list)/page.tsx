@@ -18,12 +18,12 @@ export default function Communities({ searchParams }: PageProps) {
   const pageTitle = 'Communities';
 
   return (
-    <section className="usa-section">
+    <section className="max-w-6xl mx-auto px-4 py-16">
       <ThreeColumnLayout
         left={<SearchListInput search={search} />}
         right={
           <div className="display-flex flex-column">
-            <h3>Get Help</h3>
+            <h3 className="text-2xl font-bold mb-4">Get Help</h3>
             <Button big>Contact us</Button>
           </div>
         }

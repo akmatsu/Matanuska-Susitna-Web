@@ -5,7 +5,8 @@ import {
   TypedDocumentNode,
 } from '@apollo/client';
 import { SearchListItem } from './SearchListItem';
-import { CorePagination } from '../CorePagination';
+import { Pagination } from '@matsugov/ui';
+import Link from 'next/link';
 
 export async function SearchList({
   limit = 15,
@@ -41,16 +42,18 @@ export async function SearchList({
       <h1 className="text-3xl font-bold mb-4">{title}</h1>
       {data[listKey]?.length ? (
         <>
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-4 mb-4">
             {data[listKey].map(
               (item: { slug: string; title: string; description: string }) => (
                 <SearchListItem key={item.slug} item={item} listKey={listKey} />
               ),
             )}
           </ul>
-          <CorePagination
+
+          <Pagination
             currentPage={1}
             totalPages={Math.ceil(data[`${listKey}Count`] / limit)}
+            linkAs={Link}
           />
         </>
       ) : (

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Button } from '../Button';
 export function PaginationButton({
   page,
@@ -11,13 +12,22 @@ export function PaginationButton({
   as?: React.ElementType;
 }) {
   const active = page == currentPage;
+  const [href, setHref] = useState(`page=${page}`);
+
+  useEffect(() => {
+    if (window) {
+      setHref(
+        `${window.location.search ? window.location.search.replace(/([?&])page=[^&]*(&|$)/, '$1') : '?'}${window.location.search.includes('?') ? '&' : ''}page=${page}`,
+      );
+    }
+  }, []);
 
   return (
     <Button
       as={as}
       square
       color={active ? 'black' : 'transparent'}
-      href={`${window.location.search ? window.location.search.replace(/([?&])page=[^&]*(&|$)/, '$1') : '?'}${window.location.search.includes('?') ? '&' : ''}page=${page}`}
+      href={href}
       underline
       shadow={false}
     >
