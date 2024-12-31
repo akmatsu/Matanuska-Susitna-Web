@@ -1,5 +1,6 @@
-import { Field, Input, Label } from '@headlessui/react';
 import { Button } from '../Button';
+import { TextField } from '../TextField';
+import clsx from 'clsx';
 
 export interface SearchProps {
   name?: string;
@@ -22,20 +23,23 @@ export function Search({
 }: SearchProps) {
   return (
     <form role="search" className={className} onSubmit={onSubmit}>
-      <Field className="flex items-center w-full shadow">
-        <Label className="sr-only" htmlFor={id}>
-          Search
-        </Label>
-        <Input
-          className="border border-base rounded-l h-10 px-2 focus:outline-none focus:ring-4 focus:ring-blue-40v w-full"
+      <div className="flex items-center w-full shadow">
+        <TextField
+          label="Search"
+          showLabel={false}
           id={id}
           name={name}
           placeholder={placeholder}
           defaultValue={defaultValue}
+          rounded="left"
+          fill={true}
         />
         <Button
           type="submit"
-          className="rounded-l-none h-10 flex items-center justify-center"
+          className={clsx({ 'h-10': !useIcon, 'size-10': useIcon })}
+          rounded="right"
+          shadow={false}
+          icon={useIcon}
         >
           {useIcon ? (
             <span className="iconify mdi--search size-6"></span>
@@ -43,7 +47,7 @@ export function Search({
             'Search'
           )}
         </Button>
-      </Field>
+      </div>
     </form>
   );
 }
