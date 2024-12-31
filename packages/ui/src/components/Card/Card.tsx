@@ -1,21 +1,28 @@
+import clsx from 'clsx';
 import React from 'react';
 
 export function Card({
   as = 'div',
   children,
+  className,
   titleAs = 'h4',
   ...props
 }: {
   children: React.ReactNode;
   as?: React.ElementType;
-
+  className?: string;
   titleAs?: React.ElementType;
 }) {
   const Component = as;
 
   return (
     <Component {...props}>
-      <div className="bg-white rounded border-2 border-base-lighter flex flex-col gap-4">
+      <div
+        className={clsx(
+          'bg-white rounded border-2 border-base-lighter flex flex-col gap-4',
+          className,
+        )}
+      >
         {children}
       </div>
     </Component>
@@ -50,20 +57,30 @@ export function LinkCard({
   );
 }
 
-export function CardMedia({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
+export function CardMedia({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <div className={className}>{children}</div>;
 }
 
 export function CardTitle({
   children,
   as = 'h4',
+  className,
 }: {
   children: React.ReactNode;
   as?: React.ElementType;
+  className?: string;
 }) {
   const Component = as;
   return (
-    <Component className="text-xl font-bold leading-none">{children}</Component>
+    <Component className={clsx('text-xl font-bold leading-none', className)}>
+      {children}
+    </Component>
   );
 }
 
@@ -75,9 +92,20 @@ export function CardBody({ children }: { children: React.ReactNode }) {
   return <div className="px-6 first:pt-6 last:pb-6">{children}</div>;
 }
 
-export function CardFooter({ children }: { children: React.ReactNode }) {
+export function CardFooter({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="px-6 last:pb-6 flex flex-row gap-2 first:pt-6">
+    <div
+      className={clsx(
+        'px-6 last:pb-6 flex flex-row gap-2 first:pt-6',
+        className,
+      )}
+    >
       {children}
     </div>
   );

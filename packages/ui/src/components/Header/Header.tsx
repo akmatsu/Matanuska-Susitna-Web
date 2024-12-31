@@ -58,13 +58,15 @@ export function Header({
           </div>
         </NavLink>
 
-        <button
-          onClick={() => setIsOpen(true)}
-          className="lg:hidden px-2 leading-none text-sm focus-ring shadow text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white h-12 flex items-center justify-center focus-ring"
-          aria-label="Open menu"
-        >
-          MENU
-        </button>
+        <div className="lg:hidden">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="px-2 leading-none text-sm focus-ring shadow text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white h-12 flex items-center justify-center focus-ring"
+            aria-label="Open menu"
+          >
+            MENU
+          </button>
+        </div>
 
         <nav className="hidden lg:flex items-center gap-4">
           <ul className="flex items-center gap-4">

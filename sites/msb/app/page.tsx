@@ -12,28 +12,28 @@ export default function Home() {
       <Hero />
       <Featured />
 
-      <section className="usa-section grid-container">
-        <h2>Upcoming Meetings</h2>
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="mb-4 text-3xl font-bold">Upcoming Meetings</h2>
 
         <Meetings />
       </section>
-      <section className="usa-section grid-container">
-        <h2>Announcement & Public Notices</h2>
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="mb-4 text-3xl font-bold">
+          Announcement & Public Notices
+        </h2>
 
         <FeaturedContent />
       </section>
 
-      <section className="usa-section">
-        {/* <GridContainer> */}
-        <h2>Can't find what you need?</h2>
-        <p className="usa-intro">
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="mb-4 text-3xl font-bold">Can't find what you need?</h2>
+        <p className="text-xl mb-4">
           Use the search bar or reach out to us directly — we're here to help.
         </p>
 
         <LinkButton href="#" color="primary">
           Contact us
         </LinkButton>
-        {/* </GridContainer> */}
       </section>
     </div>
   );

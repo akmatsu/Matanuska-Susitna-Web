@@ -1,4 +1,4 @@
-import { LinkCard, CardHeader, CardMedia } from '@matsugov/ui';
+import { LinkCard, CardHeader, CardMedia, CardTitle } from '@matsugov/ui';
 
 export type FeaturedCardProps = {
   icon: string;
@@ -13,25 +13,22 @@ export function FeaturedCard(props: FeaturedCardProps) {
   return (
     <LinkCard href={props.linkUrl}>
       {props.imageUrl && (
-        <CardMedia>
+        <CardMedia className="aspect-[2] overflow-hidden">
           <img
             src={props.imageUrl}
             alt={props.imageAlt}
             loading="lazy"
-            className="add-aspect-2x1"
+            className="aspect-[2] object-cover h-full w-full"
           />
         </CardMedia>
       )}
 
       <CardHeader>
-        <div className="display-flex flex-align-center width-full">
-          {/* <CoreIcon
-            icon={props.icon}
-            className="margin-right-1 bg-secondary text-white padding-1 circle-5"
-            size={3}
-            ariaLabel={props.title}
-          /> */}
-          <h3 className="usa-card__heading margin-top-0">{props.title}</h3>
+        <div className="flex items-center w-full gap-2">
+          <div className="bg-secondary text-white rounded-full p-2 flex items-center justify-center">
+            <span className={`iconify size-6 ${props.icon}`}></span>
+          </div>
+          <CardTitle>{props.title}</CardTitle>
         </div>
       </CardHeader>
     </LinkCard>
