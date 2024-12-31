@@ -1,7 +1,6 @@
 'use client';
 import { appConfig } from '@matsugov/app-config';
 import { useState } from 'react';
-import { Button } from '../Button';
 
 type HeaderProps = {
   /** The name of the organization */
@@ -46,7 +45,7 @@ export function Header({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-white border border-base-light min-h-12 lg:min-h-20 flex items-center justify-between pl-4 lg:pr-4">
+    <header className="bg-white min-h-12 lg:min-h-20 flex items-center justify-between pl-4 lg:pr-4">
       <div className="flex items-center justify-between w-full min-h-full">
         <NavLink href={homeHref}>
           <div className="flex items-center gap-2">
