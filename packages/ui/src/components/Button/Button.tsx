@@ -17,6 +17,8 @@ export function Button<T extends React.ElementType = 'button'>({
   icon,
   rounded = true,
   shadow = true,
+  square = false,
+  underline = false,
   ...props
 }: {
   className?: string;
@@ -31,7 +33,9 @@ export function Button<T extends React.ElementType = 'button'>({
     | 'base'
     | 'error'
     | 'warning'
-    | 'success';
+    | 'success'
+    | 'black'
+    | 'transparent';
   disabled?: boolean;
   as?: T;
   href?: string;
@@ -40,6 +44,8 @@ export function Button<T extends React.ElementType = 'button'>({
   rounded?: boolean | 'none' | 'pill' | 'left' | 'right';
   shadow?: boolean;
   icon?: boolean;
+  square?: boolean;
+  underline?: boolean;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'color'>) {
   const Component = as || (href ? 'a' : 'button');
 
@@ -51,7 +57,7 @@ export function Button<T extends React.ElementType = 'button'>({
       disabled={disabled}
       aria-disabled={disabled}
       className={clsx(
-        'leading-none font-bold focus-ring text-center flex items-center justify-center',
+        'leading-none focus-ring text-center flex items-center justify-center',
         {
           shadow,
           // Rounded corners group
@@ -62,18 +68,24 @@ export function Button<T extends React.ElementType = 'button'>({
           'rounded-r': rounded === 'right',
 
           // Width group
-          'w-fit': !block && !icon,
-          'w-full': block && !icon,
+          'w-fit': !block && !icon && !square,
+          'w-full': block && !icon && !square,
 
           // Padding and text size group
-          'px-5 py-3': !big && !icon,
-          'px-6 py-4 text-xl': big && !icon,
-          'px-2': icon,
+          'px-5 py-3': !big && !icon && !square,
+          'px-6 py-4 text-xl': big && !icon && !square,
+          'size-10': square && !big,
+          'p-4': square && big,
+          'px-2': icon && !square,
+          'font-bold': !square,
+          underline: underline,
 
           // Disabled state
           'bg-disabled-lighter text-disabled-dark cursor-not-allowed': disabled,
 
           // Color variants group
+          'bg-transparent text-primary border border-base-lighter hover:border-primary':
+            color === 'transparent' && !disabled,
           'bg-primary hover:bg-primary-dark active:bg-primary-darker text-white':
             color === 'primary' && !disabled,
           'bg-secondary hover:bg-secondary-dark active:bg-secondary-darker text-white':
@@ -90,6 +102,8 @@ export function Button<T extends React.ElementType = 'button'>({
             color === 'warning' && !disabled,
           'bg-success hover:bg-success-dark active:bg-success-darker text-white':
             color === 'success' && !disabled,
+          'bg-base-darkest hover:bg-base-darker active:bg-base-dark text-white':
+            color === 'black' && !disabled,
         },
         className,
       )}
