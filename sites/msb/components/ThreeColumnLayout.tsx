@@ -5,16 +5,11 @@ export function ThreeColumnLayout(props: {
   children?: ReactNode;
   right?: ReactNode;
 }) {
-  return <></>;
-  // return (
-  // <GridContainer>
-  //   <Grid row gap>
-  //     <Grid desktop={{ col: 3 }} className="margin-bottom-4">
-  //       {props.left}
-  //     </Grid>
-  //     <Grid desktop={{ col: 6 }}>{props.children}</Grid>
-  //     <Grid desktop={{ col: 3 }}>{props.right}</Grid>
-  //   </Grid>
-  // </GridContainer>
-  // );
+  return (
+    <div className="grid grid-cols-12 gap-8">
+      <div className="col-span-3">{props.left}</div>
+      <div className="col-span-6">{props.children}</div>
+      <div className="col-span-3">{props.right}</div>
+    </div>
+  );
 }

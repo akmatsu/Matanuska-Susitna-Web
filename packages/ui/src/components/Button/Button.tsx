@@ -45,7 +45,7 @@ export function Button<T extends React.ElementType = 'button'>({
       disabled={disabled}
       aria-disabled={disabled}
       className={clsx(
-        'rounded leading-none font-bold focus-ring block shadow text-center',
+        'rounded leading-none font-bold focus-ring shadow text-center flex items-center justify-center justify-center',
         { 'w-fit': !block },
         { 'w-full': block },
         { 'px-5 py-3': !big },

@@ -38,13 +38,13 @@ export async function SearchList({
 
   return (
     <>
-      <h1 className="margin-bottom-2">{title}</h1>
+      <h1 className="text-3xl font-bold mb-4">{title}</h1>
       {data[listKey]?.length ? (
         <>
-          <ul className="usa-list--unstyled display-flex flex-column gap-4">
+          <ul className="flex flex-col gap-4">
             {data[listKey].map(
               (item: { slug: string; title: string; description: string }) => (
-                <SearchListItem item={item} listKey={listKey} />
+                <SearchListItem key={item.slug} item={item} listKey={listKey} />
               ),
             )}
           </ul>
