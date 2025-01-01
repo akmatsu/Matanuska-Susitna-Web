@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 
 export default function Loading() {
   return (
-    <section className="usa-section">
+    <section className="max-w-6xl mx-auto px-4 py-16">
       <ThreeColumnLayout
         left={
           <nav>

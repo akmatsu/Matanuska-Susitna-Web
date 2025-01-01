@@ -11,7 +11,7 @@ export default function Loading() {
       <ThreeColumnLayout
         left={<SearchListInput />}
         right={
-          <div className="display-flex flex-column">
+          <div className="max-w-6xl mx-auto px-4 py-16">
             <h3>Get Help</h3>
             <Button big>Contact us</Button>
           </div>
