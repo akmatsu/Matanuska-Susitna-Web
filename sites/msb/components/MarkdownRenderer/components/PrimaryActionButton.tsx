@@ -2,7 +2,6 @@
 import { LinkButton } from '@/components/LinkButton';
 import { GET_SERVICE_QUERY } from '@/utils/apollo/queries/GetService';
 import { useQuery } from '@apollo/client';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 export function PrimaryActionButton({

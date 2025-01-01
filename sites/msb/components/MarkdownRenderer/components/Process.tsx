@@ -1,5 +1,6 @@
+import { ProcessList } from '@matsugov/ui';
 import { ReactNode } from 'react';
 
 export function Process({ children }: { children: ReactNode }) {
-  return <ol className="usa-process-list">{children}</ol>;
+  return <ProcessList>{children}</ProcessList>;
 }
