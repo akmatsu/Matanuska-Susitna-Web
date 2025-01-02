@@ -1,62 +1,72 @@
-import { CardBody, CardHeader, CardMedia, Grid } from '@trussworks/react-uswds';
+import {
+  LinkCard,
+  CardHeader,
+  CardBody,
+  CardMedia,
+  CardTitle,
+} from '@matsugov/ui';
+import { LinkButton } from '../LinkButton';
 import Link from 'next/link';
-import { LinkCard } from '../LinkCard/LinkCard';
 
 export function FeaturedContent() {
   return (
-    <Grid row gap="md" style={{ height: '100%' }}>
-      <Grid col={7} style={{ height: '100%' }}>
-        <LinkCard href="#" className="minh-15 height-full">
+    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <LinkCard href="#" as="li" linkAs={Link}>
+        <CardMedia className="aspect-[2] overflow-hidden">
+          <img
+            loading="lazy"
+            className="aspect-[2] object-cover h-full w-full"
+            src="https://d1159zutbdy4l.cloudfront.net/public/uploads/329eb210-c21f-4049-b2e9-3e0c3bf7e62aoptimized_images/1000x750_optimized_image.jpg"
+          ></img>
+        </CardMedia>
+        <CardHeader>
+          <CardTitle>Magna ad ad eu ipsum.</CardTitle>
+        </CardHeader>
+
+        <CardBody>
+          <p>
+            Magna ad ad eu ipsum. Aliqua pariatur deserunt amet anim et. Enim eu
+            reprehenderit sit cupidatat sunt ipsum quis ea labore reprehenderit
+            in eu ad aliquip. Exercitation officia culpa consequat enim labore
+            in pariatur.
+          </p>
+        </CardBody>
+      </LinkCard>
+      <div className="flex flex-col gap-4 justify-between">
+        <LinkCard href="#" as="li" linkAs={Link}>
           <CardHeader>
-            <h3 className="usa-card__heading">Magna ad ad eu ipsum.</h3>
-          </CardHeader>
-          <CardMedia>
-            <img src="https://d1159zutbdy4l.cloudfront.net/public/uploads/c3d08b9f-c8df-4114-ba60-529111438482optimized_images/1000x370_optimized_image.jpg"></img>
-          </CardMedia>
-          <CardBody>
-            <p>
-              Magna ad ad eu ipsum. Aliqua pariatur deserunt amet anim et. Enim
-              eu reprehenderit sit cupidatat sunt ipsum quis ea labore
-              reprehenderit in eu ad aliquip. Exercitation officia culpa
-              consequat enim labore in pariatur.
-            </p>
-          </CardBody>
-        </LinkCard>
-      </Grid>
-      <Grid
-        col={5}
-        className="display-flex flex-column"
-        style={{ justifyContent: 'space-between' }}
-      >
-        <LinkCard href="#">
-          <CardHeader>
-            <h4>Tempor non aliquip in fugiat nulla tempor.</h4>
+            <CardTitle className="text-lg">
+              Tempor non aliquip in fugiat nulla tempor.
+            </CardTitle>
           </CardHeader>
         </LinkCard>
 
-        <LinkCard href="#">
+        <LinkCard href="#" as="li" linkAs={Link}>
           <CardHeader>
-            <h4>Tempor non aliquip in fugiat nulla tempor.</h4>
+            <CardTitle className="text-lg">
+              Tempor non aliquip in fugiat nulla tempor.
+            </CardTitle>
           </CardHeader>
         </LinkCard>
-        <LinkCard href="#">
+        <LinkCard href="#" as="li" linkAs={Link}>
           <CardHeader>
-            <h4>Tempor non aliquip in fugiat nulla tempor.</h4>
+            <CardTitle className="text-lg">
+              Tempor non aliquip in fugiat nulla tempor.
+            </CardTitle>
           </CardHeader>
         </LinkCard>
-        <LinkCard href="#">
+        <LinkCard href="#" as="li" linkAs={Link}>
           <CardHeader>
-            <h4>Tempor non aliquip in fugiat nulla tempor.</h4>
+            <CardTitle className="text-lg">
+              Tempor non aliquip in fugiat nulla tempor.
+            </CardTitle>
           </CardHeader>
         </LinkCard>
 
-        <Link
-          href="#see-all"
-          className="radius-0 usa-button usa-button--big width-full"
-        >
+        <LinkButton href="#see-all" block big>
           See all
-        </Link>
-      </Grid>
-    </Grid>
+        </LinkButton>
+      </div>
+    </ul>
   );
 }

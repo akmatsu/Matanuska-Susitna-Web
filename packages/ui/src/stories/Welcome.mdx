@@ -1,0 +1,75 @@
+# Matanuska Susitna Borough UI
+
+Welcome to the Matanuska Susitna Borough UI library!
+
+## Table of Contents
+
+- [Matanuska Susitna Borough UI](#matanuska-susitna-borough-ui)
+  - [Table of Contents](#table-of-contents)
+  - [Setup](#setup)
+    - [Install Tailwind CSS and our Tailwind config](#install-tailwind-css-and-our-tailwind-config)
+    - [Configure Tailwind](#configure-tailwind)
+    - [Install the package](#install-the-package)
+  - [Usage](#usage)
+    - [Import the components](#import-the-components)
+
+## Setup
+
+### Install Tailwind CSS and our Tailwind config
+
+Install the Tailwind CSS and our Tailwind config as development dependencies.
+
+```bash
+pnpm add -D tailwindcss postcss autoprefixer @matsugov/tw-config@workspace:*
+```
+
+### Configure Tailwind
+
+Follow the basic TailwindCSS [installation guides](https://tailwindcss.com/docs/installation/framework-guides) to setup the project for your framework.
+
+Add the following to your `tailwind.config.js` file:
+
+```js
+/** @type {import('tailwindcss').Config} */
+const twConfig = require('@matsugov/tw-config');
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  presets: [twConfig],
+  content: [
+    // ... Other content ...
+
+    // Add the UI package to content to ensure CSS classes are included in the build
+    './node_modules/@matsugov/ui/src/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+### Install the package
+
+Install the UI package as a workspace dependency.
+
+```bash
+pnpm add @matsugov/ui@workspace:*
+```
+
+## Usage
+
+### Import the components
+
+For each component you want to use, import it from the package. See a specific component's documentation for more information.
+
+```tsx
+import { Button } from '@matsugov/ui';
+
+function page() {
+  <main>
+    <h1>Hello World</h1>
+    <Button>Click me</Button>
+  </main>;
+}
+```

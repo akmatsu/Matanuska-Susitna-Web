@@ -1,11 +1,14 @@
 import { Suspense } from 'react';
-import { Button } from '@trussworks/react-uswds';
-import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
-import { ServicesList } from '@/components/Services/ServicesList';
-import { ServiceSearch } from '@/components/Services/ServiceSearch';
-import { ServicesLoading } from '@/components/Services/ServicesLoading';
+import { Button } from '@matsugov/ui';
 import { Metadata } from 'next';
 import { PageProps } from '@/.next/types/app/page';
+import { GET_SERVICES_QUERY } from '@/utils/apollo/queries/getServices';
+import {
+  SearchList,
+  SearchListInput,
+  SearchListLoading,
+  ThreeColumnLayout,
+} from '@/components';
 
 export const metadata: Metadata = {
   title: 'MSB - Services',
@@ -19,20 +22,27 @@ export default function Services({ searchParams }: PageProps) {
   const pageNum = parseInt(page);
 
   return (
-    <section className="usa-section">
+    <section className="max-w-6xl mx-auto px-4 py-16">
       <ThreeColumnLayout
-        left={<ServiceSearch search={searchParams.search} />}
+        left={<SearchListInput search={search} />}
         right={
           <div className="display-flex flex-column">
-            <h3>Get Help</h3>
-            <Button type="button" size="big">
-              Contact us
-            </Button>
+            <h3 className="text-2xl font-bold mb-4">Get Help</h3>
+            <Button big>Contact us</Button>
           </div>
         }
       >
-        <Suspense key={`${page}-${search}`} fallback={<ServicesLoading />}>
-          <ServicesList page={pageNum} search={search || ''} />
+        <Suspense
+          key={`${page}-${search}`}
+          fallback={<SearchListLoading title="Services" />}
+        >
+          <SearchList
+            page={pageNum}
+            search={search || ''}
+            listKey="services"
+            title="Services"
+            query={GET_SERVICES_QUERY}
+          />
         </Suspense>
       </ThreeColumnLayout>
     </section>

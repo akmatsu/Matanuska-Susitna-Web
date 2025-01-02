@@ -1,46 +1,35 @@
 'use client';
 import Link from 'next/link';
 import { Carousel } from '../Carousel';
-import { Grid, Icon, Search } from '@trussworks/react-uswds';
 import React from 'react';
-import { CoreIcon } from '../CoreIcon';
+import { Hero as UIHero, Search } from '@matsugov/ui';
 
 export function Hero() {
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
 
-  const links: { icon: keyof typeof Icon; text: string; url: string }[] = [
+  const links: { icon: string; text: string; url: string }[] = [
     {
-      icon: 'Pets',
+      icon: 'mdi--pets',
       text: 'Animal Care',
       url: 'https://matsugov.us/animalcare',
     },
     {
-      icon: 'Announcement',
+      icon: 'mdi--message-alert',
       text: 'Problem Reporter',
       url: 'https://problemreporter.matsugov.us/',
     },
     {
-      icon: 'Home',
+      icon: 'mdi--home',
       text: 'myProperty Lookup',
       url: 'https://myproperty.matsugov.us/',
     },
     {
-      icon: 'Map',
+      icon: 'mdi--map',
       text: 'Parcel Viewer',
       url: 'https://mapping.matsugov.us/Html5Viewer/index.html?viewer=MSB_Parcel_Viewer',
     },
-    // {
-    //   icon: 'Home',
-    //   text: 'myProperty Lookup',
-    //   url: 'https://myproperty.matsugov.us/',
-    // },
-    // {
-    //   icon: 'Map',
-    //   text: 'Parcel Viewer',
-    //   url: 'https://mapping.matsugov.us/Html5Viewer/index.html?viewer=MSB_Parcel_Viewer',
-    // },
   ];
   return (
     <Carousel
@@ -49,48 +38,35 @@ export function Hero() {
           title: 'Home',
           content: (
             <>
-              <section
-                className="usa-hero display-flex flex-column flex-justify-center flex-align-center text-black text-center"
-                aria-label="introduction"
-                style={{ minHeight: '300px' }}
+              <UIHero
+                position="top"
+                className="flex justify-center items-center"
               >
-                <Search
-                  onSubmit={handleSearch}
-                  size="big"
-                  placeholder="Search website..."
-                  style={{ width: '500px' }}
-                />
-              </section>
-              <section className="display-flex  padding-top-2 padding-bottom-1 flex-justify-center usa-section--light">
-                <div
-                  className="grid-container width-full"
-                  style={{ maxWidth: '900px' }}
-                >
-                  <Grid row gap>
+                <div className="max-w-[500px] w-full">
+                  <Search
+                    placeholder="Search website..."
+                    onSubmit={handleSearch}
+                  />
+                </div>
+              </UIHero>
+              <section className="flex justify-center items-center bg-base-lightest py-4 px-2">
+                <div className=" max-w-[900px] w-full">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 w-full">
                     {links.map((link) => (
-                      <Grid
-                        col={12}
-                        mobileLg={{ col: 6 }}
-                        desktop={{ col: 3 }}
-                        key={crypto.randomUUID()}
+                      <Link
+                        href={link.url}
+                        className="rounded px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full"
+                        key={link.text}
                       >
-                        <Link
-                          href={link.url}
-                          className="usa-button shadow-2 width-full bg-white hover:bg-base-lightest text-base-darkest margin-bottom-2"
-                        >
-                          <div className="display-flex flex-column flex-align-center">
-                            <CoreIcon
-                              icon={link.icon}
-                              size={5}
-                              className="margin-bottom-1"
-                              color="green"
-                            />
-                            {link.text}
-                          </div>
-                        </Link>
-                      </Grid>
+                        <div className="flex flex-col items-center">
+                          <span
+                            className={`iconify size-9 ${link.icon} text-green-600`}
+                          ></span>
+                          <span>{link.text}</span>
+                        </div>
+                      </Link>
                     ))}
-                  </Grid>
+                  </div>
                 </div>
               </section>
             </>

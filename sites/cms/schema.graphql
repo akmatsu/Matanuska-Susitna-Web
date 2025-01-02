@@ -196,6 +196,8 @@ type UserGroup {
   usersCount(where: UserWhereInput! = {}): Int
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
+  communities(where: CommunityWhereInput! = {}, orderBy: [CommunityOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: CommunityWhereUniqueInput): [Community!]
+  communitiesCount(where: CommunityWhereInput! = {}): Int
   documentCollections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
   documentCollectionsCount(where: DocumentCollectionWhereInput! = {}): Int
 }
@@ -214,6 +216,7 @@ input UserGroupWhereInput {
   description: StringFilter
   users: UserManyRelationFilter
   services: ServiceManyRelationFilter
+  communities: CommunityManyRelationFilter
   documentCollections: DocumentCollectionManyRelationFilter
 }
 
@@ -227,6 +230,12 @@ input ServiceManyRelationFilter {
   every: ServiceWhereInput
   some: ServiceWhereInput
   none: ServiceWhereInput
+}
+
+input CommunityManyRelationFilter {
+  every: CommunityWhereInput
+  some: CommunityWhereInput
+  none: CommunityWhereInput
 }
 
 input DocumentCollectionManyRelationFilter {
@@ -247,6 +256,7 @@ input UserGroupUpdateInput {
   description: String
   users: UserRelateToManyForUpdateInput
   services: ServiceRelateToManyForUpdateInput
+  communities: CommunityRelateToManyForUpdateInput
   documentCollections: DocumentCollectionRelateToManyForUpdateInput
 }
 
@@ -270,6 +280,13 @@ input ServiceRelateToManyForUpdateInput {
   connect: [ServiceWhereUniqueInput!]
 }
 
+input CommunityRelateToManyForUpdateInput {
+  disconnect: [CommunityWhereUniqueInput!]
+  set: [CommunityWhereUniqueInput!]
+  create: [CommunityCreateInput!]
+  connect: [CommunityWhereUniqueInput!]
+}
+
 input DocumentCollectionRelateToManyForUpdateInput {
   disconnect: [DocumentCollectionWhereUniqueInput!]
   set: [DocumentCollectionWhereUniqueInput!]
@@ -288,6 +305,7 @@ input UserGroupCreateInput {
   description: String
   users: UserRelateToManyForCreateInput
   services: ServiceRelateToManyForCreateInput
+  communities: CommunityRelateToManyForCreateInput
   documentCollections: DocumentCollectionRelateToManyForCreateInput
 }
 
@@ -306,6 +324,11 @@ input ServiceRelateToManyForCreateInput {
   connect: [ServiceWhereUniqueInput!]
 }
 
+input CommunityRelateToManyForCreateInput {
+  create: [CommunityCreateInput!]
+  connect: [CommunityWhereUniqueInput!]
+}
+
 input DocumentCollectionRelateToManyForCreateInput {
   create: [DocumentCollectionCreateInput!]
   connect: [DocumentCollectionWhereUniqueInput!]
@@ -320,6 +343,8 @@ type Contact {
   primaryServicesCount(where: ServiceWhereInput! = {}): Int
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
+  communities(where: CommunityWhereInput! = {}, orderBy: [CommunityOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: CommunityWhereUniqueInput): [Community!]
+  communitiesCount(where: CommunityWhereInput! = {}): Int
   user: User
   editorNotes: String
 }
@@ -338,6 +363,7 @@ input ContactWhereInput {
   email: StringNullableFilter
   primaryServices: ServiceManyRelationFilter
   services: ServiceManyRelationFilter
+  communities: CommunityManyRelationFilter
   user: UserWhereInput
   editorNotes: StringFilter
 }
@@ -371,6 +397,7 @@ input ContactUpdateInput {
   email: String
   primaryServices: ServiceRelateToManyForUpdateInput
   services: ServiceRelateToManyForUpdateInput
+  communities: CommunityRelateToManyForUpdateInput
   user: UserRelateToOneForUpdateInput
   editorNotes: String
 }
@@ -386,6 +413,7 @@ input ContactCreateInput {
   email: String
   primaryServices: ServiceRelateToManyForCreateInput
   services: ServiceRelateToManyForCreateInput
+  communities: CommunityRelateToManyForCreateInput
   user: UserRelateToOneForCreateInput
   editorNotes: String
 }
@@ -495,8 +523,12 @@ type Tag {
   name: String
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
+  communities(where: CommunityWhereInput! = {}, orderBy: [CommunityOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: CommunityWhereUniqueInput): [Community!]
+  communitiesCount(where: CommunityWhereInput! = {}): Int
   documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
   documentsCount(where: DocumentWhereInput! = {}): Int
+  images(where: ImageWhereInput! = {}, orderBy: [ImageOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ImageWhereUniqueInput): [Image!]
+  imagesCount(where: ImageWhereInput! = {}): Int
   documentCollections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
   documentCollectionsCount(where: DocumentCollectionWhereInput! = {}): Int
 }
@@ -512,7 +544,9 @@ input TagWhereInput {
   id: IDFilter
   name: StringFilter
   services: ServiceManyRelationFilter
+  communities: CommunityManyRelationFilter
   documents: DocumentManyRelationFilter
+  images: ImageManyRelationFilter
   documentCollections: DocumentCollectionManyRelationFilter
 }
 
@@ -520,6 +554,12 @@ input DocumentManyRelationFilter {
   every: DocumentWhereInput
   some: DocumentWhereInput
   none: DocumentWhereInput
+}
+
+input ImageManyRelationFilter {
+  every: ImageWhereInput
+  some: ImageWhereInput
+  none: ImageWhereInput
 }
 
 input TagOrderByInput {
@@ -530,7 +570,9 @@ input TagOrderByInput {
 input TagUpdateInput {
   name: String
   services: ServiceRelateToManyForUpdateInput
+  communities: CommunityRelateToManyForUpdateInput
   documents: DocumentRelateToManyForUpdateInput
+  images: ImageRelateToManyForUpdateInput
   documentCollections: DocumentCollectionRelateToManyForUpdateInput
 }
 
@@ -541,6 +583,13 @@ input DocumentRelateToManyForUpdateInput {
   connect: [DocumentWhereUniqueInput!]
 }
 
+input ImageRelateToManyForUpdateInput {
+  disconnect: [ImageWhereUniqueInput!]
+  set: [ImageWhereUniqueInput!]
+  create: [ImageCreateInput!]
+  connect: [ImageWhereUniqueInput!]
+}
+
 input TagUpdateArgs {
   where: TagWhereUniqueInput!
   data: TagUpdateInput!
@@ -549,13 +598,20 @@ input TagUpdateArgs {
 input TagCreateInput {
   name: String
   services: ServiceRelateToManyForCreateInput
+  communities: CommunityRelateToManyForCreateInput
   documents: DocumentRelateToManyForCreateInput
+  images: ImageRelateToManyForCreateInput
   documentCollections: DocumentCollectionRelateToManyForCreateInput
 }
 
 input DocumentRelateToManyForCreateInput {
   create: [DocumentCreateInput!]
   connect: [DocumentWhereUniqueInput!]
+}
+
+input ImageRelateToManyForCreateInput {
+  create: [ImageCreateInput!]
+  connect: [ImageWhereUniqueInput!]
 }
 
 type Service {
@@ -578,6 +634,8 @@ type Service {
   primaryContact: Contact
   contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
   contactsCount(where: ContactWhereInput! = {}): Int
+  communities(where: CommunityWhereInput! = {}, orderBy: [CommunityOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: CommunityWhereUniqueInput): [Community!]
+  communitiesCount(where: CommunityWhereInput! = {}): Int
   createdAt: DateTime
   updatedAt: DateTime
   editorNotes: String
@@ -607,6 +665,7 @@ input ServiceWhereInput {
   userGroups: UserGroupManyRelationFilter
   primaryContact: ContactWhereInput
   contacts: ContactManyRelationFilter
+  communities: CommunityManyRelationFilter
   createdAt: DateTimeNullableFilter
   updatedAt: DateTimeNullableFilter
   editorNotes: StringFilter
@@ -655,6 +714,7 @@ input ServiceUpdateInput {
   userGroups: UserGroupRelateToManyForUpdateInput
   primaryContact: ContactRelateToOneForUpdateInput
   contacts: ContactRelateToManyForUpdateInput
+  communities: CommunityRelateToManyForUpdateInput
   createdAt: DateTime
   updatedAt: DateTime
   editorNotes: String
@@ -694,6 +754,7 @@ input ServiceCreateInput {
   userGroups: UserGroupRelateToManyForCreateInput
   primaryContact: ContactRelateToOneForCreateInput
   contacts: ContactRelateToManyForCreateInput
+  communities: CommunityRelateToManyForCreateInput
   createdAt: DateTime
   updatedAt: DateTime
   editorNotes: String
@@ -707,6 +768,240 @@ input TagRelateToManyForCreateInput {
 input ContactRelateToManyForCreateInput {
   create: [ContactCreateInput!]
   connect: [ContactWhereUniqueInput!]
+}
+
+type Community {
+  id: ID!
+  heroImage: String
+  title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  reviewDate: DateTime
+  liveUrl: String
+  slug: String
+  owner: User
+  mapId: String
+  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
+  tagsCount(where: TagWhereInput! = {}): Int
+  userGroups(where: UserGroupWhereInput! = {}, orderBy: [UserGroupOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserGroupWhereUniqueInput): [UserGroup!]
+  userGroupsCount(where: UserGroupWhereInput! = {}): Int
+  contacts(where: ContactWhereInput! = {}, orderBy: [ContactOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ContactWhereUniqueInput): [Contact!]
+  contactsCount(where: ContactWhereInput! = {}): Int
+  services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
+  servicesCount(where: ServiceWhereInput! = {}): Int
+  districts(where: AssemblyDistrictWhereInput! = {}, orderBy: [AssemblyDistrictOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AssemblyDistrictWhereUniqueInput): [AssemblyDistrict!]
+  districtsCount(where: AssemblyDistrictWhereInput! = {}): Int
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CommunityWhereUniqueInput {
+  id: ID
+  slug: String
+}
+
+input CommunityWhereInput {
+  AND: [CommunityWhereInput!]
+  OR: [CommunityWhereInput!]
+  NOT: [CommunityWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  description: StringFilter
+  publishAt: DateTimeNullableFilter
+  unpublishAt: DateTimeNullableFilter
+  reviewDate: DateTimeNullableFilter
+  slug: StringFilter
+  owner: UserWhereInput
+  mapId: StringFilter
+  tags: TagManyRelationFilter
+  userGroups: UserGroupManyRelationFilter
+  contacts: ContactManyRelationFilter
+  services: ServiceManyRelationFilter
+  districts: AssemblyDistrictManyRelationFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input AssemblyDistrictManyRelationFilter {
+  every: AssemblyDistrictWhereInput
+  some: AssemblyDistrictWhereInput
+  none: AssemblyDistrictWhereInput
+}
+
+input CommunityOrderByInput {
+  id: OrderDirection
+  heroImage: OrderDirection
+  title: OrderDirection
+  description: OrderDirection
+  publishAt: OrderDirection
+  unpublishAt: OrderDirection
+  reviewDate: OrderDirection
+  slug: OrderDirection
+  mapId: OrderDirection
+  createdAt: OrderDirection
+  updatedAt: OrderDirection
+}
+
+input CommunityUpdateInput {
+  heroImage: String
+  title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  reviewDate: DateTime
+  slug: String
+  owner: UserRelateToOneForUpdateInput
+  mapId: String
+  tags: TagRelateToManyForUpdateInput
+  userGroups: UserGroupRelateToManyForUpdateInput
+  contacts: ContactRelateToManyForUpdateInput
+  services: ServiceRelateToManyForUpdateInput
+  districts: AssemblyDistrictRelateToManyForUpdateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input AssemblyDistrictRelateToManyForUpdateInput {
+  disconnect: [AssemblyDistrictWhereUniqueInput!]
+  set: [AssemblyDistrictWhereUniqueInput!]
+  create: [AssemblyDistrictCreateInput!]
+  connect: [AssemblyDistrictWhereUniqueInput!]
+}
+
+input CommunityUpdateArgs {
+  where: CommunityWhereUniqueInput!
+  data: CommunityUpdateInput!
+}
+
+input CommunityCreateInput {
+  heroImage: String
+  title: String
+  description: String
+  publishAt: DateTime
+  unpublishAt: DateTime
+  reviewDate: DateTime
+  slug: String
+  owner: UserRelateToOneForCreateInput
+  mapId: String
+  tags: TagRelateToManyForCreateInput
+  userGroups: UserGroupRelateToManyForCreateInput
+  contacts: ContactRelateToManyForCreateInput
+  services: ServiceRelateToManyForCreateInput
+  districts: AssemblyDistrictRelateToManyForCreateInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input AssemblyDistrictRelateToManyForCreateInput {
+  create: [AssemblyDistrictCreateInput!]
+  connect: [AssemblyDistrictWhereUniqueInput!]
+}
+
+type AssemblyDistrict {
+  id: ID!
+  title: String
+  description: String
+  liveUrl: String
+  slug: String
+  owner: User
+  photo: Image
+  memberName: String
+  bio: String
+  address: String
+  email: String
+  phone: String
+  fax: String
+  termStart: DateTime
+  termEnd: DateTime
+}
+
+input AssemblyDistrictWhereUniqueInput {
+  id: ID
+  slug: String
+}
+
+input AssemblyDistrictWhereInput {
+  AND: [AssemblyDistrictWhereInput!]
+  OR: [AssemblyDistrictWhereInput!]
+  NOT: [AssemblyDistrictWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  description: StringFilter
+  slug: StringFilter
+  owner: UserWhereInput
+  photo: ImageWhereInput
+  memberName: StringFilter
+  bio: StringFilter
+  address: StringFilter
+  email: StringNullableFilter
+  phone: StringNullableFilter
+  fax: StringNullableFilter
+  termStart: DateTimeNullableFilter
+  termEnd: DateTimeNullableFilter
+}
+
+input AssemblyDistrictOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  description: OrderDirection
+  slug: OrderDirection
+  memberName: OrderDirection
+  bio: OrderDirection
+  address: OrderDirection
+  email: OrderDirection
+  phone: OrderDirection
+  fax: OrderDirection
+  termStart: OrderDirection
+  termEnd: OrderDirection
+}
+
+input AssemblyDistrictUpdateInput {
+  title: String
+  description: String
+  slug: String
+  owner: UserRelateToOneForUpdateInput
+  photo: ImageRelateToOneForUpdateInput
+  memberName: String
+  bio: String
+  address: String
+  email: String
+  phone: String
+  fax: String
+  termStart: DateTime
+  termEnd: DateTime
+}
+
+input ImageRelateToOneForUpdateInput {
+  create: ImageCreateInput
+  connect: ImageWhereUniqueInput
+  disconnect: Boolean
+}
+
+input AssemblyDistrictUpdateArgs {
+  where: AssemblyDistrictWhereUniqueInput!
+  data: AssemblyDistrictUpdateInput!
+}
+
+input AssemblyDistrictCreateInput {
+  title: String
+  description: String
+  slug: String
+  owner: UserRelateToOneForCreateInput
+  photo: ImageRelateToOneForCreateInput
+  memberName: String
+  bio: String
+  address: String
+  email: String
+  phone: String
+  fax: String
+  termStart: DateTime
+  termEnd: DateTime
+}
+
+input ImageRelateToOneForCreateInput {
+  create: ImageCreateInput
+  connect: ImageWhereUniqueInput
 }
 
 type Highlight {
@@ -783,6 +1078,77 @@ input HighlightCreateInput {
   editorNotes: String
 }
 
+type Image {
+  id: ID!
+  title: String
+  description: String
+  tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
+  tagsCount(where: TagWhereInput! = {}): Int
+  file: ImageFieldOutput
+}
+
+type ImageFieldOutput {
+  id: ID!
+  filesize: Int!
+  width: Int!
+  height: Int!
+  extension: ImageExtension!
+  url: String!
+}
+
+enum ImageExtension {
+  jpg
+  png
+  webp
+  gif
+}
+
+input ImageWhereUniqueInput {
+  id: ID
+}
+
+input ImageWhereInput {
+  AND: [ImageWhereInput!]
+  OR: [ImageWhereInput!]
+  NOT: [ImageWhereInput!]
+  id: IDFilter
+  title: StringFilter
+  description: StringFilter
+  tags: TagManyRelationFilter
+}
+
+input ImageOrderByInput {
+  id: OrderDirection
+  title: OrderDirection
+  description: OrderDirection
+}
+
+input ImageUpdateInput {
+  title: String
+  description: String
+  tags: TagRelateToManyForUpdateInput
+  file: ImageFieldInput
+}
+
+input ImageFieldInput {
+  upload: Upload!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input ImageUpdateArgs {
+  where: ImageWhereUniqueInput!
+  data: ImageUpdateInput!
+}
+
+input ImageCreateInput {
+  title: String
+  description: String
+  tags: TagRelateToManyForCreateInput
+  file: ImageFieldInput
+}
+
 type Document {
   id: ID!
   title: String
@@ -836,9 +1202,6 @@ input DocumentUpdateInput {
 input FileFieldInput {
   upload: Upload!
 }
-
-"""The `Upload` scalar type represents a file upload."""
-scalar Upload
 
 input DocumentUpdateArgs {
   where: DocumentWhereUniqueInput!
@@ -956,12 +1319,30 @@ type Mutation {
   updateServices(data: [ServiceUpdateArgs!]!): [Service]
   deleteService(where: ServiceWhereUniqueInput!): Service
   deleteServices(where: [ServiceWhereUniqueInput!]!): [Service]
+  createCommunity(data: CommunityCreateInput!): Community
+  createCommunities(data: [CommunityCreateInput!]!): [Community]
+  updateCommunity(where: CommunityWhereUniqueInput!, data: CommunityUpdateInput!): Community
+  updateCommunities(data: [CommunityUpdateArgs!]!): [Community]
+  deleteCommunity(where: CommunityWhereUniqueInput!): Community
+  deleteCommunities(where: [CommunityWhereUniqueInput!]!): [Community]
+  createAssemblyDistrict(data: AssemblyDistrictCreateInput!): AssemblyDistrict
+  createAssemblyDistricts(data: [AssemblyDistrictCreateInput!]!): [AssemblyDistrict]
+  updateAssemblyDistrict(where: AssemblyDistrictWhereUniqueInput!, data: AssemblyDistrictUpdateInput!): AssemblyDistrict
+  updateAssemblyDistricts(data: [AssemblyDistrictUpdateArgs!]!): [AssemblyDistrict]
+  deleteAssemblyDistrict(where: AssemblyDistrictWhereUniqueInput!): AssemblyDistrict
+  deleteAssemblyDistricts(where: [AssemblyDistrictWhereUniqueInput!]!): [AssemblyDistrict]
   createHighlight(data: HighlightCreateInput!): Highlight
   createHighlights(data: [HighlightCreateInput!]!): [Highlight]
   updateHighlight(where: HighlightWhereUniqueInput!, data: HighlightUpdateInput!): Highlight
   updateHighlights(data: [HighlightUpdateArgs!]!): [Highlight]
   deleteHighlight(where: HighlightWhereUniqueInput!): Highlight
   deleteHighlights(where: [HighlightWhereUniqueInput!]!): [Highlight]
+  createImage(data: ImageCreateInput!): Image
+  createImages(data: [ImageCreateInput!]!): [Image]
+  updateImage(where: ImageWhereUniqueInput!, data: ImageUpdateInput!): Image
+  updateImages(data: [ImageUpdateArgs!]!): [Image]
+  deleteImage(where: ImageWhereUniqueInput!): Image
+  deleteImages(where: [ImageWhereUniqueInput!]!): [Image]
   createDocument(data: DocumentCreateInput!): Document
   createDocuments(data: [DocumentCreateInput!]!): [Document]
   updateDocument(where: DocumentWhereUniqueInput!, data: DocumentUpdateInput!): Document
@@ -996,9 +1377,18 @@ type Query {
   service(where: ServiceWhereUniqueInput!): Service
   services(where: ServiceWhereInput! = {}, orderBy: [ServiceOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ServiceWhereUniqueInput): [Service!]
   servicesCount(where: ServiceWhereInput! = {}): Int
+  community(where: CommunityWhereUniqueInput!): Community
+  communities(where: CommunityWhereInput! = {}, orderBy: [CommunityOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: CommunityWhereUniqueInput): [Community!]
+  communitiesCount(where: CommunityWhereInput! = {}): Int
+  assemblyDistrict(where: AssemblyDistrictWhereUniqueInput!): AssemblyDistrict
+  assemblyDistricts(where: AssemblyDistrictWhereInput! = {}, orderBy: [AssemblyDistrictOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AssemblyDistrictWhereUniqueInput): [AssemblyDistrict!]
+  assemblyDistrictsCount(where: AssemblyDistrictWhereInput! = {}): Int
   highlight(where: HighlightWhereUniqueInput!): Highlight
   highlights(where: HighlightWhereInput! = {}, orderBy: [HighlightOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: HighlightWhereUniqueInput): [Highlight!]
   highlightsCount(where: HighlightWhereInput! = {}): Int
+  image(where: ImageWhereUniqueInput!): Image
+  images(where: ImageWhereInput! = {}, orderBy: [ImageOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: ImageWhereUniqueInput): [Image!]
+  imagesCount(where: ImageWhereInput! = {}): Int
   document(where: DocumentWhereUniqueInput!): Document
   documents(where: DocumentWhereInput! = {}, orderBy: [DocumentOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentWhereUniqueInput): [Document!]
   documentsCount(where: DocumentWhereInput! = {}): Int

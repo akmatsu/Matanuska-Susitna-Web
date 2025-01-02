@@ -18,7 +18,7 @@ export const appConfig = {
     originHost: process.env.ORIGIN_HOST,
   },
   siteUrl:
-    process.env.NODE_NODE === 'production'
+    process.env.NODE_ENV === 'production'
       ? 'https://matsu.gov'
       : 'http://localhost:3000',
   storage: {
@@ -33,6 +33,10 @@ export const appConfig = {
     s3Images: {
       kind: 's3',
       type: 'image',
+      bucketName: process.env.S3_BUCKET_NAME,
+      region: process.env.S3_REGION,
+      accessKeyId: process.env.S3_ACCESS_KEY_ID,
+      secretAccessKey: process.env.SECRET_ACCESS_KEY,
     } as StorageConfig,
     localDocuments: {
       kind: 'local',

@@ -1,8 +1,10 @@
-import { Featured, Hero, HighlightGrid } from '@/components';
-import { FeaturedContent } from '@/components/landing/FeatureContent';
-import { Meetings } from '@/components/Meetings';
-import { GridContainer, Grid } from '@trussworks/react-uswds';
-import Link from 'next/link';
+import {
+  Featured,
+  Hero,
+  FeaturedContent,
+  Meetings,
+  LinkButton,
+} from '@/components';
 
 export default function Home() {
   return (
@@ -10,28 +12,28 @@ export default function Home() {
       <Hero />
       <Featured />
 
-      <section className="usa-section grid-container">
-        <h2>Upcoming Meetings</h2>
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="mb-4 text-3xl font-bold">Upcoming Meetings</h2>
 
         <Meetings />
       </section>
-      <section className="usa-section grid-container">
-        <h2>Announcement & Public Notices</h2>
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="mb-4 text-3xl font-bold">
+          Announcement & Public Notices
+        </h2>
 
         <FeaturedContent />
       </section>
 
-      <section className="usa-section">
-        <GridContainer>
-          <h2>Can't find what you need?</h2>
-          <p className="usa-intro">
-            Use the search bar or reach out to us directly — we're here to help.
-          </p>
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="mb-4 text-3xl font-bold">Can't find what you need?</h2>
+        <p className="text-xl mb-4">
+          Use the search bar or reach out to us directly — we're here to help.
+        </p>
 
-          <Link href="#" className="usa-button">
-            Contact us
-          </Link>
-        </GridContainer>
+        <LinkButton href="#" color="primary">
+          Contact us
+        </LinkButton>
       </section>
     </div>
   );

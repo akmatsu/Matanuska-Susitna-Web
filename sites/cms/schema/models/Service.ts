@@ -1,9 +1,11 @@
-import { graphql, group, list, ListConfig } from '@keystone-6/core';
-import { relationship, text, virtual } from '@keystone-6/core/fields';
+import { group, list, ListConfig } from '@keystone-6/core';
+import { relationship, text } from '@keystone-6/core/fields';
 import {
+  liveUrl,
   owner,
   publishable,
   slug,
+  tags,
   timestamps,
   titleAndDescription,
   urlRegex,
@@ -15,9 +17,7 @@ import {
   filterByPubDates,
   generalItemAccess,
   generalOperationAccess,
-  getDatetimeISOString,
 } from '../access/utils';
-import { appConfig } from '../../appConfig';
 
 export const Service: ListConfig<any> = list({
   access: {
@@ -31,34 +31,7 @@ export const Service: ListConfig<any> = list({
   fields: {
     ...titleAndDescription(),
     ...publishable,
-    liveUrl: virtual({
-      field: graphql.field({
-        type: graphql.String,
-        resolve(baseItem) {
-          return `${appConfig.siteUrl}/services/${baseItem.slug}`;
-        },
-      }),
-      ui: {
-        views: './customFields/liveUrl/views.tsx',
-        createView: {
-          fieldMode: 'hidden',
-        },
-        itemView: {
-          fieldPosition: 'sidebar',
-          fieldMode(args) {
-            const now = getDatetimeISOString();
-            const pubAt = args.item.publishAt
-              ? getDatetimeISOString(args.item.publishAt as Date)
-              : false;
-            const unpubAt = args.item.unpublishAt
-              ? getDatetimeISOString(args.item.unpublishAt as Date)
-              : false;
-            if (pubAt <= now && (!unpubAt || unpubAt >= now)) return 'read';
-            else return 'hidden';
-          },
-        },
-      },
-    }),
+    liveUrl: liveUrl('services'),
     slug,
     owner,
     body: customText(),
@@ -99,20 +72,8 @@ export const Service: ListConfig<any> = list({
       },
     }),
 
-    tags: relationship({
-      ref: 'Tag.services',
-      many: true,
-      ui: {
-        displayMode: 'select',
-        searchFields: ['name'],
-        itemView: {
-          fieldPosition: 'sidebar',
-        },
-      },
-    }),
-
+    tags: tags('services'),
     userGroups: userGroups('services'),
-
     primaryContact: relationship({
       ref: 'Contact.primaryServices',
       ui: {
@@ -129,6 +90,16 @@ export const Service: ListConfig<any> = list({
         itemView: {
           fieldPosition: 'sidebar',
         },
+      },
+    }),
+    communities: relationship({
+      ref: 'Community.services',
+      many: true,
+      ui: {
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
+        hideCreate: true,
       },
     }),
     ...timestamps,

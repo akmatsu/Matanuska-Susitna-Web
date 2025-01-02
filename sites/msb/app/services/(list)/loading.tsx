@@ -1,23 +1,23 @@
-import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
-import { ServiceSearch } from '@/components/Services/ServiceSearch';
-import { Button } from '@trussworks/react-uswds';
-import { ServicesLoading } from '@/components/Services/ServicesLoading';
+import {
+  SearchListInput,
+  SearchListLoading,
+  ThreeColumnLayout,
+} from '@/components';
+import { Button } from '@matsugov/ui';
 
 export default function Loading() {
   return (
-    <section className="usa-section">
+    <section className="max-w-6xl mx-auto px-4 py-16">
       <ThreeColumnLayout
-        left={<ServiceSearch />}
+        left={<SearchListInput listKey="services" />}
         right={
-          <div className="display-flex flex-column">
-            <h3>Get Help</h3>
-            <Button type="button" size="big">
-              Contact us
-            </Button>
+          <div className="flex flex-col">
+            <h3 className="text-2xl font-bold mb-4">Get Help</h3>
+            <Button big>Contact us</Button>
           </div>
         }
       >
-        <ServicesLoading />
+        <SearchListLoading title="Services" />
       </ThreeColumnLayout>
     </section>
   );

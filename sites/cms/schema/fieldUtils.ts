@@ -1,10 +1,20 @@
-import { BaseFields, group } from '@keystone-6/core';
-import { relationship, text, timestamp } from '@keystone-6/core/fields';
+import { BaseFields, graphql, group } from '@keystone-6/core';
+import {
+  relationship,
+  text,
+  timestamp,
+  virtual,
+} from '@keystone-6/core/fields';
 import { KeystoneContextFromListTypeInfo } from '@keystone-6/core/types';
 import { isAdmin } from './access/roles';
 import { isOwner } from './access/group';
+import { appConfig } from '../appConfig';
+import { getDatetimeISOString } from './access';
 
 export const urlRegex = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/;
+export const phoneNumberRegex =
+  /^(\(\d{3}\)\s\d{3}-\d{4}|\d{3}-\d{3}-\d{4}|\d{3}\.\d{3}\.\d{4})$/;
+export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const timestamps: BaseFields<any> = {
   createdAt: timestamp({
@@ -27,6 +37,38 @@ export const timestamps: BaseFields<any> = {
     },
   }),
 };
+
+export function liveUrl(listKey: string) {
+  return virtual({
+    field: graphql.field({
+      type: graphql.String,
+      resolve(baseItem: any) {
+        baseItem as { slug: string };
+        return `${appConfig.siteUrl}/${listKey}/${baseItem.slug}`;
+      },
+    }),
+    ui: {
+      views: './customFields/liveUrl/views.tsx',
+      createView: {
+        fieldMode: 'hidden',
+      },
+      itemView: {
+        fieldPosition: 'sidebar',
+        fieldMode(args) {
+          const now = getDatetimeISOString();
+          const pubAt = args.item.publishAt
+            ? getDatetimeISOString(args.item.publishAt as Date)
+            : false;
+          const unpubAt = args.item.unpublishAt
+            ? getDatetimeISOString(args.item.unpublishAt as Date)
+            : false;
+          if (pubAt <= now && (!unpubAt || unpubAt >= now)) return 'read';
+          else return 'hidden';
+        },
+      },
+    },
+  });
+}
 
 export const publishable: BaseFields<any> = {
   ...group({
@@ -159,6 +201,7 @@ export const owner = relationship({
     createView: {
       fieldMode: 'hidden',
     },
+    hideCreate: true,
   },
   hooks: {
     resolveInput: relateActiveUser,
@@ -185,6 +228,32 @@ export function relateActiveUser({
   return resolvedData?.[fieldKey];
 }
 
+export function tags(listKey: string) {
+  return relationship({
+    ref: `Tag.${listKey}`,
+    many: true,
+    ui: {
+      displayMode: 'select',
+      searchFields: ['name'],
+      itemView: {
+        fieldPosition: 'sidebar',
+      },
+    },
+  });
+}
+
+export function contacts(listKey: string) {
+  return relationship({
+    ref: `Contact.${listKey}`,
+    many: true,
+    ui: {
+      itemView: {
+        fieldPosition: 'sidebar',
+      },
+    },
+  });
+}
+
 export function userGroups(listKey: string) {
   return relationship({
     ref: `UserGroup.${listKey}`,
@@ -197,5 +266,12 @@ export function userGroups(listKey: string) {
     access: {
       update: ({ session, item }) => isAdmin(session) || isOwner(session, item),
     },
+  });
+}
+
+export function services(listKey: string) {
+  return relationship({
+    ref: `Service.${listKey}`,
+    many: true,
   });
 }

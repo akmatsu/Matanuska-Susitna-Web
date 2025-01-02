@@ -1,5 +1,4 @@
 import { appConfig } from '@/configs/config';
-import { Grid, GridContainer, MediaBlockBody } from '@trussworks/react-uswds';
 import Link from 'next/link';
 
 export function HighlightGrid() {
@@ -50,7 +49,7 @@ export function HighlightGrid() {
   ];
   return (
     <section className="usa-graphic-list usa-section usa-section--dark">
-      <GridContainer>
+      {/* <GridContainer>
         {highlights.map((row) => (
           <Grid
             row
@@ -82,7 +81,7 @@ export function HighlightGrid() {
             ))}
           </Grid>
         ))}
-      </GridContainer>
+      </GridContainer> */}
     </section>
   );
 }

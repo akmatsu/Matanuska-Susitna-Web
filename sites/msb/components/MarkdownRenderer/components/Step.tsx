@@ -1,13 +1,17 @@
-import React, { PropsWithChildren, ReactElement, ReactNode } from 'react';
+import { ProcessListItem } from '@matsugov/ui';
+import React, { ReactNode } from 'react';
 
 export function Step({ children }: { children: ReactNode }) {
-  const modifiedChildren = React.Children.map(children, (child, index) => {
+  let title = 'Step';
+  let remainingChildren: ReactNode[] = [];
+
+  React.Children.forEach(children, (child, index) => {
     if (index === 0 && React.isValidElement(child)) {
-      return React.cloneElement<HTMLElement>(child as ReactElement, {
-        className: `${child.props.className || ''} usa-process-list__heading`,
-      });
+      title = child.props.children || title;
+      return;
     }
-    return child;
+    remainingChildren.push(child);
   });
-  return <li className="usa-process-list__item">{modifiedChildren}</li>;
+
+  return <ProcessListItem title={title}>{remainingChildren}</ProcessListItem>;
 }

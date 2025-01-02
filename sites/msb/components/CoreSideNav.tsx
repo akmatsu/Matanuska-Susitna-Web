@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { SideNav } from '@trussworks/react-uswds';
+
 import Link from 'next/link';
 
 type Headers = { id: string; tag: string; text?: string }[];
@@ -44,19 +44,20 @@ const TreeRenderer = ({
   nodes: TreeNode[];
   isSubnav?: boolean;
 }) => {
-  return (
-    <SideNav
-      isSubnav={isSubnav}
-      items={nodes.map((node) => (
-        <div key={node.id}>
-          <Link href={`#${node.id}`}>{node.text}</Link>
-          {!!node.children?.length && (
-            <TreeRenderer nodes={node.children} isSubnav />
-          )}
-        </div>
-      ))}
-    />
-  );
+  return <></>;
+  // return (
+  //   <SideNav
+  //     isSubnav={isSubnav}
+  //     items={nodes.map((node) => (
+  //       <div key={node.id}>
+  //         <Link href={`#${node.id}`}>{node.text}</Link>
+  //         {!!node.children?.length && (
+  //           <TreeRenderer nodes={node.children} isSubnav />
+  //         )}
+  //       </div>
+  //     ))}
+  //   />
+  // );
 };
 
 export function CoreSideNav() {
@@ -84,5 +85,5 @@ export function CoreSideNav() {
     }
   }, []);
 
-  return <TreeRenderer nodes={headerTree} />;
+  // return <TreeRenderer nodes={headerTree} />;
 }

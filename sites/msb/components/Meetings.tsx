@@ -1,12 +1,11 @@
 import {
-  Grid,
-  CardHeader,
-  CardMedia,
-  CardBody,
-  Card,
-  CardFooter,
   Button,
-} from '@trussworks/react-uswds';
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@matsugov/ui';
 
 export function Meetings() {
   const meetings: {
@@ -42,31 +41,26 @@ export function Meetings() {
     return date.toLocaleDateString();
   }
   return (
-    <Grid row gap="md">
-      {meetings.map((meeting) => (
-        <Grid
-          col={12}
-          tablet={{ col: 6 }}
-          key={crypto.randomUUID()}
-          className="margin-bottom-2"
-        >
-          <Card className="usa-list--unstyled height-full">
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        {meetings.map((meeting) => (
+          <Card className="h-full justify-between">
             <CardHeader>
-              <h4>{meeting.title}</h4>
+              <CardTitle>{meeting.title}</CardTitle>
               <span className="font-body-sm">{formatDate(meeting.date)}</span>
             </CardHeader>
-            <CardBody>{meeting.location}</CardBody>
+            <CardBody>
+              <p>{meeting.location}</p>
+            </CardBody>
             <CardFooter>
-              <Button type="button">Add to Calendar</Button>
+              <Button>Add to Calendar</Button>
             </CardFooter>
           </Card>
-        </Grid>
-      ))}
-      <div className="display-flex flex-row flex-justify-center flex-align-center width-full">
-        <Button type="button" className="display-block" size="big" outline>
-          View all
-        </Button>
+        ))}
       </div>
-    </Grid>
+      <div className="flex flex-row justify-center items-center w-full">
+        <Button big>View all</Button>
+      </div>
+    </>
   );
 }

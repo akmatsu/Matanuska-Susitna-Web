@@ -1,7 +1,7 @@
 'use client';
+import { LinkButton } from '@/components/LinkButton';
 import { GET_SERVICE_QUERY } from '@/utils/apollo/queries/GetService';
 import { useQuery } from '@apollo/client';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 export function PrimaryActionButton({
@@ -14,14 +14,14 @@ export function PrimaryActionButton({
   const isLinkExternal = href.startsWith('http');
 
   return (
-    <Link
-      className={`usa-button ${isLinkExternal ? 'usa-link--external' : ''}`}
+    <LinkButton
+      className="not-prose"
       target={isLinkExternal ? '_blank' : undefined}
       referrerPolicy="no-referrer"
       href={href}
     >
       {label}
-    </Link>
+    </LinkButton>
   );
 }
 

@@ -6,12 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "node ./scripts/postinstall.cjs"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@trussworks/react-uswds": "^9.1.0",
-    "@uswds/uswds": "^3.8.2",
+    "@matsugov/ui": "workspace:^",
     "next": "^14.2.14",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -23,14 +21,17 @@
     "swiper": "^11.1.14"
   },
   "devDependencies": {
+    "@matsugov/tw-config": "workspace:^",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.0.1",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.6",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
     "jsdom": "^25.0.0",
-    "sass": "^1.78.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
     "vitest": "^2.1.1"
   }
 }
