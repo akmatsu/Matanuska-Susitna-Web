@@ -14,9 +14,11 @@ export async function DocCollection({ id }: { id: string }) {
   return (
     <table>
       <thead>
-        <th>
-          <span>{data?.documentCollection.title}</span>
-        </th>
+        <tr>
+          <th>
+            <span>{data?.documentCollection.title}</span>
+          </th>
+        </tr>
       </thead>
       <tbody>
         {data?.documentCollection.documents.map((doc, index) => (

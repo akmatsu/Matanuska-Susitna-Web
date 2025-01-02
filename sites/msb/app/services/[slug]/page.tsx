@@ -60,15 +60,7 @@ export default async function Service({
     <section className="max-w-6xl mx-auto px-4 py-16 relative">
       {data?.service && (
         <ThreeColumnLayout
-          left={
-            <nav
-              aria-label="Secondary navigation"
-              className="position-sticky"
-              style={{ top: '144px' }}
-            >
-              <InPageNavigation borderPosition="left" />
-            </nav>
-          }
+          left={<InPageNavigation />}
           right={
             <>
               <ul className="flex flex-col" style={{ gap: '8px' }}>
