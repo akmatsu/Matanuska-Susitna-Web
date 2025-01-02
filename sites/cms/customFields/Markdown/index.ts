@@ -3,8 +3,6 @@ import {
   fieldType,
   type FieldTypeFunc,
   type CommonFieldConfig,
-  orderDirectionEnum,
-  QueryMode,
 } from '@keystone-6/core/types';
 import { graphql } from '@keystone-6/core';
 
@@ -46,6 +44,11 @@ const NestedMyStringFilter: NestedMyStringFilterType = graphql.inputObject({
   }),
 });
 
+const MyQueryMode = graphql.enum({
+  name: 'MyQueryMode',
+  values: graphql.enumValues(['default', 'insensitive']),
+});
+
 const MyStringFilter = graphql.inputObject({
   name: 'MyStringFilter',
   fields: () => ({
@@ -59,7 +62,7 @@ const MyStringFilter = graphql.inputObject({
     contains: graphql.arg({ type: graphql.String }),
     startsWith: graphql.arg({ type: graphql.String }),
     endsWith: graphql.arg({ type: graphql.String }),
-    mode: graphql.arg({ type: QueryMode }),
+    mode: graphql.arg({ type: MyQueryMode }),
     not: graphql.arg({ type: NestedMyStringFilter }),
   }),
 });
@@ -163,6 +166,11 @@ function resolveString(
   );
 }
 
+const MyOrderDirectionEnum = graphql.enum({
+  name: 'MyOrderDirection',
+  values: graphql.enumValues(['asc', 'desc']),
+});
+
 export function customText<ListTypeInfo extends BaseListTypeInfo>({
   isIndexed,
   ...config
@@ -183,7 +191,7 @@ export function customText<ListTypeInfo extends BaseListTypeInfo>({
           },
         },
         update: { arg: graphql.arg({ type: graphql.String }) },
-        orderBy: { arg: graphql.arg({ type: orderDirectionEnum }) },
+        orderBy: { arg: graphql.arg({ type: MyOrderDirectionEnum }) },
         where: {
           arg: graphql.arg({
             type: MyStringFilter,

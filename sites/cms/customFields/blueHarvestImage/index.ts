@@ -4,11 +4,15 @@ import {
   CommonFieldConfig,
   fieldType,
   FieldTypeFunc,
-  orderDirectionEnum,
 } from '@keystone-6/core/types';
 
 type BlueHarvestImageConfig<ListTypeInfo extends BaseListTypeInfo> =
   CommonFieldConfig<ListTypeInfo>;
+
+const BlueHarvestImageOrderDirectionEnum = graphql.enum({
+  name: 'BlueHarvestImageOrderDirection',
+  values: graphql.enumValues(['asc', 'desc']),
+});
 
 export function blueHarvestImage<ListTypeInfo extends BaseListTypeInfo>({
   ...config
@@ -31,7 +35,7 @@ export function blueHarvestImage<ListTypeInfo extends BaseListTypeInfo>({
           arg: graphql.arg({ type: graphql.String }),
         },
         orderBy: {
-          arg: graphql.arg({ type: orderDirectionEnum }),
+          arg: graphql.arg({ type: BlueHarvestImageOrderDirectionEnum }),
         },
       },
       output: graphql.field({

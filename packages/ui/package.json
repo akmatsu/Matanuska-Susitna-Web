@@ -23,7 +23,6 @@
   "license": "ISC",
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.3",
-    "@matsugov/tw-config": "workspace:*",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",
     "@storybook/addon-onboarding": "^8.4.7",
@@ -58,6 +57,7 @@
     "@fontsource/source-sans-pro": "^5.1.0",
     "@headlessui/react": "^2.2.0",
     "@matsugov/app-config": "workspace:^",
+    "@matsugov/tw-config": "workspace:*",
     "clsx": "^2.1.1"
   }
 }

@@ -456,8 +456,13 @@ input MyStringFilter {
   contains: String
   startsWith: String
   endsWith: String
-  mode: QueryMode
+  mode: MyQueryMode
   not: NestedMyStringFilter
+}
+
+enum MyQueryMode {
+  default
+  insensitive
 }
 
 input NestedMyStringFilter {
@@ -488,11 +493,16 @@ input IntFilter {
 input AlertOrderByInput {
   id: OrderDirection
   title: OrderDirection
-  body: OrderDirection
+  body: MyOrderDirection
   urgency: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
   editorNotes: OrderDirection
+}
+
+enum MyOrderDirection {
+  asc
+  desc
 }
 
 input AlertUpdateInput {
@@ -691,7 +701,7 @@ input ServiceOrderByInput {
   unpublishAt: OrderDirection
   reviewDate: OrderDirection
   slug: OrderDirection
-  body: OrderDirection
+  body: MyOrderDirection
   actionLabel: OrderDirection
   actionUrl: OrderDirection
   createdAt: OrderDirection
@@ -831,7 +841,7 @@ input AssemblyDistrictManyRelationFilter {
 
 input CommunityOrderByInput {
   id: OrderDirection
-  heroImage: OrderDirection
+  heroImage: BlueHarvestImageOrderDirection
   title: OrderDirection
   description: OrderDirection
   publishAt: OrderDirection
@@ -841,6 +851,11 @@ input CommunityOrderByInput {
   mapId: OrderDirection
   createdAt: OrderDirection
   updatedAt: OrderDirection
+}
+
+enum BlueHarvestImageOrderDirection {
+  asc
+  desc
 }
 
 input CommunityUpdateInput {
@@ -1044,9 +1059,14 @@ input HighlightOrderByInput {
   reviewDate: OrderDirection
   image: OrderDirection
   message: OrderDirection
-  internalLink: OrderDirection
+  internalLink: LinkOrderDirection
   externalLink: OrderDirection
   editorNotes: OrderDirection
+}
+
+enum LinkOrderDirection {
+  asc
+  desc
 }
 
 input HighlightUpdateInput {
