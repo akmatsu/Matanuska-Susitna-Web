@@ -57,7 +57,7 @@ export function InPageNavigation({
   if (headings.length === 0) return null;
 
   return (
-    <nav className="fixed top-20 max-h-[calc(100vh-2rem)] overflow-y-auto">
+    <nav className="fixed max-h-[calc(100vh-2rem)] overflow-y-auto">
       <h3 className="text-sm font-bold mb-2">On this page</h3>
       <ul
         className={clsx(

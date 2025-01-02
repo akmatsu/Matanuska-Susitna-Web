@@ -15,7 +15,7 @@ export function PrimaryActionButton({
 
   return (
     <LinkButton
-      className={`${isLinkExternal ? 'usa-link--external' : ''}`}
+      className="not-prose"
       target={isLinkExternal ? '_blank' : undefined}
       referrerPolicy="no-referrer"
       href={href}

@@ -7,7 +7,7 @@ import {
 } from '@/utils/apollo/queries/GetService';
 import { Metadata } from 'next';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { Button } from '@matsugov/ui';
+import { Button, InPageNavigation } from '@matsugov/ui';
 
 export async function generateMetadata({
   params,
@@ -57,7 +57,7 @@ export default async function Service({
   const service = data?.service;
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-16">
+    <section className="max-w-6xl mx-auto px-4 py-16 relative">
       {data?.service && (
         <ThreeColumnLayout
           left={
@@ -66,7 +66,7 @@ export default async function Service({
               className="position-sticky"
               style={{ top: '144px' }}
             >
-              {/* <CoreSideNav /> */}
+              <InPageNavigation borderPosition="left" />
             </nav>
           }
           right={

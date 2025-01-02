@@ -57,7 +57,7 @@ export function Button<T extends React.ElementType = 'button'>({
       disabled={disabled}
       aria-disabled={disabled}
       className={clsx(
-        'leading-none focus-ring text-center flex items-center justify-center',
+        'leading-none focus-ring text-center flex items-center justify-center no-underline',
         {
           shadow,
           // Rounded corners group
@@ -86,7 +86,7 @@ export function Button<T extends React.ElementType = 'button'>({
           // Color variants group
           'bg-transparent text-primary border border-base-lighter hover:border-primary':
             color === 'transparent' && !disabled,
-          'bg-primary hover:bg-primary-dark active:bg-primary-darker text-white':
+          'bg-primary hover:bg-primary-dark active:bg-primary-darker text-base-lightest':
             color === 'primary' && !disabled,
           'bg-secondary hover:bg-secondary-dark active:bg-secondary-darker text-white':
             color === 'secondary' && !disabled,
