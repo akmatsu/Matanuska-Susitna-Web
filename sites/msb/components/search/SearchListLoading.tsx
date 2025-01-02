@@ -11,8 +11,8 @@ export function SearchListLoading({
 }) {
   return (
     <>
-      <h1>{title}</h1>
-      <ul className="usa-list--unstyled">
+      <h1 className="text-3xl font-bold mb-4">{title}</h1>
+      <ul className="flex flex-col gap-4 mb-4">
         {Array.from({ length: limit }, (_, index) => (
           <Card key={index}>
             <CardHeader>

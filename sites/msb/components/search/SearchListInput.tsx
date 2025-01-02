@@ -8,6 +8,7 @@ import { Search } from '@matsugov/ui';
 export function SearchListInput({
   search = '',
   className,
+  listKey = 'services',
 }: SearchListInputProps) {
   const router = useRouter();
 
@@ -22,7 +23,7 @@ export function SearchListInput({
     <div className={`display-flex flex-column ${className}`}>
       <h3 className="text-2xl font-bold mb-4">Search</h3>
       <Search
-        placeholder="Search services..."
+        placeholder={`Search ${listKey}...`}
         useIcon
         onSubmit={handleSearch}
         defaultValue={search || ''}

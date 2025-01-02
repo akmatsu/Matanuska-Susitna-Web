@@ -6,6 +6,7 @@
   "scripts": {
     "msb:dev": "pnpm turbo run dev --filter=msb",
     "msb:build": "pnpm turbo run build --filter=msb",
+    "msb:start": "pnpm turbo run start --filter=msb",
     "mde:build": "pnpm turbo run build --filter=@msb/md-editor",
     "ui:dev": "pnpm turbo run storybook --filter=@matsugov/ui",
     "ui:start": "pnpm turbo run build -- -w --filter=@matsugov/ui",

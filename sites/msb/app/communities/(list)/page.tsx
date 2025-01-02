@@ -20,7 +20,7 @@ export default function Communities({ searchParams }: PageProps) {
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
       <ThreeColumnLayout
-        left={<SearchListInput search={search} />}
+        left={<SearchListInput search={search} listKey="communities" />}
         right={
           <div className="display-flex flex-column">
             <h3 className="text-2xl font-bold mb-4">Get Help</h3>
