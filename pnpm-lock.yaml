@@ -145,7 +145,7 @@ importers:
         specifier: workspace:^
         version: link:../app-config
       '@matsugov/tw-config':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../tw-config
       clsx:
         specifier: ^2.1.1

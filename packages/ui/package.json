@@ -57,7 +57,7 @@
     "@fontsource/source-sans-pro": "^5.1.0",
     "@headlessui/react": "^2.2.0",
     "@matsugov/app-config": "workspace:^",
-    "@matsugov/tw-config": "workspace:*",
+    "@matsugov/tw-config": "workspace:^",
     "clsx": "^2.1.1"
   }
 }
