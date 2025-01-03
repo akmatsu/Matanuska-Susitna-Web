@@ -26,7 +26,7 @@ export function InPageNavigation({
             ?.toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/(^-|-$)/g, '') ||
-          `heading-${Math.random().toString(36).substr(2, 9)}`;
+          `heading-${Math.random().toString(36).substring(2, 9)}`;
 
         heading.id = id;
       }

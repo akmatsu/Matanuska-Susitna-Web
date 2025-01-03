@@ -1,0 +1,49 @@
+import { ReactNode } from 'react';
+import clsx from 'clsx';
+
+export function Alert({
+  title,
+  type = 'info',
+  children,
+  hideIcon = false,
+  slim = false,
+}: {
+  title?: string;
+  type?: 'info' | 'warning' | 'success' | 'error' | 'emergency';
+  children?: ReactNode;
+  hideIcon?: boolean;
+  slim?: boolean;
+}) {
+  return (
+    <div
+      className={clsx('border-l-[0.5rem]', {
+        'border-info bg-info-lighter': type === 'info',
+        'border-warning bg-warning-lighter': type === 'warning',
+        'border-success bg-success-lighter': type === 'success',
+        'border-error bg-error-lighter': type === 'error',
+        'border-emergency bg-emergency text-white': type === 'emergency',
+      })}
+    >
+      <div className={clsx('flex', { 'px-5 py-4': !slim, 'px-5 py-2': slim })}>
+        {!hideIcon && (
+          <span
+            className={clsx('iconify mr-2', {
+              'size-8': !!title,
+              'size-6': !title,
+              '-mt-1': !!title,
+              'mdi--information': type === 'info',
+              'mdi--alert': type === 'warning',
+              'mdi--check-circle': type === 'success',
+              'mdi--alert-circle': type === 'error',
+              'mdi--alert-octagon': type === 'emergency',
+            })}
+          ></span>
+        )}
+        <div>
+          {title && <h4 className="mb-2 leading-none">{title}</h4>}
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
