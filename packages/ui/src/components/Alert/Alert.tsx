@@ -40,7 +40,9 @@ export function Alert({
           ></span>
         )}
         <div>
-          {title && <h4 className="mb-2 leading-none">{title}</h4>}
+          {title && (
+            <h4 className="mb-2 leading-none font-bold text-xl">{title}</h4>
+          )}
           {children}
         </div>
       </div>
