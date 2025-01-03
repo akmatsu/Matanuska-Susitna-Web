@@ -27,12 +27,7 @@ export function Footer({
   return (
     <footer>
       <div className="px-4 py-5">
-        <Link
-          href="#"
-          className="underline text-blue-600 hover:text-black visited:text-purple-900"
-        >
-          Return to top
-        </Link>
+        <Link href="#">Return to top</Link>
       </div>
       <nav>
         <ul className="flex gap-8 p-4 bg-base-lightest flex-wrap">
@@ -53,7 +48,9 @@ export function Footer({
         <Link href={homeHref} className="flex items-center gap-2">
           <div className="flex items-center gap-2">
             <img src={orgLogo} alt={orgLogoAlt} className="size-20" />
-            <span className="sm:text-2xl font-bold">{orgName}</span>
+            <span className="sm:text-2xl font-bold no-underline text-base-darkest">
+              {orgName}
+            </span>
           </div>
         </Link>
         <div className="flex flex-col items-end gap-4">
@@ -65,7 +62,7 @@ export function Footer({
                 className="bg-gray-20 size-12 flex items-center justify-center"
               >
                 <span
-                  className={clsx('iconify size-10', {
+                  className={clsx('iconify size-10 text-base-darkest', {
                     'mdi--facebook': link.label === 'Facebook',
                     'mdi--twitter': link.label === 'Twitter',
                     'mdi--youtube': link.label === 'YouTube',
@@ -77,16 +74,10 @@ export function Footer({
             ))}
           </div>
           <div className="flex gap-8 flex-wrap">
-            <Link
-              href={`tel:${orgPhone}`}
-              className="underline visited:text-purple-900"
-            >
+            <Link className="text-base-darkest" href={`tel:${orgPhone}`}>
               {orgPhone}
             </Link>
-            <Link
-              href={contactHref}
-              className="underline visited:text-purple-900"
-            >
+            <Link className="text-base-darkest" href={contactHref}>
               Contact Us
             </Link>
           </div>

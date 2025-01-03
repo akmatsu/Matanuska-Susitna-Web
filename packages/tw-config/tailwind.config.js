@@ -1,5 +1,6 @@
 import { addIconSelectors } from '@iconify/tailwind';
 import typography from '@tailwindcss/typography';
+import plugin from 'tailwindcss/plugin';
 
 const uswdsColors = {
   'red-cool-10': '#f3e1e4',
@@ -506,34 +507,6 @@ const uswdsColors = {
   'gray-warm-70': '#454540',
   'gray-warm-80': '#2e2e2a',
   'gray-warm-90': '#171716',
-
-  'info-lighter': '#e7f6f8',
-  'info-light': '#99deea',
-  info: '#00bde3',
-  'info-dark': '#009ec1',
-  'info-darker': '#2e6276',
-  'error-lighter': '#f4e3db',
-  'error-light': '#f39268',
-  error: '#d54309',
-  'error-dark': '#b50909',
-  'error-darker': '#6f3331',
-  'warning-lighter': '#faf3d1',
-  'warning-light': '#fee685',
-  warning: '#ffbe2e',
-  'warning-dark': '#e5a000',
-  'warning-darker': '#936f38',
-  'success-lighter': '#ecf3ec',
-  'success-light': '#70e17b',
-  success: '#00a91c',
-  'success-dark': '#008817',
-  'success-darker': '#216e1f',
-  'disabled-lighter': '#c9c9c9',
-  'disabled-light': '#919191',
-  disabled: '#757575',
-  'disabled-dark': '#454545',
-  'disabled-darker': '#1b1b1b',
-  emergency: '#9c3d10',
-  'emergency-dark': '#332d29',
 };
 
 /** @type {import('tailwindcss').Config} */
@@ -628,5 +601,65 @@ module.exports = {
       },
     },
   },
-  plugins: [addIconSelectors(['mdi']), typography],
+  plugins: [
+    addIconSelectors(['mdi']),
+    typography,
+    plugin(({ addBase, theme, addComponents }) => {
+      addBase({
+        a: {
+          color: theme('colors.primary'),
+          textDecoration: 'underline',
+          '&:hover': {
+            color: theme('colors.primary-dark'),
+          },
+          '&:focus': {
+            outline: 'none',
+            '--tw-ring-offset-width': '4px',
+            '--tw-ring-color': `${theme('colors.blue-40v')}`,
+            '--tw-ring-offset-shadow':
+              'var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)',
+            '--tw-ring-shadow':
+              'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+            '--tw-ring-opacity': '1',
+            'box-shadow':
+              'var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)',
+          },
+          '&:visited': {
+            color: theme('colors.purple-900'),
+          },
+        },
+        button: {
+          '&:focus': {
+            outline: 'none',
+            '--tw-ring-offset-width': '4px',
+            '--tw-ring-color': `${theme('colors.blue-40v')}`,
+            '--tw-ring-offset-shadow':
+              'var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)',
+            '--tw-ring-shadow':
+              'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+            '--tw-ring-opacity': '1',
+            'box-shadow':
+              'var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)',
+          },
+        },
+      });
+
+      addComponents({
+        '.focus-ring': {
+          '&:focus': {
+            outline: 'none',
+            '--tw-ring-offset-width': '4px !important;',
+            '--tw-ring-color': `${theme('colors.blue-40v')} !important;`,
+            '--tw-ring-offset-shadow':
+              'var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;',
+            '--tw-ring-shadow':
+              'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;',
+            '--tw-ring-opacity': '1 !important;',
+            'box-shadow':
+              'var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000) !important;',
+          },
+        },
+      });
+    }),
+  ],
 };

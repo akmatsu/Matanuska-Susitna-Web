@@ -47,7 +47,7 @@ export function Header({
   return (
     <header className="bg-white min-h-12 lg:min-h-20 flex items-center justify-between pl-4 lg:pr-4 shadow-md">
       <div className="flex items-center justify-between w-full min-h-full">
-        <NavLink href={homeHref}>
+        <NavLink href={homeHref} className="no-underline text-base-darkest">
           <div className="flex items-center gap-2">
             <img
               src={orgLogo}
@@ -73,7 +73,7 @@ export function Header({
             {navItems.map(({ label, href }) => (
               <li key={href}>
                 <NavLink
-                  className="py-4 text-sm font-bold text-base-darker focus-ring hover:border-b-4 hover:border-primary transition-colors hover:text-primary"
+                  className="py-4 text-sm font-bold text-base-darker hover:border-b-4 hover:border-primary hover:text-primary transition-colors no-underline"
                   href={href}
                 >
                   {label}
