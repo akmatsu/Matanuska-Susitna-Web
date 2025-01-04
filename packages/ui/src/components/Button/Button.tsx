@@ -57,7 +57,7 @@ export function Button<T extends React.ElementType = 'button'>({
       disabled={disabled}
       aria-disabled={disabled}
       className={clsx(
-        'leading-none focus-ring text-center flex items-center justify-center no-underline',
+        'leading-none focus-ring text-center flex items-center justify-center no-underline transition-colors active:transition-none',
         {
           shadow,
           // Rounded corners group

@@ -628,6 +628,16 @@ module.exports = {
             color: theme('colors.purple-900'),
           },
         },
+        body: {
+          color: theme('colors.base-darkest'),
+          background: theme('colors.white'),
+        },
+        // '@media (prefers-color-scheme:dark)': {
+        //   body: {
+        //     color: theme('colors.base-lightest'),
+        //     background: theme('colors.base-darkest'),
+        //   },
+        // },
         button: {
           '&:focus': {
             outline: 'none',
