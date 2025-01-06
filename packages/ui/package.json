@@ -53,6 +53,7 @@
     "react-dom": "^18.3.1"
   },
   "dependencies": {
+    "@arcgis/core": "^4.31.6",
     "@fontsource-variable/public-sans": "^5.1.1",
     "@fontsource-variable/roboto-mono": "^5.1.0",
     "@fontsource/source-sans-pro": "^5.1.0",
