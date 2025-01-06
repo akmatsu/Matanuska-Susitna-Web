@@ -1,9 +1,21 @@
+import { Meetings, SearchListItem } from '@/components';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import {
   GET_COMMUNITY_META_QUERY,
   GET_COMMUNITY_QUERY,
 } from '@/utils/apollo/queries/getCommunity';
+import {
+  LinkCard,
+  CardBody,
+  CardHeader,
+  CardTitle,
+  Hero,
+  Card,
+  Search,
+} from '@matsugov/ui';
 import { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export async function generateMetadata({
   params,
@@ -35,7 +47,7 @@ export default async function Community({
 }: {
   params: { slug: string };
 }) {
-  const { data } = await getClient().query({
+  const { data, errors } = await getClient().query({
     query: GET_COMMUNITY_QUERY,
     variables: {
       where: { slug: params.slug },
@@ -68,22 +80,96 @@ export default async function Community({
     return position || '50% 50%';
   }
 
+  if (errors) {
+    return (
+      <div>
+        There was an error
+        {errors.map((error) => {
+          return <div key={error.message}>{error.message}</div>;
+        })}
+      </div>
+    );
+  }
+
   return (
-    <>
-      <section
-        className="usa-hero display-flex flex-column flex-justify-center flex-align-center text-black text-center"
-        aria-label="introduction"
-        style={{
-          backgroundImage: `url(${getImageBaseUrl(community.heroImage)})`,
-          backgroundPosition: getPosition(community.heroImage),
-          height: '300px',
-        }}
-      ></section>
-      {/* <section className="usa-section">
-        <GridContainer>
-          <MarkdownRenderer>{data?.community?.body}</MarkdownRenderer>
-        </GridContainer>
-      </section> */}
-    </>
+    <div>
+      <Hero
+        position={getPosition(community.heroImage)}
+        image={getImageBaseUrl(community.heroImage)}
+      ></Hero>
+      <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-12 gap-16">
+        <div className="col-span-8 flex flex-col gap-16">
+          <div>
+            <h1 className="mb-4 text-6xl font-bold">{community.title}</h1>
+            <p>{community.description}</p>
+          </div>
+
+          <section>
+            <h2 className="mb-4 text-3xl font-bold">Services</h2>
+            <ul className="grid grid-cols-2 gap-4">
+              {community.services.map((service) => (
+                <LinkCard
+                  as="li"
+                  linkAs={Link}
+                  href={`/services/${service.slug}`}
+                  className="h-full"
+                >
+                  <CardHeader>
+                    <CardTitle>{service.title}</CardTitle>
+                  </CardHeader>
+                  <CardBody>
+                    <p className="truncate">{service.description}</p>
+                  </CardBody>
+                </LinkCard>
+              ))}
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="mb-4 text-3xl font-bold">Events</h2>
+            <Meetings />
+          </section>
+        </div>
+        <div className="col-span-4 flex flex-col gap-4">
+          <section>
+            <h3 className="text-2xl font-bold mb-4">Map</h3>
+            <div className="bg-base-dark w-full aspect-square"></div>
+          </section>
+
+          <section>
+            <h3 className="text-2xl font-bold">Districts</h3>
+            <ul>
+              {community.districts.map((district) => (
+                <LinkCard
+                  as="li"
+                  key={district.slug}
+                  className="my-2"
+                  href={`/districts/${district.slug}`}
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="flex flex-col gap-4">
+                      <CardHeader>
+                        <CardTitle>{district.title}</CardTitle>
+                      </CardHeader>
+                      <CardBody>
+                        <div>
+                          <p>{district.description}</p>
+                        </div>
+                      </CardBody>
+                    </div>
+                    <div className="pr-6">
+                      <img
+                        src={district.photo?.file.url}
+                        className="rounded-full size-20"
+                      />
+                    </div>
+                  </div>
+                </LinkCard>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
   );
 }

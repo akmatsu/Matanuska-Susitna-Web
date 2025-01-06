@@ -15,24 +15,23 @@ export function Meetings() {
   }[] = [
     {
       date: Date.now(),
-      location: '350 E Dahlia Ave, Assembly Chambers',
-      title: 'Abbreviated Plat',
+      location: '123 N Example Ave, Earth',
+      title: 'Nulla consectetur ad dolore',
     },
     {
       date: Date.now(),
-      location:
-        'Lower Level Conference Room, 350 E Dahlia Ave, Palmer, AK 99645, USA',
-      title: 'Agriculture Advisory Board',
+      location: 'Somewhere, 123 E Example St, SomeCity, ST 12345, USA',
+      title: 'Incididunt in enim et ad velit',
     },
     {
       date: Date.now(),
-      location: '680 N Seward Meridian Parkway, Wasilla Casey L',
-      title: 'Local Emergency Planning Committee',
+      location: '123 N Example St, SomeCity',
+      title: 'Ea consequat incididunt',
     },
     {
       date: Date.now(),
-      location: 'Latitude 62, Talkeetna',
-      title: 'Chase Community Council',
+      location: 'Latitude 62, SomeWhere',
+      title: 'Nulla sint sunt.',
     },
   ];
 

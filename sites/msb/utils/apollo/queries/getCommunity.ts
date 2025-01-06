@@ -14,6 +14,7 @@ export interface GetCommunityData {
     id: string;
     title: string;
     body: string;
+    description: string;
     mapId?: string | null;
     heroImage?: string | null;
     services: {
@@ -28,6 +29,17 @@ export interface GetCommunityData {
       phone: string;
       email: string;
     }[];
+    districts: {
+      title: string;
+      slug: string;
+      description?: string;
+      memberName?: string;
+      photo?: {
+        file: {
+          url: string
+        }
+      }
+    }[]
   };
 }
 
@@ -53,11 +65,11 @@ export const GET_COMMUNITY_QUERY: TypedDocumentNode<
   GetCommunityData,
   GetCommunityVariables
 > = gql`
-  query GetCommunity($where: CommunityWhereUniqueInput!) {
+  query Community($where: CommunityWhereUniqueInput!) {
     community(where: $where) {
-      body
       id
       title
+      description
       mapId
       heroImage
       services {
@@ -71,6 +83,17 @@ export const GET_COMMUNITY_QUERY: TypedDocumentNode<
         name
         phone
         email
+      }
+      districts {
+        slug
+        title
+        description
+        memberName
+        photo {
+          file {
+            url
+          }
+        }
       }
     }
   }

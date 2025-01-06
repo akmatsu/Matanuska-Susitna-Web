@@ -101,7 +101,6 @@ model Service {
   editorNotes      String      @default("")
 
   @@index([title])
-  @@index([description])
   @@index([ownerId])
   @@index([primaryContactId])
 }
@@ -127,7 +126,6 @@ model Community {
   updatedAt   DateTime?          @default(now()) @updatedAt
 
   @@index([title])
-  @@index([description])
   @@index([ownerId])
 }
 
@@ -151,7 +149,6 @@ model AssemblyDistrict {
   from_Community_districts Community[] @relation("Community_districts")
 
   @@index([title])
-  @@index([description])
   @@index([ownerId])
   @@index([photoId])
 }
@@ -182,7 +179,6 @@ model Image {
   from_AssemblyDistrict_photo AssemblyDistrict[] @relation("AssemblyDistrict_photo")
 
   @@index([title])
-  @@index([description])
 }
 
 model Document {

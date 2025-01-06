@@ -34,13 +34,14 @@ export function LinkCard({
   linkAs = 'a',
   href,
   children,
-
+  className,
   ...props
 }: {
   children: React.ReactNode;
   href: string;
   as?: React.ElementType;
   linkAs?: React.ElementType;
+  className?: string;
 }) {
   const Component = as;
   const LinkComponent = linkAs;
@@ -49,7 +50,10 @@ export function LinkCard({
     <Component {...props}>
       <LinkComponent
         href={href}
-        className="text-black overflow-hidden no-underline rounded-t bg-base-lightest border-b-primary border-b-4 hover:bg-base-lighter cursor-pointer transition-colors active:bg-base-light active:transition-none flex flex-col gap-4"
+        className={clsx(
+          'text-black overflow-hidden no-underline rounded-t bg-base-lightest border-b-primary border-b-4 hover:bg-base-lighter cursor-pointer transition-colors active:bg-base-light active:transition-none flex flex-col gap-4',
+          className,
+        )}
       >
         {children}
       </LinkComponent>

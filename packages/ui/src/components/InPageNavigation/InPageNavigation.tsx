@@ -17,6 +17,8 @@ export function InPageNavigation({
       document.querySelector('.prose')?.querySelectorAll('h2, h3') || [],
     );
 
+    console.log(elements);
+
     // Ensure each heading has an ID
     elements.forEach((heading) => {
       if (!heading.id) {

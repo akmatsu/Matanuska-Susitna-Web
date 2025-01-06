@@ -166,7 +166,6 @@ export function titleAndDescription(opts?: {
       ui: {
         displayMode: 'textarea',
       },
-      isIndexed: true,
     }),
   };
 }
