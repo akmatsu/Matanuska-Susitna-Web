@@ -12,6 +12,7 @@ import {
   Hero,
   Card,
   Search,
+  Map,
 } from '@matsugov/ui';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -133,7 +134,15 @@ export default async function Community({
         <div className="col-span-4 flex flex-col gap-4">
           <section>
             <h3 className="text-2xl font-bold mb-4">Map</h3>
-            <div className="bg-base-dark w-full aspect-square"></div>
+            <div className="aspect-[1/1] w-full overflow-hidden border rounded">
+              <Map
+                layerId="cc6808c179cc4f3ba282814afdc3882c"
+                layerUrl="https://maps.matsugov.us/map/rest/services/OpenData/Administrative_Communities/FeatureServer"
+                layerOpacity={0.5}
+                itemKey="CC_NAME"
+                itemId={community.title.toUpperCase()}
+              />
+            </div>
           </section>
 
           <section>
