@@ -41,9 +41,9 @@ export function Meetings() {
   }
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         {meetings.map((meeting) => (
-          <Card className="h-full justify-between">
+          <Card as="li" className="h-full" key={meeting.title}>
             <CardHeader>
               <CardTitle>{meeting.title}</CardTitle>
               <span className="font-body-sm">{formatDate(meeting.date)}</span>
@@ -56,7 +56,7 @@ export function Meetings() {
             </CardFooter>
           </Card>
         ))}
-      </div>
+      </ul>
       <div className="flex flex-row justify-center items-center w-full">
         <Button big>View all</Button>
       </div>

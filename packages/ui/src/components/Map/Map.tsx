@@ -1,10 +1,21 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import GISMap from '@arcgis/core/Map';
-import MapView from '@arcgis/core/views/MapView';
-import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
-import VectorTileLayer from '@arcgis/core/layers/VectorTileLayer';
+import { useEffect, useRef, useState } from 'react';
+import type MapView from '@arcgis/core/views/MapView';
+import type FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+
+const isBrowser = () => typeof window !== 'undefined';
+const hasResiveObserver = () => isBrowser() && 'ResizeObserver' in window;
+
+async function ensureResizeObserver() {
+  if (isBrowser() && !hasResiveObserver()) {
+    const { default: ResizeObserver } = await import(
+      'resize-observer-polyfill'
+    );
+
+    window.ResizeObserver = ResizeObserver;
+  }
+}
 
 export function Map({
   layerId = 'cc6808c179cc4f3ba282814afdc3882c',
@@ -23,44 +34,63 @@ export function Map({
 }) {
   const mapRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<MapView | null>(null);
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    const initMap = async () => {
+      if (!mapRef.current) return;
 
-    const map = new GISMap();
+      await ensureResizeObserver();
 
-    const view = new MapView({
-      container: mapRef.current,
-      map: map,
-    });
+      const [
+        { default: GISMap },
+        { default: MapView },
+        { default: FeatureLayer },
+        { default: VectorTileLayer },
+      ] = await Promise.all([
+        import('@arcgis/core/Map'),
+        import('@arcgis/core/views/MapView'),
+        import('@arcgis/core/layers/FeatureLayer'),
+        import('@arcgis/core/layers/VectorTileLayer'),
+      ]);
 
-    const layer = new FeatureLayer({
-      url: layerUrl,
-      id: layerId,
-      opacity: Number(layerOpacity),
-    });
+      const map = new GISMap();
 
-    const tileLayer = new VectorTileLayer({
-      url: tileLayerUrl,
-    });
+      const view = new MapView({
+        container: mapRef.current,
+        map: map,
+      });
 
-    map.add(tileLayer);
-    map.add(layer);
+      const layer = new FeatureLayer({
+        url: layerUrl,
+        id: layerId,
+        opacity: Number(layerOpacity),
+      });
 
-    viewRef.current = view;
+      const tileLayer = new VectorTileLayer({
+        url: tileLayerUrl,
+      });
 
-    return () => {
-      if (view) {
-        view.destroy();
-      }
+      map.add(tileLayer);
+      map.add(layer);
+
+      viewRef.current = view;
+      setInitialized(true);
+
+      return () => {
+        if (view) {
+          view.destroy();
+        }
+      };
     };
+    initMap();
   }, [tileLayerUrl, layerUrl, layerId]);
 
   useEffect(() => {
-    if (itemId) {
+    if (itemId && initialized) {
       filterDistrict();
     }
-  }, [itemId, itemKey, layerOpacity]);
+  }, [itemId, itemKey, layerOpacity, initialized]);
 
   async function filterDistrict() {
     const map = viewRef.current?.map;

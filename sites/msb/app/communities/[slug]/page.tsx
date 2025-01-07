@@ -1,22 +1,17 @@
-import { Meetings, SearchListItem } from '@/components';
+import { Meetings } from '@/components';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import {
   GET_COMMUNITY_META_QUERY,
   GET_COMMUNITY_QUERY,
 } from '@/utils/apollo/queries/getCommunity';
-import {
-  LinkCard,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Hero,
-  Card,
-  Search,
-  Map,
-} from '@matsugov/ui';
+import { LinkCard, CardBody, CardHeader, CardTitle, Hero } from '@matsugov/ui';
 import { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const Map = dynamic(() => import('@matsugov/ui').then((mod) => mod.Map), {
+  ssr: false,
+});
 
 export async function generateMetadata({
   params,
