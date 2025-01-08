@@ -24,7 +24,7 @@ export function Search({
 }: SearchProps) {
   return (
     <form role="search" className={className} onSubmit={onSubmit}>
-      <div className="flex items-center w-full shadow">
+      <div className="flex items-center w-full shadow-md">
         <TextField
           label="Search"
           showLabel={false}
@@ -34,6 +34,7 @@ export function Search({
           defaultValue={defaultValue}
           rounded="left"
           fill={true}
+          shadow={false}
         />
         <Button
           type="submit"

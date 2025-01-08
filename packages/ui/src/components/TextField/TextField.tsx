@@ -34,14 +34,14 @@ export function TextField({
       </Label>
       <Input
         className={clsx(
-          'border border-base h-10 px-2 focus:outline-none focus:ring-4 focus:ring-blue-40v w-full',
+          'border border-base-lighter h-10 px-2 focus:outline-none focus:ring-4 focus:ring-blue-40v w-full',
           {
             'rounded-none': !rounded || rounded === 'none',
             rounded: rounded === true,
             'rounded-full': rounded === 'pill',
             'rounded-l': rounded === 'left',
             'rounded-r': rounded === 'right',
-            shadow: shadow,
+            'shadow-md': shadow,
           },
 
           className,

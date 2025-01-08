@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { LinkCard } from './Card';
+import { CardBody, CardHeader, CardTitle, LinkCard } from './Card';
 import { Button } from '../Button';
 
 const meta = {
@@ -17,11 +17,12 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     href: 'https://example.com',
-    title: 'Link Card Title',
-    titleAs: 'h4',
     children: (
       <>
-        <div>
+        <CardHeader>
+          <CardTitle>Link Card Title</CardTitle>
+        </CardHeader>
+        <CardBody>
           <p>
             This card is a clickable link that navigates to another page. Click
             anywhere on the card to visit the linked page.
@@ -30,7 +31,7 @@ export const Default: Story = {
             The entire card acts as a large click target, improving
             accessibility and user experience.
           </p>
-        </div>
+        </CardBody>
       </>
     ),
   },
