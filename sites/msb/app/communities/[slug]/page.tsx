@@ -13,11 +13,12 @@ const Map = dynamic(() => import('@matsugov/ui').then((mod) => mod.Map), {
   ssr: false,
 });
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const { data } = await getClient().query({
     query: GET_COMMUNITY_META_QUERY,
     variables: {
@@ -38,11 +39,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function Community({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function Community(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+) {
+  const params = await props.params;
   const { data, errors } = await getClient().query({
     query: GET_COMMUNITY_QUERY,
     variables: {

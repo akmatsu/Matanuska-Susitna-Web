@@ -9,7 +9,8 @@ import {
   ThreeColumnLayout,
 } from '@/components';
 
-export default function Communities({ searchParams }: PageProps) {
+export default async function Communities(props: PageProps) {
+  const searchParams = await props.searchParams;
   const { page = '1', search = '' }: { page?: string; search?: string } =
     searchParams;
 

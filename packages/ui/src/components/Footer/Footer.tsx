@@ -1,3 +1,4 @@
+import React from 'react';
 import { appConfig } from '@matsugov/app-config';
 import clsx from 'clsx';
 

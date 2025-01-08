@@ -25,5 +25,11 @@ export default defineConfig({
     },
   },
 
-  plugins: [react(), preserveDirectives(), dts()],
+  plugins: [
+    react({
+      jsxRuntime: 'classic',
+    }),
+    preserveDirectives(),
+    dts(),
+  ],
 });
