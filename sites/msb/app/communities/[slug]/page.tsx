@@ -1,4 +1,5 @@
 import { Meetings } from '@/components';
+import { MapWrapper } from '@/components/MapWrapper';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import {
   GET_COMMUNITY_META_QUERY,
@@ -7,17 +8,10 @@ import {
 import { LinkCard, CardBody, CardHeader, CardTitle, Hero } from '@matsugov/ui';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 
-const Map = dynamic(() => import('@matsugov/ui').then((mod) => mod.Map), {
-  ssr: false,
-});
-
-export async function generateMetadata(
-  props: {
-    params: Promise<{ slug: string }>;
-  }
-): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const params = await props.params;
   const { data } = await getClient().query({
     query: GET_COMMUNITY_META_QUERY,
@@ -39,11 +33,9 @@ export async function generateMetadata(
   };
 }
 
-export default async function Community(
-  props: {
-    params: Promise<{ slug: string }>;
-  }
-) {
+export default async function Community(props: {
+  params: Promise<{ slug: string }>;
+}) {
   const params = await props.params;
   const { data, errors } = await getClient().query({
     query: GET_COMMUNITY_QUERY,
@@ -111,6 +103,7 @@ export default async function Community(
                   linkAs={Link}
                   href={`/services/${service.slug}`}
                   className="h-full"
+                  key={service.id}
                 >
                   <CardHeader>
                     <CardTitle>{service.title}</CardTitle>
@@ -132,7 +125,7 @@ export default async function Community(
           <section>
             <h3 className="text-2xl font-bold mb-4">Map</h3>
             <div className="aspect-[1/1] w-full overflow-hidden border rounded">
-              <Map
+              <MapWrapper
                 layerId="cc6808c179cc4f3ba282814afdc3882c"
                 layerUrl="https://maps.matsugov.us/map/rest/services/OpenData/Administrative_Communities/FeatureServer"
                 layerOpacity={0.5}

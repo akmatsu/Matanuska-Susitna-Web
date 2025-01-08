@@ -9,11 +9,9 @@ import { Metadata } from 'next';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Button, InPageNavigation } from '@matsugov/ui';
 
-export async function generateMetadata(
-  props: {
-    params: Promise<{ slug: string }>;
-  }
-): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const params = await props.params;
   const { data } = await getClient().query({
     query: GET_SERVICE_META_QUERY,
@@ -35,11 +33,9 @@ export async function generateMetadata(
   };
 }
 
-export default async function Service(
-  props: {
-    params: Promise<{ slug: string }>;
-  }
-) {
+export default async function Service(props: {
+  params: Promise<{ slug: string }>;
+}) {
   const params = await props.params;
   const { data } = await getClient().query({
     query: GET_SERVICE_QUERY,

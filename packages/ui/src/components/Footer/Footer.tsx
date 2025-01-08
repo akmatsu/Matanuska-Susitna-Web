@@ -33,10 +33,9 @@ export function Footer({
       <nav>
         <ul className="flex gap-8 p-4 bg-base-lightest flex-wrap">
           {navItems.map((item) => (
-            <li>
+            <li key={item.label}>
               <Link
                 href={item.href}
-                key={item.label}
                 className="font-bold underline visited:text-purple-900"
               >
                 {item.label}
