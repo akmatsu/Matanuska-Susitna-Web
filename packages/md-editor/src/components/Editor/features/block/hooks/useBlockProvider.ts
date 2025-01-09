@@ -4,7 +4,7 @@ import { MutableRefObject, useEffect, useRef } from 'react';
 
 export function useBlockProvider(contentRef: MutableRefObject<HTMLDivElement>) {
   const [loading, get] = useInstance();
-  const provider = useRef<BlockProvider>();
+  const provider = useRef<BlockProvider>(null);
 
   useEffect(() => {
     const div = contentRef.current;

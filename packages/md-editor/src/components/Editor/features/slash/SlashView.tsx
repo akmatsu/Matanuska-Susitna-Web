@@ -63,7 +63,9 @@ export const SlashView = () => {
       {items.map((item, index) => (
         <button
           key={crypto.randomUUID()}
-          ref={(el) => (buttonsRef.current[index] = el)}
+          ref={(el) => {
+            buttonsRef.current[index] = el;
+          }}
           className={`btn ${selectedIndex === index ? 'btn--focused' : 'btn--default'}`}
           onClick={(e) => e.preventDefault()}
           onMouseDown={(e) => e.preventDefault()}

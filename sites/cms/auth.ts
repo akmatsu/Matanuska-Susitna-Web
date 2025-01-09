@@ -125,7 +125,8 @@ export function passportMiddleware(
     }),
     async (req, res) => {
       if (!req.user) {
-        return res.status(401).send('Authentication failed');
+        res.status(401).send('Authentication failed');
+        return;
       }
 
       const context = await commonContext.withRequest(req, res);

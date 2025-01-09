@@ -15,7 +15,8 @@ export const metadata: Metadata = {
   description: 'Services offered by the Matanuska-Susitna Borough',
 };
 
-export default function Services({ searchParams }: PageProps) {
+export default async function Services(props: PageProps) {
+  const searchParams = await props.searchParams;
   const { page = '1', search = '' }: { page?: string; search?: string } =
     searchParams;
 

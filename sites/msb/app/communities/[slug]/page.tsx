@@ -1,27 +1,18 @@
-import { Meetings, SearchListItem } from '@/components';
+import { Meetings } from '@/components';
+import { MapWrapper } from '@/components/MapWrapper';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import {
   GET_COMMUNITY_META_QUERY,
   GET_COMMUNITY_QUERY,
 } from '@/utils/apollo/queries/getCommunity';
-import {
-  LinkCard,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Hero,
-  Card,
-  Search,
-} from '@matsugov/ui';
+import { LinkCard, CardBody, CardHeader, CardTitle, Hero } from '@matsugov/ui';
 import { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const { data } = await getClient().query({
     query: GET_COMMUNITY_META_QUERY,
     variables: {
@@ -42,11 +33,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function Community({
-  params,
-}: {
-  params: { slug: string };
+export default async function Community(props: {
+  params: Promise<{ slug: string }>;
 }) {
+  const params = await props.params;
   const { data, errors } = await getClient().query({
     query: GET_COMMUNITY_QUERY,
     variables: {
@@ -113,6 +103,7 @@ export default async function Community({
                   linkAs={Link}
                   href={`/services/${service.slug}`}
                   className="h-full"
+                  key={service.id}
                 >
                   <CardHeader>
                     <CardTitle>{service.title}</CardTitle>
@@ -133,7 +124,15 @@ export default async function Community({
         <div className="col-span-4 flex flex-col gap-4">
           <section>
             <h3 className="text-2xl font-bold mb-4">Map</h3>
-            <div className="bg-base-dark w-full aspect-square"></div>
+            <div className="aspect-[1/1] w-full overflow-hidden border rounded">
+              <MapWrapper
+                layerId="cc6808c179cc4f3ba282814afdc3882c"
+                layerUrl="https://maps.matsugov.us/map/rest/services/OpenData/Administrative_Communities/FeatureServer"
+                layerOpacity={0.5}
+                itemKey="CC_NAME"
+                itemId={community.title.toUpperCase()}
+              />
+            </div>
           </section>
 
           <section>

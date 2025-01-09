@@ -13,11 +13,11 @@ import clsx from 'clsx';
 import { gql, useQuery } from '@keystone-6/core/admin-ui/apollo';
 
 export function DocCollectionSearchView() {
-  const content = useRef<HTMLDivElement>();
-  const tooltipProvider = useRef<TooltipProvider>();
+  const content = useRef<HTMLDivElement>(null);
+  const tooltipProvider = useRef<TooltipProvider>(null);
   const { view, prevState } = usePluginViewContext();
   const [loading] = useInstance();
-  const input = useRef<HTMLInputElement>();
+  const input = useRef<HTMLInputElement>(null);
 
   const [search, setSearch] = useState<string>('');
   const [selectedCollection, setSelectedCollection] = useState<{

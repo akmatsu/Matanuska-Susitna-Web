@@ -19,7 +19,7 @@ export function Card({
     <Component {...props}>
       <div
         className={clsx(
-          'bg-white rounded border-2 border-base-lighter flex flex-col gap-4',
+          'bg-white rounded border border-base-lighter flex flex-col gap-4 shadow-md',
           className,
         )}
       >
@@ -51,7 +51,7 @@ export function LinkCard({
       <LinkComponent
         href={href}
         className={clsx(
-          'text-black overflow-hidden no-underline rounded-t bg-base-lightest border-b-primary border-b-4 hover:bg-base-lighter cursor-pointer transition-colors active:bg-base-light active:transition-none flex flex-col gap-4',
+          'text-black overflow-hidden no-underline rounded-t bg-base-lightest border-b-primary border-b-4 hover:bg-base-lighter cursor-pointer transition-colors active:bg-base-light active:transition-none flex flex-col gap-4 shadow-md border border-base-lighter',
           className,
         )}
       >
