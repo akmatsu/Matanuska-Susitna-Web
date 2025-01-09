@@ -22,7 +22,7 @@ If you want an overview of all the features Keystone offers, check out our [feat
 
 We've set you up with an [SQLite database](https://keystonejs.com/docs/apis/config#sqlite) for ease-of-use. If you're wanting to use PostgreSQL, you can!
 
-Just change the `db` property on line 16 of the Keystone file [./keystone.ts](./keystone.ts) to
+Just change the `db` property on line 16 of the Keystone file [./keystone.ts](./keystone.ts)
 
 ```typescript
 db: {
