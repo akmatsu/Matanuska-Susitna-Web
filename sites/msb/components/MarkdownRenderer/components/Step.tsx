@@ -7,7 +7,7 @@ export function Step({ children }: { children: ReactNode }) {
 
   React.Children.forEach(children, (child, index) => {
     if (index === 0 && React.isValidElement(child)) {
-      title = child.props.children || title;
+      title = (child.props as { children: string[] }).children[0] || title;
       return;
     }
     remainingChildren.push(child);

@@ -4,20 +4,7 @@ import remarkGfm from 'remark-gfm';
 import remarkDirective from 'remark-directive';
 import { Process, Step, DocCollectionWrapper } from './components';
 import remarkDirectiveRehype from 'remark-directive-rehype';
-import { ReactNode } from 'react';
 import { ActionButtonWrapper } from './components/PrimaryActionButton';
-
-declare global {
-  namespace JSX {
-    // this merges with the existing intrinsic elements, adding 'my-custom-tag' and its props
-    interface IntrinsicElements {
-      process: { children: ReactNode };
-      step: { children: ReactNode };
-      'doc-collection': { id: string };
-      'primary-action-button': { label: string };
-    }
-  }
-}
 
 export function MarkdownRenderer(props: {
   title?: string;
