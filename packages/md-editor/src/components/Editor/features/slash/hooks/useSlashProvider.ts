@@ -13,7 +13,7 @@ export function useSlashProvider(
   onShow?: () => void,
   onHide?: () => void,
 ) {
-  const slashProvider = useRef<SlashProvider>();
+  const slashProvider = useRef<SlashProvider>(null);
   const { view, prevState } = usePluginViewContext();
   const [loading, get] = useInstance();
   const [filter, setFilter] = useState<string>('');

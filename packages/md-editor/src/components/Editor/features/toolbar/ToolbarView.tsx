@@ -13,7 +13,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 
 export const ToolbarView = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const tooltipProvider = useRef<TooltipProvider>();
+  const tooltipProvider = useRef<TooltipProvider>(null);
 
   const { view, prevState } = usePluginViewContext();
   const [loading, get] = useInstance();

@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useTransition } from 'react';
 import type MapView from '@arcgis/core/views/MapView';
 import type FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+import clsx from 'clsx';
 
 const isBrowser = () => typeof window !== 'undefined';
 const hasResiveObserver = () => isBrowser() && 'ResizeObserver' in window;
@@ -35,9 +36,12 @@ export function Map({
   const mapRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<MapView | null>(null);
   const [initialized, setInitialized] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    const initMap = async () => {
+    let view: MapView;
+
+    startTransition(async () => {
       if (!mapRef.current) return;
 
       await ensureResizeObserver();
@@ -56,7 +60,7 @@ export function Map({
 
       const map = new GISMap();
 
-      const view = new MapView({
+      view = new MapView({
         container: mapRef.current,
         map: map,
       });
@@ -76,14 +80,13 @@ export function Map({
 
       viewRef.current = view;
       setInitialized(true);
+    });
 
-      return () => {
-        if (view) {
-          view.destroy();
-        }
-      };
+    return () => {
+      if (view) {
+        view.destroy();
+      }
     };
-    initMap();
   }, [tileLayerUrl, layerUrl, layerId]);
 
   useEffect(() => {
@@ -127,5 +130,19 @@ export function Map({
     }
   }
 
-  return <div className="w-full h-full" ref={mapRef}></div>;
+  return (
+    <>
+      <div
+        className={clsx('w-full h-full', {
+          hidden: isPending,
+        })}
+        ref={mapRef}
+      ></div>
+      {isPending && (
+        <div className="w-full h-full flex items-center justify-center">
+          <span className="iconify mdi--loading animate-spin" />
+        </div>
+      )}
+    </>
+  );
 }
