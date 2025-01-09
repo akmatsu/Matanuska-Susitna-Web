@@ -1,7 +1,7 @@
 import '@/styles/index.css';
-// import '@matsugov/ui/styles';
+
 import type { Metadata } from 'next';
-import { ApolloWrapper } from './ApolloWrapper';
+import { ApolloWrapper } from '@msb/js-sdk';
 import { SiteInfo } from '@/components/Header/SiteInfo';
 import { FeedbackButton } from '@/components/FeedbackButton';
 import { Header, Footer } from '@matsugov/ui';
@@ -21,7 +21,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ApolloWrapper>
+        <ApolloWrapper apiUrl={process.env.NEXT_PUBLIC_API_URL || ''}>
           <SiteInfo />
           <Header navItems={primaryNav} navLinkAs={Link} />
           <main id="main-content" className="position-relative">

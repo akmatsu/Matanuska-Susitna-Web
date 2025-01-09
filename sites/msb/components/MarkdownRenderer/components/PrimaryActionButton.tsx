@@ -1,6 +1,6 @@
 'use client';
 import { LinkButton } from '@/components/LinkButton';
-import { GET_SERVICE_QUERY } from '@/utils/apollo/queries/GetService';
+import { GET_SERVICE_QUERY } from '@msb/js-sdk';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 

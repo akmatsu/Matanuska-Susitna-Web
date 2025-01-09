@@ -1,4 +1,4 @@
-import { GET_ALERTS_QUERY } from '@/utils/apollo/queries/getAlerts';
+import { GET_ALERTS_QUERY } from '@msb/js-sdk';
 import { MarkdownRenderer } from './MarkdownRenderer/MarkdownRenderer';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Alert } from '@matsugov/ui';

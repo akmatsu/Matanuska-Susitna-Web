@@ -1,6 +1,4 @@
-import { registerApolloClient } from '@apollo/experimental-nextjs-app-support';
-import { makeClient } from './makeClient';
+import { registerClient } from '@msb/js-sdk';
 
-export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
-  return makeClient();
-});
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
+export const { getClient, query, PreloadQuery } = registerClient(API_URL);

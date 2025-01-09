@@ -4,11 +4,16 @@ import {
   InMemoryCache,
 } from '@apollo/experimental-nextjs-app-support';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-export function makeClient(opts?: { fetchOptions?: RequestInit }) {
+export function makeClient({
+  apiEndpoint = '/api/graphql',
+  ...opts
+}: {
+  fetchOptions?: RequestInit;
+  apiUrl: string;
+  apiEndpoint?: string;
+}) {
   const httpLink = new HttpLink({
-    uri: `${API_URL}/api/graphql`,
+    uri: `${opts?.apiUrl}${apiEndpoint}`,
 
     /**
      * (this does not work if you are rendering your page with `export const dynamic = "force-static"`)
