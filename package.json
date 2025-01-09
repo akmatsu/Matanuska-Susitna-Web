@@ -2,7 +2,7 @@
   "name": "craft-dmeo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "msb:dev": "pnpm turbo run dev --filter=msb",
     "msb:build": "pnpm turbo run build --filter=msb",
@@ -16,7 +16,9 @@
     "cms:start": "pnpm turbo run start --filter=cms",
     "cms:fix": "pnpm turbo run fix --filter=cms",
     "cms:migrate": "pnpm turbo run migrate --filter=cms",
-    "cms:generate": "pnpm turbo run migrations --filter=cms"
+    "wid:dev": "pnpm turbo run dev --filter=widgets",
+    "wid:build": "pnpm turbo run build --filter=widgets",
+    "wid:start": "pnpm turbo run start --filter=widgets"
   },
   "keywords": [],
   "author": "",
@@ -32,10 +34,6 @@
     "typescript-eslint": "^8.19.1"
   },
   "packageManager": "pnpm@9.15.0",
-  "dependencies": {
-    "@apollo/client": "^3.12.4",
-    "@apollo/experimental-nextjs-app-support": "^0.11.7"
-  },
   "resolutions": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
