@@ -9,4 +9,3 @@ export * from './Search';
 export * from './Pagination';
 export * from './ProcessList';
 export * from './InPageNavigation';
-export * from './Map';

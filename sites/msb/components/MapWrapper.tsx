@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { ComponentProps } from 'react';
 
-const Map = dynamic(() => import('@matsugov/ui').then((mod) => mod.Map), {
+const Map = dynamic(() => import('@matsugov/ui/map').then((mod) => mod.Map), {
   ssr: false,
   loading: () => <div>Loading...</div>,
 });

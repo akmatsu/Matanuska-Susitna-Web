@@ -4,7 +4,9 @@
   "description": "",
   "type": "module",
   "sideEffects": false,
+  "main": "./src/index.ts",
   "exports": {
+    ".": "./src/index.ts",
     "./components": "./src/components/index.ts",
     "./queries": "./src/queries/index.ts",
     "./client": "./src/client/index.ts",

@@ -4,6 +4,11 @@
   "description": "",
   "type": "module",
   "main": "src/index.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./map": "./src/map.ts"
+  },
   "scripts": {
     "test": "vitest",
     "storybook": "storybook dev -p 6006",
