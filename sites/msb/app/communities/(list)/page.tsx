@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { PageProps } from '@/.next/types/app/page';
-import { GET_COMMUNITIES_QUERY } from '@msb/js-sdk';
+import { GET_COMMUNITIES_QUERY } from '@msb/js-sdk/queries';
 import { Button } from '@matsugov/ui';
 import {
   SearchList,

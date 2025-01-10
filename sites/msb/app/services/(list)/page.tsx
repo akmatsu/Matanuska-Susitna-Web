@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Button } from '@matsugov/ui';
 import { Metadata } from 'next';
 import { PageProps } from '@/.next/types/app/page';
-import { GET_SERVICES_QUERY } from '@msb/js-sdk';
+import { GET_SERVICES_QUERY } from '@msb/js-sdk/queries';
 import {
   SearchList,
   SearchListInput,

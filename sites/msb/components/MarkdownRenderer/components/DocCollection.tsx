@@ -1,5 +1,5 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { GET_DOC_COLLECTION_QUERY } from '@msb/js-sdk';
+import { GET_DOC_COLLECTION_QUERY } from '@msb/js-sdk/queries';
 import Link from 'next/link';
 
 export async function DocCollection({ id }: { id: string }) {

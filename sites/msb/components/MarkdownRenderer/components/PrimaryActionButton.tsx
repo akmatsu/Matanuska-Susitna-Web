@@ -1,7 +1,7 @@
 'use client';
 import { LinkButton } from '@/components/LinkButton';
-import { GET_SERVICE_QUERY } from '@msb/js-sdk';
-import { useQuery } from '@apollo/client';
+import { useQuery } from '@msb/js-sdk/apollo';
+import { GET_SERVICE_QUERY } from '@msb/js-sdk/queries';
 import { useParams } from 'next/navigation';
 
 export function PrimaryActionButton({

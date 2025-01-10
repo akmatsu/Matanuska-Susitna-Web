@@ -1,7 +1,10 @@
 import { Meetings } from '@/components';
 import { MapWrapper } from '@/components/MapWrapper';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { GET_COMMUNITY_META_QUERY, GET_COMMUNITY_QUERY } from '@msb/js-sdk';
+import {
+  GET_COMMUNITY_META_QUERY,
+  GET_COMMUNITY_QUERY,
+} from '@msb/js-sdk/queries';
 import { LinkCard, CardBody, CardHeader, CardTitle, Hero } from '@matsugov/ui';
 import { Metadata } from 'next';
 import Link from 'next/link';

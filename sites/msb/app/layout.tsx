@@ -1,7 +1,7 @@
 import '@/styles/index.css';
 
 import type { Metadata } from 'next';
-import { ApolloWrapper } from '@msb/js-sdk';
+import { ApolloWrapper } from '@msb/js-sdk/components';
 import { SiteInfo } from '@/components/Header/SiteInfo';
 import { FeedbackButton } from '@/components/FeedbackButton';
 import { Header, Footer } from '@matsugov/ui';

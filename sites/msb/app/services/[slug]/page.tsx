@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ThreeColumnLayout, MarkdownRenderer, ContactCard } from '@/components';
-import { GET_SERVICE_META_QUERY, GET_SERVICE_QUERY } from '@msb/js-sdk';
+import { GET_SERVICE_META_QUERY, GET_SERVICE_QUERY } from '@msb/js-sdk/queries';
 import { Metadata } from 'next';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Button, InPageNavigation } from '@matsugov/ui';
