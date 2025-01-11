@@ -7,7 +7,7 @@
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
-    "./map": "./src/map.ts"
+    "./map": "./src/components/Map/index.ts"
   },
   "scripts": {
     "test": "vitest",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.3",
     "@matsugov/tw-config": "workspace:^",
+    "@msb/js-sdk": "workspace:^",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",
     "@storybook/addon-onboarding": "^8.4.7",
