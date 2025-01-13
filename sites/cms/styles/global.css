@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .markdown-editor-text-area {
   resize: none !important;
   overflow: hidden !important;

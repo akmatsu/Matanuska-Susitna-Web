@@ -17,6 +17,10 @@ export const appConfig = {
     port: process.env.WEB_PORT ? parseInt(process.env.WEB_PORT) : 3333,
     originHost: process.env.ORIGIN_HOST,
   },
+  widgetsUrl:
+    process.env.NODE_ENV === 'production'
+      ? 'https://widgets.matsu.gov'
+      : 'http://localhost:3001',
   siteUrl:
     process.env.NODE_ENV === 'production'
       ? 'https://matsu.gov'
