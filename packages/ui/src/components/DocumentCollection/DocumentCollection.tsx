@@ -6,7 +6,7 @@ import clsx from 'clsx';
 export function DocumentCollection({
   collection,
   linkAs = 'a',
-  linkStyle = 'link',
+  linkStyle = 'button',
   hideTitle = false,
   centerLabel = true,
 }: {
@@ -27,6 +27,7 @@ export function DocumentCollection({
             linkAs={linkAs}
             linkStyle={linkStyle}
             centerLabel={centerLabel}
+            key={document.id}
           />
         ))}
       </ul>
@@ -55,7 +56,8 @@ function Document({
   const fileType = document.file.filename.split('.').pop()?.toUpperCase();
   const isInternal =
     document.file.url.includes('matsu.gov') ||
-    document.file.url.includes('matsugov.us');
+    document.file.url.includes('matsugov.us') ||
+    document.file.url.includes('msb-cms-documents.s3.us-west-2.amazonaws.com');
 
   return (
     <li key={document.id} className="my-2">
@@ -64,7 +66,8 @@ function Document({
         className={clsx('flex items-center gap-1 flex-nowrap', {
           'justify-between': !centerLabel,
         })}
-        target="_parent"
+        target={isInternal ? '_parent' : '_blank'}
+        download={fileType === 'PDF' ? undefined : document.file.filename}
       >
         <span className="truncate">
           <span className="truncate">
