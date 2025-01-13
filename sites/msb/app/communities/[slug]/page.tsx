@@ -4,7 +4,7 @@ import { getClient } from '@/utils/apollo/ApolloClient';
 import {
   GET_COMMUNITY_META_QUERY,
   GET_COMMUNITY_QUERY,
-} from '@/utils/apollo/queries/getCommunity';
+} from '@msb/js-sdk/queries';
 import { LinkCard, CardBody, CardHeader, CardTitle, Hero } from '@matsugov/ui';
 import { Metadata } from 'next';
 import Link from 'next/link';

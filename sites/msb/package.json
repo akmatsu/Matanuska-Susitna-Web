@@ -9,9 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.12.4",
-    "@apollo/experimental-nextjs-app-support": "^0.11.7",
     "@matsugov/ui": "workspace:^",
+    "@msb/js-sdk": "workspace:^",
     "next": "15.1.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",

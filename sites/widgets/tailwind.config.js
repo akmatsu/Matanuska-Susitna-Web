@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-const twConfig = require('@matsugov/tw-config');
+import twConfig from '@matsugov/tw-config';
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const config = {
   presets: [twConfig],
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -16,3 +16,5 @@ module.exports = {
   },
   plugins: [],
 };
+
+export default config;
