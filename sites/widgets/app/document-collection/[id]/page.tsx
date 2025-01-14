@@ -13,7 +13,7 @@ export default async function Page({
   const { id } = await params;
   const { link_style, center_label, hide_title } = await searchParams;
 
-  const centerLabel = center_label === 'true';
+  const doNotCenterLabel = center_label === 'false';
   const hideTitle = hide_title === 'true';
 
   const { data, loading, error } = await getClient().query({
@@ -38,7 +38,7 @@ export default async function Page({
       ) : data.documentCollection ? (
         <DocumentCollection
           linkAs={Link}
-          centerLabel={centerLabel}
+          centerLabel={!doNotCenterLabel}
           linkStyle={link_style as 'button' | 'link' | undefined}
           collection={data.documentCollection}
           hideTitle={hideTitle}

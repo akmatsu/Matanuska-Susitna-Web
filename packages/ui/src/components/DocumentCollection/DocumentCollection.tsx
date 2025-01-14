@@ -71,7 +71,7 @@ function Document({
       >
         <span className="truncate">
           <span className="truncate">
-            {fileType === 'PDF' ? 'View' : 'Download'} {document.title} {''}
+            {document.title} {''}
           </span>
           <span className="text-xs">
             ({fileType} | {formatFileSize(document.file.filesize)})
