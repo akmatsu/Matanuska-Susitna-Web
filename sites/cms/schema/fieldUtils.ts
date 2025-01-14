@@ -38,13 +38,18 @@ export const timestamps: BaseFields<any> = {
   }),
 };
 
-export function liveUrl(listKey: string) {
+export function liveUrl(
+  listKey: string,
+  identifierKey = 'slug',
+  baseUrl = appConfig.siteUrl,
+  ignorePubDates = false,
+) {
   return virtual({
     field: graphql.field({
       type: graphql.String,
       resolve(baseItem: any) {
-        baseItem as { slug: string };
-        return `${appConfig.siteUrl}/${listKey}/${baseItem.slug}`;
+        baseItem as { [key: string]: string };
+        return `${baseUrl}/${listKey}/${baseItem[identifierKey]}`;
       },
     }),
     ui: {
@@ -55,6 +60,8 @@ export function liveUrl(listKey: string) {
       itemView: {
         fieldPosition: 'sidebar',
         fieldMode(args) {
+          if (ignorePubDates) return 'read';
+
           const now = getDatetimeISOString();
           const pubAt = args.item.publishAt
             ? getDatetimeISOString(args.item.publishAt as Date)
@@ -65,6 +72,31 @@ export function liveUrl(listKey: string) {
           if (pubAt <= now && (!unpubAt || unpubAt >= now)) return 'read';
           else return 'hidden';
         },
+      },
+    },
+  });
+}
+
+export function embed(
+  listKey: string,
+  identifierKey = 'slug',
+  baseUrl = appConfig.siteUrl,
+) {
+  return virtual({
+    field: graphql.field({
+      type: graphql.String,
+      resolve(baseItem: any) {
+        baseItem as { [key: string]: string };
+        return `${baseUrl}/${listKey}/${baseItem[identifierKey]}`;
+      },
+    }),
+    ui: {
+      views: './customFields/embed/views.tsx',
+      itemView: {
+        fieldPosition: 'sidebar',
+      },
+      createView: {
+        fieldMode: 'hidden',
       },
     },
   });
