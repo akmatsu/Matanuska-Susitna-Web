@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useTransition } from 'react';
 import type MapView from '@arcgis/core/views/MapView';
 import type FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+// import type SimpleFillSymbol from '@arcgis/core/symbols/SimpleFillSymbol';
 import clsx from 'clsx';
 
 const isBrowser = () => typeof window !== 'undefined';
@@ -25,10 +26,16 @@ export function Map({
   tileLayerUrl = 'https://tiles.arcgis.com/tiles/fX5IGselyy1TirdY/arcgis/rest/services/MSB_Streets_standard/VectorTileServer',
   itemId,
   itemKey,
+  layerFillColor,
+  layerOutlineColor,
+  layerOutlineWidth,
 }: {
   layerId?: string;
   layerUrl?: string;
   layerOpacity?: number | string;
+  layerFillColor?: string;
+  layerOutlineColor?: string;
+  layerOutlineWidth?: string | number;
   tileLayerUrl?: string;
   itemId?: string;
   itemKey?: string;
@@ -51,11 +58,15 @@ export function Map({
         { default: MapView },
         { default: FeatureLayer },
         { default: VectorTileLayer },
+        { default: SimpleFillSymbol },
+        { default: SimpleRenderer },
       ] = await Promise.all([
         import('@arcgis/core/Map'),
         import('@arcgis/core/views/MapView'),
         import('@arcgis/core/layers/FeatureLayer'),
         import('@arcgis/core/layers/VectorTileLayer'),
+        import('@arcgis/core/symbols/SimpleFillSymbol'),
+        import('@arcgis/core/renderers/SimpleRenderer'),
       ]);
 
       const map = new GISMap();
@@ -65,10 +76,23 @@ export function Map({
         map: map,
       });
 
+      const fillSymbol = !!layerFillColor
+        ? new SimpleFillSymbol({
+            color: layerFillColor,
+            outline: {
+              color: layerOutlineColor,
+              width: layerOutlineWidth,
+            },
+          })
+        : undefined;
+
       const layer = new FeatureLayer({
         url: layerUrl,
         id: layerId,
         opacity: Number(layerOpacity),
+        ...(fillSymbol && {
+          renderer: new SimpleRenderer({ symbol: fillSymbol }),
+        }),
       });
 
       const tileLayer = new VectorTileLayer({
