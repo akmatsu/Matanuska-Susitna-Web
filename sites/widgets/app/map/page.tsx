@@ -15,6 +15,7 @@ export default async function Page({
     layer_fill_color,
     layer_outline_color,
     layer_outline_width,
+    animate,
   } = await searchParams;
 
   function processColor(
@@ -51,6 +52,7 @@ export default async function Page({
         layerFillColor={layerFillColor as string | undefined}
         layerOutlineColor={layerOutlineColor as string | undefined}
         layerOutlineWidth={layerOutlineWidth as string | number | undefined}
+        animate={animate === 'true'}
       />
     </div>
   );

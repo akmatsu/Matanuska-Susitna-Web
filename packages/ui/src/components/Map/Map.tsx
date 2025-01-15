@@ -29,6 +29,7 @@ export function Map({
   layerFillColor,
   layerOutlineColor,
   layerOutlineWidth,
+  animate,
 }: {
   layerId?: string;
   layerUrl?: string;
@@ -39,6 +40,7 @@ export function Map({
   tileLayerUrl?: string;
   itemId?: string;
   itemKey?: string;
+  animate?: boolean;
 }) {
   const mapRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<MapView | null>(null);
@@ -144,7 +146,7 @@ export function Map({
 
           if (view && geometry) {
             view
-              .goTo(geometry)
+              .goTo(geometry, { animate: animate })
               .catch((error) =>
                 console.error('Error zooming to geometry', error),
               );
