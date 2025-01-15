@@ -33,8 +33,8 @@ export function Map({
   layerId?: string;
   layerUrl?: string;
   layerOpacity?: number | string;
-  layerFillColor?: string;
-  layerOutlineColor?: string;
+  layerFillColor?: string | [number, number, number, number];
+  layerOutlineColor?: string | [number, number, number, number];
   layerOutlineWidth?: string | number;
   tileLayerUrl?: string;
   itemId?: string;

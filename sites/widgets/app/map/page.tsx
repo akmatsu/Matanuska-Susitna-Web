@@ -17,10 +17,24 @@ export default async function Page({
     layer_outline_width,
   } = await searchParams;
 
-  const layerFillColor = layer_fill_color ? `#${layer_fill_color}` : undefined;
-  const layerOutlineColor = layer_fill_color
-    ? `#${layer_outline_color}`
-    : undefined;
+  function processColor(
+    color: string | number[] | string[] | undefined,
+  ): number[] | string | undefined {
+    if (typeof color === 'string' && color.includes(',')) {
+      // Split the comma-separated string into an array and convert to numbers
+      return color.split(',').map((value) => Number(value));
+    }
+    if (Array.isArray(color)) {
+      return color.map(function (value) {
+        return typeof value === 'string' ? Number(value) : value;
+      });
+    }
+
+    return color ? `#${color}` : undefined;
+  }
+
+  const layerFillColor = processColor(layer_fill_color);
+  const layerOutlineColor = processColor(layer_outline_color);
   const layerOutlineWidth = layer_outline_width
     ? Number(layer_outline_width)
     : undefined;
