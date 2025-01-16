@@ -1,6 +1,6 @@
 import axios from 'axios';
-import GISRequest from '@arcgis/core/request.js';
+import { request } from '@esri/arcgis-rest-request';
 
 export async function handler(): Promise<void> {
-  console.log(GISRequest);
+  
 }
