@@ -1,0 +1,21 @@
+{
+  "name": "gis-indexer",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@tsconfig/recommended": "^1.0.8"
+  },
+  "dependencies": {
+    "@arcgis/core": "^4.31.6",
+    "axios": "^1.7.9"
+  }
+}
