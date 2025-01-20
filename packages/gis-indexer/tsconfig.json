@@ -3,5 +3,9 @@
   "extends": [
     "@tsconfig/recommended/tsconfig.json",
     "@tsconfig/node20/tsconfig.json"
-  ]
+  ],
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    "outDir": "dist"
+  }
 }

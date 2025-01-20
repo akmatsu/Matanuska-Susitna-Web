@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "dev": "node ./dist/handler.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "@esri/arcgis-rest-request": "^4.2.3",
-    "axios": "^1.7.9"
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.5"
   }
 }
