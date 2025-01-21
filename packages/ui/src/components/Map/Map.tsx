@@ -1,23 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState, useTransition } from 'react';
-import type MapView from '@arcgis/core/views/MapView';
-import type FeatureLayer from '@arcgis/core/layers/FeatureLayer';
-// import type SimpleFillSymbol from '@arcgis/core/symbols/SimpleFillSymbol';
+
 import clsx from 'clsx';
-
-const isBrowser = () => typeof window !== 'undefined';
-const hasResiveObserver = () => isBrowser() && 'ResizeObserver' in window;
-
-async function ensureResizeObserver() {
-  if (isBrowser() && !hasResiveObserver()) {
-    const { default: ResizeObserver } = await import(
-      'resize-observer-polyfill'
-    );
-
-    window.ResizeObserver = ResizeObserver;
-  }
-}
+import { filterAndZoom, initializeMap } from './utils';
 
 export function Map({
   layerId = 'cc6808c179cc4f3ba282814afdc3882c',
@@ -42,119 +28,47 @@ export function Map({
   itemKey?: string;
   animate?: boolean;
 }) {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const viewRef = useRef<MapView | null>(null);
+  const root = useRef<HTMLDivElement>(null);
+  const viewRef = useRef<__esri.MapView | null>(null);
   const [initialized, setInitialized] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    let view: MapView;
-
     startTransition(async () => {
-      if (!mapRef.current) return;
-
-      await ensureResizeObserver();
-
-      const [
-        { default: GISMap },
-        { default: MapView },
-        { default: FeatureLayer },
-        { default: VectorTileLayer },
-        { default: SimpleFillSymbol },
-        { default: SimpleRenderer },
-      ] = await Promise.all([
-        import('@arcgis/core/Map'),
-        import('@arcgis/core/views/MapView'),
-        import('@arcgis/core/layers/FeatureLayer'),
-        import('@arcgis/core/layers/VectorTileLayer'),
-        import('@arcgis/core/symbols/SimpleFillSymbol'),
-        import('@arcgis/core/renderers/SimpleRenderer'),
-      ]);
-
-      const map = new GISMap();
-
-      view = new MapView({
-        container: mapRef.current,
-        map: map,
-      });
-
-      const fillSymbol = !!layerFillColor
-        ? new SimpleFillSymbol({
-            color: layerFillColor,
-            outline: {
-              color: layerOutlineColor,
-              width: layerOutlineWidth,
-            },
-          })
-        : undefined;
-
-      const layer = new FeatureLayer({
-        url: layerUrl,
-        id: layerId,
-        opacity: Number(layerOpacity),
-        ...(fillSymbol && {
-          renderer: new SimpleRenderer({ symbol: fillSymbol }),
-        }),
-      });
-
-      const tileLayer = new VectorTileLayer({
-        url: tileLayerUrl,
-      });
-
-      map.add(tileLayer);
-      map.add(layer);
-
-      viewRef.current = view;
-      setInitialized(true);
+      initializeMap(
+        {
+          root,
+          view: viewRef,
+          layerFillColor,
+          layerOutlineColor,
+          layerOutlineWidth,
+          layerUrl,
+          layerId,
+          tileLayerUrl,
+          layerOpacity,
+        },
+        () => setInitialized(true),
+      );
     });
 
     return () => {
-      if (view) {
-        view.destroy();
+      if (viewRef.current) {
+        viewRef.current.destroy();
       }
     };
   }, [tileLayerUrl, layerUrl, layerId]);
 
   useEffect(() => {
-    if (itemId && initialized) {
-      filterDistrict();
+    if (itemId && itemKey && viewRef.current && initialized) {
+      filterAndZoom({
+        view: viewRef.current,
+        layerId,
+        itemId,
+        itemKey,
+        animate,
+      });
     }
   }, [itemId, itemKey, layerOpacity, initialized]);
-
-  async function filterDistrict() {
-    const map = viewRef.current?.map;
-    const view = viewRef.current;
-    const layer = map?.findLayerById(layerId) as FeatureLayer;
-
-    if (layer && itemId) {
-      const isNumeric = !isNaN(Number(itemId));
-      const formattedValue = isNumeric ? itemId : `'${itemId}'`;
-
-      layer.definitionExpression =
-        itemId === 'all' ? '' : `${itemKey} = ${formattedValue}`;
-
-      if (itemId !== 'all' && itemKey) {
-        const query = layer.createQuery();
-
-        query.where = `${itemKey} = ${formattedValue}`;
-        query.returnGeometry = true;
-
-        const response = await layer.queryFeatures(query);
-
-        if (response.features.length) {
-          const geometry = response.features[0].geometry;
-
-          if (view && geometry) {
-            view
-              .goTo(geometry, { animate: animate })
-              .catch((error) =>
-                console.error('Error zooming to geometry', error),
-              );
-          }
-        }
-      }
-    }
-  }
 
   return (
     <>
@@ -162,7 +76,7 @@ export function Map({
         className={clsx('w-full h-full', {
           hidden: isPending,
         })}
-        ref={mapRef}
+        ref={root}
       ></div>
       {isPending && (
         <div className="w-full h-full flex items-center justify-center">
