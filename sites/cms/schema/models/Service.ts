@@ -18,6 +18,7 @@ import {
   generalItemAccess,
   generalOperationAccess,
 } from '../access/utils';
+import { TYPESENSE_CLIENT, TYPESENSE_COLLECTIONS } from '../../typesense';
 
 export const Service: ListConfig<any> = list({
   access: {
@@ -108,5 +109,45 @@ export const Service: ListConfig<any> = list({
         displayMode: 'textarea',
       },
     }),
+  },
+  hooks: {
+    async afterOperation({ operation, context, item }) {
+      if (operation === 'create') {
+        try {
+          // Do something after a new item is created
+        } catch (error: any) {
+          console.error('Error creating Typesense document:', error);
+        }
+      }
+
+      if (operation === 'update') {
+        try {
+          const service = await context.query.Service.findOne({
+            where: { id: item.id.toString() },
+            query:
+              'id title description body slug owner {name} actionLabel publishAt tags {name}',
+          });
+          const document = {
+            id: service.id,
+            title: service.title,
+            description: service.description || '',
+            body: service.body || '',
+            slug: service.slug,
+            owner: service.owner.name || '',
+            actionLabel: service.actionLabel || '',
+            publishedAt: service.publishAt
+              ? Math.floor(new Date(service.publishAt).getTime() / 1000)
+              : 0,
+            tags: service.tags.map((tag: { name: string }) => tag.name),
+          };
+
+          TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.SERVICES)
+            .documents()
+            .upsert(document);
+        } catch (error: any) {
+          console.error('Error updating Typesense document:', error);
+        }
+      }
+    },
   },
 });
