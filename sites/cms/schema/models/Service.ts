@@ -111,16 +111,20 @@ export const Service: ListConfig<any> = list({
     }),
   },
   hooks: {
-    async afterOperation({ operation, context, item }) {
-      if (operation === 'create') {
+    async beforeOperation({ operation, context, item }) {
+      if (operation === 'delete') {
         try {
-          // Do something after a new item is created
+          TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.SERVICES)
+            .documents(item.id.toString())
+            .delete();
         } catch (error: any) {
-          console.error('Error creating Typesense document:', error);
+          console.error('Error deleting Typesense document', error);
         }
       }
+    },
 
-      if (operation === 'update') {
+    async afterOperation({ operation, context, item }) {
+      if (operation === 'update' || operation === 'create') {
         try {
           const service = await context.query.Service.findOne({
             where: { id: item.id.toString() },

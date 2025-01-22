@@ -16,13 +16,11 @@ const ServiceCollection: CollectionCreateSchema = {
   ],
 };
 
-async function indexServiceCollection() {
+async function createServiceCollection(collection: CollectionCreateSchema) {
   try {
-    const exists = await TYPESENSE_CLIENT.collections(
-      ServiceCollection.name,
-    ).exists();
+    const exists = await TYPESENSE_CLIENT.collections(collection.name).exists();
     if (!exists) {
-      await TYPESENSE_CLIENT.collections().create(ServiceCollection);
+      await TYPESENSE_CLIENT.collections().create(collection);
       console.log(`Collection ${collection.name} created successfully`);
     }
   } catch (error: any) {
@@ -34,4 +32,4 @@ async function indexServiceCollection() {
   }
 }
 
-indexServiceCollection();
+createServiceCollection(ServiceCollection);
