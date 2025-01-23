@@ -1,54 +1,42 @@
-import {
-  ApolloClient,
-  gql,
-  InMemoryCache,
-} from '@keystone-6/core/admin-ui/apollo';
 import { parseServicesTypeSenseSchema } from '../schema/models/Service';
 import { TYPESENSE_CLIENT, TYPESENSE_COLLECTIONS } from '../typesense';
+import { getContext } from '@keystone-6/core/context';
+import config from '../keystone';
+import * as PrismaModule from '.prisma/client';
 
 async function importServices() {
-  const client = new ApolloClient({
-    uri: 'http://localhost:3333/api/graphql',
-    cache: new InMemoryCache(),
-  });
+  const context = getContext(config, PrismaModule);
 
   console.log('Fetching services...');
-  const services = await client.query({
-    query: gql`
-      query Service {
-        services {
-          id
-          title
-          description
-          body
-          slug
-          actionLabel
-          publishAt
-          tags {
-            name
-          }
-        }
-      }
-    `,
+  const services = await context.prisma.service.findMany({
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      description: true,
+      body: true,
+      actionLabel: true,
+      publishAt: true,
+      tags: {
+        select: {
+          name: true,
+        },
+      },
+    },
   });
+  console.log('Services found:', services.length);
 
-  console.log('Formatting services...');
-  const formatted = services.data.services.map((service: any) =>
+  console.log('Formatting Services...');
+  const formatted = services.map((service: any) =>
     parseServicesTypeSenseSchema(service),
   );
 
-  console.log('Importing services...');
+  console.log('Importing services to Typesense...');
+  await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.SERVICES)
+    .documents()
+    .import(formatted, { action: 'upsert' });
 
-  formatted.forEach(async (service: any) => {
-    try {
-      console.log('Importing service', service.id);
-      await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.SERVICES)
-        .documents()
-        .upsert(service);
-    } catch (error: any) {
-      console.error('Error importing service', error);
-    }
-  });
+  console.log('Services imported successfully.');
 }
 
 importServices();

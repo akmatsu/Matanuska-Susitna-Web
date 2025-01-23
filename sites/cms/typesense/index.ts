@@ -26,12 +26,12 @@ export const COLLECTIONS: CollectionCreateSchema[] = [
     fields: [
       { name: 'id', type: 'string' },
       { name: 'title', type: 'string' },
-      { name: 'description', type: 'string' },
-      { name: 'body', type: 'string' },
       { name: 'slug', type: 'string' },
-      { name: 'action_label', type: 'string' },
-      { name: 'publish_at', type: 'int64[]' },
-      { name: 'tags', type: 'string[]' },
+      { name: 'description', type: 'string', optional: true },
+      { name: 'body', type: 'string', optional: true },
+      { name: 'action_label', type: 'string', optional: true },
+      { name: 'published_at', type: 'int64', optional: true },
+      { name: 'tags', type: 'string[]', optional: true },
     ],
   },
 ];

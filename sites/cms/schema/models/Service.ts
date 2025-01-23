@@ -20,15 +20,15 @@ import {
 } from '../access/utils';
 import { TYPESENSE_CLIENT, TYPESENSE_COLLECTIONS } from '../../typesense';
 
-export async function parseServicesTypeSenseSchema(item: any) {
+export function parseServicesTypeSenseSchema(item: any) {
   return {
     id: item.id,
     title: item.title || '',
     description: item.description || '',
     body: item.body || '',
     slug: item.slug,
-    action_label: item.actionLabel || '',
-    published_at: item.publishAt
+    action_label: item.actionLabel,
+    publish_at: item.publishAt
       ? Math.floor(new Date(item.publishAt).getTime() / 1000)
       : 0,
     tags: item.tags.map((tag: { name: string }) => tag.name || ''),

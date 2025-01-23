@@ -9,6 +9,7 @@ import {
 } from '@keystone-6/core/types';
 import { isAdmin, isContentManager, isContributor } from './roles';
 import { belongsToGroup, isOwner } from './group';
+import 'dotenv/config';
 
 type Operation =
   | ListOperationAccessControl<AccessOperation, BaseListTypeInfo>
@@ -96,7 +97,7 @@ export const generalItemAccess: Item = {
  * Filters out unpublished items from query results from public requests.
  */
 export const filterByPubDates: Filter = {
-  query: ({ session }) => {
+  query: async ({ session }) => {
     if (session) return {};
     return {
       AND: [
