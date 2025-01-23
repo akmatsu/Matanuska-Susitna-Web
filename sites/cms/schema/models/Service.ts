@@ -20,6 +20,21 @@ import {
 } from '../access/utils';
 import { TYPESENSE_CLIENT, TYPESENSE_COLLECTIONS } from '../../typesense';
 
+export async function parseServicesTypeSenseSchema(item: any) {
+  return {
+    id: item.id,
+    title: item.title || '',
+    description: item.description || '',
+    body: item.body || '',
+    slug: item.slug,
+    action_label: item.actionLabel || '',
+    published_at: item.publishAt
+      ? Math.floor(new Date(item.publishAt).getTime() / 1000)
+      : 0,
+    tags: item.tags.map((tag: { name: string }) => tag.name || ''),
+  };
+}
+
 export const Service: ListConfig<any> = list({
   access: {
     operation: generalOperationAccess,
@@ -131,19 +146,7 @@ export const Service: ListConfig<any> = list({
             query:
               'id title description body slug owner {name} actionLabel publishAt tags {name}',
           });
-          const document = {
-            id: service.id,
-            title: service.title,
-            description: service.description || '',
-            body: service.body || '',
-            slug: service.slug,
-            owner: service.owner.name || '',
-            actionLabel: service.actionLabel || '',
-            publishedAt: service.publishAt
-              ? Math.floor(new Date(service.publishAt).getTime() / 1000)
-              : 0,
-            tags: service.tags.map((tag: { name: string }) => tag.name),
-          };
+          const document = parseServicesTypeSenseSchema(service);
 
           TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.SERVICES)
             .documents()
