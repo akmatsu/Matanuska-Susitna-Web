@@ -18,6 +18,7 @@ import {
 } from '../fieldUtils';
 import { relationship, text } from '@keystone-6/core/fields';
 import { blueHarvestImage } from '../../customFields/blueHarvestImage';
+import { TYPESENSE_CLIENT, TYPESENSE_COLLECTIONS } from '../../typesense';
 
 /*
 TODO: Fields to add
@@ -87,5 +88,51 @@ export const Community: ListConfig<any> = list({
       },
     }),
     ...timestamps,
+  },
+  hooks: {
+    async beforeOperation({ operation, item, context }) {
+      if (operation === 'delete') {
+        try {
+          await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.COMMUNITIES)
+            .documents(item.id.toString())
+            .delete();
+        } catch (error) {
+          console.error('Error deleting from Typesense index:', error);
+        }
+      }
+    },
+
+    async afterOperation({ operation, item, context }) {
+      if (operation === 'create' || operation === 'update') {
+        try {
+          const service = await context.prisma.community.findOne({
+            where: { id: item.id },
+            select: {
+              id: true,
+              title: true,
+              slug: true,
+              description: true,
+              publishAt: true,
+              tags: {
+                select: {
+                  name: true,
+                },
+              },
+              districts: {
+                select: {
+                  title: true,
+                },
+              },
+            },
+          });
+          const formatted = toSearchableObj(service);
+          await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.COMMUNITIES)
+            .documents()
+            .upsert(formatted);
+        } catch (error) {
+          console.error('Error updating Typesense index:', error);
+        }
+      }
+    },
   },
 });
