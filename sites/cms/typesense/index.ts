@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 export const TYPESENSE_COLLECTIONS = {
   SERVICES: 'services',
+  COMMUNITIES: 'communities',
 };
 
 export const TYPESENSE_CLIENT = new Typesense.Client({
@@ -32,6 +33,18 @@ export const COLLECTIONS: CollectionCreateSchema[] = [
       { name: 'action_label', type: 'string', optional: true },
       { name: 'published_at', type: 'int64', optional: true },
       { name: 'tags', type: 'string[]', optional: true },
+    ],
+  },
+  {
+    name: TYPESENSE_COLLECTIONS.COMMUNITIES,
+    fields: [
+      { name: 'id', type: 'string' },
+      { name: 'title', type: 'string' },
+      { name: 'slug', type: 'string' },
+      { name: 'description', type: 'string', optional: true },
+      { name: 'published_at', type: 'int64', optional: true },
+      { name: 'tags', type: 'string[]', optional: true },
+      { name: 'districts', type: 'string[]', optional: true },
     ],
   },
 ];

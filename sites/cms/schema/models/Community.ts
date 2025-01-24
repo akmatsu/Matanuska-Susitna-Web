@@ -36,6 +36,20 @@ SPUD(s)
 
 const pluralFieldKey = 'communities';
 
+export function toSearchableObj(item: any) {
+  return {
+    id: item.id,
+    title: item.title || '',
+    description: item.description || '',
+    slug: item.slug || '',
+    publish_at: item.publishAt || 0,
+    tags: item.tags.map((tag: { name: string }) => tag.name || ''),
+    districts: item.districts.map(
+      (district: { title: string }) => district.title || '',
+    ),
+  };
+}
+
 export const Community: ListConfig<any> = list({
   access: {
     operation: generalOperationAccess,
