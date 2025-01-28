@@ -9,6 +9,7 @@ export interface SearchProps {
   useIcon?: boolean;
   placeholder?: string;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string;
   big?: boolean;
 }
@@ -20,6 +21,7 @@ export function Search({
   useIcon = false,
   placeholder = 'Search...',
   onSubmit,
+  onChange,
   defaultValue,
 }: SearchProps) {
   return (
@@ -32,6 +34,7 @@ export function Search({
           name={name}
           placeholder={placeholder}
           defaultValue={defaultValue}
+          onChange={onChange}
           rounded="left"
           fill={true}
           shadow={false}

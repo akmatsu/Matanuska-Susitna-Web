@@ -6,10 +6,12 @@ export function PaginationButton({
   page,
   currentPage,
   as = 'a',
+  onClick,
 }: {
   page: number | string;
   currentPage: number | string;
   as?: React.ElementType;
+  onClick?: (page: string | number) => void;
 }) {
   const active = page == currentPage;
   const [href, setHref] = useState(`page=${page}`);
@@ -22,6 +24,13 @@ export function PaginationButton({
     }
   }, []);
 
+  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    if (onClick) {
+      e.preventDefault();
+      onClick(page);
+    }
+  }
+
   return (
     <Button
       as={as}
@@ -30,6 +39,8 @@ export function PaginationButton({
       href={href}
       underline
       shadow={false}
+      onClick={handleClick}
+      disabled={active}
     >
       {page}
     </Button>

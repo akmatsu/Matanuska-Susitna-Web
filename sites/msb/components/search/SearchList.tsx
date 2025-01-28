@@ -42,7 +42,7 @@ export async function SearchList({
       <h1 className="text-3xl font-bold mb-4">{title}</h1>
       {data[listKey]?.length ? (
         <>
-          <ul className="flex flex-col gap-4 mb-4">
+          <ul className="flex flex-col gap-4 mb-4" role="list">
             {data[listKey].map(
               (item: { slug: string; title: string; description: string }) => (
                 <SearchListItem key={item.slug} item={item} listKey={listKey} />
