@@ -33,7 +33,7 @@ async function importCommunities() {
   const formatted = communities.map((c: any) => toSearchableObj(c));
 
   console.log('Importing communities to Typesense...');
-  await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.COMMUNITIES)
+  await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
     .documents()
     .import(formatted, { action: 'upsert' });
 

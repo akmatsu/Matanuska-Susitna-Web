@@ -2,9 +2,22 @@ import Typesense from 'typesense';
 import { CollectionCreateSchema } from 'typesense/lib/Typesense/Collections';
 import 'dotenv/config';
 
+export type TypeSensePageDocument = {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  body?: string;
+  action_label?: string;
+  published_at?: number;
+  tags?: string[];
+  url?: string;
+  districts?: string[];
+  type?: string;
+};
+
 export const TYPESENSE_COLLECTIONS = {
-  SERVICES: 'services',
-  COMMUNITIES: 'communities',
+  PAGES: 'pages',
 };
 
 export const TYPESENSE_CLIENT = new Typesense.Client({
@@ -23,28 +36,19 @@ export const TYPESENSE_CLIENT = new Typesense.Client({
 
 export const COLLECTIONS: CollectionCreateSchema[] = [
   {
-    name: TYPESENSE_COLLECTIONS.SERVICES,
+    name: TYPESENSE_COLLECTIONS.PAGES,
     fields: [
       { name: 'id', type: 'string' },
-      { name: 'title', type: 'string' },
+      { name: 'title', type: 'string', sort: true },
       { name: 'slug', type: 'string' },
       { name: 'description', type: 'string', optional: true },
       { name: 'body', type: 'string', optional: true },
       { name: 'action_label', type: 'string', optional: true },
-      { name: 'published_at', type: 'int64', optional: true },
-      { name: 'tags', type: 'string[]', optional: true },
-    ],
-  },
-  {
-    name: TYPESENSE_COLLECTIONS.COMMUNITIES,
-    fields: [
-      { name: 'id', type: 'string' },
-      { name: 'title', type: 'string' },
-      { name: 'slug', type: 'string' },
-      { name: 'description', type: 'string', optional: true },
-      { name: 'published_at', type: 'int64', optional: true },
-      { name: 'tags', type: 'string[]', optional: true },
-      { name: 'districts', type: 'string[]', optional: true },
+      { name: 'published_at', type: 'int64', optional: true, sort: true },
+      { name: 'tags', type: 'string[]', optional: true, facet: true },
+      { name: 'url', type: 'string', optional: true },
+      { name: 'districts', type: 'string[]', optional: true, facet: true },
+      { name: 'type', type: 'string', optional: true, facet: true },
     ],
   },
 ];

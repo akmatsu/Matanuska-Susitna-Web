@@ -18,20 +18,25 @@ import {
   generalItemAccess,
   generalOperationAccess,
 } from '../access/utils';
-import { TYPESENSE_CLIENT, TYPESENSE_COLLECTIONS } from '../../typesense';
+import {
+  TYPESENSE_CLIENT,
+  TYPESENSE_COLLECTIONS,
+  TypeSensePageDocument,
+} from '../../typesense';
 
-export function parseServicesTypeSenseSchema(item: any) {
+export function serviceToSearchableObj(item: any): TypeSensePageDocument {
   return {
     id: item.id,
-    title: item.title || '',
-    description: item.description || '',
-    body: item.body || '',
+    title: item.title,
+    description: item.description,
+    body: item.body,
     slug: item.slug,
     action_label: item.actionLabel,
-    publish_at: item.publishAt
+    published_at: item.publishAt
       ? Math.floor(new Date(item.publishAt).getTime() / 1000)
-      : 0,
+      : undefined,
     tags: item.tags.map((tag: { name: string }) => tag.name || ''),
+    type: 'service',
   };
 }
 
@@ -129,7 +134,7 @@ export const Service: ListConfig<any> = list({
     async beforeOperation({ operation, context, item }) {
       if (operation === 'delete') {
         try {
-          TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.SERVICES)
+          TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
             .documents(item.id.toString())
             .delete();
         } catch (error: any) {
@@ -146,9 +151,9 @@ export const Service: ListConfig<any> = list({
             query:
               'id title description body slug owner {name} actionLabel publishAt tags {name}',
           });
-          const document = parseServicesTypeSenseSchema(service);
+          const document = serviceToSearchableObj(service);
 
-          TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.SERVICES)
+          TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
             .documents()
             .upsert(document);
         } catch (error: any) {

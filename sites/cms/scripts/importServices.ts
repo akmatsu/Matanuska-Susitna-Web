@@ -1,4 +1,4 @@
-import { parseServicesTypeSenseSchema } from '../schema/models/Service';
+import { serviceToSearchableObj } from '../schema/models/Service';
 import { TYPESENSE_CLIENT, TYPESENSE_COLLECTIONS } from '../typesense';
 import { getContext } from '@keystone-6/core/context';
 import config from '../keystone';
@@ -28,11 +28,11 @@ async function importServices() {
 
   console.log('Formatting Services...');
   const formatted = services.map((service: any) =>
-    parseServicesTypeSenseSchema(service),
+    serviceToSearchableObj(service),
   );
 
   console.log('Importing services to Typesense...');
-  await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.SERVICES)
+  await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
     .documents()
     .import(formatted, { action: 'upsert' });
 

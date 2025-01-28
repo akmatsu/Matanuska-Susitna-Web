@@ -18,7 +18,11 @@ import {
 } from '../fieldUtils';
 import { relationship, text } from '@keystone-6/core/fields';
 import { blueHarvestImage } from '../../customFields/blueHarvestImage';
-import { TYPESENSE_CLIENT, TYPESENSE_COLLECTIONS } from '../../typesense';
+import {
+  TYPESENSE_CLIENT,
+  TYPESENSE_COLLECTIONS,
+  type TypeSensePageDocument,
+} from '../../typesense';
 
 /*
 TODO: Fields to add
@@ -37,17 +41,20 @@ SPUD(s)
 
 const pluralFieldKey = 'communities';
 
-export function toSearchableObj(item: any) {
+export function toSearchableObj(item: any): TypeSensePageDocument {
   return {
     id: item.id,
     title: item.title || '',
     description: item.description || '',
     slug: item.slug || '',
-    publish_at: item.publishAt || 0,
+    published_at: item.publishAt
+      ? Math.floor(new Date(item.publishAt).getTime() / 1000)
+      : undefined,
     tags: item.tags.map((tag: { name: string }) => tag.name || ''),
     districts: item.districts.map(
       (district: { title: string }) => district.title || '',
     ),
+    type: 'community',
   };
 }
 
@@ -93,7 +100,7 @@ export const Community: ListConfig<any> = list({
     async beforeOperation({ operation, item, context }) {
       if (operation === 'delete') {
         try {
-          await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.COMMUNITIES)
+          await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
             .documents(item.id.toString())
             .delete();
         } catch (error) {
@@ -126,7 +133,7 @@ export const Community: ListConfig<any> = list({
             },
           });
           const formatted = toSearchableObj(service);
-          await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.COMMUNITIES)
+          await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
             .documents()
             .upsert(formatted);
         } catch (error) {
