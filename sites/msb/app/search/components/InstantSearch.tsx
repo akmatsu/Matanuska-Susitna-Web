@@ -8,6 +8,7 @@ import { CoreSearchBox } from './CoreSearchBox';
 import { CoreSearchHits } from './CoreSearchHit';
 import { CoreSearchPagination } from './CoreSearchPagination';
 import { CustomRefinementList } from './CoreRefinementList';
+import { LinkButton } from '@/components/LinkButton';
 
 const typesenseInstantSearchAdapter = new TypesenseInstantsearchAdapter({
   server: {
@@ -21,12 +22,6 @@ const typesenseInstantSearchAdapter = new TypesenseInstantsearchAdapter({
         protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL || 'http',
       },
     ],
-  },
-
-  filterByOptions: {
-    body: {
-      exactMatch: false,
-    },
   },
 
   additionalSearchParameters: {
@@ -65,6 +60,13 @@ export function InstantSearch() {
                 sortBy={['name', 'count']}
               />
             </DynamicWidgets>
+          </div>
+        }
+        right={
+          <div className="flex flex-col gap-4">
+            <LinkButton href="/contact" block>
+              Contact Us
+            </LinkButton>
           </div>
         }
       >
