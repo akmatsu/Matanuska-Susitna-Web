@@ -10,3 +10,5 @@ export * from './Pagination';
 export * from './ProcessList';
 export * from './InPageNavigation';
 export * from './DocumentCollection';
+export * from './Checkbox';
+export * from './Combobox';

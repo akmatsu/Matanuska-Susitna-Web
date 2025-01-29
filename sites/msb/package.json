@@ -12,14 +12,18 @@
     "@matsugov/ui": "workspace:^",
     "@msb/js-sdk": "workspace:^",
     "next": "15.1.4",
+    "pluralize": "^8.0.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
+    "react-instantsearch": "^7.15.1",
+    "react-instantsearch-nextjs": "^0.4.2",
     "react-loading-skeleton": "^3.5.0",
     "react-markdown": "^9.0.3",
     "remark-directive": "^3.0.0",
     "remark-directive-rehype": "^0.4.2",
     "remark-gfm": "^4.0.0",
-    "swiper": "^11.2.0"
+    "swiper": "^11.2.0",
+    "typesense-instantsearch-adapter": "^2.8.0"
   },
   "devDependencies": {
     "@matsugov/tw-config": "workspace:^",
@@ -27,6 +31,7 @@
     "@testing-library/react": "^16.1.0",
     "@tsconfig/next": "^2.0.3",
     "@types/node": "^22.10.5",
+    "@types/pluralize": "^0.0.33",
     "@types/react": "19.0.4",
     "@types/react-dom": "19.0.2",
     "@vitejs/plugin-react": "^4.3.4",

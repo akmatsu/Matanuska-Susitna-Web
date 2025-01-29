@@ -4,12 +4,14 @@ type PaginationProps = {
   currentPage?: number;
   totalPages?: number;
   linkAs?: React.ElementType;
+  onLinkClick: (page: string | number) => void;
 };
 
 export function Pagination({
   currentPage = 1,
   totalPages = 1,
   linkAs = 'a',
+  onLinkClick,
 }: PaginationProps) {
   const maxSlots = 3;
   const showOverflow = totalPages > maxSlots;
@@ -17,7 +19,7 @@ export function Pagination({
   let currentRange = pageList || [1];
 
   if (showOverflow) {
-    const currentPageIndex = currentPage - 1;
+    const currentPageIndex = currentPage;
     const sideSlots = (maxSlots - 1) / 2;
     const rangeStart =
       currentPageIndex === 0 ? currentPageIndex : currentPageIndex - sideSlots;
@@ -32,7 +34,12 @@ export function Pagination({
     <nav aria-label="Pagination">
       <ul className="flex gap-2 justify-center items-center">
         {currentPage >= maxSlots && showOverflow && (
-          <PaginationButton page="1" currentPage={currentPage} as={linkAs} />
+          <PaginationButton
+            page="1"
+            currentPage={currentPage}
+            as={linkAs}
+            onClick={onLinkClick}
+          />
         )}
 
         {currentPage > maxSlots && showOverflow && (
@@ -49,6 +56,7 @@ export function Pagination({
             page={page}
             currentPage={currentPage}
             as={linkAs}
+            onClick={onLinkClick}
           />
         ))}
 
@@ -65,6 +73,7 @@ export function Pagination({
             page={totalPages}
             currentPage={currentPage}
             as={linkAs}
+            onClick={onLinkClick}
           />
         )}
       </ul>

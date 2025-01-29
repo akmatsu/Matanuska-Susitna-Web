@@ -1299,6 +1299,72 @@ input DocumentCollectionCreateInput {
   editorNotes: String
 }
 
+type ApiKey {
+  id: ID!
+  name: String
+  description: String
+  token: String
+  user: User
+  expiresAt: DateTime
+}
+
+input ApiKeyWhereUniqueInput {
+  id: ID
+  token: String
+}
+
+input ApiKeyWhereInput {
+  AND: [ApiKeyWhereInput!]
+  OR: [ApiKeyWhereInput!]
+  NOT: [ApiKeyWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  description: StringFilter
+  token: StringFilter
+  user: UserWhereInput
+  expiresAt: DateTimeFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: DateTimeFilter
+}
+
+input ApiKeyOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  description: OrderDirection
+  token: OrderDirection
+  expiresAt: OrderDirection
+}
+
+input ApiKeyUpdateInput {
+  name: String
+  description: String
+  token: String
+  user: UserRelateToOneForUpdateInput
+  expiresAt: DateTime
+}
+
+input ApiKeyUpdateArgs {
+  where: ApiKeyWhereUniqueInput!
+  data: ApiKeyUpdateInput!
+}
+
+input ApiKeyCreateInput {
+  name: String
+  description: String
+  token: String
+  user: UserRelateToOneForCreateInput
+  expiresAt: DateTime
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -1377,6 +1443,12 @@ type Mutation {
   updateDocumentCollections(data: [DocumentCollectionUpdateArgs!]!): [DocumentCollection]
   deleteDocumentCollection(where: DocumentCollectionWhereUniqueInput!): DocumentCollection
   deleteDocumentCollections(where: [DocumentCollectionWhereUniqueInput!]!): [DocumentCollection]
+  createApiKey(data: ApiKeyCreateInput!): ApiKey
+  createApiKeys(data: [ApiKeyCreateInput!]!): [ApiKey]
+  updateApiKey(where: ApiKeyWhereUniqueInput!, data: ApiKeyUpdateInput!): ApiKey
+  updateApiKeys(data: [ApiKeyUpdateArgs!]!): [ApiKey]
+  deleteApiKey(where: ApiKeyWhereUniqueInput!): ApiKey
+  deleteApiKeys(where: [ApiKeyWhereUniqueInput!]!): [ApiKey]
   endSession: Boolean!
 }
 
@@ -1417,6 +1489,9 @@ type Query {
   documentCollection(where: DocumentCollectionWhereUniqueInput!): DocumentCollection
   documentCollections(where: DocumentCollectionWhereInput! = {}, orderBy: [DocumentCollectionOrderByInput!]! = [], take: Int! = 100, skip: Int! = 0, cursor: DocumentCollectionWhereUniqueInput): [DocumentCollection!]
   documentCollectionsCount(where: DocumentCollectionWhereInput! = {}): Int
+  apiKey(where: ApiKeyWhereUniqueInput!): ApiKey
+  apiKeys(where: ApiKeyWhereInput! = {}, orderBy: [ApiKeyOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ApiKeyWhereUniqueInput): [ApiKey!]
+  apiKeysCount(where: ApiKeyWhereInput! = {}): Int
   keystone: KeystoneMeta!
 }
 

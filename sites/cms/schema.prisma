@@ -28,6 +28,7 @@ model User {
   from_Community_owner          Community[]          @relation("Community_owner")
   from_AssemblyDistrict_owner   AssemblyDistrict[]   @relation("AssemblyDistrict_owner")
   from_DocumentCollection_owner DocumentCollection[] @relation("DocumentCollection_owner")
+  from_ApiKey_user              ApiKey[]             @relation("ApiKey_user")
 }
 
 model UserGroup {
@@ -205,4 +206,16 @@ model DocumentCollection {
   editorNotes String      @default("")
 
   @@index([ownerId])
+}
+
+model ApiKey {
+  id          String   @id @default(cuid())
+  name        String   @default("")
+  description String   @default("")
+  token       String   @unique @default("")
+  user        User?    @relation("ApiKey_user", fields: [userId], references: [id])
+  userId      String?  @map("user")
+  expiresAt   DateTime
+
+  @@index([userId])
 }

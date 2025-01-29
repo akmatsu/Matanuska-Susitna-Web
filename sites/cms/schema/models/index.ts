@@ -11,6 +11,7 @@ import { UserGroup } from './UserGroup';
 import { Community } from './Community';
 import { AssemblyDistrict } from './AssemblyDistrict';
 import { Image } from './Image';
+import { ApiKey } from './ApiKey';
 
 export const lists = {
   User,
@@ -25,4 +26,5 @@ export const lists = {
   Image,
   Document,
   DocumentCollection,
+  ApiKey,
 } satisfies Lists;

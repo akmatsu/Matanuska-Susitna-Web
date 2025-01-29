@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Carousel } from '../Carousel';
 import React from 'react';
 import { Hero as UIHero, Search } from '@matsugov/ui';
+import { InstantSearchAutoComplete } from '@/app/search/components/InstantSearchAutoComplete';
 
 export function Hero() {
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
@@ -31,6 +32,7 @@ export function Hero() {
       url: 'https://mapping.matsugov.us/Html5Viewer/index.html?viewer=MSB_Parcel_Viewer',
     },
   ];
+
   return (
     <Carousel
       slides={[
@@ -43,10 +45,11 @@ export function Hero() {
                 className="flex justify-center items-center"
               >
                 <div className="max-w-[500px] w-full">
-                  <Search
+                  {/* <Search
                     placeholder="Search website..."
                     onSubmit={handleSearch}
-                  />
+                  /> */}
+                  <InstantSearchAutoComplete />
                 </div>
               </UIHero>
               <section className="flex justify-center items-center bg-base-lightest py-4 px-2">

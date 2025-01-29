@@ -1,5 +1,5 @@
 import expressSession from 'express-session';
-import { Router } from 'express';
+import { RequestHandler, Router } from 'express';
 import { statelessSessions } from '@keystone-6/core/session';
 import { type KeystoneContext } from '@keystone-6/core/types';
 import { Passport } from 'passport';
@@ -11,6 +11,7 @@ import {
 
 import { type User as PrismaUser } from '.prisma/client';
 import { type TypeInfo } from '.keystone/types';
+import { appConfig } from './appConfig';
 
 export type Session = PrismaUser;
 
@@ -52,10 +53,10 @@ export function passportMiddleware(
 
   router.use(
     expressSession({
-      secret: process.env.SESSION_SECRET!,
+      secret: process.env.SESSION_SECRET! || 'default-secret',
       resave: false,
       saveUninitialized: false,
-      cookie: { secure: false },
+      cookie: { secure: appConfig.nodeEnv === 'production' },
     }),
   );
 

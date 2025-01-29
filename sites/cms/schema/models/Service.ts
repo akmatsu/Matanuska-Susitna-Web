@@ -18,6 +18,27 @@ import {
   generalItemAccess,
   generalOperationAccess,
 } from '../access/utils';
+import {
+  TYPESENSE_CLIENT,
+  TYPESENSE_COLLECTIONS,
+  TypeSensePageDocument,
+} from '../../typesense';
+
+export function serviceToSearchableObj(item: any): TypeSensePageDocument {
+  return {
+    id: item.id,
+    title: item.title,
+    description: item.description,
+    body: item.body,
+    slug: item.slug,
+    action_label: item.actionLabel,
+    published_at: item.publishAt
+      ? Math.floor(new Date(item.publishAt).getTime() / 1000)
+      : undefined,
+    tags: item.tags.map((tag: { name: string }) => tag.name || ''),
+    type: 'service',
+  };
+}
 
 export const Service: ListConfig<any> = list({
   access: {
@@ -108,5 +129,37 @@ export const Service: ListConfig<any> = list({
         displayMode: 'textarea',
       },
     }),
+  },
+  hooks: {
+    async beforeOperation({ operation, context, item }) {
+      if (operation === 'delete') {
+        try {
+          TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
+            .documents(item.id.toString())
+            .delete();
+        } catch (error: any) {
+          console.error('Error deleting Typesense document', error);
+        }
+      }
+    },
+
+    async afterOperation({ operation, context, item }) {
+      if (operation === 'update' || operation === 'create') {
+        try {
+          const service = await context.query.Service.findOne({
+            where: { id: item.id.toString() },
+            query:
+              'id title description body slug owner {name} actionLabel publishAt tags {name}',
+          });
+          const document = serviceToSearchableObj(service);
+
+          TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
+            .documents()
+            .upsert(document);
+        } catch (error: any) {
+          console.error('Error updating Typesense document:', error);
+        }
+      }
+    },
   },
 });
