@@ -1,41 +1,18 @@
 'use client';
 
-import TypesenseInstantsearchAdapter from 'typesense-instantsearch-adapter';
 import { Configure, DynamicWidgets } from 'react-instantsearch';
-import { InstantSearchNext } from 'react-instantsearch-nextjs';
+
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { CoreSearchBox } from './CoreSearchBox';
 import { CoreSearchHits } from './CoreSearchHit';
 import { CoreSearchPagination } from './CoreSearchPagination';
 import { CustomRefinementList } from './CoreRefinementList';
 import { LinkButton } from '@/components/LinkButton';
-
-const typesenseInstantSearchAdapter = new TypesenseInstantsearchAdapter({
-  server: {
-    apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY || 'xyz',
-    nodes: [
-      {
-        host: process.env.NEXT_PUBLIC_TYPESENSE_HOST || 'localhost',
-        port: process.env.NEXT_PUBLIC_TYPESENSE_PORT
-          ? parseInt(process.env.NEXT_PUBLIC_TYPESENSE_PORT)
-          : 8108,
-        protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL || 'http',
-      },
-    ],
-  },
-
-  additionalSearchParameters: {
-    num_typos: 3,
-    query_by: 'title,description,body,districts,tags',
-    sort_by: '_text_match:desc,title:asc,published_at:desc',
-  },
-});
-
-const searchClient = typesenseInstantSearchAdapter.searchClient;
+import { InstantSearchWrapper } from './InstantSearchWrapper';
 
 export function InstantSearch() {
   return (
-    <InstantSearchNext searchClient={searchClient} indexName="pages" routing>
+    <InstantSearchWrapper indexName="pages" routing>
       <ThreeColumnLayout
         left={
           <div className="flex flex-col gap-4">
@@ -73,6 +50,6 @@ export function InstantSearch() {
         <CoreSearchHits />
         <CoreSearchPagination />
       </ThreeColumnLayout>
-    </InstantSearchNext>
+    </InstantSearchWrapper>
   );
 }
