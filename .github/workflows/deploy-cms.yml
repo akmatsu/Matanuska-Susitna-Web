@@ -76,7 +76,7 @@ jobs:
           TYPESENSE_API_KEY=${{secrets.TYPESENSE_API_KEY}}
           TYPESENSE_HOST=search.matsu.gov
           TYPESENSE_PORT=443
-          protocol=https
+          TYPESENSE_PROTOCOL=https
           EOT
 
       - uses: pnpm/action-setup@v4
