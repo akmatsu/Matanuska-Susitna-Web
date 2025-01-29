@@ -13,18 +13,14 @@ type Story = StoryObj<typeof Combobox>;
 
 export const Default: Story = {
   render() {
-    type Hit = { objectID: number; title: string };
-    const hits = [
-      { objectID: 1, title: 'Page 1' },
-      { objectID: 2, title: 'Page 2' },
-      { objectID: 3, title: 'Page 3' },
-      { objectID: 4, title: 'Page 4' },
-      { objectID: 5, title: 'Page 5' },
+    type Hit = { objectID: number; title: string; description: string };
+    const hits: Hit[] = [
+      { objectID: 1, title: 'Page 1', description: 'Page 1 description' },
+      { objectID: 2, title: 'Page 2', description: 'Page 2 description' },
+      { objectID: 3, title: 'Page 3', description: 'Page 3 description' },
+      { objectID: 4, title: 'Page 4', description: 'Page 4 description' },
+      { objectID: 5, title: 'Page 5', description: 'Page 5 description' },
     ];
-
-    const [selectedPage, setSelectedPage] = React.useState<
-      Hit | undefined | null
-    >(hits[0]);
 
     const [query, setQuery] = React.useState('');
 
@@ -35,16 +31,21 @@ export const Default: Story = {
             hit.title.toLowerCase().includes(query.toLowerCase()),
           );
 
+    function handleChange(value?: Hit | null) {
+      console.log(value);
+    }
+
     return (
       <Combobox<Hit>
         label="Search Pages"
         idKey="objectID"
         displayValueKey="title"
-        items={filteredHits}
+        descriptionKey="description"
         onChangeQuery={(e) => setQuery(e.target.value)}
-        onChange={(value) => setSelectedPage(value)}
+        onChange={handleChange}
+        items={filteredHits}
         placeholder="Search for a page..."
-        value={selectedPage}
+        autoFocus
       />
     );
   },
