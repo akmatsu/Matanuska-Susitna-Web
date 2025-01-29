@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export function InPageNavigation({
   borderPosition = 'right',

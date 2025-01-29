@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useTransition } from 'react';
-
+import React, { useEffect, useRef, useState, useTransition } from 'react';
 import clsx from 'clsx';
 import { filterAndZoom, initializeMap } from './utils';
 

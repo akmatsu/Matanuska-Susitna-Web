@@ -1,10 +1,11 @@
+import React from 'react';
 import { PaginationButton } from './PaginationButton';
 
 type PaginationProps = {
   currentPage?: number;
   totalPages?: number;
   linkAs?: React.ElementType;
-  onLinkClick: (page: string | number) => void;
+  onLinkClick?: (page: string | number) => void;
 };
 
 export function Pagination({
