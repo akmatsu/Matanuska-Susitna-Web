@@ -1,6 +1,5 @@
 import { AdminConfig } from '@keystone-6/core/types';
 import { CustomNavigation } from './components/CustomNavigation';
-import { Button } from '@keystone-ui/button';
 
 function CustomLogo() {
   return (
@@ -25,5 +24,5 @@ function CustomLogo() {
 
 export const components: AdminConfig['components'] = {
   Logo: CustomLogo,
-  // Navigation: CustomNavigation,
+  Navigation: CustomNavigation,
 };
