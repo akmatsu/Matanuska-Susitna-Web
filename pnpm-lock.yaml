@@ -304,9 +304,6 @@ importers:
       '@types/express-session':
         specifier: ^1.18.0
         version: 1.18.1
-      components:
-        specifier: link:@keystone-6/core/admin-ui/components
-        version: link:@keystone-6/core/admin-ui/components
       dotenv:
         specifier: ^16.4.5
         version: 16.4.7
