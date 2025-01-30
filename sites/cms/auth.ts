@@ -1,5 +1,5 @@
 import expressSession from 'express-session';
-import { RequestHandler, Router } from 'express';
+import { Router } from 'express';
 import { statelessSessions } from '@keystone-6/core/session';
 import { type KeystoneContext } from '@keystone-6/core/types';
 import { Passport } from 'passport';
@@ -53,10 +53,10 @@ export function passportMiddleware(
 
   router.use(
     expressSession({
-      secret: process.env.SESSION_SECRET! || 'default-secret',
+      secret: process.env.SESSION_SECRET!,
       resave: false,
       saveUninitialized: false,
-      cookie: { secure: appConfig.nodeEnv === 'production' },
+      cookie: { secure: false },
     }),
   );
 

@@ -25,5 +25,5 @@ function CustomLogo() {
 
 export const components: AdminConfig['components'] = {
   Logo: CustomLogo,
-  Navigation: CustomNavigation,
+  // Navigation: CustomNavigation,
 };
