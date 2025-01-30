@@ -1,3 +1,7 @@
+import { AdminConfig } from '@keystone-6/core/types';
+import { CustomNavigation } from './components/CustomNavigation';
+import { Button } from '@keystone-ui/button';
+
 function CustomLogo() {
   return (
     <div
@@ -15,11 +19,11 @@ function CustomLogo() {
         width="50"
         height="50"
       ></img>
-      <h3>MSB CMS</h3>
     </div>
   );
 }
 
-export const components = {
+export const components: AdminConfig['components'] = {
   Logo: CustomLogo,
+  Navigation: CustomNavigation,
 };
