@@ -5,11 +5,12 @@ export function SearchListItem({
   item,
   listKey,
 }: {
-  item: { description: string; title: string; slug: string };
+  item: { description: string; title: string; slug: string; url?: string };
   listKey: string;
 }) {
+  const url = item.url || `/${listKey}/${item.slug}`;
   return (
-    <LinkCard href={`/${listKey}/${item.slug}`} as="li" linkAs={Link}>
+    <LinkCard href={url} as="li" linkAs={Link}>
       <CardHeader>
         <CardTitle>{item.title}</CardTitle>
       </CardHeader>
