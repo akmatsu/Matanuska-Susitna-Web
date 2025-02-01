@@ -1,5 +1,6 @@
 import { APIGatewayEvent, Callback, Context } from 'aws-lambda';
 import Typesense from 'typesense';
+import 'dotenv/config';
 
 type ArcGISItem = {
   id: string;
@@ -107,15 +108,19 @@ export async function handler(
     },
   );
 
-  const tsRes = await tsClient
+  await tsClient
     .collections('pages')
     .documents()
     .import(formatted, { action: 'upsert' });
 
   const response = {
     statusCode: 200,
-    body: { message: 'successfully imported.' },
+    body: { message: 'successfully imported GIS applications.' },
   };
 
   return callback(null, response);
 }
+
+handler(null, null, (err, res) => {
+  console.log(res);
+});
