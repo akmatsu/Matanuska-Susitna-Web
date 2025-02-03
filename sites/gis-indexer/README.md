@@ -14,7 +14,7 @@ pnpm run build
 
 ```bash
 cd dist
-zip -r gis-indexer.zip dist
+zip -r gis-indexer.zip .
 ```
 
 ### Deploy
