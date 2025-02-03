@@ -1,6 +1,8 @@
 import { APIGatewayEvent, Callback, Context } from 'aws-lambda';
 import Typesense from 'typesense';
 import 'dotenv/config';
+import chromium from 'chrome-aws-lambda';
+import puppeteer, { Browser } from 'puppeteer-core';
 
 type ArcGISItem = {
   id: string;
@@ -89,23 +91,34 @@ export async function handler(
   callback: Callback,
 ) {
   const res = await fetch(
-    'https://www.arcgis.com/sharing/rest/search?q=(type:"Hub Site Application" OR type:"Dashboard" OR type:"Experience Builder" OR type:"StoryMap") AND access:public AND orgid:fX5IGselyy1TirdY&f=json&num=100',
+    'https://www.arcgis.com/sharing/rest/search?q=(type:"Hub Site Application" OR type:"StoryMap") AND access:public AND orgid:fX5IGselyy1TirdY&f=json&num=100',
   );
 
   const data = await res.json();
-  const formatted: TypeSensePageDocument[] = data?.results?.map(
-    (item: ArcGISItem): TypeSensePageDocument => {
-      return {
-        id: item.id,
-        title: item.title,
-        slug: item.title.toLowerCase().replace(/ /g, '-'),
-        description: item.snippet,
-        published_at: item.created / 1000,
-        tags: item.tags,
-        url: item.url,
-        type: item.type,
-      };
-    },
+  const formatted: TypeSensePageDocument[] = await Promise.all(
+    data?.results?.map(
+      async (item: ArcGISItem): Promise<TypeSensePageDocument> => {
+        console.log('Crawling: ', item.url);
+
+        let pageBody = '';
+
+        if (item.url) {
+          pageBody = await fetchRenderedContent(item.url);
+        }
+
+        return {
+          id: item.id,
+          title: item.title,
+          slug: item.title.toLowerCase().replace(/ /g, '-'),
+          description: item.snippet,
+          body: pageBody,
+          published_at: item.created / 1000,
+          tags: item.tags,
+          url: item.url,
+          type: item.type,
+        };
+      },
+    ),
   );
 
   await tsClient
@@ -124,3 +137,36 @@ export async function handler(
 handler(null, null, (err, res) => {
   console.log(res);
 });
+
+async function fetchRenderedContent(url: string) {
+  let browser: Browser | null = null;
+
+  try {
+    let executablePath = await chromium.executablePath;
+    if (!executablePath) {
+      executablePath = process.env.CHROME_EXECUTABLE_PATH!;
+      if (!executablePath) {
+        throw new Error('Chromium executable path not found');
+      }
+    }
+
+    browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: executablePath,
+      headless: chromium.headless,
+    });
+
+    const page = await browser.newPage();
+    await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
+    const content = await page.content();
+    return content;
+  } catch (err) {
+    console.error(`Error fetching rendered content for ${url}: `, err);
+    return '';
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
+  }
+}
