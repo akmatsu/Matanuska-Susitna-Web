@@ -1,6 +1,5 @@
 import { APIGatewayEvent, Callback, Context } from 'aws-lambda';
 import Typesense from 'typesense';
-import 'dotenv/config';
 import chromium from 'chrome-aws-lambda';
 import puppeteer, { Browser } from 'puppeteer-core';
 
@@ -133,10 +132,6 @@ export async function handler(
 
   return callback(null, response);
 }
-
-handler(null, null, (err, res) => {
-  console.log(res);
-});
 
 async function fetchRenderedContent(url: string) {
   let browser: Browser | null = null;
