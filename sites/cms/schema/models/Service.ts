@@ -123,6 +123,16 @@ export const Service: ListConfig<any> = list({
         hideCreate: true,
       },
     }),
+    orgUnits: relationship({
+      ref: 'OrgUnit.services',
+      many: true,
+      ui: {
+        itemView: {
+          fieldPosition: 'sidebar',
+        },
+        hideCreate: true,
+      },
+    }),
     ...timestamps,
     editorNotes: text({
       ui: {

@@ -29,6 +29,7 @@ model User {
   from_AssemblyDistrict_owner   AssemblyDistrict[]   @relation("AssemblyDistrict_owner")
   from_DocumentCollection_owner DocumentCollection[] @relation("DocumentCollection_owner")
   from_ApiKey_user              ApiKey[]             @relation("ApiKey_user")
+  from_OrgUnit_owner            OrgUnit[]            @relation("OrgUnit_owner")
 }
 
 model UserGroup {
@@ -53,6 +54,7 @@ model Contact {
   primaryServices Service[]   @relation("Service_primaryContact")
   services        Service[]   @relation("Contact_services")
   communities     Community[] @relation("Community_contacts")
+  orgUnits        OrgUnit[]   @relation("Contact_orgUnits")
   user            User?       @relation("Contact_user", fields: [userId], references: [id])
   userId          String?     @unique @map("user")
   editorNotes     String      @default("")
@@ -76,6 +78,7 @@ model Tag {
   documents           Document[]           @relation("Document_tags")
   images              Image[]              @relation("Image_tags")
   documentCollections DocumentCollection[] @relation("DocumentCollection_tags")
+  orgUnits            OrgUnit[]            @relation("OrgUnit_tags")
 }
 
 model Service {
@@ -97,6 +100,7 @@ model Service {
   primaryContactId String?     @map("primaryContact")
   contacts         Contact[]   @relation("Contact_services")
   communities      Community[] @relation("Community_services")
+  orgUnits         OrgUnit[]   @relation("OrgUnit_services")
   createdAt        DateTime?   @default(now())
   updatedAt        DateTime?   @default(now()) @updatedAt
   editorNotes      String      @default("")
@@ -218,4 +222,27 @@ model ApiKey {
   expiresAt   DateTime
 
   @@index([userId])
+}
+
+model OrgUnit {
+  id          String    @id @default(cuid())
+  heroImage   String?
+  title       String    @default("")
+  description String    @default("")
+  slug        String    @unique @default("")
+  owner       User?     @relation("OrgUnit_owner", fields: [ownerId], references: [id])
+  ownerId     String?   @map("owner")
+  showPage    Boolean   @default(true)
+  tags        Tag[]     @relation("OrgUnit_tags")
+  contacts    Contact[] @relation("Contact_orgUnits")
+  services    Service[] @relation("OrgUnit_services")
+  children    OrgUnit[] @relation("OrgUnit_parent")
+  parent      OrgUnit?  @relation("OrgUnit_parent", fields: [parentId], references: [id])
+  parentId    String?   @map("parent")
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+
+  @@index([title])
+  @@index([ownerId])
+  @@index([parentId])
 }

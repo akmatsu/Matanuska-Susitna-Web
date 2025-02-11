@@ -20,5 +20,6 @@ export const Tag: ListConfig<any> = list({
       ref: 'DocumentCollection.tags',
       many: true,
     }),
+    orgUnits: relationship({ ref: 'OrgUnit.tags', many: true }),
   },
 });
