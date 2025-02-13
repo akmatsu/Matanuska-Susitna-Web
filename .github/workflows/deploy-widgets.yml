@@ -9,7 +9,7 @@ on:
       - packages/sdk/**
       - packages/ui/**
       - packages/tw-config/**
-      - .github/deploy-widgets.yml
+      - .github/workflows/deploy-widgets.yml
 
 permissions:
   id-token: write
