@@ -2,6 +2,8 @@ name: Trigger Amplify Build for widgets`
 
 on:
   push:
+    branches:
+      - main
     paths:
       - sites/widgets/**
       - packages/sdk/**
