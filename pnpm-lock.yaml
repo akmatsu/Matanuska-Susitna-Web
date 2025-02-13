@@ -360,7 +360,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages/sdk
       next:
-        specifier: ^15.1.7
+        specifier: ^15.1.4
         version: 15.1.7(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       pluralize:
         specifier: ^8.0.0
@@ -448,7 +448,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages/sdk
       next:
-        specifier: ^15.1.7
+        specifier: ^15.1.4
         version: 15.1.7(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react:
         specifier: ^19.0.0
