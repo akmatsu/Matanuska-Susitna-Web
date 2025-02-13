@@ -11,11 +11,15 @@ on:
       - packages/tw-config/**
       - .github/deploy-widgets.yml
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     concurrency:
-      group: ci-${{github.ref}}
+      group: ci-widgets-${{github.ref}}
       cancel-in-progress: false
     steps:
       - name: Configure AWS credentials

@@ -11,10 +11,14 @@ on:
       - packages/tw-config/**
       - .github/workflows/deploy-msb.yml
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy:
     concurrency:
-      group: ci-${{github.ref}}
+      group: ci-msb-${{github.ref}}
       cancel-in-progress: false
     runs-on: ubuntu-latest
     steps:
