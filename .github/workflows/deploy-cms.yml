@@ -77,6 +77,11 @@ jobs:
           TYPESENSE_HOST=search.matsu.gov
           TYPESENSE_PORT=443
           TYPESENSE_PROTOCOL=https
+          GOV_DELIVERY_USERNAME=${{secrets.GOV_DELIVERY_USERNAME}}
+          GOV_DELIVERY_PASSWORD=${{secrets.GOV_DELIVERY_PASSWORD}}
+          GOV_DELIVERY_SUB_DOMAIN=${{secrets.GOV_DELIVERY_SUB_DOMAIN}}
+          GOV_DELIVERY_ACCOUNT_CODE=${{secrets.GOV_DELIVERY_ACCOUNT_CODE}}
+          GOV_DELIVERY_FROM_ADDRESS=${{secrets.GOV_DELIVERY_FROM_ADDRESS}}
           EOT
 
       - uses: pnpm/action-setup@v4
