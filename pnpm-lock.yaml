@@ -75,7 +75,7 @@ importers:
         version: 1.2.0
       '@keystone-6/core':
         specifier: ^6.3.1
-        version: 6.3.1(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8)
+        version: 6.3.1(@babel/core@7.26.8)(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8)
       '@types/react':
         specifier: ^19.0.8
         version: 19.0.8
@@ -285,7 +285,7 @@ importers:
         version: 8.1.0(@keystone-6/core@6.3.1(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@keystone-6/core':
         specifier: ^6.3.1
-        version: 6.3.1(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8)
+        version: 6.3.1(@babel/core@7.26.8)(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8)
       '@keystone-6/fields-document':
         specifier: ^9.1.1
         version: 9.1.1(@keystone-6/core@6.3.1(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8))(slate-dom@0.111.0(slate@0.110.2))
@@ -304,6 +304,9 @@ importers:
       '@types/express-session':
         specifier: ^1.18.1
         version: 1.18.1
+      axios:
+        specifier: ^1.7.9
+        version: 1.7.9
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
@@ -376,7 +379,7 @@ importers:
         version: 7.15.3(algoliasearch@5.20.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-instantsearch-nextjs:
         specifier: ^0.4.4
-        version: 0.4.4(next@15.1.7(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-instantsearch@7.15.3(algoliasearch@5.20.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
+        version: 0.4.4(next@15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-instantsearch@7.15.3(algoliasearch@5.20.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       react-loading-skeleton:
         specifier: ^3.5.0
         version: 3.5.0(react@19.0.0)
@@ -8710,7 +8713,7 @@ snapshots:
   '@keystone-6/auth@8.1.0(@keystone-6/core@6.3.1(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.26.7
-      '@keystone-6/core': 6.3.1(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8)
+      '@keystone-6/core': 6.3.1(@babel/core@7.26.8)(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8)
       '@keystone-ui/button': 7.0.2(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))
       '@keystone-ui/core': 5.0.2(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@keystone-ui/fields': 7.2.0(@types/react@19.0.8)
@@ -8726,7 +8729,7 @@ snapshots:
       - react-dom
       - supports-color
 
-  '@keystone-6/core@6.3.1(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8)':
+  '@keystone-6/core@6.3.1(@babel/core@7.26.8)(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8)':
     dependencies:
       '@apollo/cache-control-types': 1.0.3(graphql@16.10.0)
       '@apollo/client': 3.13.0(@types/react@19.0.8)(graphql@16.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -8821,7 +8824,7 @@ snapshots:
       '@dnd-kit/modifiers': 7.0.0(@dnd-kit/core@6.3.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       '@dnd-kit/sortable': 8.0.0(@dnd-kit/core@6.3.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       '@emotion/weak-memoize': 0.4.0
-      '@keystone-6/core': 6.3.1(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8)
+      '@keystone-6/core': 6.3.1(@babel/core@7.26.8)(@prisma/generator-helper@5.22.0)(@types/express@4.17.21)(@types/react@19.0.8)
       '@keystone-6/document-renderer': 1.1.2(react@19.0.0)
       '@keystone-ui/button': 7.0.2(@types/react@18.3.18)(react-dom@19.0.0(react@19.0.0))
       '@keystone-ui/core': 5.0.2(@types/react@18.3.18)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -14053,7 +14056,7 @@ snapshots:
       react: 19.0.0
       use-sync-external-store: 1.4.0(react@19.0.0)
 
-  react-instantsearch-nextjs@0.4.4(next@15.1.7(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-instantsearch@7.15.3(algoliasearch@5.20.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)):
+  react-instantsearch-nextjs@0.4.4(next@15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-instantsearch@7.15.3(algoliasearch@5.20.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)):
     dependencies:
       next: 15.1.7(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-instantsearch: 7.15.3(algoliasearch@5.20.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
