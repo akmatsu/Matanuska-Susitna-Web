@@ -30,7 +30,4 @@ jobs:
 
       - name: Trigger AWS Amplify Build
         run: |
-          aws amplify start-job \
-            --app-id d1wvh0ssryavqz \
-            --branch-name main \
-            --job-type RELEASE
+          aws amplify start-job --app-id d1wvh0ssryavqz --branch-name main --job-type RELEASE

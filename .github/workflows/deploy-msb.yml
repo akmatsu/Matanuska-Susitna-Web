@@ -26,11 +26,8 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2 # Update this if your Amplify app is in a different region
+          aws-region: us-east-2
 
       - name: Trigger AWS Amplify Build
         run: |
-          aws amplify start-job \
-            --app-id d2hc61286ccr51 \
-            --branch-name main \
-            --job-type RELEASE
+          aws amplify start-job --app-id d2hc61286ccr51 --branch-name main --job-type RELEASE
