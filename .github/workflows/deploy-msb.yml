@@ -21,8 +21,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ secrets.AMPLIFY_DEPLOYER_ROLE }}
+          role-session-name: github-actions-deploy-msb-session
           aws-region: us-east-2
 
       - name: Trigger AWS Amplify Build
