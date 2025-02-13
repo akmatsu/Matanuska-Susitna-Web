@@ -8,7 +8,7 @@ import {
 import { KeystoneContextFromListTypeInfo } from '@keystone-6/core/types';
 import { isAdmin } from './access/roles';
 import { isOwner } from './access/group';
-import { appConfig } from '../appConfig';
+import { appConfig } from '../configs/appConfig';
 import { getDatetimeISOString } from './access';
 
 export const urlRegex = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/;
@@ -53,7 +53,7 @@ export function liveUrl(
       },
     }),
     ui: {
-      views: './customFields/liveUrl/views.tsx',
+      views: './src/components/customFields/liveUrl/views.tsx',
       createView: {
         fieldMode: 'hidden',
       },
@@ -91,7 +91,7 @@ export function embed(
       },
     }),
     ui: {
-      views: './customFields/embed/views.tsx',
+      views: './src/components/customFields/embed/views.tsx',
       itemView: {
         fieldPosition: 'sidebar',
       },

@@ -11,7 +11,7 @@ import {
   urlRegex,
   userGroups,
 } from '../fieldUtils';
-import { customText } from '../../customFields/Markdown';
+import { customText } from '../../components/customFields/Markdown';
 
 import {
   filterByPubDates,
@@ -22,7 +22,7 @@ import {
   TYPESENSE_CLIENT,
   TYPESENSE_COLLECTIONS,
   TypeSensePageDocument,
-} from '../../typesense';
+} from '../../utils/typesense';
 
 export function serviceToSearchableObj(item: any): TypeSensePageDocument {
   return {

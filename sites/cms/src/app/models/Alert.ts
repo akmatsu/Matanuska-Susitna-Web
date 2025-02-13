@@ -1,7 +1,7 @@
 import { list, ListConfig } from '@keystone-6/core';
 import { timestamps } from '../fieldUtils';
 import { select, text } from '@keystone-6/core/fields';
-import { customText } from '../../customFields/Markdown';
+import { customText } from '../../components/customFields/Markdown';
 import { isContentManager } from '../access/roles';
 import { elevatedOperationAccess } from '../access';
 

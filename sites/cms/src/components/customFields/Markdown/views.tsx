@@ -14,7 +14,7 @@ import {
   type FieldControllerConfig,
   type FieldProps,
 } from '@keystone-6/core/types';
-import { RichEditor } from '../../components/RichEditor';
+import { RichEditor } from '../../RichEditor';
 
 export function Field({
   field,

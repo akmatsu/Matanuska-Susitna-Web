@@ -205,7 +205,7 @@ export function customText<ListTypeInfo extends BaseListTypeInfo>({
           return value;
         },
       }),
-      views: './customFields/Markdown/views.tsx',
+      views: './src/components/customFields/Markdown/views.tsx',
       getAdminMeta() {
         return {};
       },

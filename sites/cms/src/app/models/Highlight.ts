@@ -1,7 +1,7 @@
 import { group, list, ListConfig } from '@keystone-6/core';
 import { publishable, urlRegex } from '../fieldUtils';
 import { text } from '@keystone-6/core/fields';
-import { linkField } from '../../customFields/link';
+import { linkField } from '../../components/customFields/link';
 import { isAdmin } from '../access/roles';
 import { adminOnlyOperationAccess } from '../access';
 

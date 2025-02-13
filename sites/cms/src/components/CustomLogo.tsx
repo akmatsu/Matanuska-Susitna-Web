@@ -1,7 +1,4 @@
-import { AdminConfig } from '@keystone-6/core/types';
-import { CustomNavigation } from './components/CustomNavigation';
-
-function CustomLogo() {
+export function CustomLogo() {
   return (
     <div
       style={{
@@ -21,8 +18,3 @@ function CustomLogo() {
     </div>
   );
 }
-
-export const components: AdminConfig['components'] = {
-  Logo: CustomLogo,
-  Navigation: CustomNavigation,
-};

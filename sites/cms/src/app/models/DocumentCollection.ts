@@ -2,7 +2,7 @@ import { graphql, list, ListConfig } from '@keystone-6/core';
 import { relationship, text, virtual } from '@keystone-6/core/fields';
 import { generalOperationAccess } from '../access';
 import { embed, liveUrl, owner, userGroups } from '../fieldUtils';
-import { appConfig } from '../../appConfig';
+import { appConfig } from '../../configs/appConfig';
 
 export const DocumentCollection: ListConfig<any> = list({
   access: {
@@ -69,7 +69,7 @@ export const DocumentCollection: ListConfig<any> = list({
 
       ui: {
         query: '{ title id }',
-        views: './customFields/ReferencedBy/views.tsx',
+        views: './src/components/customFields/ReferencedBy/views.tsx',
         createView: {
           fieldMode: 'hidden',
         },

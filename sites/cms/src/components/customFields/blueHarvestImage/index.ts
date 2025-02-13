@@ -6,27 +6,22 @@ import {
   FieldTypeFunc,
 } from '@keystone-6/core/types';
 
-type LinkFieldConfig<ListTypeInfo extends BaseListTypeInfo> =
-  CommonFieldConfig<ListTypeInfo> & {
-    isIndex?: boolean | 'unique';
-  };
+type BlueHarvestImageConfig<ListTypeInfo extends BaseListTypeInfo> =
+  CommonFieldConfig<ListTypeInfo>;
 
-
-const LinkOrderDirectionEnum = graphql.enum({
-  name: 'LinkOrderDirection',
+const BlueHarvestImageOrderDirectionEnum = graphql.enum({
+  name: 'BlueHarvestImageOrderDirection',
   values: graphql.enumValues(['asc', 'desc']),
 });
 
-export function linkField<ListTypeInfo extends BaseListTypeInfo>({
-  isIndex,
+export function blueHarvestImage<ListTypeInfo extends BaseListTypeInfo>({
   ...config
-}: LinkFieldConfig<ListTypeInfo> = {}): FieldTypeFunc<ListTypeInfo> {
+}: BlueHarvestImageConfig<ListTypeInfo> = {}): FieldTypeFunc<ListTypeInfo> {
   return (meta) =>
     fieldType({
       kind: 'scalar',
       mode: 'optional',
       scalar: 'String',
-      index: isIndex === true ? 'index' : isIndex || undefined,
     })({
       ...config,
       input: {
@@ -36,8 +31,12 @@ export function linkField<ListTypeInfo extends BaseListTypeInfo>({
             return value;
           },
         },
-        update: { arg: graphql.arg({ type: graphql.String }) },
-        orderBy: { arg: graphql.arg({ type: LinkOrderDirectionEnum }) },
+        update: {
+          arg: graphql.arg({ type: graphql.String }),
+        },
+        orderBy: {
+          arg: graphql.arg({ type: BlueHarvestImageOrderDirectionEnum }),
+        },
       },
       output: graphql.field({
         type: graphql.String,
@@ -45,7 +44,7 @@ export function linkField<ListTypeInfo extends BaseListTypeInfo>({
           return value;
         },
       }),
-      views: './customFields/link/views.tsx',
+      views: './src/components/customFields/blueHarvestImage/views.tsx',
       getAdminMeta() {
         return {};
       },

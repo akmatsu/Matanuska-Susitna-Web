@@ -17,12 +17,8 @@ import {
   userGroups,
 } from '../fieldUtils';
 import { relationship, text } from '@keystone-6/core/fields';
-import { blueHarvestImage } from '../../customFields/blueHarvestImage';
-import {
-  TYPESENSE_CLIENT,
-  TYPESENSE_COLLECTIONS,
-  type TypeSensePageDocument,
-} from '../../typesense';
+import { blueHarvestImage } from '../../components/customFields/blueHarvestImage';
+import { TYPESENSE_CLIENT, TYPESENSE_COLLECTIONS } from '../../utils/typesense';
 
 /*
 TODO: Fields to add

@@ -1,6 +1,6 @@
 import { list, ListConfig } from '@keystone-6/core';
 import { file, relationship, text } from '@keystone-6/core/fields';
-import { appConfig } from '../../appConfig';
+import { appConfig } from '../../configs/appConfig';
 import { generalOperationAccess } from '../access';
 
 export const Document: ListConfig<any> = list({

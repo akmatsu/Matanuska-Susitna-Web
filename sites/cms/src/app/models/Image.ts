@@ -1,9 +1,8 @@
-import { operationName } from '@apollo/client';
-import { graphql, list, ListConfig } from '@keystone-6/core';
+import { list, ListConfig } from '@keystone-6/core';
 import { generalOperationAccess } from '../access';
 import { tags, titleAndDescription } from '../fieldUtils';
-import { image, relationship } from '@keystone-6/core/fields';
-import { appConfig } from '../../appConfig';
+import { image } from '@keystone-6/core/fields';
+import { appConfig } from '../../configs/appConfig';
 
 export const Image: ListConfig<any> = list({
   access: {

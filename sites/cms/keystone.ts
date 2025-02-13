@@ -1,22 +1,22 @@
 // Keystone config docs: https://keystonejs.com/docs/apis/config
 import { config } from '@keystone-6/core';
-import { lists } from './schema';
+import { lists } from './src/app';
 import { TypeInfo } from '.keystone/types';
-import { appConfig } from './appConfig';
+import { appConfig } from './src/configs/appConfig';
 import {
   type Session,
   passportMiddleware,
   setupAzureADClient,
   session,
-} from './auth';
+} from './src/auth';
 import {
   COLLECTIONS,
   TYPESENSE_CLIENT,
   TYPESENSE_COLLECTIONS,
-} from './typesense';
+} from './src/utils/typesense';
 import { json } from 'express';
-import { serviceToSearchableObj } from './schema/models/Service';
-import { toSearchableObj } from './schema/models/Community';
+import { serviceToSearchableObj } from './src/app/models/Service';
+import { toSearchableObj } from './src/app/models/Community';
 
 export default config<TypeInfo<Session>>({
   // https://keystonejs.com/docs/config/config#db

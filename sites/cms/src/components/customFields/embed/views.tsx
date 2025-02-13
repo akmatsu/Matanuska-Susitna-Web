@@ -9,7 +9,7 @@ import {
   FieldDescription,
   FieldLabel,
 } from '@keystone-ui/fields';
-import '../../styles/global.css';
+import '../../../styles/global.css';
 import { Button } from '@keystone-ui/button';
 
 export function Field({ field, value }: FieldProps<typeof controller>) {

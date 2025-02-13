@@ -1,7 +1,7 @@
 // admin/pages/custom-page.tsx
 import { useEffect, useState } from 'react';
 import { PageContainer } from '@keystone-6/core/admin-ui/components';
-import { TYPESENSE_CLIENT } from '../../typesense';
+import { TYPESENSE_CLIENT } from '../../src/utils/typesense';
 import { Button } from '@keystone-ui/button';
 
 export default function CustomPage() {

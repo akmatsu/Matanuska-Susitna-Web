@@ -11,7 +11,7 @@ import {
 } from '../fieldUtils';
 import { generalItemAccess, generalOperationAccess } from '../access';
 import { checkbox, relationship } from '@keystone-6/core/fields';
-import { blueHarvestImage } from '../../customFields/blueHarvestImage';
+import { blueHarvestImage } from '../../components/customFields/blueHarvestImage';
 
 export const OrgUnit: ListConfig<any> = list({
   access: {

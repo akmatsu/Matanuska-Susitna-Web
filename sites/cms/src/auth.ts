@@ -11,7 +11,7 @@ import {
 
 import { type User as PrismaUser } from '.prisma/client';
 import { type TypeInfo } from '.keystone/types';
-import { appConfig } from './appConfig';
+import { appConfig } from './configs/appConfig';
 
 export type Session = PrismaUser;
 
