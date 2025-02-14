@@ -59,6 +59,7 @@ export function Footer({
               <Link
                 href={link.href}
                 key={link.label}
+                target="_blank"
                 className="bg-gray-20 size-12 flex items-center justify-center"
               >
                 <span

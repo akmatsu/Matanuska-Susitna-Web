@@ -13,6 +13,7 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const params = await props.params;
+
   const { data } = await getClient().query({
     query: GET_COMMUNITY_META_QUERY,
     variables: {
@@ -54,22 +55,6 @@ export default async function Community(props: {
 
   const community = data?.community;
 
-  function getImageBaseUrl(value?: string | null) {
-    if (!value) return;
-    const [baseUrl, _] = value.split('?');
-
-    return baseUrl;
-  }
-
-  function getPosition(value?: string | null) {
-    if (!value) return;
-    const [_, search] = value.split('?');
-    const params = new URLSearchParams(search);
-    const position = params.get('position');
-
-    return position || '50% 50%';
-  }
-
   if (errors) {
     return (
       <div>
@@ -83,10 +68,7 @@ export default async function Community(props: {
 
   return (
     <div>
-      <Hero
-        position={getPosition(community.heroImage)}
-        image={getImageBaseUrl(community.heroImage)}
-      ></Hero>
+      <Hero image={community.heroImage || undefined} />
       <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-12 gap-16">
         <div className="col-span-8 flex flex-col gap-16">
           <div>
