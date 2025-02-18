@@ -163,7 +163,7 @@ export const Service: ListConfig<any> = list({
           });
           const document = serviceToSearchableObj(service);
 
-          TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
+          await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
             .documents()
             .upsert(document);
         } catch (error: any) {

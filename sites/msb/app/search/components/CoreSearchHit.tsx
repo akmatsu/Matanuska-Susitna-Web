@@ -16,7 +16,9 @@ export function CoreSearchHits(props: ComponentProps<typeof Hits>) {
               ? 'services'
               : item.type === 'community'
                 ? 'communities'
-                : 'pages'
+                : item.type === 'department'
+                  ? 'departments'
+                  : 'pages'
           }
         />
       ))}

@@ -59,24 +59,10 @@ export default function CustomPage() {
     }
   }
 
-  async function importServices() {
+  async function importPages(list: string) {
     try {
       setCreateLoading(true);
-      const res = fetch('/typesense/import-services', {
-        method: 'POST',
-      });
-      console.log(res);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setCreateLoading(false);
-    }
-  }
-
-  async function importCommunities() {
-    try {
-      setCreateLoading(true);
-      const res = fetch('/typesense/import-communities', {
+      const res = fetch(`/typesense/import-${list}`, {
         method: 'POST',
       });
       console.log(res);
@@ -105,11 +91,20 @@ export default function CustomPage() {
       <Button onClick={removePagesCollection} isLoading={createLoading}>
         Remove Pages Collection
       </Button>
-      <Button onClick={importServices} isLoading={createLoading}>
+      <Button onClick={() => importPages('services')} isLoading={createLoading}>
         Import Services
       </Button>
-      <Button onClick={importCommunities} isLoading={createLoading}>
+      <Button
+        onClick={() => importPages('communities')}
+        isLoading={createLoading}
+      >
         Import Communities
+      </Button>
+      <Button
+        onClick={() => importPages('departments')}
+        isLoading={createLoading}
+      >
+        Import Departments
       </Button>
     </PageContainer>
   );

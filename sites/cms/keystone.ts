@@ -17,6 +17,7 @@ import {
 import { json } from 'express';
 import { serviceToSearchableObj } from './src/app/models/Service';
 import { toSearchableObj } from './src/app/models/Community';
+import { orgUnitToSearchableObj } from './src/app/models/OrgUnit';
 
 export default config<TypeInfo<Session>>({
   // https://keystonejs.com/docs/config/config#db
@@ -158,6 +159,34 @@ export default config<TypeInfo<Session>>({
             .documents()
             .import(formatted, { action: 'upsert' });
           return res.status(200).json({ message: 'Communities imported.' });
+        } catch (error: any) {
+          return res.status(500).json(error);
+        }
+      });
+      app.post('/typesense/import-departments', async (_, res) => {
+        try {
+          const departments = await commonContext.prisma.orgUnit.findMany({
+            select: {
+              id: true,
+              title: true,
+              slug: true,
+              description: true,
+              tags: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          });
+
+          const formatted = departments.map((department: any) =>
+            orgUnitToSearchableObj(department),
+          );
+
+          await TYPESENSE_CLIENT.collections(TYPESENSE_COLLECTIONS.PAGES)
+            .documents()
+            .import(formatted, { action: 'upsert' });
+          return res.status(200).json({ message: 'Departments imported.' });
         } catch (error: any) {
           return res.status(500).json(error);
         }
