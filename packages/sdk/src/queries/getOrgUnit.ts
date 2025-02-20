@@ -54,10 +54,12 @@ export const GET_ORG_UNIT_META_QUERY: TypedDocumentNode<
   GetOrgUnitMetaData,
   GetOrgUnitVariables
 > = gql`
-  query OrgUnitMeta($where: OrgUnitMetaWhereUniqueInput!) {
-    title
-    description
-    heroImage
+  query GetOrgUnitMeta($where: OrgUnitMetaWhereUniqueInput!) {
+    orgUnit(where: $where) {
+      id
+      title
+      description
+    }
   }
 `;
 
@@ -65,7 +67,7 @@ export const GET_ORG_UNIT_QUERY: TypedDocumentNode<
   GetOrgUnitData,
   GetOrgUnitVariables
 > = gql`
-  query OrgUnit($where: OrgUnitWhereUniqueInput!) {
+  query GetOrgUnit($where: OrgUnitWhereUniqueInput!) {
     orgUnit(where: $where) {
       id
       title

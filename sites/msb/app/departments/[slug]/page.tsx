@@ -1,6 +1,6 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Hero } from '@matsugov/ui';
-import { GET_ORG_UNIT_META_QUERY } from '@msb/js-sdk';
+import { GET_ORG_UNIT_META_QUERY, GET_ORG_UNIT_QUERY } from '@msb/js-sdk';
 import { Metadata } from 'next';
 
 export async function generateMetadata(props: {
@@ -34,7 +34,7 @@ export default async function DepartmentPage(props: {
   const params = await props.params;
 
   const { data, errors } = await getClient().query({
-    query: GET_ORG_UNIT_META_QUERY,
+    query: GET_ORG_UNIT_QUERY,
     variables: {
       where: { slug: params.slug },
     },
