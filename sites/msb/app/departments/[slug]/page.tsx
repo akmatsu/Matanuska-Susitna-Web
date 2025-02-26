@@ -1,7 +1,8 @@
 import { FeaturedContent, Meetings, SearchListItem } from '@/components';
+import { ContactsList } from '@/components/ContactsList';
 import { LinkCardGrid } from '@/components/LinkCardGrid';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { Hero } from '@matsugov/ui';
+import { CardBody, CardHeader, CardTitle, Hero, LinkCard } from '@matsugov/ui';
 import { GET_ORG_UNIT_META_QUERY, GET_ORG_UNIT_QUERY } from '@msb/js-sdk';
 import { Metadata } from 'next';
 
@@ -87,26 +88,34 @@ export default async function DepartmentPage(props: {
         <div className="col-span-12 md:col-span-4 flex flex-col gap-8">
           <section>
             <h2 className="text-2xl font-bold mb-4">Contacts</h2>
-            <ul className="flex flex-col gap-2">
-              <li className="bg-base-light p-4 rounded"></li>
-              <li className="bg-base-light p-4 rounded"></li>
-              <li className="bg-base-light p-4 rounded"></li>
-              <li className="bg-base-light p-4 rounded"></li>
-            </ul>
+            <ContactsList contacts={department.contacts} />
           </section>
-          <section>
-            <h2 className="text-2xl font-bold mb-4">Parent Department</h2>
-            <ul className="flex flex-col gap-2">
-              <li className="bg-base-light p-4 rounded"></li>
-            </ul>
-          </section>
+          {department.parent && (
+            <section>
+              <h2 className="text-2xl font-bold mb-4">Parent Department</h2>
+              <LinkCard href={`/departments/${department.parent.slug}`}>
+                <CardHeader>
+                  <CardTitle>{department.parent.title}</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <p className="truncate">{department.parent.description}</p>
+                </CardBody>
+              </LinkCard>
+            </section>
+          )}
           <section>
             <h2 className="text-2xl font-bold mb-4">Divisions</h2>
             <ul className="flex flex-col gap-2">
-              <li className="bg-base-light p-4 rounded"></li>
-              <li className="bg-base-light p-4 rounded"></li>
-              <li className="bg-base-light p-4 rounded"></li>
-              <li className="bg-base-light p-4 rounded"></li>
+              {department.children.map((child) => (
+                <LinkCard href={`/departments/${child.slug}`}>
+                  <CardHeader>
+                    <CardTitle>{child.title}</CardTitle>
+                  </CardHeader>
+                  <CardBody>
+                    <p className="truncate">{child.description}</p>
+                  </CardBody>
+                </LinkCard>
+              ))}
             </ul>
           </section>
         </div>

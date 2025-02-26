@@ -6,7 +6,13 @@ export function SearchListItem({
   listKey,
   className,
 }: {
-  item: { description: string; title: string; slug: string; url?: string };
+  item: {
+    description: string;
+    title: string;
+    slug: string;
+    url?: string;
+    [key: string]: any;
+  };
   listKey: string;
   className?: string;
 }) {

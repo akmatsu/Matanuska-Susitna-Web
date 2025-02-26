@@ -21,7 +21,7 @@ export function LinkCardGrid({
           as="li"
           linkAs={Link}
           href={`/${listKey}/${item.slug}`}
-          className="h-full"
+          className="h-full col-span-2 sm:col-span-1"
           key={item.id}
         >
           <CardHeader>

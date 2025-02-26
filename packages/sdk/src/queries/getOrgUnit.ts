@@ -23,13 +23,14 @@ export interface GetOrgUnitData {
     contacts: {
       id: string;
       name: string;
+      title?: string;
       email?: string | null;
       phone?: string | null;
       user: {
         name: string;
       };
     }[];
-    parent: {
+    parent?: {
       id: string;
       slug: string;
       title: string;
@@ -82,6 +83,7 @@ export const GET_ORG_UNIT_QUERY: TypedDocumentNode<
       contacts {
         id
         name
+        title
         email
         phone
         user {
