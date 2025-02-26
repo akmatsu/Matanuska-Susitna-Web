@@ -11,11 +11,6 @@
     "ui:dev": "pnpm turbo run storybook --filter=@matsugov/ui",
     "ui:start": "pnpm turbo run build -- -w --filter=@matsugov/ui",
     "ui:build": "pnpm turbo run build --filter=@matsugov/ui",
-    "cms:dev": "pnpm turbo run dev --filter=cms",
-    "cms:build": "pnpm turbo run build --filter=cms",
-    "cms:start": "pnpm turbo run start --filter=cms",
-    "cms:fix": "pnpm turbo run fix --filter=cms",
-    "cms:migrate": "pnpm turbo run migrate --filter=cms",
     "wid:dev": "pnpm turbo run dev --filter=widgets",
     "wid:build": "pnpm turbo run build --filter=widgets",
     "wid:start": "pnpm turbo run start --filter=widgets"

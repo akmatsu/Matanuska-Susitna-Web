@@ -7,10 +7,11 @@ export const appConfig = {
   orgAddress: '350 E. Dahlia Ave., Palmer, AK 99645',
   orgHours: 'Monday - Friday, 8:00 AM - 5:00 PM',
   orgSocialLinks: [
-    { label: 'Facebook', href: '#' },
-    { label: 'Twitter', href: '#' },
-    { label: 'YouTube', href: '#' },
-    { label: 'Instagram', href: '#' },
-    { label: 'RSS', href: '#' },
+    { label: 'Facebook', href: 'https://www.facebook.com/MatSuBorough' },
+    { label: 'Twitter', href: 'https://x.com/matsuborough' },
+    {
+      label: 'YouTube',
+      href: 'https://www.youtube.com/user/matsuboroughvideo',
+    },
   ],
 };

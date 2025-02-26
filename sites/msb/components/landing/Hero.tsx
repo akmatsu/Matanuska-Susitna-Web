@@ -6,10 +6,6 @@ import { Hero as UIHero, Search } from '@matsugov/ui';
 import { InstantSearchAutoComplete } from '@/app/search/components/InstantSearchAutoComplete';
 
 export function Hero() {
-  function handleSearch(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-  }
-
   const links: { icon: string; text: string; url: string }[] = [
     {
       icon: 'mdi--pets',

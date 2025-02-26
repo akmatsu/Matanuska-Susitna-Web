@@ -4,3 +4,4 @@ export * from './getCommunity';
 export * from './getDocCollection';
 export * from './getService';
 export * from './getServices';
+export * from './getOrgUnit';

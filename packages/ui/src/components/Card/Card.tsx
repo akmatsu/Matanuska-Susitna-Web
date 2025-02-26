@@ -47,7 +47,7 @@ export function LinkCard({
   const LinkComponent = linkAs;
 
   return (
-    <Component {...props}>
+    <Component {...props} className={className}>
       <LinkComponent
         href={href}
         className={clsx(
