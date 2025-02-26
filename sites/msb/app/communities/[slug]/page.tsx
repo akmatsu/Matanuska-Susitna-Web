@@ -8,6 +8,7 @@ import {
 import { LinkCard, CardBody, CardHeader, CardTitle, Hero } from '@matsugov/ui';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { LinkCardGrid } from '@/components/LinkCardGrid';
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
@@ -78,24 +79,7 @@ export default async function Community(props: {
 
           <section>
             <h2 className="mb-4 text-3xl font-bold">Services</h2>
-            <ul className="grid grid-cols-2 gap-4">
-              {community.services.map((service) => (
-                <LinkCard
-                  as="li"
-                  linkAs={Link}
-                  href={`/services/${service.slug}`}
-                  className="h-full"
-                  key={service.id}
-                >
-                  <CardHeader>
-                    <CardTitle>{service.title}</CardTitle>
-                  </CardHeader>
-                  <CardBody>
-                    <p className="truncate">{service.description}</p>
-                  </CardBody>
-                </LinkCard>
-              ))}
-            </ul>
+            <LinkCardGrid items={community.services} listKey="services" />
           </section>
 
           <section>

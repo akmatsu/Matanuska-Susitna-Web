@@ -3,5 +3,5 @@ export const primaryNav = [
   { href: '/communities', label: 'Communities' },
   { href: '#government', label: 'Government' },
   { href: '/departments', label: 'Departments' },
-  { href: '#property', label: 'Property & Maps' },
+  // { href: '#property', label: 'Property & Maps' },
 ];
