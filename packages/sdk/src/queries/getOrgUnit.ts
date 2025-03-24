@@ -55,7 +55,7 @@ export const GET_ORG_UNIT_META_QUERY: TypedDocumentNode<
   GetOrgUnitMetaData,
   GetOrgUnitVariables
 > = gql`
-  query GetOrgUnitMeta($where: OrgUnitMetaWhereUniqueInput!) {
+  query GetOrgUnitMeta($where: OrgUnitWhereUniqueInput!) {
     orgUnit(where: $where) {
       id
       title
@@ -68,7 +68,7 @@ export const GET_ORG_UNIT_QUERY: TypedDocumentNode<
   GetOrgUnitData,
   GetOrgUnitVariables
 > = gql`
-  query GetOrgUnit($where: OrgUnitWhereUniqueInput!) {
+  query OrgUnit($where: OrgUnitWhereUniqueInput!) {
     orgUnit(where: $where) {
       id
       title

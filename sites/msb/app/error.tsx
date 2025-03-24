@@ -29,6 +29,7 @@ export default function Error({
       </p>
 
       <pre>{error.message}</pre>
+
       <div className="flex gap-2">
         <Button onClick={reset} color="base">
           Try again
