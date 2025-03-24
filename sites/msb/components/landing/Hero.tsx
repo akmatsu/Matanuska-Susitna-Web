@@ -41,10 +41,6 @@ export function Hero() {
                 className="flex justify-center items-center"
               >
                 <div className="max-w-[500px] w-full">
-                  {/* <Search
-                    placeholder="Search website..."
-                    onSubmit={handleSearch}
-                  /> */}
                   <InstantSearchAutoComplete />
                 </div>
               </UIHero>
