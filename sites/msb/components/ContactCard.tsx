@@ -1,17 +1,13 @@
 import React from 'react';
-import { Card, CardHeader, CardBody, CardTitle } from '@matsugov/ui';
 import Link from 'next/link';
+import { Card, CardHeader, CardBody, CardTitle } from '@matsugov/ui';
+import { Contact } from '@msb/js-sdk';
 
 export function ContactCard({
   contact,
   isPrimary,
 }: {
-  contact: {
-    phone?: string;
-    name: string;
-    id: string;
-    email?: string;
-  };
+  contact: Contact;
   isPrimary?: boolean;
 }) {
   const headerText = isPrimary ? 'Primary Contact' : 'Secondary Contact';

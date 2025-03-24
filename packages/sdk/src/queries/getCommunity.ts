@@ -1,4 +1,5 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
+import { Contact } from '../types';
 
 export interface GetCommunityItemMeta {
   title: string;
@@ -23,12 +24,7 @@ export interface GetCommunityData {
       title: string;
       description: string;
     }[];
-    contacts: {
-      id: string;
-      name: string;
-      phone: string;
-      email: string;
-    }[];
+    contacts: Contact[];
     districts: {
       title: string;
       slug: string;
@@ -36,10 +32,10 @@ export interface GetCommunityData {
       memberName?: string;
       photo?: {
         file: {
-          url: string
-        }
-      }
-    }[]
+          url: string;
+        };
+      };
+    }[];
   };
 }
 

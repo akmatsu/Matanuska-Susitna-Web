@@ -4,10 +4,13 @@ import { TypedDocumentNode } from '@msb/js-sdk/apollo';
 import { redirect } from 'next/navigation';
 import { MarkdownRenderer } from './MarkdownRenderer';
 import { ThreeColumnLayout } from './ThreeColumnLayout';
-import { Button, InPageNavigation } from '@matsugov/ui';
-import Link from 'next/link';
-import { ContactCard } from './ContactCard';
+import { Hero, InPageNavigation } from '@matsugov/ui';
+import { PageActions } from './PageActions';
+import { PageContacts } from './PageContacts';
 
+/**
+ * The page controller is the primary component for controlling most pages.
+ */
 export default async function PageController({
   query,
   listName,
@@ -33,45 +36,37 @@ export default async function PageController({
     },
   });
 
-  const item: PageMerged | undefined = data?.[listName];
+  const page: PageMerged | undefined = data?.[listName];
 
-  if (!item) {
+  if (!page) {
     redirect('/not-found');
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16 relative">
-      {item && (
-        <ThreeColumnLayout
-          left={<InPageNavigation />}
-          right={
-            <>
-              <ul className="flex flex-col" style={{ gap: '8px' }}>
-                {item.actionUrl && (
-                  <Button
-                    as={Link}
-                    href={item.actionUrl}
-                    className="margin-right-0 usa-link--external"
-                    target="_blank"
-                    big
-                    block
-                  >
-                    {item.actionLabel || 'Primary Action'}
-                  </Button>
-                )}
-                {item.primaryContact && (
-                  <ContactCard contact={item.primaryContact} isPrimary />
-                )}
-                {item.contacts.map((contact: any) => (
-                  <ContactCard key={contact.id} contact={contact} />
-                ))}
-              </ul>
-            </>
-          }
-        >
-          <MarkdownRenderer title={item.title}>{item.body}</MarkdownRenderer>
-        </ThreeColumnLayout>
-      )}
-    </div>
+    <>
+      {page.heroImage && <Hero image={page.heroImage} />}
+      <div className="max-w-7xl mx-auto px-4 py-16 relative">
+        {page && (
+          <ThreeColumnLayout
+            left={<InPageNavigation />}
+            right={
+              <div className="flex flex-col gap-2">
+                <PageActions primaryAction={page.primaryAction} />
+                <PageContacts
+                  primaryContact={page.primaryContact}
+                  contacts={page.contacts}
+                />
+              </div>
+            }
+          >
+            {page.body && (
+              <MarkdownRenderer title={page.title}>
+                {page.body}
+              </MarkdownRenderer>
+            )}
+          </ThreeColumnLayout>
+        )}
+      </div>
+    </>
   );
 }
