@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 type HeroProps = {
-  image?: string;
+  image?: string | null;
   className?: string;
   position?: string;
   children?: React.ReactNode;

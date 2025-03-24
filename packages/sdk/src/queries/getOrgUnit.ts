@@ -1,4 +1,5 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
+import { Contact } from '../types';
 
 export interface GetOrgUnitMetaData {
   orgUnit: {
@@ -20,16 +21,7 @@ export interface GetOrgUnitData {
       title: string;
       slug: string;
     }[];
-    contacts: {
-      id: string;
-      name: string;
-      title?: string;
-      email?: string | null;
-      phone?: string | null;
-      user: {
-        name: string;
-      };
-    }[];
+    contacts: Contact[];
     parent?: {
       id: string;
       slug: string;

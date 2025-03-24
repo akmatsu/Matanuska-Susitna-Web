@@ -1,20 +1,13 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
-
-export interface GetServiceContact {
-  id: string;
-  name: string;
-  phone?: string;
-  email?: string;
-}
+import { Contact, ExternalLink } from '../types';
 
 export interface GetServiceItem {
   id: string;
   title: string;
   body: string;
-  actionUrl?: string;
-  actionLabel?: string;
-  primaryContact?: GetServiceContact;
-  contacts: GetServiceContact[];
+  primaryAction?: ExternalLink | null;
+  primaryContact?: Contact | null;
+  contacts?: Contact[] | null;
 }
 
 export interface GetServiceItemMeta {
@@ -58,8 +51,15 @@ export const GET_SERVICE_QUERY: TypedDocumentNode<
       slug
       title
       body
-      actionUrl
-      actionLabel
+      primaryAction {
+        id
+        label
+        url {
+          id
+          title
+          url
+        }
+      }
       primaryContact {
         id
         name
