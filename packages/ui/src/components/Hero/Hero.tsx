@@ -34,16 +34,17 @@ export function Hero({
 
     return position || '50% 50%';
   }
-  return (
-    <section
-      className={clsx(`w-full bg-cover `, className)}
-      style={{
-        backgroundImage: `url(${url})`,
-        backgroundPosition: pos,
-        height,
-      }}
-    >
-      {children}
-    </section>
-  );
+  if (url)
+    return (
+      <section
+        className={clsx(`w-full bg-cover `, className)}
+        style={{
+          backgroundImage: `url(${url})`,
+          backgroundPosition: pos,
+          height,
+        }}
+      >
+        {children}
+      </section>
+    );
 }
