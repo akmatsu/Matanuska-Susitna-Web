@@ -36,6 +36,16 @@ export function InstantSearch() {
                 title="Tags"
                 sortBy={['name', 'count']}
               />
+              <CustomRefinementList
+                attribute="departments"
+                title="Departments"
+                sortBy={['name', 'count']}
+              />
+              <CustomRefinementList
+                attribute="communities"
+                title="Communities"
+                sortBy={['name', 'count']}
+              />
             </DynamicWidgets>
           </div>
         }

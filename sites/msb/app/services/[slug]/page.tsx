@@ -15,6 +15,7 @@ export default async function Service(props: {
       query={GET_SERVICE_QUERY}
       listName="service"
       params={props.params}
+      sideNav
     />
   );
 }
