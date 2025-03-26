@@ -56,3 +56,10 @@ export type Contact = {
   phone?: string | null;
   email?: string | null;
 };
+
+export type Service = {
+  slug: string;
+  id: string;
+  title: string;
+  description?: string | null;
+};

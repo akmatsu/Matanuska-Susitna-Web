@@ -1,19 +1,14 @@
 import { LinkCard, CardHeader, CardTitle, CardBody } from '@matsugov/ui';
 import Link from 'next/link';
 
-export function LinkCardGrid({
-  items,
-  listKey,
-}: {
-  items: {
+export function LinkCardGrid<
+  T extends {
     slug: string;
     id: string;
     title: string;
     description?: string | null;
-    [key: string]: any;
-  }[];
-  listKey: string;
-}) {
+  },
+>({ items, listKey }: { items: T[]; listKey: string }) {
   return (
     <ul className="grid grid-cols-2 gap-4">
       {items.map((item) => (

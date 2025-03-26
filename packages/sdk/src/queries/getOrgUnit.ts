@@ -78,9 +78,6 @@ export const GET_ORG_UNIT_QUERY: TypedDocumentNode<
         title
         email
         phone
-        user {
-          name
-        }
       }
       parent {
         id
