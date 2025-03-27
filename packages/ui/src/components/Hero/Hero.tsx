@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 type HeroProps = {
-  image?: string;
+  image?: string | null;
   className?: string;
   position?: string;
   children?: React.ReactNode;
@@ -34,16 +34,17 @@ export function Hero({
 
     return position || '50% 50%';
   }
-  return (
-    <section
-      className={clsx(`w-full bg-cover `, className)}
-      style={{
-        backgroundImage: `url(${url})`,
-        backgroundPosition: pos,
-        height,
-      }}
-    >
-      {children}
-    </section>
-  );
+  if (url)
+    return (
+      <section
+        className={clsx(`w-full bg-cover `, className)}
+        style={{
+          backgroundImage: `url(${url})`,
+          backgroundPosition: pos,
+          height,
+        }}
+      >
+        {children}
+      </section>
+    );
 }

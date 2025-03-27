@@ -1,5 +1,4 @@
 import '@/styles/index.css';
-
 import type { Metadata } from 'next';
 import { ApolloWrapper } from '@msb/js-sdk/components';
 import { SiteInfo } from '@/components/Header/SiteInfo';
@@ -7,6 +6,7 @@ import { FeedbackButton } from '@/components/FeedbackButton';
 import { Header, Footer } from '@matsugov/ui';
 import Link from 'next/link';
 import { primaryNav } from '@/configs/config';
+
 export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',
   description:
