@@ -35,6 +35,9 @@ export function ActionButtonWrapper(props: { label: string }) {
 
   if (!loading && data)
     return (
-      <PrimaryActionButton {...props} href={data.service.actionUrl || ''} />
+      <PrimaryActionButton
+        {...props}
+        href={data.service.primaryAction?.url.url || ''}
+      />
     );
 }

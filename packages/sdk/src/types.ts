@@ -53,6 +53,7 @@ export type SavedUrl = {
 export type Contact = {
   id: string;
   name: string;
+  title?: string | null;
   phone?: string | null;
   email?: string | null;
 };
