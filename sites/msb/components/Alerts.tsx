@@ -33,7 +33,7 @@ export async function Alerts() {
                 slim={parseInt(alert.urgency) < 4}
                 title={parseInt(alert.urgency) >= 4 ? alert.title : undefined}
               >
-                <MarkdownRenderer noProse>{alert.body}</MarkdownRenderer>
+                <MarkdownRenderer>{alert.body}</MarkdownRenderer>
               </Alert>
             </li>
           ))}
