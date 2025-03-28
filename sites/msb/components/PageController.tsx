@@ -3,6 +3,7 @@ import { PageMerged, PageType } from '@msb/js-sdk';
 import { TypedDocumentNode } from '@msb/js-sdk/apollo';
 import { redirect } from 'next/navigation';
 import {
+  Card,
   CardBody,
   CardHeader,
   CardTitle,
@@ -21,6 +22,7 @@ import pluralize from 'pluralize';
 import { PageProps } from '@/types';
 import { ComponentProps } from 'react';
 import { MapWrapper } from './MapWrapper';
+import { toTitleCase } from '@/utils/stringHelpers';
 
 /**
  * The page controller is the primary component for controlling most pages.
@@ -115,8 +117,61 @@ export default async function PageController({
               })}
             >
               <aside className="flex flex-col gap-8">
+                {!!map && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Map</h2>
+                    <div className="aspect-[1/1] w-full overflow-hidden border rounded">
+                      <MapWrapper {...map} itemId={page.title.toUpperCase()} />
+                    </div>
+                  </section>
+                )}
                 {page.primaryAction && (
                   <PageActions primaryAction={page.primaryAction} />
+                )}
+                {!!page.address && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Address</h2>
+                    <div className="flex flex-col">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle as="h4">{page.address.title}</CardTitle>
+                        </CardHeader>
+                        <CardBody>
+                          <p>{page.address.lineOne},</p>
+                          {page.address.lineTwo && (
+                            <p>{page.address.lineTwo}</p>
+                          )}
+                          <p>
+                            {page.address.city}, {page.address.state},{' '}
+                            {page.address.zip}
+                          </p>
+                        </CardBody>
+                      </Card>
+                    </div>
+                  </section>
+                )}
+                {!!page.hours?.length && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Hours</h2>
+                    <div className="flex flex-col gap-4">
+                      <Card>
+                        <CardBody>
+                          <div className="flex flex-col gap-2">
+                            {page.hours.map((hour) => (
+                              <div key={hour.day}>
+                                <p className="font-bold">
+                                  {toTitleCase(hour.day.replace(/-/g, ' '))}
+                                </p>
+                                <p className="text-sm">
+                                  {hour.open} - {hour.close}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </CardBody>
+                      </Card>
+                    </div>
+                  </section>
                 )}
                 {(page.contacts?.length > 0 || page.primaryContact) && (
                   <section>
@@ -127,12 +182,56 @@ export default async function PageController({
                     />
                   </section>
                 )}
-                {!!map && (
+                {!!page.trails?.length && (
                   <section>
-                    <h2 className="text-2xl font-bold mb-4">Map</h2>
-                    <div className="aspect-[1/1] w-full overflow-hidden border rounded">
-                      <MapWrapper {...map} itemId={page.title.toUpperCase()} />
-                    </div>
+                    <h2 className="text-2xl font-bold mb-4">Trails</h2>
+                    <ul>
+                      {page.trails.map((trail) => (
+                        <LinkCard
+                          as="li"
+                          key={trail.slug}
+                          className="my-2"
+                          href={`/trails/${trail.slug}`}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="flex flex-col gap-4">
+                              <CardHeader>
+                                <CardTitle>{trail.title}</CardTitle>
+                              </CardHeader>
+                              <CardBody>
+                                <p className="truncate">{trail.description}</p>
+                              </CardBody>
+                            </div>
+                          </div>
+                        </LinkCard>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+                {!!page.facilities?.length && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Trails</h2>
+                    <ul>
+                      {page.facilities.map((fac) => (
+                        <LinkCard
+                          as="li"
+                          key={fac.slug}
+                          className="my-2"
+                          href={`/trails/${fac.slug}`}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="flex flex-col gap-4">
+                              <CardHeader>
+                                <CardTitle>{fac.title}</CardTitle>
+                              </CardHeader>
+                              <CardBody>
+                                <p className="truncate">{fac.description}</p>
+                              </CardBody>
+                            </div>
+                          </div>
+                        </LinkCard>
+                      ))}
+                    </ul>
                   </section>
                 )}
                 {!!page.districts?.length && (
@@ -169,7 +268,6 @@ export default async function PageController({
                     </ul>
                   </section>
                 )}
-
                 {page.parent && (
                   <section>
                     <h2 className="text-2xl font-bold mb-4">
