@@ -1,4 +1,9 @@
-import { GetCommunityData, GetOrgUnitData, GetServiceData } from './queries';
+import {
+  GetCommunityData,
+  GetOrgUnitData,
+  GetParkItem,
+  GetServiceData,
+} from './queries';
 
 // Converts a union into an intersection
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
@@ -23,11 +28,12 @@ type MergeUnion<T> = {
 type PageTypes =
   | GetServiceData['service']
   | GetCommunityData['community']
-  | GetOrgUnitData['orgUnit'];
+  | GetOrgUnitData['orgUnit']
+  | GetParkItem;
 
 export type PageMerged = MergeUnion<PageTypes>;
 
-export type PageType = 'service' | 'community' | 'orgUnit';
+export type PageType = 'service' | 'community' | 'orgUnit' | 'park';
 
 export type ExternalLink = {
   id: string;
@@ -58,9 +64,31 @@ export type Contact = {
   email?: string | null;
 };
 
+export type PageListItem = {
+  slug: string;
+  id: string;
+  title: string;
+  description?: string | null;
+};
+
 export type Service = {
   slug: string;
   id: string;
   title: string;
   description?: string | null;
+};
+
+export type Address = {
+  title: string;
+  lineOne: string;
+  lineTwo?: string | null;
+  city: string;
+  state: string;
+  zip: string;
+};
+
+export type Hour = {
+  day: string;
+  open: string;
+  close: string;
 };
