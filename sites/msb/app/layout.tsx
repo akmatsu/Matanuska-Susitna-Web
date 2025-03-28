@@ -23,6 +23,7 @@ export default async function RootLayout({
       <body>
         <ApolloWrapper apiUrl={process.env.NEXT_PUBLIC_API_URL || ''}>
           <SiteInfo />
+
           <Header navItems={primaryNav} navLinkAs={Link} />
           <main id="main-content" className="position-relative">
             {children}

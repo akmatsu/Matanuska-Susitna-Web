@@ -1,6 +1,6 @@
 # Matanuska-Susitna Borough Web
 
-This is a monorepo containing all of the MSB's public facing web services. You can find internal documentation for this project at [MSB Web Presence](https://git.ad.matsugov.us/ops/obsidian/msb_obsidian/-/blob/main/freedom/Docs/Projects/MSB%20web/MSB%20Web%20Presence.md?ref_type=heads). If you do not have access to this, talk to your manager or the MSB web team to get access. test
+This is a monorepo containing all of the MSB's public facing web services. You can find internal documentation for this project at [MSB Web Presence](https://git.ad.matsugov.us/ops/obsidian/msb_obsidian/-/blob/main/freedom/Docs/Projects/MSB%20web/MSB%20Web%20Presence.md?ref_type=heads). If you do not have access to this, talk to your manager or the MSB web team to get access.
 
 ## 🚀 Getting Started
 
