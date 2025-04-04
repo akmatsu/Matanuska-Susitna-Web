@@ -64,11 +64,11 @@ export function Footer({
               >
                 <span
                   className={clsx('iconify size-10 text-base-darkest', {
-                    'mdi--facebook': link.label === 'Facebook',
-                    'mdi--twitter': link.label === 'Twitter',
-                    'mdi--youtube': link.label === 'YouTube',
-                    'mdi--instagram': link.label === 'Instagram',
-                    'mdi--rss': link.label === 'RSS',
+                    'icon-[mdi--facebook]': link.label === 'Facebook',
+                    'icon-[mdi--twitter]': link.label === 'Twitter',
+                    'icon-[mdi--youtube]': link.label === 'YouTube',
+                    'icon-[mdi--instagram]': link.label === 'Instagram',
+                    'icon-[mdi--rss]': link.label === 'RSS',
                   })}
                 ></span>
               </Link>

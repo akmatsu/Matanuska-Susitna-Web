@@ -31,11 +31,11 @@ export function Alert({
               'size-8': !!title,
               'size-6': !title,
               '-mt-1': !!title,
-              'mdi--information': type === 'info',
-              'mdi--alert': type === 'warning',
-              'mdi--check-circle': type === 'success',
-              'mdi--alert-circle': type === 'error',
-              'mdi--alert-octagon': type === 'emergency',
+              'icon-[mdi--information]': type === 'info',
+              'icon-[mdi--alert]': type === 'warning',
+              'icon-[mdi--check-circle]': type === 'success',
+              'icon-[mdi--alert-circle]': type === 'error',
+              'icon-[mdi--alert-octagon]': type === 'emergency',
             })}
           ></span>
         )}

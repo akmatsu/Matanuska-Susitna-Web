@@ -52,7 +52,7 @@ export function Combobox<T = any>(props: {
         >
           <p className="text-sm text-base-darker">
             Search for {query}{' '}
-            <span className="iconify mdi--arrow-right size-2"></span>
+            <span className="icon-[mdi--arrow-right] size-2"></span>
           </p>
         </ComboboxOption>
         {props.items?.map((item, index) => (

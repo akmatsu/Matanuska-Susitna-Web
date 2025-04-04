@@ -7,7 +7,7 @@ export default function NotFound() {
       <div className="flex gap-2 items-center">
         <h1 className="flex gap-2 items-center">
           <span>Page Not Found</span>
-          <span className="iconify mdi--alert size-10 text-warning"></span>
+          <span className="icon-[mdi--alert] size-10 text-warning"></span>
         </h1>
       </div>
       <p>

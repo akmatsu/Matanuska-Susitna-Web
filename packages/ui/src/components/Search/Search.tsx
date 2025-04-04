@@ -47,7 +47,7 @@ export function Search({
           icon={useIcon}
         >
           {useIcon ? (
-            <span className="iconify mdi--search size-6"></span>
+            <span className="icon-[mdi--search] size-6"></span>
           ) : (
             'Search'
           )}

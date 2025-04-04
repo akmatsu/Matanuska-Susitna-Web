@@ -1,5 +1,5 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { PageMerged, PageType } from '@msb/js-sdk';
+import { PageMerged, PageType, TrailItem } from '@msb/js-sdk';
 import { TypedDocumentNode } from '@msb/js-sdk/apollo';
 import { redirect } from 'next/navigation';
 import {
@@ -23,6 +23,7 @@ import { PageProps } from '@/types';
 import { ComponentProps } from 'react';
 import { MapWrapper } from './MapWrapper';
 import { toTitleCase } from '@/utils/stringHelpers';
+import { PageTrailInfo } from './PageTrailInfo';
 
 /**
  * The page controller is the primary component for controlling most pages.
@@ -89,6 +90,10 @@ export default async function PageController({
                 description={page.description}
                 body={page.body}
               />
+              {listName === 'trail' && (
+                <PageTrailInfo trail={page as TrailItem} />
+              )}
+              {/* <TrailInfo listName /> */}
               <PageServices
                 services={page.services}
                 filters={{

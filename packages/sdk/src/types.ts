@@ -4,6 +4,7 @@ import {
   GetParkItem,
   GetServiceData,
 } from './queries';
+import { TrailItem } from './queries/getTrail';
 
 // Converts a union into an intersection
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
@@ -29,11 +30,12 @@ type PageTypes =
   | GetServiceData['service']
   | GetCommunityData['community']
   | GetOrgUnitData['orgUnit']
-  | GetParkItem;
+  | GetParkItem
+  | TrailItem;
 
 export type PageMerged = MergeUnion<PageTypes>;
 
-export type PageType = 'service' | 'community' | 'orgUnit' | 'park';
+export type PageType = 'service' | 'community' | 'orgUnit' | 'park' | 'trail';
 
 export type ExternalLink = {
   id: string;
@@ -91,4 +93,10 @@ export type Hour = {
   day: string;
   open: string;
   close: string;
+};
+
+export type WhereSlugVariables = {
+  where: {
+    slug: string;
+  };
 };
