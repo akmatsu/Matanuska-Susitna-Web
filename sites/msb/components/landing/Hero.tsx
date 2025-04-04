@@ -8,22 +8,22 @@ import { InstantSearchAutoComplete } from '@/app/search/components/InstantSearch
 export function Hero() {
   const links: { icon: string; text: string; url: string }[] = [
     {
-      icon: 'mdi--pets',
+      icon: 'icon-[mdi--pets]',
       text: 'Animal Care',
       url: 'https://matsugov.us/animalcare',
     },
     {
-      icon: 'mdi--message-alert',
+      icon: 'icon-[mdi--message-alert]',
       text: 'Problem Reporter',
       url: 'https://problemreporter.matsugov.us/',
     },
     {
-      icon: 'mdi--home',
+      icon: 'icon-[mdi--home]',
       text: 'myProperty Lookup',
       url: 'https://myproperty.matsugov.us/',
     },
     {
-      icon: 'mdi--map',
+      icon: 'icon-[mdi--map]',
       text: 'Parcel Viewer',
       url: 'https://mapping.matsugov.us/Html5Viewer/index.html?viewer=MSB_Parcel_Viewer',
     },

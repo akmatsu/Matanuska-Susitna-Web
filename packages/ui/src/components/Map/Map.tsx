@@ -79,7 +79,7 @@ export function Map({
       ></div>
       {isPending && (
         <div className="w-full h-full flex items-center justify-center">
-          <span className="iconify mdi--loading animate-spin" />
+          <span className="icon-[mdi--loading] animate-spin" />
         </div>
       )}
     </>

@@ -6,3 +6,4 @@ export * from './getService';
 export * from './getServices';
 export * from './getOrgUnit';
 export * from './getPark';
+export * from './getTrail';

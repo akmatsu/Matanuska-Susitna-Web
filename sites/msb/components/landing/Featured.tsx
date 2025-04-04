@@ -3,7 +3,7 @@ import { FeaturedCard, FeaturedCardProps } from './FeaturedCard';
 export function Featured() {
   const featuredItems: FeaturedCardProps[] = [
     {
-      icon: 'mdi--briefcase',
+      icon: 'icon-[mdi--briefcase]',
       title: 'Career Opportunities',
       text: 'View Latest Updates',
       linkUrl: '#public-notices',
@@ -11,7 +11,7 @@ export function Featured() {
         'https://d1159zutbdy4l.cloudfront.net/public/uploads/05620280-c80f-4f5f-b1f6-14d89f12099foptimized_images/1000x667_optimized_image.jpg',
     },
     {
-      icon: 'mdi--legal',
+      icon: 'icon-[mdi--legal]',
       title: 'Legislation',
       text: 'View upcoming meetings',
       linkUrl: '#meetings',
@@ -19,7 +19,7 @@ export function Featured() {
         'https://d1159zutbdy4l.cloudfront.net/public/uploads/d34162a6-3bbd-4356-9e61-7f9f0e2e11c4optimized_images/500x185_optimized_image.jpg',
     },
     {
-      icon: 'mdi--excavator',
+      icon: 'icon-[mdi--excavator]',
       title: 'Projects',
       text: 'View project plans',
       linkUrl: '#projects',

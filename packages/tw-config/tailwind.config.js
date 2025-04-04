@@ -1,4 +1,4 @@
-import { addIconSelectors } from '@iconify/tailwind';
+import { addDynamicIconSelectors } from '@iconify/tailwind';
 import typography from '@tailwindcss/typography';
 import plugin from 'tailwindcss/plugin';
 
@@ -602,7 +602,7 @@ export default {
     },
   },
   plugins: [
-    addIconSelectors(['mdi']),
+    addDynamicIconSelectors(),
     typography,
     plugin(({ addBase, theme, addComponents }) => {
       addBase({

@@ -86,7 +86,7 @@ export function Header({
               href={searchHref}
               className="rounded leading-none font-bold focus-ring shadow text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white size-8 flex items-center justify-center"
             >
-              <span className="iconify mdi--magnify size-6"></span>
+              <span className="icon-[mdi--magnify] size-6"></span>
             </NavLink>
           )}
         </nav>
@@ -104,7 +104,7 @@ export function Header({
                 aria-label="Close menu"
                 className="rounded bg-primary hover:bg-primary-dark active:bg-primary-darker text-white size-8 flex items-center justify-center focus-ring"
               >
-                <span className="iconify mdi--close size-4"></span>
+                <span className="icon-[mdi--close] size-4"></span>
               </button>
 
               <ul className="flex flex-col gap-4">
@@ -127,7 +127,7 @@ export function Header({
                   className="mt-4 w-full rounded leading-none font-bold focus-ring shadow text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white p-2 flex items-center justify-center"
                   onClick={() => setIsOpen(false)}
                 >
-                  <span className="iconify mdi--magnify size-6 mr-2"></span>
+                  <span className="icon-[mdi--magnify] size-6 mr-2"></span>
                   Search
                 </NavLink>
               )}

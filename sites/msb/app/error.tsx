@@ -20,7 +20,7 @@ export default function Error({
       <div className="flex gap-2 items-center">
         <h1 className="flex gap-2 items-center">
           <span>An Error Occurred</span>
-          <span className="iconify mdi--alert size-10 text-error"></span>
+          <span className="icon-[mdi--alert] size-10 text-error"></span>
         </h1>
       </div>
       <p>
