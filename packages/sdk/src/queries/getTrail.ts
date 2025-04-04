@@ -13,23 +13,9 @@ export interface TrailItem {
   body?: string | null;
   description?: string | null;
   heroImage?: string | null;
-  atv?: boolean | null;
-  biking?: boolean | null;
-  crossCountrySkiing?: boolean | null;
-  difficulty?: string | null;
-  dirtBiking?: boolean | null;
-  dogWalking?: boolean | null;
-  elevationChange?: number | null;
-  fall?: boolean | null;
-  frisbeeGolf?: boolean | null;
+
   groomed?: boolean | null;
-  hiking?: boolean | null;
-  horsebackRiding?: boolean | null;
-  mushing?: boolean | null;
   open?: boolean | null;
-  running?: boolean | null;
-  snowMachining?: boolean | null;
-  snowshoeing?: boolean | null;
   spring?: boolean | null;
   summer?: boolean | null;
   winter?: boolean | null;
@@ -37,6 +23,24 @@ export interface TrailItem {
   contacts?: Contact[] | null;
   park?: PageListItem | null;
   services?: PageListItem[] | null;
+  difficulty?: string | null;
+  elevationChange?: number | null;
+  fall?: boolean | null;
+  length?: boolean | null;
+
+  // Uses
+  atv?: boolean | null;
+  biking?: boolean | null;
+  crossCountrySkiing?: boolean | null;
+  dirtBiking?: boolean | null;
+  dogWalking?: boolean | null;
+  frisbeeGolf?: boolean | null;
+  hiking?: boolean | null;
+  horsebackRiding?: boolean | null;
+  mushing?: boolean | null;
+  running?: boolean | null;
+  snowMachining?: boolean | null;
+  snowshoeing?: boolean | null;
 }
 
 export interface TrialData<T = any> {
@@ -63,6 +67,7 @@ export const GET_TRAIL_QUERY = gql`
       body
       heroImage
       description
+      length
       atv
       biking
       crossCountrySkiing

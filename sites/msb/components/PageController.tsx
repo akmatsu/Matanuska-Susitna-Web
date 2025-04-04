@@ -90,10 +90,7 @@ export default async function PageController({
                 description={page.description}
                 body={page.body}
               />
-              {listName === 'trail' && (
-                <PageTrailInfo trail={page as TrailItem} />
-              )}
-              {/* <TrailInfo listName /> */}
+
               <PageServices
                 services={page.services}
                 filters={{
@@ -186,6 +183,9 @@ export default async function PageController({
                       contacts={page.contacts}
                     />
                   </section>
+                )}
+                {listName === 'trail' && (
+                  <PageTrailInfo trail={page as TrailItem} />
                 )}
                 {!!page.trails?.length && (
                   <section>
