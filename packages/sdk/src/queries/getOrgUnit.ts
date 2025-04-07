@@ -1,5 +1,5 @@
-import { gql, TypedDocumentNode } from '@apollo/client';
-import { Contact } from '../types';
+import { gql, type TypedDocumentNode } from '@apollo/client';
+import type { Contact } from './baseTypes';
 
 export interface GetOrgUnitMetaData {
   orgUnit: {

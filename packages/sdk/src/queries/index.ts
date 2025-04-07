@@ -7,3 +7,4 @@ export * from './getServices';
 export * from './getOrgUnit';
 export * from './getPark';
 export * from './getTrail';
+export * from './getFacility';
