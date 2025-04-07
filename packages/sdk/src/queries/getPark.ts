@@ -1,5 +1,5 @@
-import { gql, TypedDocumentNode } from '@apollo/client';
-import { Address, Contact, Hour, PageListItem } from '../types';
+import { gql, type TypedDocumentNode } from '@apollo/client';
+import type { Address, Contact, Hour, PageListItem } from './baseTypes';
 
 export interface GetParkItemMetaData {
   park: {

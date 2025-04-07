@@ -1,5 +1,10 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
-import { Address, Contact, PageListItem, WhereSlugVariables } from '../types';
+import {
+  Address,
+  Contact,
+  PageListItem,
+  WhereSlugVariables,
+} from './baseTypes';
 
 export interface TrailMeta {
   title: string;

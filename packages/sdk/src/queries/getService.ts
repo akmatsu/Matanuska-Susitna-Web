@@ -1,5 +1,5 @@
-import { gql, TypedDocumentNode } from '@apollo/client';
-import { Contact, ExternalLink } from '../types';
+import { gql, type TypedDocumentNode } from '@apollo/client';
+import type { Contact, ExternalLink } from './baseTypes';
 
 export interface GetServiceItem {
   id: string;

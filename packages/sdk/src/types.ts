@@ -4,6 +4,7 @@ import {
   GetParkItem,
   GetServiceData,
 } from './queries';
+import { FacilityItem } from './queries/getFacility';
 import { TrailItem } from './queries/getTrail';
 
 // Converts a union into an intersection
@@ -31,72 +32,15 @@ type PageTypes =
   | GetCommunityData['community']
   | GetOrgUnitData['orgUnit']
   | GetParkItem
-  | TrailItem;
+  | TrailItem
+  | FacilityItem;
 
 export type PageMerged = MergeUnion<PageTypes>;
 
-export type PageType = 'service' | 'community' | 'orgUnit' | 'park' | 'trail';
-
-export type ExternalLink = {
-  id: string;
-  label?: string | null;
-  url: SavedUrl;
-};
-
-export type SavedUrl = {
-  id: string;
-  url: string;
-  title: string;
-};
-
-// Not sure if I need this. Not being used atm.
-// export type BasePage = {
-//   id: string;
-//   title: string;
-//   slug?: string;
-//   body?: string | null;
-//   description?: string | null;
-// };
-
-export type Contact = {
-  id: string;
-  name: string;
-  title?: string | null;
-  phone?: string | null;
-  email?: string | null;
-};
-
-export type PageListItem = {
-  slug: string;
-  id: string;
-  title: string;
-  description?: string | null;
-};
-
-export type Service = {
-  slug: string;
-  id: string;
-  title: string;
-  description?: string | null;
-};
-
-export type Address = {
-  title: string;
-  lineOne: string;
-  lineTwo?: string | null;
-  city: string;
-  state: string;
-  zip: string;
-};
-
-export type Hour = {
-  day: string;
-  open: string;
-  close: string;
-};
-
-export type WhereSlugVariables = {
-  where: {
-    slug: string;
-  };
-};
+export type PageType =
+  | 'service'
+  | 'community'
+  | 'orgUnit'
+  | 'park'
+  | 'trail'
+  | 'facility';

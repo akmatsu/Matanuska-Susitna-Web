@@ -1,5 +1,5 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
-import { Contact } from '../types';
+import { Contact } from './baseTypes';
 
 export interface GetCommunityItemMeta {
   title: string;
