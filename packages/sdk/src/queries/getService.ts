@@ -5,6 +5,7 @@ export interface GetServiceItem {
   id: string;
   title: string;
   body: string;
+  heroImage?: string | null;
   primaryAction?: ExternalLink | null;
   primaryContact?: Contact | null;
   contacts?: Contact[] | null;
@@ -50,6 +51,7 @@ export const GET_SERVICE_QUERY: TypedDocumentNode<
       id
       slug
       title
+      heroImage
       body
       primaryAction {
         id
