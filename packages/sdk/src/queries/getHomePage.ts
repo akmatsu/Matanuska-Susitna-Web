@@ -36,11 +36,10 @@ export const GET_HOME_PAGE_META: TypedDocumentNode<HomePageData<HomePageMeta>> =
   `;
 
 export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
-  query getHomePage {
+  query HomePage {
     homePage {
       id
       title
-      heroImage
       description
       toolbeltOne {
         id
@@ -48,7 +47,57 @@ export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
         title
         linkedItem {
           label
-          selectItem
+          item {
+            __typename
+            ... on Service {
+              id
+              title
+              slug
+              description
+            }
+            ... on Park {
+              id
+              title
+              slug
+              description
+            }
+            ... on Trail {
+              id
+              title
+              slug
+              description
+            }
+            ... on Facility {
+              id
+              title
+              slug
+              description
+            }
+            ... on Community {
+              id
+              title
+              slug
+              description
+            }
+            ... on AssemblyDistrict {
+              id
+              title
+              slug
+              description
+            }
+            ... on OrgUnit {
+              id
+              title
+              slug
+              description
+            }
+            ... on Url {
+              id
+              title
+              description
+              url
+            }
+          }
         }
       }
       toolbeltTwo {
@@ -57,7 +106,57 @@ export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
         title
         linkedItem {
           label
-          selectItem
+          item {
+            __typename
+            ... on Service {
+              id
+              title
+              slug
+              description
+            }
+            ... on Park {
+              id
+              title
+              slug
+              description
+            }
+            ... on Trail {
+              id
+              title
+              slug
+              description
+            }
+            ... on Facility {
+              id
+              title
+              slug
+              description
+            }
+            ... on Community {
+              id
+              title
+              slug
+              description
+            }
+            ... on AssemblyDistrict {
+              id
+              title
+              slug
+              description
+            }
+            ... on OrgUnit {
+              id
+              title
+              slug
+              description
+            }
+            ... on Url {
+              id
+              title
+              description
+              url
+            }
+          }
         }
       }
       toolbeltThree {
@@ -66,6 +165,57 @@ export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
         title
         linkedItem {
           label
+          item {
+            __typename
+            ... on Service {
+              id
+              title
+              slug
+              description
+            }
+            ... on Park {
+              id
+              title
+              slug
+              description
+            }
+            ... on Trail {
+              id
+              title
+              slug
+              description
+            }
+            ... on Facility {
+              id
+              title
+              slug
+              description
+            }
+            ... on Community {
+              id
+              title
+              slug
+              description
+            }
+            ... on AssemblyDistrict {
+              id
+              title
+              slug
+              description
+            }
+            ... on OrgUnit {
+              id
+              title
+              slug
+              description
+            }
+            ... on Url {
+              id
+              title
+              description
+              url
+            }
+          }
           selectItem
         }
       }
@@ -75,7 +225,57 @@ export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
         title
         linkedItem {
           label
-          selectItem
+          item {
+            __typename
+            ... on Service {
+              id
+              title
+              slug
+              description
+            }
+            ... on Park {
+              id
+              title
+              slug
+              description
+            }
+            ... on Trail {
+              id
+              title
+              slug
+              description
+            }
+            ... on Facility {
+              id
+              title
+              slug
+              description
+            }
+            ... on Community {
+              id
+              title
+              slug
+              description
+            }
+            ... on AssemblyDistrict {
+              id
+              title
+              slug
+              description
+            }
+            ... on OrgUnit {
+              id
+              title
+              slug
+              description
+            }
+            ... on Url {
+              id
+              title
+              description
+              url
+            }
+          }
         }
       }
       highlightOne {
@@ -84,7 +284,57 @@ export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
         title
         linkedItem {
           label
-          selectItem
+          item {
+            __typename
+            ... on Service {
+              id
+              title
+              slug
+              description
+            }
+            ... on Park {
+              id
+              title
+              slug
+              description
+            }
+            ... on Trail {
+              id
+              title
+              slug
+              description
+            }
+            ... on Facility {
+              id
+              title
+              slug
+              description
+            }
+            ... on Community {
+              id
+              title
+              slug
+              description
+            }
+            ... on AssemblyDistrict {
+              id
+              title
+              slug
+              description
+            }
+            ... on OrgUnit {
+              id
+              title
+              slug
+              description
+            }
+            ... on Url {
+              id
+              title
+              description
+              url
+            }
+          }
         }
       }
       highlightTwo {
@@ -93,7 +343,57 @@ export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
         title
         linkedItem {
           label
-          selectItem
+          item {
+            __typename
+            ... on Service {
+              id
+              title
+              slug
+              description
+            }
+            ... on Park {
+              id
+              title
+              slug
+              description
+            }
+            ... on Trail {
+              id
+              title
+              slug
+              description
+            }
+            ... on Facility {
+              id
+              title
+              slug
+              description
+            }
+            ... on Community {
+              id
+              title
+              slug
+              description
+            }
+            ... on AssemblyDistrict {
+              id
+              title
+              slug
+              description
+            }
+            ... on OrgUnit {
+              id
+              title
+              slug
+              description
+            }
+            ... on Url {
+              id
+              title
+              description
+              url
+            }
+          }
         }
       }
       highlightThree {
@@ -102,7 +402,57 @@ export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
         title
         linkedItem {
           label
-          selectItem
+          item {
+            __typename
+            ... on Service {
+              id
+              title
+              slug
+              description
+            }
+            ... on Park {
+              id
+              title
+              slug
+              description
+            }
+            ... on Trail {
+              id
+              title
+              slug
+              description
+            }
+            ... on Facility {
+              id
+              title
+              slug
+              description
+            }
+            ... on Community {
+              id
+              title
+              slug
+              description
+            }
+            ... on AssemblyDistrict {
+              id
+              title
+              slug
+              description
+            }
+            ... on OrgUnit {
+              id
+              title
+              slug
+              description
+            }
+            ... on Url {
+              id
+              title
+              description
+              url
+            }
+          }
         }
       }
     }
