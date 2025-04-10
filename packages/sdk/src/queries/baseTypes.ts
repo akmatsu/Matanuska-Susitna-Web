@@ -52,3 +52,19 @@ export type WhereSlugVariables = {
     slug: string;
   };
 };
+
+export type Highlight = {
+  id: string;
+  image: string | null;
+  title: string;
+  linkedItem: {
+    label: string;
+    item?: {
+      id: string;
+      title: string;
+      slug?: string;
+      description?: string | null;
+      url?: string;
+    };
+  };
+};
