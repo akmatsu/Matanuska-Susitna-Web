@@ -5,6 +5,8 @@ import { GET_HOME_PAGE } from '@msb/js-sdk';
 import { InstantSearchAutoComplete } from './search/components/InstantSearchAutoComplete';
 import Link from 'next/link';
 
+// TODO - Figure out how to dynamically load icons from CMS
+
 export default async function Home() {
   const { data, errors, error } = await getClient().query({
     query: GET_HOME_PAGE,
@@ -85,7 +87,13 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <Featured />
+      <Featured
+        featuredItems={[
+          { ...page.highlightOne, icon: 'icon-[mdi--briefcase]' },
+          { ...page.highlightTwo, icon: 'icon-[mdi--legal]' },
+          { ...page.highlightThree, icon: 'icon-[mdi--excavator]' },
+        ]}
+      />
 
       <section className="max-w-6xl mx-auto px-4 py-16">
         <h2 className="mb-4 text-3xl font-bold">Upcoming Meetings</h2>
