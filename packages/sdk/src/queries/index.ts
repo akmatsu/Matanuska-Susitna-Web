@@ -8,4 +8,5 @@ export * from './getOrgUnit';
 export * from './getPark';
 export * from './getTrail';
 export * from './getFacility';
+export * from './getHomePage';
 export * from './baseTypes';
