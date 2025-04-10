@@ -41,6 +41,7 @@ export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
       id
       title
       description
+      heroImage
       toolbeltOne {
         id
         image
