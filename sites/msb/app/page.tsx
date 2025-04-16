@@ -10,10 +10,13 @@ import Link from 'next/link';
 export default async function Home() {
   const { data, errors, error } = await getClient().query({
     query: GET_HOME_PAGE,
+    variables: {
+      take: 5,
+    },
     context: {
       fetchOptions: {
         next: {
-          revalidate: 300,
+          revalidate: 15,
         },
       },
     },
@@ -25,6 +28,7 @@ export default async function Home() {
   }
 
   const page = data.homePage;
+  const publicNotices = data.publicNotices || [];
 
   return (
     <div>
@@ -100,13 +104,15 @@ export default async function Home() {
 
         <Meetings />
       </section>
-      <section className="max-w-6xl mx-auto px-4 py-16">
-        <h2 className="mb-4 text-3xl font-bold">
-          Announcement & Public Notices
-        </h2>
+      {publicNotices.length > 0 && (
+        <section className="max-w-6xl mx-auto px-4 py-16">
+          <h2 className="mb-4 text-3xl font-bold">
+            Announcement & Public Notices
+          </h2>
 
-        <FeaturedContent />
-      </section>
+          <FeaturedContent items={publicNotices} />
+        </section>
+      )}
 
       <section className="max-w-6xl mx-auto px-4 py-16">
         <h2 className="mb-4 text-3xl font-bold">Can't find what you need?</h2>
