@@ -1,4 +1,5 @@
 import { LinkCard, CardHeader, CardMedia, CardTitle } from '@matsugov/ui';
+import Image from 'next/image';
 
 export type FeaturedCardProps = {
   icon: string;
@@ -13,12 +14,13 @@ export function FeaturedCard(props: FeaturedCardProps) {
   return (
     <LinkCard href={props.linkUrl}>
       {props.imageUrl && (
-        <CardMedia className="aspect-[2] overflow-hidden">
-          <img
-            src={props.imageUrl}
-            alt={props.imageAlt}
+        <CardMedia className="aspect-[2] overflow-hidden relative">
+          <Image
+            src={props.imageUrl.split('?')[0]} // Remove query params
+            alt={props.imageAlt || ''}
             loading="lazy"
             className="aspect-[2] object-cover h-full w-full"
+            fill
           />
         </CardMedia>
       )}

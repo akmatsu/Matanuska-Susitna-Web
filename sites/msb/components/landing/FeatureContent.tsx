@@ -18,15 +18,15 @@ export function FeaturedContent({
     <ul>
       {items.map((item) => (
         <LinkCard key={item.id} href="#" as="li" linkAs={Link}>
-          <Image src={item.heroImage || ''} alt={item.description || ''} fill />
-          {/* <CardMedia className="aspect-[2] overflow-hidden">
-            <img
-              loading="lazy"
-              className="aspect-[2] object-cover h-full w-full"
-              src={item.heroImage || ''}
-            ></img>
+          <CardMedia className="aspect-[2] overflow-hidden relative">
+            <Image
+              src={item.heroImage?.split('?')[0] || ''}
+              alt={item.description || ''}
+              objectFit="cover"
+              fill
+            />
           </CardMedia>
-          */}
+
           <div>
             <CardHeader>
               <CardTitle>{item.title}</CardTitle>

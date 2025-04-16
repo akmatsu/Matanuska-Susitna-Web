@@ -18,6 +18,9 @@ type HeaderProps = {
   /** The component to use for the nav links */
   navLinkAs?: React.ElementType;
 
+  /** The component to use for the image */
+  imageAs?: React.ElementType;
+
   /** The href for the search link */
   searchHref?: string;
 
@@ -37,11 +40,13 @@ export function Header({
   orgLogoAlt = appConfig.orgLogoAlt,
   homeHref = '/',
   navLinkAs = 'a',
+  imageAs = 'img',
   navItems = [],
   searchHref = '/search',
   search = true,
 }: HeaderProps) {
   const NavLink = navLinkAs;
+  const Image = imageAs;
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -49,10 +54,12 @@ export function Header({
       <div className="flex items-center justify-between w-full min-h-full">
         <NavLink href={homeHref} className="no-underline text-base-darkest">
           <div className="flex items-center gap-2">
-            <img
+            <Image
               src={orgLogo}
               alt={orgLogoAlt}
               className="size-10 lg:size-14"
+              width={56}
+              height={56}
             />
             <span className="text-sm lg:text-2xl font-bold">{orgName}</span>
           </div>
