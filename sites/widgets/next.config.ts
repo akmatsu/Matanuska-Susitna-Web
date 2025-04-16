@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
       '@msb/js-sdk/apollo',
     ],
   },
+  images: {
+    remotePatterns: [{ hostname: 'd1159zutbdy4l.cloudfront.net' }],
+  },
 };
 
 export default nextConfig;

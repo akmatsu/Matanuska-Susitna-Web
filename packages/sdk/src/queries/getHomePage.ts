@@ -1,5 +1,5 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
-import { Highlight, PageListItem } from './baseTypes';
+import { Highlight, PageListItem, TakeVariable } from './baseTypes';
 
 export interface HomePageMeta {
   title: string;
@@ -25,18 +25,20 @@ export interface HomePageData<T = any> {
   publicNotices?: (PageListItem & { heroImage?: string | null })[];
 }
 
-export const GET_HOME_PAGE_META: TypedDocumentNode<HomePageData<HomePageMeta>> =
-  gql`
-    query getHomePageMeta {
-      homePage {
-        title
-        description
-      }
+export const GET_HOME_PAGE_META: TypedDocumentNode<
+  HomePageData<HomePageMeta>,
+  TakeVariable
+> = gql`
+  query getHomePageMeta {
+    homePage {
+      title
+      description
     }
-  `;
+  }
+`;
 
 export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
-  query HomePage {
+  query HomePage($take: Int) {
     homePage {
       id
       title
@@ -457,7 +459,7 @@ export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
         }
       }
     }
-    publicNotices {
+    publicNotices(take: $take) {
       id
       slug
       title

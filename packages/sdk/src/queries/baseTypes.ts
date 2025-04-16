@@ -53,6 +53,10 @@ export type WhereSlugVariables = {
   };
 };
 
+export type TakeVariable = {
+  take?: number | null;
+};
+
 export type Highlight = {
   id: string;
   image: string | null;
