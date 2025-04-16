@@ -21,7 +21,6 @@ export function Autocomplete() {
   const router = useRouter();
 
   function onChange(value?: Hit | null) {
-    console.log(value);
     if (value?.url) {
       router.push(value.url);
     } else if (value?.slug) {

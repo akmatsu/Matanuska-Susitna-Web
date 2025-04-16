@@ -6,6 +6,7 @@ import { FeedbackButton } from '@/components/FeedbackButton';
 import { Header, Footer } from '@matsugov/ui';
 import Link from 'next/link';
 import { primaryNav } from '@/configs/config';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',
@@ -24,12 +25,12 @@ export default async function RootLayout({
         <ApolloWrapper apiUrl={process.env.NEXT_PUBLIC_API_URL || ''}>
           <SiteInfo />
 
-          <Header navItems={primaryNav} navLinkAs={Link} />
+          <Header navItems={primaryNav} navLinkAs={Link} imageAs={Image} />
           <main id="main-content" className="position-relative">
             {children}
           </main>
           <FeedbackButton />
-          <Footer navLinkAs={Link} navItems={primaryNav} />
+          <Footer navLinkAs={Link} navItems={primaryNav} imageAs={Image} />
         </ApolloWrapper>
       </body>
     </html>

@@ -17,6 +17,12 @@ const nextConfig = {
       '@msb/js-sdk/apollo',
     ],
   },
+  images: {
+    remotePatterns: [
+      new URL('https://d1159zutbdy4l.cloudfront.net/**'),
+      new URL('https://images.matsu.gov/**'),
+    ],
+  },
 };
 
 export default nextConfig;

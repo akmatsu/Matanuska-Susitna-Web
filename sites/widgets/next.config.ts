@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
     ],
   },
   images: {
-    remotePatterns: [{ hostname: 'd1159zutbdy4l.cloudfront.net' }],
+    remotePatterns: [new URL('https://d1159zutbdy4l.cloudfront.net/**')],
   },
 };
 

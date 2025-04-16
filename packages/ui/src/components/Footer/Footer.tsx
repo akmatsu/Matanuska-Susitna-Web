@@ -4,6 +4,7 @@ import clsx from 'clsx';
 
 export function Footer({
   navLinkAs = 'a',
+  imageAs = 'img',
   navItems = [],
   orgName = appConfig.orgName,
   orgLogo = appConfig.orgLogoUrl,
@@ -14,6 +15,7 @@ export function Footer({
   contactHref = '#contact',
 }: {
   navLinkAs?: React.ElementType;
+  imageAs?: React.ElementType;
   navItems?: { href: string; label: string }[];
   orgName?: string;
   orgLogo?: string;
@@ -24,6 +26,7 @@ export function Footer({
   contactHref?: string;
 }) {
   const Link = navLinkAs;
+  const Image = imageAs;
 
   return (
     <footer>
@@ -47,7 +50,13 @@ export function Footer({
       <div className="px-4 py-5 bg-base-lighter flex justify-between items-center gap-4 flex-wrap">
         <Link href={homeHref} className="flex items-center gap-2">
           <div className="flex items-center gap-2">
-            <img src={orgLogo} alt={orgLogoAlt} className="size-20" />
+            <Image
+              src={orgLogo}
+              alt={orgLogoAlt}
+              className="size-20"
+              width={80}
+              height={80}
+            />
             <span className="sm:text-2xl font-bold no-underline text-base-darkest">
               {orgName}
             </span>

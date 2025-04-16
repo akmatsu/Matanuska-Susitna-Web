@@ -24,6 +24,7 @@ import { ComponentProps } from 'react';
 import { MapWrapper } from './MapWrapper';
 import { toTitleCase } from '@/utils/stringHelpers';
 import { PageTrailInfo } from './PageTrailInfo';
+import Image from 'next/image';
 
 /**
  * The page controller is the primary component for controlling most pages.
@@ -108,7 +109,7 @@ export default async function PageController({
               {listName !== 'service' && (
                 <section>
                   <h2 className="text-2xl font-bold mb-4">Announcements</h2>
-                  <FeaturedContent />
+                  {/* <FeaturedContent /> */}
                 </section>
               )}
             </div>
@@ -261,10 +262,13 @@ export default async function PageController({
                                 </div>
                               </CardBody>
                             </div>
-                            <div className="pr-6">
-                              <img
-                                src={district.photo?.file.url}
+                            <div className="pr-6 relative">
+                              <Image
+                                src={district.photo?.file.url || ''}
+                                alt={`${district.title} assembly member photo`}
                                 className="rounded-full size-20"
+                                width={80}
+                                height={80}
                               />
                             </div>
                           </div>

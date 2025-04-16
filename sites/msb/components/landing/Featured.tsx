@@ -6,7 +6,6 @@ export function Featured({
 }: {
   featuredItems: (Highlight & { icon: string })[];
 }) {
-  console.log(featuredItems[0].linkedItem);
   return (
     <section className="max-w-6xl mx-auto relative px-4 py-16">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
