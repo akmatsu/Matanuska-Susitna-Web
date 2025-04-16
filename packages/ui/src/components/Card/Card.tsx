@@ -88,12 +88,32 @@ export function CardTitle({
   );
 }
 
-export function CardHeader({ children }: { children: React.ReactNode }) {
-  return <div className="px-6 first:pt-6 last:pb-6">{children}</div>;
+export function CardHeader({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={clsx('px-6 first:pt-6 last:pb-6', className)}>
+      {children}
+    </div>
+  );
 }
 
-export function CardBody({ children }: { children: React.ReactNode }) {
-  return <div className="px-6 first:pt-6 last:pb-6">{children}</div>;
+export function CardBody({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={clsx('px-6 first:pt-6 last:pb-6', className)}>
+      {children}
+    </div>
+  );
 }
 
 export function CardFooter({

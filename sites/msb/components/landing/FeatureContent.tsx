@@ -4,10 +4,13 @@ import {
   CardBody,
   CardMedia,
   CardTitle,
+  Button,
 } from '@matsugov/ui';
 import Link from 'next/link';
 import { PageListItem } from '@msb/js-sdk';
 import Image from 'next/image';
+import clsx from 'clsx';
+import { LinkButton } from '../LinkButton';
 
 export function FeaturedContent({
   items,
@@ -15,86 +18,53 @@ export function FeaturedContent({
   items: (PageListItem & { heroImage?: string | null })[];
 }) {
   return (
-    <ul>
-      {items.map((item) => (
-        <LinkCard key={item.id} href="#" as="li" linkAs={Link}>
-          <CardMedia className="aspect-[2] overflow-hidden relative">
-            <Image
-              src={item.heroImage?.split('?')[0] || ''}
-              alt={item.description || ''}
-              objectFit="cover"
-              fill
-            />
-          </CardMedia>
-
-          <div>
-            <CardHeader>
-              <CardTitle>{item.title}</CardTitle>
-            </CardHeader>
-            <CardBody>
-              <p>{item.description}</p>
-            </CardBody>
-          </div>
-        </LinkCard>
-      ))}
-    </ul>
-    // <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    //   <LinkCard href="#" as="li" linkAs={Link}>
-    //     <CardMedia className="aspect-[2] overflow-hidden">
-    //       <img
-    //         loading="lazy"
-    //         className="aspect-[2] object-cover h-full w-full"
-    //         src="https://d1159zutbdy4l.cloudfront.net/public/uploads/329eb210-c21f-4049-b2e9-3e0c3bf7e62aoptimized_images/1000x750_optimized_image.jpg"
-    //       ></img>
-    //     </CardMedia>
-    //     <CardHeader>
-    //       <CardTitle>Magna ad ad eu ipsum.</CardTitle>
-    //     </CardHeader>
-
-    //     <CardBody>
-    //       <p>
-    //         Magna ad ad eu ipsum. Aliqua pariatur deserunt amet anim et. Enim eu
-    //         reprehenderit sit cupidatat sunt ipsum quis ea labore reprehenderit
-    //         in eu ad aliquip. Exercitation officia culpa consequat enim labore
-    //         in pariatur.
-    //       </p>
-    //     </CardBody>
-    //   </LinkCard>
-    //   <div className="flex flex-col gap-4 justify-between">
-    //     <LinkCard href="#" as="li" linkAs={Link}>
-    //       <CardHeader>
-    //         <CardTitle className="text-lg">
-    //           Tempor non aliquip in fugiat nulla tempor.
-    //         </CardTitle>
-    //       </CardHeader>
-    //     </LinkCard>
-
-    //     <LinkCard href="#" as="li" linkAs={Link}>
-    //       <CardHeader>
-    //         <CardTitle className="text-lg">
-    //           Tempor non aliquip in fugiat nulla tempor.
-    //         </CardTitle>
-    //       </CardHeader>
-    //     </LinkCard>
-    //     <LinkCard href="#" as="li" linkAs={Link}>
-    //       <CardHeader>
-    //         <CardTitle className="text-lg">
-    //           Tempor non aliquip in fugiat nulla tempor.
-    //         </CardTitle>
-    //       </CardHeader>
-    //     </LinkCard>
-    //     <LinkCard href="#" as="li" linkAs={Link}>
-    //       <CardHeader>
-    //         <CardTitle className="text-lg">
-    //           Tempor non aliquip in fugiat nulla tempor.
-    //         </CardTitle>
-    //       </CardHeader>
-    //     </LinkCard>
-
-    //     <LinkButton href="#see-all" block big>
-    //       See all
-    //     </LinkButton>
-    //   </div>
-    // </ul>
+    <div className="flex flex-col items-center gap-4">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {items.map((item, index) => (
+          <LinkCard
+            key={item.id}
+            href={`/public-notices/${item.slug}`}
+            as="li"
+            linkAs={Link}
+            className={clsx('h-full', {
+              'col-span-1 sm:col-span-2': index === 0,
+            })}
+          >
+            {index === 0 ? (
+              <div className="flex">
+                <CardMedia className="relative w-2/3 aspect-video">
+                  <Image
+                    src={item.heroImage?.split('?')[0] || ''}
+                    alt={item.title}
+                    objectFit="cover"
+                    fill
+                  />
+                </CardMedia>
+                <div className="flex flex-col justify-center">
+                  <CardHeader className="mb-4">
+                    <CardTitle>{item.title}</CardTitle>
+                  </CardHeader>
+                  <CardBody>
+                    <p>{item.description}</p>
+                  </CardBody>
+                </div>
+              </div>
+            ) : (
+              <>
+                <CardHeader>
+                  <CardTitle>{item.title}</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <p>{item.description}</p>
+                </CardBody>
+              </>
+            )}
+          </LinkCard>
+        ))}
+      </ul>
+      <LinkButton href="/public-notices" big>
+        View All Announcements & Public Notices
+      </LinkButton>
+    </div>
   );
 }
