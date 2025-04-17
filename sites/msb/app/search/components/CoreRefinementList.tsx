@@ -4,6 +4,14 @@ import { RefinementListProps, useRefinementList } from 'react-instantsearch';
 export function CustomRefinementList(props: RefinementListProps) {
   const { items, refine } = useRefinementList(props);
 
+  function getLabel(str: string) {
+    if (props.attribute === 'related_pages') {
+      const index = str.indexOf(':');
+      return index !== -1 ? str.slice(index + 1) : str;
+    }
+    return str;
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -16,7 +24,7 @@ export function CustomRefinementList(props: RefinementListProps) {
               <Checkbox
                 checked={item.isRefined}
                 onChange={(e) => refine(item.value)}
-                label={`${item.label} (${item.count})`}
+                label={`${getLabel(item.label)} (${item.count})`}
               />
             </li>
           ))}
