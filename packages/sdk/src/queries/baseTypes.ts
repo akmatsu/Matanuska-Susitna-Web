@@ -57,18 +57,30 @@ export type TakeVariable = {
   take?: number | null;
 };
 
+export type LinkedItem = {
+  label: string;
+  item?: {
+    id: string;
+    title: string;
+    slug?: string;
+    description?: string | null;
+    url?: string;
+  };
+};
+
+export type Document = {
+  id: string;
+  title: string;
+  file: {
+    filename: string;
+    url: string;
+    filesize: number;
+  };
+};
+
 export type Highlight = {
   id: string;
   image: string | null;
   title: string;
-  linkedItem: {
-    label: string;
-    item?: {
-      id: string;
-      title: string;
-      slug?: string;
-      description?: string | null;
-      url?: string;
-    };
-  };
+  linkedItem: LinkedItem;
 };

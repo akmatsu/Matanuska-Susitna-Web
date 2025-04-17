@@ -3,6 +3,7 @@ import {
   GetOrgUnitData,
   GetParkItem,
   GetServiceData,
+  PublicNoticeItem,
 } from './queries';
 import { FacilityItem } from './queries/getFacility';
 import { TrailItem } from './queries/getTrail';
@@ -33,7 +34,8 @@ type PageTypes =
   | GetOrgUnitData['orgUnit']
   | GetParkItem
   | TrailItem
-  | FacilityItem;
+  | FacilityItem
+  | PublicNoticeItem;
 
 export type PageMerged = MergeUnion<PageTypes>;
 
@@ -43,4 +45,5 @@ export type PageType =
   | 'orgUnit'
   | 'park'
   | 'trail'
-  | 'facility';
+  | 'facility'
+  | 'publicNotice';
