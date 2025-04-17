@@ -1,4 +1,5 @@
 import { SearchListItem } from '@/components/search/SearchListItem';
+import pluralize from 'pluralize';
 import { ComponentProps } from 'react';
 import { Hits, useHits } from 'react-instantsearch';
 
@@ -11,15 +12,7 @@ export function CoreSearchHits(props: ComponentProps<typeof Hits>) {
         <SearchListItem
           key={item.slug}
           item={item}
-          listKey={
-            item.type === 'service'
-              ? 'services'
-              : item.type === 'community'
-                ? 'communities'
-                : item.type === 'department'
-                  ? 'departments'
-                  : 'pages'
-          }
+          listKey={pluralize(item.type)}
         />
       ))}
       {items.length === 0 && <p>No Results</p>}
