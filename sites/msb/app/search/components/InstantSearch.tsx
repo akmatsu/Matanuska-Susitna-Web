@@ -46,6 +46,11 @@ export function InstantSearch() {
                 title="Communities"
                 sortBy={['name', 'count']}
               />
+              <CustomRefinementList
+                attribute="related_pages"
+                title="Related Pages"
+                sortBy={['count', 'name']}
+              />
             </DynamicWidgets>
           </div>
         }
