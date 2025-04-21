@@ -46,7 +46,6 @@ export const GET_PUBLIC_NOTICE: TypedDocumentNode<
       id
       slug
       title
-      liveUrl
       heroImage
       body
       description
