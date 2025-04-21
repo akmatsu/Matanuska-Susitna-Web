@@ -3,6 +3,8 @@ import {
   Address,
   Contact,
   PageListItem,
+  PublicNoticeWhere,
+  TakeVariable,
   WhereSlugVariables,
 } from './baseTypes';
 
@@ -64,8 +66,16 @@ export const GET_TRAIL_META_QUERY: TypedDocumentNode<
   }
 `;
 
-export const GET_TRAIL_QUERY = gql`
-  query Trail($where: TrailWhereUniqueInput!) {
+export const GET_TRAIL_QUERY: TypedDocumentNode<
+  TrialData<TrailItem>,
+  WhereSlugVariables & PublicNoticeWhere & TakeVariable
+> = gql`
+  query Trail(
+    $where: TrailWhereUniqueInput!
+    $publicNoticesWhere2: PublicNoticeWhereInput!
+    $take: Int
+    $orderBy: [PublicNoticeOrderByInput!]!
+  ) {
     trail(where: $where) {
       id
       title
@@ -121,6 +131,14 @@ export const GET_TRAIL_QUERY = gql`
         slug
         description
       }
+    }
+    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+      id
+      slug
+      title
+      description
+      heroImage
+      urgency
     }
   }
 `;

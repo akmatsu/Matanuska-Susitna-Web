@@ -1,5 +1,11 @@
 import { gql, type TypedDocumentNode } from '@apollo/client';
-import type { Contact, ExternalLink } from './baseTypes';
+import type {
+  Contact,
+  ExternalLink,
+  PublicNoticeWhere,
+  TakeVariable,
+  WhereSlugVariables,
+} from './baseTypes';
 
 export interface GetServiceItem {
   id: string;
@@ -24,15 +30,9 @@ export interface GetServiceData {
   service: GetServiceItem;
 }
 
-export interface GetServiceVariables {
-  where: {
-    slug: string;
-  };
-}
-
 export const GET_SERVICE_META_QUERY: TypedDocumentNode<
   GetServiceItemMetaData,
-  GetServiceVariables
+  WhereSlugVariables
 > = gql`
   query GetServiceMetaQuery($where: ServiceWhereUniqueInput!) {
     service(where: $where) {
@@ -44,9 +44,14 @@ export const GET_SERVICE_META_QUERY: TypedDocumentNode<
 
 export const GET_SERVICE_QUERY: TypedDocumentNode<
   GetServiceData,
-  GetServiceVariables
+  WhereSlugVariables & PublicNoticeWhere & TakeVariable
 > = gql`
-  query GetService($where: ServiceWhereUniqueInput!) {
+  query GetService(
+    $where: ServiceWhereUniqueInput!
+    $publicNoticesWhere2: PublicNoticeWhereInput!
+    $take: Int
+    $orderBy: [PublicNoticeOrderByInput!]!
+  ) {
     service(where: $where) {
       id
       slug
@@ -74,6 +79,14 @@ export const GET_SERVICE_QUERY: TypedDocumentNode<
         phone
         email
       }
+    }
+    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+      id
+      slug
+      title
+      description
+      heroImage
+      urgency
     }
   }
 `;
