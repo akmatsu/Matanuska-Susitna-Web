@@ -16,7 +16,6 @@ import { PageContacts } from './PageContacts';
 import { PageBody } from './PageBody';
 import clsx from 'clsx';
 import { Meetings } from './Meetings';
-import { FeaturedContent } from './landing';
 import { PageServices } from './PageServices';
 import pluralize from 'pluralize';
 import { PageProps } from '@/types';
@@ -25,6 +24,7 @@ import { MapWrapper } from './MapWrapper';
 import { toTitleCase } from '@/utils/stringHelpers';
 import { PageTrailInfo } from './PageTrailInfo';
 import Image from 'next/image';
+import { PageDocuments } from './PageDocuments';
 
 /**
  * The page controller is the primary component for controlling most pages.
@@ -100,7 +100,7 @@ export default async function PageController({
                     : pluralize(listName)]: [page.title],
                 }}
               />
-              {listName !== 'service' && (
+              {listName !== 'service' && listName !== 'publicNotice' && (
                 <section>
                   <h2 className="text-2xl font-bold mb-4">Events</h2>
                   <Meetings />
@@ -130,6 +130,9 @@ export default async function PageController({
                 )}
                 {page.primaryAction && (
                   <PageActions primaryAction={page.primaryAction} />
+                )}
+                {page.documents?.length && (
+                  <PageDocuments documents={page.documents} />
                 )}
                 {!!page.address && (
                   <section>
@@ -188,6 +191,7 @@ export default async function PageController({
                 {listName === 'trail' && (
                   <PageTrailInfo trail={page as TrailItem} />
                 )}
+
                 {!!page.trails?.length && (
                   <section>
                     <h2 className="text-2xl font-bold mb-4">Trails</h2>

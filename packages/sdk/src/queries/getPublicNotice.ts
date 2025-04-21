@@ -1,5 +1,5 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
-import { Contact, LinkedItem, WhereSlugVariables } from './baseTypes';
+import { Contact, Document, LinkedItem, WhereSlugVariables } from './baseTypes';
 
 export interface PublicNoticeMetaData {
   title: string;
@@ -18,6 +18,7 @@ export interface PublicNoticeItem {
   documents?: Document[] | null;
   effectiveDate?: string | null;
   endDate?: string | null;
+  urgency?: number | null;
 }
 
 export interface ParkData<T = any> {

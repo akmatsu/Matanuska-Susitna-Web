@@ -78,7 +78,7 @@ function Document({
           </span>
         </span>
         <span
-          className={clsx('iconify flex-none', {
+          className={clsx('flex-none', {
             'icon-[mdi--download]': fileType !== 'PDF',
             'icon-[mdi--external-link]': fileType === 'PDF' && !isInternal,
             'icon-[mdi--eye]': fileType === 'PDF' && isInternal,
