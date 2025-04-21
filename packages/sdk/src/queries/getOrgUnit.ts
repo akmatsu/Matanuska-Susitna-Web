@@ -1,5 +1,10 @@
 import { gql, type TypedDocumentNode } from '@apollo/client';
-import type { Contact } from './baseTypes';
+import type {
+  Contact,
+  PublicNoticeWhere,
+  TakeVariable,
+  WhereSlugVariables,
+} from './baseTypes';
 
 export interface GetOrgUnitMetaData {
   orgUnit: {
@@ -37,15 +42,9 @@ export interface GetOrgUnitData {
   };
 }
 
-export interface GetOrgUnitVariables {
-  where: {
-    slug: string;
-  };
-}
-
 export const GET_ORG_UNIT_META_QUERY: TypedDocumentNode<
   GetOrgUnitMetaData,
-  GetOrgUnitVariables
+  WhereSlugVariables
 > = gql`
   query GetOrgUnitMeta($where: OrgUnitWhereUniqueInput!) {
     orgUnit(where: $where) {
@@ -58,9 +57,14 @@ export const GET_ORG_UNIT_META_QUERY: TypedDocumentNode<
 
 export const GET_ORG_UNIT_QUERY: TypedDocumentNode<
   GetOrgUnitData,
-  GetOrgUnitVariables
+  WhereSlugVariables & PublicNoticeWhere & TakeVariable
 > = gql`
-  query OrgUnit($where: OrgUnitWhereUniqueInput!) {
+  query OrgUnit(
+    $where: OrgUnitWhereUniqueInput!
+    $publicNoticesWhere2: PublicNoticeWhereInput!
+    $take: Int
+    $orderBy: [PublicNoticeOrderByInput!]!
+  ) {
     orgUnit(where: $where) {
       id
       title
@@ -91,6 +95,14 @@ export const GET_ORG_UNIT_QUERY: TypedDocumentNode<
         title
         description
       }
+    }
+    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+      id
+      slug
+      title
+      description
+      heroImage
+      urgency
     }
   }
 `;

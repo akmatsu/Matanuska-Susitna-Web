@@ -49,7 +49,7 @@ export default async function PageController({
     query,
     variables: {
       where: { slug },
-      ...(listName !== 'service' && {
+      ...(listName !== 'publicNotice' && {
         take: 5,
         publicNoticesWhere2: {
           [pluralize(listName)]: {

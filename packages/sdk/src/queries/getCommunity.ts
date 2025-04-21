@@ -1,5 +1,11 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
-import { Contact, PageListItem } from './baseTypes';
+import {
+  Contact,
+  PageListItem,
+  PublicNoticeWhere,
+  TakeVariable,
+  WhereSlugVariables,
+} from './baseTypes';
 
 export interface GetCommunityItemMeta {
   title: string;
@@ -40,15 +46,9 @@ export interface GetCommunityData {
   publicNotices?: (PageListItem & { heroImage?: string | null })[];
 }
 
-export interface GetCommunityVariables {
-  where: {
-    slug: string;
-  };
-}
-
 export const GET_COMMUNITY_META_QUERY: TypedDocumentNode<
   GetCommunityItemMetaData,
-  GetCommunityVariables
+  WhereSlugVariables
 > = gql`
   query GetCommunityMetaQuery($where: CommunityWhereUniqueInput!) {
     community(where: $where) {
@@ -60,9 +60,14 @@ export const GET_COMMUNITY_META_QUERY: TypedDocumentNode<
 
 export const GET_COMMUNITY_QUERY: TypedDocumentNode<
   GetCommunityData,
-  GetCommunityVariables
+  WhereSlugVariables & PublicNoticeWhere & TakeVariable
 > = gql`
-  query Community($where: CommunityWhereUniqueInput!) {
+  query Community(
+    $where: CommunityWhereUniqueInput!
+    $publicNoticesWhere2: PublicNoticeWhereInput!
+    $take: Int
+    $orderBy: [PublicNoticeOrderByInput!]!
+  ) {
     community(where: $where) {
       id
       title
@@ -92,6 +97,15 @@ export const GET_COMMUNITY_QUERY: TypedDocumentNode<
           }
         }
       }
+    }
+
+    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+      id
+      slug
+      title
+      description
+      heroImage
+      urgency
     }
   }
 `;

@@ -4,6 +4,8 @@ import type {
   Contact,
   Hour,
   PageListItem,
+  PublicNoticeWhere,
+  TakeVariable,
   WhereSlugVariables,
 } from './baseTypes';
 
@@ -44,9 +46,14 @@ export const GET_FACILITY_META: TypedDocumentNode<
 
 export const GET_FACILITY_QUERY: TypedDocumentNode<
   GetFacilityData<FacilityItem>,
-  WhereSlugVariables
+  WhereSlugVariables & PublicNoticeWhere & TakeVariable
 > = gql`
-  query Facility($where: FacilityWhereUniqueInput!) {
+  query Facility(
+    $where: FacilityWhereUniqueInput!
+    $publicNoticesWhere2: PublicNoticeWhereInput!
+    $take: Int
+    $orderBy: [PublicNoticeOrderByInput!]!
+  ) {
     facility(where: $where) {
       id
       slug
@@ -87,6 +94,14 @@ export const GET_FACILITY_QUERY: TypedDocumentNode<
         open
         close
       }
+    }
+    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+      id
+      slug
+      title
+      description
+      heroImage
+      urgency
     }
   }
 `;
