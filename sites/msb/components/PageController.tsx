@@ -25,6 +25,7 @@ import { toTitleCase } from '@/utils/stringHelpers';
 import { PageTrailInfo } from './PageTrailInfo';
 import Image from 'next/image';
 import { PageDocuments } from './PageDocuments';
+import { FeaturedContent } from './landing';
 
 /**
  * The page controller is the primary component for controlling most pages.
@@ -48,6 +49,23 @@ export default async function PageController({
     query,
     variables: {
       where: { slug },
+      ...(listName !== 'service' && {
+        take: 5,
+        publicNoticesWhere2: {
+          [pluralize(listName)]: {
+            some: {
+              slug: {
+                equals: slug,
+              },
+            },
+          },
+        },
+        orderBy: [
+          {
+            urgency: 'desc',
+          },
+        ],
+      }),
     },
     context: {
       fetchOptions: {
@@ -64,6 +82,7 @@ export default async function PageController({
   }
 
   const page: PageMerged | undefined = data?.[listName];
+  const publicNotices = data?.publicNotices;
 
   if (!page) {
     redirect('/not-found');
@@ -100,16 +119,16 @@ export default async function PageController({
                     : pluralize(listName)]: [page.title],
                 }}
               />
+              {publicNotices?.length > 0 && (
+                <section>
+                  <h2 className="text-2xl font-bold mb-4">Announcements</h2>
+                  <FeaturedContent items={publicNotices} />
+                </section>
+              )}
               {listName !== 'service' && listName !== 'publicNotice' && (
                 <section>
                   <h2 className="text-2xl font-bold mb-4">Events</h2>
                   <Meetings />
-                </section>
-              )}
-              {listName !== 'service' && (
-                <section>
-                  <h2 className="text-2xl font-bold mb-4">Announcements</h2>
-                  {/* <FeaturedContent /> */}
                 </section>
               )}
             </div>
@@ -180,13 +199,10 @@ export default async function PageController({
                   </section>
                 )}
                 {(page.contacts?.length > 0 || page.primaryContact) && (
-                  <section>
-                    <h2 className="text-2xl font-bold mb-4">Contacts</h2>
-                    <PageContacts
-                      primaryContact={page.primaryContact}
-                      contacts={page.contacts}
-                    />
-                  </section>
+                  <PageContacts
+                    primaryContact={page.primaryContact}
+                    contacts={page.contacts}
+                  />
                 )}
                 {listName === 'trail' && (
                   <PageTrailInfo trail={page as TrailItem} />

@@ -52,6 +52,13 @@ export const GET_PUBLIC_NOTICE: TypedDocumentNode<
       description
       effectiveDate
       endDate
+      contacts {
+        id
+        name
+        title
+        email
+        phone
+      }
       documents {
         id
         title
