@@ -37,8 +37,11 @@ export const GET_HOME_PAGE_META: TypedDocumentNode<
   }
 `;
 
-export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
-  query HomePage($take: Int) {
+export const GET_HOME_PAGE: TypedDocumentNode<
+  HomePageData<HomePageItem>,
+  TakeVariable & { orderBy: { urgency: 'desc' | 'asc' }[] }
+> = gql`
+  query HomePage($take: Int, $orderBy: [PublicNoticeOrderByInput!]!) {
     homePage {
       id
       title
@@ -459,12 +462,14 @@ export const GET_HOME_PAGE: TypedDocumentNode<HomePageData<HomePageItem>> = gql`
         }
       }
     }
-    publicNotices(take: $take) {
+
+    publicNotices(take: $take, orderBy: $orderBy) {
       id
       slug
       title
       description
       heroImage
+      urgency
     }
   }
 `;
