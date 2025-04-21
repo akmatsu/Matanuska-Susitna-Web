@@ -1,5 +1,5 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
-import { Contact } from './baseTypes';
+import { Contact, PageListItem } from './baseTypes';
 
 export interface GetCommunityItemMeta {
   title: string;
@@ -37,6 +37,7 @@ export interface GetCommunityData {
       };
     }[];
   };
+  publicNotices?: (PageListItem & { heroImage?: string | null })[];
 }
 
 export interface GetCommunityVariables {

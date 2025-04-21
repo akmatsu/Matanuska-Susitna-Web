@@ -53,6 +53,21 @@ export type WhereSlugVariables = {
   };
 };
 
+export type PublicNoticeWhere = {
+  publicNoticesWhere2: {
+    [key: string]: {
+      some: {
+        slug: {
+          equals: string | null;
+        };
+      };
+    };
+  };
+  orderBy: {
+    urgency: 'asc' | 'desc' | null;
+  };
+};
+
 export type TakeVariable = {
   take?: number | null;
 };

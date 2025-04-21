@@ -9,7 +9,8 @@ export function PageContacts({
   contacts?: Contact[] | null;
 }) {
   return (
-    <>
+    <section>
+      <h2 className="text-2xl font-bold mb-4">Contacts</h2>
       {primaryContact && <ContactCard contact={primaryContact} isPrimary />}
       {contacts && (
         <ul className="flex flex-col" style={{ gap: '8px' }}>
@@ -18,6 +19,6 @@ export function PageContacts({
           ))}
         </ul>
       )}
-    </>
+    </section>
   );
 }
