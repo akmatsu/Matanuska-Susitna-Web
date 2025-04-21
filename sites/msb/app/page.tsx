@@ -12,6 +12,11 @@ export default async function Home() {
     query: GET_HOME_PAGE,
     variables: {
       take: 5,
+      orderBy: [
+        {
+          urgency: 'desc',
+        },
+      ],
     },
     context: {
       fetchOptions: {

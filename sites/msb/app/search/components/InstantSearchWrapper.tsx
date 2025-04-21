@@ -18,7 +18,7 @@ const typesenseInstantSearchAdapter = new TypesenseInstantsearchAdapter({
   additionalSearchParameters: {
     num_typos: 3,
     query_by: 'title,description,body,districts,tags,departments,communities',
-    sort_by: '_text_match:desc,title:asc,published_at:desc',
+    sort_by: '_text_match:desc,urgency:desc,title:asc',
   },
 });
 
