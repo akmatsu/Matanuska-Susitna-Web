@@ -29,7 +29,7 @@ export function Banner({
       aria-label={label}
       className="bg-base-lightest px-4"
     >
-      <div className="mx-auto max-w-screen-xl">
+      <div className="mx-auto max-w-(--breakpoint-xl)">
         <DisclosureButton className="group py-1 text-xs text-left leading-none flex items-center">
           <img
             src={flagImage}
@@ -39,7 +39,7 @@ export function Banner({
           <span>
             {label}{' '}
             <span className="underline text-primary">Here's how you know</span>
-            <span className="icon-[mdi--chevron-down] group-data-[open]:rotate-180 transition-transform size-4 text-primary align-bottom"></span>
+            <span className="icon-[mdi--chevron-down] group-data-open:rotate-180 transition-transform size-4 text-primary align-bottom"></span>
           </span>
         </DisclosureButton>
         <DisclosurePanel className="py-6">

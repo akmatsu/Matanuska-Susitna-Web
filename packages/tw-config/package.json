@@ -3,18 +3,23 @@
   "version": "1.0.0",
   "description": "Matsu tailwind config",
   "main": "./tailwind.config.js",
+  "style": "./msb.css",
+  "exports": {
+    ".": "./tailwind.config.js",
+    "./msb.css": "./msb.css"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@iconify/json": "^2.2.330",
-    "@iconify/tailwind": "^1.2.0",
+    "@iconify/tailwind4": "^1.0.6",
     "@tailwindcss/typography": "^0.5.16",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^4.1.4"
   }
 }

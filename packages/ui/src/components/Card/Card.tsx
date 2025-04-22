@@ -19,7 +19,7 @@ export function Card({
     <Component {...props}>
       <div
         className={clsx(
-          'bg-white rounded border border-base-lighter flex flex-col gap-4 shadow-md',
+          'bg-white rounded-xs border border-base-lighter flex flex-col gap-4 shadow-md',
           className,
         )}
       >

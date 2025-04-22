@@ -18,7 +18,7 @@ export const Default: Story = {
   args: {},
   render() {
     return (
-      <div className="grid grid-cols-12 max-w-screen-xl mx-auto">
+      <div className="grid grid-cols-12 max-w-(--breakpoint-xl) mx-auto">
         <div className="relative col-span-4">
           <InPageNavigation />
         </div>

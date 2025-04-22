@@ -38,17 +38,17 @@ export function Combobox<T = any>(props: {
         displayValue={(item: any) => item?.[props.displayValueKey]}
         onChange={onChangeQuery}
         placeholder={props.placeholder}
-        className="border border-base-lighter h-10 px-2 focus:outline-none focus:ring-4 focus:ring-blue-40v w-full rounded shadow-md"
+        className="border border-base-lighter h-10 px-2 focus:outline-hidden focus:ring-4 focus:ring-blue-40v w-full rounded-xs shadow-md bg-white"
         autoFocus={props.autoFocus}
       ></ComboboxInput>
       <ComboboxOptions
         anchor="bottom"
         transition
-        className="border border-base-lightest empty:invisible rounded bg-white transition duration-100 data-[leave]:data-[closed]:opacity-0 w-[var(--input-width)] shadow-md z-50"
+        className="border border-base-lightest empty:invisible rounded-xs bg-white transition duration-100 data-leave:data-closed:opacity-0 w-[var(--input-width)] shadow-md z-50"
       >
         <ComboboxOption
           value={{ [props.displayValueKey]: query }}
-          className="px-4 py-2 border-b border-b-base-lightest last:border-none group cursor-default select-none data-[focus]:bg-primary-light/10 data-[selected]:bg-light-/20"
+          className="px-4 py-2 border-b border-b-base-lightest last:border-none group cursor-default select-none data-focus:bg-primary-light/10 data-[selected]:bg-light-/20"
         >
           <p className="text-sm text-base-darker">
             Search for {query}{' '}
@@ -59,7 +59,7 @@ export function Combobox<T = any>(props: {
           <ComboboxOption
             key={index}
             value={item}
-            className="px-4 py-2 border-b border-b-base-lightest last:border-none group cursor-default select-none data-[focus]:bg-primary-light/10 data-[selected]:bg-light-/20"
+            className="px-4 py-2 border-b border-b-base-lightest last:border-none group cursor-default select-none data-focus:bg-primary-light/10 data-[selected]:bg-light-/20"
           >
             <h6 className="text-bold">
               {item?.[props.displayValueKey] as React.ReactNode}

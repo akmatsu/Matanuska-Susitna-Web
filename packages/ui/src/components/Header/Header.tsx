@@ -68,7 +68,7 @@ export function Header({
         <div className="lg:hidden">
           <button
             onClick={() => setIsOpen(true)}
-            className="px-2 leading-none text-sm shadow text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white h-12 flex items-center justify-center focus-ring"
+            className="px-2 leading-none text-sm shadow-2xs text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white h-12 flex items-center justify-center focus-ring"
             aria-label="Open menu"
           >
             MENU
@@ -91,7 +91,7 @@ export function Header({
           {search && (
             <NavLink
               href={searchHref}
-              className="rounded leading-none font-bold focus-ring shadow text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white size-8 flex items-center justify-center"
+              className="rounded-xs leading-none font-bold focus-ring shadow-2xs text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white size-8 flex items-center justify-center"
             >
               <span className="icon-[mdi--magnify] size-6"></span>
             </NavLink>
@@ -109,7 +109,7 @@ export function Header({
               <button
                 onClick={() => setIsOpen(false)}
                 aria-label="Close menu"
-                className="rounded bg-primary hover:bg-primary-dark active:bg-primary-darker text-white size-8 flex items-center justify-center focus-ring"
+                className="rounded-xs bg-primary hover:bg-primary-dark active:bg-primary-darker text-white size-8 flex items-center justify-center focus-ring"
               >
                 <span className="icon-[mdi--close] size-4"></span>
               </button>
@@ -131,7 +131,7 @@ export function Header({
               {search && (
                 <NavLink
                   href={searchHref}
-                  className="mt-4 w-full rounded leading-none font-bold focus-ring shadow text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white p-2 flex items-center justify-center"
+                  className="mt-4 w-full rounded-xs leading-none font-bold focus-ring shadow-2xs text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white p-2 flex items-center justify-center"
                   onClick={() => setIsOpen(false)}
                 >
                   <span className="icon-[mdi--magnify] size-6 mr-2"></span>
