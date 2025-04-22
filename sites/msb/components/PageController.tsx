@@ -109,6 +109,7 @@ export default async function PageController({
                 title={page.title}
                 description={page.description}
                 body={page.body}
+                pageType={listName}
               />
 
               <PageServices

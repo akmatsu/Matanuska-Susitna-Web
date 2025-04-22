@@ -19,8 +19,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/client": "^3.13.7",
-    "@apollo/experimental-nextjs-app-support": "^0.11.11"
+    "@apollo/client": "^3.13.8",
+    "@apollo/client-integration-nextjs": "^0.12.2"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.8",
