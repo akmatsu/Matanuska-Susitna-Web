@@ -143,7 +143,7 @@ export default async function PageController({
                 {!!map && (
                   <section>
                     <h2 className="text-2xl font-bold mb-4">Map</h2>
-                    <div className="aspect-[1/1] w-full overflow-hidden border rounded">
+                    <div className="aspect-1/1 w-full overflow-hidden border rounded-sm">
                       <MapWrapper {...map} itemId={page.title.toUpperCase()} />
                     </div>
                   </section>

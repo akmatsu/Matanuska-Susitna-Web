@@ -40,7 +40,7 @@ export function Hero({ image }: { image?: string | null }) {
             {links.map((link) => (
               <Link
                 href={link.url}
-                className="rounded px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
+                className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
                 key={link.text}
               >
                 <div className="flex flex-col items-center">

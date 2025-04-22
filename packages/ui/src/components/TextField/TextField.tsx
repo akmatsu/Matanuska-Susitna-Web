@@ -34,7 +34,7 @@ export function TextField({
       </Label>
       <Input
         className={clsx(
-          'border border-base-lighter h-10 px-2 focus:outline-none focus:ring-4 focus:ring-blue-40v w-full',
+          'border border-base-lighter h-10 px-2 focus:outline-hidden focus:ring-4 focus:ring-blue-40v w-full',
           {
             'rounded-none': !rounded || rounded === 'none',
             rounded: rounded === true,

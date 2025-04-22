@@ -47,7 +47,7 @@ export default async function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 w-full">
             <Link
               href={page.toolbeltOne?.linkedItem.item?.url || ''}
-              className="rounded px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
+              className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
               key={page.toolbeltOne?.id}
             >
               <div className="flex flex-col items-center">
@@ -59,7 +59,7 @@ export default async function Home() {
             </Link>
             <Link
               href={page.toolbeltTwo?.linkedItem.item?.url || ''}
-              className="rounded px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
+              className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
               key={page.toolbeltTwo?.id}
             >
               <div className="flex flex-col items-center">
@@ -71,7 +71,7 @@ export default async function Home() {
             </Link>
             <Link
               href={page.toolbeltThree?.linkedItem.item?.url || ''}
-              className="rounded px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
+              className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
               key={page.toolbeltThree?.id}
             >
               <div className="flex flex-col items-center">
@@ -83,7 +83,7 @@ export default async function Home() {
             </Link>
             <Link
               href={page.toolbeltFour?.linkedItem.item?.url || ''}
-              className="rounded px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
+              className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
               key={page.toolbeltFour?.id}
             >
               <div className="flex flex-col items-center">
