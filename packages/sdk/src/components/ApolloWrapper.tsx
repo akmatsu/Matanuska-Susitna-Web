@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { ApolloNextAppProvider } from '@apollo/experimental-nextjs-app-support';
+import { ApolloNextAppProvider } from '@apollo/client-integration-nextjs';
 import { makeClient } from '../client/makeClient';
 
 export function ApolloWrapper({
