@@ -100,7 +100,7 @@ async function _filter(
   itemId: string,
   itemKey: string,
   layer: __esri.FeatureLayer,
-): Promise<__esri.Geometry | void> {
+): Promise<nullish | __esri.GeometryUnion> {
   try {
     const isNumeric = !isNaN(Number(itemId));
     const formattedValue = isNumeric ? itemId : `'${itemId}'`;

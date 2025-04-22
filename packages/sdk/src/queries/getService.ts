@@ -42,6 +42,42 @@ export const GET_SERVICE_META_QUERY: TypedDocumentNode<
   }
 `;
 
+export const GET_SERVICE_QUERY_NO_PN: TypedDocumentNode<
+  GetServiceData,
+  WhereSlugVariables
+> = gql`
+  query GetService($where: ServiceWhereUniqueInput!) {
+    service(where: $where) {
+      id
+      slug
+      title
+      heroImage
+      body
+      primaryAction {
+        id
+        label
+        url {
+          id
+          title
+          url
+        }
+      }
+      primaryContact {
+        id
+        name
+        phone
+        email
+      }
+      contacts {
+        id
+        name
+        phone
+        email
+      }
+    }
+  }
+`;
+
 export const GET_SERVICE_QUERY: TypedDocumentNode<
   GetServiceData,
   WhereSlugVariables & PublicNoticeWhere & TakeVariable

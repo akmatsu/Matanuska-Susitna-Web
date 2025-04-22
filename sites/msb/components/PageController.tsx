@@ -37,7 +37,7 @@ export default async function PageController({
   map,
   ...props
 }: {
-  query: TypedDocumentNode<any, { where: { slug: string } }>;
+  query: TypedDocumentNode<any, any>;
   listName: PageType;
   sideNav?: boolean;
   map?: ComponentProps<typeof MapWrapper>;
