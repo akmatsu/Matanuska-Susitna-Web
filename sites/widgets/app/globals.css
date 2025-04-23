@@ -1,6 +1,12 @@
 @import 'tailwindcss';
+@import '@matsugov/tw-config/msb.css';
 
-@config '../tailwind.config.js';
+@source '../app/**/*.{js,ts,jsx,tsx,mdx}';
+@source '../components/**/*.{js,ts,jsx,tsx,mdx}';
+@source './pages/**/*.{js,ts,jsx,tsx,mdx}';
+@source '../node_modules/@matsugov/ui/src/**/*.{js,ts,jsx,tsx,mdx}';
+
+/* @config '../tailwind.config.js'; */
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
