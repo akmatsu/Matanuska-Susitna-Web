@@ -41,7 +41,10 @@ const ignoreWords = [
 ];
 
 const separators = [' ', '-', '_'];
-const separatorRegex = new RegExp(`[${separators.join('|')}]`, 'g');
+const escapedSeparators = separators
+  .map((s) => (s === '-' ? '\\-' : s))
+  .join('');
+const separatorRegex = new RegExp(`[${escapedSeparators}]`, 'gi');
 
 export function toTitleCase(str: string) {
   const lowerCaseStr = str.toLowerCase();

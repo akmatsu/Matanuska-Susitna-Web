@@ -6,18 +6,12 @@ export async function getPageMeta<
     any,
     { where: { slug: string } }
   > = TypedDocumentNode<any, { where: { slug: string } }>,
->(
-  listName: string,
-  query: TQuery,
-  props: { params: Promise<{ slug: string }> },
-) {
+>(listName: string, query: TQuery, slug: string) {
   try {
-    const params = await props.params;
-
     const { data } = await getClient().query({
       query,
       variables: {
-        where: { slug: params.slug },
+        where: { slug },
       },
       context: {
         fetchOptions: {

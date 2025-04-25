@@ -1,7 +1,7 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { PageMerged, PageType, TrailItem } from '@msb/js-sdk';
 import { TypedDocumentNode } from '@msb/js-sdk/apollo';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import {
   Card,
   CardBody,
@@ -41,9 +41,9 @@ export default async function PageController({
   listName: PageType;
   sideNav?: boolean;
   map?: ComponentProps<typeof MapWrapper>;
-  params: PageProps['params'];
+  params: Awaited<PageProps['params']>;
 }) {
-  const { slug } = await props.params;
+  const { slug } = props.params;
 
   const { data, errors, error } = await getClient().query({
     query,
@@ -76,7 +76,7 @@ export default async function PageController({
     },
   });
 
-  if (error) {
+  if (errors) {
     console.error('Apollo query failed: ', JSON.stringify(errors));
     throw error;
   }
@@ -85,7 +85,7 @@ export default async function PageController({
   const publicNotices = data?.publicNotices;
 
   if (!page) {
-    redirect('/not-found');
+    return notFound();
   }
 
   return (
