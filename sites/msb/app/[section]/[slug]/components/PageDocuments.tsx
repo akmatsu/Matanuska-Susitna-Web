@@ -1,18 +1,23 @@
 import { Document } from '@msb/js-sdk';
-import { LinkButton } from '../../../../components/LinkButton';
+import { LinkButton } from '@/components/LinkButton';
 import clsx from 'clsx';
+import { PageSection } from './PageSection';
 
-export function PageDocuments({ documents }: { documents: Document[] }) {
-  return (
-    <section>
-      <h2 className="text-2xl font-bold mb-4">Documents</h2>
-      <ul className="flex flex-col gap-2">
-        {documents.map((doc) => (
-          <DocumentButton key={doc.id} doc={doc} />
-        ))}
-      </ul>
-    </section>
-  );
+export function PageDocuments({
+  documents,
+}: {
+  documents?: Document[] | null;
+}) {
+  if (!!documents?.length)
+    return (
+      <PageSection title="Documents">
+        <ul className="flex flex-col gap-2">
+          {documents.map((doc) => (
+            <DocumentButton key={doc.id} doc={doc} />
+          ))}
+        </ul>
+      </PageSection>
+    );
 }
 
 function DocumentButton({ doc }: { doc: Document }) {

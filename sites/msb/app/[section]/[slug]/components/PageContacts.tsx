@@ -1,5 +1,6 @@
 import { Contact } from '@msb/js-sdk';
 import { ContactCard } from '../../../../components/ContactCard';
+import { PageSection } from './PageSection';
 
 export function PageContacts({
   primaryContact,
@@ -8,17 +9,17 @@ export function PageContacts({
   primaryContact?: Contact | null;
   contacts?: Contact[] | null;
 }) {
-  return (
-    <section>
-      <h2 className="text-2xl font-bold mb-4">Contacts</h2>
-      {primaryContact && <ContactCard contact={primaryContact} isPrimary />}
-      {contacts && (
-        <ul className="flex flex-col" style={{ gap: '8px' }}>
-          {contacts.map((contact) => (
-            <ContactCard key={contact.id} contact={contact} />
-          ))}
-        </ul>
-      )}
-    </section>
-  );
+  if (primaryContact || !!contacts?.length)
+    return (
+      <PageSection title="Contacts">
+        {primaryContact && <ContactCard contact={primaryContact} isPrimary />}
+        {contacts && (
+          <ul className="flex flex-col" style={{ gap: '8px' }}>
+            {contacts.map((contact) => (
+              <ContactCard key={contact.id} contact={contact} />
+            ))}
+          </ul>
+        )}
+      </PageSection>
+    );
 }

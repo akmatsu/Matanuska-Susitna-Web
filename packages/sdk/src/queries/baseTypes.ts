@@ -99,3 +99,15 @@ export type Highlight = {
   title: string;
   linkedItem: LinkedItem;
 };
+
+export type District = {
+  title: string;
+  slug: string;
+  description?: string;
+  memberName?: string;
+  photo?: {
+    file: {
+      url: string;
+    };
+  };
+};

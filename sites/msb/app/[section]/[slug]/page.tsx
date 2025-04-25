@@ -1,32 +1,20 @@
-import clsx from 'clsx';
 import { Metadata } from 'next';
-import Image from 'next/image';
-import { type PageMerged, queryMap, type TrailItem } from '@msb/js-sdk';
+import { type PageMerged, queryMap } from '@msb/js-sdk';
 import pluralize, { singular } from 'pluralize';
 import { notFound } from 'next/navigation';
-import { MapWrapper } from '@/components/MapWrapper';
-import { Meetings, PublicNotices } from '@/components';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { getPageMeta } from '@/utils/pageHelpers';
-import { toCamelCase, toTitleCase } from '@/utils/stringHelpers';
+import { toCamelCase } from '@/utils/stringHelpers';
+import { Hero } from '@matsugov/ui';
 import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Hero,
-  InPageNavigation,
-  LinkCard,
-} from '@matsugov/ui';
-import {
-  PageActions,
   PageBody,
-  PageContacts,
-  PageDocuments,
+  PageEvents,
   PageServices,
   PageSideNavController,
-  PageTrailInfo,
+  PagePublicNotices,
+  PageSidebar,
 } from './components';
+import { PageContainer } from '@/components/PageContainer';
 
 export const generateMetadata = async ({
   params,
@@ -101,206 +89,12 @@ export default async function Page(props: {
   return (
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
-      <div className="max-w-7xl mx-auto px-4 py-16 relative">
+      <PageContainer className="relative">
         {page && (
           <PageSideNavController
             showSideNav={sideNav}
             rightSide={
-              <>
-                {!!config.map && (
-                  <section>
-                    <h2 className="text-2xl font-bold mb-4">Map</h2>
-                    <div className="aspect-1/1 w-full overflow-hidden border rounded-sm">
-                      <MapWrapper
-                        {...config.map}
-                        itemId={page.title.toUpperCase()}
-                      />
-                    </div>
-                  </section>
-                )}
-                {page.primaryAction && (
-                  <PageActions primaryAction={page.primaryAction} />
-                )}
-                {page.documents?.length && (
-                  <PageDocuments documents={page.documents} />
-                )}
-                {!!page.address && (
-                  <section>
-                    <h2 className="text-2xl font-bold mb-4">Address</h2>
-                    <div className="flex flex-col">
-                      <Card>
-                        <CardHeader>
-                          <CardTitle as="h4">{page.address.title}</CardTitle>
-                        </CardHeader>
-                        <CardBody>
-                          <p>{page.address.lineOne},</p>
-                          {page.address.lineTwo && (
-                            <p>{page.address.lineTwo}</p>
-                          )}
-                          <p>
-                            {page.address.city}, {page.address.state},{' '}
-                            {page.address.zip}
-                          </p>
-                        </CardBody>
-                      </Card>
-                    </div>
-                  </section>
-                )}
-                {!!page.hours?.length && (
-                  <section>
-                    <h2 className="text-2xl font-bold mb-4">Hours</h2>
-                    <div className="flex flex-col gap-4">
-                      <Card>
-                        <CardBody>
-                          <div className="flex flex-col gap-2">
-                            {page.hours.map((hour) => (
-                              <div key={hour.day}>
-                                <p className="font-bold">
-                                  {toTitleCase(hour.day.replace(/-/g, ' '))}
-                                </p>
-                                <p className="text-sm">
-                                  {hour.open} - {hour.close}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
-                        </CardBody>
-                      </Card>
-                    </div>
-                  </section>
-                )}
-                {(page.contacts?.length > 0 || page.primaryContact) && (
-                  <PageContacts
-                    primaryContact={page.primaryContact}
-                    contacts={page.contacts}
-                  />
-                )}
-                {listName === 'trail' && (
-                  <PageTrailInfo trail={page as TrailItem} />
-                )}
-
-                {!!page.trails?.length && (
-                  <section>
-                    <h2 className="text-2xl font-bold mb-4">Trails</h2>
-                    <ul>
-                      {page.trails.map((trail) => (
-                        <LinkCard
-                          as="li"
-                          key={trail.slug}
-                          className="my-2"
-                          href={`/trails/${trail.slug}`}
-                        >
-                          <div className="flex justify-between items-center">
-                            <div className="flex flex-col gap-4">
-                              <CardHeader>
-                                <CardTitle>{trail.title}</CardTitle>
-                              </CardHeader>
-                              <CardBody>
-                                <p className="truncate">{trail.description}</p>
-                              </CardBody>
-                            </div>
-                          </div>
-                        </LinkCard>
-                      ))}
-                    </ul>
-                  </section>
-                )}
-                {!!page.facilities?.length && (
-                  <section>
-                    <h2 className="text-2xl font-bold mb-4">Trails</h2>
-                    <ul>
-                      {page.facilities.map((fac) => (
-                        <LinkCard
-                          as="li"
-                          key={fac.slug}
-                          className="my-2"
-                          href={`/trails/${fac.slug}`}
-                        >
-                          <div className="flex justify-between items-center">
-                            <div className="flex flex-col gap-4">
-                              <CardHeader>
-                                <CardTitle>{fac.title}</CardTitle>
-                              </CardHeader>
-                              <CardBody>
-                                <p className="truncate">{fac.description}</p>
-                              </CardBody>
-                            </div>
-                          </div>
-                        </LinkCard>
-                      ))}
-                    </ul>
-                  </section>
-                )}
-                {!!page.districts?.length && (
-                  <section>
-                    <h2 className="text-2xl font-bold mb-4">Districts</h2>
-                    <ul>
-                      {page.districts.map((district) => (
-                        <LinkCard
-                          as="li"
-                          key={district.slug}
-                          className="my-2"
-                          href={`/districts/${district.slug}`}
-                        >
-                          <div className="flex justify-between items-center">
-                            <div className="flex flex-col gap-4">
-                              <CardHeader>
-                                <CardTitle>{district.title}</CardTitle>
-                              </CardHeader>
-                              <CardBody>
-                                <div>
-                                  <p>{district.description}</p>
-                                </div>
-                              </CardBody>
-                            </div>
-                            <div className="pr-6 relative">
-                              <Image
-                                src={district.photo?.file.url || ''}
-                                alt={`${district.title} assembly member photo`}
-                                className="rounded-full size-20"
-                                width={80}
-                                height={80}
-                              />
-                            </div>
-                          </div>
-                        </LinkCard>
-                      ))}
-                    </ul>
-                  </section>
-                )}
-                {page.parent && (
-                  <section>
-                    <h2 className="text-2xl font-bold mb-4">
-                      Parent Department
-                    </h2>
-                    <LinkCard href={`/departments/${page.parent.slug}`}>
-                      <CardHeader>
-                        <CardTitle>{page.parent.title}</CardTitle>
-                      </CardHeader>
-                      <CardBody>
-                        <p className="truncate">{page.parent.description}</p>
-                      </CardBody>
-                    </LinkCard>
-                  </section>
-                )}
-                {page.children?.length > 0 && (
-                  <section>
-                    <h2 className="text-2xl font-bold mb-4">Divisions</h2>
-                    <ul className="flex flex-col gap-2">
-                      {page.children.map((child) => (
-                        <LinkCard href={`/departments/${child.slug}`}>
-                          <CardHeader>
-                            <CardTitle>{child.title}</CardTitle>
-                          </CardHeader>
-                          <CardBody>
-                            <p className="truncate">{child.description}</p>
-                          </CardBody>
-                        </LinkCard>
-                      ))}
-                    </ul>
-                  </section>
-                )}
-              </>
+              <PageSidebar config={config} page={page} listName={listName} />
             }
           >
             <PageBody
@@ -317,21 +111,11 @@ export default async function Page(props: {
                   [page.title],
               }}
             />
-            {publicNotices?.length > 0 && (
-              <section>
-                <h2 className="text-2xl font-bold mb-4">Announcements</h2>
-                <PublicNotices items={publicNotices} />
-              </section>
-            )}
-            {listName !== 'service' && listName !== 'publicNotice' && (
-              <section>
-                <h2 className="text-2xl font-bold mb-4">Events</h2>
-                <Meetings />
-              </section>
-            )}
+            <PagePublicNotices items={publicNotices} />
+            <PageEvents listName={listName} />
           </PageSideNavController>
         )}
-      </div>
+      </PageContainer>
     </>
   );
 }

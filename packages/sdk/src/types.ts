@@ -1,3 +1,4 @@
+import { TypedDocumentNode } from '@apollo/client';
 import {
   GetCommunityData,
   GetOrgUnitData,
@@ -47,3 +48,14 @@ export type PageType =
   | 'trail'
   | 'facility'
   | 'publicNotice';
+
+export type PageConfig = {
+  query: TypedDocumentNode<any, any>;
+  metaQuery: TypedDocumentNode<any, any>;
+  map?: {
+    layerId?: string;
+    layerUrl?: string;
+    layerOpacity?: number;
+    itemKey?: string;
+  };
+};

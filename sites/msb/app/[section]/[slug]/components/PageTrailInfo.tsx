@@ -1,11 +1,11 @@
 import { TrailItem } from '@msb/js-sdk';
 import clsx from 'clsx';
+import { PageSection } from './PageSection';
 
 export function PageTrailInfo({ trail }: { trail: TrailItem }) {
   return (
     <>
-      <section>
-        <h2 className="text-2xl font-bold mb-4">Trail Seasons</h2>
+      <PageSection title="Trails Seasons">
         {trail.spring && (
           <span className="icon-[mdi--flower-tulip] size-8 text-green-700" />
         )}
@@ -18,9 +18,8 @@ export function PageTrailInfo({ trail }: { trail: TrailItem }) {
         {trail.winter && (
           <span className="icon-[mdi--snowflake] size-8 text-sky-400" />
         )}
-      </section>
-      <section>
-        <h2 className="text-2xl font-bold mb-4">Trail Activities</h2>
+      </PageSection>
+      <PageSection title="Trail Activities">
         <div className="flex gap-2">
           {trail.hiking && (
             <span
@@ -95,9 +94,8 @@ export function PageTrailInfo({ trail }: { trail: TrailItem }) {
             />
           )}
         </div>
-      </section>
-      <section>
-        <h2 className="text-2xl font-bold mb-4">Trail Details</h2>
+      </PageSection>
+      <PageSection title="Trail Details">
         <p
           className={clsx('font-bold', {
             'text-green-700': trail.open,
@@ -125,7 +123,7 @@ export function PageTrailInfo({ trail }: { trail: TrailItem }) {
           <span className="font-bold">Groomed</span>:{' '}
           {trail.groomed ? 'Yes' : 'No'}
         </p>
-      </section>
+      </PageSection>
     </>
   );
 }

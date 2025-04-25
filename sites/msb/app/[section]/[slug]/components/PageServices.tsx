@@ -1,7 +1,8 @@
-import { Service } from '@msb/js-sdk';
+import type { Service } from '@msb/js-sdk';
 import { LinkCardGrid } from '../../../../components/LinkCardGrid';
 import { LinkButton } from '../../../../components/LinkButton';
 import QueryString from 'qs';
+import { PageSection } from './PageSection';
 
 export function PageServices(props: {
   services?: Service[] | null;
@@ -9,8 +10,7 @@ export function PageServices(props: {
 }) {
   if (props.services && props.services.length > 0) {
     return (
-      <section>
-        <h2 className="text-2xl font-bold mb-4">Services</h2>
+      <PageSection title="Services">
         <LinkCardGrid items={props.services.slice(0, 4)} listKey="services" />
         {props.services.length > 4 && (
           <div className="flex justify-center items-center">
@@ -23,7 +23,7 @@ export function PageServices(props: {
             </LinkButton>
           </div>
         )}
-      </section>
+      </PageSection>
     );
   }
 }

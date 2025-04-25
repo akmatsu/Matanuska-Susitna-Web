@@ -1,6 +1,7 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
 import {
   Contact,
+  District,
   PageListItem,
   PublicNoticeWhere,
   TakeVariable,
@@ -31,17 +32,7 @@ export interface GetCommunityData {
       description: string;
     }[];
     contacts: Contact[];
-    districts: {
-      title: string;
-      slug: string;
-      description?: string;
-      memberName?: string;
-      photo?: {
-        file: {
-          url: string;
-        };
-      };
-    }[];
+    districts?: District[] | null;
   };
   publicNotices?: (PageListItem & { heroImage?: string | null })[];
 }

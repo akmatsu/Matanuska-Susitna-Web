@@ -1,4 +1,3 @@
-import { type TypedDocumentNode } from '@apollo/client';
 import {
   GET_COMMUNITY_META_QUERY,
   GET_COMMUNITY_QUERY,
@@ -15,22 +14,14 @@ import {
   GET_TRAIL_META_QUERY,
   GET_TRAIL_QUERY,
 } from './queries';
+import { PageConfig } from './types';
 
 export * from './client';
 export * from './queries';
 export * from './types';
 
 export const queryMap: {
-  [key: string]: {
-    query: TypedDocumentNode<any, any>;
-    metaQuery: TypedDocumentNode<any, any>;
-    map?: {
-      layerId?: string;
-      layerUrl?: string;
-      layerOpacity?: number;
-      itemKey?: string;
-    };
-  };
+  [key: string]: PageConfig;
 } = {
   services: {
     query: GET_SERVICE_QUERY,
