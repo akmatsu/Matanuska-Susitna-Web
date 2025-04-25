@@ -1,4 +1,4 @@
-import { MarkdownRenderer } from './MarkdownRenderer';
+import { MarkdownRenderer } from '../../../../components/MarkdownRenderer';
 
 export function PageBody(props: {
   title: string;

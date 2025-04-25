@@ -1,4 +1,4 @@
-import { Featured, FeaturedContent, Meetings, LinkButton } from '@/components';
+import { Featured, PublicNotices, Meetings, LinkButton } from '@/components';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Hero } from '@matsugov/ui';
 import { GET_HOME_PAGE } from '@msb/js-sdk';
@@ -115,7 +115,7 @@ export default async function Home() {
             Announcement & Public Notices
           </h2>
 
-          <FeaturedContent items={publicNotices} />
+          <PublicNotices items={publicNotices} />
         </section>
       )}
 

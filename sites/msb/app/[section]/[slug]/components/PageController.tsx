@@ -15,17 +15,17 @@ import { PageActions } from './PageActions';
 import { PageContacts } from './PageContacts';
 import { PageBody } from './PageBody';
 import clsx from 'clsx';
-import { Meetings } from './Meetings';
+import { Meetings } from '../../../../components/Meetings';
 import { PageServices } from './PageServices';
 import pluralize from 'pluralize';
 import { PageProps } from '@/types';
 import { ComponentProps } from 'react';
-import { MapWrapper } from './MapWrapper';
+import { MapWrapper } from '../../../../components/MapWrapper';
 import { toTitleCase } from '@/utils/stringHelpers';
 import { PageTrailInfo } from './PageTrailInfo';
 import Image from 'next/image';
 import { PageDocuments } from './PageDocuments';
-import { FeaturedContent } from './landing';
+import { PublicNotices } from '@/components/landing/PublicNotices';
 
 /**
  * The page controller is the primary component for controlling most pages.
@@ -123,7 +123,7 @@ export default async function PageController({
               {publicNotices?.length > 0 && (
                 <section>
                   <h2 className="text-2xl font-bold mb-4">Announcements</h2>
-                  <FeaturedContent items={publicNotices} />
+                  <PublicNotices items={publicNotices} />
                 </section>
               )}
               {listName !== 'service' && listName !== 'publicNotice' && (

@@ -1,6 +1,6 @@
 import { Service } from '@msb/js-sdk';
-import { LinkCardGrid } from './LinkCardGrid';
-import { LinkButton } from './LinkButton';
+import { LinkCardGrid } from '../../../../components/LinkCardGrid';
+import { LinkButton } from '../../../../components/LinkButton';
 import QueryString from 'qs';
 
 export function PageServices(props: {

@@ -1,5 +1,5 @@
 import { Contact } from '@msb/js-sdk';
-import { ContactCard } from './ContactCard';
+import { ContactCard } from '../../../../components/ContactCard';
 
 export function PageContacts({
   primaryContact,

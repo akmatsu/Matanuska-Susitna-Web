@@ -1,4 +1,4 @@
-import { LinkButton } from './LinkButton';
+import { LinkButton } from '../../../../components/LinkButton';
 import { ExternalLink } from '@msb/js-sdk';
 
 export function PageActions({

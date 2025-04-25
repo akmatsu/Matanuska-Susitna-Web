@@ -1,4 +1,4 @@
 export * from './Featured';
 export * from './FeaturedCard';
 export * from './Hero';
-export * from './FeatureContent';
+export * from './PublicNotices';

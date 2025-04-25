@@ -1,5 +1,5 @@
 import { Document } from '@msb/js-sdk';
-import { LinkButton } from './LinkButton';
+import { LinkButton } from '../../../../components/LinkButton';
 import clsx from 'clsx';
 
 export function PageDocuments({ documents }: { documents: Document[] }) {

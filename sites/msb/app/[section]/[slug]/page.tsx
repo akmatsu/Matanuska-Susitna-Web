@@ -1,73 +1,32 @@
-import PageController from '@/components/PageController';
-import { getPageMeta } from '@/utils/pageHelpers';
-import { toCamelCase } from '@/utils/stringHelpers';
-import {
-  GET_COMMUNITY_META_QUERY,
-  GET_COMMUNITY_QUERY,
-  GET_FACILITY_META,
-  GET_FACILITY_QUERY,
-  GET_ORG_UNIT_META_QUERY,
-  GET_ORG_UNIT_QUERY,
-  GET_PARK_META_QUERY,
-  GET_PARK_QUERY,
-  GET_PUBLIC_NOTICE,
-  GET_PUBLIC_NOTICE_META,
-  GET_SERVICE_META_QUERY,
-  GET_SERVICE_QUERY,
-  GET_TRAIL_META_QUERY,
-  GET_TRAIL_QUERY,
-} from '@msb/js-sdk';
+import clsx from 'clsx';
 import { Metadata } from 'next';
+import Image from 'next/image';
+import { type PageMerged, queryMap, type TrailItem } from '@msb/js-sdk';
+import pluralize, { singular } from 'pluralize';
 import { notFound } from 'next/navigation';
-
-import { singular } from 'pluralize';
-import { ComponentProps } from 'react';
-
-type PageControllerProps = ComponentProps<typeof PageController>;
-
-const queryMap: {
-  [key: string]: {
-    query: PageControllerProps['query'];
-    metaQuery: PageControllerProps['query'];
-    map?: PageControllerProps['map'];
-  };
-} = {
-  services: {
-    query: GET_SERVICE_QUERY,
-    metaQuery: GET_SERVICE_META_QUERY,
-  },
-  communities: {
-    query: GET_COMMUNITY_QUERY,
-    metaQuery: GET_COMMUNITY_META_QUERY,
-    map: {
-      layerId: 'cc6808c179cc4f3ba282814afdc3882c',
-      layerUrl:
-        'https://maps.matsugov.us/map/rest/services/OpenData/Administrative_Communities/FeatureServer',
-      layerOpacity: 0.5,
-      itemKey: 'CC_NAME',
-    },
-  },
-  departments: {
-    query: GET_ORG_UNIT_QUERY,
-    metaQuery: GET_ORG_UNIT_META_QUERY,
-  },
-  facilities: {
-    query: GET_FACILITY_QUERY,
-    metaQuery: GET_FACILITY_META,
-  },
-  parks: {
-    query: GET_PARK_QUERY,
-    metaQuery: GET_PARK_META_QUERY,
-  },
-  'public-notices': {
-    query: GET_PUBLIC_NOTICE,
-    metaQuery: GET_PUBLIC_NOTICE_META,
-  },
-  trails: {
-    query: GET_TRAIL_QUERY,
-    metaQuery: GET_TRAIL_META_QUERY,
-  },
-};
+import { MapWrapper } from '@/components/MapWrapper';
+import { Meetings, PublicNotices } from '@/components';
+import { getClient } from '@/utils/apollo/ApolloClient';
+import { getPageMeta } from '@/utils/pageHelpers';
+import { toCamelCase, toTitleCase } from '@/utils/stringHelpers';
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardTitle,
+  Hero,
+  InPageNavigation,
+  LinkCard,
+} from '@matsugov/ui';
+import {
+  PageActions,
+  PageBody,
+  PageContacts,
+  PageDocuments,
+  PageServices,
+  PageSideNavController,
+  PageTrailInfo,
+} from './components';
 
 export const generateMetadata = async ({
   params,
@@ -76,6 +35,7 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   const { section, slug } = await params;
   const config = queryMap[section as keyof typeof queryMap];
+
   if (!config) {
     return {};
   }
@@ -87,22 +47,291 @@ export default async function Page(props: {
   params: Promise<{ section: string; slug: string }>;
 }) {
   const { section, slug } = await props.params;
-
   const config = queryMap[section as keyof typeof queryMap];
+  const listName = singular(toCamelCase(section));
+  const sideNav = section === 'services';
 
   if (!config) {
     return notFound();
   }
 
+  const { data, errors, error } = await getClient().query({
+    query: config.query,
+    variables: {
+      where: { slug },
+      ...(listName !== 'publicNotice' && {
+        take: 5,
+        publicNoticesWhere2: {
+          [pluralize(listName)]: {
+            some: {
+              slug: {
+                equals: slug,
+              },
+            },
+          },
+        },
+        orderBy: [
+          {
+            urgency: 'desc',
+          },
+        ],
+      }),
+    },
+    context: {
+      fetchOptions: {
+        next: {
+          revalidate: 300,
+        },
+      },
+    },
+  });
+
+  if (errors) {
+    console.error('Apollo query failed: ', JSON.stringify(errors));
+    throw error;
+  }
+
+  const page: PageMerged | undefined = data?.[listName];
+  const publicNotices = data?.publicNotices;
+
+  if (!page) {
+    return notFound();
+  }
+
   return (
-    <PageController
-      query={config.query}
-      listName={
-        singular(toCamelCase(section)) as PageControllerProps['listName']
-      }
-      params={{ slug }}
-      sideNav={section === 'services'}
-      map={config.map}
-    />
+    <>
+      {page.heroImage && <Hero image={page.heroImage} />}
+      <div className="max-w-7xl mx-auto px-4 py-16 relative">
+        {page && (
+          <PageSideNavController
+            showSideNav={sideNav}
+            rightSide={
+              <>
+                {!!config.map && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Map</h2>
+                    <div className="aspect-1/1 w-full overflow-hidden border rounded-sm">
+                      <MapWrapper
+                        {...config.map}
+                        itemId={page.title.toUpperCase()}
+                      />
+                    </div>
+                  </section>
+                )}
+                {page.primaryAction && (
+                  <PageActions primaryAction={page.primaryAction} />
+                )}
+                {page.documents?.length && (
+                  <PageDocuments documents={page.documents} />
+                )}
+                {!!page.address && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Address</h2>
+                    <div className="flex flex-col">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle as="h4">{page.address.title}</CardTitle>
+                        </CardHeader>
+                        <CardBody>
+                          <p>{page.address.lineOne},</p>
+                          {page.address.lineTwo && (
+                            <p>{page.address.lineTwo}</p>
+                          )}
+                          <p>
+                            {page.address.city}, {page.address.state},{' '}
+                            {page.address.zip}
+                          </p>
+                        </CardBody>
+                      </Card>
+                    </div>
+                  </section>
+                )}
+                {!!page.hours?.length && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Hours</h2>
+                    <div className="flex flex-col gap-4">
+                      <Card>
+                        <CardBody>
+                          <div className="flex flex-col gap-2">
+                            {page.hours.map((hour) => (
+                              <div key={hour.day}>
+                                <p className="font-bold">
+                                  {toTitleCase(hour.day.replace(/-/g, ' '))}
+                                </p>
+                                <p className="text-sm">
+                                  {hour.open} - {hour.close}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </CardBody>
+                      </Card>
+                    </div>
+                  </section>
+                )}
+                {(page.contacts?.length > 0 || page.primaryContact) && (
+                  <PageContacts
+                    primaryContact={page.primaryContact}
+                    contacts={page.contacts}
+                  />
+                )}
+                {listName === 'trail' && (
+                  <PageTrailInfo trail={page as TrailItem} />
+                )}
+
+                {!!page.trails?.length && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Trails</h2>
+                    <ul>
+                      {page.trails.map((trail) => (
+                        <LinkCard
+                          as="li"
+                          key={trail.slug}
+                          className="my-2"
+                          href={`/trails/${trail.slug}`}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="flex flex-col gap-4">
+                              <CardHeader>
+                                <CardTitle>{trail.title}</CardTitle>
+                              </CardHeader>
+                              <CardBody>
+                                <p className="truncate">{trail.description}</p>
+                              </CardBody>
+                            </div>
+                          </div>
+                        </LinkCard>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+                {!!page.facilities?.length && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Trails</h2>
+                    <ul>
+                      {page.facilities.map((fac) => (
+                        <LinkCard
+                          as="li"
+                          key={fac.slug}
+                          className="my-2"
+                          href={`/trails/${fac.slug}`}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="flex flex-col gap-4">
+                              <CardHeader>
+                                <CardTitle>{fac.title}</CardTitle>
+                              </CardHeader>
+                              <CardBody>
+                                <p className="truncate">{fac.description}</p>
+                              </CardBody>
+                            </div>
+                          </div>
+                        </LinkCard>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+                {!!page.districts?.length && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Districts</h2>
+                    <ul>
+                      {page.districts.map((district) => (
+                        <LinkCard
+                          as="li"
+                          key={district.slug}
+                          className="my-2"
+                          href={`/districts/${district.slug}`}
+                        >
+                          <div className="flex justify-between items-center">
+                            <div className="flex flex-col gap-4">
+                              <CardHeader>
+                                <CardTitle>{district.title}</CardTitle>
+                              </CardHeader>
+                              <CardBody>
+                                <div>
+                                  <p>{district.description}</p>
+                                </div>
+                              </CardBody>
+                            </div>
+                            <div className="pr-6 relative">
+                              <Image
+                                src={district.photo?.file.url || ''}
+                                alt={`${district.title} assembly member photo`}
+                                className="rounded-full size-20"
+                                width={80}
+                                height={80}
+                              />
+                            </div>
+                          </div>
+                        </LinkCard>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+                {page.parent && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">
+                      Parent Department
+                    </h2>
+                    <LinkCard href={`/departments/${page.parent.slug}`}>
+                      <CardHeader>
+                        <CardTitle>{page.parent.title}</CardTitle>
+                      </CardHeader>
+                      <CardBody>
+                        <p className="truncate">{page.parent.description}</p>
+                      </CardBody>
+                    </LinkCard>
+                  </section>
+                )}
+                {page.children?.length > 0 && (
+                  <section>
+                    <h2 className="text-2xl font-bold mb-4">Divisions</h2>
+                    <ul className="flex flex-col gap-2">
+                      {page.children.map((child) => (
+                        <LinkCard href={`/departments/${child.slug}`}>
+                          <CardHeader>
+                            <CardTitle>{child.title}</CardTitle>
+                          </CardHeader>
+                          <CardBody>
+                            <p className="truncate">{child.description}</p>
+                          </CardBody>
+                        </LinkCard>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+              </>
+            }
+          >
+            <PageBody
+              title={page.title}
+              description={page.description}
+              body={page.body}
+              pageType={listName}
+            />
+
+            <PageServices
+              services={page.services}
+              filters={{
+                [listName === 'orgUnit' ? 'departments' : pluralize(listName)]:
+                  [page.title],
+              }}
+            />
+            {publicNotices?.length > 0 && (
+              <section>
+                <h2 className="text-2xl font-bold mb-4">Announcements</h2>
+                <PublicNotices items={publicNotices} />
+              </section>
+            )}
+            {listName !== 'service' && listName !== 'publicNotice' && (
+              <section>
+                <h2 className="text-2xl font-bold mb-4">Events</h2>
+                <Meetings />
+              </section>
+            )}
+          </PageSideNavController>
+        )}
+      </div>
+    </>
   );
 }

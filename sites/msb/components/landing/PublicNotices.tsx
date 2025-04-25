@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from '@matsugov/ui';
 
-export function FeaturedContent({
+export function PublicNotices({
   items,
 }: {
   items: (PageListItem & { heroImage?: string | null })[];

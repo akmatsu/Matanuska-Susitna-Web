@@ -4,7 +4,11 @@
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@components/*": ["./components/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@lib/*": ["./lib/*"],
+      "@app/*": ["./pages/*"]
     },
     "target": "ES2017"
   },
