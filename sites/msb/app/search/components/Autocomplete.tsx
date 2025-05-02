@@ -8,6 +8,7 @@ import { Combobox } from '@matsugov/ui';
 import { Hit } from 'instantsearch.js';
 import { useRouter } from 'next/navigation';
 import pluralize from 'pluralize';
+import { toKebabCase } from '@/utils/stringHelpers';
 
 type UseAutocompleteProps = AutocompleteConnectorParams;
 
@@ -24,7 +25,7 @@ export function Autocomplete() {
     if (value?.url) {
       router.push(value.url);
     } else if (value?.slug) {
-      const type = value.type ? '/' + pluralize(value.type) : '';
+      const type = toKebabCase(value.type ? '/' + pluralize(value.type) : '');
       router.push(`${type}/${value.slug}`);
     } else if (value?.title) {
       router.push(`/search?pages[query]=${value.title}`);

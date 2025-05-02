@@ -79,8 +79,6 @@ export default async function Page(props: {
     throw error;
   }
 
-  console.log(listName, data);
-
   const page: PageMerged | undefined = data?.[listName];
   const publicNotices = data?.publicNotices;
 

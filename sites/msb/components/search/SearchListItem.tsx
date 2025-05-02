@@ -1,3 +1,4 @@
+import { toKebabCase } from '@/utils/stringHelpers';
 import { LinkCard, CardHeader, CardBody, CardTitle } from '@matsugov/ui';
 import Link from 'next/link';
 
@@ -16,12 +17,15 @@ export function SearchListItem({
   listKey: string;
   className?: string;
 }) {
-  const url = item.url || `/${listKey}/${item.slug}`;
+  const formattedListKey = toKebabCase(listKey);
+
+  const url = item.url || `/${formattedListKey}/${item.slug}`;
   return (
     <LinkCard href={url} as="li" linkAs={Link} className={className}>
       <CardHeader>
         <CardTitle>{item.title}</CardTitle>
       </CardHeader>
+
       <CardBody>
         <p>{item.description}</p>
       </CardBody>

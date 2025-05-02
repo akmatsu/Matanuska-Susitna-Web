@@ -2,6 +2,14 @@ export function capitalizeFirstLetter(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+export function toKebabCase(str: string) {
+  return str
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2') // insert '-' between lowercase and uppercase
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2') // handle cases like "XMLHttpRequest"
+    .replace(/_\s/gi, '-')
+    .toLowerCase();
+}
+
 const ignoreWords = [
   // Articles
   'a',
