@@ -93,6 +93,11 @@ export type Document = {
   };
 };
 
+export type GQLPageMeta = {
+  title: string;
+  description?: string | null;
+};
+
 export type Highlight = {
   id: string;
   image: string | null;

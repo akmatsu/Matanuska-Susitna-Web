@@ -1,5 +1,6 @@
 import { TypedDocumentNode } from '@apollo/client';
 import {
+  AssemblyDistrictItem,
   GetCommunityData,
   GetOrgUnitData,
   GetParkItem,
@@ -36,7 +37,8 @@ type PageTypes =
   | GetParkItem
   | TrailItem
   | FacilityItem
-  | PublicNoticeItem;
+  | PublicNoticeItem
+  | AssemblyDistrictItem;
 
 export type PageMerged = MergeUnion<PageTypes>;
 

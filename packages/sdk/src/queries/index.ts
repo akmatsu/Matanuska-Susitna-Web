@@ -9,3 +9,4 @@ export * from './getFacility';
 export * from './getHomePage';
 export * from './baseTypes';
 export * from './getPublicNotice';
+export * from './getAssemblyDistrict';

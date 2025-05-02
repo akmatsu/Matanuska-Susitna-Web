@@ -1,4 +1,6 @@
 import {
+  GET_ASSEMBLY_DISTRICT_META_QUERY,
+  GET_ASSEMBLY_DISTRICT_QUERY,
   GET_COMMUNITY_META_QUERY,
   GET_COMMUNITY_QUERY,
   GET_FACILITY_META,
@@ -57,5 +59,9 @@ export const queryMap: {
   trails: {
     query: GET_TRAIL_QUERY,
     metaQuery: GET_TRAIL_META_QUERY,
+  },
+  'assembly-districts': {
+    query: GET_ASSEMBLY_DISTRICT_QUERY,
+    metaQuery: GET_ASSEMBLY_DISTRICT_META_QUERY,
   },
 };

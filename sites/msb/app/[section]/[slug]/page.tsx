@@ -28,7 +28,7 @@ export const generateMetadata = async ({
     return {};
   }
 
-  return getPageMeta(singular(section), config.metaQuery, slug);
+  return getPageMeta(toCamelCase(singular(section)), config.metaQuery, slug);
 };
 
 export default async function Page(props: {
@@ -78,6 +78,8 @@ export default async function Page(props: {
     console.error('Apollo query failed: ', JSON.stringify(errors));
     throw error;
   }
+
+  console.log(listName, data);
 
   const page: PageMerged | undefined = data?.[listName];
   const publicNotices = data?.publicNotices;
