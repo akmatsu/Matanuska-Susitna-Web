@@ -1,5 +1,11 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
-import { Contact, GQLPageMeta, WhereSlugVariables } from './baseTypes';
+import {
+  Contact,
+  GQLPageMeta,
+  PublicNoticeWhere,
+  TakeVariable,
+  WhereSlugVariables,
+} from './baseTypes';
 
 export interface AssemblyDistrictItem {
   id: string;
@@ -48,9 +54,14 @@ export const GET_ASSEMBLY_DISTRICT_META_QUERY: TypedDocumentNode<
 
 export const GET_ASSEMBLY_DISTRICT_QUERY: TypedDocumentNode<
   GetAssemblyDistrictData<AssemblyDistrictItem>,
-  WhereSlugVariables
+  WhereSlugVariables & PublicNoticeWhere & TakeVariable
 > = gql`
-  query AssemblyDistrict($where: AssemblyDistrictWhereUniqueInput!) {
+  query AssemblyDistrict(
+    $where: AssemblyDistrictWhereUniqueInput!
+    $publicNoticesWhere2: PublicNoticeWhereInput!
+    $take: Int
+    $orderBy: [PublicNoticeOrderByInput!]
+  ) {
     assemblyDistrict(where: $where) {
       id
       heroImage
@@ -84,6 +95,15 @@ export const GET_ASSEMBLY_DISTRICT_QUERY: TypedDocumentNode<
       fax
       termStart
       termEnd
+    }
+
+    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+      id
+      slug
+      title
+      description
+      heroImage
+      urgency
     }
   }
 `;
