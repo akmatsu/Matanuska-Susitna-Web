@@ -12,7 +12,11 @@ export function CoreSearchHits(props: ComponentProps<typeof Hits>) {
         <SearchListItem
           key={item.slug}
           item={item}
-          listKey={pluralize(item.type)}
+          listKey={pluralize(
+            item.type === 'orgUnit' || item.type === 'org-unit'
+              ? 'department'
+              : item.type,
+          )}
         />
       ))}
       {items.length === 0 && <p>No Results</p>}
