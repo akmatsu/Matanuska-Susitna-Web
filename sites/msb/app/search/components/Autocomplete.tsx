@@ -22,10 +22,16 @@ export function Autocomplete() {
   const router = useRouter();
 
   function onChange(value?: Hit | null) {
+    console.log(value?.type);
+    const hitType = !value
+      ? undefined
+      : value?.type === 'orgUnit' || value?.type === 'org-unit'
+        ? 'department'
+        : value?.type;
     if (value?.url) {
       router.push(value.url);
     } else if (value?.slug) {
-      const type = toKebabCase(value.type ? '/' + pluralize(value.type) : '');
+      const type = toKebabCase(hitType ? '/' + pluralize(hitType) : '');
       router.push(`${type}/${value.slug}`);
     } else if (value?.title) {
       router.push(`/search?pages[query]=${value.title}`);

@@ -24,11 +24,16 @@ export const generateMetadata = async ({
   const { section, slug } = await params;
   const config = queryMap[section as keyof typeof queryMap];
 
+  const listName =
+    section === 'departments'
+      ? toCamelCase(singular('org-units'))
+      : toCamelCase(singular(section));
+
   if (!config) {
     return {};
   }
 
-  return getPageMeta(toCamelCase(singular(section)), config.metaQuery, slug);
+  return getPageMeta(listName, config.metaQuery, slug);
 };
 
 export default async function Page(props: {
@@ -36,7 +41,10 @@ export default async function Page(props: {
 }) {
   const { section, slug } = await props.params;
   const config = queryMap[section as keyof typeof queryMap];
-  const listName = singular(toCamelCase(section));
+  const listName =
+    section === 'departments'
+      ? singular(toCamelCase('org-units'))
+      : singular(toCamelCase(section));
   const sideNav = section === 'services';
 
   if (!config) {
