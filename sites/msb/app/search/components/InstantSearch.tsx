@@ -1,6 +1,6 @@
 'use client';
 
-import { Configure, DynamicWidgets } from 'react-instantsearch';
+import { DynamicWidgets } from 'react-instantsearch';
 
 import { ThreeColumnLayout } from '@/components/ThreeColumnLayout';
 import { CoreSearchBox } from './CoreSearchBox';
@@ -16,9 +16,6 @@ export function InstantSearch() {
       <ThreeColumnLayout
         left={
           <div className="flex flex-col gap-4">
-            <Configure
-              filters={`published_at:<=${Math.floor(Date.now() / 1000)}`}
-            />
             <CoreSearchBox />
             <DynamicWidgets facets={['*']}>
               <CustomRefinementList
