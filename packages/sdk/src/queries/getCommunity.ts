@@ -63,6 +63,7 @@ export const GET_COMMUNITY_QUERY: TypedDocumentNode<
       id
       title
       description
+      body
       mapId
       heroImage
       services {
