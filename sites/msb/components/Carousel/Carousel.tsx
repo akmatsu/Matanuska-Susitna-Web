@@ -10,6 +10,7 @@ export function Carousel(props: CarouselProps) {
       {props.slides.map((slide) => (
         <SwiperSlide key={slide.title}>{slide.content}</SwiperSlide>
       ))}
+
       {props.slides.length > 1 && (
         <CarouselMenu slides={props.slides.map((slides) => slides.title)} />
       )}
