@@ -69,6 +69,7 @@ export const GET_ORG_UNIT_QUERY: TypedDocumentNode<
       id
       title
       description
+      body
       heroImage
       children {
         id
