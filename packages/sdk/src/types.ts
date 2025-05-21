@@ -1,14 +1,16 @@
 import { TypedDocumentNode } from '@apollo/client';
-import {
-  AssemblyDistrictItem,
-  GetCommunityData,
-  GetOrgUnitData,
-  GetParkItem,
-  GetServiceData,
-  PublicNoticeItem,
-} from './queries';
-import { FacilityItem } from './queries/getFacility';
-import { TrailItem } from './queries/getTrail';
+import type {
+  GetAssemblyDistrictQuery,
+  GetCommunityMetaQuery,
+  GetFacilityQuery,
+  GetOrgUnitQuery,
+  GetParkQuery,
+  GetPublicNoticeQuery,
+  GetServiceQuery,
+  GetTrailQuery,
+} from './graphql/graphql.ts';
+
+export type * from './graphql/graphql.ts';
 
 // Converts a union into an intersection
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
@@ -31,14 +33,14 @@ type MergeUnion<T> = {
 
 // Example usage with your types
 type PageTypes =
-  | GetServiceData['service']
-  | GetCommunityData['community']
-  | GetOrgUnitData['orgUnit']
-  | GetParkItem
-  | TrailItem
-  | FacilityItem
-  | PublicNoticeItem
-  | AssemblyDistrictItem;
+  | NonNullable<GetServiceQuery['service']>
+  | NonNullable<GetCommunityMetaQuery['community']>
+  | NonNullable<GetOrgUnitQuery['orgUnit']>
+  | NonNullable<GetParkQuery['park']>
+  | NonNullable<GetTrailQuery['trail']>
+  | NonNullable<GetFacilityQuery['facility']>
+  | NonNullable<GetPublicNoticeQuery['publicNotice']>
+  | NonNullable<GetAssemblyDistrictQuery['assemblyDistrict']>;
 
 export type PageMerged = MergeUnion<PageTypes>;
 

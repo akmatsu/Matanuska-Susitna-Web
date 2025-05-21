@@ -2,17 +2,26 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import preserveDirectives from 'rollup-preserve-directives';
+import path from 'node:path';
 
 export default defineConfig({
   build: {
     lib: {
-      entry: './src/index.ts',
+      entry: {
+        index: path.resolve(__dirname, 'src/index.ts'),
+        client: path.resolve(__dirname, 'src/components/client.ts'),
+      },
       name: 'ui',
       fileName: 'ui',
       formats: ['es'],
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'react/jsx-dev-runtime',
+      ],
       output: {
         preserveModules: true,
         preserveModulesRoot: 'src',

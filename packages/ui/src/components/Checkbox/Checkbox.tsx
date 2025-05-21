@@ -4,7 +4,6 @@ export function Checkbox({
   label,
   checked,
   onChange,
-  disabled,
 }: {
   checked?: boolean;
   onChange?: (checked: boolean) => void;

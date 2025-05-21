@@ -1,32 +1,14 @@
 import { gql, type TypedDocumentNode } from '@apollo/client';
-
-export interface GetDocCollectionData {
-  documentCollection: {
-    id: string;
-    title: string;
-    documents: {
-      id: string;
-      title: string;
-      file: {
-        filename: string;
-        filesize: number;
-        url: string;
-      };
-    }[];
-  };
-}
-
-export interface GetDocCollectionVariables {
-  where: {
-    id: string;
-  };
-}
+import {
+  GetDocumentCollectionQuery,
+  GetDocumentCollectionQueryVariables,
+} from '../graphql/graphql';
 
 export const GET_DOC_COLLECTION_QUERY: TypedDocumentNode<
-  GetDocCollectionData,
-  GetDocCollectionVariables
+  GetDocumentCollectionQuery,
+  GetDocumentCollectionQueryVariables
 > = gql`
-  query DocumentCollection($where: DocumentCollectionWhereUniqueInput!) {
+  query GetDocumentCollection($where: DocumentCollectionWhereUniqueInput!) {
     documentCollection(where: $where) {
       id
       title

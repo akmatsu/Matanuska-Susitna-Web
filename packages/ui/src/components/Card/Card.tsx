@@ -6,17 +6,19 @@ export function Card({
   children,
   className,
   titleAs = 'h4',
+  containerClassName,
   ...props
 }: {
   children: React.ReactNode;
   as?: React.ElementType;
   className?: string;
   titleAs?: React.ElementType;
+  containerClassName?: string;
 }) {
   const Component = as;
 
   return (
-    <Component {...props}>
+    <Component {...props} className={containerClassName}>
       <div
         className={clsx(
           'bg-white rounded-xs border border-base-lighter flex flex-col gap-4 shadow-md',

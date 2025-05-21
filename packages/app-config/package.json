@@ -4,7 +4,7 @@
   "description": "Matsu app config",
   "type": "module",
   "sideEffects": false,
-  "main": "./index.ts",
+  "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

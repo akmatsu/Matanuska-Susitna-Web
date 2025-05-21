@@ -1,64 +1,16 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
 import {
-  Address,
-  Contact,
-  PageListItem,
-  PublicNoticeWhere,
-  TakeVariable,
-  WhereSlugVariables,
-} from './baseTypes';
-
-export interface TrailMeta {
-  title: string;
-  description: string;
-}
-
-export interface TrailItem {
-  id: string;
-  title: string;
-  slug: string;
-  body?: string | null;
-  description?: string | null;
-  heroImage?: string | null;
-
-  groomed?: boolean | null;
-  open?: boolean | null;
-  spring?: boolean | null;
-  summer?: boolean | null;
-  winter?: boolean | null;
-  address?: Address | null;
-  contacts?: Contact[] | null;
-  park?: PageListItem | null;
-  services?: PageListItem[] | null;
-  difficulty?: string | null;
-  elevationChange?: number | null;
-  fall?: boolean | null;
-  length?: boolean | null;
-
-  // Uses
-  atv?: boolean | null;
-  biking?: boolean | null;
-  crossCountrySkiing?: boolean | null;
-  dirtBiking?: boolean | null;
-  dogWalking?: boolean | null;
-  frisbeeGolf?: boolean | null;
-  hiking?: boolean | null;
-  horsebackRiding?: boolean | null;
-  mushing?: boolean | null;
-  running?: boolean | null;
-  snowMachining?: boolean | null;
-  snowshoeing?: boolean | null;
-}
-
-export interface TrialData<T = any> {
-  trail: T;
-}
+  GetTrailMetaQuery,
+  GetTrailMetaQueryVariables,
+  GetTrailQuery,
+  GetTrailQueryVariables,
+} from '../graphql/graphql';
 
 export const GET_TRAIL_META_QUERY: TypedDocumentNode<
-  TrialData<TrailMeta>,
-  WhereSlugVariables
+  GetTrailMetaQuery,
+  GetTrailMetaQueryVariables
 > = gql`
-  query TrailPark($where: TrailWhereUniqueInput!) {
+  query GetTrailMeta($where: TrailWhereUniqueInput!) {
     trail(where: $where) {
       title
       description
@@ -67,10 +19,10 @@ export const GET_TRAIL_META_QUERY: TypedDocumentNode<
 `;
 
 export const GET_TRAIL_QUERY: TypedDocumentNode<
-  TrialData<TrailItem>,
-  WhereSlugVariables & PublicNoticeWhere & TakeVariable
+  GetTrailQuery,
+  GetTrailQueryVariables
 > = gql`
-  query Trail(
+  query GetTrail(
     $where: TrailWhereUniqueInput!
     $publicNoticesWhere2: PublicNoticeWhereInput!
     $take: Int
@@ -92,7 +44,6 @@ export const GET_TRAIL_QUERY: TypedDocumentNode<
       elevationChange
       fall
       frisbeeGolf
-      groomed
       hiking
       horsebackRiding
       mushing

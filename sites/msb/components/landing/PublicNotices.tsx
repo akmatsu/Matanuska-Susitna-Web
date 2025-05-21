@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { PageListItem } from '@msb/js-sdk';
 import { LinkButton } from '../LinkButton';
 import {
   LinkCard,
@@ -10,12 +9,9 @@ import {
   CardMedia,
   CardTitle,
 } from '@matsugov/ui';
+import { PublicNotice } from '@msb/js-sdk/graphql';
 
-export function PublicNotices({
-  items,
-}: {
-  items: (PageListItem & { heroImage?: string | null })[];
-}) {
+export function PublicNotices({ items }: { items: PublicNotice[] }) {
   return (
     <div className="flex flex-col items-center gap-4">
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
@@ -38,7 +34,7 @@ export function PublicNotices({
                         item.heroImage?.split('?')[0] ||
                         'https://d1159zutbdy4l.cloudfront.net/public/uploads/7d2a895e-d867-4959-b953-80bf2ea95aa3/Borough-Seal.png'
                       }
-                      alt={item.title}
+                      alt={item.title!}
                       objectFit="cover"
                       fill
                     />
@@ -59,7 +55,7 @@ export function PublicNotices({
                       item.heroImage?.split('?')[0] ||
                       'https://d1159zutbdy4l.cloudfront.net/public/uploads/7d2a895e-d867-4959-b953-80bf2ea95aa3/Borough-Seal.png'
                     }
-                    alt={item.title}
+                    alt={item.title!}
                     loading="lazy"
                     className="aspect-[2] object-cover h-full w-full"
                     objectFit="cover"

@@ -1,35 +1,16 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
-import { Contact, Document, LinkedItem, WhereSlugVariables } from './baseTypes';
-
-export interface PublicNoticeMetaData {
-  title: string;
-  description?: string | null;
-}
-
-export interface PublicNoticeItem {
-  id: string;
-  title: string;
-  slug: string;
-  body?: string | null;
-  description?: string | null;
-  heroImage?: string | null;
-  contacts?: Contact[] | null;
-  actions?: LinkedItem[] | null;
-  documents?: Document[] | null;
-  effectiveDate?: string | null;
-  endDate?: string | null;
-  urgency?: number | null;
-}
-
-export interface ParkData<T = any> {
-  park: T;
-}
+import {
+  GetTrailMetaQuery,
+  GetTrailMetaQueryVariables,
+  GetTrailQuery,
+  GetTrailQueryVariables,
+} from '../graphql/graphql';
 
 export const GET_PUBLIC_NOTICE_META: TypedDocumentNode<
-  ParkData<PublicNoticeMetaData>,
-  WhereSlugVariables
+  GetTrailMetaQuery,
+  GetTrailMetaQueryVariables
 > = gql`
-  query PublicNoticeMeta($where: PublicNoticeWhereUniqueInput!) {
+  query GetPublicNoticeMeta($where: PublicNoticeWhereUniqueInput!) {
     publicNotice(where: $where) {
       title
       description
@@ -38,10 +19,10 @@ export const GET_PUBLIC_NOTICE_META: TypedDocumentNode<
 `;
 
 export const GET_PUBLIC_NOTICE: TypedDocumentNode<
-  ParkData<PublicNoticeItem>,
-  WhereSlugVariables
+  GetTrailQuery,
+  GetTrailQueryVariables
 > = gql`
-  query PublicNotice($where: PublicNoticeWhereUniqueInput!) {
+  query GetPublicNotice($where: PublicNoticeWhereUniqueInput!) {
     publicNotice(where: $where) {
       id
       slug

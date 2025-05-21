@@ -1,40 +1,19 @@
 import { gql, type TypedDocumentNode } from '@apollo/client';
-import type {
-  Contact,
-  ExternalLink,
-  PublicNoticeWhere,
-  TakeVariable,
-  WhereSlugVariables,
-} from './baseTypes';
 
-export interface GetServiceItem {
-  id: string;
-  title: string;
-  body: string;
-  heroImage?: string | null;
-  primaryAction?: ExternalLink | null;
-  primaryContact?: Contact | null;
-  contacts?: Contact[] | null;
-}
-
-export interface GetServiceItemMeta {
-  title: string;
-  description: string;
-}
-
-export interface GetServiceItemMetaData {
-  service: GetServiceItemMeta;
-}
-
-export interface GetServiceData {
-  service: GetServiceItem;
-}
+import {
+  GetServiceMetaQuery,
+  GetServiceMetaQueryVariables,
+  GetServiceNoPnQuery,
+  GetServiceNoPnQueryVariables,
+  GetServiceQuery,
+  GetServiceQueryVariables,
+} from '../graphql/graphql';
 
 export const GET_SERVICE_META_QUERY: TypedDocumentNode<
-  GetServiceItemMetaData,
-  WhereSlugVariables
+  GetServiceMetaQuery,
+  GetServiceMetaQueryVariables
 > = gql`
-  query GetServiceMetaQuery($where: ServiceWhereUniqueInput!) {
+  query GetServiceMeta($where: ServiceWhereUniqueInput!) {
     service(where: $where) {
       title
       description
@@ -43,10 +22,10 @@ export const GET_SERVICE_META_QUERY: TypedDocumentNode<
 `;
 
 export const GET_SERVICE_QUERY_NO_PN: TypedDocumentNode<
-  GetServiceData,
-  WhereSlugVariables
+  GetServiceNoPnQuery,
+  GetServiceNoPnQueryVariables
 > = gql`
-  query GetService(
+  query GetServiceNoPn(
     $where: ServiceWhereUniqueInput!
     $publicNoticesWhere2: PublicNoticeWhereInput!
     $take: Int
@@ -92,8 +71,8 @@ export const GET_SERVICE_QUERY_NO_PN: TypedDocumentNode<
 `;
 
 export const GET_SERVICE_QUERY: TypedDocumentNode<
-  GetServiceData,
-  WhereSlugVariables & PublicNoticeWhere & TakeVariable
+  GetServiceQuery,
+  GetServiceQueryVariables
 > = gql`
   query GetService(
     $where: ServiceWhereUniqueInput!
@@ -106,7 +85,6 @@ export const GET_SERVICE_QUERY: TypedDocumentNode<
       slug
       title
       heroImage
-      body
       primaryAction {
         id
         label

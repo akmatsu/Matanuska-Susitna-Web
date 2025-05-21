@@ -1,4 +1,4 @@
-import type { GetDocCollectionData } from '@msb/js-sdk';
+import type { GetDocumentCollectionQuery } from '@msb/js-sdk/graphql';
 import { ComponentProps, ElementType } from 'react';
 import { Button } from '../Button';
 import clsx from 'clsx';
@@ -10,7 +10,7 @@ export function DocumentCollection({
   hideTitle = false,
   centerLabel = true,
 }: {
-  collection: GetDocCollectionData['documentCollection'];
+  collection: GetDocumentCollectionQuery['documentCollection'];
   linkAs?: ElementType;
   linkStyle?: 'button' | 'link';
   hideTitle?: boolean;
@@ -19,9 +19,9 @@ export function DocumentCollection({
 }) {
   return (
     <div className="w-full">
-      {!hideTitle && <h4 className="text-xl">{collection.title}</h4>}
+      {!hideTitle && <h4 className="text-xl">{collection?.title}</h4>}
       <ul className="not-prose w-full">
-        {collection.documents.map((document) => (
+        {collection?.documents?.map((document) => (
           <Document
             document={document}
             linkAs={linkAs}
@@ -41,7 +41,9 @@ function Document({
   linkStyle,
   centerLabel,
 }: {
-  document: GetDocCollectionData['documentCollection']['documents'][number];
+  document: NonNullable<
+    NonNullable<GetDocumentCollectionQuery['documentCollection']>['documents']
+  >[number];
   linkAs: ElementType;
   linkStyle: 'button' | 'link';
   centerLabel: boolean;
@@ -53,28 +55,30 @@ function Document({
           <Button block as={linkAs} {...props}></Button>
         );
 
-  const fileType = document.file.filename.split('.').pop()?.toUpperCase();
+  const fileType = document.file?.filename.split('.').pop()?.toUpperCase();
   const isInternal =
-    document.file.url.includes('matsu.gov') ||
-    document.file.url.includes('matsugov.us') ||
-    document.file.url.includes('msb-cms-documents.s3.us-west-2.amazonaws.com');
+    document.file?.url.includes('matsu.gov') ||
+    document.file?.url.includes('matsugov.us') ||
+    document.file?.url.includes('msb-cms-documents.s3.us-west-2.amazonaws.com');
 
   return (
     <li key={document.id} className="my-2">
       <Link
-        href={document.file.url}
+        href={document.file?.url}
         className={clsx('flex items-center gap-1 flex-nowrap', {
           'justify-between': !centerLabel,
         })}
         target={isInternal ? '_parent' : '_blank'}
-        download={fileType === 'PDF' ? undefined : document.file.filename}
+        download={fileType === 'PDF' ? undefined : document.file?.filename}
       >
         <span className="truncate">
           <span className="truncate">
             {document.title} {''}
           </span>
           <span className="text-xs">
-            ({fileType} | {formatFileSize(document.file.filesize)})
+            ({fileType} |{' '}
+            {document.file?.filesize && formatFileSize(document.file?.filesize)}
+            )
           </span>
         </span>
         <span

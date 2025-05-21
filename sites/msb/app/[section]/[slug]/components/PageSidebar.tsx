@@ -19,15 +19,20 @@ export function PageSidebar({
   config,
   listName,
 }: {
-  page: PageMerged;
-  config: PageConfig;
-  listName: string;
+  page: Partial<PageMerged>;
+  config?: Partial<PageConfig>;
+  listName?: string;
 }) {
   return (
     <>
-      <PageMap {...config.map} itemId={page.title} />
+      <PageMap {...config?.map} itemId={page?.title || ''} />
 
-      {page.primaryAction && <PageActions primaryAction={page.primaryAction} />}
+      {(page.primaryAction || !!page.actions?.length) && (
+        <PageActions
+          primaryAction={page.primaryAction}
+          actions={page.actions}
+        />
+      )}
       {page.memberName && (
         <PageSection title="Assembly Member">
           <Card>
