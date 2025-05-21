@@ -1,12 +1,12 @@
-import type { Service } from '@msb/js-sdk';
 import { LinkCardGrid } from '../../../../components/LinkCardGrid';
 import { LinkButton } from '../../../../components/LinkButton';
 import QueryString from 'qs';
 import { PageSection } from './PageSection';
+import { Service } from '@msb/js-sdk/graphql';
 
 export function PageServices(props: {
-  services?: Service[] | null;
-  filters?: { [key: string]: string[] };
+  services?: (Service | undefined | null)[] | null;
+  filters?: { [key: string]: (string | undefined | null)[] } | null;
 }) {
   if (props.services && props.services.length > 0) {
     return (

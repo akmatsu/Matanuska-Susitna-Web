@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "sideEffects": false,
   "exports": {
-    ".": "./src/index.ts",
-    "./map": "./src/components/Map/index.ts"
+    ".": "./dist/index.js",
+    "./client": "./dist/client.js"
   },
   "scripts": {
     "test": "vitest",
@@ -35,8 +35,8 @@
     "vite-plugin-dts": "^4.5.3"
   },
   "peerDependencies": {
-    "react": "^18.3.0 || ^19.0.0",
-    "react-dom": "^18.3.0 || ^19.0.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "dependencies": {
     "@arcgis/core": "^4.32.10",

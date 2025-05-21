@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useEffect, useRef, useState, useTransition } from 'react';
 import clsx from 'clsx';
 import { filterAndZoom, initializeMap } from './utils';

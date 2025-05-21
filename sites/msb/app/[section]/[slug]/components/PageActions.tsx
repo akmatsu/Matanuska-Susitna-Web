@@ -1,16 +1,18 @@
 import { LinkButton } from '../../../../components/LinkButton';
-import { ExternalLink } from '@msb/js-sdk';
+import { ExternalLink, LinkedItem } from '@msb/js-sdk';
 
 export function PageActions({
   primaryAction,
+  secondaryActions,
   actions,
 }: {
   primaryAction?: ExternalLink | null;
-  actions?: ExternalLink[] | null;
+  secondaryActions?: ExternalLink[] | null;
+  actions?: LinkedItem[] | null;
 }) {
   return (
     <>
-      {primaryAction && (
+      {!!primaryAction && (
         <LinkButton
           href={primaryAction.url.url}
           className="margin-right-0 usa-link--external"
@@ -21,11 +23,11 @@ export function PageActions({
           {primaryAction.label || primaryAction.url.title}
         </LinkButton>
       )}
-      {actions && (
+      {!!secondaryActions && (
         <ul className="flex flex-col gap-2">
-          {actions.map((action) => (
+          {secondaryActions.map((action) => (
             <LinkButton
-              key={action.id}
+              key={action.url.id}
               href={action.url.url}
               className="margin-right-0 usa-link--external"
               target="_blank"
@@ -33,6 +35,22 @@ export function PageActions({
               block
             >
               {action.label || action.url.title}
+            </LinkButton>
+          ))}
+        </ul>
+      )}
+      {!!actions && (
+        <ul className="flex flex-col gap-2">
+          {actions.map((action) => (
+            <LinkButton
+              key={action.item?.id}
+              href={action.item?.url || ''}
+              className="margin-right-0 usa-link--external"
+              target="_blank"
+              big
+              block
+            >
+              {action.label || action.item?.title}
             </LinkButton>
           ))}
         </ul>

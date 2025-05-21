@@ -1,11 +1,12 @@
-import { Featured, PublicNotices, Meetings, LinkButton } from '@/components';
+import { Featured, Meetings, LinkButton } from '@/components';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Hero } from '@matsugov/ui';
 import { GET_HOME_PAGE } from '@msb/js-sdk';
-import { InstantSearchAutoComplete } from './search/components/InstantSearchAutoComplete';
 import Link from 'next/link';
-
-// TODO - Figure out how to dynamically load icons from CMS
+import { Highlight, OrderDirection } from '@msb/js-sdk/graphql';
+import { plural } from 'pluralize';
+import { SearchDynamicWrapper } from './search/components/SearchDynamicWrapper';
+import { PublicNotices } from '@/components/landing/PublicNotices';
 
 export default async function Home() {
   const { data, errors, error } = await getClient().query({
@@ -14,7 +15,7 @@ export default async function Home() {
       take: 5,
       orderBy: [
         {
-          urgency: 'desc',
+          urgency: OrderDirection.Desc,
         },
       ],
     },
@@ -35,72 +36,97 @@ export default async function Home() {
   const page = data.homePage;
   const publicNotices = data.publicNotices || [];
 
+  function getUrlSection(str?: string) {
+    if (!str) {
+      return '/';
+    }
+    if (str === 'OrgUnit') {
+      return '/departments/';
+    }
+
+    return `/${plural(str.toLocaleLowerCase())}/`;
+  }
+
+  const toolBeltItems = [
+    {
+      id: page?.toolbeltOne?.id,
+      title: page?.toolbeltOne?.title,
+      icon: 'icon-[mdi--pets]',
+      url:
+        page?.toolbeltOne?.linkedItem?.item?.__typename === 'Url'
+          ? page?.toolbeltOne?.linkedItem?.item?.url
+          : `${getUrlSection(page?.toolbeltOne?.linkedItem?.item?.__typename)}${page?.toolbeltOne?.linkedItem?.item?.slug}`,
+    },
+    {
+      id: page?.toolbeltTwo?.id,
+      title: page?.toolbeltTwo?.title,
+      icon: 'icon-[mdi--message-alert]',
+      url:
+        page?.toolbeltTwo?.linkedItem?.item?.__typename === 'Url'
+          ? page?.toolbeltTwo?.linkedItem?.item?.url
+          : `${getUrlSection(page?.toolbeltTwo?.linkedItem?.item?.__typename)}${page?.toolbeltTwo?.linkedItem?.item?.slug}`,
+    },
+    {
+      id: page?.toolbeltThree?.id,
+      title: page?.toolbeltThree?.title,
+      icon: 'icon-[mdi--home]',
+      url:
+        page?.toolbeltThree?.linkedItem?.item?.__typename === 'Url'
+          ? page?.toolbeltThree?.linkedItem?.item?.url
+          : `${getUrlSection(page?.toolbeltThree?.linkedItem?.item?.__typename)}${page?.toolbeltThree?.linkedItem?.item?.slug}`,
+    },
+    {
+      id: page?.toolbeltFour?.id,
+      title: page?.toolbeltFour?.title,
+      icon: 'icon-[mdi--map]',
+      url:
+        page?.toolbeltFour?.linkedItem?.item?.__typename === 'Url'
+          ? page?.toolbeltFour?.linkedItem?.item?.url
+          : `${getUrlSection(page?.toolbeltFour?.linkedItem?.item?.__typename)}${page?.toolbeltFour?.linkedItem?.item?.slug}`,
+    },
+  ];
+
   return (
     <div>
-      <Hero className="flex justify-center items-center" image={page.heroImage}>
+      <Hero
+        className="flex justify-center items-center"
+        image={page?.heroImage}
+      >
         <div className="max-w-[500px] w-full">
-          <InstantSearchAutoComplete />
+          <SearchDynamicWrapper />
         </div>
       </Hero>
       <section className="flex justify-center items-center bg-base-lightest py-4 px-2">
         <div className=" max-w-[900px] w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 w-full">
-            <Link
-              href={page.toolbeltOne?.linkedItem.item?.url || ''}
-              className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
-              key={page.toolbeltOne?.id}
-            >
-              <div className="flex flex-col items-center">
-                <span
-                  className={`iconify size-9 icon-[mdi--pets] text-green-600`}
-                ></span>
-                <span>{page.toolbeltOne?.title}</span>
-              </div>
-            </Link>
-            <Link
-              href={page.toolbeltTwo?.linkedItem.item?.url || ''}
-              className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
-              key={page.toolbeltTwo?.id}
-            >
-              <div className="flex flex-col items-center">
-                <span
-                  className={`iconify size-9 icon-[mdi--message-alert] text-green-600`}
-                ></span>
-                <span>{page.toolbeltTwo?.title}</span>
-              </div>
-            </Link>
-            <Link
-              href={page.toolbeltThree?.linkedItem.item?.url || ''}
-              className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
-              key={page.toolbeltThree?.id}
-            >
-              <div className="flex flex-col items-center">
-                <span
-                  className={`iconify size-9 icon-[mdi--home] text-green-600`}
-                ></span>
-                <span>{page.toolbeltThree?.title}</span>
-              </div>
-            </Link>
-            <Link
-              href={page.toolbeltFour?.linkedItem.item?.url || ''}
-              className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
-              key={page.toolbeltFour?.id}
-            >
-              <div className="flex flex-col items-center">
-                <span
-                  className={`iconify size-9 icon-[mdi--map] text-green-600`}
-                ></span>
-                <span>{page.toolbeltFour?.title}</span>
-              </div>
-            </Link>
+            {toolBeltItems.map((item) => (
+              <Link
+                href={item.url || ''}
+                className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
+                key={item.id}
+              >
+                <div className="flex flex-col items-center">
+                  <span
+                    className={`iconify size-9 ${item.icon} text-green-600`}
+                  ></span>
+                  <span>{item.title}</span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
       <Featured
         featuredItems={[
-          { ...page.highlightOne, icon: 'icon-[mdi--briefcase]' },
-          { ...page.highlightTwo, icon: 'icon-[mdi--legal]' },
-          { ...page.highlightThree, icon: 'icon-[mdi--excavator]' },
+          {
+            ...(page?.highlightOne as Highlight),
+            icon: 'icon-[mdi--briefcase]',
+          },
+          { ...(page?.highlightTwo as Highlight), icon: 'icon-[mdi--legal]' },
+          {
+            ...(page?.highlightThree as Highlight),
+            icon: 'icon-[mdi--excavator]',
+          },
         ]}
       />
 

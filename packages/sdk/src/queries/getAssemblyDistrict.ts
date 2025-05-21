@@ -1,50 +1,17 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
+
 import {
-  Contact,
-  GQLPageMeta,
-  PublicNoticeWhere,
-  TakeVariable,
-  WhereSlugVariables,
-} from './baseTypes';
-
-export interface AssemblyDistrictItem {
-  id: string;
-  title: string;
-  slug: string;
-  description?: string | null;
-  body?: string | null;
-  heroImage?: string | null;
-  memberName?: string | null;
-  bio?: string | null;
-  address?: string | null;
-  email?: string | null;
-  phone?: string | null;
-  fax?: string | null;
-  termStart?: string | null;
-  termEnd?: string | null;
-  contacts?: Contact[] | null;
-  photo?: {
-    id: string;
-    title: string;
-    description: string;
-    file: {
-      id: string;
-      width: number;
-      height: number;
-      url: string;
-    };
-  } | null;
-}
-
-export interface GetAssemblyDistrictData<T = any> {
-  assemblyDistrict: T;
-}
+  GetAssemblyDistrictMetaQuery,
+  GetAssemblyDistrictMetaQueryVariables,
+  GetAssemblyDistrictQuery,
+  GetAssemblyDistrictQueryVariables,
+} from '../graphql/graphql';
 
 export const GET_ASSEMBLY_DISTRICT_META_QUERY: TypedDocumentNode<
-  GetAssemblyDistrictData<GQLPageMeta>,
-  WhereSlugVariables
+  GetAssemblyDistrictMetaQuery,
+  GetAssemblyDistrictMetaQueryVariables
 > = gql`
-  query AssemblyDistrictMeta($where: AssemblyDistrictWhereUniqueInput!) {
+  query GetAssemblyDistrictMeta($where: AssemblyDistrictWhereUniqueInput!) {
     assemblyDistrict(where: $where) {
       title
       description
@@ -53,10 +20,10 @@ export const GET_ASSEMBLY_DISTRICT_META_QUERY: TypedDocumentNode<
 `;
 
 export const GET_ASSEMBLY_DISTRICT_QUERY: TypedDocumentNode<
-  GetAssemblyDistrictData<AssemblyDistrictItem>,
-  WhereSlugVariables & PublicNoticeWhere & TakeVariable
+  GetAssemblyDistrictQuery,
+  GetAssemblyDistrictQueryVariables
 > = gql`
-  query AssemblyDistrict(
+  query GetAssemblyDistrict(
     $where: AssemblyDistrictWhereUniqueInput!
     $publicNoticesWhere2: PublicNoticeWhereInput!
     $take: Int

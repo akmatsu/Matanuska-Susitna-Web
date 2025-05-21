@@ -7,6 +7,7 @@ export * from './getPark';
 export * from './getTrail';
 export * from './getFacility';
 export * from './getHomePage';
-export * from './baseTypes';
 export * from './getPublicNotice';
 export * from './getAssemblyDistrict';
+export * from './getBoardsPage';
+export * from './getBoards';

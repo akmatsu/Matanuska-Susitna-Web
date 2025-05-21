@@ -3,5 +3,13 @@
     "@tsconfig/recommended/tsconfig.json",
     "@tsconfig/vite-react/tsconfig.json"
   ],
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "http://localhost:3333/api/graphql"
+      }
+    ]
+  },
   "include": ["./src/**/*.ts"]
 }

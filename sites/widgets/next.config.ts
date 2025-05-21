@@ -3,6 +3,14 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   transpilePackages: ['@matsugov/ui', '@msb/js-sdk'],
   reactStrictMode: true,
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        graphql: false,
+      };
+    }
+  },
   experimental: {
     optimizePackageImports: [
       '@matsugov/ui',

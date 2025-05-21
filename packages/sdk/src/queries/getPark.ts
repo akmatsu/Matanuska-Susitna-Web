@@ -1,46 +1,16 @@
 import { gql, type TypedDocumentNode } from '@apollo/client';
-import type {
-  Address,
-  Contact,
-  Hour,
-  PageListItem,
-  PublicNoticeWhere,
-  TakeVariable,
-  WhereSlugVariables,
-} from './baseTypes';
-
-export interface GetParkItemMetaData {
-  park: {
-    title: string;
-    description: string;
-  };
-}
-
-export interface GetParkItem {
-  id: string;
-  title: string;
-  slug: string;
-  body?: string | null;
-  description?: string | null;
-  heroImage?: string | null;
-  contacts?: Contact[];
-  services?: PageListItem[] | null;
-  address?: Address | null;
-  trails?: PageListItem[] | null;
-  facilities?: PageListItem[] | null;
-  hours?: Hour[] | null;
-}
-
-export interface GetParkData {
-  park: GetParkItem;
-  publicNotices?: (PageListItem & { heroImage?: string | null })[];
-}
+import {
+  GetParkMetaQuery,
+  GetParkMetaQueryVariables,
+  GetParkQuery,
+  GetParkQueryVariables,
+} from '../graphql/graphql';
 
 export const GET_PARK_META_QUERY: TypedDocumentNode<
-  GetParkItemMetaData,
-  WhereSlugVariables
+  GetParkMetaQuery,
+  GetParkMetaQueryVariables
 > = gql`
-  query GetParkMetaQuery($where: ParkWhereUniqueInput!) {
+  query GetParkMeta($where: ParkWhereUniqueInput!) {
     park(where: $where) {
       title
       description
@@ -49,10 +19,10 @@ export const GET_PARK_META_QUERY: TypedDocumentNode<
 `;
 
 export const GET_PARK_QUERY: TypedDocumentNode<
-  GetParkData,
-  WhereSlugVariables & PublicNoticeWhere & TakeVariable
+  GetParkQuery,
+  GetParkQueryVariables
 > = gql`
-  query Park(
+  query GetPark(
     $where: ParkWhereUniqueInput!
     $publicNoticesWhere2: PublicNoticeWhereInput!
     $take: Int

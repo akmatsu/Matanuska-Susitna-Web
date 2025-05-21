@@ -1,35 +1,16 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
-import { Highlight, PageListItem, TakeVariable } from './baseTypes';
-
-export interface HomePageMeta {
-  title: string;
-  description?: string | null;
-}
-
-export interface HomePageItem {
-  id: string;
-  title: string;
-  description?: string | null;
-  heroImage?: string | null;
-  toolbeltOne?: Highlight | null;
-  toolbeltTwo?: Highlight | null;
-  toolbeltThree?: Highlight | null;
-  toolbeltFour?: Highlight | null;
-  highlightOne?: Highlight | null;
-  highlightTwo?: Highlight | null;
-  highlightThree?: Highlight | null;
-}
-
-export interface HomePageData<T = any> {
-  homePage: T;
-  publicNotices?: (PageListItem & { heroImage?: string | null })[];
-}
+import {
+  GetHomePageMetaQuery,
+  GetHomePageMetaQueryVariables,
+  GetHomePageQuery,
+  GetHomePageQueryVariables,
+} from '../graphql/graphql';
 
 export const GET_HOME_PAGE_META: TypedDocumentNode<
-  HomePageData<HomePageMeta>,
-  TakeVariable
+  GetHomePageMetaQuery,
+  GetHomePageMetaQueryVariables
 > = gql`
-  query getHomePageMeta {
+  query GetHomePageMeta {
     homePage {
       title
       description
@@ -38,10 +19,10 @@ export const GET_HOME_PAGE_META: TypedDocumentNode<
 `;
 
 export const GET_HOME_PAGE: TypedDocumentNode<
-  HomePageData<HomePageItem>,
-  TakeVariable & { orderBy: { urgency: 'desc' | 'asc' }[] }
+  GetHomePageQuery,
+  GetHomePageQueryVariables
 > = gql`
-  query HomePage($take: Int, $orderBy: [PublicNoticeOrderByInput!]!) {
+  query GetHomePage($take: Int, $orderBy: [PublicNoticeOrderByInput!]!) {
     homePage {
       id
       title

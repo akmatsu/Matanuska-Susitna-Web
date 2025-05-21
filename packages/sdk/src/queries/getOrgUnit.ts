@@ -1,50 +1,15 @@
 import { gql, type TypedDocumentNode } from '@apollo/client';
-import type {
-  Contact,
-  PublicNoticeWhere,
-  TakeVariable,
-  WhereSlugVariables,
-} from './baseTypes';
 
-export interface GetOrgUnitMetaData {
-  orgUnit: {
-    title: string;
-    description?: string | null;
-    heroImage?: string | null;
-  };
-}
-
-export interface GetOrgUnitData {
-  orgUnit: {
-    id: string;
-    title: string;
-    description?: string | null;
-    heroImage?: string | null;
-    children: {
-      id: string;
-      description?: string | null;
-      title: string;
-      slug: string;
-    }[];
-    contacts: Contact[];
-    parent?: {
-      id: string;
-      slug: string;
-      title: string;
-      description?: string | null;
-    };
-    services: {
-      id: string;
-      slug: string;
-      title: string;
-      description?: string | null;
-    }[];
-  };
-}
+import {
+  GetOrgUnitMetaQuery,
+  GetOrgUnitMetaQueryVariables,
+  GetOrgUnitQuery,
+  GetOrgUnitQueryVariables,
+} from '../graphql/graphql';
 
 export const GET_ORG_UNIT_META_QUERY: TypedDocumentNode<
-  GetOrgUnitMetaData,
-  WhereSlugVariables
+  GetOrgUnitMetaQuery,
+  GetOrgUnitMetaQueryVariables
 > = gql`
   query GetOrgUnitMeta($where: OrgUnitWhereUniqueInput!) {
     orgUnit(where: $where) {
@@ -56,10 +21,10 @@ export const GET_ORG_UNIT_META_QUERY: TypedDocumentNode<
 `;
 
 export const GET_ORG_UNIT_QUERY: TypedDocumentNode<
-  GetOrgUnitData,
-  WhereSlugVariables & PublicNoticeWhere & TakeVariable
+  GetOrgUnitQuery,
+  GetOrgUnitQueryVariables
 > = gql`
-  query OrgUnit(
+  query GetOrgUnit(
     $where: OrgUnitWhereUniqueInput!
     $publicNoticesWhere2: PublicNoticeWhereInput!
     $take: Int
