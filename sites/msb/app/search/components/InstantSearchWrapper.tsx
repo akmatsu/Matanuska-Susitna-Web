@@ -33,7 +33,18 @@ export function InstantSearchWrapper(props: {
     <InstantSearchNext
       searchClient={searchClient}
       indexName={props.indexName}
-      routing={props.routing}
+      routing={
+        props.routing
+          ? {
+              router: {
+                // cleanUrlOnDispose: false,
+              },
+            }
+          : undefined
+      }
+      future={{
+        preserveSharedStateOnUnmount: true,
+      }}
     >
       {props.children}
     </InstantSearchNext>
