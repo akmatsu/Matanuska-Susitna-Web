@@ -8,8 +8,8 @@ export const GET_BOARDS: TypedDocumentNode<
   GetBoardsQuery,
   GetBoardsQueryVariables
 > = gql`
-  query GetBoards($take: Int, $where: BoardWhereInput) {
-    boards(take: $take, where: $where) {
+  query GetBoards($take: Int, $skip: Int, $where: BoardWhereInput) {
+    boards(take: $take, where: $where, skip: $skip) {
       id
       title
       slug

@@ -5,7 +5,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath,
-  transpilePackages: ['mui-color-input', '@msb/map'],
+  transpilePackages: ['mui-color-input', '@msb/map', '@msb/js-sdk'],
   reactStrictMode: true,
 
   images: {

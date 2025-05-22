@@ -1,5 +1,5 @@
+import { ExternalLink, InternalLink } from '@msb/js-sdk/graphql';
 import { LinkButton } from '../../../../components/LinkButton';
-import { ExternalLink, LinkedItem } from '@msb/js-sdk';
 
 export function PageActions({
   primaryAction,
@@ -8,33 +8,33 @@ export function PageActions({
 }: {
   primaryAction?: ExternalLink | null;
   secondaryActions?: ExternalLink[] | null;
-  actions?: LinkedItem[] | null;
+  actions?: InternalLink[] | null;
 }) {
   return (
     <>
       {!!primaryAction && (
         <LinkButton
-          href={primaryAction.url.url}
+          href={primaryAction?.url?.url || ''}
           className="margin-right-0 usa-link--external"
           target="_blank"
           big
           block
         >
-          {primaryAction.label || primaryAction.url.title}
+          {primaryAction.label || primaryAction?.url?.title}
         </LinkButton>
       )}
       {!!secondaryActions && (
         <ul className="flex flex-col gap-2">
           {secondaryActions.map((action) => (
             <LinkButton
-              key={action.url.id}
-              href={action.url.url}
+              key={action?.url?.id}
+              href={action?.url?.url || ''}
               className="margin-right-0 usa-link--external"
               target="_blank"
               big
               block
             >
-              {action.label || action.url.title}
+              {action.label || action?.url?.title}
             </LinkButton>
           ))}
         </ul>
