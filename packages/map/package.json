@@ -11,18 +11,18 @@
   "license": "ISC",
   "devDependencies": {
     "@matsugov/tw-config": "workspace:^",
-    "@tailwindcss/postcss": "^4.1.4",
+    "@tailwindcss/postcss": "^4.1.7",
     "@tsconfig/vite-react": "^3.4.0",
-    "@types/node": "^22.14.1",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5",
     "postcss": "^8.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.4",
+    "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3",
-    "vite": "^6.3.2",
-    "vite-plugin-dts": "^4.5.3"
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4"
   },
   "peerDependencies": {
     "react": "^19.1.0",

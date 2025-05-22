@@ -2,12 +2,13 @@ import { LinkButton } from '@/components';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Card, CardHeader, CardTitle } from '@matsugov/ui';
 import { GetBoardsQuery } from '@msb/js-sdk/graphql';
+import { GET_BOARDS } from '@msb/js-sdk';
 import Link from 'next/link';
 
 export async function BoardsList() {
-  const { GET_BOARDS } = await import('@msb/js-sdk');
   const { data, error } = await getClient().query({
     query: GET_BOARDS,
+    variables: {},
   });
 
   if (error) {
@@ -38,29 +39,22 @@ export async function BoardsList() {
         </thead>
         <tbody>
           {boards?.map((board) => (
-            <Link
-              href={`/boards/${board.slug}`}
-              className="contents text-inherit"
-            >
-              <tr
-                key={board.id}
-                className="not-even:bg-neutral-50 hover:bg-neutral-100 transition-colors"
-              >
-                <td className="border border-base-lighter px-4 py-2">
+            <tr key={board.id} className="not-odd:bg-neutral-100">
+              <td className="border border-base-lighter px-4 py-2">
+                <Link href={`/boards/${board.slug}`} as={`/boards/${board.id}`}>
                   {board.title}
-                </td>
-                <td className="border border-base-lighter px-4 py-2">
-                  {board.meetingSchedule}
-                </td>
-                <td className="border border-base-lighter px-4 py-2">
-                  {board.description}
-                </td>
-              </tr>
-            </Link>
+                </Link>
+              </td>
+              <td className="border border-base-lighter px-4 py-2">
+                {board.meetingSchedule}
+              </td>
+              <td className="border border-base-lighter px-4 py-2 truncate overflow-hidden max-w-2xs">
+                {board.description}
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>
-      {/* </CardBody> */}
     </Card>
   );
 }

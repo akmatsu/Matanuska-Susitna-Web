@@ -1,4 +1,5 @@
 import { makeClient } from './makeClient';
+import { registerApolloClient } from '@apollo/client-integration-nextjs';
 
 export function initApolloDevLogging() {
   if (process.env.NODE_ENV !== 'production') {
@@ -11,13 +12,8 @@ export function initApolloDevLogging() {
   }
 }
 
-export async function registerClient(apiUrl: string) {
-  if (typeof window === 'undefined') {
-    const { registerApolloClient } = await import(
-      '@apollo/client-integration-nextjs'
-    );
-    return registerApolloClient(() => {
-      return makeClient({ apiUrl });
-    });
-  }
+export function registerClient(apiUrl: string) {
+  return registerApolloClient(() => {
+    return makeClient({ apiUrl });
+  });
 }
