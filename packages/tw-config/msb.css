@@ -20,12 +20,12 @@
   --color-primary-dark: var(--color-blue-warm-70v);
   --color-primary-darker: var(--color-blue-warm-80v);
 
-  --color-secondary-lighter: var(--color-red-cool-10);
-  --color-secondary-light: var(--color-red-30);
-  --color-secondary: var(--color-red-50);
-  --color-secondary-vivid: var(--color-red-cool-50v);
-  --color-secondary-dark: var(--color-red-60v);
-  --color-secondary-darker: var(--color-red-70v);
+  --color-secondary-lighter: var(--color-yellow-10v);
+  --color-secondary-light: var(--color-yellow-20v);
+  --color-secondary: var(--color-yellow-20v);
+  --color-secondary-vivid: var(--color-yellow-cool-30v);
+  --color-secondary-dark: var(--color-yellow-30v);
+  --color-secondary-darker: var(--color-yellow-40v);
 
   --color-accent-cool-lighter: var(--color-blue-cool-5v);
   --color-accent-cool-light: var(--color-blue-cool-20v);

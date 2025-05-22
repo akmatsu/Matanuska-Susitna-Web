@@ -88,7 +88,7 @@ export function Button<T extends React.ElementType = 'button'>({
             color === 'transparent' && !disabled,
           'bg-primary hover:bg-primary-dark active:bg-primary-darker text-base-lightest':
             color === 'primary' && !disabled,
-          'bg-secondary hover:bg-secondary-dark active:bg-secondary-darker text-white':
+          'bg-secondary hover:bg-secondary-dark active:bg-secondary-darker text-black':
             color === 'secondary' && !disabled,
           'bg-accent-cool hover:bg-accent-cool-dark active:bg-accent-cool-darker text-black active:text-white':
             color === 'accent-cool' && !disabled,
