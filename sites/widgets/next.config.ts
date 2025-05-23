@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: [
       '@matsugov/ui',
-      '@matsugov/ui/map',
       '@matsugov/tw-config',
       '@msb/js-sdk',
       '@msb/js-sdk/components',

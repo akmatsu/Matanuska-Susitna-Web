@@ -1,0 +1,3 @@
+# Client Components
+
+These are components that have "use client" at the top of the file. They are used to create interactive components that can be rendered on the client side. These components can use hooks and other client-side features. We separate them from server and static components to make it clear that they are meant to be used on the client side. This is important for performance and SEO reasons, as server and static components can be rendered on the server and sent to the client as HTML, while client components are rendered on the client side and can be interactive. Additionally since we're using barrel files if we mix client and static/server components in the same folder it can cause issues with the bundler. So we keep them separate to avoid any issues.

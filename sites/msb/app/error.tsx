@@ -1,6 +1,5 @@
 'use client';
-
-import { Button } from '@matsugov/ui';
+import { Button } from '@matsugov/ui/Button';
 import Link from 'next/link';
 import { useEffect } from 'react';
 

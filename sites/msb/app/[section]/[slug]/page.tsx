@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { getPageMeta } from '@/utils/pageHelpers';
 import { toCamelCase } from '@/utils/stringHelpers';
-import { Hero } from '@matsugov/ui';
+import { Hero } from '@matsugov/ui/Hero';
 import {
   PageBody,
   PageEvents,
@@ -13,7 +13,7 @@ import {
   PagePublicNotices,
   PageSidebar,
   PageContainer,
-} from '@components/server';
+} from '@/components/static/Page';
 import { PageSideNavController } from '@components/client/Page/PageSideNavController';
 
 const queryMap: {

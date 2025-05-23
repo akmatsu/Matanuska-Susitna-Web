@@ -9,10 +9,11 @@ export default defineConfig({
       entry: {
         index: './src/index.ts',
         components: './src/components/index.ts',
+        types: './src/types.ts',
         queries: './src/queries/index.ts',
         client: './src/client/index.ts',
         apollo: './src/apollo.ts',
-        graphql: './src/graphql',
+        graphql: './src/graphql/graphql.ts',
         getBoards: './src/queries/getBoards.ts',
         getBoardsPage: './src/queries/getBoardsPage.ts',
       },
@@ -35,5 +36,14 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react(), preserveDirectives(), dts()],
+  plugins: [
+    react(),
+    preserveDirectives(),
+    dts({
+      tsconfigPath: './tsconfig.json',
+      entryRoot: './src',
+      outDir: './dist',
+      insertTypesEntry: true,
+    }),
+  ],
 });

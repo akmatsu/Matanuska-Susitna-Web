@@ -21,6 +21,7 @@ export default defineConfig({
         'react-dom',
         'react/jsx-runtime',
         'react/jsx-dev-runtime',
+        '@msb/js-sdk',
       ],
       output: {
         preserveModules: true,
@@ -29,6 +30,9 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'jsxRuntime',
+          'react/jsx-dev-runtime': 'jsxDevRuntime',
+          '@msb/js-sdk': 'MsbSDK',
         },
       },
     },

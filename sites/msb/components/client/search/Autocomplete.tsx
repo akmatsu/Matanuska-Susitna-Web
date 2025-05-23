@@ -1,11 +1,9 @@
 'use client';
 import { useConnector } from 'react-instantsearch';
-
 import connectAutocomplete, {
   type AutocompleteConnectorParams,
 } from 'instantsearch.js/es/connectors/autocomplete/connectAutocomplete';
-
-import { Combobox } from '@matsugov/ui/client';
+import { Combobox } from '@matsugov/ui/Combobox';
 import { Hit } from 'instantsearch.js';
 import { useRouter } from 'next/navigation';
 import pluralize from 'pluralize';
