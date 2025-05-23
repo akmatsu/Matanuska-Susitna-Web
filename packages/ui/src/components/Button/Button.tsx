@@ -19,6 +19,7 @@ export function Button<T extends React.ElementType = 'button'>({
   shadow = true,
   square = false,
   underline = false,
+  active = false,
   ...props
 }: {
   className?: string;
@@ -46,6 +47,7 @@ export function Button<T extends React.ElementType = 'button'>({
   icon?: boolean;
   square?: boolean;
   underline?: boolean;
+  active?: boolean;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'color'>) {
   const Component = as || (href ? 'a' : 'button');
 
@@ -54,7 +56,7 @@ export function Button<T extends React.ElementType = 'button'>({
       {...props}
       href={href}
       type={Component === 'button' ? type : undefined}
-      disabled={disabled}
+      disabled={disabled || active}
       aria-disabled={disabled}
       className={clsx(
         'leading-none focus-ring text-center flex items-center justify-center no-underline transition-colors active:transition-none',
@@ -85,25 +87,45 @@ export function Button<T extends React.ElementType = 'button'>({
 
           // Color variants group
           'bg-transparent text-primary border border-base-lighter hover:border-primary':
-            color === 'transparent' && !disabled,
+            color === 'transparent' && !disabled && !active,
           'bg-primary hover:bg-primary-dark active:bg-primary-darker text-base-lightest':
-            color === 'primary' && !disabled,
+            color === 'primary' && !disabled && !active,
           'bg-secondary hover:bg-secondary-dark active:bg-secondary-darker text-black':
-            color === 'secondary' && !disabled,
+            color === 'secondary' && !disabled && !active,
           'bg-accent-cool hover:bg-accent-cool-dark active:bg-accent-cool-darker text-black active:text-white':
-            color === 'accent-cool' && !disabled,
+            color === 'accent-cool' && !disabled && !active,
           'bg-accent-warm hover:bg-accent-warm-dark active:bg-accent-warm-darker text-black hover:text-white active:text-white':
-            color === 'accent-warm' && !disabled,
+            color === 'accent-warm' && !disabled && !active,
           'bg-base hover:bg-base-dark active:bg-base-darker text-white':
-            color === 'base' && !disabled,
+            color === 'base' && !disabled && !active,
           'bg-error hover:bg-error-dark active:bg-error-darker text-white':
-            color === 'error' && !disabled,
+            color === 'error' && !disabled && !active,
           'bg-warning hover:bg-warning-dark active:bg-warning-darker text-white':
-            color === 'warning' && !disabled,
+            color === 'warning' && !disabled && !active,
           'bg-success hover:bg-success-dark active:bg-success-darker text-white':
-            color === 'success' && !disabled,
+            color === 'success' && !disabled && !active,
           'bg-base-darkest hover:bg-base-darker active:bg-base-dark text-white':
-            color === 'black' && !disabled,
+            color === 'black' && !disabled && !active,
+
+          // 'bg-transparent text-primary border border-base-lighter hover:border-primary':
+          //   color === 'transparent' && !disabled && active,
+          'bg-primary  active:bg-primary-darker text-base-lightest':
+            color === 'primary' && !disabled && active,
+          'bg-primary text-white': color === 'secondary' && !disabled && active,
+          // 'bg-accent-cool hover:bg-accent-cool-dark active:bg-accent-cool-darker text-black active:text-white':
+          //   color === 'accent-cool' && !disabled && active,
+          // 'bg-accent-warm hover:bg-accent-warm-dark active:bg-accent-warm-darker text-black hover:text-white active:text-white':
+          //   color === 'accent-warm' && !disabled && active,
+          // 'bg-base hover:bg-base-dark active:bg-base-darker text-white':
+          //   color === 'base' && !disabled && active,
+          // 'bg-error hover:bg-error-dark active:bg-error-darker text-white':
+          //   color === 'error' && !disabled && active,
+          // 'bg-warning hover:bg-warning-dark active:bg-warning-darker text-white':
+          //   color === 'warning' && !disabled && active,
+          // 'bg-success hover:bg-success-dark active:bg-success-darker text-white':
+          //   color === 'success' && !disabled && active,
+          // 'bg-base-darkest hover:bg-base-darker active:bg-base-dark text-white':
+          //   color === 'black' && !disabled && active,
         },
         className,
       )}
