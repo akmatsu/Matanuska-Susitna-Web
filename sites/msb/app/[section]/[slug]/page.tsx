@@ -10,11 +10,11 @@ import {
   PageBody,
   PageEvents,
   PageServices,
-  PageSideNavController,
   PagePublicNotices,
   PageSidebar,
-} from './components';
-import { PageContainer } from '@/components/PageContainer';
+  PageContainer,
+} from '@components/server';
+import { PageSideNavController } from '@components/client/Page/PageSideNavController';
 
 const queryMap: {
   [key: string]: () => Promise<PageConfig>;

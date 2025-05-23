@@ -1,13 +1,13 @@
 import '@/styles/index.css';
 import type { Metadata } from 'next';
-import { FeedbackButton } from '@/components/FeedbackButton';
+import { FeedbackButton } from '@/components/client/FeedbackButton';
 // import { ApolloWrapper } from '@msb/js-sdk/components';
 import { Footer } from '@matsugov/ui';
 import { Header } from '@matsugov/ui/client';
 import Link from 'next/link';
 import { primaryNav } from '@/configs/config';
 import Image from 'next/image';
-import { SiteInfo } from '@/components';
+import { SiteInfo } from '@/components/server';
 
 export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',

@@ -1,5 +1,5 @@
 import { ReactNode, ComponentProps } from 'react';
-import { Process, Step } from './components/MarkdownRenderer/components';
+import { Process, Step } from './components/server/MarkdownRenderer/components';
 
 declare module 'react' {
   namespace JSX {
