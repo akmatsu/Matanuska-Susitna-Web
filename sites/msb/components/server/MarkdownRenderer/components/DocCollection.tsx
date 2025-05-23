@@ -16,15 +16,15 @@ export async function DocCollection({ id }: { id: string }) {
       <thead>
         <tr>
           <th>
-            <span>{data?.documentCollection.title}</span>
+            <span>{data?.documentCollection?.title}</span>
           </th>
         </tr>
       </thead>
       <tbody>
-        {data?.documentCollection.documents.map((doc, index) => (
+        {data?.documentCollection?.documents?.map((doc, index) => (
           <tr key={doc.id}>
             <td>
-              <Link href={doc.file.url}>{doc.title}</Link>
+              <Link href={doc.file?.url || ''}>{doc.title}</Link>
             </td>
           </tr>
         ))}

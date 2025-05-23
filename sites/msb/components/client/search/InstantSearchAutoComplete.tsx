@@ -1,7 +1,7 @@
 'use client';
 import { Configure } from 'react-instantsearch';
 import { Autocomplete } from './Autocomplete';
-import { InstantSearchWrapper } from '../../server/search/InstantSearchWrapper';
+import { InstantSearchWrapper } from '../../static/search/InstantSearchWrapper';
 
 export function InstantSearchAutoComplete() {
   return (

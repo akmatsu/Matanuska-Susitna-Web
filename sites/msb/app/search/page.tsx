@@ -1,5 +1,5 @@
 import { InstantSearch } from '@/components/client/search/InstantSearch';
-import { PageContainer } from '@/components/server';
+import { PageContainer } from '@/components/static/Page/PageContainer';
 
 export const dynamic = 'force-dynamic';
 

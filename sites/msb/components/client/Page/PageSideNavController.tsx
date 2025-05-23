@@ -1,4 +1,4 @@
-import { InPageNavigation } from '@matsugov/ui/client';
+import { InPageNavigation } from '@matsugov/ui/InPageNavigation';
 import clsx from 'clsx';
 
 export function PageSideNavController(props: {

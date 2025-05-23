@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { LinkButton } from '@/components/server/LinkButton/LinkButton';
+import { LinkButton } from '@/components/static/LinkButton/LinkButton';
 import { usePathname } from 'next/navigation';
 
 export const FeedbackButton = () => {

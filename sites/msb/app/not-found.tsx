@@ -1,4 +1,4 @@
-import { Button } from '@matsugov/ui';
+import { Button } from '@matsugov/ui/Button';
 import Link from 'next/link';
 
 export default function NotFound() {

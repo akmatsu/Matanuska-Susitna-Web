@@ -3,15 +3,30 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "./src/index.ts",
   "sideEffects": false,
   "exports": {
-    ".": "./dist/index.js",
-    "./client": "./dist/client.js"
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./Alert": "./src/components/Alert/index.ts",
+    "./Banner": "./src/components/Banner/index.ts",
+    "./Button": "./src/components/Button/index.ts",
+    "./Card": "./src/components/Card/index.ts",
+    "./Checkbox": "./src/components/Checkbox/index.ts",
+    "./Combobox": "./src/components/Combobox/index.ts",
+    "./DocumentCollection": "./src/components/DocumentCollection/index.ts",
+    "./Footer": "./src/components/Footer/index.ts",
+    "./Header": "./src/components/Header/index.ts",
+    "./Hero": "./src/components/Hero/index.ts",
+    "./InPageNavigation": "./src/components/InPageNavigation/index.ts",
+    "./Pagination": "./src/components/Pagination/index.ts",
+    "./ProcessList": "./src/components/ProcessList/index.ts",
+    "./Search": "./src/components/Search/index.ts",
+    "./TextField": "./src/components/TextField/index.ts",
+    "./TwoColumnLayout": "./src/components/TwoColumnLayout/index.ts"
   },
   "scripts": {
-    "test": "vitest",
-    "build": "vite build"
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +50,8 @@
     "vite-plugin-dts": "^4.5.4"
   },
   "peerDependencies": {
+    "@matsugov/tw-config": "workspace:^",
+    "@msb/js-sdk": "workspace:^",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

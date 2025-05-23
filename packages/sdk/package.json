@@ -4,21 +4,20 @@
   "description": "",
   "type": "module",
   "sideEffects": false,
-  "main": "./dist/index.ts",
+  "main": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./components": "./dist/components/index.ts",
-    "./types": "./dist/types.d.ts",
-    "./queries": "./dist/queries.js",
-    "./client": "./dist/client.js",
-    "./apollo": "./dist/apollo.js",
-    "./graphql": "./dist/graphql.js",
-    "./getBoards": "./dist/getBoards.js",
-    "./getBoardsPage": "./dist/getBoardsPage.js"
+    "./components": "./src/components/index.ts",
+    "./types": "./src/types.ts",
+    "./queries": "./src/queries/index.ts",
+    "./client": "./src/client/index.ts",
+    "./apollo": "./src/apollo.ts",
+    "./graphql": "./src/graphql/graphql.ts",
+    "./getBoards": "./src/queries/getBoards.ts",
+    "./getBoardsPage": "./src/queries/getBoardsPage.ts"
   },
   "scripts": {
-    "codegen:watch": "pnpm exec graphql-codegen --config codegen.ts --watch",
-    "build": "vite build"
+    "codegen:watch": "pnpm exec graphql-codegen --config codegen.ts --watch"
   },
   "keywords": [],
   "author": "",

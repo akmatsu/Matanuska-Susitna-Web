@@ -1,6 +1,6 @@
 'use client';
-import { Search } from '@matsugov/ui';
-import { ChangeEvent, FormEvent } from 'react';
+import { Search } from '@matsugov/ui/Search';
+import type { ChangeEvent } from 'react';
 import { useSearchBox } from 'react-instantsearch';
 
 export function CoreSearchBox() {

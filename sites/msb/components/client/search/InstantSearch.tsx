@@ -1,12 +1,14 @@
 'use client';
 import { DynamicWidgets } from 'react-instantsearch';
-import { ThreeColumnLayout } from '@/components/server/ThreeColumnLayout';
 import { CoreSearchBox } from './CoreSearchBox';
-import { CoreSearchHits } from '../../server/search/CoreSearchHit';
-import { CoreSearchPagination } from '../../server/search/CoreSearchPagination';
-import { CustomRefinementList } from '../../server/search/CoreRefinementList';
-import { LinkButton } from '@/components/server/LinkButton';
-import { InstantSearchWrapper } from '../../server/search/InstantSearchWrapper';
+import {
+  CoreSearchHits,
+  CoreSearchPagination,
+  CustomRefinementList,
+  InstantSearchWrapper,
+} from '@/components/static/search';
+import { ThreeColumnLayout } from '@/components/static/ThreeColumnLayout';
+import { LinkButton } from '@/components/static/LinkButton';
 
 export function InstantSearch() {
   return (

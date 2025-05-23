@@ -1,6 +1,6 @@
-import { LinkButton } from '@/components/server';
+import { LinkButton } from '@/components/static/LinkButton';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { Card, CardHeader, CardTitle } from '@matsugov/ui';
+import { Card, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import { GetBoardsQuery } from '@msb/js-sdk/graphql';
 import { GET_BOARDS } from '@msb/js-sdk';
 import Link from 'next/link';

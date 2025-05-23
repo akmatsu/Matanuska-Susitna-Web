@@ -1,13 +1,13 @@
 import '@/styles/index.css';
 import type { Metadata } from 'next';
 import { FeedbackButton } from '@/components/client/FeedbackButton';
-// import { ApolloWrapper } from '@msb/js-sdk/components';
-import { Footer } from '@matsugov/ui';
-import { Header } from '@matsugov/ui/client';
+import { ApolloWrapper } from '@msb/js-sdk/components';
+import { Footer } from '@matsugov/ui/Footer';
+import { Header } from '@matsugov/ui/Header';
 import Link from 'next/link';
 import { primaryNav } from '@/configs/config';
 import Image from 'next/image';
-import { SiteInfo } from '@/components/server';
+import { SiteInfo } from '@/components/static/Header/SiteInfo';
 
 export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',
@@ -31,15 +31,15 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* <ApolloWrapper> */}
-        <SiteInfo />
-        <Header navItems={primaryNav} navLinkAs={Link} imageAs={Image} />
-        <main id="main-content" className="position-relative">
-          {children}
-        </main>
-        <FeedbackButton />
-        <Footer navLinkAs={Link} navItems={primaryNav} imageAs={Image} />
-        {/* </ApolloWrapper> */}
+        <ApolloWrapper apiUrl={process.env.NEXT_PUBLIC_API_URL ?? ''}>
+          <SiteInfo />
+          <Header navItems={primaryNav} navLinkAs={Link} imageAs={Image} />
+          <main id="main-content" className="position-relative">
+            {children}
+          </main>
+          <FeedbackButton />
+          <Footer navLinkAs={Link} navItems={primaryNav} imageAs={Image} />
+        </ApolloWrapper>
       </body>
     </html>
   );

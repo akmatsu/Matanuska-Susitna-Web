@@ -1,4 +1,4 @@
-import { ProcessList } from '@matsugov/ui';
+import { ProcessList } from '@matsugov/ui/ProcessList';
 import { ReactNode } from 'react';
 
 export function Process({ children }: { children: ReactNode }) {

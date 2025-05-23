@@ -1,5 +1,5 @@
 import { getClient } from '@/utils';
-import { DocumentCollection } from '@matsugov/ui';
+import { DocumentCollection } from '@matsugov/ui/DocumentCollection';
 import { GET_DOC_COLLECTION_QUERY } from '@msb/js-sdk';
 import Link from 'next/link';
 

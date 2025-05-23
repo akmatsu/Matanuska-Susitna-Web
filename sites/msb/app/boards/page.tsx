@@ -1,13 +1,14 @@
-import { Card, CardBody, CardHeader, CardTitle, Hero } from '@matsugov/ui';
-import { Metadata } from 'next';
-import { PageBody } from '@components/server';
+import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
+import { Hero } from '@matsugov/ui/Hero';
+import * as next from 'next';
+import { PageBody } from '@/components/static/Page/PageBody';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
 import { BoardsList } from './components/BoardsList';
 import { GET_BOARDS_PAGE } from '@msb/js-sdk';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
+export const metadata: next.Metadata = {
   title: 'MSB - Boards & Commissions',
   description:
     'The Matanuska-Susitna Borough (MSB) Boards, Commissions, and Community Councils',

@@ -1,5 +1,5 @@
 'use client';
-import { LinkButton } from '@/components/server/LinkButton';
+import { LinkButton } from '@/components/static/LinkButton';
 
 export function BoardsListFilter({
   types,
