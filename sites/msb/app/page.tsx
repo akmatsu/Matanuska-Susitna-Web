@@ -1,12 +1,12 @@
-import { Featured, Meetings, LinkButton } from '@/components';
+import { Featured, Meetings, LinkButton } from '@/components/server';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Hero } from '@matsugov/ui';
 import { GET_HOME_PAGE } from '@msb/js-sdk';
 import Link from 'next/link';
 import { Highlight, OrderDirection } from '@msb/js-sdk/graphql';
 import { plural } from 'pluralize';
-import { SearchDynamicWrapper } from './search/components/SearchDynamicWrapper';
-import { PublicNotices } from '@/components/landing/PublicNotices';
+import { SearchDynamicWrapper } from '../components/client/search/SearchDynamicWrapper';
+import { PublicNotices } from '@/components/server/landing/PublicNotices';
 
 export default async function Home() {
   const { data, errors, error } = await getClient().query({

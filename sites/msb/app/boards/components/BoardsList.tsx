@@ -1,9 +1,10 @@
-import { LinkButton } from '@/components';
+import { LinkButton } from '@/components/server';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Card, CardHeader, CardTitle } from '@matsugov/ui';
 import { GetBoardsQuery } from '@msb/js-sdk/graphql';
 import { GET_BOARDS } from '@msb/js-sdk';
 import Link from 'next/link';
+import { BoardsListFilter } from './BoardListFilter';
 
 export async function BoardsList({
   searchParams,
@@ -31,15 +32,6 @@ export async function BoardsList({
 
   const { boards } = data as GetBoardsQuery;
 
-  const types = [
-    { label: 'Board', value: 'board' },
-    { label: 'Community Council', value: 'community_council' },
-    { label: 'SSA Board', value: 'ssa_board' },
-    { label: 'FSA Board', value: 'fsa_board' },
-    { label: 'RSA Board', value: 'rsa_board' },
-    { label: 'Other', value: 'other' },
-  ];
-
   return (
     <Card>
       <CardHeader className="flex gap-2 justify-between items-center">
@@ -49,30 +41,16 @@ export async function BoardsList({
         </LinkButton>
       </CardHeader>
 
-      <div className="flex justify-center items-center gap-4 flex-wrap mt-4">
-        {types.map((item) => (
-          <LinkButton
-            key={item.value}
-            href={`?type=${item.value}`}
-            className="text-sm"
-            color="secondary"
-            scroll={false}
-          >
-            {item.label}
-          </LinkButton>
-        ))}
-        <LinkButton
-          color="secondary"
-          href={`search?${types
-            .map(
-              (item, index) =>
-                `pages[refinementList][type][${index}]=${item.label.toLowerCase()}`,
-            )
-            .join('&')}`}
-        >
-          Search
-        </LinkButton>
-      </div>
+      <BoardsListFilter
+        types={[
+          { label: 'Board', value: 'board' },
+          { label: 'Community Council', value: 'community_council' },
+          { label: 'SSA Board', value: 'ssa_board' },
+          { label: 'FSA Board', value: 'fsa_board' },
+          { label: 'RSA Board', value: 'rsa_board' },
+          { label: 'Other', value: 'other' },
+        ]}
+      />
 
       <table className="border-collapse table-auto">
         <thead>

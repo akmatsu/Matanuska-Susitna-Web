@@ -1,6 +1,6 @@
 import { Card, CardBody, CardHeader, CardTitle, Hero } from '@matsugov/ui';
 import { Metadata } from 'next';
-import { PageBody } from '../[section]/[slug]/components/PageBody';
+import { PageBody } from '@components/server';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
 import { BoardsList } from './components/BoardsList';

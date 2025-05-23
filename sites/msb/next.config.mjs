@@ -8,6 +8,10 @@ const nextConfig = {
   transpilePackages: ['mui-color-input', '@msb/map', '@msb/js-sdk'],
   reactStrictMode: true,
 
+  experimental: {
+    optimizePackageImports: ['@msb/js-sdk', '@matsugov/ui'],
+  },
+
   images: {
     remotePatterns: [
       new URL('https://d1159zutbdy4l.cloudfront.net/**'),
