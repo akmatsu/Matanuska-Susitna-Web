@@ -1,15 +1,42 @@
-import type { ExternalLink, InternalLink } from '@msb/js-sdk/graphql';
+import type {
+  ExternalLink,
+  InternalLink,
+  LinkedItemUnion,
+  Maybe,
+} from '@msb/js-sdk/graphql';
 import { LinkButton } from '@/components/static/LinkButton';
+import { PageMerged } from '@msb/js-sdk/types';
 
 export function PageActions({
   primaryAction,
   secondaryActions,
   actions,
 }: {
-  primaryAction?: ExternalLink | null;
-  secondaryActions?: ExternalLink[] | null;
-  actions?: InternalLink[] | null;
+  primaryAction?: PageMerged['primaryAction'] | null;
+  secondaryActions?: PageMerged['secondaryActions'] | null;
+  actions?: PageMerged['actions'] | null;
 }) {
+  function getUrlSection(str?: string) {
+    if (!str) {
+      return '/';
+    }
+    if (str === 'OrgUnit') {
+      return '/departments/';
+    }
+    return `/${str.toLocaleLowerCase()}s/`;
+  }
+
+  function getUrl(item?: Maybe<LinkedItemUnion>) {
+    if (!item) {
+      return '';
+    }
+
+    return 'url' in item
+      ? item.url!
+      : 'slug' in item
+        ? `${getUrlSection(item.__typename)}${item.slug}`
+        : '';
+  }
   return (
     <>
       {!!primaryAction && (
@@ -44,7 +71,7 @@ export function PageActions({
           {actions.map((action) => (
             <LinkButton
               key={action.item?.id}
-              href={action.item?.url || ''}
+              href={getUrl(action.item)}
               className="margin-right-0 usa-link--external"
               target="_blank"
               big

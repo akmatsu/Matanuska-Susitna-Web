@@ -1,13 +1,13 @@
-import { Contact } from '@msb/js-sdk';
 import { ContactCard } from '@/components/static/ContactCard';
 import { PageSection } from './PageSection';
+import { PageMerged } from '@msb/js-sdk/types';
 
 export function PageContacts({
   primaryContact,
   contacts,
 }: {
-  primaryContact?: Contact | null;
-  contacts?: Contact[] | null;
+  primaryContact?: PageMerged['primaryContact'] | null;
+  contacts?: PageMerged['contacts'] | null;
 }) {
   if (primaryContact || !!contacts?.length)
     return (

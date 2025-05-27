@@ -7,11 +7,13 @@ const config: CodegenConfig = {
   generates: {
     './src/graphql/': {
       preset: 'client',
-
       presetConfig: {
         gqlTagName: 'gql',
         gqlImport: '@apollo/client#gql',
         documentMode: 'documentNode',
+      },
+      config: {
+        addTypename: true,
       },
     },
   },

@@ -1,7 +1,8 @@
 import { TypedDocumentNode } from '@apollo/client';
 import type {
   GetAssemblyDistrictQuery,
-  GetCommunityMetaQuery,
+  GetBoardQuery,
+  GetCommunityQuery,
   GetFacilityQuery,
   GetOrgUnitQuery,
   GetParkQuery,
@@ -19,28 +20,37 @@ type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
   ? I
   : never;
 
+type Distribute<T> = T extends any ? T : never;
+
 // Takes a union of object types and makes shared properties required, non-shared optional
 type MergeUnion<T> = {
-  [K in keyof UnionToIntersection<T>]: UnionToIntersection<T>[K];
+  __typename?: Exclude<
+    // for each member of T, pull out its __typename type (if it has one)
+    Distribute<T> extends { __typename?: infer U } ? U : never,
+    undefined
+  >;
 } & {
-  [K in Exclude<keyof T, keyof UnionToIntersection<T>>]?: T extends Record<
-    K,
-    infer V
-  >
-    ? V
-    : never;
+  [K in Exclude<
+    keyof UnionToIntersection<T>,
+    '__typename'
+  >]: UnionToIntersection<T>[K];
+} & {
+  [K in Exclude<
+    keyof T,
+    keyof UnionToIntersection<T> | '__typename'
+  >]?: T extends Record<K, infer V> ? V : never;
 };
-
 // Example usage with your types
-type PageTypes =
+export type PageTypes =
   | NonNullable<GetServiceQuery['service']>
-  | NonNullable<GetCommunityMetaQuery['community']>
+  | NonNullable<GetCommunityQuery['community']>
   | NonNullable<GetOrgUnitQuery['orgUnit']>
   | NonNullable<GetParkQuery['park']>
   | NonNullable<GetTrailQuery['trail']>
   | NonNullable<GetFacilityQuery['facility']>
   | NonNullable<GetPublicNoticeQuery['publicNotice']>
-  | NonNullable<GetAssemblyDistrictQuery['assemblyDistrict']>;
+  | NonNullable<GetAssemblyDistrictQuery['assemblyDistrict']>
+  | NonNullable<GetBoardQuery['board']>;
 
 export type PageMerged = MergeUnion<PageTypes>;
 
@@ -51,7 +61,9 @@ export type PageType =
   | 'park'
   | 'trail'
   | 'facility'
-  | 'publicNotice';
+  | 'publicNotice'
+  | 'assemblyDistrict'
+  | 'board';
 
 export type PageConfig = {
   query: TypedDocumentNode<any, any>;

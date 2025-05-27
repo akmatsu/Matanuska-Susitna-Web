@@ -84,7 +84,8 @@ export type AlertWhereUniqueInput = {
 
 export type AssemblyDistrict = {
   __typename?: 'AssemblyDistrict';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Scalars['String']['output']>;
   bio?: Maybe<Scalars['String']['output']>;
   boards?: Maybe<Array<Board>>;
@@ -124,6 +125,20 @@ export type AssemblyDistrict = {
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
   versions?: Maybe<Array<AssemblyDistrictVersion>>;
   versionsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type AssemblyDistrictActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type AssemblyDistrictActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -225,7 +240,7 @@ export type AssemblyDistrictVersionsCountArgs = {
 };
 
 export type AssemblyDistrictCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<Scalars['String']['input']>;
   bio?: InputMaybe<Scalars['String']['input']>;
   boards?: InputMaybe<BoardRelateToManyForCreateInput>;
@@ -260,7 +275,8 @@ export type AssemblyDistrictCreateInput = {
 
 export type AssemblyDistrictDraft = {
   __typename?: 'AssemblyDistrictDraft';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Scalars['String']['output']>;
   bio?: Maybe<Scalars['String']['output']>;
   boards?: Maybe<Array<Board>>;
@@ -294,6 +310,20 @@ export type AssemblyDistrictDraft = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type AssemblyDistrictDraftActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type AssemblyDistrictDraftActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -367,7 +397,7 @@ export type AssemblyDistrictDraftUserGroupsCountArgs = {
 };
 
 export type AssemblyDistrictDraftCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<Scalars['String']['input']>;
   bio?: InputMaybe<Scalars['String']['input']>;
   boards?: InputMaybe<BoardRelateToManyForCreateInput>;
@@ -442,7 +472,7 @@ export type AssemblyDistrictDraftUpdateArgs = {
 };
 
 export type AssemblyDistrictDraftUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<Scalars['String']['input']>;
   bio?: InputMaybe<Scalars['String']['input']>;
   boards?: InputMaybe<BoardRelateToManyForUpdateInput>;
@@ -475,7 +505,7 @@ export type AssemblyDistrictDraftWhereInput = {
   AND?: InputMaybe<Array<AssemblyDistrictDraftWhereInput>>;
   NOT?: InputMaybe<Array<AssemblyDistrictDraftWhereInput>>;
   OR?: InputMaybe<Array<AssemblyDistrictDraftWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<StringFilter>;
   bio?: InputMaybe<StringFilter>;
   boards?: InputMaybe<BoardManyRelationFilter>;
@@ -566,7 +596,7 @@ export type AssemblyDistrictUpdateArgs = {
 };
 
 export type AssemblyDistrictUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<Scalars['String']['input']>;
   bio?: InputMaybe<Scalars['String']['input']>;
   boards?: InputMaybe<BoardRelateToManyForUpdateInput>;
@@ -601,7 +631,8 @@ export type AssemblyDistrictUpdateInput = {
 
 export type AssemblyDistrictVersion = {
   __typename?: 'AssemblyDistrictVersion';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Scalars['String']['output']>;
   bio?: Maybe<Scalars['String']['output']>;
   boards?: Maybe<Array<Board>>;
@@ -636,6 +667,20 @@ export type AssemblyDistrictVersion = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type AssemblyDistrictVersionActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type AssemblyDistrictVersionActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -709,7 +754,7 @@ export type AssemblyDistrictVersionUserGroupsCountArgs = {
 };
 
 export type AssemblyDistrictVersionCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<Scalars['String']['input']>;
   bio?: InputMaybe<Scalars['String']['input']>;
   boards?: InputMaybe<BoardRelateToManyForCreateInput>;
@@ -796,7 +841,7 @@ export type AssemblyDistrictVersionUpdateArgs = {
 };
 
 export type AssemblyDistrictVersionUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<Scalars['String']['input']>;
   bio?: InputMaybe<Scalars['String']['input']>;
   boards?: InputMaybe<BoardRelateToManyForUpdateInput>;
@@ -830,7 +875,7 @@ export type AssemblyDistrictVersionWhereInput = {
   AND?: InputMaybe<Array<AssemblyDistrictVersionWhereInput>>;
   NOT?: InputMaybe<Array<AssemblyDistrictVersionWhereInput>>;
   OR?: InputMaybe<Array<AssemblyDistrictVersionWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<StringFilter>;
   bio?: InputMaybe<StringFilter>;
   boards?: InputMaybe<BoardManyRelationFilter>;
@@ -868,7 +913,7 @@ export type AssemblyDistrictWhereInput = {
   AND?: InputMaybe<Array<AssemblyDistrictWhereInput>>;
   NOT?: InputMaybe<Array<AssemblyDistrictWhereInput>>;
   OR?: InputMaybe<Array<AssemblyDistrictWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<StringFilter>;
   bio?: InputMaybe<StringFilter>;
   boards?: InputMaybe<BoardManyRelationFilter>;
@@ -914,7 +959,8 @@ export enum BlueHarvestImageOrderDirection {
 
 export type Board = {
   __typename?: 'Board';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
   communities?: Maybe<Array<Community>>;
   communitiesCount?: Maybe<Scalars['Int']['output']>;
@@ -953,6 +999,20 @@ export type Board = {
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
   versions?: Maybe<Array<BoardVersion>>;
   versionsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type BoardActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type BoardActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -1068,7 +1128,7 @@ export type BoardVersionsCountArgs = {
 };
 
 export type BoardCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForCreateInput>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -1101,7 +1161,8 @@ export type BoardCreateInput = {
 
 export type BoardDraft = {
   __typename?: 'BoardDraft';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
   communities?: Maybe<Array<Community>>;
   communitiesCount?: Maybe<Scalars['Int']['output']>;
@@ -1134,6 +1195,20 @@ export type BoardDraft = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type BoardDraftActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type BoardDraftActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -1221,7 +1296,7 @@ export type BoardDraftUserGroupsCountArgs = {
 };
 
 export type BoardDraftCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForCreateInput>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -1289,7 +1364,7 @@ export type BoardDraftUpdateArgs = {
 };
 
 export type BoardDraftUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForUpdateInput>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -1320,7 +1395,7 @@ export type BoardDraftWhereInput = {
   AND?: InputMaybe<Array<BoardDraftWhereInput>>;
   NOT?: InputMaybe<Array<BoardDraftWhereInput>>;
   OR?: InputMaybe<Array<BoardDraftWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   communities?: InputMaybe<CommunityManyRelationFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -1534,7 +1609,7 @@ export type BoardUpdateArgs = {
 };
 
 export type BoardUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForUpdateInput>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -1567,7 +1642,8 @@ export type BoardUpdateInput = {
 
 export type BoardVersion = {
   __typename?: 'BoardVersion';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
   communities?: Maybe<Array<Community>>;
   communitiesCount?: Maybe<Scalars['Int']['output']>;
@@ -1601,6 +1677,20 @@ export type BoardVersion = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type BoardVersionActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type BoardVersionActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -1688,7 +1778,7 @@ export type BoardVersionUserGroupsCountArgs = {
 };
 
 export type BoardVersionCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForCreateInput>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -1768,7 +1858,7 @@ export type BoardVersionUpdateArgs = {
 };
 
 export type BoardVersionUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForUpdateInput>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -1800,7 +1890,7 @@ export type BoardVersionWhereInput = {
   AND?: InputMaybe<Array<BoardVersionWhereInput>>;
   NOT?: InputMaybe<Array<BoardVersionWhereInput>>;
   OR?: InputMaybe<Array<BoardVersionWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   communities?: InputMaybe<CommunityManyRelationFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -1836,7 +1926,7 @@ export type BoardWhereInput = {
   AND?: InputMaybe<Array<BoardWhereInput>>;
   NOT?: InputMaybe<Array<BoardWhereInput>>;
   OR?: InputMaybe<Array<BoardWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   communities?: InputMaybe<CommunityManyRelationFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -1880,7 +1970,8 @@ export type BooleanFilter = {
 
 export type Community = {
   __typename?: 'Community';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   boards?: Maybe<Array<Board>>;
   boardsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
@@ -1915,6 +2006,20 @@ export type Community = {
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
   versions?: Maybe<Array<CommunityVersion>>;
   versionsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type CommunityActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type CommunityActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -2044,7 +2149,7 @@ export type CommunityVersionsCountArgs = {
 };
 
 export type CommunityCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   boards?: InputMaybe<BoardRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -2072,7 +2177,8 @@ export type CommunityCreateInput = {
 
 export type CommunityDraft = {
   __typename?: 'CommunityDraft';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   boards?: Maybe<Array<Board>>;
   boardsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
@@ -2101,6 +2207,20 @@ export type CommunityDraft = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type CommunityDraftActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type CommunityDraftActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -2202,7 +2322,7 @@ export type CommunityDraftUserGroupsCountArgs = {
 };
 
 export type CommunityDraftCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   boards?: InputMaybe<BoardRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -2262,7 +2382,7 @@ export type CommunityDraftUpdateArgs = {
 };
 
 export type CommunityDraftUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   boards?: InputMaybe<BoardRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -2288,7 +2408,7 @@ export type CommunityDraftWhereInput = {
   AND?: InputMaybe<Array<CommunityDraftWhereInput>>;
   NOT?: InputMaybe<Array<CommunityDraftWhereInput>>;
   OR?: InputMaybe<Array<CommunityDraftWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   boards?: InputMaybe<BoardManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -2364,7 +2484,7 @@ export type CommunityUpdateArgs = {
 };
 
 export type CommunityUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   boards?: InputMaybe<BoardRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -2392,7 +2512,8 @@ export type CommunityUpdateInput = {
 
 export type CommunityVersion = {
   __typename?: 'CommunityVersion';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   boards?: Maybe<Array<Board>>;
   boardsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
@@ -2422,6 +2543,20 @@ export type CommunityVersion = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type CommunityVersionActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type CommunityVersionActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -2523,7 +2658,7 @@ export type CommunityVersionUserGroupsCountArgs = {
 };
 
 export type CommunityVersionCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   boards?: InputMaybe<BoardRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -2595,7 +2730,7 @@ export type CommunityVersionUpdateArgs = {
 };
 
 export type CommunityVersionUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   boards?: InputMaybe<BoardRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -2622,7 +2757,7 @@ export type CommunityVersionWhereInput = {
   AND?: InputMaybe<Array<CommunityVersionWhereInput>>;
   NOT?: InputMaybe<Array<CommunityVersionWhereInput>>;
   OR?: InputMaybe<Array<CommunityVersionWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   boards?: InputMaybe<BoardManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -2653,7 +2788,7 @@ export type CommunityWhereInput = {
   AND?: InputMaybe<Array<CommunityWhereInput>>;
   NOT?: InputMaybe<Array<CommunityWhereInput>>;
   OR?: InputMaybe<Array<CommunityWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   boards?: InputMaybe<BoardManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -3092,7 +3227,8 @@ export type ExternalLinkWhereUniqueInput = {
 
 export type Facility = {
   __typename?: 'Facility';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Location>;
   body?: Maybe<Scalars['String']['output']>;
   contacts?: Maybe<Array<Contact>>;
@@ -3127,6 +3263,20 @@ export type Facility = {
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
   versions?: Maybe<Array<FacilityVersion>>;
   versionsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type FacilityActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type FacilityActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -3242,7 +3392,7 @@ export type FacilityVersionsCountArgs = {
 };
 
 export type FacilityCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<LocationRelateToOneForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -3271,7 +3421,8 @@ export type FacilityCreateInput = {
 
 export type FacilityDraft = {
   __typename?: 'FacilityDraft';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Location>;
   body?: Maybe<Scalars['String']['output']>;
   contacts?: Maybe<Array<Contact>>;
@@ -3300,6 +3451,20 @@ export type FacilityDraft = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type FacilityDraftActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type FacilityDraftActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -3387,7 +3552,7 @@ export type FacilityDraftUserGroupsCountArgs = {
 };
 
 export type FacilityDraftCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<LocationRelateToOneForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -3448,7 +3613,7 @@ export type FacilityDraftUpdateArgs = {
 };
 
 export type FacilityDraftUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<LocationRelateToOneForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -3475,7 +3640,7 @@ export type FacilityDraftWhereInput = {
   AND?: InputMaybe<Array<FacilityDraftWhereInput>>;
   NOT?: InputMaybe<Array<FacilityDraftWhereInput>>;
   OR?: InputMaybe<Array<FacilityDraftWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<LocationWhereInput>;
   body?: InputMaybe<MyStringFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -3552,7 +3717,7 @@ export type FacilityUpdateArgs = {
 };
 
 export type FacilityUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<LocationRelateToOneForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -3581,7 +3746,8 @@ export type FacilityUpdateInput = {
 
 export type FacilityVersion = {
   __typename?: 'FacilityVersion';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Location>;
   body?: Maybe<Scalars['String']['output']>;
   contacts?: Maybe<Array<Contact>>;
@@ -3611,6 +3777,20 @@ export type FacilityVersion = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type FacilityVersionActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type FacilityVersionActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -3698,7 +3878,7 @@ export type FacilityVersionUserGroupsCountArgs = {
 };
 
 export type FacilityVersionCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<LocationRelateToOneForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -3771,7 +3951,7 @@ export type FacilityVersionUpdateArgs = {
 };
 
 export type FacilityVersionUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<LocationRelateToOneForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -3799,7 +3979,7 @@ export type FacilityVersionWhereInput = {
   AND?: InputMaybe<Array<FacilityVersionWhereInput>>;
   NOT?: InputMaybe<Array<FacilityVersionWhereInput>>;
   OR?: InputMaybe<Array<FacilityVersionWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<LocationWhereInput>;
   body?: InputMaybe<MyStringFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -3831,7 +4011,7 @@ export type FacilityWhereInput = {
   AND?: InputMaybe<Array<FacilityWhereInput>>;
   NOT?: InputMaybe<Array<FacilityWhereInput>>;
   OR?: InputMaybe<Array<FacilityWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<LocationWhereInput>;
   body?: InputMaybe<MyStringFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -6185,7 +6365,8 @@ export enum OrderDirection {
 
 export type OrgUnit = {
   __typename?: 'OrgUnit';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
   children?: Maybe<Array<OrgUnit>>;
   childrenCount?: Maybe<Scalars['Int']['output']>;
@@ -6219,6 +6400,20 @@ export type OrgUnit = {
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
   versions?: Maybe<Array<OrgUnitVersion>>;
   versionsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type OrgUnitActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type OrgUnitActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -6320,7 +6515,7 @@ export type OrgUnitVersionsCountArgs = {
 };
 
 export type OrgUnitCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   children?: InputMaybe<OrgUnitRelateToManyForCreateInput>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -6349,7 +6544,8 @@ export type OrgUnitCreateInput = {
 
 export type OrgUnitDraft = {
   __typename?: 'OrgUnitDraft';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
   children?: Maybe<Array<OrgUnit>>;
   childrenCount?: Maybe<Scalars['Int']['output']>;
@@ -6377,6 +6573,20 @@ export type OrgUnitDraft = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type OrgUnitDraftActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type OrgUnitDraftActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -6450,7 +6660,7 @@ export type OrgUnitDraftUserGroupsCountArgs = {
 };
 
 export type OrgUnitDraftCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   children?: InputMaybe<OrgUnitRelateToManyForCreateInput>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -6512,7 +6722,7 @@ export type OrgUnitDraftUpdateArgs = {
 };
 
 export type OrgUnitDraftUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   children?: InputMaybe<OrgUnitRelateToManyForUpdateInput>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -6539,7 +6749,7 @@ export type OrgUnitDraftWhereInput = {
   AND?: InputMaybe<Array<OrgUnitDraftWhereInput>>;
   NOT?: InputMaybe<Array<OrgUnitDraftWhereInput>>;
   OR?: InputMaybe<Array<OrgUnitDraftWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   children?: InputMaybe<OrgUnitManyRelationFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -6617,7 +6827,7 @@ export type OrgUnitUpdateArgs = {
 };
 
 export type OrgUnitUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   children?: InputMaybe<OrgUnitRelateToManyForUpdateInput>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -6646,7 +6856,8 @@ export type OrgUnitUpdateInput = {
 
 export type OrgUnitVersion = {
   __typename?: 'OrgUnitVersion';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
   children?: Maybe<Array<OrgUnit>>;
   childrenCount?: Maybe<Scalars['Int']['output']>;
@@ -6675,6 +6886,20 @@ export type OrgUnitVersion = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type OrgUnitVersionActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type OrgUnitVersionActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -6748,7 +6973,7 @@ export type OrgUnitVersionUserGroupsCountArgs = {
 };
 
 export type OrgUnitVersionCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   children?: InputMaybe<OrgUnitRelateToManyForCreateInput>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -6822,7 +7047,7 @@ export type OrgUnitVersionUpdateArgs = {
 };
 
 export type OrgUnitVersionUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   children?: InputMaybe<OrgUnitRelateToManyForUpdateInput>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -6850,7 +7075,7 @@ export type OrgUnitVersionWhereInput = {
   AND?: InputMaybe<Array<OrgUnitVersionWhereInput>>;
   NOT?: InputMaybe<Array<OrgUnitVersionWhereInput>>;
   OR?: InputMaybe<Array<OrgUnitVersionWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   children?: InputMaybe<OrgUnitManyRelationFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -6882,7 +7107,7 @@ export type OrgUnitWhereInput = {
   AND?: InputMaybe<Array<OrgUnitWhereInput>>;
   NOT?: InputMaybe<Array<OrgUnitWhereInput>>;
   OR?: InputMaybe<Array<OrgUnitWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   children?: InputMaybe<OrgUnitManyRelationFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -6917,7 +7142,8 @@ export type OrgUnitWhereUniqueInput = {
 
 export type Park = {
   __typename?: 'Park';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Location>;
   body?: Maybe<Scalars['String']['output']>;
   contacts?: Maybe<Array<Contact>>;
@@ -6955,6 +7181,20 @@ export type Park = {
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
   versions?: Maybe<Array<ParkVersion>>;
   versionsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type ParkActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type ParkActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -7098,7 +7338,7 @@ export type ParkVersionsCountArgs = {
 };
 
 export type ParkCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<LocationRelateToOneForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -7128,7 +7368,8 @@ export type ParkCreateInput = {
 
 export type ParkDraft = {
   __typename?: 'ParkDraft';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Location>;
   body?: Maybe<Scalars['String']['output']>;
   contacts?: Maybe<Array<Contact>>;
@@ -7160,6 +7401,20 @@ export type ParkDraft = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type ParkDraftActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type ParkDraftActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -7275,7 +7530,7 @@ export type ParkDraftUserGroupsCountArgs = {
 };
 
 export type ParkDraftCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<LocationRelateToOneForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -7337,7 +7592,7 @@ export type ParkDraftUpdateArgs = {
 };
 
 export type ParkDraftUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<LocationRelateToOneForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -7365,7 +7620,7 @@ export type ParkDraftWhereInput = {
   AND?: InputMaybe<Array<ParkDraftWhereInput>>;
   NOT?: InputMaybe<Array<ParkDraftWhereInput>>;
   OR?: InputMaybe<Array<ParkDraftWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<LocationWhereInput>;
   body?: InputMaybe<MyStringFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -7443,7 +7698,7 @@ export type ParkUpdateArgs = {
 };
 
 export type ParkUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<LocationRelateToOneForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -7473,7 +7728,8 @@ export type ParkUpdateInput = {
 
 export type ParkVersion = {
   __typename?: 'ParkVersion';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Location>;
   body?: Maybe<Scalars['String']['output']>;
   contacts?: Maybe<Array<Contact>>;
@@ -7506,6 +7762,20 @@ export type ParkVersion = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type ParkVersionActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type ParkVersionActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -7621,7 +7891,7 @@ export type ParkVersionUserGroupsCountArgs = {
 };
 
 export type ParkVersionCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<LocationRelateToOneForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
@@ -7695,7 +7965,7 @@ export type ParkVersionUpdateArgs = {
 };
 
 export type ParkVersionUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<LocationRelateToOneForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
@@ -7724,7 +7994,7 @@ export type ParkVersionWhereInput = {
   AND?: InputMaybe<Array<ParkVersionWhereInput>>;
   NOT?: InputMaybe<Array<ParkVersionWhereInput>>;
   OR?: InputMaybe<Array<ParkVersionWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<LocationWhereInput>;
   body?: InputMaybe<MyStringFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -7757,7 +8027,7 @@ export type ParkWhereInput = {
   AND?: InputMaybe<Array<ParkWhereInput>>;
   NOT?: InputMaybe<Array<ParkWhereInput>>;
   OR?: InputMaybe<Array<ParkWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<LocationWhereInput>;
   body?: InputMaybe<MyStringFilter>;
   contacts?: InputMaybe<ContactManyRelationFilter>;
@@ -7802,7 +8072,8 @@ export type PasswordState = {
 
 export type PublicNotice = {
   __typename?: 'PublicNotice';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   assemblyDistricts?: Maybe<Array<AssemblyDistrict>>;
   assemblyDistrictsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
@@ -7848,6 +8119,20 @@ export type PublicNotice = {
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
   versions?: Maybe<Array<PublicNoticeVersion>>;
   versionsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type PublicNoticeActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type PublicNoticeActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -8033,7 +8318,7 @@ export type PublicNoticeVersionsCountArgs = {
 };
 
 export type PublicNoticeCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   assemblyDistricts?: InputMaybe<AssemblyDistrictRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForCreateInput>;
@@ -8068,7 +8353,8 @@ export type PublicNoticeCreateInput = {
 
 export type PublicNoticeDraft = {
   __typename?: 'PublicNoticeDraft';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   assemblyDistricts?: Maybe<Array<AssemblyDistrict>>;
   assemblyDistrictsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
@@ -8108,6 +8394,20 @@ export type PublicNoticeDraft = {
   urgency?: Maybe<Scalars['Int']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type PublicNoticeDraftActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type PublicNoticeDraftActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -8265,7 +8565,7 @@ export type PublicNoticeDraftUserGroupsCountArgs = {
 };
 
 export type PublicNoticeDraftCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   assemblyDistricts?: InputMaybe<AssemblyDistrictRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForCreateInput>;
@@ -8335,7 +8635,7 @@ export type PublicNoticeDraftUpdateArgs = {
 };
 
 export type PublicNoticeDraftUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   assemblyDistricts?: InputMaybe<AssemblyDistrictRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForUpdateInput>;
@@ -8368,7 +8668,7 @@ export type PublicNoticeDraftWhereInput = {
   AND?: InputMaybe<Array<PublicNoticeDraftWhereInput>>;
   NOT?: InputMaybe<Array<PublicNoticeDraftWhereInput>>;
   OR?: InputMaybe<Array<PublicNoticeDraftWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   assemblyDistricts?: InputMaybe<AssemblyDistrictManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   communities?: InputMaybe<CommunityManyRelationFilter>;
@@ -8436,7 +8736,7 @@ export type PublicNoticeUpdateArgs = {
 };
 
 export type PublicNoticeUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   assemblyDistricts?: InputMaybe<AssemblyDistrictRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForUpdateInput>;
@@ -8471,7 +8771,8 @@ export type PublicNoticeUpdateInput = {
 
 export type PublicNoticeVersion = {
   __typename?: 'PublicNoticeVersion';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   assemblyDistricts?: Maybe<Array<AssemblyDistrict>>;
   assemblyDistrictsCount?: Maybe<Scalars['Int']['output']>;
   body?: Maybe<Scalars['String']['output']>;
@@ -8512,6 +8813,20 @@ export type PublicNoticeVersion = {
   urgency?: Maybe<Scalars['Int']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type PublicNoticeVersionActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type PublicNoticeVersionActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -8669,7 +8984,7 @@ export type PublicNoticeVersionUserGroupsCountArgs = {
 };
 
 export type PublicNoticeVersionCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   assemblyDistricts?: InputMaybe<AssemblyDistrictRelateToManyForCreateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForCreateInput>;
@@ -8751,7 +9066,7 @@ export type PublicNoticeVersionUpdateArgs = {
 };
 
 export type PublicNoticeVersionUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   assemblyDistricts?: InputMaybe<AssemblyDistrictRelateToManyForUpdateInput>;
   body?: InputMaybe<Scalars['String']['input']>;
   communities?: InputMaybe<CommunityRelateToManyForUpdateInput>;
@@ -8785,7 +9100,7 @@ export type PublicNoticeVersionWhereInput = {
   AND?: InputMaybe<Array<PublicNoticeVersionWhereInput>>;
   NOT?: InputMaybe<Array<PublicNoticeVersionWhereInput>>;
   OR?: InputMaybe<Array<PublicNoticeVersionWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   assemblyDistricts?: InputMaybe<AssemblyDistrictManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   communities?: InputMaybe<CommunityManyRelationFilter>;
@@ -8823,7 +9138,7 @@ export type PublicNoticeWhereInput = {
   AND?: InputMaybe<Array<PublicNoticeWhereInput>>;
   NOT?: InputMaybe<Array<PublicNoticeWhereInput>>;
   OR?: InputMaybe<Array<PublicNoticeWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   assemblyDistricts?: InputMaybe<AssemblyDistrictManyRelationFilter>;
   body?: InputMaybe<MyStringFilter>;
   communities?: InputMaybe<CommunityManyRelationFilter>;
@@ -10909,7 +11224,8 @@ export type TagWhereUniqueInput = {
 
 export type Trail = {
   __typename?: 'Trail';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Location>;
   atv?: Maybe<Scalars['Boolean']['output']>;
   biking?: Maybe<Scalars['Boolean']['output']>;
@@ -10962,6 +11278,20 @@ export type Trail = {
   versions?: Maybe<Array<TrailVersion>>;
   versionsCount?: Maybe<Scalars['Int']['output']>;
   winter?: Maybe<Scalars['Boolean']['output']>;
+};
+
+
+export type TrailActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type TrailActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -11063,7 +11393,7 @@ export type TrailVersionsCountArgs = {
 };
 
 export type TrailCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<LocationRelateToOneForCreateInput>;
   atv?: InputMaybe<Scalars['Boolean']['input']>;
   biking?: InputMaybe<Scalars['Boolean']['input']>;
@@ -11111,7 +11441,8 @@ export type TrailCreateInput = {
 
 export type TrailDraft = {
   __typename?: 'TrailDraft';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Location>;
   atv?: Maybe<Scalars['Boolean']['output']>;
   biking?: Maybe<Scalars['Boolean']['output']>;
@@ -11158,6 +11489,20 @@ export type TrailDraft = {
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
   winter?: Maybe<Scalars['Boolean']['output']>;
+};
+
+
+export type TrailDraftActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type TrailDraftActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -11231,7 +11576,7 @@ export type TrailDraftUserGroupsCountArgs = {
 };
 
 export type TrailDraftCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<LocationRelateToOneForCreateInput>;
   atv?: InputMaybe<Scalars['Boolean']['input']>;
   biking?: InputMaybe<Scalars['Boolean']['input']>;
@@ -11331,7 +11676,7 @@ export type TrailDraftUpdateArgs = {
 };
 
 export type TrailDraftUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<LocationRelateToOneForUpdateInput>;
   atv?: InputMaybe<Scalars['Boolean']['input']>;
   biking?: InputMaybe<Scalars['Boolean']['input']>;
@@ -11377,7 +11722,7 @@ export type TrailDraftWhereInput = {
   AND?: InputMaybe<Array<TrailDraftWhereInput>>;
   NOT?: InputMaybe<Array<TrailDraftWhereInput>>;
   OR?: InputMaybe<Array<TrailDraftWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<LocationWhereInput>;
   atv?: InputMaybe<BooleanFilter>;
   biking?: InputMaybe<BooleanFilter>;
@@ -11493,7 +11838,7 @@ export type TrailUpdateArgs = {
 };
 
 export type TrailUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<LocationRelateToOneForUpdateInput>;
   atv?: InputMaybe<Scalars['Boolean']['input']>;
   biking?: InputMaybe<Scalars['Boolean']['input']>;
@@ -11541,7 +11886,8 @@ export type TrailUpdateInput = {
 
 export type TrailVersion = {
   __typename?: 'TrailVersion';
-  actions?: Maybe<InternalLink>;
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
   address?: Maybe<Location>;
   atv?: Maybe<Scalars['Boolean']['output']>;
   biking?: Maybe<Scalars['Boolean']['output']>;
@@ -11589,6 +11935,20 @@ export type TrailVersion = {
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
   winter?: Maybe<Scalars['Boolean']['output']>;
+};
+
+
+export type TrailVersionActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type TrailVersionActionsCountArgs = {
+  where?: InternalLinkWhereInput;
 };
 
 
@@ -11662,7 +12022,7 @@ export type TrailVersionUserGroupsCountArgs = {
 };
 
 export type TrailVersionCreateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
   address?: InputMaybe<LocationRelateToOneForCreateInput>;
   atv?: InputMaybe<Scalars['Boolean']['input']>;
   biking?: InputMaybe<Scalars['Boolean']['input']>;
@@ -11774,7 +12134,7 @@ export type TrailVersionUpdateArgs = {
 };
 
 export type TrailVersionUpdateInput = {
-  actions?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
   address?: InputMaybe<LocationRelateToOneForUpdateInput>;
   atv?: InputMaybe<Scalars['Boolean']['input']>;
   biking?: InputMaybe<Scalars['Boolean']['input']>;
@@ -11821,7 +12181,7 @@ export type TrailVersionWhereInput = {
   AND?: InputMaybe<Array<TrailVersionWhereInput>>;
   NOT?: InputMaybe<Array<TrailVersionWhereInput>>;
   OR?: InputMaybe<Array<TrailVersionWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<LocationWhereInput>;
   atv?: InputMaybe<BooleanFilter>;
   biking?: InputMaybe<BooleanFilter>;
@@ -11872,7 +12232,7 @@ export type TrailWhereInput = {
   AND?: InputMaybe<Array<TrailWhereInput>>;
   NOT?: InputMaybe<Array<TrailWhereInput>>;
   OR?: InputMaybe<Array<TrailWhereInput>>;
-  actions?: InputMaybe<InternalLinkWhereInput>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
   address?: InputMaybe<LocationWhereInput>;
   atv?: InputMaybe<BooleanFilter>;
   biking?: InputMaybe<BooleanFilter>;
@@ -12228,7 +12588,7 @@ export type GetBoardQueryVariables = Exact<{
 }>;
 
 
-export type GetBoardQuery = { __typename?: 'Query', board?: { __typename?: 'Board', id: string, title?: string | null, slug?: string | null, description?: string | null, body?: string | null, heroImage?: string | null, meetingSchedule?: string | null, isActive?: boolean | null, communities?: Array<{ __typename?: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null }> | null, districts?: Array<{ __typename?: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null, memberName?: string | null, bio?: string | null, address?: string | null, email?: string | null, phone?: string | null, photo?: { __typename?: 'Image', id: string, title?: string | null, file?: { __typename?: 'ImageFieldOutput', width: number, height: number, url: string } | null } | null }> | null, linkToAgendas?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, linkToResolutions?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, linkToPublicOpinionMessage?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, title?: string | null, phone?: string | null, email?: string | null }> | null, actions?: { __typename?: 'InternalLink', id: string, label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null } | null, documents?: Array<{ __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', url: string, filename: string, filesize: number } | null }> | null } | null };
+export type GetBoardQuery = { __typename?: 'Query', board?: { __typename?: 'Board', id: string, title?: string | null, slug?: string | null, description?: string | null, body?: string | null, heroImage?: string | null, meetingSchedule?: string | null, isActive?: boolean | null, communities?: Array<{ __typename?: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null }> | null, districts?: Array<{ __typename?: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null, memberName?: string | null, bio?: string | null, address?: string | null, email?: string | null, phone?: string | null, photo?: { __typename?: 'Image', id: string, title?: string | null, file?: { __typename?: 'ImageFieldOutput', width: number, height: number, url: string } | null } | null }> | null, linkToAgendas?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, linkToResolutions?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, linkToPublicOpinionMessage?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, title?: string | null, phone?: string | null, email?: string | null }> | null, actions?: Array<{ __typename?: 'InternalLink', id: string, label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null }> | null, documents?: Array<{ __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', url: string, filename: string, filesize: number } | null }> | null } | null };
 
 export type GetBoardsQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -12290,6 +12650,11 @@ export type GetFacilityQueryVariables = Exact<{
 
 export type GetFacilityQuery = { __typename?: 'Query', facility?: { __typename?: 'Facility', id: string, slug?: string | null, title?: string | null, liveUrl?: string | null, heroImage?: string | null, description?: string | null, body?: string | null, park?: { __typename?: 'Park', id: string, title?: string | null, description?: string | null, slug?: string | null } | null, services?: Array<{ __typename?: 'Service', id: string, title?: string | null, description?: string | null, slug?: string | null }> | null, address?: { __typename?: 'Location', title?: string | null, lineOne?: string | null, lineTwo?: string | null, city?: string | null, state?: string | null, zip?: string | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, email?: string | null, phone?: string | null, title?: string | null }> | null, hours?: Array<{ __typename?: 'OperatingHour', day?: string | null, open?: string | null, close?: string | null }> | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
 
+export type GetGovernmentPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetGovernmentPageQuery = { __typename?: 'Query', assemblyDistricts?: Array<{ __typename?: 'AssemblyDistrict', id: string, slug?: string | null, title?: string | null, description?: string | null, memberName?: string | null, photo?: { __typename?: 'Image', file?: { __typename?: 'ImageFieldOutput', url: string } | null } | null }> | null };
+
 export type GetHomePageMetaQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -12349,7 +12714,7 @@ export type GetPublicNoticeQueryVariables = Exact<{
 }>;
 
 
-export type GetPublicNoticeQuery = { __typename?: 'Query', publicNotice?: { __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, body?: string | null, description?: string | null, effectiveDate?: any | null, endDate?: any | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, title?: string | null, email?: string | null, phone?: string | null }> | null, documents?: Array<{ __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', filename: string, url: string, filesize: number } | null }> | null, actions?: { __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null } | null } | null };
+export type GetPublicNoticeQuery = { __typename?: 'Query', publicNotice?: { __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, body?: string | null, description?: string | null, effectiveDate?: any | null, endDate?: any | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, title?: string | null, email?: string | null, phone?: string | null }> | null, documents?: Array<{ __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', filename: string, url: string, filesize: number } | null }> | null, actions?: Array<{ __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null }> | null } | null };
 
 export type GetServiceMetaQueryVariables = Exact<{
   where: ServiceWhereUniqueInput;
@@ -12363,7 +12728,7 @@ export type GetServiceNoPnQueryVariables = Exact<{
 }>;
 
 
-export type GetServiceNoPnQuery = { __typename?: 'Query', service?: { __typename?: 'Service', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, body?: string | null, primaryAction?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, primaryContact?: { __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null }> | null } | null };
+export type GetServiceNoPnQuery = { __typename?: 'Query', service?: { __typename?: 'Service', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, body?: string | null, primaryAction?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, secondaryActions?: Array<{ __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null }> | null, primaryContact?: { __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null }> | null } | null };
 
 export type GetServiceQueryVariables = Exact<{
   where: ServiceWhereUniqueInput;
@@ -12373,7 +12738,7 @@ export type GetServiceQueryVariables = Exact<{
 }>;
 
 
-export type GetServiceQuery = { __typename?: 'Query', service?: { __typename?: 'Service', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, primaryAction?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, primaryContact?: { __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null }> | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
+export type GetServiceQuery = { __typename?: 'Query', service?: { __typename?: 'Service', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, primaryAction?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, secondaryActions?: Array<{ __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null }> | null, primaryContact?: { __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null }> | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
 
 export type GetTrailMetaQueryVariables = Exact<{
   where: TrailWhereUniqueInput;
@@ -12406,6 +12771,7 @@ export const GetCommunityDocument = {"kind":"Document","definitions":[{"kind":"O
 export const GetDocumentCollectionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDocumentCollection"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DocumentCollectionWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetDocumentCollectionQuery, GetDocumentCollectionQueryVariables>;
 export const GetFacilityMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFacilityMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"FacilityWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"facility"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetFacilityMetaQuery, GetFacilityMetaQueryVariables>;
 export const GetFacilityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFacility"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"FacilityWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"facility"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"liveUrl"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"park"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hours"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"day"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetFacilityQuery, GetFacilityQueryVariables>;
+export const GetGovernmentPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGovernmentPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"assemblyDistricts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"memberName"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetGovernmentPageQuery, GetGovernmentPageQueryVariables>;
 export const GetHomePageMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetHomePageMeta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetHomePageMetaQuery, GetHomePageMetaQueryVariables>;
 export const GetHomePageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetHomePage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltOne"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltTwo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltThree"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"selectItem"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltFour"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"highlightOne"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"highlightTwo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"highlightThree"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetHomePageQuery, GetHomePageQueryVariables>;
 export const GetOrgUnitMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOrgUnitMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnitWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orgUnit"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetOrgUnitMetaQuery, GetOrgUnitMetaQueryVariables>;
@@ -12415,7 +12781,7 @@ export const GetParkDocument = {"kind":"Document","definitions":[{"kind":"Operat
 export const GetPublicNoticeMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPublicNoticeMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publicNotice"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetPublicNoticeMetaQuery, GetPublicNoticeMetaQueryVariables>;
 export const GetPublicNoticeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPublicNotice"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publicNotice"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"effectiveDate"}},{"kind":"Field","name":{"kind":"Name","value":"endDate"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"actions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}}]} as unknown as DocumentNode<GetPublicNoticeQuery, GetPublicNoticeQueryVariables>;
 export const GetServiceMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetServiceMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ServiceWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"service"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetServiceMetaQuery, GetServiceMetaQueryVariables>;
-export const GetServiceNoPnDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetServiceNoPn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ServiceWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"service"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"primaryAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]}}]} as unknown as DocumentNode<GetServiceNoPnQuery, GetServiceNoPnQueryVariables>;
-export const GetServiceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetService"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ServiceWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"service"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"primaryAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetServiceQuery, GetServiceQueryVariables>;
+export const GetServiceNoPnDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetServiceNoPn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ServiceWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"service"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"primaryAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondaryActions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]}}]} as unknown as DocumentNode<GetServiceNoPnQuery, GetServiceNoPnQueryVariables>;
+export const GetServiceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetService"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ServiceWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"service"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"primaryAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondaryActions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetServiceQuery, GetServiceQueryVariables>;
 export const GetTrailMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTrailMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"TrailWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetTrailMetaQuery, GetTrailMetaQueryVariables>;
 export const GetTrailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTrail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"TrailWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"length"}},{"kind":"Field","name":{"kind":"Name","value":"atv"}},{"kind":"Field","name":{"kind":"Name","value":"biking"}},{"kind":"Field","name":{"kind":"Name","value":"crossCountrySkiing"}},{"kind":"Field","name":{"kind":"Name","value":"difficulty"}},{"kind":"Field","name":{"kind":"Name","value":"dirtBiking"}},{"kind":"Field","name":{"kind":"Name","value":"dogWalking"}},{"kind":"Field","name":{"kind":"Name","value":"elevationChange"}},{"kind":"Field","name":{"kind":"Name","value":"fall"}},{"kind":"Field","name":{"kind":"Name","value":"frisbeeGolf"}},{"kind":"Field","name":{"kind":"Name","value":"hiking"}},{"kind":"Field","name":{"kind":"Name","value":"horsebackRiding"}},{"kind":"Field","name":{"kind":"Name","value":"mushing"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"running"}},{"kind":"Field","name":{"kind":"Name","value":"snowMachining"}},{"kind":"Field","name":{"kind":"Name","value":"snowshoeing"}},{"kind":"Field","name":{"kind":"Name","value":"spring"}},{"kind":"Field","name":{"kind":"Name","value":"summer"}},{"kind":"Field","name":{"kind":"Name","value":"winter"}},{"kind":"Field","name":{"kind":"Name","value":"park"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetTrailQuery, GetTrailQueryVariables>;

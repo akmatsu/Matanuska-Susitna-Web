@@ -1,12 +1,12 @@
-import { Document } from '@msb/js-sdk';
 import { LinkButton } from '@/components/static/LinkButton';
 import clsx from 'clsx';
 import { PageSection } from './PageSection';
+import { PageMerged } from '@msb/js-sdk/types';
 
 export function PageDocuments({
   documents,
 }: {
-  documents?: Document[] | null;
+  documents?: PageMerged['documents'] | null;
 }) {
   if (!!documents?.length)
     return (
@@ -20,7 +20,14 @@ export function PageDocuments({
     );
 }
 
-function DocumentButton({ doc }: { doc: Document }) {
+function DocumentButton({
+  doc,
+}: {
+  doc: NonNullable<PageMerged['documents']>[number];
+}) {
+  if (!doc.file || !doc.file.filename || !doc.file.url) {
+    return null;
+  }
   const fileType = doc.file.filename.split('.').pop()?.toUpperCase();
   const isInternal =
     doc.file.url.includes('matsu.gov') ||
