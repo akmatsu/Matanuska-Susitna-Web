@@ -1,59 +1,87 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
 import {
-  GetBoardsPageMetaQuery,
-  GetBoardsPageMetaQueryVariables,
-  GetBoardsPageQuery,
-  GetBoardsPageQueryVariables,
-} from '../graphql/graphql';
+  GetBoardMetaQuery,
+  GetBoardMetaQueryVariables,
+  GetBoardQuery,
+} from '../types';
 
-export const GET_BOARDS_PAGE_META: TypedDocumentNode<
-  GetBoardsPageMetaQuery,
-  GetBoardsPageMetaQueryVariables
+export const GET_BOARD_META: TypedDocumentNode<
+  GetBoardMetaQuery,
+  GetBoardMetaQueryVariables
 > = gql`
-  query GetBoardsPageMeta {
-    boardPage {
+  query GetBoardMeta($where: BoardWhereUniqueInput!) {
+    board(where: $where) {
       title
       description
     }
   }
 `;
 
-export const GET_BOARDS_PAGE: TypedDocumentNode<
-  GetBoardsPageQuery,
-  GetBoardsPageQueryVariables
+export const GET_BOARD: TypedDocumentNode<
+  GetBoardQuery,
+  GetBoardMetaQueryVariables
 > = gql`
-  query GetBoardsPage {
-    boardPage {
+  query GetBoard($where: BoardWhereUniqueInput!) {
+    board(where: $where) {
       id
       title
+      slug
       description
       body
       heroImage
-      vacancyReport {
+      meetingSchedule
+      isActive
+      communities {
         id
         title
-        file {
-          url
-          filename
-          filesize
+        slug
+        description
+      }
+      districts {
+        id
+        title
+        slug
+        description
+        memberName
+        bio
+        address
+        email
+        phone
+        photo {
+          id
+          title
+          file {
+            width
+            height
+            url
+          }
         }
       }
-      documents {
+      linkToAgendas {
         id
-        title
-        file {
+        label
+        url {
+          id
+          title
           url
-          filename
-          filesize
         }
       }
-      applicationForm {
+      linkToResolutions {
         id
-        title
-        file {
+        label
+        url {
+          id
+          title
           url
-          filename
-          filesize
+        }
+      }
+      linkToPublicOpinionMessage {
+        id
+        label
+        url {
+          id
+          title
+          url
         }
       }
 
@@ -64,7 +92,6 @@ export const GET_BOARDS_PAGE: TypedDocumentNode<
         phone
         email
       }
-
       actions {
         id
         label
@@ -118,6 +145,15 @@ export const GET_BOARDS_PAGE: TypedDocumentNode<
             description
             url
           }
+        }
+      }
+      documents {
+        id
+        title
+        file {
+          url
+          filename
+          filesize
         }
       }
     }

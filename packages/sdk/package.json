@@ -24,9 +24,11 @@
     "./getPark": "./src/queries/getPark.ts",
     "./getPublicNotice": "./src/queries/getPublicNotice.ts",
     "./getService": "./src/queries/getService.ts",
-    "./getTrail": "./src/queries/getTrail.ts"
+    "./getTrail": "./src/queries/getTrail.ts",
+    "./getBoard": "./src/queries/getBoard.ts"
   },
   "scripts": {
+    "codegen": "pnpm exec graphql-codegen --config codegen.ts",
     "codegen:watch": "pnpm exec graphql-codegen --config codegen.ts --watch"
   },
   "keywords": [],
