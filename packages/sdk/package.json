@@ -9,12 +9,22 @@
     ".": "./src/index.ts",
     "./components": "./src/components/index.ts",
     "./types": "./src/types.ts",
-    "./queries": "./src/queries/index.ts",
     "./client": "./src/client/index.ts",
     "./apollo": "./src/apollo.ts",
     "./graphql": "./src/graphql/graphql.ts",
+    "./getAlerts": "./src/queries/getAlerts.ts",
+    "./getAssemblyDistrict": "./src/queries/getAssemblyDistrict.ts",
     "./getBoards": "./src/queries/getBoards.ts",
-    "./getBoardsPage": "./src/queries/getBoardsPage.ts"
+    "./getBoardsPage": "./src/queries/getBoardsPage.ts",
+    "./getCommunity": "./src/queries/getCommunity.ts",
+    "./getDocCollection": "./src/queries/getDocCollection.ts",
+    "./getFacility": "./src/queries/getFacility.ts",
+    "./getHomePage": "./src/queries/getHomePage.ts",
+    "./getOrgUnit": "./src/queries/getOrgUnit.ts",
+    "./getPark": "./src/queries/getPark.ts",
+    "./getPublicNotice": "./src/queries/getPublicNotice.ts",
+    "./getService": "./src/queries/getService.ts",
+    "./getTrail": "./src/queries/getTrail.ts"
   },
   "scripts": {
     "codegen:watch": "pnpm exec graphql-codegen --config codegen.ts --watch"

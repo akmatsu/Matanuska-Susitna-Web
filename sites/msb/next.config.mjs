@@ -15,7 +15,6 @@ const nextConfig = {
       '@matsugov/ui/client',
       '@msb/js-sdk/components',
       '@msb/js-sdk/client',
-      '@msb/js-sdk/queries',
       '@msb/js-sdk/graphql',
       '@msb/js-sdk/types',
       './components/server',
