@@ -1,4 +1,3 @@
-import { PageConfig, PageMerged, TrailItem } from '@msb/js-sdk';
 import { PageMap } from './PageMap';
 import { PageActions } from './PageActions';
 import { PageDocuments } from './PageDocuments';
@@ -13,6 +12,7 @@ import { PageChildrenOrgUnits } from './PageChildrenOrgUnits';
 import { PageSection } from './PageSection';
 import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import Link from 'next/link';
+import { PageConfig, PageMerged, Trail } from '@msb/js-sdk/types';
 
 export function PageSidebar({
   page,
@@ -41,7 +41,7 @@ export function PageSidebar({
                 <CardTitle>{page.memberName}</CardTitle>
                 {page.photo && (
                   <img
-                    src={page.photo?.file.url}
+                    src={page.photo?.file?.url}
                     className="rounded-full size-20"
                   />
                 )}
@@ -66,7 +66,7 @@ export function PageSidebar({
         contacts={page.contacts}
       />
 
-      {listName === 'trail' && <PageTrailInfo trail={page as TrailItem} />}
+      {listName === 'trail' && <PageTrailInfo trail={page as Trail} />}
       <PageListItems title="Trails" items={page.trails} />
 
       <PageListItems title="Facilities" items={page.facilities} />

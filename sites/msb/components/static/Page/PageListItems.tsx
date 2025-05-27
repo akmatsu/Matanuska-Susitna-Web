@@ -1,9 +1,14 @@
 import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui/Card';
-import type { PageListItem } from '@msb/js-sdk';
 import { PageSection } from './PageSection';
 
 export function PageListItems(props: {
-  items?: PageListItem[] | null;
+  items?:
+    | {
+        slug?: string | null;
+        title?: string | null;
+        description?: string | null;
+      }[]
+    | null;
   title: string;
 }) {
   if (!!props.items?.length) {

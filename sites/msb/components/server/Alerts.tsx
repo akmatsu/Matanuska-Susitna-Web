@@ -38,10 +38,18 @@ export async function Alerts() {
               <li key={alert.id}>
                 <Alert
                   type={getAlertType(alert.urgency!)}
-                  slim={parseInt(alert.urgency) < 4}
-                  title={parseInt(alert.urgency) >= 4 ? alert.title : undefined}
+                  slim={!!alert.urgency && alert.urgency < 4}
+                  title={
+                    !!alert.urgency && alert.urgency >= 4
+                      ? alert.title
+                        ? alert.title
+                        : undefined
+                      : undefined
+                  }
                 >
-                  <MarkdownRenderer>{alert.body}</MarkdownRenderer>
+                  {alert.body && (
+                    <MarkdownRenderer>{alert.body}</MarkdownRenderer>
+                  )}
                 </Alert>
               </li>
             ))}

@@ -14,6 +14,7 @@ export function PageServices(props: {
         <LinkCardGrid items={props.services.slice(0, 4)} listKey="services" />
         {props.services.length > 4 && (
           <div className="flex justify-center items-center">
+            z
             <LinkButton
               href={`/search?${QueryString.stringify({ pages: { refinementList: { ...props.filters, type: ['service'] } } })}`}
               className="mt-4"

@@ -1,8 +1,10 @@
 import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui/Card';
-import { PageListItem } from '@msb/js-sdk';
 import { PageSection } from './PageSection';
+import { PageMerged } from '@msb/js-sdk/types';
 
-export function PageChildrenOrgUnits(props: { items?: PageListItem[] | null }) {
+export function PageChildrenOrgUnits(props: {
+  items?: PageMerged['children'] | null;
+}) {
   if (!!props.items?.length)
     return (
       <PageSection title="Division">

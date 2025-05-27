@@ -1,9 +1,11 @@
 import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui/Card';
-import { District } from '@msb/js-sdk';
 import Image from 'next/image';
 import { PageSection } from './PageSection';
+import { PageMerged } from '@msb/js-sdk/types';
 
-export function PageDistricts(props: { items?: District[] | null }) {
+export function PageDistricts(props: {
+  items?: PageMerged['districts'] | null;
+}) {
   if (props.items?.length)
     return (
       <PageSection title="Districts">
@@ -28,7 +30,7 @@ export function PageDistricts(props: { items?: District[] | null }) {
                 </div>
                 <div className="pr-6 relative">
                   <Image
-                    src={district.photo?.file.url || ''}
+                    src={district.photo?.file?.url || ''}
                     alt={`${district.title} assembly member photo`}
                     className="rounded-full size-20"
                     width={80}

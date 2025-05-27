@@ -1,8 +1,8 @@
-import { TrailItem } from '@msb/js-sdk';
 import clsx from 'clsx';
 import { PageSection } from './PageSection';
+import { Trail } from '@msb/js-sdk/graphql';
 
-export function PageTrailInfo({ trail }: { trail: TrailItem }) {
+export function PageTrailInfo({ trail }: { trail: Trail }) {
   return (
     <>
       <PageSection title="Trails Seasons">
@@ -119,10 +119,6 @@ export function PageTrailInfo({ trail }: { trail: TrailItem }) {
             {trail.elevationChange}
           </p>
         )}
-        <p>
-          <span className="font-bold">Groomed</span>:{' '}
-          {trail.groomed ? 'Yes' : 'No'}
-        </p>
       </PageSection>
     </>
   );

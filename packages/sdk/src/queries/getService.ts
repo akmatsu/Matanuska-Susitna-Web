@@ -41,6 +41,15 @@ export const GET_SERVICE_QUERY_NO_PN: TypedDocumentNode<
           url
         }
       }
+      secondaryActions {
+        id
+        label
+        url {
+          id
+          title
+          url
+        }
+      }
       primaryContact {
         id
         name
@@ -73,6 +82,15 @@ export const GET_SERVICE_QUERY: TypedDocumentNode<
       title
       heroImage
       primaryAction {
+        id
+        label
+        url {
+          id
+          title
+          url
+        }
+      }
+      secondaryActions {
         id
         label
         url {
