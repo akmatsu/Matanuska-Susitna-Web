@@ -66,9 +66,7 @@ export async function BoardsList({
           {boards?.map((board) => (
             <tr key={board.id} className="not-odd:bg-neutral-100">
               <td className="border border-base-lighter px-4 py-2">
-                <Link href={`/boards/${board.slug}`} as={`/boards/${board.id}`}>
-                  {board.title}
-                </Link>
+                <Link href={`/boards/${board.slug}`}>{board.title}</Link>
               </td>
               <td className="border border-base-lighter px-4 py-2">
                 {board.meetingSchedule}

@@ -21,7 +21,7 @@ const queryMap: {
 } = {
   services: async () => {
     const { GET_SERVICE_QUERY, GET_SERVICE_META_QUERY } = await import(
-      '@msb/js-sdk/queries'
+      '@msb/js-sdk/getService'
     );
     return {
       query: GET_SERVICE_QUERY,
@@ -30,7 +30,7 @@ const queryMap: {
   },
   communities: async () => {
     const { GET_COMMUNITY_QUERY, GET_COMMUNITY_META_QUERY } = await import(
-      '@msb/js-sdk/queries'
+      '@msb/js-sdk/getCommunity'
     );
     return {
       query: GET_COMMUNITY_QUERY,
@@ -46,7 +46,7 @@ const queryMap: {
   },
   departments: async () => {
     const { GET_ORG_UNIT_QUERY, GET_ORG_UNIT_META_QUERY } = await import(
-      '@msb/js-sdk/queries'
+      '@msb/js-sdk/getOrgUnit'
     );
     return {
       query: GET_ORG_UNIT_QUERY,
@@ -55,7 +55,7 @@ const queryMap: {
   },
   facilities: async () => {
     const { GET_FACILITY_QUERY, GET_FACILITY_META } = await import(
-      '@msb/js-sdk/queries'
+      '@msb/js-sdk/getFacility'
     );
     return {
       query: GET_FACILITY_QUERY,
@@ -64,7 +64,7 @@ const queryMap: {
   },
   parks: async () => {
     const { GET_PARK_QUERY, GET_PARK_META_QUERY } = await import(
-      '@msb/js-sdk/queries'
+      '@msb/js-sdk/getPark'
     );
     return {
       query: GET_PARK_QUERY,
@@ -73,7 +73,7 @@ const queryMap: {
   },
   'public-notices': async () => {
     const { GET_PUBLIC_NOTICE, GET_PUBLIC_NOTICE_META } = await import(
-      '@msb/js-sdk/queries'
+      '@msb/js-sdk/getPublicNotice'
     );
     return {
       query: GET_PUBLIC_NOTICE,
@@ -82,7 +82,7 @@ const queryMap: {
   },
   trails: async () => {
     const { GET_TRAIL_QUERY, GET_TRAIL_META_QUERY } = await import(
-      '@msb/js-sdk/queries'
+      '@msb/js-sdk/getTrail'
     );
     return {
       query: GET_TRAIL_QUERY,
@@ -91,7 +91,7 @@ const queryMap: {
   },
   'assembly-districts': async () => {
     const { GET_ASSEMBLY_DISTRICT_QUERY, GET_ASSEMBLY_DISTRICT_META_QUERY } =
-      await import('@msb/js-sdk/queries');
+      await import('@msb/js-sdk/getAssemblyDistrict');
     return {
       query: GET_ASSEMBLY_DISTRICT_QUERY,
       metaQuery: GET_ASSEMBLY_DISTRICT_META_QUERY,

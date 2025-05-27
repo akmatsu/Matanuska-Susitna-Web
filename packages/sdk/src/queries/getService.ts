@@ -25,12 +25,7 @@ export const GET_SERVICE_QUERY_NO_PN: TypedDocumentNode<
   GetServiceNoPnQuery,
   GetServiceNoPnQueryVariables
 > = gql`
-  query GetServiceNoPn(
-    $where: ServiceWhereUniqueInput!
-    $publicNoticesWhere2: PublicNoticeWhereInput!
-    $take: Int
-    $orderBy: [PublicNoticeOrderByInput!]!
-  ) {
+  query GetServiceNoPn($where: ServiceWhereUniqueInput!) {
     service(where: $where) {
       id
       slug
@@ -58,14 +53,6 @@ export const GET_SERVICE_QUERY_NO_PN: TypedDocumentNode<
         phone
         email
       }
-    }
-    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
-      id
-      slug
-      title
-      description
-      heroImage
-      urgency
     }
   }
 `;

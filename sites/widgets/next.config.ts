@@ -17,7 +17,6 @@ const nextConfig: NextConfig = {
       '@matsugov/tw-config',
       '@msb/js-sdk',
       '@msb/js-sdk/components',
-      '@msb/js-sdk/queries',
       '@msb/js-sdk/client',
       '@msb/js-sdk/apollo',
     ],
