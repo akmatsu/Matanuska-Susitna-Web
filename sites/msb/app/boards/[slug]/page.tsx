@@ -1,5 +1,7 @@
 import { PageSideNavController } from '@/components/client/Page/PageSideNavController';
-import { PageBody, PageEvents, PageSidebar } from '@/components/static/Page';
+import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
+import { LinkButton } from '@/components/static/LinkButton';
+import { PageEvents, PageSidebar } from '@/components/static/Page';
 import { PageContainer } from '@/components/static/Page/PageContainer';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { getPageMeta } from '@/utils/pageHelpers';
@@ -49,12 +51,50 @@ export default async function BoardPage(props: {
         <PageSideNavController
           rightSide={<PageSidebar page={page} listName={listName} />}
         >
-          <PageBody
-            title={page.title}
-            description={page.description}
-            body={page.body}
-            pageType={page.__typename}
-          />
+          <div className="prose max-w-none prose-table:table-auto prose-table:w-full prose-th:bg-base-lighter prose-th:border prose-th:border-base-darkest prose-th:font-bold prose-th:px-2 prose-td:px-2 prose-td:border prose-td:border-base-darkest prose-table:border prose-table:border-base-darkest prose-a:text-primary">
+            <p className="text-bold capitalize text-base-dark! font-bold text-2xl not-prose">
+              {page.__typename?.split(/(?=[A-Z])/).join(' ')}
+            </p>
+            <h1>{page.title}</h1>
+            <div className="flex flex-wrap gap-2 not-prose">
+              {page.linkToAgendas && (
+                <LinkButton
+                  href={page.linkToAgendas.url?.url!}
+                  color="secondary"
+                >
+                  {page.linkToAgendas.label}
+                </LinkButton>
+              )}
+              {page.linkToPublicOpinionMessage && (
+                <LinkButton
+                  href={page.linkToPublicOpinionMessage.url?.url!}
+                  color="secondary"
+                >
+                  {page.linkToPublicOpinionMessage.label}
+                </LinkButton>
+              )}
+              {page.linkToResolutions && (
+                <LinkButton
+                  href={page.linkToResolutions.url?.url!}
+                  color="secondary"
+                >
+                  {page.linkToResolutions.label}
+                </LinkButton>
+              )}
+              <LinkButton
+                href="https://matsugov.us/publicmeetings"
+                color="secondary"
+              >
+                Public Meetings Calendar
+              </LinkButton>
+            </div>
+            {page.body ? (
+              <MarkdownRenderer>{page.body}</MarkdownRenderer>
+            ) : page.description ? (
+              <p>{page.description}</p>
+            ) : undefined}
+          </div>
+
           <PageEvents listName={listName} />
         </PageSideNavController>
       </PageContainer>

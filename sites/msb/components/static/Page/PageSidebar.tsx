@@ -25,7 +25,7 @@ export function PageSidebar({
 }) {
   return (
     <>
-      <PageMap {...config?.map} itemId={page?.title || ''} />
+      {config?.map && <PageMap {...config?.map} itemId={page?.title || ''} />}
 
       {(page.primaryAction || !!page.actions?.length) && (
         <PageActions

@@ -27,7 +27,7 @@ export function FeaturedCard(props: FeaturedCardProps) {
 
       <CardHeader>
         <div className="flex items-center w-full gap-2">
-          <div className="bg-secondary text-white rounded-full p-2 flex items-center justify-center">
+          <div className="bg-secondary text-base-darkest rounded-full p-2 flex items-center justify-center">
             <span className={`iconify size-6 ${props.icon}`}></span>
           </div>
           <CardTitle>{props.title}</CardTitle>
