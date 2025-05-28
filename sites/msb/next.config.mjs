@@ -29,4 +29,4 @@ const nextConfig = {
   },
 };
 
-export default withPlugins(nextConfig);
+export default nextConfig;
