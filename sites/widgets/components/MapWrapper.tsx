@@ -1,5 +1,5 @@
 'use client';
-import { Map } from '@matsugov/ui/map';
+import { Map } from '@msb/map';
 import { ComponentProps } from 'react';
 
 export function MapWrapper(props: ComponentProps<typeof Map>) {
