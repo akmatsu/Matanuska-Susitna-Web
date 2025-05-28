@@ -104,7 +104,7 @@ importers:
         version: 1.12.16(graphql@16.11.0)(typescript@5.8.3)
       '@apollo/client-integration-nextjs':
         specifier: ^0.12.2
-        version: 0.12.2(@apollo/client@3.13.8(@types/react@19.1.5)(graphql-ws@6.0.5(graphql@16.11.0)(ws@8.18.2))(graphql@16.11.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.5)(graphql@16.11.0)(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 0.12.2(@apollo/client@3.13.8(@types/react@19.1.5)(graphql-ws@6.0.5(graphql@16.11.0)(ws@8.18.2))(graphql@16.11.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.5)(graphql@16.11.0)(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@graphql-codegen/cli':
         specifier: ^5.0.6
         version: 5.0.6(@parcel/watcher@2.5.1)(@types/node@22.15.21)(graphql@16.11.0)(typescript@5.8.3)
@@ -256,7 +256,7 @@ importers:
     dependencies:
       '@apollo/client-integration-nextjs':
         specifier: ^0.12.2
-        version: 0.12.2(@apollo/client@3.13.8(@types/react@19.1.5)(graphql-ws@6.0.5(graphql@16.11.0)(ws@8.18.2))(graphql@16.11.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.5)(graphql@16.11.0)(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 0.12.2(@apollo/client@3.13.8(@types/react@19.1.5)(graphql-ws@6.0.5(graphql@16.11.0)(ws@8.18.2))(graphql@16.11.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.5)(graphql@16.11.0)(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@matsugov/ui':
         specifier: workspace:^
         version: link:../../packages/ui
@@ -289,10 +289,10 @@ importers:
         version: 7.15.7(algoliasearch@5.20.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-instantsearch-nextjs:
         specifier: ^0.4.8
-        version: 0.4.8(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-instantsearch@7.15.7(algoliasearch@5.20.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+        version: 0.4.8(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-instantsearch@7.15.7(algoliasearch@5.20.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       react-instantsearch-router-nextjs:
         specifier: ^7.15.7
-        version: 7.15.7(algoliasearch@5.20.0)(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+        version: 7.15.7(algoliasearch@5.20.0)(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       react-loading-skeleton:
         specifier: ^3.5.0
         version: 3.5.0(react@19.1.0)
@@ -369,6 +369,9 @@ importers:
       '@msb/js-sdk':
         specifier: workspace:^
         version: link:../../packages/sdk
+      '@msb/map':
+        specifier: workspace:^
+        version: link:../../packages/map
       next:
         specifier: ^15.3.2
         version: 15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -5297,7 +5300,7 @@ snapshots:
 
   '@antfu/utils@8.1.1': {}
 
-  '@apollo/client-integration-nextjs@0.12.2(@apollo/client@3.13.8(@types/react@19.1.5)(graphql-ws@6.0.5(graphql@16.11.0)(ws@8.18.2))(graphql@16.11.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.5)(graphql@16.11.0)(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@apollo/client-integration-nextjs@0.12.2(@apollo/client@3.13.8(@types/react@19.1.5)(graphql-ws@6.0.5(graphql@16.11.0)(ws@8.18.2))(graphql@16.11.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.5)(graphql@16.11.0)(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@apollo/client': 3.13.8(@types/react@19.1.5)(graphql-ws@6.0.5(graphql@16.11.0)(ws@8.18.2))(graphql@16.11.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@apollo/client-react-streaming': 0.12.2(@apollo/client@3.13.8(@types/react@19.1.5)(graphql-ws@6.0.5(graphql@16.11.0)(ws@8.18.2))(graphql@16.11.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.5)(graphql@16.11.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -9763,12 +9766,12 @@ snapshots:
       react: 19.1.0
       use-sync-external-store: 1.5.0(react@19.1.0)
 
-  react-instantsearch-nextjs@0.4.8(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-instantsearch@7.15.7(algoliasearch@5.20.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)):
+  react-instantsearch-nextjs@0.4.8(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-instantsearch@7.15.7(algoliasearch@5.20.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)):
     dependencies:
       next: 15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-instantsearch: 7.15.7(algoliasearch@5.20.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
-  react-instantsearch-router-nextjs@7.15.7(algoliasearch@5.20.0)(next@15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0):
+  react-instantsearch-router-nextjs@7.15.7(algoliasearch@5.20.0)(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0):
     dependencies:
       instantsearch.js: 4.78.3(algoliasearch@5.20.0)
       next: 15.3.2(@babel/core@7.27.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
