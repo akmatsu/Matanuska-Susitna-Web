@@ -12,3 +12,4 @@ export * from './getAssemblyDistrict';
 export * from './getBoardsPage';
 export * from './getBoards';
 export * from './getBoard';
+export * from './getInternalLinkData';

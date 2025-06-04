@@ -8,6 +8,11 @@ declare module 'react' {
       step: ComponentProps<typeof Step>;
       'doc-collection': { id: string };
       'primary-action-button': { label: string };
+      'internal-link': {
+        list: string;
+        id: string;
+        label: string;
+      };
     }
   }
 }

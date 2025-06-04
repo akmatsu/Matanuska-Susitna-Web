@@ -25,7 +25,8 @@
     "./getPublicNotice": "./src/queries/getPublicNotice.ts",
     "./getService": "./src/queries/getService.ts",
     "./getTrail": "./src/queries/getTrail.ts",
-    "./getBoard": "./src/queries/getBoard.ts"
+    "./getBoard": "./src/queries/getBoard.ts",
+    "./getInternalLinkData": "./src/queries/getInternalLinkData.ts"
   },
   "scripts": {
     "codegen": "pnpm exec graphql-codegen --config codegen.ts",
@@ -44,9 +45,9 @@
     "@parcel/watcher": "^2.5.1",
     "@tsconfig/recommended": "^1.0.8",
     "@tsconfig/vite-react": "^3.4.0",
-    "@types/react": "^19.1.5",
+    "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
-    "@vitejs/plugin-react": "^4.4.1",
+    "@vitejs/plugin-react": "^4.5.0",
     "graphql": "^16.11.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
