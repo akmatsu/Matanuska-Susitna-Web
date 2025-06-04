@@ -5,6 +5,7 @@ import remarkDirective from 'remark-directive';
 import { Process, Step, DocCollectionWrapper } from './components';
 import remarkDirectiveRehype from 'remark-directive-rehype';
 import { ActionButtonWrapper } from './components/PrimaryActionButton';
+import { InternalLink } from './components/InternalLink';
 
 export function MarkdownRenderer(props: { children: string }) {
   return (
@@ -30,6 +31,7 @@ export function MarkdownRenderer(props: { children: string }) {
         step: Step,
         'doc-collection': DocCollectionWrapper,
         'primary-action-button': ActionButtonWrapper,
+        'internal-link': InternalLink,
       }}
     >
       {props.children}
