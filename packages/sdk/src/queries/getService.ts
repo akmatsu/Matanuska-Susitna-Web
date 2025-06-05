@@ -32,6 +32,7 @@ export const GET_SERVICE_QUERY_NO_PN: TypedDocumentNode<
       title
       heroImage
       body
+      description
       primaryAction {
         id
         label
@@ -81,6 +82,8 @@ export const GET_SERVICE_QUERY: TypedDocumentNode<
       slug
       title
       heroImage
+      body
+      description
       primaryAction {
         id
         label
