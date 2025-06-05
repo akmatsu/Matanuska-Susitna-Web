@@ -1,6 +1,7 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { GET_INTERNAL_LINK_DATA } from '@msb/js-sdk/getInternalLinkData';
 import { GetInternalLinkDataQuery } from '@msb/js-sdk/graphql';
+import { Tooltip } from '@matsugov/ui/Tooltip';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { plural } from 'pluralize';
@@ -60,8 +61,13 @@ export async function InternalLink(props: {
     );
   else
     return (
-      <span className="text-error line-through cursor-not-allowed">
-        {props.children} <span className="icon-[mdi--error] -mb-0.5" />
-      </span>
+      <Tooltip
+        content="Oops! Looks like this link is broken. We are working on it!"
+        className="text-center"
+      >
+        <span className="text-error line-through cursor-not-allowed">
+          {props.children} <span className="icon-[mdi--error] -mb-0.5" />
+        </span>
+      </Tooltip>
     );
 }
