@@ -1,5 +1,6 @@
 import { ReactNode, ComponentProps } from 'react';
 import { Process, Step } from './components/server/MarkdownRenderer/components';
+import { InternalLink } from './components/server/MarkdownRenderer/components/InternalLink';
 
 declare module 'react' {
   namespace JSX {
@@ -8,11 +9,7 @@ declare module 'react' {
       step: ComponentProps<typeof Step>;
       'doc-collection': { id: string };
       'primary-action-button': { label: string };
-      'internal-link': {
-        list: string;
-        id: string;
-        label: string;
-      };
+      'internal-link': ComponentProps<typeof InternalLink>;
     }
   }
 }
