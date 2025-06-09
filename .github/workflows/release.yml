@@ -2,12 +2,21 @@ name: Release
 
 on:
   workflow_run:
+    types:
+      - completed
+    branches:
+      - main
     workflows:
       - 'Trigger Amplify Build for msb'
       - 'Trigger Amplify Build for widgets'
 
+concurrency:
+  group: release-${{github.event.workflow_run.head_sha}}
+  cancel-in-progress: true
+
 jobs:
   release:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
