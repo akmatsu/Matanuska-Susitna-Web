@@ -11,7 +11,7 @@ export function PageListItems(props: {
     | null;
   title: string;
 }) {
-  if (!!props.items?.length) {
+  if (props.items?.length) {
     return (
       <PageSection title={props.title}>
         <ul>

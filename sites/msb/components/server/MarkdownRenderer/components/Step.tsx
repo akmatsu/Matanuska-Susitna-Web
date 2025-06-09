@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 
 export function Step({ children }: { children: ReactNode }) {
   let title = 'Step';
-  let remainingChildren: ReactNode[] = [];
+  const remainingChildren: ReactNode[] = [];
 
   React.Children.forEach(children, (child, index) => {
     if (index === 0 && React.isValidElement(child)) {

@@ -1,9 +1,4 @@
-import type {
-  ExternalLink,
-  InternalLink,
-  LinkedItemUnion,
-  Maybe,
-} from '@msb/js-sdk/graphql';
+import type { LinkedItemUnion, Maybe } from '@msb/js-sdk/graphql';
 import { LinkButton } from '@/components/static/LinkButton';
 import { PageMerged } from '@msb/js-sdk/types';
 

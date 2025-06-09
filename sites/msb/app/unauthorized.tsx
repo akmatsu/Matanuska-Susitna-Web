@@ -10,7 +10,9 @@ export default function Unauthorized() {
           <span className="icon-[mdi--alert] size-10 text-error"></span>
         </h1>
       </div>
-      <p>We're sorry, but you are not authorized to access this content.</p>
+      <p>
+        We&apos;re sorry, but you are not authorized to access this content.
+      </p>
 
       <p>Please click the button below to navigate to the home page.</p>
 

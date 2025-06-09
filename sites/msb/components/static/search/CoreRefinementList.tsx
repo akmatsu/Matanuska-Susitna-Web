@@ -24,7 +24,7 @@ export function CustomRefinementList(props: RefinementListProps) {
             <li key={item.label}>
               <Checkbox
                 checked={item.isRefined}
-                onChange={(e) => refine(item.value)}
+                onChange={() => refine(item.value)}
                 label={`${getLabel(item.label)} (${item.count})`}
               />
             </li>

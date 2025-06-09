@@ -149,9 +149,12 @@ export default async function Home() {
       )}
 
       <section className="max-w-6xl mx-auto px-4 py-16">
-        <h2 className="mb-4 text-3xl font-bold">Can't find what you need?</h2>
+        <h2 className="mb-4 text-3xl font-bold">
+          Can&apos;t find what you need?
+        </h2>
         <p className="text-xl mb-4">
-          Use the search bar or reach out to us directly — we're here to help.
+          Use the search bar or reach out to us directly — we&apos;re here to
+          help.
         </p>
 
         <LinkButton href="#" color="primary">
