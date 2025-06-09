@@ -57,7 +57,7 @@ const separatorRegex = new RegExp(`[${escapedSeparators}]`, 'gi');
 export function toTitleCase(str: string) {
   const lowerCaseStr = str.toLowerCase();
 
-  return separators.reduce((acc, separator, index) => {
+  return separators.reduce((acc, separator) => {
     return acc
       .split(separator)
       .map((word, index) => {

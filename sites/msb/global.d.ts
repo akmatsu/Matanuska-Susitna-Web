@@ -1,4 +1,4 @@
-import { ReactNode, ComponentProps } from 'react';
+import { ComponentProps } from 'react';
 import { Process, Step } from './components/server/MarkdownRenderer/components';
 import { InternalLink } from './components/server/MarkdownRenderer/components/InternalLink';
 

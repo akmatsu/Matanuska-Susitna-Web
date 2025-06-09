@@ -38,7 +38,9 @@ export function Banner({
           />
           <span>
             {label}{' '}
-            <span className="underline text-primary">Here's how you know</span>
+            <span className="underline text-primary">
+              Here&apos;s how you know
+            </span>
             <span className="icon-[mdi--chevron-down] group-data-open:rotate-180 transition-transform size-4 text-primary align-bottom"></span>
           </span>
         </DisclosureButton>
@@ -70,9 +72,9 @@ export function Banner({
                     <span>
                       A <strong>lock</strong> ({' '}
                       <span className="icon-[mdi--lock] size-4"></span> ) or{' '}
-                      <strong>https://</strong> means you've safely connected to
-                      the .gov website. Share sensitive information only on
-                      secure websites.
+                      <strong>https://</strong> means you&apos;ve safely
+                      connected to the .gov website. Share sensitive information
+                      only on secure websites.
                     </span>
                   </p>
                 </div>

@@ -5,14 +5,12 @@ export function Card({
   as = 'div',
   children,
   className,
-  titleAs = 'h4',
   containerClassName,
   ...props
 }: {
   children: React.ReactNode;
   as?: React.ElementType;
   className?: string;
-  titleAs?: React.ElementType;
   containerClassName?: string;
 }) {
   const Component = as;

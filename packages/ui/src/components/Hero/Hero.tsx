@@ -21,14 +21,14 @@ export function Hero({
 
   function getImageBaseUrl(value?: string | null) {
     if (!value) return;
-    const [baseUrl, _] = value.split('?');
+    const [baseUrl] = value.split('?');
 
     return baseUrl;
   }
 
   function getPosition(value?: string | null) {
     if (!value) return;
-    const [_, search] = value.split('?');
+    const [, search] = value.split('?');
     const params = new URLSearchParams(search);
     const position = params.get('position');
 

@@ -57,7 +57,7 @@ async function _initFillColor(
   layerOutlineWidth?: string | number,
 ) {
   try {
-    if (!!layerFillColor) {
+    if (layerFillColor) {
       const [{ default: SimpleFillSymbol }] = await Promise.all([
         import('@arcgis/core/symbols/SimpleFillSymbol'),
       ]);
