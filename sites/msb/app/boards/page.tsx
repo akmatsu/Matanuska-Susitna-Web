@@ -35,7 +35,6 @@ export default async function BoardsPage({
     console.error('Error fetching boards page data:', JSON.stringify(errors));
     throw error;
   }
-
   const page = data.boardPage;
 
   if (!page) {
