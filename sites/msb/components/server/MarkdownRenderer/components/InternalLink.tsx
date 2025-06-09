@@ -10,7 +10,7 @@ import v from 'voca';
 function getUrl(data: GetInternalLinkDataQuery, list: string) {
   if (data.getInternalLink) {
     if ('slug' in data.getInternalLink) {
-      return `/${v.slugify(plural(list || ''))}/${data.getInternalLink.slug}`;
+      return `/${v.slugify(plural(list))}/${data.getInternalLink.slug}`;
     }
     if ('url' in data.getInternalLink) {
       return data.getInternalLink.url;

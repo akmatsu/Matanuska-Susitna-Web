@@ -103,18 +103,22 @@ export default async function Home() {
         <div className=" max-w-[900px] w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 w-full">
             {toolBeltItems.map((item) => (
-              <Link
-                href={item.url || ''}
-                className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
-                key={item.id}
-              >
-                <div className="flex flex-col items-center">
-                  <span
-                    className={`iconify size-9 ${item.icon} text-green-600`}
-                  ></span>
-                  <span>{item.title}</span>
-                </div>
-              </Link>
+              <>
+                {item.url && item.title && (
+                  <Link
+                    href={item.url}
+                    className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
+                    key={item.id}
+                  >
+                    <div className="flex flex-col items-center">
+                      <span
+                        className={`iconify size-9 ${item.icon} text-green-600`}
+                      ></span>
+                      <span>{item.title}</span>
+                    </div>
+                  </Link>
+                )}
+              </>
             ))}
           </div>
         </div>

@@ -34,30 +34,34 @@ export function PageActions({
   }
   return (
     <>
-      {!!primaryAction && (
+      {!!primaryAction && primaryAction?.url?.url && (
         <LinkButton
-          href={primaryAction?.url?.url || ''}
+          href={primaryAction.url.url}
           className="margin-right-0 usa-link--external"
           target="_blank"
           big
           block
         >
-          {primaryAction.label || primaryAction?.url?.title}
+          {primaryAction.label || primaryAction.url.title}
         </LinkButton>
       )}
       {!!secondaryActions && (
         <ul className="flex flex-col gap-2">
           {secondaryActions.map((action) => (
-            <LinkButton
-              key={action?.url?.id}
-              href={action?.url?.url || ''}
-              className="margin-right-0 usa-link--external"
-              target="_blank"
-              big
-              block
-            >
-              {action.label || action?.url?.title}
-            </LinkButton>
+            <>
+              {action?.url?.url && (
+                <LinkButton
+                  key={action.url.id}
+                  href={action.url.url}
+                  className="margin-right-0 usa-link--external"
+                  target="_blank"
+                  big
+                  block
+                >
+                  {action.label || action?.url?.title}
+                </LinkButton>
+              )}
+            </>
           ))}
         </ul>
       )}

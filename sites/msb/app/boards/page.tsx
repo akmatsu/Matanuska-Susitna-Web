@@ -83,15 +83,19 @@ export default async function BoardsPage({
             <CardBody>
               <ul className="list-disc list-inside">
                 {page.documents?.map((doc) => (
-                  <li key={doc.id} className="list-disc list-inside">
-                    <Link
-                      href={doc.file?.url || ''}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {doc.title}
-                    </Link>
-                  </li>
+                  <>
+                    {doc.file?.url && doc.title && (
+                      <li key={doc.id} className="list-disc list-inside">
+                        <Link
+                          href={doc.file.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {doc.title}
+                        </Link>
+                      </li>
+                    )}
+                  </>
                 ))}
               </ul>
             </CardBody>
@@ -113,11 +117,13 @@ export default async function BoardsPage({
                 by the Borough Clerks Office.
               </p>
               <ul className="list-disc list-inside">
-                <li>
-                  <Link href={page.applicationForm?.file?.url || ''}>
-                    {page.applicationForm?.title}
-                  </Link>
-                </li>
+                {page.applicationForm?.file?.url && (
+                  <li>
+                    <Link href={page.applicationForm?.file?.url}>
+                      {page.applicationForm?.title}
+                    </Link>
+                  </li>
+                )}
               </ul>
             </CardBody>
           </Card>
@@ -138,9 +144,12 @@ export default async function BoardsPage({
               </p>
               <ul className="list-disc list-inside">
                 <li>
-                  <Link href={page.vacancyReport?.file?.url || ''}>
-                    {page.vacancyReport?.title}
-                  </Link>
+                  {page.vacancyReport?.file?.url &&
+                    page.vacancyReport.title && (
+                      <Link href={page.vacancyReport.file.url}>
+                        {page.vacancyReport.title}
+                      </Link>
+                    )}
                 </li>
               </ul>
             </CardBody>
