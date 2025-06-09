@@ -10,7 +10,6 @@ export default function Home() {
             Map Widget
           </Link>
         </li>
-
         <li>
           <Link href="/document-collection" target="_parent">
             Document Collection Widget
