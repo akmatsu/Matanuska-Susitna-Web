@@ -1,13 +1,12 @@
-name: Release
+name: Lint
 
 on:
-  workflow_run:
-    workflows:
-      - 'Trigger Amplify Build for msb'
-      - 'Trigger Amplify Build for widgets'
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  release:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -27,7 +26,5 @@ jobs:
       - name: Install dependencies
         run: pnpm i
 
-      - name: Run Semantic Release
-        run: pnpm exec semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Lint
+        run: pnpm run lint
