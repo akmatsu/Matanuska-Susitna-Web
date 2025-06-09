@@ -8,7 +8,7 @@ export function PageDocuments({
 }: {
   documents?: PageMerged['documents'] | null;
 }) {
-  if (!!documents?.length)
+  if (documents?.length)
     return (
       <PageSection title="Documents">
         <ul className="flex flex-col gap-2">

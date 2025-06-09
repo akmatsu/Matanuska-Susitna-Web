@@ -57,25 +57,22 @@ export default async function BoardPage(props: {
             </p>
             <h1>{page.title}</h1>
             <div className="flex flex-wrap gap-2 not-prose">
-              {page.linkToAgendas && (
-                <LinkButton
-                  href={page.linkToAgendas.url?.url!}
-                  color="secondary"
-                >
+              {page.linkToAgendas && page.linkToAgendas.url?.url && (
+                <LinkButton href={page.linkToAgendas.url.url} color="secondary">
                   {page.linkToAgendas.label}
                 </LinkButton>
               )}
               {page.linkToPublicOpinionMessage && (
                 <LinkButton
-                  href={page.linkToPublicOpinionMessage.url?.url!}
+                  href={page.linkToPublicOpinionMessage.url?.url || ''}
                   color="secondary"
                 >
                   {page.linkToPublicOpinionMessage.label}
                 </LinkButton>
               )}
-              {page.linkToResolutions && (
+              {page.linkToResolutions && page.linkToResolutions.url?.url && (
                 <LinkButton
-                  href={page.linkToResolutions.url?.url!}
+                  href={page.linkToResolutions.url.url}
                   color="secondary"
                 >
                   {page.linkToResolutions.label}

@@ -11,8 +11,8 @@ export default function NotFound() {
         </h1>
       </div>
       <p>
-        We're sorry, we can't find the page you're looking for. It's possible it
-        might have been removed, or changed location.
+        We&apos;re sorry, we can&apos;t find the page you&apos;re looking for.
+        It&apos;s possible it might have been removed, or changed location.
       </p>
 
       <p>Please click the button below to navigate to our home page.</p>

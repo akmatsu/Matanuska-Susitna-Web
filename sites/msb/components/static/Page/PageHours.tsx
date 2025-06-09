@@ -4,7 +4,7 @@ import { PageSection } from './PageSection';
 import { PageMerged } from '@msb/js-sdk/types';
 
 export function PageHours(props: { hours?: PageMerged['hours'] | null }) {
-  if (!!props.hours?.length)
+  if (props.hours?.length)
     return (
       <PageSection title="Hours">
         <div className="flex flex-col gap-4">

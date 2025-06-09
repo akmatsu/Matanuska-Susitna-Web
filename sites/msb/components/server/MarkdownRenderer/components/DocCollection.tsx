@@ -21,7 +21,7 @@ export async function DocCollection({ id }: { id: string }) {
         </tr>
       </thead>
       <tbody>
-        {data?.documentCollection?.documents?.map((doc, index) => (
+        {data?.documentCollection?.documents?.map((doc) => (
           <tr key={doc.id}>
             <td>
               <Link href={doc.file?.url || ''}>{doc.title}</Link>

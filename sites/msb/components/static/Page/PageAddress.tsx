@@ -3,7 +3,7 @@ import { PageSection } from './PageSection';
 import { PageMerged } from '@msb/js-sdk/types';
 
 export function PageAddress(props: { address?: PageMerged['address'] | null }) {
-  if (!!props.address) {
+  if (props.address) {
     return (
       <PageSection title="Address">
         <div className="flex flex-col">

@@ -6,13 +6,14 @@ import { Process, Step, DocCollectionWrapper } from './components';
 import remarkDirectiveRehype from 'remark-directive-rehype';
 import { ActionButtonWrapper } from './components/PrimaryActionButton';
 import { InternalLink } from './components/InternalLink';
+import { AnchorHTMLAttributes } from 'react';
 
 export function MarkdownRenderer(props: { children: string }) {
   return (
     <Markdown
       remarkPlugins={[remarkGfm, remarkDirective, remarkDirectiveRehype]}
       components={{
-        a: (props) => {
+        a: (props: AnchorHTMLAttributes<HTMLAnchorElement>) => {
           const isExternal = props.href?.startsWith('http');
           return (
             <Link
