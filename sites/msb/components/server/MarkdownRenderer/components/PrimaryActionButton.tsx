@@ -33,11 +33,11 @@ export function ActionButtonWrapper(props: { label: string }) {
     },
   });
 
-  if (!loading && data)
+  if (!loading && data?.service?.primaryAction?.url?.url)
     return (
       <PrimaryActionButton
         {...props}
-        href={data.service?.primaryAction?.url?.url || ''}
+        href={data.service.primaryAction.url.url}
       />
     );
 }

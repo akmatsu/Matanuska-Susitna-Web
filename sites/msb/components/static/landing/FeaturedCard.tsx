@@ -17,7 +17,7 @@ export function FeaturedCard(props: FeaturedCardProps) {
         <CardMedia className="aspect-[2] overflow-hidden relative">
           <Image
             src={props.imageUrl.split('?')[0]} // Remove query params
-            alt={props.imageAlt || ''}
+            alt={props.imageAlt || 'Featured Image of ' + props.title}
             loading="lazy"
             className="aspect-[2] object-cover h-full w-full"
             fill

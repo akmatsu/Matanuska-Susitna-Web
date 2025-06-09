@@ -62,9 +62,9 @@ export default async function BoardPage(props: {
                   {page.linkToAgendas.label}
                 </LinkButton>
               )}
-              {page.linkToPublicOpinionMessage && (
+              {page.linkToPublicOpinionMessage?.url?.url && (
                 <LinkButton
-                  href={page.linkToPublicOpinionMessage.url?.url || ''}
+                  href={page.linkToPublicOpinionMessage.url?.url}
                   color="secondary"
                 >
                   {page.linkToPublicOpinionMessage.label}

@@ -29,13 +29,15 @@ export function PageDistricts(props: {
                   </CardBody>
                 </div>
                 <div className="pr-6 relative">
-                  <Image
-                    src={district.photo?.file?.url || ''}
-                    alt={`${district.title} assembly member photo`}
-                    className="rounded-full size-20"
-                    width={80}
-                    height={80}
-                  />
+                  {district.photo?.file?.url && (
+                    <Image
+                      src={district.photo.file.url}
+                      alt={`${district.title} assembly member photo`}
+                      className="rounded-full size-20"
+                      width={80}
+                      height={80}
+                    />
+                  )}
                 </div>
               </div>
             </LinkCard>
