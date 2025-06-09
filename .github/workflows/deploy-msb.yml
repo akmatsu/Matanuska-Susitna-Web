@@ -17,6 +17,12 @@ permissions:
 
 jobs:
   deploy:
+    env:
+      NEXT_PUBLIC_API_URL: https://cms-internal.matsu.gov
+      NEXT_PUBLIC_TYPESENSE_API_KEY: ${{ secrets.NEXT_PUBLIC_TYPESENSE_API_KEY }}
+      NEXT_PUBLIC_TYPESENSE_HOST: search.matsu.gov
+      NEXT_PUBLIC_TYPESENSE_PORT: 443
+      NEXT_PUBLIC_TYPESENSE_PROTOCOL: https
     concurrency:
       group: ci-msb-${{github.ref}}
       cancel-in-progress: false
