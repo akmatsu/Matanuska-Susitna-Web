@@ -49,12 +49,22 @@ export function Map({
       );
     });
 
+    const view = viewRef.current;
+
     return () => {
-      if (viewRef.current) {
-        viewRef.current.destroy();
+      if (view) {
+        view.destroy();
       }
     };
-  }, [tileLayerUrl, layerUrl, layerId]);
+  }, [
+    tileLayerUrl,
+    layerUrl,
+    layerId,
+    layerOpacity,
+    layerFillColor,
+    layerOutlineColor,
+    layerOutlineWidth,
+  ]);
 
   useEffect(() => {
     if (itemId && itemKey && viewRef.current && initialized) {
@@ -66,7 +76,7 @@ export function Map({
         animate,
       });
     }
-  }, [itemId, itemKey, layerOpacity, initialized]);
+  }, [itemId, itemKey, layerOpacity, initialized, layerId, animate]);
 
   return (
     <>

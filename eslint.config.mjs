@@ -2,17 +2,19 @@ import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
-import * as reactHooks from 'eslint-plugin-react-hooks';
 import { FlatCompat } from '@eslint/eslintrc';
+import gitignore from 'eslint-config-flat-gitignore';
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
 });
 
 export default tseslint.config(
+  gitignore({
+    root: true,
+  }),
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
-    ignores: ['node_models', 'dist', 'build'],
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
     rules: {
       ...pluginJs.configs.recommended.rules,
@@ -32,13 +34,28 @@ export default tseslint.config(
   {
     ...pluginReact.configs.flat.recommended,
     files: ['**/*.{js,ts,jsx,tsx}'],
+    settings: {
+      react: {
+        version: 'detect', // Automatically detect the React version
+      },
+    },
     rules: {
       ...pluginReact.configs.flat.recommended.rules,
       'react/react-in-jsx-scope': 'off', // Not needed with React 17+
     },
   },
 
-  ...compat.config({
-    extends: ['next'],
-  }),
+  ...compat
+    .config({
+      extends: ['next'],
+      settings: {
+        next: {
+          rootDir: 'sites/*',
+        },
+      },
+    })
+    .map((config) => ({
+      ...config,
+      files: ['sites/**/**/*.{js,jsx,ts,tsx}'],
+    })),
 );

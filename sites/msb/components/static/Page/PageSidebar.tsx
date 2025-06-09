@@ -13,6 +13,7 @@ import { PageSection } from './PageSection';
 import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import Link from 'next/link';
 import { PageConfig, PageMerged, Trail } from '@msb/js-sdk/types';
+import Image from 'next/image';
 
 export function PageSidebar({
   page,
@@ -39,10 +40,13 @@ export function PageSidebar({
             <CardHeader>
               <div className="flex items-center justify-between gap-4">
                 <CardTitle>{page.memberName}</CardTitle>
-                {page.photo && (
-                  <img
-                    src={page.photo?.file?.url}
+                {page.photo?.file?.url && (
+                  <Image
+                    src={page.photo.file.url}
                     className="rounded-full size-20"
+                    alt={page.memberName}
+                    width={80}
+                    height={80}
                   />
                 )}
               </div>
