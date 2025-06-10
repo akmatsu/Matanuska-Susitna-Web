@@ -25,6 +25,7 @@ const nextConfig = {
     remotePatterns: [
       new URL('https://d1159zutbdy4l.cloudfront.net/**'),
       new URL('https://images.matsu.gov/**'),
+      new URL('https://msb-cms-documents.s3.us-west-2.amazonaws.com/**'),
     ],
   },
 };
