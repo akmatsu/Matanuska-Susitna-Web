@@ -1,3 +1,10 @@
+## [0.9.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.9.0...v0.9.1) (2025-06-10)
+
+
+### Bug Fixes
+
+* fixed assemply member photos not loading ([5367334](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/536733427f48baf8ce1a233392e8d6d81fd8dfd5))
+
 # [0.9.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.8.0...v0.9.0) (2025-06-09)
 
 
