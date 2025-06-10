@@ -1,3 +1,10 @@
+## [0.9.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.9.1...v0.9.2) (2025-06-10)
+
+
+### Bug Fixes
+
+* internal links with no target no longer cause server errors ([dd206ff](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/dd206ff40c3b42616e38247bfe2c3adcf7f77c28))
+
 ## [0.9.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.9.0...v0.9.1) (2025-06-10)
 
 
