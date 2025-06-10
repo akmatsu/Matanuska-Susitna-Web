@@ -12,7 +12,7 @@ export function Tooltip({
   anchor?: 'top' | 'bottom' | 'left' | 'right';
 }) {
   return (
-    <div className="relative inline-block group">
+    <span className="relative inline-block group">
       {children}
       <div
         className={clsx(
@@ -40,6 +40,6 @@ export function Tooltip({
       >
         {content}
       </div>
-    </div>
+    </span>
   );
 }

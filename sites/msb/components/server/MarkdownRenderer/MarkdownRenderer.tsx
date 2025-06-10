@@ -15,18 +15,22 @@ export function MarkdownRenderer(props: { children: string }) {
       components={{
         a: (props: AnchorHTMLAttributes<HTMLAnchorElement>) => {
           const isExternal = props.href?.startsWith('http');
-          return (
-            <Link
-              href={props.href as string}
-              className={`usa-link ${isExternal ? 'usa-link--external' : ''}`}
-              target={isExternal ? '_blank' : '_self'}
-              referrerPolicy={
-                isExternal ? 'no-referrer' : 'strict-origin-when-cross-origin'
-              }
-            >
-              {props.children}
-            </Link>
-          );
+          const isEmail = props.href?.startsWith('mailto:');
+
+          if (!isEmail)
+            return (
+              <Link
+                href={props.href as string}
+                className={`usa-link ${isExternal ? 'usa-link--external' : ''}`}
+                target={isExternal ? '_blank' : '_self'}
+                referrerPolicy={
+                  isExternal ? 'no-referrer' : 'strict-origin-when-cross-origin'
+                }
+              >
+                {props.children}
+              </Link>
+            );
+          else return props.children;
         },
         process: Process,
         step: Step,
