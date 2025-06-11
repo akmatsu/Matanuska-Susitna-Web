@@ -3,6 +3,13 @@
     "service": {
       "name": "msb-cms",
       "url": "http://localhost:3333/api/graphql"
-    }
+    },
+    "excludes": [
+      "**/node_modules",
+      "**/dist",
+      "**/build",
+      "**/graphql/**/*.ts",
+      "**/__tests__"
+    ]
   }
 }
