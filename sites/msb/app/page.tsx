@@ -101,9 +101,10 @@ export default async function Home() {
       <section className="flex justify-center items-center bg-base-lightest py-4 px-2">
         <div className=" max-w-[900px] w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 w-full">
-            {toolBeltItems.map((item) => (
-              <>
-                {item.url && item.title && (
+            {toolBeltItems.map(
+              (item) =>
+                item.url &&
+                item.title && (
                   <Link
                     href={item.url}
                     className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
@@ -116,9 +117,8 @@ export default async function Home() {
                       <span>{item.title}</span>
                     </div>
                   </Link>
-                )}
-              </>
-            ))}
+                ),
+            )}
           </div>
         </div>
       </section>
