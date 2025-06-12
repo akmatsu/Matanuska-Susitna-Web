@@ -23,7 +23,7 @@
     "./hooks/**/*.ts",
     "./utils/**/*.ts",
     ".next/types/**/*.ts",
-    "./next-env.d.ts"
+    "./global.d.ts"
   ],
   "exclude": ["node_modules"]
 }
