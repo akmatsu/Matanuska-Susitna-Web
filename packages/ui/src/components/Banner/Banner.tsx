@@ -44,6 +44,7 @@ export function Banner({
             <span className="icon-[mdi--chevron-down] group-data-open:rotate-180 transition-transform size-4 text-primary align-bottom"></span>
           </span>
         </DisclosureButton>
+
         <DisclosurePanel className="py-6">
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <div className="w-full flex">
