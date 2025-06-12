@@ -2,7 +2,7 @@
   "client": {
     "service": {
       "name": "msb-cms",
-      "url": "http://localhost:3333/graphql/api"
+      "url": "http://localhost:3333/api/graphql"
     },
     "excludes": [
       "**/node_modules",

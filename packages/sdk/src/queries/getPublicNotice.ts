@@ -33,74 +33,13 @@ export const GET_PUBLIC_NOTICE: TypedDocumentNode<
       effectiveDate
       endDate
       contacts {
-        id
-        name
-        title
-        email
-        phone
+        ...ContactFields
       }
       documents {
-        id
-        title
-        file {
-          filename
-          url
-          filesize
-        }
+        ...DocumentFields
       }
       actions {
-        item {
-          __typename
-          ... on Service {
-            id
-            title
-            slug
-            description
-          }
-          ... on Park {
-            id
-            title
-            slug
-            description
-          }
-          ... on Trail {
-            id
-            title
-            slug
-            description
-          }
-          ... on Facility {
-            id
-            title
-            slug
-            description
-          }
-          ... on Community {
-            id
-            title
-            slug
-            description
-          }
-          ... on AssemblyDistrict {
-            id
-            title
-            slug
-            description
-          }
-          ... on OrgUnit {
-            id
-            title
-            slug
-            description
-          }
-          ... on Url {
-            id
-            title
-            description
-            url
-          }
-        }
-        label
+        ...ActionFields
       }
     }
   }

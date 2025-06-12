@@ -37,38 +37,20 @@ export const GET_ORG_UNIT_QUERY: TypedDocumentNode<
       body
       heroImage
       children {
-        id
-        description
-        title
-        slug
+        ...OrgUnitFields
       }
       contacts {
-        id
-        name
-        title
-        email
-        phone
+        ...ContactFields
       }
       parent {
-        id
-        slug
-        title
-        description
+        ...OrgUnitFields
       }
       services {
-        id
-        slug
-        title
-        description
+        ...ServiceFields
       }
     }
     publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
-      id
-      slug
-      title
-      description
-      heroImage
-      urgency
+      ...PublicNoticeFields
     }
   }
 `;

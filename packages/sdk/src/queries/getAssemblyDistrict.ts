@@ -37,22 +37,10 @@ export const GET_ASSEMBLY_DISTRICT_QUERY: TypedDocumentNode<
       slug
       body
       contacts {
-        id
-        name
-        title
-        phone
-        email
+        ...ContactFields
       }
       photo {
-        id
-        title
-        description
-        file {
-          id
-          width
-          height
-          url
-        }
+        ...ImageFields
       }
       memberName
       bio
@@ -65,12 +53,7 @@ export const GET_ASSEMBLY_DISTRICT_QUERY: TypedDocumentNode<
     }
 
     publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
-      id
-      slug
-      title
-      description
-      heroImage
-      urgency
+      ...PublicNoticeFields
     }
   }
 `;

@@ -1,4 +1,4 @@
- 
+/* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -119,6 +119,8 @@ export type AssemblyDistrict = {
   termEnd?: Maybe<Scalars['DateTime']['output']>;
   termStart?: Maybe<Scalars['DateTime']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -212,6 +214,20 @@ export type AssemblyDistrictTagsCountArgs = {
 };
 
 
+export type AssemblyDistrictTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type AssemblyDistrictTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type AssemblyDistrictUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -267,6 +283,7 @@ export type AssemblyDistrictCreateInput = {
   termEnd?: InputMaybe<Scalars['DateTime']['input']>;
   termStart?: InputMaybe<Scalars['DateTime']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -306,6 +323,8 @@ export type AssemblyDistrictDraft = {
   termEnd?: Maybe<Scalars['DateTime']['output']>;
   termStart?: Maybe<Scalars['DateTime']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -383,6 +402,20 @@ export type AssemblyDistrictDraftTagsCountArgs = {
 };
 
 
+export type AssemblyDistrictDraftTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type AssemblyDistrictDraftTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type AssemblyDistrictDraftUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -421,6 +454,7 @@ export type AssemblyDistrictDraftCreateInput = {
   termEnd?: InputMaybe<Scalars['DateTime']['input']>;
   termStart?: InputMaybe<Scalars['DateTime']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -496,6 +530,7 @@ export type AssemblyDistrictDraftUpdateInput = {
   termEnd?: InputMaybe<Scalars['DateTime']['input']>;
   termStart?: InputMaybe<Scalars['DateTime']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -528,6 +563,7 @@ export type AssemblyDistrictDraftWhereInput = {
   termEnd?: InputMaybe<DateTimeNullableFilter>;
   termStart?: InputMaybe<DateTimeNullableFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -623,6 +659,7 @@ export type AssemblyDistrictUpdateInput = {
   termEnd?: InputMaybe<Scalars['DateTime']['input']>;
   termStart?: InputMaybe<Scalars['DateTime']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -663,6 +700,8 @@ export type AssemblyDistrictVersion = {
   termEnd?: Maybe<Scalars['DateTime']['output']>;
   termStart?: Maybe<Scalars['DateTime']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -740,6 +779,20 @@ export type AssemblyDistrictVersionTagsCountArgs = {
 };
 
 
+export type AssemblyDistrictVersionTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type AssemblyDistrictVersionTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type AssemblyDistrictVersionUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -779,6 +832,7 @@ export type AssemblyDistrictVersionCreateInput = {
   termEnd?: InputMaybe<Scalars['DateTime']['input']>;
   termStart?: InputMaybe<Scalars['DateTime']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -866,6 +920,7 @@ export type AssemblyDistrictVersionUpdateInput = {
   termEnd?: InputMaybe<Scalars['DateTime']['input']>;
   termStart?: InputMaybe<Scalars['DateTime']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -899,6 +954,7 @@ export type AssemblyDistrictVersionWhereInput = {
   termEnd?: InputMaybe<DateTimeNullableFilter>;
   termStart?: InputMaybe<DateTimeNullableFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -939,6 +995,7 @@ export type AssemblyDistrictWhereInput = {
   termEnd?: InputMaybe<DateTimeNullableFilter>;
   termStart?: InputMaybe<DateTimeNullableFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -992,6 +1049,8 @@ export type Board = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   type?: Maybe<Scalars['String']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1100,6 +1159,20 @@ export type BoardTagsCountArgs = {
 };
 
 
+export type BoardTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type BoardTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type BoardUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -1152,6 +1225,7 @@ export type BoardCreateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   type?: InputMaybe<Scalars['String']['input']>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1190,6 +1264,8 @@ export type BoardDraft = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   type?: Maybe<Scalars['String']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1282,6 +1358,20 @@ export type BoardDraftTagsCountArgs = {
 };
 
 
+export type BoardDraftTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type BoardDraftTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type BoardDraftUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -1317,6 +1407,7 @@ export type BoardDraftCreateInput = {
   reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   type?: InputMaybe<Scalars['String']['input']>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1385,6 +1476,7 @@ export type BoardDraftUpdateInput = {
   reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   type?: InputMaybe<Scalars['String']['input']>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1415,6 +1507,7 @@ export type BoardDraftWhereInput = {
   reviewDate?: InputMaybe<DateTimeNullableFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   type?: InputMaybe<StringFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -1633,6 +1726,7 @@ export type BoardUpdateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   type?: InputMaybe<Scalars['String']['input']>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1672,6 +1766,8 @@ export type BoardVersion = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   type?: Maybe<Scalars['String']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1764,6 +1860,20 @@ export type BoardVersionTagsCountArgs = {
 };
 
 
+export type BoardVersionTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type BoardVersionTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type BoardVersionUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -1800,6 +1910,7 @@ export type BoardVersionCreateInput = {
   reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   type?: InputMaybe<Scalars['String']['input']>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1880,6 +1991,7 @@ export type BoardVersionUpdateInput = {
   reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   type?: InputMaybe<Scalars['String']['input']>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1911,6 +2023,7 @@ export type BoardVersionWhereInput = {
   reviewDate?: InputMaybe<DateTimeNullableFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   type?: InputMaybe<StringFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -1949,6 +2062,7 @@ export type BoardWhereInput = {
   status?: InputMaybe<StringFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   type?: InputMaybe<StringFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -2000,6 +2114,8 @@ export type Community = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -2121,6 +2237,20 @@ export type CommunityTagsCountArgs = {
 };
 
 
+export type CommunityTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type CommunityTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type CommunityUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -2169,6 +2299,7 @@ export type CommunityCreateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -2203,6 +2334,8 @@ export type CommunityDraft = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -2308,6 +2441,20 @@ export type CommunityDraftTagsCountArgs = {
 };
 
 
+export type CommunityDraftTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type CommunityDraftTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type CommunityDraftUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -2339,6 +2486,7 @@ export type CommunityDraftCreateInput = {
   services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -2399,6 +2547,7 @@ export type CommunityDraftUpdateInput = {
   services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -2424,6 +2573,7 @@ export type CommunityDraftWhereInput = {
   services?: InputMaybe<ServiceManyRelationFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -2504,6 +2654,7 @@ export type CommunityUpdateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -2539,6 +2690,8 @@ export type CommunityVersion = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -2644,6 +2797,20 @@ export type CommunityVersionTagsCountArgs = {
 };
 
 
+export type CommunityVersionTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type CommunityVersionTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type CommunityVersionUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -2676,6 +2843,7 @@ export type CommunityVersionCreateInput = {
   services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -2748,6 +2916,7 @@ export type CommunityVersionUpdateInput = {
   services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -2774,6 +2943,7 @@ export type CommunityVersionWhereInput = {
   services?: InputMaybe<ServiceManyRelationFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -2807,6 +2977,7 @@ export type CommunityWhereInput = {
   status?: InputMaybe<StringFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -3257,6 +3428,8 @@ export type Facility = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -3364,6 +3537,20 @@ export type FacilityTagsCountArgs = {
 };
 
 
+export type FacilityTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type FacilityTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type FacilityUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -3413,6 +3600,7 @@ export type FacilityCreateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -3447,6 +3635,8 @@ export type FacilityDraft = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -3538,6 +3728,20 @@ export type FacilityDraftTagsCountArgs = {
 };
 
 
+export type FacilityDraftTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type FacilityDraftTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type FacilityDraftUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -3570,6 +3774,7 @@ export type FacilityDraftCreateInput = {
   services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -3631,6 +3836,7 @@ export type FacilityDraftUpdateInput = {
   services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -3657,6 +3863,7 @@ export type FacilityDraftWhereInput = {
   services?: InputMaybe<ServiceManyRelationFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -3738,6 +3945,7 @@ export type FacilityUpdateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -3773,6 +3981,8 @@ export type FacilityVersion = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -3864,6 +4074,20 @@ export type FacilityVersionTagsCountArgs = {
 };
 
 
+export type FacilityVersionTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type FacilityVersionTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type FacilityVersionUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -3897,6 +4121,7 @@ export type FacilityVersionCreateInput = {
   services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -3970,6 +4195,7 @@ export type FacilityVersionUpdateInput = {
   services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -3997,6 +4223,7 @@ export type FacilityVersionWhereInput = {
   services?: InputMaybe<ServiceManyRelationFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -4031,6 +4258,7 @@ export type FacilityWhereInput = {
   status?: InputMaybe<StringFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -4077,6 +4305,12 @@ export type HighlightCreateInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
+export type HighlightManyRelationFilter = {
+  every?: InputMaybe<HighlightWhereInput>;
+  none?: InputMaybe<HighlightWhereInput>;
+  some?: InputMaybe<HighlightWhereInput>;
+};
+
 export type HighlightOrderByInput = {
   createdAt?: InputMaybe<OrderDirection>;
   editorNotes?: InputMaybe<OrderDirection>;
@@ -4085,6 +4319,18 @@ export type HighlightOrderByInput = {
   message?: InputMaybe<OrderDirection>;
   title?: InputMaybe<OrderDirection>;
   updatedAt?: InputMaybe<OrderDirection>;
+};
+
+export type HighlightRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<HighlightWhereUniqueInput>>;
+  create?: InputMaybe<Array<HighlightCreateInput>>;
+};
+
+export type HighlightRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<HighlightWhereUniqueInput>>;
+  create?: InputMaybe<Array<HighlightCreateInput>>;
+  disconnect?: InputMaybe<Array<HighlightWhereUniqueInput>>;
+  set?: InputMaybe<Array<HighlightWhereUniqueInput>>;
 };
 
 export type HighlightRelateToOneForCreateInput = {
@@ -4723,6 +4969,12 @@ export type Mutation = {
   createServices?: Maybe<Array<Maybe<Service>>>;
   createTag?: Maybe<Tag>;
   createTags?: Maybe<Array<Maybe<Tag>>>;
+  createTopic?: Maybe<Topic>;
+  createTopicDraft?: Maybe<TopicDraft>;
+  createTopicDrafts?: Maybe<Array<Maybe<TopicDraft>>>;
+  createTopicVersion?: Maybe<TopicVersion>;
+  createTopicVersions?: Maybe<Array<Maybe<TopicVersion>>>;
+  createTopics?: Maybe<Array<Maybe<Topic>>>;
   createTrail?: Maybe<Trail>;
   createTrailDraft?: Maybe<TrailDraft>;
   createTrailDrafts?: Maybe<Array<Maybe<TrailDraft>>>;
@@ -4809,6 +5061,12 @@ export type Mutation = {
   deleteServices?: Maybe<Array<Maybe<Service>>>;
   deleteTag?: Maybe<Tag>;
   deleteTags?: Maybe<Array<Maybe<Tag>>>;
+  deleteTopic?: Maybe<Topic>;
+  deleteTopicDraft?: Maybe<TopicDraft>;
+  deleteTopicDrafts?: Maybe<Array<Maybe<TopicDraft>>>;
+  deleteTopicVersion?: Maybe<TopicVersion>;
+  deleteTopicVersions?: Maybe<Array<Maybe<TopicVersion>>>;
+  deleteTopics?: Maybe<Array<Maybe<Topic>>>;
   deleteTrail?: Maybe<Trail>;
   deleteTrailDraft?: Maybe<TrailDraft>;
   deleteTrailDrafts?: Maybe<Array<Maybe<TrailDraft>>>;
@@ -4896,6 +5154,12 @@ export type Mutation = {
   updateServices?: Maybe<Array<Maybe<Service>>>;
   updateTag?: Maybe<Tag>;
   updateTags?: Maybe<Array<Maybe<Tag>>>;
+  updateTopic?: Maybe<Topic>;
+  updateTopicDraft?: Maybe<TopicDraft>;
+  updateTopicDrafts?: Maybe<Array<Maybe<TopicDraft>>>;
+  updateTopicVersion?: Maybe<TopicVersion>;
+  updateTopicVersions?: Maybe<Array<Maybe<TopicVersion>>>;
+  updateTopics?: Maybe<Array<Maybe<Topic>>>;
   updateTrail?: Maybe<Trail>;
   updateTrailDraft?: Maybe<TrailDraft>;
   updateTrailDrafts?: Maybe<Array<Maybe<TrailDraft>>>;
@@ -5278,6 +5542,36 @@ export type MutationCreateTagArgs = {
 
 export type MutationCreateTagsArgs = {
   data: Array<TagCreateInput>;
+};
+
+
+export type MutationCreateTopicArgs = {
+  data: TopicCreateInput;
+};
+
+
+export type MutationCreateTopicDraftArgs = {
+  data: TopicDraftCreateInput;
+};
+
+
+export type MutationCreateTopicDraftsArgs = {
+  data: Array<TopicDraftCreateInput>;
+};
+
+
+export type MutationCreateTopicVersionArgs = {
+  data: TopicVersionCreateInput;
+};
+
+
+export type MutationCreateTopicVersionsArgs = {
+  data: Array<TopicVersionCreateInput>;
+};
+
+
+export type MutationCreateTopicsArgs = {
+  data: Array<TopicCreateInput>;
 };
 
 
@@ -5708,6 +6002,36 @@ export type MutationDeleteTagArgs = {
 
 export type MutationDeleteTagsArgs = {
   where: Array<TagWhereUniqueInput>;
+};
+
+
+export type MutationDeleteTopicArgs = {
+  where: TopicWhereUniqueInput;
+};
+
+
+export type MutationDeleteTopicDraftArgs = {
+  where: TopicDraftWhereUniqueInput;
+};
+
+
+export type MutationDeleteTopicDraftsArgs = {
+  where: Array<TopicDraftWhereUniqueInput>;
+};
+
+
+export type MutationDeleteTopicVersionArgs = {
+  where: TopicVersionWhereUniqueInput;
+};
+
+
+export type MutationDeleteTopicVersionsArgs = {
+  where: Array<TopicVersionWhereUniqueInput>;
+};
+
+
+export type MutationDeleteTopicsArgs = {
+  where: Array<TopicWhereUniqueInput>;
 };
 
 
@@ -6178,6 +6502,39 @@ export type MutationUpdateTagsArgs = {
 };
 
 
+export type MutationUpdateTopicArgs = {
+  data: TopicUpdateInput;
+  where: TopicWhereUniqueInput;
+};
+
+
+export type MutationUpdateTopicDraftArgs = {
+  data: TopicDraftUpdateInput;
+  where: TopicDraftWhereUniqueInput;
+};
+
+
+export type MutationUpdateTopicDraftsArgs = {
+  data: Array<TopicDraftUpdateArgs>;
+};
+
+
+export type MutationUpdateTopicVersionArgs = {
+  data: TopicVersionUpdateInput;
+  where: TopicVersionWhereUniqueInput;
+};
+
+
+export type MutationUpdateTopicVersionsArgs = {
+  data: Array<TopicVersionUpdateArgs>;
+};
+
+
+export type MutationUpdateTopicsArgs = {
+  data: Array<TopicUpdateArgs>;
+};
+
+
 export type MutationUpdateTrailArgs = {
   data: TrailUpdateInput;
   where: TrailWhereUniqueInput;
@@ -6389,13 +6746,16 @@ export type OrgUnit = {
   parent?: Maybe<OrgUnit>;
   publishAt?: Maybe<Scalars['DateTime']['output']>;
   reviewDate?: Maybe<Scalars['DateTime']['output']>;
-  services?: Maybe<Service>;
+  services?: Maybe<Array<Service>>;
+  servicesCount?: Maybe<Scalars['Int']['output']>;
   showPage?: Maybe<Scalars['Boolean']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Scalars['String']['output']>;
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -6475,6 +6835,20 @@ export type OrgUnitDraftsCountArgs = {
 };
 
 
+export type OrgUnitServicesArgs = {
+  cursor?: InputMaybe<ServiceWhereUniqueInput>;
+  orderBy?: Array<ServiceOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: ServiceWhereInput;
+};
+
+
+export type OrgUnitServicesCountArgs = {
+  where?: ServiceWhereInput;
+};
+
+
 export type OrgUnitTagsArgs = {
   cursor?: InputMaybe<TagWhereUniqueInput>;
   orderBy?: Array<TagOrderByInput>;
@@ -6486,6 +6860,20 @@ export type OrgUnitTagsArgs = {
 
 export type OrgUnitTagsCountArgs = {
   where?: TagWhereInput;
+};
+
+
+export type OrgUnitTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type OrgUnitTopicsCountArgs = {
+  where?: TopicWhereInput;
 };
 
 
@@ -6532,12 +6920,13 @@ export type OrgUnitCreateInput = {
   parent?: InputMaybe<OrgUnitRelateToOneForCreateInput>;
   publishAt?: InputMaybe<Scalars['DateTime']['input']>;
   reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
-  services?: InputMaybe<ServiceRelateToOneForCreateInput>;
+  services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   showPage?: InputMaybe<Scalars['Boolean']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -6566,11 +6955,14 @@ export type OrgUnitDraft = {
   publish?: Maybe<Scalars['String']['output']>;
   publishAt?: Maybe<Scalars['DateTime']['output']>;
   reviewDate?: Maybe<Scalars['DateTime']['output']>;
-  services?: Maybe<Service>;
+  services?: Maybe<Array<Service>>;
+  servicesCount?: Maybe<Scalars['Int']['output']>;
   showPage?: Maybe<Scalars['Boolean']['output']>;
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -6634,6 +7026,20 @@ export type OrgUnitDraftDocumentsCountArgs = {
 };
 
 
+export type OrgUnitDraftServicesArgs = {
+  cursor?: InputMaybe<ServiceWhereUniqueInput>;
+  orderBy?: Array<ServiceOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: ServiceWhereInput;
+};
+
+
+export type OrgUnitDraftServicesCountArgs = {
+  where?: ServiceWhereInput;
+};
+
+
 export type OrgUnitDraftTagsArgs = {
   cursor?: InputMaybe<TagWhereUniqueInput>;
   orderBy?: Array<TagOrderByInput>;
@@ -6645,6 +7051,20 @@ export type OrgUnitDraftTagsArgs = {
 
 export type OrgUnitDraftTagsCountArgs = {
   where?: TagWhereInput;
+};
+
+
+export type OrgUnitDraftTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type OrgUnitDraftTopicsCountArgs = {
+  where?: TopicWhereInput;
 };
 
 
@@ -6676,10 +7096,11 @@ export type OrgUnitDraftCreateInput = {
   publish?: InputMaybe<Scalars['String']['input']>;
   publishAt?: InputMaybe<Scalars['DateTime']['input']>;
   reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
-  services?: InputMaybe<ServiceRelateToOneForCreateInput>;
+  services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   showPage?: InputMaybe<Scalars['Boolean']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -6738,10 +7159,11 @@ export type OrgUnitDraftUpdateInput = {
   publish?: InputMaybe<Scalars['String']['input']>;
   publishAt?: InputMaybe<Scalars['DateTime']['input']>;
   reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
-  services?: InputMaybe<ServiceRelateToOneForUpdateInput>;
+  services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   showPage?: InputMaybe<Scalars['Boolean']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -6764,10 +7186,11 @@ export type OrgUnitDraftWhereInput = {
   parent?: InputMaybe<OrgUnitWhereInput>;
   publishAt?: InputMaybe<DateTimeNullableFilter>;
   reviewDate?: InputMaybe<DateTimeNullableFilter>;
-  services?: InputMaybe<ServiceWhereInput>;
+  services?: InputMaybe<ServiceManyRelationFilter>;
   showPage?: InputMaybe<BooleanFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -6844,12 +7267,13 @@ export type OrgUnitUpdateInput = {
   parent?: InputMaybe<OrgUnitRelateToOneForUpdateInput>;
   publishAt?: InputMaybe<Scalars['DateTime']['input']>;
   reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
-  services?: InputMaybe<ServiceRelateToOneForUpdateInput>;
+  services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   showPage?: InputMaybe<Scalars['Boolean']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -6879,11 +7303,14 @@ export type OrgUnitVersion = {
   publishAt?: Maybe<Scalars['DateTime']['output']>;
   republish?: Maybe<Scalars['String']['output']>;
   reviewDate?: Maybe<Scalars['DateTime']['output']>;
-  services?: Maybe<Service>;
+  services?: Maybe<Array<Service>>;
+  servicesCount?: Maybe<Scalars['Int']['output']>;
   showPage?: Maybe<Scalars['Boolean']['output']>;
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -6947,6 +7374,20 @@ export type OrgUnitVersionDocumentsCountArgs = {
 };
 
 
+export type OrgUnitVersionServicesArgs = {
+  cursor?: InputMaybe<ServiceWhereUniqueInput>;
+  orderBy?: Array<ServiceOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: ServiceWhereInput;
+};
+
+
+export type OrgUnitVersionServicesCountArgs = {
+  where?: ServiceWhereInput;
+};
+
+
 export type OrgUnitVersionTagsArgs = {
   cursor?: InputMaybe<TagWhereUniqueInput>;
   orderBy?: Array<TagOrderByInput>;
@@ -6958,6 +7399,20 @@ export type OrgUnitVersionTagsArgs = {
 
 export type OrgUnitVersionTagsCountArgs = {
   where?: TagWhereInput;
+};
+
+
+export type OrgUnitVersionTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type OrgUnitVersionTopicsCountArgs = {
+  where?: TopicWhereInput;
 };
 
 
@@ -6990,10 +7445,11 @@ export type OrgUnitVersionCreateInput = {
   publishAt?: InputMaybe<Scalars['DateTime']['input']>;
   republish?: InputMaybe<Scalars['String']['input']>;
   reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
-  services?: InputMaybe<ServiceRelateToOneForCreateInput>;
+  services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   showPage?: InputMaybe<Scalars['Boolean']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -7064,10 +7520,11 @@ export type OrgUnitVersionUpdateInput = {
   publishAt?: InputMaybe<Scalars['DateTime']['input']>;
   republish?: InputMaybe<Scalars['String']['input']>;
   reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
-  services?: InputMaybe<ServiceRelateToOneForUpdateInput>;
+  services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   showPage?: InputMaybe<Scalars['Boolean']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -7091,10 +7548,11 @@ export type OrgUnitVersionWhereInput = {
   parent?: InputMaybe<OrgUnitWhereInput>;
   publishAt?: InputMaybe<DateTimeNullableFilter>;
   reviewDate?: InputMaybe<DateTimeNullableFilter>;
-  services?: InputMaybe<ServiceWhereInput>;
+  services?: InputMaybe<ServiceManyRelationFilter>;
   showPage?: InputMaybe<BooleanFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -7123,12 +7581,13 @@ export type OrgUnitWhereInput = {
   parent?: InputMaybe<OrgUnitWhereInput>;
   publishAt?: InputMaybe<DateTimeNullableFilter>;
   reviewDate?: InputMaybe<DateTimeNullableFilter>;
-  services?: InputMaybe<ServiceWhereInput>;
+  services?: InputMaybe<ServiceManyRelationFilter>;
   showPage?: InputMaybe<BooleanFilter>;
   slug?: InputMaybe<StringFilter>;
   status?: InputMaybe<StringFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -7175,6 +7634,8 @@ export type Park = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   trails?: Maybe<Array<Trail>>;
   trailsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
@@ -7298,6 +7759,20 @@ export type ParkTagsCountArgs = {
 };
 
 
+export type ParkTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type ParkTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type ParkTrailsArgs = {
   cursor?: InputMaybe<TrailWhereUniqueInput>;
   orderBy?: Array<TrailOrderByInput>;
@@ -7361,6 +7836,7 @@ export type ParkCreateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   trails?: InputMaybe<TrailRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -7397,6 +7873,8 @@ export type ParkDraft = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   trails?: Maybe<Array<Trail>>;
   trailsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
@@ -7504,6 +7982,20 @@ export type ParkDraftTagsCountArgs = {
 };
 
 
+export type ParkDraftTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type ParkDraftTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type ParkDraftTrailsArgs = {
   cursor?: InputMaybe<TrailWhereUniqueInput>;
   orderBy?: Array<TrailOrderByInput>;
@@ -7550,6 +8042,7 @@ export type ParkDraftCreateInput = {
   services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   trails?: InputMaybe<TrailRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -7612,6 +8105,7 @@ export type ParkDraftUpdateInput = {
   services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -7639,6 +8133,7 @@ export type ParkDraftWhereInput = {
   services?: InputMaybe<ServiceManyRelationFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   trails?: InputMaybe<TrailManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -7721,6 +8216,7 @@ export type ParkUpdateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -7758,6 +8254,8 @@ export type ParkVersion = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   trails?: Maybe<Array<Trail>>;
   trailsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
@@ -7865,6 +8363,20 @@ export type ParkVersionTagsCountArgs = {
 };
 
 
+export type ParkVersionTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type ParkVersionTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type ParkVersionTrailsArgs = {
   cursor?: InputMaybe<TrailWhereUniqueInput>;
   orderBy?: Array<TrailOrderByInput>;
@@ -7912,6 +8424,7 @@ export type ParkVersionCreateInput = {
   services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   trails?: InputMaybe<TrailRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -7986,6 +8499,7 @@ export type ParkVersionUpdateInput = {
   services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -8014,6 +8528,7 @@ export type ParkVersionWhereInput = {
   services?: InputMaybe<ServiceManyRelationFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   trails?: InputMaybe<TrailManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -8049,6 +8564,7 @@ export type ParkWhereInput = {
   status?: InputMaybe<StringFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   trails?: InputMaybe<TrailManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -8112,6 +8628,8 @@ export type PublicNotice = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   trails?: Maybe<Array<Trail>>;
   trailsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
@@ -8278,6 +8796,20 @@ export type PublicNoticeTagsCountArgs = {
 };
 
 
+export type PublicNoticeTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type PublicNoticeTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type PublicNoticeTrailsArgs = {
   cursor?: InputMaybe<TrailWhereUniqueInput>;
   orderBy?: Array<TrailOrderByInput>;
@@ -8345,6 +8877,7 @@ export type PublicNoticeCreateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   trails?: InputMaybe<TrailRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -8389,6 +8922,8 @@ export type PublicNoticeDraft = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   trails?: Maybe<Array<Trail>>;
   trailsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
@@ -8539,6 +9074,20 @@ export type PublicNoticeDraftTagsCountArgs = {
 };
 
 
+export type PublicNoticeDraftTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type PublicNoticeDraftTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type PublicNoticeDraftTrailsArgs = {
   cursor?: InputMaybe<TrailWhereUniqueInput>;
   orderBy?: Array<TrailOrderByInput>;
@@ -8589,6 +9138,7 @@ export type PublicNoticeDraftCreateInput = {
   services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   trails?: InputMaybe<TrailRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -8659,6 +9209,7 @@ export type PublicNoticeDraftUpdateInput = {
   services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -8691,6 +9242,7 @@ export type PublicNoticeDraftWhereInput = {
   services?: InputMaybe<ServiceManyRelationFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   trails?: InputMaybe<TrailManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -8700,6 +9252,12 @@ export type PublicNoticeDraftWhereInput = {
 
 export type PublicNoticeDraftWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type PublicNoticeManyRelationFilter = {
+  every?: InputMaybe<PublicNoticeWhereInput>;
+  none?: InputMaybe<PublicNoticeWhereInput>;
+  some?: InputMaybe<PublicNoticeWhereInput>;
 };
 
 export type PublicNoticeOrderByInput = {
@@ -8719,6 +9277,18 @@ export type PublicNoticeOrderByInput = {
   unpublishAt?: InputMaybe<OrderDirection>;
   updatedAt?: InputMaybe<OrderDirection>;
   urgency?: InputMaybe<OrderDirection>;
+};
+
+export type PublicNoticeRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<PublicNoticeWhereUniqueInput>>;
+  create?: InputMaybe<Array<PublicNoticeCreateInput>>;
+};
+
+export type PublicNoticeRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<PublicNoticeWhereUniqueInput>>;
+  create?: InputMaybe<Array<PublicNoticeCreateInput>>;
+  disconnect?: InputMaybe<Array<PublicNoticeWhereUniqueInput>>;
+  set?: InputMaybe<Array<PublicNoticeWhereUniqueInput>>;
 };
 
 export type PublicNoticeRelateToOneForCreateInput = {
@@ -8763,6 +9333,7 @@ export type PublicNoticeUpdateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -8808,6 +9379,8 @@ export type PublicNoticeVersion = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   trails?: Maybe<Array<Trail>>;
   trailsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
@@ -8958,6 +9531,20 @@ export type PublicNoticeVersionTagsCountArgs = {
 };
 
 
+export type PublicNoticeVersionTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type PublicNoticeVersionTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type PublicNoticeVersionTrailsArgs = {
   cursor?: InputMaybe<TrailWhereUniqueInput>;
   orderBy?: Array<TrailOrderByInput>;
@@ -9009,6 +9596,7 @@ export type PublicNoticeVersionCreateInput = {
   services?: InputMaybe<ServiceRelateToManyForCreateInput>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   trails?: InputMaybe<TrailRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -9091,6 +9679,7 @@ export type PublicNoticeVersionUpdateInput = {
   services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -9124,6 +9713,7 @@ export type PublicNoticeVersionWhereInput = {
   services?: InputMaybe<ServiceManyRelationFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   trails?: InputMaybe<TrailManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -9164,6 +9754,7 @@ export type PublicNoticeWhereInput = {
   status?: InputMaybe<StringFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   trails?: InputMaybe<TrailManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -9235,7 +9826,7 @@ export type Query = {
   facilityVersion?: Maybe<FacilityVersion>;
   facilityVersions?: Maybe<Array<FacilityVersion>>;
   facilityVersionsCount?: Maybe<Scalars['Int']['output']>;
-  getInternalLink: InternalLinkSearch;
+  getInternalLink?: Maybe<InternalLinkSearch>;
   highlight?: Maybe<Highlight>;
   highlights?: Maybe<Array<Highlight>>;
   highlightsCount?: Maybe<Scalars['Int']['output']>;
@@ -9248,7 +9839,7 @@ export type Query = {
   internalLink?: Maybe<InternalLink>;
   internalLinks?: Maybe<Array<InternalLink>>;
   internalLinksCount?: Maybe<Scalars['Int']['output']>;
-  internalSearch: Array<InternalLinkSearch>;
+  internalSearch?: Maybe<Array<Maybe<InternalLinkSearch>>>;
   keystone: KeystoneMeta;
   location?: Maybe<Location>;
   locations?: Maybe<Array<Location>>;
@@ -9295,6 +9886,15 @@ export type Query = {
   tag?: Maybe<Tag>;
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
+  topic?: Maybe<Topic>;
+  topicDraft?: Maybe<TopicDraft>;
+  topicDrafts?: Maybe<Array<TopicDraft>>;
+  topicDraftsCount?: Maybe<Scalars['Int']['output']>;
+  topicVersion?: Maybe<TopicVersion>;
+  topicVersions?: Maybe<Array<TopicVersion>>;
+  topicVersionsCount?: Maybe<Scalars['Int']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   trail?: Maybe<Trail>;
   trailDraft?: Maybe<TrailDraft>;
   trailDrafts?: Maybe<Array<TrailDraft>>;
@@ -10030,6 +10630,63 @@ export type QueryTagsCountArgs = {
 };
 
 
+export type QueryTopicArgs = {
+  where: TopicWhereUniqueInput;
+};
+
+
+export type QueryTopicDraftArgs = {
+  where: TopicDraftWhereUniqueInput;
+};
+
+
+export type QueryTopicDraftsArgs = {
+  cursor?: InputMaybe<TopicDraftWhereUniqueInput>;
+  orderBy?: Array<TopicDraftOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicDraftWhereInput;
+};
+
+
+export type QueryTopicDraftsCountArgs = {
+  where?: TopicDraftWhereInput;
+};
+
+
+export type QueryTopicVersionArgs = {
+  where: TopicVersionWhereUniqueInput;
+};
+
+
+export type QueryTopicVersionsArgs = {
+  cursor?: InputMaybe<TopicVersionWhereUniqueInput>;
+  orderBy?: Array<TopicVersionOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicVersionWhereInput;
+};
+
+
+export type QueryTopicVersionsCountArgs = {
+  where?: TopicVersionWhereInput;
+};
+
+
+export type QueryTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type QueryTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type QueryTrailArgs = {
   where: TrailWhereUniqueInput;
 };
@@ -10185,6 +10842,8 @@ export type Service = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   trails?: Maybe<Array<Trail>>;
   trailsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
@@ -10322,6 +10981,20 @@ export type ServiceTagsCountArgs = {
 };
 
 
+export type ServiceTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type ServiceTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type ServiceTrailsArgs = {
   cursor?: InputMaybe<TrailWhereUniqueInput>;
   orderBy?: Array<TrailOrderByInput>;
@@ -10388,6 +11061,7 @@ export type ServiceCreateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   trails?: InputMaybe<TrailRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10428,6 +11102,8 @@ export type ServiceDraft = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   trails?: Maybe<Array<Trail>>;
   trailsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
@@ -10549,6 +11225,20 @@ export type ServiceDraftTagsCountArgs = {
 };
 
 
+export type ServiceDraftTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type ServiceDraftTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type ServiceDraftTrailsArgs = {
   cursor?: InputMaybe<TrailWhereUniqueInput>;
   orderBy?: Array<TrailOrderByInput>;
@@ -10598,6 +11288,7 @@ export type ServiceDraftCreateInput = {
   secondaryActions?: InputMaybe<ExternalLinkRelateToManyForCreateInput>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   trails?: InputMaybe<TrailRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10664,6 +11355,7 @@ export type ServiceDraftUpdateInput = {
   secondaryActions?: InputMaybe<ExternalLinkRelateToManyForUpdateInput>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10694,6 +11386,7 @@ export type ServiceDraftWhereInput = {
   secondaryActions?: InputMaybe<ExternalLinkManyRelationFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   trails?: InputMaybe<TrailManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -10780,6 +11473,7 @@ export type ServiceUpdateInput = {
   status?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -10821,6 +11515,8 @@ export type ServiceVersion = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   trails?: Maybe<Array<Trail>>;
   trailsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
@@ -10942,6 +11638,20 @@ export type ServiceVersionTagsCountArgs = {
 };
 
 
+export type ServiceVersionTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type ServiceVersionTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type ServiceVersionTrailsArgs = {
   cursor?: InputMaybe<TrailWhereUniqueInput>;
   orderBy?: Array<TrailOrderByInput>;
@@ -10992,6 +11702,7 @@ export type ServiceVersionCreateInput = {
   secondaryActions?: InputMaybe<ExternalLinkRelateToManyForCreateInput>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   trails?: InputMaybe<TrailRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -11070,6 +11781,7 @@ export type ServiceVersionUpdateInput = {
   secondaryActions?: InputMaybe<ExternalLinkRelateToManyForUpdateInput>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -11101,6 +11813,7 @@ export type ServiceVersionWhereInput = {
   secondaryActions?: InputMaybe<ExternalLinkManyRelationFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   trails?: InputMaybe<TrailManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -11139,6 +11852,7 @@ export type ServiceWhereInput = {
   status?: InputMaybe<StringFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   trails?: InputMaybe<TrailManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
@@ -11237,6 +11951,1257 @@ export type TagWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
+export type Topic = {
+  __typename?: 'Topic';
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
+  boards?: Maybe<Array<Board>>;
+  boardsCount?: Maybe<Scalars['Int']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  communities?: Maybe<Array<Community>>;
+  communitiesCount?: Maybe<Scalars['Int']['output']>;
+  contacts?: Maybe<Array<Contact>>;
+  contactsCount?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  currentVersion?: Maybe<TopicVersion>;
+  description?: Maybe<Scalars['String']['output']>;
+  districts?: Maybe<Array<AssemblyDistrict>>;
+  districtsCount?: Maybe<Scalars['Int']['output']>;
+  documents?: Maybe<Array<Document>>;
+  documentsCount?: Maybe<Scalars['Int']['output']>;
+  drafts?: Maybe<Array<TopicDraft>>;
+  draftsCount?: Maybe<Scalars['Int']['output']>;
+  facilities?: Maybe<Array<Facility>>;
+  facilitiesCount?: Maybe<Scalars['Int']['output']>;
+  heroImage?: Maybe<Scalars['String']['output']>;
+  highlights?: Maybe<Array<Highlight>>;
+  highlightsCount?: Maybe<Scalars['Int']['output']>;
+  id: Scalars['ID']['output'];
+  liveUrl?: Maybe<Scalars['String']['output']>;
+  makeDrafts?: Maybe<Scalars['String']['output']>;
+  orgUnits?: Maybe<Array<OrgUnit>>;
+  orgUnitsCount?: Maybe<Scalars['Int']['output']>;
+  owner?: Maybe<User>;
+  parks?: Maybe<Array<Park>>;
+  parksCount?: Maybe<Scalars['Int']['output']>;
+  publicNotices?: Maybe<Array<PublicNotice>>;
+  publicNoticesCount?: Maybe<Scalars['Int']['output']>;
+  publishAt?: Maybe<Scalars['DateTime']['output']>;
+  reviewDate?: Maybe<Scalars['DateTime']['output']>;
+  services?: Maybe<Array<Service>>;
+  servicesCount?: Maybe<Scalars['Int']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  tags?: Maybe<Array<Tag>>;
+  tagsCount?: Maybe<Scalars['Int']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  trails?: Maybe<Array<Trail>>;
+  trailsCount?: Maybe<Scalars['Int']['output']>;
+  unpublishAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userGroups?: Maybe<Array<UserGroup>>;
+  userGroupsCount?: Maybe<Scalars['Int']['output']>;
+  versions?: Maybe<Array<TopicVersion>>;
+  versionsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type TopicActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type TopicActionsCountArgs = {
+  where?: InternalLinkWhereInput;
+};
+
+
+export type TopicBoardsArgs = {
+  cursor?: InputMaybe<BoardWhereUniqueInput>;
+  orderBy?: Array<BoardOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: BoardWhereInput;
+};
+
+
+export type TopicBoardsCountArgs = {
+  where?: BoardWhereInput;
+};
+
+
+export type TopicCommunitiesArgs = {
+  cursor?: InputMaybe<CommunityWhereUniqueInput>;
+  orderBy?: Array<CommunityOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: CommunityWhereInput;
+};
+
+
+export type TopicCommunitiesCountArgs = {
+  where?: CommunityWhereInput;
+};
+
+
+export type TopicContactsArgs = {
+  cursor?: InputMaybe<ContactWhereUniqueInput>;
+  orderBy?: Array<ContactOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: ContactWhereInput;
+};
+
+
+export type TopicContactsCountArgs = {
+  where?: ContactWhereInput;
+};
+
+
+export type TopicDistrictsArgs = {
+  cursor?: InputMaybe<AssemblyDistrictWhereUniqueInput>;
+  orderBy?: Array<AssemblyDistrictOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: AssemblyDistrictWhereInput;
+};
+
+
+export type TopicDistrictsCountArgs = {
+  where?: AssemblyDistrictWhereInput;
+};
+
+
+export type TopicDocumentsArgs = {
+  cursor?: InputMaybe<DocumentWhereUniqueInput>;
+  orderBy?: Array<DocumentOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: DocumentWhereInput;
+};
+
+
+export type TopicDocumentsCountArgs = {
+  where?: DocumentWhereInput;
+};
+
+
+export type TopicDraftsArgs = {
+  cursor?: InputMaybe<TopicDraftWhereUniqueInput>;
+  orderBy?: Array<TopicDraftOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicDraftWhereInput;
+};
+
+
+export type TopicDraftsCountArgs = {
+  where?: TopicDraftWhereInput;
+};
+
+
+export type TopicFacilitiesArgs = {
+  cursor?: InputMaybe<FacilityWhereUniqueInput>;
+  orderBy?: Array<FacilityOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: FacilityWhereInput;
+};
+
+
+export type TopicFacilitiesCountArgs = {
+  where?: FacilityWhereInput;
+};
+
+
+export type TopicHighlightsArgs = {
+  cursor?: InputMaybe<HighlightWhereUniqueInput>;
+  orderBy?: Array<HighlightOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: HighlightWhereInput;
+};
+
+
+export type TopicHighlightsCountArgs = {
+  where?: HighlightWhereInput;
+};
+
+
+export type TopicOrgUnitsArgs = {
+  cursor?: InputMaybe<OrgUnitWhereUniqueInput>;
+  orderBy?: Array<OrgUnitOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: OrgUnitWhereInput;
+};
+
+
+export type TopicOrgUnitsCountArgs = {
+  where?: OrgUnitWhereInput;
+};
+
+
+export type TopicParksArgs = {
+  cursor?: InputMaybe<ParkWhereUniqueInput>;
+  orderBy?: Array<ParkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: ParkWhereInput;
+};
+
+
+export type TopicParksCountArgs = {
+  where?: ParkWhereInput;
+};
+
+
+export type TopicPublicNoticesArgs = {
+  cursor?: InputMaybe<PublicNoticeWhereUniqueInput>;
+  orderBy?: Array<PublicNoticeOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PublicNoticeWhereInput;
+};
+
+
+export type TopicPublicNoticesCountArgs = {
+  where?: PublicNoticeWhereInput;
+};
+
+
+export type TopicServicesArgs = {
+  cursor?: InputMaybe<ServiceWhereUniqueInput>;
+  orderBy?: Array<ServiceOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: ServiceWhereInput;
+};
+
+
+export type TopicServicesCountArgs = {
+  where?: ServiceWhereInput;
+};
+
+
+export type TopicTagsArgs = {
+  cursor?: InputMaybe<TagWhereUniqueInput>;
+  orderBy?: Array<TagOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TagWhereInput;
+};
+
+
+export type TopicTagsCountArgs = {
+  where?: TagWhereInput;
+};
+
+
+export type TopicTrailsArgs = {
+  cursor?: InputMaybe<TrailWhereUniqueInput>;
+  orderBy?: Array<TrailOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TrailWhereInput;
+};
+
+
+export type TopicTrailsCountArgs = {
+  where?: TrailWhereInput;
+};
+
+
+export type TopicUserGroupsArgs = {
+  cursor?: InputMaybe<UserGroupWhereUniqueInput>;
+  orderBy?: Array<UserGroupOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: UserGroupWhereInput;
+};
+
+
+export type TopicUserGroupsCountArgs = {
+  where?: UserGroupWhereInput;
+};
+
+
+export type TopicVersionsArgs = {
+  cursor?: InputMaybe<TopicVersionWhereUniqueInput>;
+  orderBy?: Array<TopicVersionOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicVersionWhereInput;
+};
+
+
+export type TopicVersionsCountArgs = {
+  where?: TopicVersionWhereInput;
+};
+
+export type TopicCreateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
+  boards?: InputMaybe<BoardRelateToManyForCreateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  communities?: InputMaybe<CommunityRelateToManyForCreateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  currentVersion?: InputMaybe<TopicVersionRelateToOneForCreateInput>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  districts?: InputMaybe<AssemblyDistrictRelateToManyForCreateInput>;
+  documents?: InputMaybe<DocumentRelateToManyForCreateInput>;
+  drafts?: InputMaybe<TopicDraftRelateToManyForCreateInput>;
+  facilities?: InputMaybe<FacilityRelateToManyForCreateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  highlights?: InputMaybe<HighlightRelateToManyForCreateInput>;
+  makeDrafts?: InputMaybe<Scalars['String']['input']>;
+  orgUnits?: InputMaybe<OrgUnitRelateToManyForCreateInput>;
+  owner?: InputMaybe<UserRelateToOneForCreateInput>;
+  parks?: InputMaybe<ParkRelateToManyForCreateInput>;
+  publicNotices?: InputMaybe<PublicNoticeRelateToManyForCreateInput>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  services?: InputMaybe<ServiceRelateToManyForCreateInput>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<TagRelateToManyForCreateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  trails?: InputMaybe<TrailRelateToManyForCreateInput>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
+  versions?: InputMaybe<TopicVersionRelateToManyForCreateInput>;
+};
+
+export type TopicDraft = {
+  __typename?: 'TopicDraft';
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
+  boards?: Maybe<Array<Board>>;
+  boardsCount?: Maybe<Scalars['Int']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  communities?: Maybe<Array<Community>>;
+  communitiesCount?: Maybe<Scalars['Int']['output']>;
+  contacts?: Maybe<Array<Contact>>;
+  contactsCount?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  districts?: Maybe<Array<AssemblyDistrict>>;
+  districtsCount?: Maybe<Scalars['Int']['output']>;
+  documents?: Maybe<Array<Document>>;
+  documentsCount?: Maybe<Scalars['Int']['output']>;
+  facilities?: Maybe<Array<Facility>>;
+  facilitiesCount?: Maybe<Scalars['Int']['output']>;
+  heroImage?: Maybe<Scalars['String']['output']>;
+  highlights?: Maybe<Array<Highlight>>;
+  highlightsCount?: Maybe<Scalars['Int']['output']>;
+  id: Scalars['ID']['output'];
+  liveUrl?: Maybe<Scalars['String']['output']>;
+  orgUnits?: Maybe<Array<OrgUnit>>;
+  orgUnitsCount?: Maybe<Scalars['Int']['output']>;
+  original?: Maybe<Topic>;
+  owner?: Maybe<User>;
+  parks?: Maybe<Array<Park>>;
+  parksCount?: Maybe<Scalars['Int']['output']>;
+  publicNotices?: Maybe<Array<PublicNotice>>;
+  publicNoticesCount?: Maybe<Scalars['Int']['output']>;
+  publish?: Maybe<Scalars['String']['output']>;
+  publishAt?: Maybe<Scalars['DateTime']['output']>;
+  reviewDate?: Maybe<Scalars['DateTime']['output']>;
+  services?: Maybe<Array<Service>>;
+  servicesCount?: Maybe<Scalars['Int']['output']>;
+  tags?: Maybe<Array<Tag>>;
+  tagsCount?: Maybe<Scalars['Int']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  trails?: Maybe<Array<Trail>>;
+  trailsCount?: Maybe<Scalars['Int']['output']>;
+  unpublishAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userGroups?: Maybe<Array<UserGroup>>;
+  userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type TopicDraftActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type TopicDraftActionsCountArgs = {
+  where?: InternalLinkWhereInput;
+};
+
+
+export type TopicDraftBoardsArgs = {
+  cursor?: InputMaybe<BoardWhereUniqueInput>;
+  orderBy?: Array<BoardOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: BoardWhereInput;
+};
+
+
+export type TopicDraftBoardsCountArgs = {
+  where?: BoardWhereInput;
+};
+
+
+export type TopicDraftCommunitiesArgs = {
+  cursor?: InputMaybe<CommunityWhereUniqueInput>;
+  orderBy?: Array<CommunityOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: CommunityWhereInput;
+};
+
+
+export type TopicDraftCommunitiesCountArgs = {
+  where?: CommunityWhereInput;
+};
+
+
+export type TopicDraftContactsArgs = {
+  cursor?: InputMaybe<ContactWhereUniqueInput>;
+  orderBy?: Array<ContactOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: ContactWhereInput;
+};
+
+
+export type TopicDraftContactsCountArgs = {
+  where?: ContactWhereInput;
+};
+
+
+export type TopicDraftDistrictsArgs = {
+  cursor?: InputMaybe<AssemblyDistrictWhereUniqueInput>;
+  orderBy?: Array<AssemblyDistrictOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: AssemblyDistrictWhereInput;
+};
+
+
+export type TopicDraftDistrictsCountArgs = {
+  where?: AssemblyDistrictWhereInput;
+};
+
+
+export type TopicDraftDocumentsArgs = {
+  cursor?: InputMaybe<DocumentWhereUniqueInput>;
+  orderBy?: Array<DocumentOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: DocumentWhereInput;
+};
+
+
+export type TopicDraftDocumentsCountArgs = {
+  where?: DocumentWhereInput;
+};
+
+
+export type TopicDraftFacilitiesArgs = {
+  cursor?: InputMaybe<FacilityWhereUniqueInput>;
+  orderBy?: Array<FacilityOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: FacilityWhereInput;
+};
+
+
+export type TopicDraftFacilitiesCountArgs = {
+  where?: FacilityWhereInput;
+};
+
+
+export type TopicDraftHighlightsArgs = {
+  cursor?: InputMaybe<HighlightWhereUniqueInput>;
+  orderBy?: Array<HighlightOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: HighlightWhereInput;
+};
+
+
+export type TopicDraftHighlightsCountArgs = {
+  where?: HighlightWhereInput;
+};
+
+
+export type TopicDraftOrgUnitsArgs = {
+  cursor?: InputMaybe<OrgUnitWhereUniqueInput>;
+  orderBy?: Array<OrgUnitOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: OrgUnitWhereInput;
+};
+
+
+export type TopicDraftOrgUnitsCountArgs = {
+  where?: OrgUnitWhereInput;
+};
+
+
+export type TopicDraftParksArgs = {
+  cursor?: InputMaybe<ParkWhereUniqueInput>;
+  orderBy?: Array<ParkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: ParkWhereInput;
+};
+
+
+export type TopicDraftParksCountArgs = {
+  where?: ParkWhereInput;
+};
+
+
+export type TopicDraftPublicNoticesArgs = {
+  cursor?: InputMaybe<PublicNoticeWhereUniqueInput>;
+  orderBy?: Array<PublicNoticeOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PublicNoticeWhereInput;
+};
+
+
+export type TopicDraftPublicNoticesCountArgs = {
+  where?: PublicNoticeWhereInput;
+};
+
+
+export type TopicDraftServicesArgs = {
+  cursor?: InputMaybe<ServiceWhereUniqueInput>;
+  orderBy?: Array<ServiceOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: ServiceWhereInput;
+};
+
+
+export type TopicDraftServicesCountArgs = {
+  where?: ServiceWhereInput;
+};
+
+
+export type TopicDraftTagsArgs = {
+  cursor?: InputMaybe<TagWhereUniqueInput>;
+  orderBy?: Array<TagOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TagWhereInput;
+};
+
+
+export type TopicDraftTagsCountArgs = {
+  where?: TagWhereInput;
+};
+
+
+export type TopicDraftTrailsArgs = {
+  cursor?: InputMaybe<TrailWhereUniqueInput>;
+  orderBy?: Array<TrailOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TrailWhereInput;
+};
+
+
+export type TopicDraftTrailsCountArgs = {
+  where?: TrailWhereInput;
+};
+
+
+export type TopicDraftUserGroupsArgs = {
+  cursor?: InputMaybe<UserGroupWhereUniqueInput>;
+  orderBy?: Array<UserGroupOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: UserGroupWhereInput;
+};
+
+
+export type TopicDraftUserGroupsCountArgs = {
+  where?: UserGroupWhereInput;
+};
+
+export type TopicDraftCreateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
+  boards?: InputMaybe<BoardRelateToManyForCreateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  communities?: InputMaybe<CommunityRelateToManyForCreateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  districts?: InputMaybe<AssemblyDistrictRelateToManyForCreateInput>;
+  documents?: InputMaybe<DocumentRelateToManyForCreateInput>;
+  facilities?: InputMaybe<FacilityRelateToManyForCreateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  highlights?: InputMaybe<HighlightRelateToManyForCreateInput>;
+  orgUnits?: InputMaybe<OrgUnitRelateToManyForCreateInput>;
+  original?: InputMaybe<TopicRelateToOneForCreateInput>;
+  owner?: InputMaybe<UserRelateToOneForCreateInput>;
+  parks?: InputMaybe<ParkRelateToManyForCreateInput>;
+  publicNotices?: InputMaybe<PublicNoticeRelateToManyForCreateInput>;
+  publish?: InputMaybe<Scalars['String']['input']>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  services?: InputMaybe<ServiceRelateToManyForCreateInput>;
+  tags?: InputMaybe<TagRelateToManyForCreateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  trails?: InputMaybe<TrailRelateToManyForCreateInput>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
+};
+
+export type TopicDraftManyRelationFilter = {
+  every?: InputMaybe<TopicDraftWhereInput>;
+  none?: InputMaybe<TopicDraftWhereInput>;
+  some?: InputMaybe<TopicDraftWhereInput>;
+};
+
+export type TopicDraftOrderByInput = {
+  body?: InputMaybe<MyOrderDirection>;
+  createdAt?: InputMaybe<OrderDirection>;
+  description?: InputMaybe<OrderDirection>;
+  heroImage?: InputMaybe<BlueHarvestImageOrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  publish?: InputMaybe<OrderDirection>;
+  publishAt?: InputMaybe<OrderDirection>;
+  reviewDate?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+  unpublishAt?: InputMaybe<OrderDirection>;
+  updatedAt?: InputMaybe<OrderDirection>;
+};
+
+export type TopicDraftRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<TopicDraftWhereUniqueInput>>;
+  create?: InputMaybe<Array<TopicDraftCreateInput>>;
+};
+
+export type TopicDraftRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<TopicDraftWhereUniqueInput>>;
+  create?: InputMaybe<Array<TopicDraftCreateInput>>;
+  disconnect?: InputMaybe<Array<TopicDraftWhereUniqueInput>>;
+  set?: InputMaybe<Array<TopicDraftWhereUniqueInput>>;
+};
+
+export type TopicDraftUpdateArgs = {
+  data: TopicDraftUpdateInput;
+  where: TopicDraftWhereUniqueInput;
+};
+
+export type TopicDraftUpdateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
+  boards?: InputMaybe<BoardRelateToManyForUpdateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  communities?: InputMaybe<CommunityRelateToManyForUpdateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  districts?: InputMaybe<AssemblyDistrictRelateToManyForUpdateInput>;
+  documents?: InputMaybe<DocumentRelateToManyForUpdateInput>;
+  facilities?: InputMaybe<FacilityRelateToManyForUpdateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  highlights?: InputMaybe<HighlightRelateToManyForUpdateInput>;
+  orgUnits?: InputMaybe<OrgUnitRelateToManyForUpdateInput>;
+  original?: InputMaybe<TopicRelateToOneForUpdateInput>;
+  owner?: InputMaybe<UserRelateToOneForUpdateInput>;
+  parks?: InputMaybe<ParkRelateToManyForUpdateInput>;
+  publicNotices?: InputMaybe<PublicNoticeRelateToManyForUpdateInput>;
+  publish?: InputMaybe<Scalars['String']['input']>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
+  tags?: InputMaybe<TagRelateToManyForUpdateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
+};
+
+export type TopicDraftWhereInput = {
+  AND?: InputMaybe<Array<TopicDraftWhereInput>>;
+  NOT?: InputMaybe<Array<TopicDraftWhereInput>>;
+  OR?: InputMaybe<Array<TopicDraftWhereInput>>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
+  boards?: InputMaybe<BoardManyRelationFilter>;
+  body?: InputMaybe<MyStringFilter>;
+  communities?: InputMaybe<CommunityManyRelationFilter>;
+  contacts?: InputMaybe<ContactManyRelationFilter>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  description?: InputMaybe<StringFilter>;
+  districts?: InputMaybe<AssemblyDistrictManyRelationFilter>;
+  documents?: InputMaybe<DocumentManyRelationFilter>;
+  facilities?: InputMaybe<FacilityManyRelationFilter>;
+  highlights?: InputMaybe<HighlightManyRelationFilter>;
+  id?: InputMaybe<IdFilter>;
+  orgUnits?: InputMaybe<OrgUnitManyRelationFilter>;
+  original?: InputMaybe<TopicWhereInput>;
+  owner?: InputMaybe<UserWhereInput>;
+  parks?: InputMaybe<ParkManyRelationFilter>;
+  publicNotices?: InputMaybe<PublicNoticeManyRelationFilter>;
+  publishAt?: InputMaybe<DateTimeNullableFilter>;
+  reviewDate?: InputMaybe<DateTimeNullableFilter>;
+  services?: InputMaybe<ServiceManyRelationFilter>;
+  tags?: InputMaybe<TagManyRelationFilter>;
+  title?: InputMaybe<StringFilter>;
+  trails?: InputMaybe<TrailManyRelationFilter>;
+  unpublishAt?: InputMaybe<DateTimeNullableFilter>;
+  updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  userGroups?: InputMaybe<UserGroupManyRelationFilter>;
+};
+
+export type TopicDraftWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type TopicManyRelationFilter = {
+  every?: InputMaybe<TopicWhereInput>;
+  none?: InputMaybe<TopicWhereInput>;
+  some?: InputMaybe<TopicWhereInput>;
+};
+
+export type TopicOrderByInput = {
+  body?: InputMaybe<MyOrderDirection>;
+  createdAt?: InputMaybe<OrderDirection>;
+  description?: InputMaybe<OrderDirection>;
+  heroImage?: InputMaybe<BlueHarvestImageOrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  makeDrafts?: InputMaybe<OrderDirection>;
+  publishAt?: InputMaybe<OrderDirection>;
+  reviewDate?: InputMaybe<OrderDirection>;
+  slug?: InputMaybe<OrderDirection>;
+  status?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+  unpublishAt?: InputMaybe<OrderDirection>;
+  updatedAt?: InputMaybe<OrderDirection>;
+};
+
+export type TopicRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<TopicWhereUniqueInput>>;
+  create?: InputMaybe<Array<TopicCreateInput>>;
+};
+
+export type TopicRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<TopicWhereUniqueInput>>;
+  create?: InputMaybe<Array<TopicCreateInput>>;
+  disconnect?: InputMaybe<Array<TopicWhereUniqueInput>>;
+  set?: InputMaybe<Array<TopicWhereUniqueInput>>;
+};
+
+export type TopicRelateToOneForCreateInput = {
+  connect?: InputMaybe<TopicWhereUniqueInput>;
+  create?: InputMaybe<TopicCreateInput>;
+};
+
+export type TopicRelateToOneForUpdateInput = {
+  connect?: InputMaybe<TopicWhereUniqueInput>;
+  create?: InputMaybe<TopicCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type TopicUpdateArgs = {
+  data: TopicUpdateInput;
+  where: TopicWhereUniqueInput;
+};
+
+export type TopicUpdateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
+  boards?: InputMaybe<BoardRelateToManyForUpdateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  communities?: InputMaybe<CommunityRelateToManyForUpdateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  currentVersion?: InputMaybe<TopicVersionRelateToOneForUpdateInput>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  districts?: InputMaybe<AssemblyDistrictRelateToManyForUpdateInput>;
+  documents?: InputMaybe<DocumentRelateToManyForUpdateInput>;
+  drafts?: InputMaybe<TopicDraftRelateToManyForUpdateInput>;
+  facilities?: InputMaybe<FacilityRelateToManyForUpdateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  highlights?: InputMaybe<HighlightRelateToManyForUpdateInput>;
+  makeDrafts?: InputMaybe<Scalars['String']['input']>;
+  orgUnits?: InputMaybe<OrgUnitRelateToManyForUpdateInput>;
+  owner?: InputMaybe<UserRelateToOneForUpdateInput>;
+  parks?: InputMaybe<ParkRelateToManyForUpdateInput>;
+  publicNotices?: InputMaybe<PublicNoticeRelateToManyForUpdateInput>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<TagRelateToManyForUpdateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
+  versions?: InputMaybe<TopicVersionRelateToManyForUpdateInput>;
+};
+
+export type TopicVersion = {
+  __typename?: 'TopicVersion';
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
+  boards?: Maybe<Array<Board>>;
+  boardsCount?: Maybe<Scalars['Int']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  communities?: Maybe<Array<Community>>;
+  communitiesCount?: Maybe<Scalars['Int']['output']>;
+  contacts?: Maybe<Array<Contact>>;
+  contactsCount?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  districts?: Maybe<Array<AssemblyDistrict>>;
+  districtsCount?: Maybe<Scalars['Int']['output']>;
+  documents?: Maybe<Array<Document>>;
+  documentsCount?: Maybe<Scalars['Int']['output']>;
+  facilities?: Maybe<Array<Facility>>;
+  facilitiesCount?: Maybe<Scalars['Int']['output']>;
+  heroImage?: Maybe<Scalars['String']['output']>;
+  highlights?: Maybe<Array<Highlight>>;
+  highlightsCount?: Maybe<Scalars['Int']['output']>;
+  id: Scalars['ID']['output'];
+  isLive?: Maybe<Topic>;
+  liveUrl?: Maybe<Scalars['String']['output']>;
+  orgUnits?: Maybe<Array<OrgUnit>>;
+  orgUnitsCount?: Maybe<Scalars['Int']['output']>;
+  original?: Maybe<Topic>;
+  owner?: Maybe<User>;
+  parks?: Maybe<Array<Park>>;
+  parksCount?: Maybe<Scalars['Int']['output']>;
+  publicNotices?: Maybe<Array<PublicNotice>>;
+  publicNoticesCount?: Maybe<Scalars['Int']['output']>;
+  publishAt?: Maybe<Scalars['DateTime']['output']>;
+  republish?: Maybe<Scalars['String']['output']>;
+  reviewDate?: Maybe<Scalars['DateTime']['output']>;
+  services?: Maybe<Array<Service>>;
+  servicesCount?: Maybe<Scalars['Int']['output']>;
+  tags?: Maybe<Array<Tag>>;
+  tagsCount?: Maybe<Scalars['Int']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  trails?: Maybe<Array<Trail>>;
+  trailsCount?: Maybe<Scalars['Int']['output']>;
+  unpublishAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userGroups?: Maybe<Array<UserGroup>>;
+  userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type TopicVersionActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type TopicVersionActionsCountArgs = {
+  where?: InternalLinkWhereInput;
+};
+
+
+export type TopicVersionBoardsArgs = {
+  cursor?: InputMaybe<BoardWhereUniqueInput>;
+  orderBy?: Array<BoardOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: BoardWhereInput;
+};
+
+
+export type TopicVersionBoardsCountArgs = {
+  where?: BoardWhereInput;
+};
+
+
+export type TopicVersionCommunitiesArgs = {
+  cursor?: InputMaybe<CommunityWhereUniqueInput>;
+  orderBy?: Array<CommunityOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: CommunityWhereInput;
+};
+
+
+export type TopicVersionCommunitiesCountArgs = {
+  where?: CommunityWhereInput;
+};
+
+
+export type TopicVersionContactsArgs = {
+  cursor?: InputMaybe<ContactWhereUniqueInput>;
+  orderBy?: Array<ContactOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: ContactWhereInput;
+};
+
+
+export type TopicVersionContactsCountArgs = {
+  where?: ContactWhereInput;
+};
+
+
+export type TopicVersionDistrictsArgs = {
+  cursor?: InputMaybe<AssemblyDistrictWhereUniqueInput>;
+  orderBy?: Array<AssemblyDistrictOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: AssemblyDistrictWhereInput;
+};
+
+
+export type TopicVersionDistrictsCountArgs = {
+  where?: AssemblyDistrictWhereInput;
+};
+
+
+export type TopicVersionDocumentsArgs = {
+  cursor?: InputMaybe<DocumentWhereUniqueInput>;
+  orderBy?: Array<DocumentOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: DocumentWhereInput;
+};
+
+
+export type TopicVersionDocumentsCountArgs = {
+  where?: DocumentWhereInput;
+};
+
+
+export type TopicVersionFacilitiesArgs = {
+  cursor?: InputMaybe<FacilityWhereUniqueInput>;
+  orderBy?: Array<FacilityOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: FacilityWhereInput;
+};
+
+
+export type TopicVersionFacilitiesCountArgs = {
+  where?: FacilityWhereInput;
+};
+
+
+export type TopicVersionHighlightsArgs = {
+  cursor?: InputMaybe<HighlightWhereUniqueInput>;
+  orderBy?: Array<HighlightOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: HighlightWhereInput;
+};
+
+
+export type TopicVersionHighlightsCountArgs = {
+  where?: HighlightWhereInput;
+};
+
+
+export type TopicVersionOrgUnitsArgs = {
+  cursor?: InputMaybe<OrgUnitWhereUniqueInput>;
+  orderBy?: Array<OrgUnitOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: OrgUnitWhereInput;
+};
+
+
+export type TopicVersionOrgUnitsCountArgs = {
+  where?: OrgUnitWhereInput;
+};
+
+
+export type TopicVersionParksArgs = {
+  cursor?: InputMaybe<ParkWhereUniqueInput>;
+  orderBy?: Array<ParkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: ParkWhereInput;
+};
+
+
+export type TopicVersionParksCountArgs = {
+  where?: ParkWhereInput;
+};
+
+
+export type TopicVersionPublicNoticesArgs = {
+  cursor?: InputMaybe<PublicNoticeWhereUniqueInput>;
+  orderBy?: Array<PublicNoticeOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PublicNoticeWhereInput;
+};
+
+
+export type TopicVersionPublicNoticesCountArgs = {
+  where?: PublicNoticeWhereInput;
+};
+
+
+export type TopicVersionServicesArgs = {
+  cursor?: InputMaybe<ServiceWhereUniqueInput>;
+  orderBy?: Array<ServiceOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: ServiceWhereInput;
+};
+
+
+export type TopicVersionServicesCountArgs = {
+  where?: ServiceWhereInput;
+};
+
+
+export type TopicVersionTagsArgs = {
+  cursor?: InputMaybe<TagWhereUniqueInput>;
+  orderBy?: Array<TagOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TagWhereInput;
+};
+
+
+export type TopicVersionTagsCountArgs = {
+  where?: TagWhereInput;
+};
+
+
+export type TopicVersionTrailsArgs = {
+  cursor?: InputMaybe<TrailWhereUniqueInput>;
+  orderBy?: Array<TrailOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TrailWhereInput;
+};
+
+
+export type TopicVersionTrailsCountArgs = {
+  where?: TrailWhereInput;
+};
+
+
+export type TopicVersionUserGroupsArgs = {
+  cursor?: InputMaybe<UserGroupWhereUniqueInput>;
+  orderBy?: Array<UserGroupOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: UserGroupWhereInput;
+};
+
+
+export type TopicVersionUserGroupsCountArgs = {
+  where?: UserGroupWhereInput;
+};
+
+export type TopicVersionCreateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
+  boards?: InputMaybe<BoardRelateToManyForCreateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  communities?: InputMaybe<CommunityRelateToManyForCreateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  districts?: InputMaybe<AssemblyDistrictRelateToManyForCreateInput>;
+  documents?: InputMaybe<DocumentRelateToManyForCreateInput>;
+  facilities?: InputMaybe<FacilityRelateToManyForCreateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  highlights?: InputMaybe<HighlightRelateToManyForCreateInput>;
+  isLive?: InputMaybe<TopicRelateToOneForCreateInput>;
+  orgUnits?: InputMaybe<OrgUnitRelateToManyForCreateInput>;
+  original?: InputMaybe<TopicRelateToOneForCreateInput>;
+  owner?: InputMaybe<UserRelateToOneForCreateInput>;
+  parks?: InputMaybe<ParkRelateToManyForCreateInput>;
+  publicNotices?: InputMaybe<PublicNoticeRelateToManyForCreateInput>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  republish?: InputMaybe<Scalars['String']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  services?: InputMaybe<ServiceRelateToManyForCreateInput>;
+  tags?: InputMaybe<TagRelateToManyForCreateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  trails?: InputMaybe<TrailRelateToManyForCreateInput>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
+};
+
+export type TopicVersionManyRelationFilter = {
+  every?: InputMaybe<TopicVersionWhereInput>;
+  none?: InputMaybe<TopicVersionWhereInput>;
+  some?: InputMaybe<TopicVersionWhereInput>;
+};
+
+export type TopicVersionOrderByInput = {
+  body?: InputMaybe<MyOrderDirection>;
+  createdAt?: InputMaybe<OrderDirection>;
+  description?: InputMaybe<OrderDirection>;
+  heroImage?: InputMaybe<BlueHarvestImageOrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  publishAt?: InputMaybe<OrderDirection>;
+  republish?: InputMaybe<OrderDirection>;
+  reviewDate?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+  unpublishAt?: InputMaybe<OrderDirection>;
+  updatedAt?: InputMaybe<OrderDirection>;
+};
+
+export type TopicVersionRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<TopicVersionWhereUniqueInput>>;
+  create?: InputMaybe<Array<TopicVersionCreateInput>>;
+};
+
+export type TopicVersionRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<TopicVersionWhereUniqueInput>>;
+  create?: InputMaybe<Array<TopicVersionCreateInput>>;
+  disconnect?: InputMaybe<Array<TopicVersionWhereUniqueInput>>;
+  set?: InputMaybe<Array<TopicVersionWhereUniqueInput>>;
+};
+
+export type TopicVersionRelateToOneForCreateInput = {
+  connect?: InputMaybe<TopicVersionWhereUniqueInput>;
+  create?: InputMaybe<TopicVersionCreateInput>;
+};
+
+export type TopicVersionRelateToOneForUpdateInput = {
+  connect?: InputMaybe<TopicVersionWhereUniqueInput>;
+  create?: InputMaybe<TopicVersionCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type TopicVersionUpdateArgs = {
+  data: TopicVersionUpdateInput;
+  where: TopicVersionWhereUniqueInput;
+};
+
+export type TopicVersionUpdateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
+  boards?: InputMaybe<BoardRelateToManyForUpdateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  communities?: InputMaybe<CommunityRelateToManyForUpdateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  districts?: InputMaybe<AssemblyDistrictRelateToManyForUpdateInput>;
+  documents?: InputMaybe<DocumentRelateToManyForUpdateInput>;
+  facilities?: InputMaybe<FacilityRelateToManyForUpdateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  highlights?: InputMaybe<HighlightRelateToManyForUpdateInput>;
+  isLive?: InputMaybe<TopicRelateToOneForUpdateInput>;
+  orgUnits?: InputMaybe<OrgUnitRelateToManyForUpdateInput>;
+  original?: InputMaybe<TopicRelateToOneForUpdateInput>;
+  owner?: InputMaybe<UserRelateToOneForUpdateInput>;
+  parks?: InputMaybe<ParkRelateToManyForUpdateInput>;
+  publicNotices?: InputMaybe<PublicNoticeRelateToManyForUpdateInput>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  republish?: InputMaybe<Scalars['String']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  services?: InputMaybe<ServiceRelateToManyForUpdateInput>;
+  tags?: InputMaybe<TagRelateToManyForUpdateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  trails?: InputMaybe<TrailRelateToManyForUpdateInput>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
+};
+
+export type TopicVersionWhereInput = {
+  AND?: InputMaybe<Array<TopicVersionWhereInput>>;
+  NOT?: InputMaybe<Array<TopicVersionWhereInput>>;
+  OR?: InputMaybe<Array<TopicVersionWhereInput>>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
+  boards?: InputMaybe<BoardManyRelationFilter>;
+  body?: InputMaybe<MyStringFilter>;
+  communities?: InputMaybe<CommunityManyRelationFilter>;
+  contacts?: InputMaybe<ContactManyRelationFilter>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  description?: InputMaybe<StringFilter>;
+  districts?: InputMaybe<AssemblyDistrictManyRelationFilter>;
+  documents?: InputMaybe<DocumentManyRelationFilter>;
+  facilities?: InputMaybe<FacilityManyRelationFilter>;
+  highlights?: InputMaybe<HighlightManyRelationFilter>;
+  id?: InputMaybe<IdFilter>;
+  isLive?: InputMaybe<TopicWhereInput>;
+  orgUnits?: InputMaybe<OrgUnitManyRelationFilter>;
+  original?: InputMaybe<TopicWhereInput>;
+  owner?: InputMaybe<UserWhereInput>;
+  parks?: InputMaybe<ParkManyRelationFilter>;
+  publicNotices?: InputMaybe<PublicNoticeManyRelationFilter>;
+  publishAt?: InputMaybe<DateTimeNullableFilter>;
+  reviewDate?: InputMaybe<DateTimeNullableFilter>;
+  services?: InputMaybe<ServiceManyRelationFilter>;
+  tags?: InputMaybe<TagManyRelationFilter>;
+  title?: InputMaybe<StringFilter>;
+  trails?: InputMaybe<TrailManyRelationFilter>;
+  unpublishAt?: InputMaybe<DateTimeNullableFilter>;
+  updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  userGroups?: InputMaybe<UserGroupManyRelationFilter>;
+};
+
+export type TopicVersionWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  isLive?: InputMaybe<TopicWhereUniqueInput>;
+};
+
+export type TopicWhereInput = {
+  AND?: InputMaybe<Array<TopicWhereInput>>;
+  NOT?: InputMaybe<Array<TopicWhereInput>>;
+  OR?: InputMaybe<Array<TopicWhereInput>>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
+  boards?: InputMaybe<BoardManyRelationFilter>;
+  body?: InputMaybe<MyStringFilter>;
+  communities?: InputMaybe<CommunityManyRelationFilter>;
+  contacts?: InputMaybe<ContactManyRelationFilter>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  currentVersion?: InputMaybe<TopicVersionWhereInput>;
+  description?: InputMaybe<StringFilter>;
+  districts?: InputMaybe<AssemblyDistrictManyRelationFilter>;
+  documents?: InputMaybe<DocumentManyRelationFilter>;
+  drafts?: InputMaybe<TopicDraftManyRelationFilter>;
+  facilities?: InputMaybe<FacilityManyRelationFilter>;
+  highlights?: InputMaybe<HighlightManyRelationFilter>;
+  id?: InputMaybe<IdFilter>;
+  orgUnits?: InputMaybe<OrgUnitManyRelationFilter>;
+  owner?: InputMaybe<UserWhereInput>;
+  parks?: InputMaybe<ParkManyRelationFilter>;
+  publicNotices?: InputMaybe<PublicNoticeManyRelationFilter>;
+  publishAt?: InputMaybe<DateTimeNullableFilter>;
+  reviewDate?: InputMaybe<DateTimeNullableFilter>;
+  services?: InputMaybe<ServiceManyRelationFilter>;
+  slug?: InputMaybe<StringFilter>;
+  status?: InputMaybe<StringFilter>;
+  tags?: InputMaybe<TagManyRelationFilter>;
+  title?: InputMaybe<StringFilter>;
+  trails?: InputMaybe<TrailManyRelationFilter>;
+  unpublishAt?: InputMaybe<DateTimeNullableFilter>;
+  updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  userGroups?: InputMaybe<UserGroupManyRelationFilter>;
+  versions?: InputMaybe<TopicVersionManyRelationFilter>;
+};
+
+export type TopicWhereUniqueInput = {
+  currentVersion?: InputMaybe<TopicVersionWhereUniqueInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Trail = {
   __typename?: 'Trail';
   actions?: Maybe<Array<InternalLink>>;
@@ -11286,6 +13251,8 @@ export type Trail = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -11380,6 +13347,20 @@ export type TrailTagsCountArgs = {
 };
 
 
+export type TrailTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type TrailTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type TrailUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -11447,6 +13428,7 @@ export type TrailCreateInput = {
   summer?: InputMaybe<Scalars['Boolean']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -11499,6 +13481,8 @@ export type TrailDraft = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -11577,6 +13561,20 @@ export type TrailDraftTagsCountArgs = {
 };
 
 
+export type TrailDraftTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type TrailDraftTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type TrailDraftUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -11627,6 +13625,7 @@ export type TrailDraftCreateInput = {
   summer?: InputMaybe<Scalars['Boolean']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -11727,6 +13726,7 @@ export type TrailDraftUpdateInput = {
   summer?: InputMaybe<Scalars['Boolean']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -11772,6 +13772,7 @@ export type TrailDraftWhereInput = {
   summer?: InputMaybe<BooleanFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -11892,6 +13893,7 @@ export type TrailUpdateInput = {
   summer?: InputMaybe<Scalars['Boolean']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -11945,6 +13947,8 @@ export type TrailVersion = {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+  topics?: Maybe<Array<Topic>>;
+  topicsCount?: Maybe<Scalars['Int']['output']>;
   unpublishAt?: Maybe<Scalars['DateTime']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
@@ -12023,6 +14027,20 @@ export type TrailVersionTagsCountArgs = {
 };
 
 
+export type TrailVersionTopicsArgs = {
+  cursor?: InputMaybe<TopicWhereUniqueInput>;
+  orderBy?: Array<TopicOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TopicWhereInput;
+};
+
+
+export type TrailVersionTopicsCountArgs = {
+  where?: TopicWhereInput;
+};
+
+
 export type TrailVersionUserGroupsArgs = {
   cursor?: InputMaybe<UserGroupWhereUniqueInput>;
   orderBy?: Array<UserGroupOrderByInput>;
@@ -12074,6 +14092,7 @@ export type TrailVersionCreateInput = {
   summer?: InputMaybe<Scalars['Boolean']['input']>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForCreateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
@@ -12186,6 +14205,7 @@ export type TrailVersionUpdateInput = {
   summer?: InputMaybe<Scalars['Boolean']['input']>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
+  topics?: InputMaybe<TopicRelateToManyForUpdateInput>;
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
@@ -12232,6 +14252,7 @@ export type TrailVersionWhereInput = {
   summer?: InputMaybe<BooleanFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -12285,6 +14306,7 @@ export type TrailWhereInput = {
   summer?: InputMaybe<BooleanFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
+  topics?: InputMaybe<TopicManyRelationFilter>;
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
@@ -12569,6 +14591,95 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
+export type ExternalActionFieldsFragment = { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } & { ' $fragmentName'?: 'ExternalActionFieldsFragment' };
+
+export type OrgUnitFieldsFragment = { __typename?: 'OrgUnit', id: string, description?: string | null, title?: string | null, slug?: string | null } & { ' $fragmentName'?: 'OrgUnitFieldsFragment' };
+
+export type ContactFieldsFragment = { __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null, title?: string | null } & { ' $fragmentName'?: 'ContactFieldsFragment' };
+
+export type ServiceFieldsFragment = { __typename?: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } & { ' $fragmentName'?: 'ServiceFieldsFragment' };
+
+export type AddressFieldsFragment = { __typename?: 'Location', title?: string | null, lineOne?: string | null, lineTwo?: string | null, city?: string | null, state?: string | null, zip?: string | null } & { ' $fragmentName'?: 'AddressFieldsFragment' };
+
+export type HourFieldsFragment = { __typename?: 'OperatingHour', day?: string | null, open?: string | null, close?: string | null } & { ' $fragmentName'?: 'HourFieldsFragment' };
+
+export type TrailFieldsFragment = { __typename?: 'Trail', id: string, title?: string | null, description?: string | null, slug?: string | null } & { ' $fragmentName'?: 'TrailFieldsFragment' };
+
+export type FacilityFieldsFragment = { __typename?: 'Facility', id: string, title?: string | null, description?: string | null, slug?: string | null } & { ' $fragmentName'?: 'FacilityFieldsFragment' };
+
+export type ImageFieldsFragment = { __typename?: 'Image', id: string, title?: string | null, description?: string | null, file?: { __typename?: 'ImageFieldOutput', id: string, width: number, height: number, url: string } | null } & { ' $fragmentName'?: 'ImageFieldsFragment' };
+
+export type PublicNoticeFieldsFragment = { __typename?: 'PublicNotice', id: string, title?: string | null, description?: string | null, slug?: string | null, heroImage?: string | null, urgency?: number | null } & { ' $fragmentName'?: 'PublicNoticeFieldsFragment' };
+
+export type DocumentFieldsFragment = { __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', filename: string, url: string, filesize: number } | null } & { ' $fragmentName'?: 'DocumentFieldsFragment' };
+
+export type ParkFieldsFragment = { __typename?: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } & { ' $fragmentName'?: 'ParkFieldsFragment' };
+
+export type CommunityFieldsFragment = { __typename?: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } & { ' $fragmentName'?: 'CommunityFieldsFragment' };
+
+export type AssemblyDistrictFieldsFragment = { __typename?: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } & { ' $fragmentName'?: 'AssemblyDistrictFieldsFragment' };
+
+export type UrlFieldsFragment = { __typename?: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } & { ' $fragmentName'?: 'UrlFieldsFragment' };
+
+export type DistrictDetailFieldsFragment = { __typename?: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null, memberName?: string | null, photo?: { __typename?: 'Image', file?: { __typename?: 'ImageFieldOutput', url: string } | null } | null } & { ' $fragmentName'?: 'DistrictDetailFieldsFragment' };
+
+export type ActionFieldsFragment = { __typename?: 'InternalLink', id: string, label?: string | null, item?: (
+    { __typename: 'AssemblyDistrict' }
+    & { ' $fragmentRefs'?: { 'AssemblyDistrictFieldsFragment': AssemblyDistrictFieldsFragment } }
+  ) | (
+    { __typename: 'Community' }
+    & { ' $fragmentRefs'?: { 'CommunityFieldsFragment': CommunityFieldsFragment } }
+  ) | (
+    { __typename: 'Facility' }
+    & { ' $fragmentRefs'?: { 'FacilityFieldsFragment': FacilityFieldsFragment } }
+  ) | (
+    { __typename: 'OrgUnit' }
+    & { ' $fragmentRefs'?: { 'OrgUnitFieldsFragment': OrgUnitFieldsFragment } }
+  ) | (
+    { __typename: 'Park' }
+    & { ' $fragmentRefs'?: { 'ParkFieldsFragment': ParkFieldsFragment } }
+  ) | (
+    { __typename: 'Service' }
+    & { ' $fragmentRefs'?: { 'ServiceFieldsFragment': ServiceFieldsFragment } }
+  ) | (
+    { __typename: 'Trail' }
+    & { ' $fragmentRefs'?: { 'TrailFieldsFragment': TrailFieldsFragment } }
+  ) | (
+    { __typename: 'Url' }
+    & { ' $fragmentRefs'?: { 'UrlFieldsFragment': UrlFieldsFragment } }
+  ) | null } & { ' $fragmentName'?: 'ActionFieldsFragment' };
+
+type GetInternalLinkDataFields_AssemblyDistrict_Fragment = { __typename: 'AssemblyDistrict', title?: string | null, slug?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_AssemblyDistrict_Fragment' };
+
+type GetInternalLinkDataFields_Board_Fragment = { __typename: 'Board', title?: string | null, slug?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_Board_Fragment' };
+
+type GetInternalLinkDataFields_BoardPage_Fragment = { __typename: 'BoardPage', title?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_BoardPage_Fragment' };
+
+type GetInternalLinkDataFields_Community_Fragment = { __typename: 'Community', title?: string | null, slug?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_Community_Fragment' };
+
+type GetInternalLinkDataFields_Facility_Fragment = { __typename: 'Facility', title?: string | null, slug?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_Facility_Fragment' };
+
+type GetInternalLinkDataFields_HomePage_Fragment = { __typename: 'HomePage', title?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_HomePage_Fragment' };
+
+type GetInternalLinkDataFields_OrgUnit_Fragment = { __typename: 'OrgUnit', title?: string | null, slug?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_OrgUnit_Fragment' };
+
+type GetInternalLinkDataFields_Park_Fragment = { __typename: 'Park', title?: string | null, slug?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_Park_Fragment' };
+
+type GetInternalLinkDataFields_PublicNotice_Fragment = { __typename: 'PublicNotice', title?: string | null, slug?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_PublicNotice_Fragment' };
+
+type GetInternalLinkDataFields_Service_Fragment = { __typename: 'Service', title?: string | null, slug?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_Service_Fragment' };
+
+type GetInternalLinkDataFields_Trail_Fragment = { __typename: 'Trail', title?: string | null, slug?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_Trail_Fragment' };
+
+type GetInternalLinkDataFields_Url_Fragment = { __typename: 'Url', title?: string | null, url?: string | null } & { ' $fragmentName'?: 'GetInternalLinkDataFields_Url_Fragment' };
+
+export type GetInternalLinkDataFieldsFragment = GetInternalLinkDataFields_AssemblyDistrict_Fragment | GetInternalLinkDataFields_Board_Fragment | GetInternalLinkDataFields_BoardPage_Fragment | GetInternalLinkDataFields_Community_Fragment | GetInternalLinkDataFields_Facility_Fragment | GetInternalLinkDataFields_HomePage_Fragment | GetInternalLinkDataFields_OrgUnit_Fragment | GetInternalLinkDataFields_Park_Fragment | GetInternalLinkDataFields_PublicNotice_Fragment | GetInternalLinkDataFields_Service_Fragment | GetInternalLinkDataFields_Trail_Fragment | GetInternalLinkDataFields_Url_Fragment;
+
+export type HighlightFieldsFragment = { __typename?: 'Highlight', id: string, image?: string | null, title?: string | null, linkedItem?: (
+    { __typename?: 'InternalLink' }
+    & { ' $fragmentRefs'?: { 'ActionFieldsFragment': ActionFieldsFragment } }
+  ) | null } & { ' $fragmentName'?: 'HighlightFieldsFragment' };
+
 export type GetAlertsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -12589,7 +14700,16 @@ export type GetAssemblyDistrictQueryVariables = Exact<{
 }>;
 
 
-export type GetAssemblyDistrictQuery = { __typename?: 'Query', assemblyDistrict?: { __typename?: 'AssemblyDistrict', id: string, heroImage?: string | null, title?: string | null, description?: string | null, slug?: string | null, body?: string | null, memberName?: string | null, bio?: string | null, address?: string | null, email?: string | null, phone?: string | null, fax?: string | null, termStart?: any | null, termEnd?: any | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, title?: string | null, phone?: string | null, email?: string | null }> | null, photo?: { __typename?: 'Image', id: string, title?: string | null, description?: string | null, file?: { __typename?: 'ImageFieldOutput', id: string, width: number, height: number, url: string } | null } | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
+export type GetAssemblyDistrictQuery = { __typename?: 'Query', assemblyDistrict?: { __typename?: 'AssemblyDistrict', id: string, heroImage?: string | null, title?: string | null, description?: string | null, slug?: string | null, body?: string | null, memberName?: string | null, bio?: string | null, address?: string | null, email?: string | null, phone?: string | null, fax?: string | null, termStart?: any | null, termEnd?: any | null, contacts?: Array<(
+      { __typename?: 'Contact' }
+      & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
+    )> | null, photo?: (
+      { __typename?: 'Image' }
+      & { ' $fragmentRefs'?: { 'ImageFieldsFragment': ImageFieldsFragment } }
+    ) | null } | null, publicNotices?: Array<(
+    { __typename?: 'PublicNotice' }
+    & { ' $fragmentRefs'?: { 'PublicNoticeFieldsFragment': PublicNoticeFieldsFragment } }
+  )> | null };
 
 export type GetBoardMetaQueryVariables = Exact<{
   where: BoardWhereUniqueInput;
@@ -12603,7 +14723,31 @@ export type GetBoardQueryVariables = Exact<{
 }>;
 
 
-export type GetBoardQuery = { __typename?: 'Query', board?: { __typename?: 'Board', id: string, title?: string | null, slug?: string | null, description?: string | null, body?: string | null, heroImage?: string | null, meetingSchedule?: string | null, isActive?: boolean | null, communities?: Array<{ __typename?: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null }> | null, districts?: Array<{ __typename?: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null, memberName?: string | null, bio?: string | null, address?: string | null, email?: string | null, phone?: string | null, photo?: { __typename?: 'Image', id: string, title?: string | null, file?: { __typename?: 'ImageFieldOutput', width: number, height: number, url: string } | null } | null }> | null, linkToAgendas?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, linkToResolutions?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, linkToPublicOpinionMessage?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, title?: string | null, phone?: string | null, email?: string | null }> | null, actions?: Array<{ __typename?: 'InternalLink', id: string, label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null }> | null, documents?: Array<{ __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', url: string, filename: string, filesize: number } | null }> | null } | null };
+export type GetBoardQuery = { __typename?: 'Query', board?: { __typename?: 'Board', id: string, title?: string | null, slug?: string | null, description?: string | null, body?: string | null, heroImage?: string | null, meetingSchedule?: string | null, isActive?: boolean | null, communities?: Array<(
+      { __typename?: 'Community' }
+      & { ' $fragmentRefs'?: { 'CommunityFieldsFragment': CommunityFieldsFragment } }
+    )> | null, districts?: Array<(
+      { __typename?: 'AssemblyDistrict' }
+      & { ' $fragmentRefs'?: { 'DistrictDetailFieldsFragment': DistrictDetailFieldsFragment } }
+    )> | null, linkToAgendas?: (
+      { __typename?: 'ExternalLink' }
+      & { ' $fragmentRefs'?: { 'ExternalActionFieldsFragment': ExternalActionFieldsFragment } }
+    ) | null, linkToResolutions?: (
+      { __typename?: 'ExternalLink' }
+      & { ' $fragmentRefs'?: { 'ExternalActionFieldsFragment': ExternalActionFieldsFragment } }
+    ) | null, linkToPublicOpinionMessage?: (
+      { __typename?: 'ExternalLink' }
+      & { ' $fragmentRefs'?: { 'ExternalActionFieldsFragment': ExternalActionFieldsFragment } }
+    ) | null, contacts?: Array<(
+      { __typename?: 'Contact' }
+      & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
+    )> | null, actions?: Array<(
+      { __typename?: 'InternalLink' }
+      & { ' $fragmentRefs'?: { 'ActionFieldsFragment': ActionFieldsFragment } }
+    )> | null, documents?: Array<(
+      { __typename?: 'Document' }
+      & { ' $fragmentRefs'?: { 'DocumentFieldsFragment': DocumentFieldsFragment } }
+    )> | null } | null };
 
 export type GetBoardsQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -12622,7 +14766,22 @@ export type GetBoardsPageMetaQuery = { __typename?: 'Query', boardPage?: { __typ
 export type GetBoardsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBoardsPageQuery = { __typename?: 'Query', boardPage?: { __typename?: 'BoardPage', id: string, title?: string | null, description?: string | null, body?: string | null, heroImage?: string | null, vacancyReport?: { __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', url: string, filename: string, filesize: number } | null } | null, documents?: Array<{ __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', url: string, filename: string, filesize: number } | null }> | null, applicationForm?: { __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', url: string, filename: string, filesize: number } | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, title?: string | null, phone?: string | null, email?: string | null }> | null, actions?: Array<{ __typename?: 'InternalLink', id: string, label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null }> | null } | null };
+export type GetBoardsPageQuery = { __typename?: 'Query', boardPage?: { __typename?: 'BoardPage', id: string, title?: string | null, description?: string | null, body?: string | null, heroImage?: string | null, vacancyReport?: (
+      { __typename?: 'Document' }
+      & { ' $fragmentRefs'?: { 'DocumentFieldsFragment': DocumentFieldsFragment } }
+    ) | null, documents?: Array<(
+      { __typename?: 'Document' }
+      & { ' $fragmentRefs'?: { 'DocumentFieldsFragment': DocumentFieldsFragment } }
+    )> | null, applicationForm?: (
+      { __typename?: 'Document' }
+      & { ' $fragmentRefs'?: { 'DocumentFieldsFragment': DocumentFieldsFragment } }
+    ) | null, contacts?: Array<(
+      { __typename?: 'Contact' }
+      & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
+    )> | null, actions?: Array<(
+      { __typename?: 'InternalLink' }
+      & { ' $fragmentRefs'?: { 'ActionFieldsFragment': ActionFieldsFragment } }
+    )> | null } | null };
 
 export type GetCommunityMetaQueryVariables = Exact<{
   where: CommunityWhereUniqueInput;
@@ -12639,14 +14798,29 @@ export type GetCommunityQueryVariables = Exact<{
 }>;
 
 
-export type GetCommunityQuery = { __typename?: 'Query', community?: { __typename?: 'Community', id: string, title?: string | null, description?: string | null, body?: string | null, heroImage?: string | null, services?: Array<{ __typename?: 'Service', id: string, slug?: string | null, title?: string | null, description?: string | null }> | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null }> | null, districts?: Array<{ __typename?: 'AssemblyDistrict', slug?: string | null, title?: string | null, description?: string | null, memberName?: string | null, photo?: { __typename?: 'Image', file?: { __typename?: 'ImageFieldOutput', url: string } | null } | null }> | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
+export type GetCommunityQuery = { __typename?: 'Query', community?: { __typename?: 'Community', id: string, title?: string | null, description?: string | null, body?: string | null, heroImage?: string | null, services?: Array<(
+      { __typename?: 'Service' }
+      & { ' $fragmentRefs'?: { 'ServiceFieldsFragment': ServiceFieldsFragment } }
+    )> | null, contacts?: Array<(
+      { __typename?: 'Contact' }
+      & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
+    )> | null, districts?: Array<(
+      { __typename?: 'AssemblyDistrict' }
+      & { ' $fragmentRefs'?: { 'DistrictDetailFieldsFragment': DistrictDetailFieldsFragment } }
+    )> | null } | null, publicNotices?: Array<(
+    { __typename?: 'PublicNotice' }
+    & { ' $fragmentRefs'?: { 'PublicNoticeFieldsFragment': PublicNoticeFieldsFragment } }
+  )> | null };
 
 export type GetDocumentCollectionQueryVariables = Exact<{
   where: DocumentCollectionWhereUniqueInput;
 }>;
 
 
-export type GetDocumentCollectionQuery = { __typename?: 'Query', documentCollection?: { __typename?: 'DocumentCollection', id: string, title?: string | null, documents?: Array<{ __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', filename: string, filesize: number, url: string } | null }> | null } | null };
+export type GetDocumentCollectionQuery = { __typename?: 'Query', documentCollection?: { __typename?: 'DocumentCollection', id: string, title?: string | null, documents?: Array<(
+      { __typename?: 'Document' }
+      & { ' $fragmentRefs'?: { 'DocumentFieldsFragment': DocumentFieldsFragment } }
+    )> | null } | null };
 
 export type GetFacilityMetaQueryVariables = Exact<{
   where: FacilityWhereUniqueInput;
@@ -12663,7 +14837,25 @@ export type GetFacilityQueryVariables = Exact<{
 }>;
 
 
-export type GetFacilityQuery = { __typename?: 'Query', facility?: { __typename?: 'Facility', id: string, slug?: string | null, title?: string | null, liveUrl?: string | null, heroImage?: string | null, description?: string | null, body?: string | null, park?: { __typename?: 'Park', id: string, title?: string | null, description?: string | null, slug?: string | null } | null, services?: Array<{ __typename?: 'Service', id: string, title?: string | null, description?: string | null, slug?: string | null }> | null, address?: { __typename?: 'Location', title?: string | null, lineOne?: string | null, lineTwo?: string | null, city?: string | null, state?: string | null, zip?: string | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, email?: string | null, phone?: string | null, title?: string | null }> | null, hours?: Array<{ __typename?: 'OperatingHour', day?: string | null, open?: string | null, close?: string | null }> | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
+export type GetFacilityQuery = { __typename?: 'Query', facility?: { __typename?: 'Facility', id: string, slug?: string | null, title?: string | null, liveUrl?: string | null, heroImage?: string | null, description?: string | null, body?: string | null, park?: (
+      { __typename?: 'Park' }
+      & { ' $fragmentRefs'?: { 'ParkFieldsFragment': ParkFieldsFragment } }
+    ) | null, services?: Array<(
+      { __typename?: 'Service' }
+      & { ' $fragmentRefs'?: { 'ServiceFieldsFragment': ServiceFieldsFragment } }
+    )> | null, address?: (
+      { __typename?: 'Location' }
+      & { ' $fragmentRefs'?: { 'AddressFieldsFragment': AddressFieldsFragment } }
+    ) | null, contacts?: Array<(
+      { __typename?: 'Contact' }
+      & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
+    )> | null, hours?: Array<(
+      { __typename?: 'OperatingHour' }
+      & { ' $fragmentRefs'?: { 'HourFieldsFragment': HourFieldsFragment } }
+    )> | null } | null, publicNotices?: Array<(
+    { __typename?: 'PublicNotice' }
+    & { ' $fragmentRefs'?: { 'PublicNoticeFieldsFragment': PublicNoticeFieldsFragment } }
+  )> | null };
 
 export type GetGovernmentPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12681,7 +14873,31 @@ export type GetHomePageQueryVariables = Exact<{
 }>;
 
 
-export type GetHomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePage', id: string, title?: string | null, description?: string | null, heroImage?: string | null, toolbeltOne?: { __typename?: 'Highlight', id: string, image?: string | null, title?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null } | null } | null, toolbeltTwo?: { __typename?: 'Highlight', id: string, image?: string | null, title?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null } | null } | null, toolbeltThree?: { __typename?: 'Highlight', id: string, image?: string | null, title?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, selectItem?: any | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null } | null } | null, toolbeltFour?: { __typename?: 'Highlight', id: string, image?: string | null, title?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null } | null } | null, highlightOne?: { __typename?: 'Highlight', id: string, image?: string | null, title?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null } | null } | null, highlightTwo?: { __typename?: 'Highlight', id: string, image?: string | null, title?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null } | null } | null, highlightThree?: { __typename?: 'Highlight', id: string, image?: string | null, title?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null } | null } | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
+export type GetHomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePage', id: string, title?: string | null, description?: string | null, heroImage?: string | null, toolbeltOne?: (
+      { __typename?: 'Highlight' }
+      & { ' $fragmentRefs'?: { 'HighlightFieldsFragment': HighlightFieldsFragment } }
+    ) | null, toolbeltTwo?: (
+      { __typename?: 'Highlight' }
+      & { ' $fragmentRefs'?: { 'HighlightFieldsFragment': HighlightFieldsFragment } }
+    ) | null, toolbeltThree?: (
+      { __typename?: 'Highlight' }
+      & { ' $fragmentRefs'?: { 'HighlightFieldsFragment': HighlightFieldsFragment } }
+    ) | null, toolbeltFour?: (
+      { __typename?: 'Highlight' }
+      & { ' $fragmentRefs'?: { 'HighlightFieldsFragment': HighlightFieldsFragment } }
+    ) | null, highlightOne?: (
+      { __typename?: 'Highlight' }
+      & { ' $fragmentRefs'?: { 'HighlightFieldsFragment': HighlightFieldsFragment } }
+    ) | null, highlightTwo?: (
+      { __typename?: 'Highlight' }
+      & { ' $fragmentRefs'?: { 'HighlightFieldsFragment': HighlightFieldsFragment } }
+    ) | null, highlightThree?: (
+      { __typename?: 'Highlight' }
+      & { ' $fragmentRefs'?: { 'HighlightFieldsFragment': HighlightFieldsFragment } }
+    ) | null } | null, publicNotices?: Array<(
+    { __typename?: 'PublicNotice' }
+    & { ' $fragmentRefs'?: { 'PublicNoticeFieldsFragment': PublicNoticeFieldsFragment } }
+  )> | null };
 
 export type GetInternalLinkDataQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -12689,7 +14905,43 @@ export type GetInternalLinkDataQueryVariables = Exact<{
 }>;
 
 
-export type GetInternalLinkDataQuery = { __typename?: 'Query', getInternalLink: { __typename: 'AssemblyDistrict', title?: string | null, slug?: string | null } | { __typename: 'Board', title?: string | null, slug?: string | null } | { __typename: 'BoardPage', title?: string | null } | { __typename: 'Community', title?: string | null, slug?: string | null } | { __typename: 'Facility', title?: string | null, slug?: string | null } | { __typename: 'HomePage', title?: string | null } | { __typename: 'OrgUnit', title?: string | null, slug?: string | null } | { __typename: 'Park', title?: string | null, slug?: string | null } | { __typename: 'PublicNotice', title?: string | null, slug?: string | null } | { __typename: 'Service', title?: string | null, slug?: string | null } | { __typename: 'Trail', title?: string | null, slug?: string | null } | { __typename: 'Url', title?: string | null, url?: string | null } };
+export type GetInternalLinkDataQuery = { __typename?: 'Query', getInternalLink?: (
+    { __typename?: 'AssemblyDistrict' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_AssemblyDistrict_Fragment': GetInternalLinkDataFields_AssemblyDistrict_Fragment } }
+  ) | (
+    { __typename?: 'Board' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_Board_Fragment': GetInternalLinkDataFields_Board_Fragment } }
+  ) | (
+    { __typename?: 'BoardPage' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_BoardPage_Fragment': GetInternalLinkDataFields_BoardPage_Fragment } }
+  ) | (
+    { __typename?: 'Community' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_Community_Fragment': GetInternalLinkDataFields_Community_Fragment } }
+  ) | (
+    { __typename?: 'Facility' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_Facility_Fragment': GetInternalLinkDataFields_Facility_Fragment } }
+  ) | (
+    { __typename?: 'HomePage' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_HomePage_Fragment': GetInternalLinkDataFields_HomePage_Fragment } }
+  ) | (
+    { __typename?: 'OrgUnit' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_OrgUnit_Fragment': GetInternalLinkDataFields_OrgUnit_Fragment } }
+  ) | (
+    { __typename?: 'Park' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_Park_Fragment': GetInternalLinkDataFields_Park_Fragment } }
+  ) | (
+    { __typename?: 'PublicNotice' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_PublicNotice_Fragment': GetInternalLinkDataFields_PublicNotice_Fragment } }
+  ) | (
+    { __typename?: 'Service' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_Service_Fragment': GetInternalLinkDataFields_Service_Fragment } }
+  ) | (
+    { __typename?: 'Trail' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_Trail_Fragment': GetInternalLinkDataFields_Trail_Fragment } }
+  ) | (
+    { __typename?: 'Url' }
+    & { ' $fragmentRefs'?: { 'GetInternalLinkDataFields_Url_Fragment': GetInternalLinkDataFields_Url_Fragment } }
+  ) | null };
 
 export type GetOrgUnitMetaQueryVariables = Exact<{
   where: OrgUnitWhereUniqueInput;
@@ -12706,7 +14958,22 @@ export type GetOrgUnitQueryVariables = Exact<{
 }>;
 
 
-export type GetOrgUnitQuery = { __typename?: 'Query', orgUnit?: { __typename?: 'OrgUnit', id: string, title?: string | null, description?: string | null, body?: string | null, heroImage?: string | null, children?: Array<{ __typename?: 'OrgUnit', id: string, description?: string | null, title?: string | null, slug?: string | null }> | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, title?: string | null, email?: string | null, phone?: string | null }> | null, parent?: { __typename?: 'OrgUnit', id: string, slug?: string | null, title?: string | null, description?: string | null } | null, services?: { __typename?: 'Service', id: string, slug?: string | null, title?: string | null, description?: string | null } | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
+export type GetOrgUnitQuery = { __typename?: 'Query', orgUnit?: { __typename?: 'OrgUnit', id: string, title?: string | null, description?: string | null, body?: string | null, heroImage?: string | null, children?: Array<(
+      { __typename?: 'OrgUnit' }
+      & { ' $fragmentRefs'?: { 'OrgUnitFieldsFragment': OrgUnitFieldsFragment } }
+    )> | null, contacts?: Array<(
+      { __typename?: 'Contact' }
+      & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
+    )> | null, parent?: (
+      { __typename?: 'OrgUnit' }
+      & { ' $fragmentRefs'?: { 'OrgUnitFieldsFragment': OrgUnitFieldsFragment } }
+    ) | null, services?: Array<(
+      { __typename?: 'Service' }
+      & { ' $fragmentRefs'?: { 'ServiceFieldsFragment': ServiceFieldsFragment } }
+    )> | null } | null, publicNotices?: Array<(
+    { __typename?: 'PublicNotice' }
+    & { ' $fragmentRefs'?: { 'PublicNoticeFieldsFragment': PublicNoticeFieldsFragment } }
+  )> | null };
 
 export type GetParkMetaQueryVariables = Exact<{
   where: ParkWhereUniqueInput;
@@ -12723,7 +14990,28 @@ export type GetParkQueryVariables = Exact<{
 }>;
 
 
-export type GetParkQuery = { __typename?: 'Query', park?: { __typename?: 'Park', id: string, title?: string | null, slug?: string | null, body?: string | null, heroImage?: string | null, contacts?: Array<{ __typename?: 'Contact', id: string, title?: string | null, phone?: string | null, email?: string | null, name?: string | null }> | null, services?: Array<{ __typename?: 'Service', title?: string | null, description?: string | null, slug?: string | null, id: string }> | null, address?: { __typename?: 'Location', title?: string | null, lineOne?: string | null, city?: string | null, state?: string | null, zip?: string | null } | null, hours?: Array<{ __typename?: 'OperatingHour', day?: string | null, open?: string | null, close?: string | null }> | null, trails?: Array<{ __typename?: 'Trail', title?: string | null, description?: string | null, slug?: string | null, id: string }> | null, facilities?: Array<{ __typename?: 'Facility', title?: string | null, id: string, description?: string | null, slug?: string | null }> | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
+export type GetParkQuery = { __typename?: 'Query', park?: { __typename?: 'Park', id: string, title?: string | null, slug?: string | null, body?: string | null, heroImage?: string | null, contacts?: Array<(
+      { __typename?: 'Contact' }
+      & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
+    )> | null, services?: Array<(
+      { __typename?: 'Service' }
+      & { ' $fragmentRefs'?: { 'ServiceFieldsFragment': ServiceFieldsFragment } }
+    )> | null, address?: (
+      { __typename?: 'Location' }
+      & { ' $fragmentRefs'?: { 'AddressFieldsFragment': AddressFieldsFragment } }
+    ) | null, hours?: Array<(
+      { __typename?: 'OperatingHour' }
+      & { ' $fragmentRefs'?: { 'HourFieldsFragment': HourFieldsFragment } }
+    )> | null, trails?: Array<(
+      { __typename?: 'Trail' }
+      & { ' $fragmentRefs'?: { 'TrailFieldsFragment': TrailFieldsFragment } }
+    )> | null, facilities?: Array<(
+      { __typename?: 'Facility' }
+      & { ' $fragmentRefs'?: { 'FacilityFieldsFragment': FacilityFieldsFragment } }
+    )> | null } | null, publicNotices?: Array<(
+    { __typename?: 'PublicNotice' }
+    & { ' $fragmentRefs'?: { 'PublicNoticeFieldsFragment': PublicNoticeFieldsFragment } }
+  )> | null };
 
 export type GetPublicNoticeMetaQueryVariables = Exact<{
   where: PublicNoticeWhereUniqueInput;
@@ -12737,7 +15025,16 @@ export type GetPublicNoticeQueryVariables = Exact<{
 }>;
 
 
-export type GetPublicNoticeQuery = { __typename?: 'Query', publicNotice?: { __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, body?: string | null, description?: string | null, effectiveDate?: any | null, endDate?: any | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, title?: string | null, email?: string | null, phone?: string | null }> | null, documents?: Array<{ __typename?: 'Document', id: string, title?: string | null, file?: { __typename?: 'FileFieldOutput', filename: string, url: string, filesize: number } | null }> | null, actions?: Array<{ __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Community', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Facility', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Park', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Trail', id: string, title?: string | null, slug?: string | null, description?: string | null } | { __typename: 'Url', id: string, title?: string | null, description?: string | null, url?: string | null } | null }> | null } | null };
+export type GetPublicNoticeQuery = { __typename?: 'Query', publicNotice?: { __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, body?: string | null, description?: string | null, effectiveDate?: any | null, endDate?: any | null, contacts?: Array<(
+      { __typename?: 'Contact' }
+      & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
+    )> | null, documents?: Array<(
+      { __typename?: 'Document' }
+      & { ' $fragmentRefs'?: { 'DocumentFieldsFragment': DocumentFieldsFragment } }
+    )> | null, actions?: Array<(
+      { __typename?: 'InternalLink' }
+      & { ' $fragmentRefs'?: { 'ActionFieldsFragment': ActionFieldsFragment } }
+    )> | null } | null };
 
 export type GetServiceMetaQueryVariables = Exact<{
   where: ServiceWhereUniqueInput;
@@ -12751,7 +15048,19 @@ export type GetServiceNoPnQueryVariables = Exact<{
 }>;
 
 
-export type GetServiceNoPnQuery = { __typename?: 'Query', service?: { __typename?: 'Service', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, body?: string | null, primaryAction?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, secondaryActions?: Array<{ __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null }> | null, primaryContact?: { __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null }> | null } | null };
+export type GetServiceNoPnQuery = { __typename?: 'Query', service?: { __typename?: 'Service', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, body?: string | null, description?: string | null, primaryAction?: (
+      { __typename?: 'ExternalLink' }
+      & { ' $fragmentRefs'?: { 'ExternalActionFieldsFragment': ExternalActionFieldsFragment } }
+    ) | null, secondaryActions?: Array<(
+      { __typename?: 'ExternalLink' }
+      & { ' $fragmentRefs'?: { 'ExternalActionFieldsFragment': ExternalActionFieldsFragment } }
+    )> | null, primaryContact?: (
+      { __typename?: 'Contact' }
+      & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
+    ) | null, contacts?: Array<(
+      { __typename?: 'Contact' }
+      & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
+    )> | null } | null };
 
 export type GetServiceQueryVariables = Exact<{
   where: ServiceWhereUniqueInput;
@@ -12761,7 +15070,17 @@ export type GetServiceQueryVariables = Exact<{
 }>;
 
 
-export type GetServiceQuery = { __typename?: 'Query', service?: { __typename?: 'Service', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, primaryAction?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, secondaryActions?: Array<{ __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null }> | null, primaryContact?: { __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null }> | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
+export type GetServiceQuery = { __typename?: 'Query', service?: { __typename?: 'Service', id: string, slug?: string | null, title?: string | null, heroImage?: string | null, body?: string | null, description?: string | null, primaryAction?: { __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null } | null, secondaryActions?: Array<{ __typename?: 'ExternalLink', id: string, label?: string | null, url?: { __typename?: 'Url', id: string, title?: string | null, url?: string | null } | null }> | null, primaryContact?: { __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null }> | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
+
+export type GetTopicQueryVariables = Exact<{
+  where: TopicWhereUniqueInput;
+}>;
+
+
+export type GetTopicQuery = { __typename?: 'Query', topic?: { __typename?: 'Topic', id: string, body?: string | null, description?: string | null, slug?: string | null, publicNotices?: Array<(
+      { __typename?: 'PublicNotice' }
+      & { ' $fragmentRefs'?: { 'PublicNoticeFieldsFragment': PublicNoticeFieldsFragment } }
+    )> | null } | null };
 
 export type GetTrailMetaQueryVariables = Exact<{
   where: TrailWhereUniqueInput;
@@ -12780,32 +15099,51 @@ export type GetTrailQueryVariables = Exact<{
 
 export type GetTrailQuery = { __typename?: 'Query', trail?: { __typename?: 'Trail', id: string, title?: string | null, body?: string | null, heroImage?: string | null, description?: string | null, length?: string | null, atv?: boolean | null, biking?: boolean | null, crossCountrySkiing?: boolean | null, difficulty?: string | null, dirtBiking?: boolean | null, dogWalking?: boolean | null, elevationChange?: string | null, fall?: boolean | null, frisbeeGolf?: boolean | null, hiking?: boolean | null, horsebackRiding?: boolean | null, mushing?: boolean | null, open?: boolean | null, running?: boolean | null, snowMachining?: boolean | null, snowshoeing?: boolean | null, spring?: boolean | null, summer?: boolean | null, winter?: boolean | null, park?: { __typename?: 'Park', id: string, slug?: string | null, title?: string | null, description?: string | null } | null, contacts?: Array<{ __typename?: 'Contact', id: string, name?: string | null, title?: string | null, phone?: string | null, email?: string | null }> | null, address?: { __typename?: 'Location', id: string, title?: string | null, lineOne?: string | null, lineTwo?: string | null, state?: string | null, city?: string | null, zip?: string | null } | null, services?: Array<{ __typename?: 'Service', id: string, title?: string | null, slug?: string | null, description?: string | null }> | null } | null, publicNotices?: Array<{ __typename?: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null, heroImage?: string | null, urgency?: number | null }> | null };
 
-
+export const ExternalActionFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ExternalActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ExternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<ExternalActionFieldsFragment, unknown>;
+export const ContactFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<ContactFieldsFragment, unknown>;
+export const AddressFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AddressFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Location"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}}]} as unknown as DocumentNode<AddressFieldsFragment, unknown>;
+export const HourFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HourFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OperatingHour"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"day"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}}]}}]} as unknown as DocumentNode<HourFieldsFragment, unknown>;
+export const ImageFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Image"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<ImageFieldsFragment, unknown>;
+export const PublicNoticeFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PublicNoticeFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]} as unknown as DocumentNode<PublicNoticeFieldsFragment, unknown>;
+export const DocumentFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}}]} as unknown as DocumentNode<DocumentFieldsFragment, unknown>;
+export const DistrictDetailFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DistrictDetailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"memberName"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]} as unknown as DocumentNode<DistrictDetailFieldsFragment, unknown>;
+export const GetInternalLinkDataFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GetInternalLinkDataFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLinkSearch"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Board"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BoardPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"HomePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<GetInternalLinkDataFieldsFragment, unknown>;
+export const ServiceFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]} as unknown as DocumentNode<ServiceFieldsFragment, unknown>;
+export const ParkFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParkFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]} as unknown as DocumentNode<ParkFieldsFragment, unknown>;
+export const TrailFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TrailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]} as unknown as DocumentNode<TrailFieldsFragment, unknown>;
+export const FacilityFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FacilityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]} as unknown as DocumentNode<FacilityFieldsFragment, unknown>;
+export const CommunityFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CommunityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]} as unknown as DocumentNode<CommunityFieldsFragment, unknown>;
+export const AssemblyDistrictFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AssemblyDistrictFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]} as unknown as DocumentNode<AssemblyDistrictFieldsFragment, unknown>;
+export const OrgUnitFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OrgUnitFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]} as unknown as DocumentNode<OrgUnitFieldsFragment, unknown>;
+export const UrlFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UrlFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]} as unknown as DocumentNode<UrlFieldsFragment, unknown>;
+export const ActionFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ServiceFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ParkFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TrailFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FacilityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CommunityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AssemblyDistrictFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrgUnitFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UrlFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParkFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TrailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FacilityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CommunityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AssemblyDistrictFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OrgUnitFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UrlFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]} as unknown as DocumentNode<ActionFieldsFragment, unknown>;
+export const HighlightFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HighlightFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Highlight"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParkFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TrailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FacilityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CommunityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AssemblyDistrictFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OrgUnitFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UrlFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ServiceFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ParkFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TrailFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FacilityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CommunityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AssemblyDistrictFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrgUnitFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UrlFields"}}]}}]}}]}}]} as unknown as DocumentNode<HighlightFieldsFragment, unknown>;
 export const GetAlertsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAlerts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alerts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}},{"kind":"Field","name":{"kind":"Name","value":"body"}}]}}]}}]} as unknown as DocumentNode<GetAlertsQuery, GetAlertsQueryVariables>;
 export const GetAssemblyDistrictMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAssemblyDistrictMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrictWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"assemblyDistrict"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetAssemblyDistrictMetaQuery, GetAssemblyDistrictMetaQueryVariables>;
-export const GetAssemblyDistrictDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAssemblyDistrict"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrictWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"assemblyDistrict"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"memberName"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"fax"}},{"kind":"Field","name":{"kind":"Name","value":"termStart"}},{"kind":"Field","name":{"kind":"Name","value":"termEnd"}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetAssemblyDistrictQuery, GetAssemblyDistrictQueryVariables>;
+export const GetAssemblyDistrictDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAssemblyDistrict"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrictWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"assemblyDistrict"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"memberName"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"fax"}},{"kind":"Field","name":{"kind":"Name","value":"termStart"}},{"kind":"Field","name":{"kind":"Name","value":"termEnd"}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PublicNoticeFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Image"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PublicNoticeFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]} as unknown as DocumentNode<GetAssemblyDistrictQuery, GetAssemblyDistrictQueryVariables>;
 export const GetBoardMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBoardMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BoardWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetBoardMetaQuery, GetBoardMetaQueryVariables>;
-export const GetBoardDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBoard"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BoardWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"meetingSchedule"}},{"kind":"Field","name":{"kind":"Name","value":"isActive"}},{"kind":"Field","name":{"kind":"Name","value":"communities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"districts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"memberName"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"linkToAgendas"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"linkToResolutions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"linkToPublicOpinionMessage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"actions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetBoardQuery, GetBoardQueryVariables>;
+export const GetBoardDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBoard"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BoardWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"meetingSchedule"}},{"kind":"Field","name":{"kind":"Name","value":"isActive"}},{"kind":"Field","name":{"kind":"Name","value":"communities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CommunityFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"districts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DistrictDetailFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"linkToAgendas"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"linkToResolutions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"linkToPublicOpinionMessage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"actions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParkFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TrailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FacilityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CommunityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AssemblyDistrictFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OrgUnitFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UrlFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DistrictDetailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"memberName"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ExternalActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ExternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ServiceFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ParkFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TrailFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FacilityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CommunityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AssemblyDistrictFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrgUnitFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UrlFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}}]} as unknown as DocumentNode<GetBoardQuery, GetBoardQueryVariables>;
 export const GetBoardsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBoards"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"skip"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BoardWhereInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boards"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}},{"kind":"Argument","name":{"kind":"Name","value":"skip"},"value":{"kind":"Variable","name":{"kind":"Name","value":"skip"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"isActive"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"meetingSchedule"}}]}}]}}]} as unknown as DocumentNode<GetBoardsQuery, GetBoardsQueryVariables>;
 export const GetBoardsPageMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBoardsPageMeta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boardPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetBoardsPageMetaQuery, GetBoardsPageMetaQueryVariables>;
-export const GetBoardsPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBoardsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boardPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"vacancyReport"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"applicationForm"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"actions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetBoardsPageQuery, GetBoardsPageQueryVariables>;
+export const GetBoardsPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBoardsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boardPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"vacancyReport"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"applicationForm"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"actions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParkFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TrailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FacilityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CommunityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AssemblyDistrictFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OrgUnitFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UrlFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ServiceFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ParkFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TrailFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FacilityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CommunityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AssemblyDistrictFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrgUnitFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UrlFields"}}]}}]}}]}}]} as unknown as DocumentNode<GetBoardsPageQuery, GetBoardsPageQueryVariables>;
 export const GetCommunityMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCommunityMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CommunityWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"community"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetCommunityMetaQuery, GetCommunityMetaQueryVariables>;
-export const GetCommunityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCommunity"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CommunityWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"community"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"districts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"memberName"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetCommunityQuery, GetCommunityQueryVariables>;
-export const GetDocumentCollectionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDocumentCollection"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DocumentCollectionWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetDocumentCollectionQuery, GetDocumentCollectionQueryVariables>;
+export const GetCommunityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetCommunity"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CommunityWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"community"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ServiceFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"districts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DistrictDetailFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PublicNoticeFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DistrictDetailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"memberName"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PublicNoticeFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]} as unknown as DocumentNode<GetCommunityQuery, GetCommunityQueryVariables>;
+export const GetDocumentCollectionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDocumentCollection"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DocumentCollectionWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}}]} as unknown as DocumentNode<GetDocumentCollectionQuery, GetDocumentCollectionQueryVariables>;
 export const GetFacilityMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFacilityMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"FacilityWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"facility"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetFacilityMetaQuery, GetFacilityMetaQueryVariables>;
-export const GetFacilityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFacility"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"FacilityWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"facility"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"liveUrl"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"park"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hours"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"day"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetFacilityQuery, GetFacilityQueryVariables>;
+export const GetFacilityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFacility"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"FacilityWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"facility"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"liveUrl"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"park"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ParkFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ServiceFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AddressFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hours"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"HourFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PublicNoticeFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParkFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AddressFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Location"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HourFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OperatingHour"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"day"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PublicNoticeFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]} as unknown as DocumentNode<GetFacilityQuery, GetFacilityQueryVariables>;
 export const GetGovernmentPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGovernmentPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"assemblyDistricts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"memberName"}},{"kind":"Field","name":{"kind":"Name","value":"photo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetGovernmentPageQuery, GetGovernmentPageQueryVariables>;
 export const GetHomePageMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetHomePageMeta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetHomePageMetaQuery, GetHomePageMetaQueryVariables>;
-export const GetHomePageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetHomePage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltOne"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltTwo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltThree"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"selectItem"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltFour"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"highlightOne"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"highlightTwo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"highlightThree"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetHomePageQuery, GetHomePageQueryVariables>;
-export const GetInternalLinkDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetInternalLinkData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"list"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getInternalLink"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"type"},"value":{"kind":"Variable","name":{"kind":"Name","value":"list"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Board"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BoardPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"HomePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]} as unknown as DocumentNode<GetInternalLinkDataQuery, GetInternalLinkDataQueryVariables>;
+export const GetHomePageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetHomePage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltOne"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"HighlightFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltTwo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"HighlightFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltThree"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"HighlightFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"toolbeltFour"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"HighlightFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"highlightOne"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"HighlightFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"highlightTwo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"HighlightFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"highlightThree"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"HighlightFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PublicNoticeFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParkFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TrailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FacilityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CommunityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AssemblyDistrictFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OrgUnitFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UrlFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ServiceFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ParkFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TrailFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FacilityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CommunityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AssemblyDistrictFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrgUnitFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UrlFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HighlightFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Highlight"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"linkedItem"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PublicNoticeFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]} as unknown as DocumentNode<GetHomePageQuery, GetHomePageQueryVariables>;
+export const GetInternalLinkDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetInternalLinkData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"list"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getInternalLink"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"type"},"value":{"kind":"Variable","name":{"kind":"Name","value":"list"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"GetInternalLinkDataFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GetInternalLinkDataFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLinkSearch"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Board"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BoardPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"HomePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<GetInternalLinkDataQuery, GetInternalLinkDataQueryVariables>;
 export const GetOrgUnitMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOrgUnitMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnitWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orgUnit"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetOrgUnitMetaQuery, GetOrgUnitMetaQueryVariables>;
-export const GetOrgUnitDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOrgUnit"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnitWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orgUnit"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"children"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetOrgUnitQuery, GetOrgUnitQueryVariables>;
+export const GetOrgUnitDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOrgUnit"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnitWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orgUnit"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"children"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrgUnitFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrgUnitFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ServiceFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PublicNoticeFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OrgUnitFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PublicNoticeFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]} as unknown as DocumentNode<GetOrgUnitQuery, GetOrgUnitQueryVariables>;
 export const GetParkMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetParkMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ParkWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"park"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetParkMetaQuery, GetParkMetaQueryVariables>;
-export const GetParkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPark"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ParkWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"park"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hours"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"day"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}}]}},{"kind":"Field","name":{"kind":"Name","value":"trails"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"facilities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetParkQuery, GetParkQueryVariables>;
+export const GetParkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPark"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ParkWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"park"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ServiceFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AddressFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hours"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"HourFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"trails"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TrailFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"facilities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FacilityFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PublicNoticeFields"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AddressFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Location"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HourFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OperatingHour"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"day"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TrailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FacilityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PublicNoticeFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]} as unknown as DocumentNode<GetParkQuery, GetParkQueryVariables>;
 export const GetPublicNoticeMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPublicNoticeMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publicNotice"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetPublicNoticeMetaQuery, GetPublicNoticeMetaQueryVariables>;
-export const GetPublicNoticeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPublicNotice"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publicNotice"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"effectiveDate"}},{"kind":"Field","name":{"kind":"Name","value":"endDate"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"actions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}}]} as unknown as DocumentNode<GetPublicNoticeQuery, GetPublicNoticeQueryVariables>;
+export const GetPublicNoticeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPublicNotice"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publicNotice"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"effectiveDate"}},{"kind":"Field","name":{"kind":"Name","value":"endDate"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"actions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ServiceFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ParkFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TrailFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FacilityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CommunityFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AssemblyDistrictFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OrgUnitFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UrlFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ServiceFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Park"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ParkFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Trail"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TrailFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Facility"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FacilityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Community"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CommunityFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AssemblyDistrict"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AssemblyDistrictFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrgUnit"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrgUnitFields"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UrlFields"}}]}}]}}]}}]} as unknown as DocumentNode<GetPublicNoticeQuery, GetPublicNoticeQueryVariables>;
 export const GetServiceMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetServiceMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ServiceWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"service"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetServiceMetaQuery, GetServiceMetaQueryVariables>;
-export const GetServiceNoPnDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetServiceNoPn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ServiceWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"service"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"primaryAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondaryActions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]}}]} as unknown as DocumentNode<GetServiceNoPnQuery, GetServiceNoPnQueryVariables>;
-export const GetServiceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetService"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ServiceWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"service"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"primaryAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondaryActions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetServiceQuery, GetServiceQueryVariables>;
+export const GetServiceNoPnDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetServiceNoPn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ServiceWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"service"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"primaryAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondaryActions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ExternalActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ExternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<GetServiceNoPnQuery, GetServiceNoPnQueryVariables>;
+export const GetServiceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetService"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ServiceWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"service"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"primaryAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondaryActions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetServiceQuery, GetServiceQueryVariables>;
+export const GetTopicDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTopic"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"TopicWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"topic"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PublicNoticeFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PublicNoticeFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]} as unknown as DocumentNode<GetTopicQuery, GetTopicQueryVariables>;
 export const GetTrailMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTrailMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"TrailWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetTrailMetaQuery, GetTrailMetaQueryVariables>;
 export const GetTrailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTrail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"TrailWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeWhereInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"take"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNoticeOrderByInput"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"length"}},{"kind":"Field","name":{"kind":"Name","value":"atv"}},{"kind":"Field","name":{"kind":"Name","value":"biking"}},{"kind":"Field","name":{"kind":"Name","value":"crossCountrySkiing"}},{"kind":"Field","name":{"kind":"Name","value":"difficulty"}},{"kind":"Field","name":{"kind":"Name","value":"dirtBiking"}},{"kind":"Field","name":{"kind":"Name","value":"dogWalking"}},{"kind":"Field","name":{"kind":"Name","value":"elevationChange"}},{"kind":"Field","name":{"kind":"Name","value":"fall"}},{"kind":"Field","name":{"kind":"Name","value":"frisbeeGolf"}},{"kind":"Field","name":{"kind":"Name","value":"hiking"}},{"kind":"Field","name":{"kind":"Name","value":"horsebackRiding"}},{"kind":"Field","name":{"kind":"Name","value":"mushing"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"running"}},{"kind":"Field","name":{"kind":"Name","value":"snowMachining"}},{"kind":"Field","name":{"kind":"Name","value":"snowshoeing"}},{"kind":"Field","name":{"kind":"Name","value":"spring"}},{"kind":"Field","name":{"kind":"Name","value":"summer"}},{"kind":"Field","name":{"kind":"Name","value":"winter"}},{"kind":"Field","name":{"kind":"Name","value":"park"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicNoticesWhere2"}}},{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"Variable","name":{"kind":"Name","value":"take"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}}]}}]} as unknown as DocumentNode<GetTrailQuery, GetTrailQueryVariables>;

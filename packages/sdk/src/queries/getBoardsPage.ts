@@ -30,95 +30,21 @@ export const GET_BOARDS_PAGE: TypedDocumentNode<
       body
       heroImage
       vacancyReport {
-        id
-        title
-        file {
-          url
-          filename
-          filesize
-        }
+        ...DocumentFields
       }
       documents {
-        id
-        title
-        file {
-          url
-          filename
-          filesize
-        }
+        ...DocumentFields
       }
       applicationForm {
-        id
-        title
-        file {
-          url
-          filename
-          filesize
-        }
+        ...DocumentFields
       }
 
       contacts {
-        id
-        name
-        title
-        phone
-        email
+        ...ContactFields
       }
 
       actions {
-        id
-        label
-        item {
-          __typename
-          ... on Service {
-            id
-            title
-            slug
-            description
-          }
-          ... on Park {
-            id
-            title
-            slug
-            description
-          }
-          ... on Trail {
-            id
-            title
-            slug
-            description
-          }
-          ... on Facility {
-            id
-            title
-            slug
-            description
-          }
-          ... on Community {
-            id
-            title
-            slug
-            description
-          }
-          ... on AssemblyDistrict {
-            id
-            title
-            slug
-            description
-          }
-          ... on OrgUnit {
-            id
-            title
-            slug
-            description
-          }
-          ... on Url {
-            id
-            title
-            description
-            url
-          }
-        }
+        ...ActionFields
       }
     }
   }
