@@ -30,6 +30,7 @@
     "remark-gfm": "^4.0.1",
     "swiper": "^11.2.8",
     "typesense-instantsearch-adapter": "^2.9.0",
+    "unist-util-visit": "^5.0.0",
     "voca": "^1.4.1"
   },
   "devDependencies": {

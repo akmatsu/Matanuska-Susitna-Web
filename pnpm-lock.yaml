@@ -344,6 +344,9 @@ importers:
       typesense-instantsearch-adapter:
         specifier: ^2.9.0
         version: 2.9.0(@babel/runtime@7.27.4)
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
       voca:
         specifier: ^1.4.1
         version: 1.4.1
