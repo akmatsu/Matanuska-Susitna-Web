@@ -82,9 +82,10 @@ export default async function BoardsPage({
             </CardHeader>
             <CardBody>
               <ul className="list-disc list-inside">
-                {page.documents?.map((doc) => (
-                  <>
-                    {doc.file?.url && doc.title && (
+                {page.documents?.map(
+                  (doc) =>
+                    doc.file?.url &&
+                    doc.title && (
                       <li key={doc.id} className="list-disc list-inside">
                         <Link
                           href={doc.file.url}
@@ -94,9 +95,8 @@ export default async function BoardsPage({
                           {doc.title}
                         </Link>
                       </li>
-                    )}
-                  </>
-                ))}
+                    ),
+                )}
               </ul>
             </CardBody>
           </Card>
