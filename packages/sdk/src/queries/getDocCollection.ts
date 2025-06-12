@@ -13,13 +13,7 @@ export const GET_DOC_COLLECTION_QUERY: TypedDocumentNode<
       id
       title
       documents {
-        id
-        title
-        file {
-          filename
-          filesize
-          url
-        }
+        ...DocumentFields
       }
     }
   }

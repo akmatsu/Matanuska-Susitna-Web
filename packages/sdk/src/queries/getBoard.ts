@@ -32,129 +32,28 @@ export const GET_BOARD: TypedDocumentNode<
       meetingSchedule
       isActive
       communities {
-        id
-        title
-        slug
-        description
+        ...CommunityFields
       }
       districts {
-        id
-        title
-        slug
-        description
-        memberName
-        bio
-        address
-        email
-        phone
-        photo {
-          id
-          title
-          file {
-            width
-            height
-            url
-          }
-        }
+        ...DistrictDetailFields
       }
       linkToAgendas {
-        id
-        label
-        url {
-          id
-          title
-          url
-        }
+        ...ExternalActionFields
       }
       linkToResolutions {
-        id
-        label
-        url {
-          id
-          title
-          url
-        }
+        ...ExternalActionFields
       }
       linkToPublicOpinionMessage {
-        id
-        label
-        url {
-          id
-          title
-          url
-        }
+        ...ExternalActionFields
       }
-
       contacts {
-        id
-        name
-        title
-        phone
-        email
+        ...ContactFields
       }
       actions {
-        id
-        label
-        item {
-          __typename
-          ... on Service {
-            id
-            title
-            slug
-            description
-          }
-          ... on Park {
-            id
-            title
-            slug
-            description
-          }
-          ... on Trail {
-            id
-            title
-            slug
-            description
-          }
-          ... on Facility {
-            id
-            title
-            slug
-            description
-          }
-          ... on Community {
-            id
-            title
-            slug
-            description
-          }
-          ... on AssemblyDistrict {
-            id
-            title
-            slug
-            description
-          }
-          ... on OrgUnit {
-            id
-            title
-            slug
-            description
-          }
-          ... on Url {
-            id
-            title
-            description
-            url
-          }
-        }
+        ...ActionFields
       }
       documents {
-        id
-        title
-        file {
-          url
-          filename
-          filesize
-        }
+        ...DocumentFields
       }
     }
   }

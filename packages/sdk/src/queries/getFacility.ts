@@ -34,48 +34,26 @@ export const GET_FACILITY_QUERY: TypedDocumentNode<
       title
       liveUrl
       heroImage
-      park {
-        id
-        title
-        description
-        slug
-      }
-      services {
-        id
-        title
-        description
-        slug
-      }
       description
       body
+      park {
+        ...ParkFields
+      }
+      services {
+        ...ServiceFields
+      }
       address {
-        title
-        lineOne
-        lineTwo
-        city
-        state
-        zip
+        ...AddressFields
       }
       contacts {
-        id
-        name
-        email
-        phone
-        title
+        ...ContactFields
       }
       hours {
-        day
-        open
-        close
+        ...HourFields
       }
     }
     publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
-      id
-      slug
-      title
-      description
-      heroImage
-      urgency
+      ...PublicNoticeFields
     }
   }
 `;

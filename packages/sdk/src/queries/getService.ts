@@ -34,34 +34,16 @@ export const GET_SERVICE_QUERY_NO_PN: TypedDocumentNode<
       body
       description
       primaryAction {
-        id
-        label
-        url {
-          id
-          title
-          url
-        }
+        ...ExternalActionFields
       }
       secondaryActions {
-        id
-        label
-        url {
-          id
-          title
-          url
-        }
+        ...ExternalActionFields
       }
       primaryContact {
-        id
-        name
-        phone
-        email
+        ...ContactFields
       }
       contacts {
-        id
-        name
-        phone
-        email
+        ...ContactFields
       }
     }
   }

@@ -35,37 +35,18 @@ export const GET_COMMUNITY_QUERY: TypedDocumentNode<
       body
       heroImage
       services {
-        id
-        slug
-        title
-        description
+        ...ServiceFields
       }
       contacts {
-        id
-        name
-        phone
-        email
+        ...ContactFields
       }
       districts {
-        slug
-        title
-        description
-        memberName
-        photo {
-          file {
-            url
-          }
-        }
+        ...DistrictDetailFields
       }
     }
 
     publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
-      id
-      slug
-      title
-      description
-      heroImage
-      urgency
+      ...PublicNoticeFields
     }
   }
 `;
