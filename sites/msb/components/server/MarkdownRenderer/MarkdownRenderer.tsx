@@ -7,11 +7,53 @@ import remarkDirectiveRehype from 'remark-directive-rehype';
 import { ActionButtonWrapper } from './components/PrimaryActionButton';
 import { InternalLink } from './components/InternalLink';
 import { AnchorHTMLAttributes } from 'react';
+import { visit } from 'unist-util-visit';
+
+/**
+ * Remark plugin to filter out unsupported directives.
+ * It replaces unsupported directives with their literal syntax.
+ */
+function remarkFilterUnsupportedDirectives(allowed: string[]) {
+  return () => (tree: any) => {
+    visit(
+      tree,
+      ['textDirective', 'leafDirective', 'containerDirective'],
+      (node, index, parent) => {
+        if (!allowed.includes(node.name)) {
+          const raw =
+            node.type === 'textDirective'
+              ? `:${node.name}`
+              : `:${node.name}{${Object.entries(node.attributes || {})
+                  .map(([k, v]) => `${k}="${v}"`)
+                  .join(' ')}}`;
+
+          parent!.children.splice(index!, 1, {
+            type: 'text',
+            value: raw,
+          });
+        }
+      },
+    );
+  };
+}
 
 export function MarkdownRenderer(props: { children: string }) {
+  const allowedDirectives = [
+    'process',
+    'step',
+    'doc-collection',
+    'primary-action-button',
+    'internal-link',
+  ];
+
   return (
     <Markdown
-      remarkPlugins={[remarkGfm, remarkDirective, remarkDirectiveRehype]}
+      remarkPlugins={[
+        remarkGfm,
+        remarkDirective,
+        remarkFilterUnsupportedDirectives(allowedDirectives),
+        remarkDirectiveRehype,
+      ]}
       components={{
         a: (props: AnchorHTMLAttributes<HTMLAnchorElement>) => {
           const isExternal = props.href?.startsWith('http');
@@ -39,7 +81,7 @@ export function MarkdownRenderer(props: { children: string }) {
         'internal-link': InternalLink,
       }}
     >
-      {props.children}
+      {props.children.replace(/<br\s*\/?>/gi, '')}
     </Markdown>
   );
 }

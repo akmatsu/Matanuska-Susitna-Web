@@ -14,10 +14,10 @@ export function Tooltip({
   return (
     <span className="relative inline-block group">
       {children}
-      <div
+      <span
         className={clsx(
           // base styles
-          'w-max max-w-3xs scale-0 opacity-0  bg-gray-900 text-white text-sm px-3 py-1 rounded shadow-md',
+          'block w-max max-w-3xs scale-0 opacity-0  bg-gray-900 text-white text-sm px-3 py-1 rounded shadow-md',
 
           // tooltip positioning
           'absolute',
@@ -39,7 +39,7 @@ export function Tooltip({
         )}
       >
         {content}
-      </div>
+      </span>
     </span>
   );
 }
