@@ -1,3 +1,14 @@
+## [0.9.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.9.2...v0.9.3) (2025-06-12)
+
+
+### Bug Fixes
+
+* ensured documents lists have a proper key field on the boards page ([23eedf5](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/23eedf5ece9281de37b9b5e2ca641aa08ac35c54))
+* fixed build errors ([f1ffbb7](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f1ffbb7c743d6adf0c78a2025e11772f0e7a9be2))
+* fixed eslint errors ([f0de505](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f0de505c2523e7500938a8ed3fb69220b96ab318))
+* fixed remark-directive parsing invalid directives. Also fixed <br /> tags appearing in body ([bd5dca8](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/bd5dca8dbaaf7b0e43452ddcf949a88d1a50bc64))
+* triggering build and release ([1581a8e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1581a8e2596081797140cef6020d6ac190a54c79))
+
 ## [0.9.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.9.1...v0.9.2) (2025-06-10)
 
 
