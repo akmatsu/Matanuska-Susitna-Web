@@ -1,7 +1,15 @@
 import { PageSideNavController } from '@/components/client/Page/PageSideNavController';
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { LinkButton } from '@/components/static/LinkButton';
-import { PageEvents, PageSidebar } from '@/components/static/Page';
+import {
+  PageActions,
+  PageContacts,
+  PageDistricts,
+  PageDocuments,
+  PageEvents,
+  PageListItems,
+  PageSection,
+} from '@/components/static/Page';
 import { PageContainer } from '@/components/static/Page/PageContainer';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { getPageMeta } from '@/utils/pageHelpers';
@@ -49,7 +57,18 @@ export default async function BoardPage(props: {
       {page.heroImage && <Hero image={page.heroImage} />}
       <PageContainer>
         <PageSideNavController
-          rightSide={<PageSidebar page={page} listName={listName} />}
+          rightSide={
+            <>
+              <PageActions actions={page.actions} />
+              <PageDocuments documents={page.documents} />
+              <PageContacts contacts={page.contacts} />
+              <PageSection title="Meeting Schedule">
+                <p>{page.meetingSchedule}</p>
+              </PageSection>
+              <PageDistricts items={page.districts} />
+              <PageListItems items={page.communities} title="Communities" />
+            </>
+          }
         >
           <div className="prose max-w-none prose-table:table-auto prose-table:w-full prose-th:bg-base-lighter prose-th:border prose-th:border-base-darkest prose-th:font-bold prose-th:px-2 prose-td:px-2 prose-td:border prose-td:border-base-darkest prose-table:border prose-table:border-base-darkest prose-a:text-primary">
             <p className="text-bold capitalize text-base-dark! font-bold text-2xl not-prose">

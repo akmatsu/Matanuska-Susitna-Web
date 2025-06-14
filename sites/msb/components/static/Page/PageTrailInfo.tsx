@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { PageSection } from './PageSection';
-import { Trail } from '@msb/js-sdk/graphql';
+import { TrailPageFragment } from '@msb/js-sdk/graphql';
 
-export function PageTrailInfo({ trail }: { trail: Trail }) {
+export function PageTrailInfo({ trail }: { trail: TrailPageFragment }) {
   return (
     <>
       <PageSection title="Trails Seasons">

@@ -1,8 +1,10 @@
 import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui/Card';
 import { PageSection } from './PageSection';
-import { PageMerged } from '@msb/js-sdk/types';
+import { OrgUnitFieldsFragment } from '@msb/js-sdk/graphql';
 
-export function PageParentOrgUnit(props: { item?: PageMerged['parent'] }) {
+export function PageParentOrgUnit(props: {
+  item?: OrgUnitFieldsFragment | null;
+}) {
   if (props.item) {
     return (
       <PageSection title="Parent Department">

@@ -27,24 +27,7 @@ export const GET_SERVICE_QUERY_NO_PN: TypedDocumentNode<
 > = gql`
   query GetServiceNoPn($where: ServiceWhereUniqueInput!) {
     service(where: $where) {
-      id
-      slug
-      title
-      heroImage
-      body
-      description
-      primaryAction {
-        ...ExternalActionFields
-      }
-      secondaryActions {
-        ...ExternalActionFields
-      }
-      primaryContact {
-        ...ContactFields
-      }
-      contacts {
-        ...ContactFields
-      }
+      ...ServicePage
     }
   }
 `;
@@ -60,50 +43,10 @@ export const GET_SERVICE_QUERY: TypedDocumentNode<
     $orderBy: [PublicNoticeOrderByInput!]!
   ) {
     service(where: $where) {
-      id
-      slug
-      title
-      heroImage
-      body
-      description
-      primaryAction {
-        id
-        label
-        url {
-          id
-          title
-          url
-        }
-      }
-      secondaryActions {
-        id
-        label
-        url {
-          id
-          title
-          url
-        }
-      }
-      primaryContact {
-        id
-        name
-        phone
-        email
-      }
-      contacts {
-        id
-        name
-        phone
-        email
-      }
+      ...ServicePage
     }
     publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
-      id
-      slug
-      title
-      description
-      heroImage
-      urgency
+      ...PublicNoticeFields
     }
   }
 `;
