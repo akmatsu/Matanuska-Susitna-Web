@@ -12,6 +12,7 @@
     "./client": "./src/client/index.ts",
     "./apollo": "./src/apollo.ts",
     "./graphql": "./src/graphql/graphql.ts",
+    "./gql": "./src/graphql/index.ts",
     "./getAlerts": "./src/queries/getAlerts.ts",
     "./getAssemblyDistrict": "./src/queries/getAssemblyDistrict.ts",
     "./getBoards": "./src/queries/getBoards.ts",
@@ -26,7 +27,8 @@
     "./getService": "./src/queries/getService.ts",
     "./getTrail": "./src/queries/getTrail.ts",
     "./getBoard": "./src/queries/getBoard.ts",
-    "./getInternalLinkData": "./src/queries/getInternalLinkData.ts"
+    "./getInternalLinkData": "./src/queries/getInternalLinkData.ts",
+    "./getPage": "./src/queries/getPage.ts"
   },
   "scripts": {
     "codegen": "pnpm exec graphql-codegen --config codegen.ts",

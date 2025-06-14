@@ -1,15 +1,19 @@
-import type { LinkedItemUnion, Maybe } from '@msb/js-sdk/graphql';
+import type {
+  ActionFieldsFragment,
+  ExternalActionFieldsFragment,
+  LinkedItemUnion,
+  Maybe,
+} from '@msb/js-sdk/graphql';
 import { LinkButton } from '@/components/static/LinkButton';
-import { PageMerged } from '@msb/js-sdk/types';
 
 export function PageActions({
   primaryAction,
   secondaryActions,
   actions,
 }: {
-  primaryAction?: PageMerged['primaryAction'] | null;
-  secondaryActions?: PageMerged['secondaryActions'] | null;
-  actions?: PageMerged['actions'] | null;
+  primaryAction?: ExternalActionFieldsFragment | null;
+  secondaryActions?: ExternalActionFieldsFragment[] | null;
+  actions?: ActionFieldsFragment[] | null;
 }) {
   function getUrlSection(str?: string) {
     if (!str) {

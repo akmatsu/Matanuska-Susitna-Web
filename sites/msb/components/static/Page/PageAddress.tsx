@@ -1,8 +1,8 @@
 import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import { PageSection } from './PageSection';
-import { PageMerged } from '@msb/js-sdk/types';
+import { AddressFieldsFragment } from '@msb/js-sdk/graphql';
 
-export function PageAddress(props: { address?: PageMerged['address'] | null }) {
+export function PageAddress(props: { address?: AddressFieldsFragment | null }) {
   if (props.address) {
     return (
       <PageSection title="Address">

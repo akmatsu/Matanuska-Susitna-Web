@@ -1,9 +1,9 @@
 import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui/Card';
 import { PageSection } from './PageSection';
-import { PageMerged } from '@msb/js-sdk/types';
+import { OrgUnitFieldsFragment } from '@msb/js-sdk/graphql';
 
 export function PageChildrenOrgUnits(props: {
-  items?: PageMerged['children'] | null;
+  items?: OrgUnitFieldsFragment[] | null;
 }) {
   if (props.items?.length)
     return (

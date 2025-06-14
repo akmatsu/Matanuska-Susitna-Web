@@ -23,38 +23,7 @@ export const GET_BOARD: TypedDocumentNode<
 > = gql`
   query GetBoard($where: BoardWhereUniqueInput!) {
     board(where: $where) {
-      id
-      title
-      slug
-      description
-      body
-      heroImage
-      meetingSchedule
-      isActive
-      communities {
-        ...CommunityFields
-      }
-      districts {
-        ...DistrictDetailFields
-      }
-      linkToAgendas {
-        ...ExternalActionFields
-      }
-      linkToResolutions {
-        ...ExternalActionFields
-      }
-      linkToPublicOpinionMessage {
-        ...ExternalActionFields
-      }
-      contacts {
-        ...ContactFields
-      }
-      actions {
-        ...ActionFields
-      }
-      documents {
-        ...DocumentFields
-      }
+      ...BoardPage
     }
   }
 `;

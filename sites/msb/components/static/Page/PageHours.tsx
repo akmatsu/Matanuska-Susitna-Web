@@ -1,9 +1,9 @@
 import { toTitleCase } from '@/utils/stringHelpers';
 import { Card, CardBody } from '@matsugov/ui/Card';
 import { PageSection } from './PageSection';
-import { PageMerged } from '@msb/js-sdk/types';
+import { HourFieldsFragment } from '@msb/js-sdk/graphql';
 
-export function PageHours(props: { hours?: PageMerged['hours'] | null }) {
+export function PageHours(props: { hours?: HourFieldsFragment[] | null }) {
   if (props.hours?.length)
     return (
       <PageSection title="Hours">

@@ -23,73 +23,19 @@ export const GET_TRAIL_QUERY: TypedDocumentNode<
   GetTrailQueryVariables
 > = gql`
   query GetTrail(
-    $where: TrailWhereUniqueInput!
-    $publicNoticesWhere2: PublicNoticeWhereInput!
-    $take: Int
-    $orderBy: [PublicNoticeOrderByInput!]!
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
   ) {
-    trail(where: $where) {
-      id
-      title
-      body
-      heroImage
-      description
-      length
-      atv
-      biking
-      crossCountrySkiing
-      difficulty
-      dirtBiking
-      dogWalking
-      elevationChange
-      fall
-      frisbeeGolf
-      hiking
-      horsebackRiding
-      mushing
-      open
-      running
-      snowMachining
-      snowshoeing
-      spring
-      summer
-      winter
-      park {
-        id
-        slug
-        title
-        description
-      }
-      contacts {
-        id
-        name
-        title
-        phone
-        email
-      }
-      address {
-        id
-        title
-        lineOne
-        lineTwo
-        state
-        city
-        zip
-      }
-      services {
-        id
-        title
-        slug
-        description
-      }
+    trail(where: { slug: $slug }) {
+      ...TrailPage
     }
-    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
-      id
-      slug
-      title
-      description
-      heroImage
-      urgency
+    publicNotices(
+      where: { trails: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
+      ...PublicNoticeFields
     }
   }
 `;

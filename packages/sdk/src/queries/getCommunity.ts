@@ -4,6 +4,7 @@ import {
   GetCommunityMetaQuery,
   GetCommunityMetaQueryVariables,
   GetCommunityQuery,
+  GetCommunityQueryVariables,
 } from '../graphql/graphql';
 
 export const GET_COMMUNITY_META_QUERY: TypedDocumentNode<
@@ -20,32 +21,22 @@ export const GET_COMMUNITY_META_QUERY: TypedDocumentNode<
 
 export const GET_COMMUNITY_QUERY: TypedDocumentNode<
   GetCommunityQuery,
-  GetCommunityMetaQueryVariables
+  GetCommunityQueryVariables
 > = gql`
   query GetCommunity(
-    $where: CommunityWhereUniqueInput!
-    $publicNoticesWhere2: PublicNoticeWhereInput!
-    $take: Int
-    $orderBy: [PublicNoticeOrderByInput!]!
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
   ) {
-    community(where: $where) {
-      id
-      title
-      description
-      body
-      heroImage
-      services {
-        ...ServiceFields
-      }
-      contacts {
-        ...ContactFields
-      }
-      districts {
-        ...DistrictDetailFields
-      }
+    community(where: { slug: $slug }) {
+      ...CommunityPage
     }
 
-    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+    publicNotices(
+      where: { communities: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
       ...PublicNoticeFields
     }
   }

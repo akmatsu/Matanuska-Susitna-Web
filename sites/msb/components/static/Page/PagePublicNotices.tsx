@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { PageSection } from './PageSection';
 
 export function PagePublicNotices(props: {
-  items?: ComponentProps<typeof PublicNotices>['items'];
+  items?: ComponentProps<typeof PublicNotices>['items'] | null;
 }) {
   if (props.items && props.items.length > 0) {
     return (

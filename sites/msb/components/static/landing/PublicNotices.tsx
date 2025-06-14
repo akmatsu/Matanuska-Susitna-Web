@@ -9,9 +9,13 @@ import {
   CardMedia,
   CardTitle,
 } from '@matsugov/ui/Card';
-import { PublicNotice } from '@msb/js-sdk/graphql';
+import { PublicNoticeFieldsFragment } from '@msb/js-sdk/graphql';
 
-export function PublicNotices({ items }: { items: PublicNotice[] }) {
+export function PublicNotices({
+  items,
+}: {
+  items: PublicNoticeFieldsFragment[];
+}) {
   return (
     <div className="flex flex-col items-center gap-4">
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">

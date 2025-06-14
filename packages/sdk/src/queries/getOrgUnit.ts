@@ -25,31 +25,18 @@ export const GET_ORG_UNIT_QUERY: TypedDocumentNode<
   GetOrgUnitQueryVariables
 > = gql`
   query GetOrgUnit(
-    $where: OrgUnitWhereUniqueInput!
-    $publicNoticesWhere2: PublicNoticeWhereInput!
-    $take: Int
-    $orderBy: [PublicNoticeOrderByInput!]!
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
   ) {
-    orgUnit(where: $where) {
-      id
-      title
-      description
-      body
-      heroImage
-      children {
-        ...OrgUnitFields
-      }
-      contacts {
-        ...ContactFields
-      }
-      parent {
-        ...OrgUnitFields
-      }
-      services {
-        ...ServiceFields
-      }
+    orgUnit(where: { slug: $slug }) {
+      ...OrgUnitPage
     }
-    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+    publicNotices(
+      where: { orgUnits: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
       ...PublicNoticeFields
     }
   }

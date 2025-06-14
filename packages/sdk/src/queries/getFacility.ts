@@ -23,36 +23,19 @@ export const GET_FACILITY_QUERY: TypedDocumentNode<
   GetFacilityQueryVariables
 > = gql`
   query GetFacility(
-    $where: FacilityWhereUniqueInput!
-    $publicNoticesWhere2: PublicNoticeWhereInput!
-    $take: Int
-    $orderBy: [PublicNoticeOrderByInput!]!
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
   ) {
-    facility(where: $where) {
-      id
-      slug
-      title
-      liveUrl
-      heroImage
-      description
-      body
-      park {
-        ...ParkFields
-      }
-      services {
-        ...ServiceFields
-      }
-      address {
-        ...AddressFields
-      }
-      contacts {
-        ...ContactFields
-      }
-      hours {
-        ...HourFields
-      }
+    facility(where: { slug: $slug }) {
+      ...FacilityPage
     }
-    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+
+    publicNotices(
+      where: { communities: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
       ...PublicNoticeFields
     }
   }

@@ -1,12 +1,12 @@
 import { LinkButton } from '@/components/static/LinkButton';
 import clsx from 'clsx';
 import { PageSection } from './PageSection';
-import { PageMerged } from '@msb/js-sdk/types';
+import { DocumentFieldsFragment } from '@msb/js-sdk/types';
 
 export function PageDocuments({
   documents,
 }: {
-  documents?: PageMerged['documents'] | null;
+  documents?: DocumentFieldsFragment[] | null;
 }) {
   if (documents?.length)
     return (
@@ -20,11 +20,7 @@ export function PageDocuments({
     );
 }
 
-function DocumentButton({
-  doc,
-}: {
-  doc: NonNullable<PageMerged['documents']>[number];
-}) {
+function DocumentButton({ doc }: { doc: DocumentFieldsFragment }) {
   if (!doc.file || !doc.file.filename || !doc.file.url) {
     return null;
   }

@@ -1,10 +1,10 @@
 import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui/Card';
 import Image from 'next/image';
 import { PageSection } from './PageSection';
-import { PageMerged } from '@msb/js-sdk/types';
+import { DistrictDetailFieldsFragment } from '@msb/js-sdk/graphql';
 
 export function PageDistricts(props: {
-  items?: PageMerged['districts'] | null;
+  items?: DistrictDetailFieldsFragment[] | null;
 }) {
   if (props.items?.length)
     return (

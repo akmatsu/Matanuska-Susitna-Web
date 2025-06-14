@@ -33,6 +33,13 @@ export const fragments = gql`
     description
   }
 
+  fragment TopicFields on Topic {
+    id
+    title
+    slug
+    description
+  }
+
   fragment AddressFields on Location {
     title
     lineOne
@@ -119,6 +126,13 @@ export const fragments = gql`
     title
     description
     url
+  }
+
+  fragment BoardFields on Board {
+    id
+    title
+    slug
+    description
   }
 
   fragment DistrictDetailFields on AssemblyDistrict {
@@ -223,6 +237,373 @@ export const fragments = gql`
 
     linkedItem {
       ...ActionFields
+    }
+  }
+
+  fragment TopicPage on Topic {
+    id
+    body
+    description
+    slug
+    heroImage
+    publicNotices {
+      ...PublicNoticeFields
+    }
+    actions {
+      ...ActionFields
+    }
+    documents {
+      ...DocumentFields
+    }
+    contacts {
+      ...ContactFields
+    }
+    highlights {
+      ...HighlightFields
+    }
+    boards {
+      ...BoardFields
+    }
+    services {
+      ...ServiceFields
+    }
+    communities {
+      ...CommunityFields
+    }
+    facilities {
+      ...FacilityFields
+    }
+    districts {
+      ...DistrictDetailFields
+    }
+    orgUnits {
+      ...OrgUnitFields
+    }
+    parks {
+      ...ParkFields
+    }
+    trails {
+      ...TrailFields
+    }
+  }
+
+  fragment AssemblyDistrictPage on AssemblyDistrict {
+    id
+    heroImage
+    title
+    description
+    slug
+    body
+    documents {
+      ...DocumentFields
+    }
+    actions {
+      ...ActionFields
+    }
+    topics {
+      ...TopicFields
+    }
+    contacts {
+      ...ContactFields
+    }
+    photo {
+      ...ImageFields
+    }
+    memberName
+    bio
+    address {
+      ...AddressFields
+    }
+    email
+    phone
+    fax
+    termStart
+    termEnd
+  }
+
+  fragment BoardPage on Board {
+    id
+    title
+    slug
+    description
+    body
+    heroImage
+    meetingSchedule
+    isActive
+    communities {
+      ...CommunityFields
+    }
+    districts {
+      ...DistrictDetailFields
+    }
+    linkToAgendas {
+      ...ExternalActionFields
+    }
+    linkToResolutions {
+      ...ExternalActionFields
+    }
+    linkToPublicOpinionMessage {
+      ...ExternalActionFields
+    }
+    contacts {
+      ...ContactFields
+    }
+    actions {
+      ...ActionFields
+    }
+    documents {
+      ...DocumentFields
+    }
+  }
+
+  fragment CommunityPage on Community {
+    id
+    title
+    description
+    body
+    heroImage
+    boards {
+      ...BoardFields
+    }
+    topics {
+      ...TopicFields
+    }
+    documents {
+      ...DocumentFields
+    }
+    actions {
+      ...ActionFields
+    }
+    services {
+      ...ServiceFields
+    }
+    contacts {
+      ...ContactFields
+    }
+    districts {
+      ...DistrictDetailFields
+    }
+  }
+
+  fragment FacilityPage on Facility {
+    id
+    slug
+    title
+    liveUrl
+    heroImage
+    description
+    body
+    actions {
+      ...ActionFields
+    }
+    documents {
+      ...DocumentFields
+    }
+
+    topics {
+      ...TopicFields
+    }
+    park {
+      ...ParkFields
+    }
+    services {
+      ...ServiceFields
+    }
+    address {
+      ...AddressFields
+    }
+    contacts {
+      ...ContactFields
+    }
+    hours {
+      ...HourFields
+    }
+  }
+
+  fragment OrgUnitPage on OrgUnit {
+    id
+    title
+    description
+    body
+    heroImage
+    actions {
+      ...ActionFields
+    }
+    documents {
+      ...DocumentFields
+    }
+    topics {
+      ...TopicFields
+    }
+    children {
+      ...OrgUnitFields
+    }
+    contacts {
+      ...ContactFields
+    }
+    parent {
+      ...OrgUnitFields
+    }
+    services {
+      ...ServiceFields
+    }
+  }
+
+  fragment ParkPage on Park {
+    id
+    title
+    slug
+    body
+    heroImage
+    description
+    actions {
+      ...ActionFields
+    }
+    documents {
+      ...DocumentFields
+    }
+    contacts {
+      ...ContactFields
+    }
+    services {
+      ...ServiceFields
+    }
+    address {
+      ...AddressFields
+    }
+    hours {
+      ...HourFields
+    }
+    trails {
+      ...TrailFields
+    }
+    facilities {
+      ...FacilityFields
+    }
+  }
+
+  fragment PublicNoticePage on PublicNotice {
+    id
+    slug
+    title
+    heroImage
+    body
+    description
+    effectiveDate
+    endDate
+    contacts {
+      ...ContactFields
+    }
+    documents {
+      ...DocumentFields
+    }
+    actions {
+      ...ActionFields
+    }
+
+    contacts {
+      ...ContactFields
+    }
+    topics {
+      ...TopicFields
+    }
+    communities {
+      ...CommunityFields
+    }
+    assemblyDistricts {
+      ...AssemblyDistrictFields
+    }
+    parks {
+      ...ParkFields
+    }
+    facilities {
+      ...FacilityFields
+    }
+    trails {
+      ...TrailFields
+    }
+    orgUnits {
+      ...OrgUnitFields
+    }
+    boards {
+      ...BoardFields
+    }
+    services {
+      ...ServiceFields
+    }
+  }
+
+  fragment ServicePage on Service {
+    id
+    slug
+    title
+    heroImage
+    body
+    description
+    documents {
+      ...DocumentFields
+    }
+    primaryAction {
+      ...ExternalActionFields
+    }
+    secondaryActions {
+      ...ExternalActionFields
+    }
+    primaryContact {
+      ...ContactFields
+    }
+    contacts {
+      ...ContactFields
+    }
+  }
+
+  fragment TrailPage on Trail {
+    id
+    title
+    body
+    heroImage
+    description
+    length
+    atv
+    biking
+    crossCountrySkiing
+    difficulty
+    dirtBiking
+    dogWalking
+    elevationChange
+    fall
+    frisbeeGolf
+    hiking
+    horsebackRiding
+    mushing
+    open
+    running
+    snowMachining
+    snowshoeing
+    spring
+    summer
+    winter
+
+    topics {
+      ...TopicFields
+    }
+    actions {
+      ...ActionFields
+    }
+    documents {
+      ...DocumentFields
+    }
+    park {
+      ...ParkFields
+    }
+    contacts {
+      ...ContactFields
+    }
+    address {
+      ...AddressFields
+    }
+    services {
+      ...ServiceFields
     }
   }
 `;

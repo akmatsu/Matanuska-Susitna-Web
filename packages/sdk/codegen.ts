@@ -11,6 +11,10 @@ const config: CodegenConfig = {
         gqlTagName: 'gql',
         gqlImport: '@apollo/client#gql',
         documentMode: 'documentNode',
+        // fragmentMasking: {
+        //   unmaskFunctionName: 'getFragmentData',
+        // },
+        fragmentMasking: false,
       },
       config: {
         addTypename: true,

@@ -23,38 +23,19 @@ export const GET_PARK_QUERY: TypedDocumentNode<
   GetParkQueryVariables
 > = gql`
   query GetPark(
-    $where: ParkWhereUniqueInput!
-    $publicNoticesWhere2: PublicNoticeWhereInput!
-    $take: Int
-    $orderBy: [PublicNoticeOrderByInput!]!
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
   ) {
-    park(where: $where) {
-      id
-      title
-      slug
-      body
-      heroImage
-      contacts {
-        ...ContactFields
-      }
-      services {
-        ...ServiceFields
-      }
-      address {
-        ...AddressFields
-      }
-      hours {
-        ...HourFields
-      }
-      trails {
-        ...TrailFields
-      }
-      facilities {
-        ...FacilityFields
-      }
+    park(where: { slug: $slug }) {
+      ...ParkPage
     }
 
-    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+    publicNotices(
+      where: { trails: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
       ...PublicNoticeFields
     }
   }

@@ -24,35 +24,19 @@ export const GET_ASSEMBLY_DISTRICT_QUERY: TypedDocumentNode<
   GetAssemblyDistrictQueryVariables
 > = gql`
   query GetAssemblyDistrict(
-    $where: AssemblyDistrictWhereUniqueInput!
-    $publicNoticesWhere2: PublicNoticeWhereInput!
-    $take: Int
-    $orderBy: [PublicNoticeOrderByInput!]
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
   ) {
-    assemblyDistrict(where: $where) {
-      id
-      heroImage
-      title
-      description
-      slug
-      body
-      contacts {
-        ...ContactFields
-      }
-      photo {
-        ...ImageFields
-      }
-      memberName
-      bio
-      address
-      email
-      phone
-      fax
-      termStart
-      termEnd
+    assemblyDistrict(where: { slug: $slug }) {
+      ...AssemblyDistrictPage
     }
 
-    publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
+    publicNotices(
+      where: { assemblyDistricts: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
       ...PublicNoticeFields
     }
   }
