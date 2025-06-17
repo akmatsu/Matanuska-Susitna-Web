@@ -1,20 +1,38 @@
 import type {
   ActionFieldsFragment,
+  ,
   ExternalActionFieldsFragment,
+  ,
   LinkedItemUnion,
   Maybe,
 } from '@msb/js-sdk/graphql';
 import { LinkButton } from '@/components/static/LinkButton';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+
+const ExternalActionFieldsClient = gql(`
+  fragment ExternalActionFieldsClient on ExternalLink {
+    id
+    label
+    url {
+      id
+      title
+      url
+    }
+  }
+`);
 
 export function PageActions({
   primaryAction,
   secondaryActions,
   actions,
 }: {
-  primaryAction?: ExternalActionFieldsFragment | null;
-  secondaryActions?: ExternalActionFieldsFragment[] | null;
+  primaryAction?: FragmentType<typeof ExternalActionFieldsClient> | null;
+  secondaryActions?: FragmentType<typeof ExternalActionFieldsClient>[] | null;
   actions?: ActionFieldsFragment[] | null;
 }) {
+  const primary = primaryAction
+    ? getFragmentData(ExternalActionFieldsClient, primaryAction)
+    : null;
   function getUrlSection(str?: string) {
     if (!str) {
       return '/';

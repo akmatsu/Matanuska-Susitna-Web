@@ -4,12 +4,11 @@
       "name": "msb-cms",
       "url": "http://localhost:3333/api/graphql"
     },
-    "excludes": [
-      "**/node_modules",
-      "**/dist",
-      "**/build",
-      "**/graphql/**/*.ts",
-      "**/__tests__"
-    ]
+    "includes": [
+      "src/**/*.{ts,tsx,graphql}",
+      "../../sites/*/components/**/*.{ts,tsx,graphql}",
+      "../../sites/*/app/**/*.{ts,tsx,graphql}"
+    ],
+    "excludes": ["**/node_modules", "**/dist", "**/__tests__"]
   }
 }

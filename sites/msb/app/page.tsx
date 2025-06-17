@@ -2,16 +2,16 @@ import Link from 'next/link';
 import { LinkButton } from '@/components/static/LinkButton';
 import { Featured } from '@/components/static/landing/Featured';
 import { Meetings } from '@/components/static/Meetings';
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { GET_HOME_PAGE } from '@msb/js-sdk';
 import { type Highlight, OrderDirection } from '@msb/js-sdk/graphql';
 import { plural } from 'pluralize';
 import { SearchDynamicWrapper } from '../components/client/search/SearchDynamicWrapper';
 import { PublicNotices } from '@/components/static/landing/PublicNotices';
 import { Hero } from '@matsugov/ui';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 export default async function Home() {
-  const { data, errors, error } = await getClient().query({
+  const {data, error, errors} = await getClientHandler({
     query: GET_HOME_PAGE,
     variables: {
       take: 5,

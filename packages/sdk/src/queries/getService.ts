@@ -8,6 +8,12 @@ import {
   GetServiceQuery,
   GetServiceQueryVariables,
 } from '../graphql/graphql';
+import {
+  ContactFields,
+  DocumentFields,
+  ExternalActionFields,
+  PublicNoticeFields,
+} from './baseFragments';
 
 export const GET_SERVICE_META_QUERY: TypedDocumentNode<
   GetServiceMetaQuery,
@@ -25,9 +31,33 @@ export const GET_SERVICE_QUERY_NO_PN: TypedDocumentNode<
   GetServiceNoPnQuery,
   GetServiceNoPnQueryVariables
 > = gql`
+  ${DocumentFields}
+  ${ContactFields}
+  ${ExternalActionFields}
+
   query GetServiceNoPn($where: ServiceWhereUniqueInput!) {
     service(where: $where) {
-      ...ServicePage
+      id
+      slug
+      title
+      heroImage
+      body
+      description
+      documents {
+        ...DocumentFields
+      }
+      primaryAction {
+        ...ExternalActionFields
+      }
+      secondaryActions {
+        ...ExternalActionFields
+      }
+      primaryContact {
+        ...ContactFields
+      }
+      contacts {
+        ...ContactFields
+      }
     }
   }
 `;
@@ -36,6 +66,11 @@ export const GET_SERVICE_QUERY: TypedDocumentNode<
   GetServiceQuery,
   GetServiceQueryVariables
 > = gql`
+  ${DocumentFields}
+  ${ContactFields}
+  ${ExternalActionFields}
+  ${PublicNoticeFields}
+
   query GetService(
     $where: ServiceWhereUniqueInput!
     $publicNoticesWhere2: PublicNoticeWhereInput!
@@ -43,7 +78,27 @@ export const GET_SERVICE_QUERY: TypedDocumentNode<
     $orderBy: [PublicNoticeOrderByInput!]!
   ) {
     service(where: $where) {
-      ...ServicePage
+      id
+      slug
+      title
+      heroImage
+      body
+      description
+      documents {
+        ...DocumentFields
+      }
+      primaryAction {
+        ...ExternalActionFields
+      }
+      secondaryActions {
+        ...ExternalActionFields
+      }
+      primaryContact {
+        ...ContactFields
+      }
+      contacts {
+        ...ContactFields
+      }
     }
     publicNotices(where: $publicNoticesWhere2, take: $take, orderBy: $orderBy) {
       ...PublicNoticeFields

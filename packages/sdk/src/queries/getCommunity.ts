@@ -6,6 +6,16 @@ import {
   GetCommunityQuery,
   GetCommunityQueryVariables,
 } from '../graphql/graphql';
+import {
+  ActionFields,
+  BoardFields,
+  ContactFields,
+  DistrictDetailFields,
+  DocumentFields,
+  PublicNoticeFields,
+  ServiceFields,
+  TopicFields,
+} from './baseFragments';
 
 export const GET_COMMUNITY_META_QUERY: TypedDocumentNode<
   GetCommunityMetaQuery,
@@ -23,13 +33,47 @@ export const GET_COMMUNITY_QUERY: TypedDocumentNode<
   GetCommunityQuery,
   GetCommunityQueryVariables
 > = gql`
+  ${DocumentFields}
+  ${ActionFields}
+  ${ContactFields}
+  ${BoardFields}
+  ${ServiceFields}
+  ${TopicFields}
+  ${DistrictDetailFields}
+  ${PublicNoticeFields}
+
   query GetCommunity(
     $slug: String!
     $take: Int = 5
     $orderDirection: OrderDirection = desc
   ) {
     community(where: { slug: $slug }) {
-      ...CommunityPage
+      id
+      title
+      description
+      body
+      heroImage
+      boards {
+        ...BoardFields
+      }
+      topics {
+        ...TopicFields
+      }
+      documents {
+        ...DocumentFields
+      }
+      actions {
+        ...ActionFields
+      }
+      services {
+        ...ServiceFields
+      }
+      contacts {
+        ...ContactFields
+      }
+      districts {
+        ...DistrictDetailFields
+      }
     }
 
     publicNotices(

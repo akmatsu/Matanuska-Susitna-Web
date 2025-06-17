@@ -5,6 +5,19 @@ import {
   GetParkQuery,
   GetParkQueryVariables,
 } from '../graphql/graphql';
+import {
+  ActionFields,
+  AddressFields,
+  ContactFields,
+  DocumentFields,
+  FacilityFields,
+  HourFields,
+  ParkFields,
+  PublicNoticeFields,
+  ServiceFields,
+  TopicFields,
+  TrailFields,
+} from './baseFragments';
 
 export const GET_PARK_META_QUERY: TypedDocumentNode<
   GetParkMetaQuery,
@@ -22,13 +35,54 @@ export const GET_PARK_QUERY: TypedDocumentNode<
   GetParkQuery,
   GetParkQueryVariables
 > = gql`
+  ${DocumentFields}
+  ${ActionFields}
+  ${ContactFields}
+  ${AddressFields}
+  ${HourFields}
+  ${ServiceFields}
+  ${TrailFields}
+  ${FacilityFields}
+  ${TopicFields}
+  ${ParkFields}
+  ${PublicNoticeFields}
+
   query GetPark(
     $slug: String!
     $take: Int = 5
     $orderDirection: OrderDirection = desc
   ) {
     park(where: { slug: $slug }) {
-      ...ParkPage
+      id
+      title
+      slug
+      body
+      heroImage
+      description
+      actions {
+        ...ActionFields
+      }
+      documents {
+        ...DocumentFields
+      }
+      contacts {
+        ...ContactFields
+      }
+      services {
+        ...ServiceFields
+      }
+      address {
+        ...AddressFields
+      }
+      hours {
+        ...HourFields
+      }
+      trails {
+        ...TrailFields
+      }
+      facilities {
+        ...FacilityFields
+      }
     }
 
     publicNotices(

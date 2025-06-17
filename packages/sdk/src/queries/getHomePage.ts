@@ -5,6 +5,7 @@ import {
   GetHomePageQuery,
   GetHomePageQueryVariables,
 } from '../graphql/graphql';
+import { HighlightFields, PublicNoticeFields } from './baseFragments';
 
 export const GET_HOME_PAGE_META: TypedDocumentNode<
   GetHomePageMetaQuery,
@@ -22,6 +23,9 @@ export const GET_HOME_PAGE: TypedDocumentNode<
   GetHomePageQuery,
   GetHomePageQueryVariables
 > = gql`
+  ${HighlightFields}
+  ${PublicNoticeFields}
+
   query GetHomePage($take: Int, $orderBy: [PublicNoticeOrderByInput!]!) {
     homePage {
       id
