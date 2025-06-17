@@ -27,8 +27,7 @@
     "./getService": "./src/queries/getService.ts",
     "./getTrail": "./src/queries/getTrail.ts",
     "./getBoard": "./src/queries/getBoard.ts",
-    "./getInternalLinkData": "./src/queries/getInternalLinkData.ts",
-    "./getPage": "./src/queries/getPage.ts"
+    "./getInternalLinkData": "./src/queries/getInternalLinkData.ts"
   },
   "scripts": {
     "codegen": "pnpm exec graphql-codegen --config codegen.ts",

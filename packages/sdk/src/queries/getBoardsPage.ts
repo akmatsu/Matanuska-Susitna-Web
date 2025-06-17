@@ -5,6 +5,7 @@ import {
   GetBoardsPageQuery,
   GetBoardsPageQueryVariables,
 } from '../graphql/graphql';
+import { ActionFields, ContactFields, DocumentFields } from './baseFragments';
 
 export const GET_BOARDS_PAGE_META: TypedDocumentNode<
   GetBoardsPageMetaQuery,
@@ -22,6 +23,10 @@ export const GET_BOARDS_PAGE: TypedDocumentNode<
   GetBoardsPageQuery,
   GetBoardsPageQueryVariables
 > = gql`
+  ${DocumentFields}
+  ${ContactFields}
+  ${ActionFields}
+
   query GetBoardsPage {
     boardPage {
       id

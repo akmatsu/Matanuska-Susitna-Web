@@ -1,6 +1,9 @@
 import { gql } from '@apollo/client';
+import { ImageFields } from './baseFragments';
 
 export const GET_GOVERNMENT_PAG = gql`
+  ${ImageFields}
+
   query GetGovernmentPage {
     assemblyDistricts {
       id
@@ -9,9 +12,7 @@ export const GET_GOVERNMENT_PAG = gql`
       description
       memberName
       photo {
-        file {
-          url
-        }
+        ...ImageFields
       }
     }
   }

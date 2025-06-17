@@ -5,6 +5,18 @@ import {
   GetFacilityQuery,
   GetFacilityQueryVariables,
 } from '../graphql/graphql';
+import {
+  ActionFields,
+  AddressFields,
+  ContactFields,
+  DocumentFields,
+  HourFields,
+  ParkFields,
+  PublicNoticeFields,
+  ServiceFields,
+  TopicFields,
+  TrailFields,
+} from './baseFragments';
 
 export const GET_FACILITY_META: TypedDocumentNode<
   GetFacilityMetaQuery,
@@ -22,13 +34,55 @@ export const GET_FACILITY_QUERY: TypedDocumentNode<
   GetFacilityQuery,
   GetFacilityQueryVariables
 > = gql`
+  ${DocumentFields}
+  ${ActionFields}
+  ${ContactFields}
+  ${AddressFields}
+  ${HourFields}
+  ${ServiceFields}
+  ${TopicFields}
+  ${ParkFields}
+  ${TrailFields}
+  ${PublicNoticeFields}
+
   query GetFacility(
     $slug: String!
     $take: Int = 5
     $orderDirection: OrderDirection = desc
   ) {
     facility(where: { slug: $slug }) {
-      ...FacilityPage
+      id
+      slug
+      title
+      liveUrl
+      heroImage
+      description
+      body
+      actions {
+        ...ActionFields
+      }
+      documents {
+        ...DocumentFields
+      }
+
+      topics {
+        ...TopicFields
+      }
+      park {
+        ...ParkFields
+      }
+      services {
+        ...ServiceFields
+      }
+      address {
+        ...AddressFields
+      }
+      contacts {
+        ...ContactFields
+      }
+      hours {
+        ...HourFields
+      }
     }
 
     publicNotices(

@@ -1,4 +1,5 @@
-import { HttpLink } from '@apollo/client';
+import { from, HttpLink } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import { ApolloClient, InMemoryCache } from '@apollo/client-integration-nextjs';
 
 export function makeClient({
@@ -9,6 +10,22 @@ export function makeClient({
   apiUrl: string;
   apiEndpoint?: string;
 }) {
+  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
+    if (graphQLErrors) {
+      graphQLErrors.forEach(({ message, locations, path, extensions }) => {
+        console.error(`[GraphQL error]: Message: ${message}`, {
+          path,
+          locations,
+          operation,
+          code: extensions?.code,
+        });
+      });
+    }
+    if (networkError) {
+      console.error('[Network error]:', networkError, 'operation: ', operation);
+    }
+  });
+
   const httpLink = new HttpLink({
     uri: `${opts?.apiUrl}${apiEndpoint}`,
 
@@ -25,6 +42,11 @@ export function makeClient({
 
   return new ApolloClient({
     cache: new InMemoryCache(),
-    link: httpLink,
+    link: from([errorLink, httpLink]),
+    defaultOptions: {
+      query: {
+        errorPolicy: 'all', // This allows partial data to be returned even if there are errors
+      },
+    },
   });
 }

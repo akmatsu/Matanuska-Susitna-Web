@@ -1,4 +1,3 @@
-import { PageSideNavController } from '@/components/client/Page/PageSideNavController';
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { LinkButton } from '@/components/static/LinkButton';
 import {
@@ -11,10 +10,12 @@ import {
   PageSection,
 } from '@/components/static/Page';
 import { PageContainer } from '@/components/static/Page/PageContainer';
+import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { getPageMeta } from '@/utils/pageHelpers';
 import { Hero } from '@matsugov/ui';
 import { GET_BOARD, GET_BOARD_META } from '@msb/js-sdk/getBoard';
+import { GetBoardDocument } from '@msb/js-sdk/graphql';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -34,7 +35,7 @@ export default async function BoardPage(props: {
   const listName = 'board';
 
   const { data, error } = await getClient().query({
-    query: GET_BOARD,
+    query: GetBoardDocument,
     variables: {
       where: { slug },
     },
@@ -56,7 +57,7 @@ export default async function BoardPage(props: {
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
       <PageContainer>
-        <PageSideNavController
+        <PageTwoColumn
           rightSide={
             <>
               <PageActions actions={page.actions} />
@@ -112,7 +113,7 @@ export default async function BoardPage(props: {
           </div>
 
           <PageEvents listName={listName} />
-        </PageSideNavController>
+        </PageTwoColumn>
       </PageContainer>
     </>
   );

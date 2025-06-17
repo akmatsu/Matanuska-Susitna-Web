@@ -6,6 +6,15 @@ import {
   GetAssemblyDistrictQuery,
   GetAssemblyDistrictQueryVariables,
 } from '../graphql/graphql';
+import {
+  ActionFields,
+  AddressFields,
+  ContactFields,
+  DocumentFields,
+  ImageFields,
+  PublicNoticeFields,
+  TopicFields,
+} from './baseFragments';
 
 export const GET_ASSEMBLY_DISTRICT_META_QUERY: TypedDocumentNode<
   GetAssemblyDistrictMetaQuery,
@@ -23,13 +32,51 @@ export const GET_ASSEMBLY_DISTRICT_QUERY: TypedDocumentNode<
   GetAssemblyDistrictQuery,
   GetAssemblyDistrictQueryVariables
 > = gql`
+  ${DocumentFields}
+  ${ActionFields}
+  ${TopicFields}
+  ${ContactFields}
+  ${ImageFields}
+  ${AddressFields}
+  ${PublicNoticeFields}
+
   query GetAssemblyDistrict(
     $slug: String!
     $take: Int = 5
     $orderDirection: OrderDirection = desc
   ) {
     assemblyDistrict(where: { slug: $slug }) {
-      ...AssemblyDistrictPage
+      id
+      heroImage
+      title
+      description
+      slug
+      body
+      documents {
+        ...DocumentFields
+      }
+      actions {
+        ...ActionFields
+      }
+      topics {
+        ...TopicFields
+      }
+      contacts {
+        ...ContactFields
+      }
+      photo {
+        ...ImageFields
+      }
+      memberName
+      bio
+      address {
+        ...AddressFields
+      }
+      email
+      phone
+      fax
+      termStart
+      termEnd
     }
 
     publicNotices(
