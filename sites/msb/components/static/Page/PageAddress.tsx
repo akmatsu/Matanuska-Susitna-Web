@@ -1,21 +1,36 @@
 import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import { PageSection } from './PageSection';
-import { AddressFieldsFragment } from '@msb/js-sdk/graphql';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
-export function PageAddress(props: { address?: AddressFieldsFragment | null }) {
-  if (props.address) {
+const AddressFields = gql(`
+  fragment AddressFields on Location {
+    title
+    lineOne
+    lineTwo
+    city
+    state
+    zip
+  }
+`);
+
+export function PageAddress(props: {
+  address?: FragmentType<typeof AddressFields> | null;
+}) {
+  const address = getFragmentData(AddressFields, props.address);
+
+  if (address) {
     return (
       <PageSection title="Address">
         <div className="flex flex-col">
           <Card>
             <CardHeader>
-              <CardTitle as="h4">{props.address.title}</CardTitle>
+              <CardTitle as="h4">{address.title}</CardTitle>
             </CardHeader>
             <CardBody>
-              <p>{props.address.lineOne},</p>
-              {props.address.lineTwo && <p>{props.address.lineTwo}</p>}
+              <p>{address.lineOne},</p>
+              {address.lineTwo && <p>{address.lineTwo}</p>}
               <p>
-                {props.address.city}, {props.address.state}, {props.address.zip}
+                {address.city}, {address.state}, {address.zip}
               </p>
             </CardBody>
           </Card>

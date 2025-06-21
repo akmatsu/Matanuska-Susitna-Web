@@ -9,24 +9,50 @@ import {
   PageListItems,
   PageSection,
 } from '@/components/static/Page';
+import { ExternalActionButton } from '@/components/static/Page/ExternalActionButtont';
 import { PageContainer } from '@/components/static/Page/PageContainer';
+import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
 import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { getPageMeta } from '@/utils/pageHelpers';
-import { Hero } from '@matsugov/ui';
-import { GET_BOARD, GET_BOARD_META } from '@msb/js-sdk/getBoard';
-import { GetBoardDocument } from '@msb/js-sdk/graphql';
-import { Metadata } from 'next';
+import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> => {
-  const { slug } = await params;
-  return getPageMeta('board', GET_BOARD_META, slug);
-};
+const getBoardPage = gql(`
+  query GetBoard($where: BoardWhereUniqueInput!) {
+    board(where: $where) {
+      body
+      description
+      title
+      ...HeroImage
+      meetingSchedule
+      isActive
+      communities {
+        ...PageList
+      }
+      districts {
+        ...DistrictDetailFields
+      }
+      linkToAgendas {
+        ...ExternalActionButton
+      }
+      linkToResolutions {
+        ...ExternalActionButton
+      }
+      linkToPublicOpinionMessage {
+        ...ExternalActionButton
+      }
+      contacts {
+        ...ContactFields
+      }
+      actions {
+        ...ActionFields
+      }
+      documents {
+        ...DocumentFields
+      }
+    }
+  }
+`);
 
 export default async function BoardPage(props: {
   params: Promise<{ slug: string }>;
@@ -35,7 +61,7 @@ export default async function BoardPage(props: {
   const listName = 'board';
 
   const { data, error } = await getClient().query({
-    query: GetBoardDocument,
+    query: getBoardPage,
     variables: {
       where: { slug },
     },
@@ -55,7 +81,7 @@ export default async function BoardPage(props: {
 
   return (
     <>
-      {page.heroImage && <Hero image={page.heroImage} />}
+      <PageHeroImage page={page} />
       <PageContainer>
         <PageTwoColumn
           rightSide={
@@ -77,27 +103,9 @@ export default async function BoardPage(props: {
             </p>
             <h1>{page.title}</h1>
             <div className="flex flex-wrap gap-2 not-prose">
-              {page.linkToAgendas && page.linkToAgendas.url?.url && (
-                <LinkButton href={page.linkToAgendas.url.url} color="secondary">
-                  {page.linkToAgendas.label}
-                </LinkButton>
-              )}
-              {page.linkToPublicOpinionMessage?.url?.url && (
-                <LinkButton
-                  href={page.linkToPublicOpinionMessage.url?.url}
-                  color="secondary"
-                >
-                  {page.linkToPublicOpinionMessage.label}
-                </LinkButton>
-              )}
-              {page.linkToResolutions && page.linkToResolutions.url?.url && (
-                <LinkButton
-                  href={page.linkToResolutions.url.url}
-                  color="secondary"
-                >
-                  {page.linkToResolutions.label}
-                </LinkButton>
-              )}
+              <ExternalActionButton action={page.linkToAgendas} />
+              <ExternalActionButton action={page.linkToPublicOpinionMessage} />
+              <ExternalActionButton action={page.linkToResolutions} />
               <LinkButton
                 href="https://matsugov.us/publicmeetings"
                 color="secondary"

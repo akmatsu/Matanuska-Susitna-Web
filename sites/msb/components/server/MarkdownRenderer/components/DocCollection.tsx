@@ -1,10 +1,26 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { GET_DOC_COLLECTION_QUERY } from '@msb/js-sdk/getDocCollection';
+import { gql } from '@msb/js-sdk/gql';
 import Link from 'next/link';
+
+const getDocCollection = gql(`
+  query GetDocumentCollection($where: DocumentCollectionWhereUniqueInput!) {
+    documentCollection(where: $where) {
+      id
+      title
+      documents {
+        id
+        title
+        file {
+          url
+        }
+      }
+    }
+  }
+`);
 
 export async function DocCollection({ id }: { id: string }) {
   const { data } = await getClient().query({
-    query: GET_DOC_COLLECTION_QUERY,
+    query: getDocCollection,
     variables: {
       where: {
         id,

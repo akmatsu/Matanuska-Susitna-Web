@@ -1,11 +1,31 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { GET_INTERNAL_LINK_DATA } from '@msb/js-sdk/getInternalLinkData';
 import { GetInternalLinkDataQuery } from '@msb/js-sdk/graphql';
 import { Tooltip } from '@matsugov/ui/Tooltip';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { plural } from 'pluralize';
 import v from 'voca';
+import { gql } from '@msb/js-sdk/gql';
+
+const getInternalLinkData = gql(`
+  query GetInternalLinkData($id: ID!, $list: String!) {
+    getInternalLink(id: $id, type: $list) {
+      ... on BasePageWithSlug {
+        title
+        slug
+      }
+
+      ... on BasePage {
+        title
+      }
+
+      ... on Url {
+        title
+        url
+      }
+    }
+  }
+`);
 
 function getUrl(data: GetInternalLinkDataQuery, list?: string) {
   if (data.getInternalLink && list) {
@@ -32,7 +52,7 @@ export async function InternalLink(props: {
 }) {
   if (props.list && props.itemID) {
     const { data, errors, error } = await getClient().query({
-      query: GET_INTERNAL_LINK_DATA,
+      query: getInternalLinkData,
       variables: {
         id: props.itemID,
         list: props.list,

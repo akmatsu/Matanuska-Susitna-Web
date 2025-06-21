@@ -1,4 +1,7 @@
-import type { GetDocumentCollectionQuery } from '@msb/js-sdk/graphql';
+import type {
+  GetDocumentCollectionQuery,
+  GetDocumentCollectionWidgetQuery,
+} from '@msb/js-sdk/graphql';
 import { ComponentProps, ElementType } from 'react';
 import { Button } from '../Button';
 import clsx from 'clsx';
@@ -10,7 +13,7 @@ export function DocumentCollection({
   hideTitle = false,
   centerLabel = true,
 }: {
-  collection: GetDocumentCollectionQuery['documentCollection'];
+  collection: GetDocumentCollectionWidgetQuery['documentCollection'];
   linkAs?: ElementType;
   linkStyle?: 'button' | 'link';
   hideTitle?: boolean;

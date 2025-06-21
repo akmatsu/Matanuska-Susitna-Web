@@ -1,16 +1,14 @@
 import type {
-  ActionFieldsFragment,
-  ,
-  ExternalActionFieldsFragment,
-  ,
+  ActionFieldsFragmentDoc,
   LinkedItemUnion,
   Maybe,
 } from '@msb/js-sdk/graphql';
 import { LinkButton } from '@/components/static/LinkButton';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import { ActionButton } from './ActionButton';
 
-const ExternalActionFieldsClient = gql(`
-  fragment ExternalActionFieldsClient on ExternalLink {
+const ExternalActionFields = gql(`
+  fragment ExternalActionFields on ExternalLink {
     id
     label
     url {
@@ -21,18 +19,21 @@ const ExternalActionFieldsClient = gql(`
   }
 `);
 
-export function PageActions({
-  primaryAction,
-  secondaryActions,
-  actions,
-}: {
-  primaryAction?: FragmentType<typeof ExternalActionFieldsClient> | null;
-  secondaryActions?: FragmentType<typeof ExternalActionFieldsClient>[] | null;
-  actions?: ActionFieldsFragment[] | null;
+export function PageActions(props: {
+  primaryAction?: FragmentType<typeof ExternalActionFields> | null;
+  secondaryActions?: FragmentType<typeof ExternalActionFields>[] | null;
+  actions?: FragmentType<typeof ActionFieldsFragmentDoc>[] | null;
 }) {
-  const primary = primaryAction
-    ? getFragmentData(ExternalActionFieldsClient, primaryAction)
+  const primary = props.primaryAction
+    ? getFragmentData(ExternalActionFields, props.primaryAction)
     : null;
+
+  const secondaryActions = props.secondaryActions
+    ? props.secondaryActions.map((action) =>
+        getFragmentData(ExternalActionFields, action),
+      )
+    : null;
+
   function getUrlSection(str?: string) {
     if (!str) {
       return '/';
@@ -56,15 +57,15 @@ export function PageActions({
   }
   return (
     <>
-      {!!primaryAction && primaryAction?.url?.url && (
+      {!!primary && primary?.url?.url && (
         <LinkButton
-          href={primaryAction.url.url}
+          href={primary.url.url}
           className="margin-right-0 usa-link--external"
           target="_blank"
           big
           block
         >
-          {primaryAction.label || primaryAction.url.title}
+          {primary.label || primary.url.title}
         </LinkButton>
       )}
       {!!secondaryActions && (
@@ -87,19 +88,10 @@ export function PageActions({
           ))}
         </ul>
       )}
-      {!!actions && (
+      {!!props.actions && (
         <ul className="flex flex-col gap-2">
-          {actions.map((action) => (
-            <LinkButton
-              key={action.item?.id}
-              href={getUrl(action.item)}
-              className="margin-right-0 usa-link--external"
-              target="_blank"
-              big
-              block
-            >
-              {action.label || action.item?.title}
-            </LinkButton>
+          {props.actions.map((action) => (
+            <ActionButton action={action} />
           ))}
         </ul>
       )}

@@ -2,9 +2,23 @@ import { LinkButton } from '@/components/static/LinkButton';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Card, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import { GetBoardsQuery } from '@msb/js-sdk/graphql';
-import { GET_BOARDS } from '@msb/js-sdk';
 import Link from 'next/link';
 import { BoardsListFilter } from './BoardListFilter';
+import { gql } from '@msb/js-sdk/gql';
+
+const getBoards = gql(`
+    query GetBoards($take: Int, $skip: Int, $where: BoardWhereInput) {
+    boards(take: $take, where: $where, skip: $skip) {
+      id
+      title
+      slug
+      description
+      isActive
+      type
+      meetingSchedule
+    }
+  }
+`);
 
 export async function BoardsList({
   searchParams,
@@ -12,7 +26,7 @@ export async function BoardsList({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const { data, error } = await getClient().query({
-    query: GET_BOARDS,
+    query: getBoards,
     variables: {
       where: {
         type:

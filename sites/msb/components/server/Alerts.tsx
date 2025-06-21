@@ -1,12 +1,23 @@
-import { GET_ALERTS_QUERY } from '@msb/js-sdk/getAlerts';
 import { MarkdownRenderer } from './MarkdownRenderer/MarkdownRenderer';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { Alert } from '@matsugov/ui/Alert';
+import { gql } from '@msb/js-sdk/gql';
+
+const getAlerts = gql(`
+  query GetAlerts {
+    alerts {
+      id
+      title
+      urgency
+      body
+    }
+  }
+`);
 
 export async function Alerts() {
   try {
     const { data, error } = await getClient().query({
-      query: GET_ALERTS_QUERY,
+      query: getAlerts,
     });
 
     if (error) {

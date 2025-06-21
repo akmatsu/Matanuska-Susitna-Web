@@ -10,11 +10,54 @@ import {
   PagePublicNotices,
   PageServices,
 } from '@/components/static/Page';
+import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
 import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { Hero } from '@matsugov/ui';
-import { GET_COMMUNITY_QUERY } from '@msb/js-sdk/getCommunity';
+import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
+
+export const getCommunityPage = gql(`
+  query GetCommunity(
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
+  ) {
+    community(where: { slug: $slug }) {
+      ...PageBody
+      ...HeroImage
+      ...PageMap
+      boards {
+        ...PageList
+      }
+      topics {
+        ...TopicFields
+      }
+      documents {
+        ...DocumentFields
+      }
+      actions {
+        ...ActionFields
+      }
+      services {
+        ...ServiceFields
+      }
+      contacts {
+        ...ContactFields
+      }
+      districts {
+        ...DistrictDetailFields
+      }
+    }
+
+    publicNotices(
+      where: { communities: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
+      ...PublicNoticeList
+    }
+  }
+`);
 
 export default async function CommunityPage(props: {
   params: Promise<{ slug: string }>;
@@ -22,7 +65,7 @@ export default async function CommunityPage(props: {
   const { slug } = await props.params;
 
   const { data, errors, error } = await getClient().query({
-    query: GET_COMMUNITY_QUERY,
+    query: getCommunityPage,
     variables: {
       slug,
     },
@@ -41,12 +84,12 @@ export default async function CommunityPage(props: {
   const publicNotices = data.publicNotices;
   return (
     <>
-      {page.heroImage && <Hero image={page.heroImage} />}
+      <PageHeroImage page={page} />
       <PageContainer className="relative">
         <PageTwoColumn
           rightSide={
             <>
-              <PageMap itemId={page.title} />
+              <PageMap page={page} />
               <PageActions actions={page.actions} />
               <PageDocuments documents={page.documents} />
               <PageContacts contacts={page.contacts} />
@@ -54,11 +97,7 @@ export default async function CommunityPage(props: {
             </>
           }
         >
-          <PageBody
-            title={page.title}
-            description={page.description}
-            body={page.body}
-          />
+          <PageBody page={page} />
           <PageServices services={page.services} />
           <PagePublicNotices items={publicNotices} />
           <PageEvents listName="Community" />

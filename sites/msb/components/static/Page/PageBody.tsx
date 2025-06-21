@@ -1,12 +1,36 @@
 import { MarkdownRenderer } from '@components/server/MarkdownRenderer';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+
+const pageBodyFragment = gql(`
+  fragment PageBody on BasePage {
+    __typename
+    title
+    body
+    description
+  }
+`);
+
+const pageServiceBodyFragment = gql(`
+  fragment PageServiceBody on BasePage {
+    __typename
+    title
+    body
+    description
+  }
+`);
 
 export function PageBody(props: {
-  title?: string | null;
   noProse?: boolean;
-  body?: string | null;
-  description?: string | null;
-  pageType?: string | null;
+  page?: FragmentType<typeof pageServiceBodyFragment> | null;
 }) {
+  const page = getFragmentData(pageServiceBodyFragment, props.page);
+  console.log(page);
+  if (!page?.body || !page?.description) {
+    return null;
+  }
+
+  console.log(page);
+
   return (
     <div
       className={
@@ -16,14 +40,14 @@ export function PageBody(props: {
       }
     >
       <p className="text-bold capitalize text-base-dark! font-bold text-2xl not-prose">
-        {props.pageType?.split(/(?=[A-Z])/).join(' ')}
+        {page.__typename?.split(/(?=[A-Z])/).join(' ')}
       </p>
-      <h1>{props.title}</h1>
+      <h1>{page.title}</h1>
 
-      {props.body ? (
-        <MarkdownRenderer>{props.body}</MarkdownRenderer>
-      ) : props.description ? (
-        <p>{props.description}</p>
+      {page.body ? (
+        <MarkdownRenderer>{page.body}</MarkdownRenderer>
+      ) : page.description ? (
+        <p>{page.description}</p>
       ) : undefined}
     </div>
   );

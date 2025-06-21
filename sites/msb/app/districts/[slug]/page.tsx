@@ -7,22 +7,57 @@ import {
   PageDocuments,
   PageEvents,
   PagePublicNotices,
-  PageSection,
 } from '@/components/static/Page';
+import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
 import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { Card, CardBody, CardHeader, CardTitle, Hero } from '@matsugov/ui';
-import { GET_ASSEMBLY_DISTRICT_QUERY } from '@msb/js-sdk';
-import Image from 'next/image';
-import Link from 'next/link';
+import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
+
+const getAssemblyDistrict = gql(`
+    query GetAssemblyDistrict(
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
+  ) {
+    assemblyDistrict(where: { slug: $slug }) {
+      ...HeroImage
+      ...PageBody      
+      documents {
+        ...DocumentFields
+      }
+      actions {
+        ...ActionFields
+      }
+      topics {
+        ...TopicFields
+      }
+      contacts {
+        ...ContactFields
+      }
+      
+      ...AssemblyMemberInfo
+      address {
+        ...AddressFields
+      }
+    }
+
+    publicNotices(
+      where: { assemblyDistricts: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
+      ...PublicNoticeList
+    }
+  }
+`);
 
 export default async function DistrictPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
   const { data, errors, error } = await getClient().query({
-    query: GET_ASSEMBLY_DISTRICT_QUERY,
+    query: getAssemblyDistrict,
     variables: { slug },
   });
 
@@ -39,49 +74,19 @@ export default async function DistrictPage(props: {
   const publicNotices = data.publicNotices;
   return (
     <>
-      {page.heroImage && <Hero image={page.heroImage} />}
+      <PageHeroImage page={page} />
       <PageContainer className="relative">
         <PageTwoColumn
           rightSide={
             <>
               <PageActions actions={page.actions} />
               <PageDocuments documents={page.documents} />
-              <PageSection title="Assembly Member">
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between gap-4">
-                      <CardTitle>{page.memberName}</CardTitle>
-                      {page.photo?.file?.url && (
-                        <Image
-                          src={page.photo.file.url}
-                          className="rounded-full size-20"
-                          alt={
-                            page.memberName ||
-                            `Assembly Member of ${page.title}`
-                          }
-                          width={80}
-                          height={80}
-                        />
-                      )}
-                    </div>
-                  </CardHeader>
-                  <CardBody>
-                    <p>{page.bio}</p>
-                    <Link href={`tel${page.phone}`}>{page.phone}</Link>
-                    <Link href={`mailto:${page.email}`}>{page.email}</Link>
-                  </CardBody>
-                </Card>
-              </PageSection>
               <PageAddress address={page.address} />
               <PageContacts contacts={page.contacts} />
             </>
           }
         >
-          <PageBody
-            title={page.title}
-            description={page.description}
-            body={page.body}
-          />
+          <PageBody page={page} />
 
           <PagePublicNotices items={publicNotices} />
           <PageEvents listName="OrgUnit" />
