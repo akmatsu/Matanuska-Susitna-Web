@@ -1,8 +1,37 @@
 import clsx from 'clsx';
 import { PageSection } from './PageSection';
-import { TrailPageFragment } from '@msb/js-sdk/graphql';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
-export function PageTrailInfo({ trail }: { trail: TrailPageFragment }) {
+const trailInfoFragment = gql(`
+  fragment TrailInfo on Trail {
+    spring
+    summer
+    fall
+    winter
+    hiking
+    biking
+    horsebackRiding
+    crossCountrySkiing
+    snowshoeing
+    atv
+    dirtBiking
+    snowMachining
+    dogWalking
+    frisbeeGolf
+    running
+    mushing
+    open
+    difficulty
+    length
+    elevationChange
+    open
+  }
+`);
+
+export function PageTrailInfo(props: {
+  trail: FragmentType<typeof trailInfoFragment>;
+}) {
+  const trail = getFragmentData(trailInfoFragment, props.trail);
   return (
     <>
       <PageSection title="Trails Seasons">

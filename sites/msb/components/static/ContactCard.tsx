@@ -1,15 +1,26 @@
 import React from 'react';
 import Link from 'next/link';
 import { Card, CardHeader, CardBody, CardTitle } from '@matsugov/ui/Card';
-import { Contact } from '@msb/js-sdk/graphql';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+
+export const ContactFields = gql(`
+  fragment ContactFields on Contact {
+    id
+    name
+    phone
+    email
+    title
+  }
+`);
 
 export function ContactCard({
   contact,
   isPrimary,
 }: {
-  contact: Contact;
+  contact: FragmentType<typeof ContactFields>;
   isPrimary?: boolean;
 }) {
+  const c = getFragmentData(ContactFields, contact);
   const headerText = isPrimary ? 'Primary Contact' : 'Secondary Contact';
   return (
     <Card>
@@ -18,17 +29,17 @@ export function ContactCard({
       </CardHeader>
       <CardBody>
         <p>
-          <span>{contact.name}</span>
+          <span>{c.name}</span>
         </p>
         <ul>
-          {contact.phone && (
+          {c.phone && (
             <li>
-              <Link href={`tel:${contact.phone}`}>{contact.phone}</Link>
+              <Link href={`tel:${c.phone}`}>{c.phone}</Link>
             </li>
           )}
-          {contact.email && (
+          {c.email && (
             <li>
-              <Link href={`mailto:${contact.email}`}>{contact.email}</Link>
+              <Link href={`mailto:${c.email}`}>{c.email}</Link>
             </li>
           )}
         </ul>

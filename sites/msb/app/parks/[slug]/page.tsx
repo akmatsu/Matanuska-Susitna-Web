@@ -1,5 +1,4 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { GET_PARK_QUERY } from '@msb/js-sdk/getPark';
 import { notFound } from 'next/navigation';
 import {
   PageActions,
@@ -15,14 +14,60 @@ import {
   PageServices,
 } from '@/components/static/Page';
 import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
-import { Hero } from '@matsugov/ui';
+import { gql } from '@msb/js-sdk/gql';
+import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
+
+const getPark = gql(`
+  query GetPark(
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
+  ) {
+    park(where: { slug: $slug }) {
+      ...PageBody
+      ...HeroImage
+      actions {
+        ...ActionFields
+      }
+      documents {
+        ...DocumentFields
+      }
+      contacts {
+        ...ContactFields
+      }
+      services {
+        ...ServiceFields
+      }
+      address {
+        ...AddressFields
+      }
+      hours {
+        ...HourFields
+      }
+      trails {
+        ...PageList
+      }
+      facilities {
+        ...PageList
+      }
+    }
+
+    publicNotices(
+      where: { trails: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
+      ...PublicNoticeList
+    }
+  }
+`);
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
   const { data, errors, error } = await getClient().query({
-    query: GET_PARK_QUERY,
+    query: getPark,
     variables: {
       slug,
     },
@@ -44,7 +89,7 @@ export default async function Page(props: {
 
   return (
     <>
-      {page.heroImage && <Hero image={page.heroImage} />}
+      <PageHeroImage page={page} />
       <PageContainer className="relative">
         <PageTwoColumn
           rightSide={
@@ -59,11 +104,7 @@ export default async function Page(props: {
             </>
           }
         >
-          <PageBody
-            title={page.title}
-            body={page.body}
-            description={page.description}
-          />
+          <PageBody page={page} />
           <PageServices services={page.services} />
           <PagePublicNotices items={publicNotices} />
           <PageEvents listName="Park" />

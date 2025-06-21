@@ -1,7 +1,25 @@
 import { getClient } from '@/utils';
 import { DocumentCollection } from '@matsugov/ui/DocumentCollection';
-import { GET_DOC_COLLECTION_QUERY } from '@msb/js-sdk';
+import { gql } from '@msb/js-sdk/gql';
 import Link from 'next/link';
+
+const getDocCollection = gql(`
+  query GetDocumentCollectionWidget($where: DocumentCollectionWhereUniqueInput!) {
+    documentCollection(where: $where) {
+      id
+      title
+      documents {
+        id
+        title
+        file {
+          url
+          filename
+          filesize
+        }
+      }
+    }
+  }
+`);
 
 export default async function Page({
   params,
@@ -17,7 +35,7 @@ export default async function Page({
   const hideTitle = hide_title === 'true';
 
   const { data, loading, error } = await getClient().query({
-    query: GET_DOC_COLLECTION_QUERY,
+    query: getDocCollection,
     variables: {
       where: {
         id: id,

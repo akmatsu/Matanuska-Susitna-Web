@@ -1,20 +1,31 @@
-import { LinkCardGrid } from '@/components/static/LinkCardGrid';
 import { LinkButton } from '@/components/static/LinkButton';
 import { PageSection } from './PageSection';
-import { Service } from '@msb/js-sdk/graphql';
 import QueryString from 'qs';
+import { ServiceCard } from './ServiceCard';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+
+const serviceListFragment = gql(`
+  fragment ServiceList on Service {
+    id
+    ...ServiceFields
+  }
+`);
 
 export function PageServices(props: {
-  services?: (Service | undefined | null)[] | null;
+  services?: FragmentType<typeof serviceListFragment>[] | null;
   filters?: { [key: string]: (string | undefined | null)[] } | null;
 }) {
-  if (props.services && props.services.length > 0) {
+  const services = getFragmentData(serviceListFragment, props.services);
+  if (services?.length) {
     return (
       <PageSection title="Services">
-        <LinkCardGrid items={props.services.slice(0, 4)} listKey="services" />
-        {props.services.length > 4 && (
+        <ul className="grid grid-cols-2 gap-4">
+          {services.slice(0, 4).map((service) => (
+            <ServiceCard service={service} key={service.id} as="li" />
+          ))}
+        </ul>
+        {services.length > 4 && (
           <div className="flex justify-center items-center">
-            z
             <LinkButton
               href={`/search?${QueryString.stringify({ pages: { refinementList: { ...props.filters, type: ['service'] } } })}`}
               className="mt-4"

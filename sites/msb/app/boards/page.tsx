@@ -5,8 +5,35 @@ import { PageBody } from '@/components/static/Page/PageBody';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
 import { BoardsList } from './components/BoardsList';
-import { GET_BOARDS_PAGE } from '@msb/js-sdk';
-import Link from 'next/link';
+import { gql } from '@msb/js-sdk/gql';
+import { BoardDocuments } from '@/components/static/Page/BoardDocuments';
+import { DocumentLink } from '@/components/static/Page/DocumentLink';
+
+const getBoardsPage = gql(`
+  query GetBoardsPage {
+    boardPage {
+      ...PageBody
+      ...HeroImage
+      vacancyReport {
+        ...BoardDocumentLink
+      }
+      documents {
+        ...BoardDocumentList
+      }
+      applicationForm {
+        ...BoardDocumentLink
+      }
+
+      contacts {
+        ...ContactFields
+      }
+
+      actions {
+        ...ActionFields
+      }
+    }
+  }
+`);
 
 export const metadata: next.Metadata = {
   title: 'MSB - Boards & Commissions',
@@ -21,7 +48,7 @@ export default async function BoardsPage({
 }) {
   const params = await searchParams;
   const { data, errors, error } = await getClient().query({
-    query: GET_BOARDS_PAGE,
+    query: getBoardsPage,
     context: {
       fetchOptions: {
         next: {
@@ -45,11 +72,7 @@ export default async function BoardsPage({
     <>
       <Hero image="https://d1159zutbdy4l.cloudfront.net/public/uploads/acc9dacd-8633-4156-a476-5a5a22b957beoptimized_images/1920x1079_optimized_image.jpg?position=56.08838002993175% 38.41491556945659%" />
       <div className="max-w-5xl mx-auto px-4 py-16 flex flex-col gap-8 col-span-12">
-        <PageBody
-          title={page.title}
-          body={page.body}
-          description={page.description}
-        />
+        <PageBody page={page} />
 
         <div className="grid grid-cols-12 gap-2">
           <Card
@@ -81,23 +104,7 @@ export default async function BoardsPage({
               </div>
             </CardHeader>
             <CardBody>
-              <ul className="list-disc list-inside">
-                {page.documents?.map(
-                  (doc) =>
-                    doc.file?.url &&
-                    doc.title && (
-                      <li key={doc.id} className="list-disc list-inside">
-                        <Link
-                          href={doc.file.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {doc.title}
-                        </Link>
-                      </li>
-                    ),
-                )}
-              </ul>
+              <BoardDocuments documents={page.documents} />
             </CardBody>
           </Card>
           <Card
@@ -116,15 +123,13 @@ export default async function BoardsPage({
                 the Boards & Commissions Application. Applications are reviewed
                 by the Borough Clerks Office.
               </p>
-              <ul className="list-disc list-inside">
-                {page.applicationForm?.file?.url && (
+              {page.applicationForm && (
+                <ul className="list-disc list-inside">
                   <li>
-                    <Link href={page.applicationForm?.file?.url}>
-                      {page.applicationForm?.title}
-                    </Link>
+                    <DocumentLink document={page.applicationForm} />
                   </li>
-                )}
-              </ul>
+                </ul>
+              )}
             </CardBody>
           </Card>
           <Card
@@ -142,16 +147,13 @@ export default async function BoardsPage({
                 View the most recent Vacancy report to see the available seats
                 on the boards and commissions
               </p>
-              <ul className="list-disc list-inside">
-                <li>
-                  {page.vacancyReport?.file?.url &&
-                    page.vacancyReport.title && (
-                      <Link href={page.vacancyReport.file.url}>
-                        {page.vacancyReport.title}
-                      </Link>
-                    )}
-                </li>
-              </ul>
+              {page.vacancyReport && (
+                <ul className="list-disc list-inside">
+                  <li>
+                    <DocumentLink document={page.vacancyReport} />
+                  </li>
+                </ul>
+              )}
             </CardBody>
           </Card>
         </div>

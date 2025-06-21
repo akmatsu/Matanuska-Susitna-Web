@@ -1,23 +1,24 @@
-import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui/Card';
 import { PageSection } from './PageSection';
-import { OrgUnitFieldsFragment } from '@msb/js-sdk/graphql';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import { OrgUnitCard } from './OrgUnitCard';
+
+const childrenOrgUnitsFragment = gql(`
+  fragment ChildrenOrgUnits on OrgUnit {
+    id
+    ...OrgUnitFields
+  }
+`);
 
 export function PageChildrenOrgUnits(props: {
-  items?: OrgUnitFieldsFragment[] | null;
+  items?: FragmentType<typeof childrenOrgUnitsFragment>[] | null;
 }) {
-  if (props.items?.length)
+  const items = getFragmentData(childrenOrgUnitsFragment, props.items);
+  if (items?.length)
     return (
       <PageSection title="Division">
         <ul className="flex flex-col gap-2">
-          {props.items.map((child) => (
-            <LinkCard href={`/departments/${child.slug}`} key={child.id}>
-              <CardHeader>
-                <CardTitle>{child.title}</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <p className="truncate">{child.description}</p>
-              </CardBody>
-            </LinkCard>
+          {items.map((child) => (
+            <OrgUnitCard orgUnit={child} key={child.id} />
           ))}
         </ul>
       </PageSection>

@@ -10,18 +10,62 @@ import {
   PagePublicNotices,
   PageServices,
 } from '@/components/static/Page';
+import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
 import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { Hero } from '@matsugov/ui';
-import { GET_ORG_UNIT_QUERY } from '@msb/js-sdk/getOrgUnit';
+import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
+
+const getOrgUnit = gql(`
+  query GetOrgUnit(
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
+  ) {
+    orgUnit(where: { slug: $slug }) {
+      ...PageBody
+      ...HeroImage
+      actions {
+        ...ActionFields
+      }
+      documents {
+        ...DocumentFields
+      }
+      topics {
+        ...TopicFields
+      }
+      children {
+        ...OrgUnitFields
+      }
+      contacts {
+        ...ContactFields
+      }
+      parent {
+        ...OrgUnitFields
+      }
+      services {
+        ...ServiceFields
+      }
+    }
+    publicNotices(
+      where: { orgUnits: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
+      ...PublicNoticeList
+    }
+  }
+  `);
 
 export default async function DepartmentPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
   const { data, errors, error } = await getClient().query({
-    query: GET_ORG_UNIT_QUERY,
+    query: getOrgUnit,
+    variables: {
+      slug,
+    },
   });
 
   if (errors || error) {
@@ -35,11 +79,10 @@ export default async function DepartmentPage(props: {
   }
 
   const page = data.orgUnit;
-  const publicNotices = data.publicNotices;
 
   return (
     <>
-      {page.heroImage && <Hero image={page.heroImage} />}
+      <PageHeroImage page={page} />
       <PageContainer className="relative">
         <PageTwoColumn
           rightSide={
@@ -52,13 +95,9 @@ export default async function DepartmentPage(props: {
             </>
           }
         >
-          <PageBody
-            body={page.body}
-            title={page.title}
-            description={page.description}
-          />
+          <PageBody page={page} />
           <PageServices services={page.services} />
-          <PagePublicNotices items={publicNotices} />
+          <PagePublicNotices items={data.publicNotices} />
           <PageEvents listName="Department" />
         </PageTwoColumn>
       </PageContainer>

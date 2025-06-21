@@ -1,16 +1,24 @@
 import { MapWrapper } from '@/components/client/MapWrapper';
 import { ComponentProps } from 'react';
 import { PageSection } from '../../static/Page/PageSection';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+
+const pageMapFragment = gql(`
+  fragment PageMap on BasePage {
+    title
+  }
+`);
 
 export function PageMap(props: {
-  itemId?: string | null;
+  page?: FragmentType<typeof pageMapFragment>;
   map?: ComponentProps<typeof MapWrapper>;
 }) {
-  if (props.map) {
+  const page = getFragmentData(pageMapFragment, props.page);
+  if (props.map && page?.title) {
     return (
       <PageSection title="Map">
         <div className="aspect-1/1 w-full overflow-hidden border rounded-sm">
-          <MapWrapper {...props.map} itemId={props.itemId?.toUpperCase()} />
+          <MapWrapper {...props.map} itemId={page.title.toUpperCase()} />
         </div>
       </PageSection>
     );

@@ -1,38 +1,30 @@
-import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui/Card';
 import { PageSection } from './PageSection';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import { PageListItem } from './PageListItem';
+
+const pageListFragment = gql(`
+  fragment PageList on BasePageWithSlug {
+    id
+    ...PageItem
+  }
+`);
 
 export function PageListItems(props: {
-  items?:
-    | {
-        slug?: string | null;
-        title?: string | null;
-        description?: string | null;
-      }[]
-    | null;
+  items?: FragmentType<typeof pageListFragment>[] | null;
   title: string;
 }) {
-  if (props.items?.length) {
+  const items = getFragmentData(pageListFragment, props.items);
+  if (items?.length) {
     return (
       <PageSection title={props.title}>
         <ul>
-          {props.items.map((fac) => (
-            <LinkCard
+          {items.map((item) => (
+            <PageListItem
+              key={item.id}
+              item={item}
               as="li"
-              key={fac.slug}
-              className="my-2"
-              href={`/${props.title.toLowerCase().replace(/\s/gi, '-')}/${fac.slug}`}
-            >
-              <div className="flex justify-between items-center">
-                <div className="flex flex-col gap-4">
-                  <CardHeader>
-                    <CardTitle>{fac.title}</CardTitle>
-                  </CardHeader>
-                  <CardBody>
-                    <p className="truncate">{fac.description}</p>
-                  </CardBody>
-                </div>
-              </div>
-            </LinkCard>
+              title={props.title}
+            />
           ))}
         </ul>
       </PageSection>

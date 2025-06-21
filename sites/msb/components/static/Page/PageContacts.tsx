@@ -1,14 +1,23 @@
 import { ContactCard } from '@/components/static/ContactCard';
 import { PageSection } from './PageSection';
-import { ContactFieldsFragment } from '@msb/js-sdk/graphql';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
-export function PageContacts({
-  primaryContact,
-  contacts,
-}: {
-  primaryContact?: ContactFieldsFragment | null;
-  contacts?: ContactFieldsFragment[] | null;
+const contactListFragment = gql(`
+  fragment ContactList on Contact {
+    id,
+    ...ContactFields
+  }
+`);
+
+export function PageContacts(props: {
+  primaryContact?: FragmentType<typeof contactListFragment> | null;
+  contacts?: FragmentType<typeof contactListFragment>[] | null;
 }) {
+  const primaryContact = getFragmentData(
+    contactListFragment,
+    props.primaryContact,
+  );
+  const contacts = getFragmentData(contactListFragment, props.contacts);
   if (primaryContact || !!contacts?.length)
     return (
       <PageSection title="Contacts">

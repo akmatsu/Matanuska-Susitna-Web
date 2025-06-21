@@ -1,7 +1,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: 'http://localhost:3333/api/graphql',
+  schema: '../../../cms/apps/cms/schema.graphql',
   documents: [
     './src/**/*.{ts,tsx,graphql}',
     '../ui/src/**/*.{ts,tsx,graphql}',
@@ -10,11 +10,11 @@ const config: CodegenConfig = {
   ignoreNoDocuments: true,
   generates: {
     './src/graphql/': {
-      preset: 'client-preset',
+      preset: 'client',
       presetConfig: {
         gqlTagName: 'gql',
         gqlImport: '@apollo/client#gql',
-        documentMode: 'documentNode',
+        documentMode: 'documentNodeImportFragmentsFrom',
 
         fragmentMasking: {
           unmaskFunctionName: 'getFragmentData',

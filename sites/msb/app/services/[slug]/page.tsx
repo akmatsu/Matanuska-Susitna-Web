@@ -7,10 +7,46 @@ import {
   PageDocuments,
   PagePublicNotices,
 } from '@/components/static/Page';
+import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { GET_SERVICE_QUERY } from '@msb/js-sdk/getService';
-import { OrderDirection } from '@msb/js-sdk/graphql';
+import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
+
+const getService = gql(`
+  query GetService(
+    $slug: String!,
+    $take: Int = 5,
+    $orderDirection: OrderDirection = desc
+  ) {
+    service(where: { slug: $slug}) {
+      ...PageServiceBody
+      ...HeroImage
+      documents {
+        ...DocumentList
+      }
+      primaryAction {
+        ...ExternalActionFields
+      }
+      secondaryActions {
+        ...ExternalActionFields
+      }
+      primaryContact {
+        ...ContactList
+      }
+      contacts {
+        ...ContactList
+      }
+    }
+
+    publicNotices(
+      where: { services: { some: { slug: { equals: $slug } } } }, 
+      take: $take, 
+      orderBy: { urgency: $orderDirection }
+    ) {
+      ...PublicNoticeList
+    }
+  }
+`);
 
 export default async function ServicePage(props: {
   params: Promise<{ slug: string }>;
@@ -18,25 +54,9 @@ export default async function ServicePage(props: {
   const { slug } = await props.params;
 
   const { data, errors, error } = await getClient().query({
-    query: GET_SERVICE_QUERY,
+    query: getService,
     variables: {
-      where: {
-        slug,
-      },
-      publicNoticesWhere2: {
-        services: {
-          some: {
-            slug: {
-              equals: slug,
-            },
-          },
-        },
-      },
-      orderBy: [
-        {
-          urgency: OrderDirection.Desc,
-        },
-      ],
+      slug,
     },
   });
 
@@ -52,29 +72,28 @@ export default async function ServicePage(props: {
   const page = data.service;
 
   return (
-    <PageContainer className="relative">
-      <PageSideNavController
-        rightSide={
-          <>
-            <PageActions
-              primaryAction={page.primaryAction}
-              secondaryActions={page.secondaryActions}
-            />
-            <PageDocuments documents={page.documents} />
-            <PageContacts
-              primaryContact={page.primaryContact}
-              contacts={page.contacts}
-            />
-          </>
-        }
-      >
-        <PageBody
-          title={page.title}
-          description={page.description}
-          body={page.body}
-        />
-        <PagePublicNotices />
-      </PageSideNavController>
-    </PageContainer>
+    <>
+      <PageHeroImage page={page} />
+      <PageContainer className="relative">
+        <PageSideNavController
+          rightSide={
+            <>
+              <PageActions
+                primaryAction={page.primaryAction}
+                secondaryActions={page.secondaryActions}
+              />
+              <PageDocuments documents={page.documents} />
+              <PageContacts
+                primaryContact={page.primaryContact}
+                contacts={page.contacts}
+              />
+            </>
+          }
+        >
+          <PageBody page={page} />
+          <PagePublicNotices />
+        </PageSideNavController>
+      </PageContainer>
+    </>
   );
 }

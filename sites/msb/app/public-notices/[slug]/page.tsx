@@ -10,15 +10,64 @@ import {
   PageServices,
 } from '@/components/static/Page';
 import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
-import { Hero } from '@matsugov/ui';
-import { GET_PUBLIC_NOTICE } from '@msb/js-sdk/getPublicNotice';
+import { gql } from '@msb/js-sdk/gql';
+import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
+
+const getPage = gql(`
+  query GetPublicNotice($slug: String!) {
+    publicNotice(where: { slug: $slug }) {
+      ...HeroImage
+      ...PageBody
+      contacts {
+        ...ContactFields
+      }
+      documents {
+        ...DocumentFields
+      }
+      actions {
+        ...ActionFields
+      }
+
+      contacts {
+        ...ContactFields
+      }
+      topics {
+        ...PageList
+      }
+      communities {
+        ...PageList
+      }
+      assemblyDistricts {
+        ...PageList
+      }
+      parks {
+        ...PageList
+      }
+      facilities {
+        ...PageList
+      }
+      trails {
+        ...PageList
+      }
+      orgUnits {
+        ...PageList
+      }
+      boards {
+        ...PageList
+      }
+      services {
+        ...ServiceFields
+      }
+    }
+  }
+`);
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
   const { data, errors, error } = await getClient().query({
-    query: GET_PUBLIC_NOTICE,
+    query: getPage,
     variables: {
       slug,
     },
@@ -38,7 +87,7 @@ export default async function Page(props: {
 
   return (
     <>
-      {page.heroImage && <Hero image={page.heroImage} />}
+      <PageHeroImage page={page} />
       <PageContainer className="relative">
         <PageTwoColumn
           rightSide={
@@ -64,11 +113,7 @@ export default async function Page(props: {
             </>
           }
         >
-          <PageBody
-            title={page.title}
-            body={page.body}
-            description={page.description}
-          />
+          <PageBody page={page} />
           <PageServices services={page.services} />
         </PageTwoColumn>
       </PageContainer>

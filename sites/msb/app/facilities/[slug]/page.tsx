@@ -12,15 +12,61 @@ import {
   PageServices,
 } from '@/components/static/Page';
 import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
-import { Hero } from '@matsugov/ui';
-import { GET_FACILITY_QUERY } from '@msb/js-sdk/getFacility';
+import { gql } from '@msb/js-sdk/gql';
+import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
+
+const getFacilityPage = gql(`
+  query GetFacility(
+    $slug: String!
+    $take: Int = 5
+    $orderDirection: OrderDirection = desc
+  ) {
+    facility(where: { slug: $slug }) {
+      ...HeroImage
+      ...PageBody
+      actions {
+        ...ActionFields
+      }
+      documents {
+        ...DocumentFields
+      }
+
+      topics {
+        ...PageList
+      }
+      park {
+        ...PageList
+      }
+      services {
+        ...ServiceFields
+      }
+      address {
+        ...AddressFields
+      }
+      contacts {
+        ...ContactFields
+      }
+      hours {
+        ...HourFields
+      }
+    }
+
+    publicNotices(
+      where: { communities: { some: { slug: { equals: $slug } } } }
+      take: $take
+      orderBy: { urgency: $orderDirection }
+    ) {
+      ...PublicNoticeList
+    }
+  }
+`);
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
   const { data, errors, error } = await getClient().query({
-    query: GET_FACILITY_QUERY,
+    query: getFacilityPage,
     variables: {
       slug,
     },
@@ -41,7 +87,7 @@ export default async function Page(props: {
   const publicNotices = data.publicNotices;
   return (
     <>
-      {page.heroImage && <Hero image={page.heroImage} />}
+      <PageHeroImage page={page} />
       <PageContainer className="relative">
         <PageTwoColumn
           rightSide={
@@ -50,14 +96,11 @@ export default async function Page(props: {
               <PageDocuments documents={page.documents} />
               <PageContacts contacts={page.contacts} />
               <PageListItems items={page.topics} title="Topics" />
+              {page.park && <PageListItems items={[page.park]} title="Park" />}
             </>
           }
         >
-          <PageBody
-            title={page.title}
-            body={page.body}
-            description={page.description}
-          />
+          <PageBody page={page} />
           <PageServices services={page.services} />
           <PagePublicNotices items={publicNotices} />
           <PageEvents listName="Facility" />

@@ -1,8 +1,21 @@
 'use client';
 import { LinkButton } from '@/components/static/LinkButton';
 import { useQuery } from '@msb/js-sdk/apollo';
-import { GET_SERVICE_QUERY_NO_PN } from '@msb/js-sdk/getService';
+import { gql } from '@msb/js-sdk/gql';
 import { useParams } from 'next/navigation';
+
+const getServicePrimaryAction = gql(`
+  query GetServicePrimaryAction($slug: String!) {
+    service(where: { slug: $slug }) {
+      primaryAction {
+        label
+        url {
+          url
+        }
+      }
+    }
+  }
+`);
 
 export function PrimaryActionButton({
   label,
@@ -27,9 +40,9 @@ export function PrimaryActionButton({
 
 export function ActionButtonWrapper(props: { label: string }) {
   const params = useParams();
-  const { data, loading } = useQuery(GET_SERVICE_QUERY_NO_PN, {
+  const { data, loading } = useQuery(getServicePrimaryAction, {
     variables: {
-      where: { slug: params.serviceSlug as string },
+      slug: params.serviceSlug as string,
     },
   });
 

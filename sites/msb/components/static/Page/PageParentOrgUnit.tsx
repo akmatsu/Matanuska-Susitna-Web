@@ -1,21 +1,15 @@
-import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui/Card';
 import { PageSection } from './PageSection';
-import { OrgUnitFieldsFragment } from '@msb/js-sdk/graphql';
+import { OrgUnitFieldsFragmentDoc } from '@msb/js-sdk/graphql';
+import { OrgUnitCard } from './OrgUnitCard';
+import { FragmentType } from '@msb/js-sdk/gql';
 
 export function PageParentOrgUnit(props: {
-  item?: OrgUnitFieldsFragment | null;
+  item?: FragmentType<typeof OrgUnitFieldsFragmentDoc> | null;
 }) {
   if (props.item) {
     return (
       <PageSection title="Parent Department">
-        <LinkCard href={`/departments/${props.item.slug}`}>
-          <CardHeader>
-            <CardTitle>{props.item.title}</CardTitle>
-          </CardHeader>
-          <CardBody>
-            <p className="truncate">{props.item.description}</p>
-          </CardBody>
-        </LinkCard>
+        <OrgUnitCard orgUnit={props.item} />
       </PageSection>
     );
   }
