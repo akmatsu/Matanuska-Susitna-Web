@@ -31,7 +31,7 @@ export function ActionButton({
   block = true,
   target = '_blank',
   ...props
-}: ComponentProps<typeof LinkButton> & {
+}: {
   action: FragmentType<typeof ActionFields>;
   className?: string;
   big?: boolean;

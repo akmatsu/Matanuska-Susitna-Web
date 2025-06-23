@@ -16,7 +16,7 @@ import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 
-export const getCommunityPage = gql(`
+const getCommunityPage = gql(`
   query GetCommunity(
     $slug: String!
     $take: Int = 5
@@ -33,19 +33,19 @@ export const getCommunityPage = gql(`
         ...TopicFields
       }
       documents {
-        ...DocumentFields
+        ...DocumentList
       }
       actions {
-        ...ActionFields
+        ...ActionList
       }
       services {
-        ...ServiceFields
+        ...ServiceList
       }
       contacts {
-        ...ContactFields
+        ...ContactList
       }
       districts {
-        ...DistrictDetailFields
+        ...DistrictList      
       }
     }
 

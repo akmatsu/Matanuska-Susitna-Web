@@ -24,16 +24,16 @@ const getAssemblyDistrict = gql(`
       ...HeroImage
       ...PageBody      
       documents {
-        ...DocumentFields
+        ...DocumentList
       }
       actions {
-        ...ActionFields
+        ...ActionList
       }
       topics {
         ...TopicFields
       }
       contacts {
-        ...ContactFields
+        ...ContactList
       }
       
       ...AssemblyMemberInfo

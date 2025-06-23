@@ -25,10 +25,10 @@ const getFacilityPage = gql(`
       ...HeroImage
       ...PageBody
       actions {
-        ...ActionFields
+        ...ActionList
       }
       documents {
-        ...DocumentFields
+        ...DocumentList
       }
 
       topics {
@@ -38,13 +38,13 @@ const getFacilityPage = gql(`
         ...PageList
       }
       services {
-        ...ServiceFields
+        ...ServiceList
       }
       address {
         ...AddressFields
       }
       contacts {
-        ...ContactFields
+        ...ContactList
       }
       hours {
         ...HourFields

@@ -6,6 +6,7 @@
     },
     "includes": [
       "src/**/*.{ts,tsx,graphql}",
+      "../ui/src/**/*.{ts,tsx,graphql}",
       "../../sites/*/components/**/*.{ts,tsx,graphql}",
       "../../sites/*/app/**/*.{ts,tsx,graphql}"
     ],
