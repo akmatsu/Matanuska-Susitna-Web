@@ -10,20 +10,11 @@ const pageBodyFragment = gql(`
   }
 `);
 
-const pageServiceBodyFragment = gql(`
-  fragment PageServiceBody on BasePage {
-    __typename
-    title
-    body
-    description
-  }
-`);
-
 export function PageBody(props: {
   noProse?: boolean;
-  page?: FragmentType<typeof pageServiceBodyFragment> | null;
+  page?: FragmentType<typeof pageBodyFragment> | null;
 }) {
-  const page = getFragmentData(pageServiceBodyFragment, props.page);
+  const page = getFragmentData(pageBodyFragment, props.page);
   console.log(page);
   if (!page?.body || !page?.description) {
     return null;

@@ -19,7 +19,7 @@ const getService = gql(`
     $orderDirection: OrderDirection = desc
   ) {
     service(where: { slug: $slug}) {
-      ...PageServiceBody
+      ...PageBody
       ...HeroImage
       documents {
         ...DocumentList

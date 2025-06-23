@@ -41,7 +41,35 @@ export function makeClient({
   });
 
   return new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      possibleTypes: {
+        BasePage: [
+          'AssemblyDistrict',
+          'Community',
+          'Board',
+          'Facility',
+          'PublicNotice',
+          'Park',
+          'Trail',
+          'Service',
+          'Facility',
+          'OrgUnit',
+          'BoardPage',
+        ],
+        BasePageWithSlug: [
+          'AssemblyDistrict',
+          'Community',
+          'Board',
+          'Facility',
+          'PublicNotice',
+          'Park',
+          'Trail',
+          'Service',
+          'Facility',
+          'OrgUnit',
+        ],
+      },
+    }),
     link: from([errorLink, httpLink]),
     defaultOptions: {
       query: {

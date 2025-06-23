@@ -53,7 +53,13 @@ export function PageToolbelt(props: {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 w-full">
           {items.map((item) => {
             if (item.data)
-              return <ToolbeltHighlight data={item.data} icon={item.icon} />;
+              return (
+                <ToolbeltHighlight
+                  data={item.data}
+                  icon={item.icon}
+                  key={item.data.id}
+                />
+              );
           })}
         </div>
       </div>
