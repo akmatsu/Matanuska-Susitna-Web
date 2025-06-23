@@ -1,4 +1,3 @@
-import type { LinkedItemUnion, Maybe } from '@msb/js-sdk/graphql';
 import { LinkButton } from '@/components/static/LinkButton';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { ActionButton } from './ActionButton';
@@ -71,7 +70,7 @@ export function PageActions(props: {
       {!!actions && (
         <ul className="flex flex-col gap-2">
           {actions.map((action) => (
-            <ActionButton action={action} />
+            <ActionButton action={action} key={action.id} />
           ))}
         </ul>
       )}

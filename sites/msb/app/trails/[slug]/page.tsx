@@ -17,15 +17,6 @@ import { gql } from '@msb/js-sdk/gql';
 import { PageTopics } from '@/components/static/Page/PageTopics';
 import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
 
-const trailMetaQuery = gql(`
-  query GetTrailMeta($slug: String!) {
-    trail(where: { slug: $slug }) {
-      title
-      description
-    }
-  }
-`);
-
 const trailQuery = gql(`
   query GetTrail(
     $slug: String!
