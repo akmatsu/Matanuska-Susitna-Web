@@ -13,14 +13,6 @@
   color utility to any element that depends on these defaults.
 */
 
-:root {
-  --my-custom-primary-color: '#1d4ed8'; /* Example primary color */
-}
-
-.my-button {
-  background-color: var(--my-custom-primary-color);
-}
-
 @layer base {
   *,
   ::after,
