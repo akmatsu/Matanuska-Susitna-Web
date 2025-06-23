@@ -1,6 +1,5 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { PageSection } from '../PageSection';
-import { FacilitiesListFragmentDoc } from '@msb/js-sdk/graphql';
 import { FacilityCard } from './PageFacilityCard';
 
 const facilitiesListFragment = gql(`
@@ -17,10 +16,7 @@ export function PageFacilities({
   title?: string;
   facilities?: FragmentType<typeof facilitiesListFragment>[] | null;
 }) {
-  const facilities = getFragmentData(
-    FacilitiesListFragmentDoc,
-    props.facilities,
-  );
+  const facilities = getFragmentData(facilitiesListFragment, props.facilities);
 
   if (!facilities || facilities.length === 0) {
     return null;

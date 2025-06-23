@@ -1,7 +1,6 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { LinkButton } from '../LinkButton';
 import { LinkedItemUnion, Maybe } from '@msb/js-sdk/graphql';
-import { ComponentProps } from 'react';
 
 const ActionFields = gql(`
   fragment ActionFields on InternalLink {
