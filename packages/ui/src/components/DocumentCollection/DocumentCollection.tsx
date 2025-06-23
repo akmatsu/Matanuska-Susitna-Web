@@ -1,10 +1,17 @@
-import type {
-  GetDocumentCollectionQuery,
-  GetDocumentCollectionWidgetQuery,
-} from '@msb/js-sdk/graphql';
 import { ComponentProps, ElementType } from 'react';
 import { Button } from '../Button';
 import clsx from 'clsx';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+
+const documentCollectionFragment = gql(`
+  fragment DocumentCollectionDisplay on DocumentCollection {
+    title
+    documents {
+      id
+      ...DocumentButton
+    }
+  }
+`);
 
 export function DocumentCollection({
   collection,
@@ -13,18 +20,23 @@ export function DocumentCollection({
   hideTitle = false,
   centerLabel = true,
 }: {
-  collection: GetDocumentCollectionWidgetQuery['documentCollection'];
+  collection: FragmentType<typeof documentCollectionFragment>;
   linkAs?: ElementType;
   linkStyle?: 'button' | 'link';
   hideTitle?: boolean;
   label?: string;
   centerLabel?: boolean;
 }) {
+  const collectionData = getFragmentData(
+    documentCollectionFragment,
+    collection,
+  );
+
   return (
     <div className="w-full">
-      {!hideTitle && <h4 className="text-xl">{collection?.title}</h4>}
+      {!hideTitle && <h4 className="text-xl">{collectionData?.title}</h4>}
       <ul className="not-prose w-full">
-        {collection?.documents?.map((document) => (
+        {collectionData?.documents?.map((document) => (
           <Document
             document={document}
             linkAs={linkAs}
@@ -38,19 +50,29 @@ export function DocumentCollection({
   );
 }
 
+const documentButtonFragment = gql(`
+  fragment DocumentButton on Document {
+    title
+    file {
+      url 
+      filename
+      filesize
+    }
+  }
+`);
+
 function Document({
   document,
   linkAs,
   linkStyle,
   centerLabel,
 }: {
-  document: NonNullable<
-    NonNullable<GetDocumentCollectionQuery['documentCollection']>['documents']
-  >[number];
+  document: FragmentType<typeof documentButtonFragment>;
   linkAs: ElementType;
   linkStyle: 'button' | 'link';
   centerLabel: boolean;
 }) {
+  const doc = getFragmentData(documentButtonFragment, document);
   const Link =
     linkStyle === 'link'
       ? linkAs
@@ -58,30 +80,29 @@ function Document({
           <Button block as={linkAs} {...props}></Button>
         );
 
-  const fileType = document.file?.filename.split('.').pop()?.toUpperCase();
+  const fileType = doc.file?.filename.split('.').pop()?.toUpperCase();
   const isInternal =
-    document.file?.url.includes('matsu.gov') ||
-    document.file?.url.includes('matsugov.us') ||
-    document.file?.url.includes('msb-cms-documents.s3.us-west-2.amazonaws.com');
+    doc.file?.url.includes('matsu.gov') ||
+    doc.file?.url.includes('matsugov.us') ||
+    doc.file?.url.includes('msb-cms-documents.s3.us-west-2.amazonaws.com');
 
   return (
-    <li key={document.id} className="my-2">
+    <li className="my-2">
       <Link
-        href={document.file?.url}
+        href={doc.file?.url}
         className={clsx('flex items-center gap-1 flex-nowrap', {
           'justify-between': !centerLabel,
         })}
         target={isInternal ? '_parent' : '_blank'}
-        download={fileType === 'PDF' ? undefined : document.file?.filename}
+        download={fileType === 'PDF' ? undefined : doc.file?.filename}
       >
         <span className="truncate">
           <span className="truncate">
-            {document.title} {''}
+            {doc.title} {''}
           </span>
           <span className="text-xs">
             ({fileType} |{' '}
-            {document.file?.filesize && formatFileSize(document.file?.filesize)}
-            )
+            {doc.file?.filesize && formatFileSize(doc.file?.filesize)})
           </span>
         </span>
         <span

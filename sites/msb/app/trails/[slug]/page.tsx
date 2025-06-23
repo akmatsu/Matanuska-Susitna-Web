@@ -13,41 +13,9 @@ import {
   PageTrailInfo,
 } from '@/components/static/Page';
 import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
-import { Hero } from '@matsugov/ui';
-import { getFragmentData, gql } from '@msb/js-sdk/gql';
+import { gql } from '@msb/js-sdk/gql';
 import { PageTopics } from '@/components/static/Page/PageTopics';
-
-const trailPageFragment = gql(`
-  fragment TrailPage on Trail {
-    id
-    title
-    body
-    heroImage
-    description
-    ...TrailInfo
-    topics {
-      ...TopicFields
-    }
-    actions {
-      ...ActionFields
-    }
-    documents {
-      ...DocumentFields
-    }
-    park {
-      ...PageList
-    }
-    contacts {
-      ...ContactFields
-    }
-    address {
-      ...AddressFields
-    }
-    services {
-      ...ServiceFields
-    }
-  }
-`);
+import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
 
 const trailMetaQuery = gql(`
   query GetTrailMeta($slug: String!) {
@@ -65,7 +33,30 @@ const trailQuery = gql(`
     $orderDirection: OrderDirection = desc
   ) {
     trail(where: { slug: $slug }) {
-      ...TrailPage 
+      ...PageBody
+      ...HeroImage
+      ...TrailInfo
+      topics {
+        ...TopicList
+      }
+      actions {
+        ...ActionList
+      }
+      documents {
+        ...DocumentList
+      }
+      park {
+        ...PageList
+      }
+      contacts {
+        ...ContactList
+      }
+      address {
+        ...AddressFields
+      }
+      services {
+        ...ServiceList
+      }
     }
     publicNotices(
       where: { trails: { some: { slug: { equals: $slug } } } }
@@ -93,7 +84,7 @@ export default async function Page(props: {
     return notFound();
   }
 
-  const page = getFragmentData(trailPageFragment, data.trail);
+  const page = data.trail;
 
   if (!page) {
     console.error('Park not found for slug:', slug);
@@ -102,7 +93,7 @@ export default async function Page(props: {
 
   return (
     <>
-      {page.heroImage && <Hero image={page.heroImage} />}
+      <PageHeroImage page={page} />
       <PageContainer className="relative">
         <PageTwoColumn
           rightSide={
@@ -113,11 +104,11 @@ export default async function Page(props: {
               <PageAddress address={page.address} />
               <PageTrailInfo trail={page} />
               <PageTopics topics={page.topics} />
-              {page.park && <PageListItems items={[page.park]} />}
+              {page.park && <PageListItems items={[page.park]} title="Park" />}
             </>
           }
         >
-          <PageBody body={page} />
+          <PageBody page={page} />
           <PageServices services={page.services} />
           <PageEvents listName="Trail" />
         </PageTwoColumn>

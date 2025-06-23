@@ -30,7 +30,7 @@ const getBoardPage = gql(`
         ...PageList
       }
       districts {
-        ...DistrictDetailFields
+        ...DistrictList
       }
       linkToAgendas {
         ...ExternalActionButton
@@ -42,13 +42,13 @@ const getBoardPage = gql(`
         ...ExternalActionButton
       }
       contacts {
-        ...ContactFields
+        ...ContactList
       }
       actions {
-        ...ActionFields
+        ...ActionList
       }
       documents {
-        ...DocumentFields
+        ...DocumentList
       }
     }
   }

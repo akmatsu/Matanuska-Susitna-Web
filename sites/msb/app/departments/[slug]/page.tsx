@@ -26,25 +26,25 @@ const getOrgUnit = gql(`
       ...PageBody
       ...HeroImage
       actions {
-        ...ActionFields
+        ...ActionList
       }
       documents {
-        ...DocumentFields
+        ...DocumentList
       }
       topics {
         ...TopicFields
       }
       children {
-        ...OrgUnitFields
+        ...ChildrenOrgUnits
       }
       contacts {
-        ...ContactFields
+        ...ContactList
       }
       parent {
         ...OrgUnitFields
       }
       services {
-        ...ServiceFields
+        ...ServiceList
       }
     }
     publicNotices(

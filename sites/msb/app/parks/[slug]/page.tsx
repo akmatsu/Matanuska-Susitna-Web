@@ -27,22 +27,22 @@ const getPark = gql(`
       ...PageBody
       ...HeroImage
       actions {
-        ...ActionFields
+        ...ActionList
       }
       documents {
-        ...DocumentFields
+        ...DocumentList
       }
       contacts {
-        ...ContactFields
+        ...ContactList
       }
       services {
-        ...ServiceFields
+        ...ServiceList
       }
       address {
         ...AddressFields
       }
       hours {
-        ...HourFields
+        ...HourList
       }
       trails {
         ...PageList

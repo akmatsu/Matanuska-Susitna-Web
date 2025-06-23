@@ -4,7 +4,7 @@ import { FacilitiesListFragmentDoc } from '@msb/js-sdk/graphql';
 import { FacilityCard } from './PageFacilityCard';
 
 const facilitiesListFragment = gql(`
-  fragment FacilitiesList on BasePage {
+  fragment FacilitiesList on Facility {
     id
     ...FacilityCard
   }

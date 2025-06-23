@@ -12,6 +12,7 @@ const getDocCollection = gql(`
         title
         file {
           url
+          filename
         }
       }
     }

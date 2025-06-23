@@ -19,13 +19,13 @@ const getPage = gql(`
       ...HeroImage
       ...PageBody
       contacts {
-        ...ContactFields
+        ...ContactList
       }
       documents {
-        ...DocumentFields
+        ...DocumentList
       }
       actions {
-        ...ActionFields
+        ...ActionList
       }
       topics {
         ...PageList
@@ -52,7 +52,7 @@ const getPage = gql(`
         ...PageList
       }
       services {
-        ...ServiceFields
+        ...ServiceList
       }
     }
   }
