@@ -15,7 +15,7 @@ export function PageBody(props: {
   page?: FragmentType<typeof pageBodyFragment> | null;
 }) {
   const page = getFragmentData(pageBodyFragment, props.page);
-  if (!page?.body || !page?.description) {
+  if (!page?.body && !page?.description) {
     return null;
   }
 
