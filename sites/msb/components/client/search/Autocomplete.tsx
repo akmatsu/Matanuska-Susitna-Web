@@ -21,7 +21,6 @@ export function Autocomplete() {
   const router = useRouter();
 
   function onChange(value?: Hit | null) {
-    console.log(value?.type);
     const hitType = !value
       ? undefined
       : value?.type === 'orgUnit' || value?.type === 'org-unit'
