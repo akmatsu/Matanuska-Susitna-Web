@@ -54,8 +54,6 @@ export default async function Home() {
   const page = data.homePage;
   const publicNotices = data.publicNotices || [];
 
-  console.log(page);
-
   return (
     <div>
       <Hero
