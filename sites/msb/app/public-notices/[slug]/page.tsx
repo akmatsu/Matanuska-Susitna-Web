@@ -27,10 +27,6 @@ const getPage = gql(`
       actions {
         ...ActionFields
       }
-
-      contacts {
-        ...ContactFields
-      }
       topics {
         ...PageList
       }
