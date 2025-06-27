@@ -1,3 +1,11 @@
+## [0.9.5](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.9.4...v0.9.5) (2025-06-27)
+
+
+### Bug Fixes
+
+* currently selected tab is highlighted, added a searchbar ([877155c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/877155cc607e4287ff8e5cc15073f0d5b0f99c76))
+* fixed linting errors ([d654c51](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/d654c516c5c7b3547ae766a5686813f9b7ce3765))
+
 ## [0.9.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.9.3...v0.9.4) (2025-06-23)
 
 
