@@ -10,6 +10,11 @@
       "../../sites/*/components/**/*.{ts,tsx,graphql}",
       "../../sites/*/app/**/*.{ts,tsx,graphql}"
     ],
-    "excludes": ["**/node_modules", "**/dist", "**/__tests__"]
+    "excludes": [
+      "**/node_modules",
+      "**/dist",
+      "**/__tests__",
+      "./src/graphql/**"
+    ]
   }
 }

@@ -8,6 +8,9 @@ import { BoardsList } from './components/BoardsList';
 import { gql } from '@msb/js-sdk/gql';
 import { BoardDocuments } from '@/components/static/Page/BoardDocuments';
 import { DocumentLink } from '@/components/static/Page/DocumentLink';
+import Link from 'next/link';
+import { Suspense } from 'react';
+import { BoardListLoading } from './components/BoardListLoading';
 
 const getBoardsPage = gql(`
   query GetBoardsPage {
@@ -30,6 +33,9 @@ const getBoardsPage = gql(`
 
       actions {
         ...ActionList
+      }
+      ParliTrainingLink {
+        ...ParliTrainingLink
       }
     }
   }
@@ -72,7 +78,7 @@ export default async function BoardsPage({
     <>
       <Hero image="https://d1159zutbdy4l.cloudfront.net/public/uploads/acc9dacd-8633-4156-a476-5a5a22b957beoptimized_images/1920x1079_optimized_image.jpg?position=56.08838002993175% 38.41491556945659%" />
       <div className="max-w-5xl mx-auto px-4 py-16 flex flex-col gap-8 col-span-12">
-        <PageBody page={page} />
+        <PageBody page={page} hideType />
 
         <div className="grid grid-cols-12 gap-2">
           <Card
@@ -86,11 +92,17 @@ export default async function BoardsPage({
               </div>
             </CardHeader>
             <CardBody>
-              <ul className="list-disc list-inside">
-                <li>Be a resident of the Borough.</li>
-                <li>Meet qualifications for specific board (if applicable).</li>
-                <li>Attend mandatory training sessions.</li>
-              </ul>
+              <p className="mb-4">
+                Borough Boards, commissions, and committees are governed by{' '}
+                <Link href="https://www.codepublishing.com/AK/MatanuskaSusitnaBorough/#!/MatanuskaSusitnaBorough04/MatanuskaSusitnaBorough04.html">
+                  MSB Title 4
+                </Link>
+                , unless otherwise provided by ordinance. Each board member
+                shall be a registered voter of the Borough, unless otherwise
+                established in board code. If you are applying for a position
+                limited to a specific geographic area, you must also be a
+                resident of that area.
+              </p>
             </CardBody>
           </Card>
           <Card
@@ -104,7 +116,10 @@ export default async function BoardsPage({
               </div>
             </CardHeader>
             <CardBody>
-              <BoardDocuments documents={page.documents} />
+              <BoardDocuments
+                documents={page.documents}
+                parliTrainingLink={page.ParliTrainingLink}
+              />
             </CardBody>
           </Card>
           <Card
@@ -120,8 +135,13 @@ export default async function BoardsPage({
             <CardBody>
               <p className="mb-4">
                 To apply for a board or commission, please fill out and submit
-                the Boards & Commissions Application. Applications are reviewed
-                by the Borough Clerks Office.
+                the Boards & Commissions Application. Completed applications can
+                be emailed to{' '}
+                <Link href="mailto:jamie.jokhy@matsugov.us">
+                  jamie.jokhy@matsugov.us
+                </Link>
+                , delivered or mail to the Borough Clerk's Office, 350 E. Dahlia
+                Ave, Palmer AK, 99645, or Faxed to 907-861-7845.
               </p>
               {page.applicationForm && (
                 <ul className="list-disc list-inside">
@@ -138,14 +158,18 @@ export default async function BoardsPage({
           >
             <CardHeader>
               <div className="max-w-fit">
-                <CardTitle>Requirements to Serve</CardTitle>
+                <CardTitle>Vacancy Report</CardTitle>
                 <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
               </div>
             </CardHeader>
             <CardBody>
               <p className="mb-4">
-                View the most recent Vacancy report to see the available seats
-                on the boards and commissions
+                This report is pending Assembly confirmation. Please contact the
+                Borough Clerk's office for additional information regarding the
+                vacancy report. If you have questions about the application
+                process, please call the Borough Clerk's office at{' '}
+                <Link href="tel:907-861-8675">907-861-8675</Link>. Thank you for
+                your interest in serving.
               </p>
               {page.vacancyReport && (
                 <ul className="list-disc list-inside">
@@ -157,7 +181,7 @@ export default async function BoardsPage({
             </CardBody>
           </Card>
         </div>
-        <BoardsList searchParams={params} />
+        <BoardsList />
       </div>
     </>
   );
