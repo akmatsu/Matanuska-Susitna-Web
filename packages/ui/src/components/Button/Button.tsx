@@ -56,7 +56,7 @@ export function Button<T extends React.ElementType = 'button'>({
       {...props}
       href={href}
       type={Component === 'button' ? type : undefined}
-      disabled={disabled || active}
+      disabled={disabled}
       aria-disabled={disabled}
       className={clsx(
         'leading-none focus-ring text-center flex items-center justify-center no-underline transition-colors active:transition-none',
@@ -81,6 +81,7 @@ export function Button<T extends React.ElementType = 'button'>({
           'px-2': icon && !square,
           'font-bold': !square,
           underline: underline,
+          'cursor-pointer': !disabled,
 
           // Disabled state
           'bg-disabled-lighter text-disabled-dark cursor-not-allowed': disabled,
@@ -107,25 +108,9 @@ export function Button<T extends React.ElementType = 'button'>({
           'bg-base-darkest hover:bg-base-darker active:bg-base-dark text-white':
             color === 'black' && !disabled && !active,
 
-          // 'bg-transparent text-primary border border-base-lighter hover:border-primary':
-          //   color === 'transparent' && !disabled && active,
           'bg-primary  active:bg-primary-darker text-base-lightest':
             color === 'primary' && !disabled && active,
           'bg-primary text-white': color === 'secondary' && !disabled && active,
-          // 'bg-accent-cool hover:bg-accent-cool-dark active:bg-accent-cool-darker text-black active:text-white':
-          //   color === 'accent-cool' && !disabled && active,
-          // 'bg-accent-warm hover:bg-accent-warm-dark active:bg-accent-warm-darker text-black hover:text-white active:text-white':
-          //   color === 'accent-warm' && !disabled && active,
-          // 'bg-base hover:bg-base-dark active:bg-base-darker text-white':
-          //   color === 'base' && !disabled && active,
-          // 'bg-error hover:bg-error-dark active:bg-error-darker text-white':
-          //   color === 'error' && !disabled && active,
-          // 'bg-warning hover:bg-warning-dark active:bg-warning-darker text-white':
-          //   color === 'warning' && !disabled && active,
-          // 'bg-success hover:bg-success-dark active:bg-success-darker text-white':
-          //   color === 'success' && !disabled && active,
-          // 'bg-base-darkest hover:bg-base-darker active:bg-base-dark text-white':
-          //   color === 'black' && !disabled && active,
         },
         className,
       )}

@@ -13,6 +13,7 @@ const pageBodyFragment = gql(`
 export function PageBody(props: {
   noProse?: boolean;
   page?: FragmentType<typeof pageBodyFragment> | null;
+  hideType?: boolean;
 }) {
   const page = getFragmentData(pageBodyFragment, props.page);
   if (!page?.body && !page?.description) {
@@ -27,9 +28,11 @@ export function PageBody(props: {
           : 'prose max-w-none prose-table:table-auto prose-table:w-full prose-th:bg-base-lighter prose-th:border prose-th:border-base-darkest prose-th:font-bold prose-th:px-2 prose-td:px-2 prose-td:border prose-td:border-base-darkest prose-table:border prose-table:border-base-darkest prose-a:text-primary'
       }
     >
-      <p className="text-bold capitalize text-base-dark! font-bold text-2xl not-prose">
-        {page.__typename?.split(/(?=[A-Z])/).join(' ')}
-      </p>
+      {!props.hideType && (
+        <p className="text-bold capitalize text-base-dark! font-bold text-2xl not-prose">
+          {page.__typename?.split(/(?=[A-Z])/).join(' ')}
+        </p>
+      )}
       <h1>{page.title}</h1>
 
       {page.body ? (

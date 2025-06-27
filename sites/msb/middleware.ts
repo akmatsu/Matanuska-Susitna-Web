@@ -3,7 +3,6 @@ import { singular } from 'pluralize';
 
 export const config = {
   matcher: [
-    '/boards',
     '/communities',
     '/departments',
     '/districts',

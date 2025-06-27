@@ -8,10 +8,25 @@ const boardDocumentListFragment = gql(`
   }
 `);
 
+const parliTrainingLinkFragment = gql(`
+  fragment ParliTrainingLink on ExternalLink {
+    label
+    url {
+      title
+      url
+    }
+  }
+`);
+
 export function BoardDocuments(props: {
   documents?: FragmentType<typeof boardDocumentListFragment>[] | null;
+  parliTrainingLink?: FragmentType<typeof parliTrainingLinkFragment> | null;
 }) {
   const docs = getFragmentData(boardDocumentListFragment, props.documents);
+  const parliTrainingLink = getFragmentData(
+    parliTrainingLinkFragment,
+    props.parliTrainingLink,
+  );
 
   return (
     <ul className="list-disc list-inside">
@@ -20,6 +35,17 @@ export function BoardDocuments(props: {
           <DocumentLink document={doc} />
         </li>
       ))}
+      {parliTrainingLink?.url?.url && (
+        <li className="list-disc list-inside">
+          <a
+            href={parliTrainingLink.url.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {parliTrainingLink.label || parliTrainingLink.url.title}
+          </a>
+        </li>
+      )}
     </ul>
   );
 }

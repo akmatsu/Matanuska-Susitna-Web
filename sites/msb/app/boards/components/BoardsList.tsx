@@ -1,97 +1,39 @@
+'use client';
 import { LinkButton } from '@/components/static/LinkButton';
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { Card, CardHeader, CardTitle } from '@matsugov/ui/Card';
-import { GetBoardsQuery } from '@msb/js-sdk/graphql';
-import Link from 'next/link';
 import { BoardsListFilter } from './BoardListFilter';
-import { gql } from '@msb/js-sdk/gql';
+import { BoardListTable } from './BoardListTable';
+import { Suspense, useState } from 'react';
+import { BoardListLoading } from './BoardListLoading';
 
-const getBoards = gql(`
-    query GetBoards($take: Int, $skip: Int, $where: BoardWhereInput) {
-    boards(take: $take, where: $where, skip: $skip) {
-      id
-      title
-      slug
-      description
-      isActive
-      type
-      meetingSchedule
-    }
-  }
-`);
-
-export async function BoardsList({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  const { data, error } = await getClient().query({
-    query: getBoards,
-    variables: {
-      where: {
-        type:
-          typeof searchParams.type === 'string'
-            ? {
-                equals: searchParams.type,
-              }
-            : undefined,
-      },
-    },
-  });
-
-  if (error) {
-    console.error('Error fetching boards:', error);
-    return;
-  }
-
-  const { boards } = data as GetBoardsQuery;
+export function BoardsList() {
+  const [type, setType] = useState<string | undefined>();
+  const [search, setSearch] = useState<string | undefined>();
 
   return (
     <Card>
       <CardHeader className="flex gap-2 justify-between items-center">
-        <CardTitle>List of Boards</CardTitle>
+        <CardTitle>Boards & Commissions</CardTitle>
         <LinkButton href="https://matsugov.us/publicmeetings">
           View the Public Meetings Calendar
         </LinkButton>
       </CardHeader>
 
       <BoardsListFilter
+        onTypeChange={setType}
+        onSearch={setSearch}
+        currentType={type}
         types={[
           { label: 'Board', value: 'board' },
           { label: 'Community Council', value: 'community_council' },
-          { label: 'SSA Board', value: 'ssa_board' },
           { label: 'FSA Board', value: 'fsa_board' },
           { label: 'RSA Board', value: 'rsa_board' },
-          { label: 'Other', value: 'other' },
+          { label: 'SSA Board', value: 'ssa_board' },
         ]}
       />
-
-      <table className="border-collapse table-auto">
-        <thead>
-          <tr className="bg-neutral-200">
-            <th className="border border-base-light py-1 px-4">Name</th>
-            <th className="border border-base-light py-1 px-4">
-              Meeting Schedule
-            </th>
-            <th className="border border-base-light py-1 px-4">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {boards?.map((board) => (
-            <tr key={board.id} className="not-odd:bg-neutral-100">
-              <td className="border border-base-lighter px-4 py-2">
-                <Link href={`/boards/${board.slug}`}>{board.title}</Link>
-              </td>
-              <td className="border border-base-lighter px-4 py-2">
-                {board.meetingSchedule}
-              </td>
-              <td className="border border-base-lighter px-4 py-2 truncate overflow-hidden max-w-2xs">
-                {board.description}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Suspense fallback={<BoardListLoading />}>
+        <BoardListTable type={type} search={search} />
+      </Suspense>
     </Card>
   );
 }
