@@ -85,7 +85,7 @@ export function BoardListTable({
                   </Link>
                 ) : (
                   <p>
-                    Please contact the Borough Clerk's Office at{' '}
+                    Please contact the Borough Clerk&apos;s Office at{' '}
                     <Link href="tel:907-861-8675">907-861-8675</Link>.
                   </p>
                 )}

@@ -9,8 +9,6 @@ import { gql } from '@msb/js-sdk/gql';
 import { BoardDocuments } from '@/components/static/Page/BoardDocuments';
 import { DocumentLink } from '@/components/static/Page/DocumentLink';
 import Link from 'next/link';
-import { Suspense } from 'react';
-import { BoardListLoading } from './components/BoardListLoading';
 
 const getBoardsPage = gql(`
   query GetBoardsPage {
@@ -47,12 +45,7 @@ export const metadata: next.Metadata = {
     'The Matanuska-Susitna Borough (MSB) Boards, Commissions, and Community Councils',
 };
 
-export default async function BoardsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  const params = await searchParams;
+export default async function BoardsPage() {
   const { data, errors, error } = await getClient().query({
     query: getBoardsPage,
     context: {
@@ -140,8 +133,8 @@ export default async function BoardsPage({
                 <Link href="mailto:jamie.jokhy@matsugov.us">
                   jamie.jokhy@matsugov.us
                 </Link>
-                , delivered or mail to the Borough Clerk's Office, 350 E. Dahlia
-                Ave, Palmer AK, 99645, or Faxed to 907-861-7845.
+                , delivered or mail to the Borough Clerk&apos;s Office, 350 E.
+                Dahlia Ave, Palmer AK, 99645, or Faxed to 907-861-7845.
               </p>
               {page.applicationForm && (
                 <ul className="list-disc list-inside">
@@ -165,9 +158,9 @@ export default async function BoardsPage({
             <CardBody>
               <p className="mb-4">
                 This report is pending Assembly confirmation. Please contact the
-                Borough Clerk's office for additional information regarding the
-                vacancy report. If you have questions about the application
-                process, please call the Borough Clerk's office at{' '}
+                Borough Clerk&apos;s office for additional information regarding
+                the vacancy report. If you have questions about the application
+                process, please call the Borough Clerk&apos;s office at{' '}
                 <Link href="tel:907-861-8675">907-861-8675</Link>. Thank you for
                 your interest in serving.
               </p>
