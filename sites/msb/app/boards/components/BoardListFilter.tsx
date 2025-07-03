@@ -10,14 +10,11 @@ export function BoardsListFilter({
   types: { label: string; value: string }[];
   currentType?: string;
   onSearch: (search: string) => void;
-  onTypeChange: (type?: string) => void;
+  onTypeChange: (type: string) => void;
 }) {
-  function toggleType(value: string) {
-    if (currentType === value) {
-      props.onTypeChange(undefined);
-    } else {
-      props.onTypeChange(value);
-    }
+  function changeType(type: string) {
+    if (currentType === type) return;
+    props.onTypeChange(type);
   }
 
   return (
@@ -28,7 +25,7 @@ export function BoardsListFilter({
             key={item.value}
             className="text-sm"
             color="secondary"
-            onClick={() => toggleType(item.value)}
+            onClick={() => changeType(item.value)}
             active={currentType === item.value}
           >
             {item.label}

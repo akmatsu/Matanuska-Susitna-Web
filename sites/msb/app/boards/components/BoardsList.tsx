@@ -7,7 +7,7 @@ import { Suspense, useState } from 'react';
 import { BoardListLoading } from './BoardListLoading';
 
 export function BoardsList() {
-  const [type, setType] = useState<string | undefined>();
+  const [type, setType] = useState<string>('board');
   const [search, setSearch] = useState<string | undefined>();
 
   return (

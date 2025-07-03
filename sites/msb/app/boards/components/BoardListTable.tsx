@@ -79,15 +79,10 @@ export function BoardListTable({
               </BoardTableData>
 
               <BoardTableData>
-                {board.directory?.file?.url ? (
+                {board.directory?.file?.url && (
                   <Link href={board.directory.file.url}>
                     {board.directory.title}
                   </Link>
-                ) : (
-                  <p>
-                    Please contact the Borough Clerk&apos;s Office at{' '}
-                    <Link href="tel:907-861-8675">907-861-8675</Link>.
-                  </p>
                 )}
               </BoardTableData>
             </tr>
