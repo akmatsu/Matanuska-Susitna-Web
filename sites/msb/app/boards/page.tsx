@@ -32,8 +32,12 @@ const getBoardsPage = gql(`
       actions {
         ...ActionList
       }
-      ParliTrainingLink {
-        ...ParliTrainingLink
+      ParliTrainingLink{ 
+        label
+        url {
+          title
+          url
+        }
       }
     }
   }
@@ -96,6 +100,20 @@ export default async function BoardsPage() {
                 limited to a specific geographic area, you must also be a
                 resident of that area.
               </p>
+              {page.ParliTrainingLink?.url?.url && (
+                <ul className="list-disc list-inside">
+                  <li>
+                    <Link
+                      href={page.ParliTrainingLink.url.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {page.ParliTrainingLink.label ||
+                        page.ParliTrainingLink.url.title}
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </CardBody>
           </Card>
           <Card
@@ -109,10 +127,7 @@ export default async function BoardsPage() {
               </div>
             </CardHeader>
             <CardBody>
-              <BoardDocuments
-                documents={page.documents}
-                parliTrainingLink={page.ParliTrainingLink}
-              />
+              <BoardDocuments documents={page.documents} />
             </CardBody>
           </Card>
           <Card
