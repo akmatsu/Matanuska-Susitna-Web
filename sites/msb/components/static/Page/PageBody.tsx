@@ -1,5 +1,6 @@
 import { MarkdownRenderer } from '@components/server/MarkdownRenderer';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import { ProseWrapper } from '../ProseWrapper';
 
 const pageBodyFragment = gql(`
   fragment PageBody on BasePage {
@@ -21,13 +22,7 @@ export function PageBody(props: {
   }
 
   return (
-    <div
-      className={
-        props.noProse
-          ? ''
-          : 'prose max-w-none prose-table:table-auto prose-table:w-full prose-th:bg-base-lighter prose-th:border prose-th:border-base-darkest prose-th:font-bold prose-th:px-2 prose-td:px-2 prose-td:border prose-td:border-base-darkest prose-table:border prose-table:border-base-darkest prose-a:text-primary'
-      }
-    >
+    <ProseWrapper noProse={props.noProse}>
       {!props.hideType && (
         <p className="text-bold capitalize text-base-dark! font-bold text-2xl not-prose">
           {page.__typename?.split(/(?=[A-Z])/).join(' ')}
@@ -40,6 +35,6 @@ export function PageBody(props: {
       ) : page.description ? (
         <p>{page.description}</p>
       ) : undefined}
-    </div>
+    </ProseWrapper>
   );
 }
