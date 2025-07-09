@@ -52,7 +52,7 @@ export function ElectionDocumentLink(props: {
   if (!data?.file?.url) return null;
 
   return (
-    <LinkButton color="secondary" href={data.file.url} target="_blank">
+    <LinkButton href={data.file.url} target="_blank">
       {data.title}
     </LinkButton>
   );
