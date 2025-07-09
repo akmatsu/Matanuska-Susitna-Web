@@ -30,6 +30,7 @@ export function PageServices(props: {
               href={`/search?${QueryString.stringify({ pages: { refinementList: { ...props.filters, type: ['service'] } } })}`}
               className="mt-4"
               big
+              color="primary"
             >
               View all
             </LinkButton>

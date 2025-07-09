@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-export function Card({
+export function Card<T extends React.ElementType = 'div'>({
   as = 'div',
   children,
   className,
@@ -9,10 +9,10 @@ export function Card({
   ...props
 }: {
   children: React.ReactNode;
-  as?: React.ElementType;
+  as?: T;
   className?: string;
   containerClassName?: string;
-}) {
+} & React.ComponentProps<T>) {
   const Component = as;
 
   return (
@@ -29,7 +29,7 @@ export function Card({
   );
 }
 
-export function LinkCard({
+export function LinkCard<T extends React.ElementType = 'div'>({
   as = 'div',
   linkAs = 'a',
   href,
@@ -39,10 +39,10 @@ export function LinkCard({
 }: {
   children: React.ReactNode;
   href: string;
-  as?: React.ElementType;
+  as?: T;
   linkAs?: React.ElementType;
   className?: string;
-}) {
+} & React.ComponentProps<T>) {
   const Component = as;
   const LinkComponent = linkAs;
 
@@ -71,15 +71,15 @@ export function CardMedia({
   return <div className={className}>{children}</div>;
 }
 
-export function CardTitle({
+export function CardTitle<T extends React.ElementType = 'h4'>({
   children,
   as = 'h4',
   className,
 }: {
   children: React.ReactNode;
-  as?: React.ElementType;
+  as?: T;
   className?: string;
-}) {
+} & React.ComponentProps<T>) {
   const Component = as;
   return (
     <Component className={clsx('text-xl font-bold leading-none', className)}>

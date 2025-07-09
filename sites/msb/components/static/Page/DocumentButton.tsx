@@ -38,6 +38,7 @@ export function DocumentButton(props: {
       block
       key={doc.id}
       title={fileType === 'PDF' ? 'View PDF' : 'Download Document'}
+      color="primary"
     >
       <span className="flex items-center gap-1">
         {doc.title}{' '}

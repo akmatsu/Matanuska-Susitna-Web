@@ -45,6 +45,7 @@ export function Search({
           rounded="right"
           shadow={false}
           icon={useIcon}
+          color="primary"
         >
           {useIcon ? (
             <span className="icon-[mdi--search] size-6"></span>

@@ -17,7 +17,7 @@ export default function Unauthorized() {
       <p>Please click the button below to navigate to the home page.</p>
 
       <div className="flex gap-2">
-        <Button as={Link} href="/">
+        <Button as={Link} href="/" color="primary">
           Go Back
         </Button>
       </div>

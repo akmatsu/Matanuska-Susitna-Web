@@ -30,11 +30,9 @@ export default function Error({
       <pre>{error.message}</pre>
 
       <div className="flex gap-2">
-        <Button onClick={reset} color="base">
-          Try again
-        </Button>
+        <Button onClick={reset}>Try again</Button>
 
-        <Button as={Link} href="/">
+        <Button as={Link} href="/" color="primary">
           Go Back
         </Button>
       </div>

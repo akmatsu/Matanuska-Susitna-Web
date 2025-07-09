@@ -70,6 +70,7 @@ export function Header({
             onClick={() => setIsOpen(true)}
             className="px-2 leading-none text-sm shadow-2xs text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white h-12 flex items-center justify-center focus-ring"
             aria-label="Open menu"
+            color="primary"
           >
             MENU
           </button>

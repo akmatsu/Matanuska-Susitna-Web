@@ -43,6 +43,7 @@ export function PageActions(props: {
           target="_blank"
           big
           block
+          color="primary"
         >
           {primary.label || primary.url.title}
         </LinkButton>
