@@ -18,7 +18,7 @@ export default function NotFound() {
       <p>Please click the button below to navigate to our home page.</p>
 
       <div className="flex gap-2">
-        <Button as={Link} href="/">
+        <Button as={Link} href="/" color="primary">
           Go Back
         </Button>
       </div>

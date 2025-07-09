@@ -69,6 +69,7 @@ export function ActionButton({
       target={target}
       big={big}
       block={block}
+      color="primary"
     >
       {action.label || action.item?.title}
     </LinkButton>

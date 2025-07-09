@@ -32,6 +32,7 @@ export function PrimaryActionButton({
       target={isLinkExternal ? '_blank' : undefined}
       referrerPolicy="no-referrer"
       href={href}
+      color="primary"
     >
       {label}
     </LinkButton>

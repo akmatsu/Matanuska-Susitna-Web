@@ -95,6 +95,7 @@ function Document({
         })}
         target={isInternal ? '_parent' : '_blank'}
         download={fileType === 'PDF' ? undefined : doc.file?.filename}
+        color="primary"
       >
         <span className="truncate">
           <span className="truncate">

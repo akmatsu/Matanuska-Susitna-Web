@@ -52,13 +52,15 @@ export function Meetings() {
               <p>{meeting.location}</p>
             </CardBody>
             <CardFooter>
-              <Button>Add to Calendar</Button>
+              <Button color="primary">Add to Calendar</Button>
             </CardFooter>
           </Card>
         ))}
       </ul>
       <div className="flex flex-row justify-center items-center w-full">
-        <Button big>View all</Button>
+        <Button color="primary" big>
+          View all
+        </Button>
       </div>
     </>
   );

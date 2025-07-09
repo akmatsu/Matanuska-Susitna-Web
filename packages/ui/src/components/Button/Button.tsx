@@ -7,7 +7,7 @@ import clsx from 'clsx';
  */
 export function Button<T extends React.ElementType = 'button'>({
   className,
-  color = 'primary',
+  color = 'base',
   type = 'button',
   disabled,
   href,

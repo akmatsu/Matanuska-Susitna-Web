@@ -53,7 +53,7 @@ export function InstantSearch() {
         }
         right={
           <div className="flex flex-col gap-4">
-            <LinkButton href="/contact" block>
+            <LinkButton href="/contact" block color="primary">
               Contact Us
             </LinkButton>
           </div>

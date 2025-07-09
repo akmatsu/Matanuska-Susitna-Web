@@ -11,3 +11,4 @@ export * from './DocumentCollection';
 export * from './Checkbox';
 export * from './TwoColumnLayout';
 export * from './Tooltip';
+export * from './DropdownButton';

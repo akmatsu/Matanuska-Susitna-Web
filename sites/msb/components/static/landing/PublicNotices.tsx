@@ -24,7 +24,7 @@ export function PublicNotices(props: {
           />
         ))}
       </ul>
-      <LinkButton href="/public-notices" big>
+      <LinkButton href="/public-notices" big color="primary">
         View All Announcements & Public Notices
       </LinkButton>
     </div>
