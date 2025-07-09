@@ -1,4 +1,4 @@
-import { PageContainer, PageSection } from '@/components/static/Page';
+import { PageContainer } from '@/components/static/Page';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
@@ -34,13 +34,13 @@ export default async function ElectionsPage() {
   }
 
   const currentElection = data.elections?.[0];
-  const previousElection =
-    data.elections?.length === 2 ? data.elections?.[1] : null;
+  // const previousElection =
+  //   data.elections?.length === 2 ? data.elections?.[1] : null;
 
   return (
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
-      <PageContainer>
+      <PageContainer size="md">
         <ElectionPageHeader data={page} />
         <ElectionPageQuickLinks data={currentElection} />
         <UpcomingElectionDetails data={currentElection} />

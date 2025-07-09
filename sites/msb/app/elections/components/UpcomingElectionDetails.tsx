@@ -1,6 +1,9 @@
+import { LinkButton } from '@/components/static/LinkButton';
 import { PageSection } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
+import { DropdownButton } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import Link from 'next/link';
 
 const UpcomingElectionDetailsFragment = gql(`
   fragment UpcomingElectionDetails on Election {
@@ -12,6 +15,7 @@ const UpcomingElectionDetailsFragment = gql(`
     voterRegistrationDeadline
 
     electionBrochure {
+      id
       title
       file {
         url
@@ -19,6 +23,7 @@ const UpcomingElectionDetailsFragment = gql(`
     }
 
     electionBallots {
+      id
       title
       file {
         url
@@ -26,6 +31,7 @@ const UpcomingElectionDetailsFragment = gql(`
     }
 
     propositions {
+      id
       title
       file {
         url
@@ -33,6 +39,7 @@ const UpcomingElectionDetailsFragment = gql(`
     }
 
     candidates {
+      id
       title
       file {
         url
@@ -86,6 +93,25 @@ export function UpcomingElectionDetails(props: {
     },
   ];
 
+  const documents = [
+    {
+      label: 'Election Brochure',
+      value: data.electionBrochure,
+    },
+    {
+      label: 'Election Ballots',
+      value: data.electionBallots,
+    },
+    {
+      label: 'Propositions',
+      value: data.propositions,
+    },
+    {
+      label: 'Candidates',
+      value: data.candidates,
+    },
+  ];
+
   return (
     <PageSection title="Upcoming Election Details">
       <ProseWrapper>
@@ -100,6 +126,51 @@ export function UpcomingElectionDetails(props: {
           </tbody>
         </table>
       </ProseWrapper>
+      <div className="flex gap-4 justify-center flex-wrap my-4">
+        {documents.map((doc, index) => {
+          if (!doc.value) return null;
+          if (Array.isArray(doc.value)) {
+            if (doc.value.length === 0) return null;
+            return (
+              <DropdownButton
+                key={index}
+                label={
+                  <>
+                    {doc.label}{' '}
+                    <span className="icon-[mdi--chevron-down] size-4 ml-2" />
+                  </>
+                }
+                items={doc.value.map((item) => {
+                  if (!item.file?.url) return null;
+                  return (
+                    <Link
+                      key={item.title || item.id}
+                      href={item.file?.url}
+                      target="_blank"
+                      className="hover:bg-primary-lighter block w-full rounded px-4 py-2"
+                    >
+                      {item.title}
+                    </Link>
+                  );
+                })}
+              />
+            );
+          } else {
+            if (!doc.value.file?.url) return null;
+            return (
+              <LinkButton
+                key={index}
+                href={doc.value.file?.url}
+                target="_blank"
+              >
+                {doc.label}
+              </LinkButton>
+            );
+          }
+        })}
+      </div>
     </PageSection>
   );
 }
+
+function DocumentLink() {}
