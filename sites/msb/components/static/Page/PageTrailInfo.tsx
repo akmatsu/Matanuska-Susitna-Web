@@ -34,7 +34,7 @@ export function PageTrailInfo(props: {
   const trail = getFragmentData(trailInfoFragment, props.trail);
   return (
     <>
-      <PageSection title="Trails Seasons">
+      <PageSection title="Trails Seasons" noMargins>
         {trail.spring && (
           <span className="icon-[mdi--flower-tulip] size-8 text-green-700" />
         )}
@@ -48,7 +48,7 @@ export function PageTrailInfo(props: {
           <span className="icon-[mdi--snowflake] size-8 text-sky-400" />
         )}
       </PageSection>
-      <PageSection title="Trail Activities">
+      <PageSection title="Trail Activities" noMargins>
         <div className="flex gap-2">
           {trail.hiking && (
             <span
@@ -124,7 +124,7 @@ export function PageTrailInfo(props: {
           )}
         </div>
       </PageSection>
-      <PageSection title="Trail Details">
+      <PageSection title="Trail Details" noMargins>
         <p
           className={clsx('font-bold', {
             'text-green-700': trail.open,

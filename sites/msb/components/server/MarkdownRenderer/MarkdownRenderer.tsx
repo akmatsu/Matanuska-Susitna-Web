@@ -37,7 +37,7 @@ function remarkFilterUnsupportedDirectives(allowed: string[]) {
   };
 }
 
-export function MarkdownRenderer(props: { children: string }) {
+export function MarkdownRenderer(props: { children?: string | null }) {
   const allowedDirectives = [
     'process',
     'step',
@@ -81,7 +81,7 @@ export function MarkdownRenderer(props: { children: string }) {
         'internal-link': InternalLink,
       }}
     >
-      {props.children.replace(/<br\s*\/?>/gi, '')}
+      {props.children?.replace(/<br\s*\/?>/gi, '')}
     </Markdown>
   );
 }

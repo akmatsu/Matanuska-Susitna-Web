@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-export function PageSection({
+export function PageBodySection({
   title,
   children,
   noMargins,
@@ -12,10 +12,10 @@ export function PageSection({
   return (
     <section
       className={clsx({
-        'not-last:mb-16 not-first:mt-16': !noMargins,
+        'not-last:mb-32 not-first:mt-32': !noMargins,
       })}
     >
-      {title && <h2 className="text-2xl font-bold mb-4">{title}</h2>}
+      {title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}
       {children}
     </section>
   );

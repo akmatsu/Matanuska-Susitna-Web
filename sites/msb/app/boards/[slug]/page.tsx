@@ -89,7 +89,7 @@ export default async function BoardPage(props: {
               <PageActions actions={page.actions} />
               <PageDocuments documents={page.documents} />
               <PageContacts contacts={page.contacts} />
-              <PageSection title="Meeting Schedule">
+              <PageSection title="Meeting Schedule" noMargins>
                 <p>{page.meetingSchedule}</p>
               </PageSection>
               <PageDistricts items={page.districts} />

@@ -23,7 +23,7 @@ export function PageFacilities({
   }
 
   return (
-    <PageSection title={title}>
+    <PageSection title={title} noMargins>
       <ul>
         {facilities.map((facility) => (
           <FacilityCard key={facility.id} facility={facility} />

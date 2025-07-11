@@ -1,12 +1,12 @@
 import { ComponentProps } from 'react';
 import { Button } from '@matsugov/ui/Button';
-import Link, { type LinkProps } from 'next/link';
+import { Link } from '../Link';
 
 export function LinkButton({
   children,
   href,
   ...props
-}: ComponentProps<typeof Button> & LinkProps) {
+}: ComponentProps<typeof Button> & ComponentProps<typeof Link>) {
   return (
     <Button as={Link} href={href} {...props}>
       {children}

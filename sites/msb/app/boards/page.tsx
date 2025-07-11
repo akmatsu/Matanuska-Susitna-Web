@@ -9,6 +9,8 @@ import { gql } from '@msb/js-sdk/gql';
 import { BoardDocuments } from '@/components/static/Page/BoardDocuments';
 import { DocumentLink } from '@/components/static/Page/DocumentLink';
 import Link from 'next/link';
+import { CodeLink } from '@/components/static/CodeLink';
+import { PhoneLink } from '@/components/static/PhoneLink';
 
 const getBoardsPage = gql(`
   query GetBoardsPage {
@@ -91,14 +93,11 @@ export default async function BoardsPage() {
             <CardBody>
               <p className="mb-4">
                 Borough Boards, commissions, and committees are governed by{' '}
-                <Link href="https://www.codepublishing.com/AK/MatanuskaSusitnaBorough/#!/MatanuskaSusitnaBorough04/MatanuskaSusitnaBorough04.html">
-                  MSB Title 4
-                </Link>
-                , unless otherwise provided by ordinance. Each board member
-                shall be a registered voter of the Borough, unless otherwise
-                established in board code. If you are applying for a position
-                limited to a specific geographic area, you must also be a
-                resident of that area.
+                <CodeLink code="4">MSB Title 4</CodeLink>, unless otherwise
+                provided by ordinance. Each board member shall be a registered
+                voter of the Borough, unless otherwise established in board
+                code. If you are applying for a position limited to a specific
+                geographic area, you must also be a resident of that area.
               </p>
               {page.ParliTrainingLink?.url?.url && (
                 <ul className="list-disc list-inside">
@@ -176,8 +175,8 @@ export default async function BoardsPage() {
                 Borough Clerk&apos;s office for additional information regarding
                 the vacancy report. If you have questions about the application
                 process, please call the Borough Clerk&apos;s office at{' '}
-                <Link href="tel:907-861-8675">907-861-8675</Link>. Thank you for
-                your interest in serving.
+                <PhoneLink phoneNumber="9078618675" />. Thank you for your
+                interest in serving.
               </p>
               {page.vacancyReport && (
                 <ul className="list-disc list-inside">

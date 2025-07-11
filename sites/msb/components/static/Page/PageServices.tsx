@@ -18,7 +18,7 @@ export function PageServices(props: {
   const services = getFragmentData(serviceListFragment, props.services);
   if (services?.length) {
     return (
-      <PageSection title="Services">
+      <PageSection title="Services" noMargins>
         <ul className="grid grid-cols-2 gap-4">
           {services.slice(0, 4).map((service) => (
             <ServiceCard service={service} key={service.id} as="li" />

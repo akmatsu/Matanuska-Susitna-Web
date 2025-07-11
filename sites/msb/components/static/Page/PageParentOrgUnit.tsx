@@ -8,7 +8,7 @@ export function PageParentOrgUnit(props: {
 }) {
   if (props.item) {
     return (
-      <PageSection title="Parent Department">
+      <PageSection title="Parent Department" noMargins>
         <OrgUnitCard orgUnit={props.item} />
       </PageSection>
     );

@@ -24,6 +24,9 @@ export default async function GovernmentPage() {
           </div>
           <aside className="col-span-12 md:col-span-4">
             <div className="flex flex-col gap-4">
+              <LinkButton href="/elections" block color="primary">
+                Elections
+              </LinkButton>
               <LinkButton href="/boards" block color="primary">
                 View Boards & Commissions
               </LinkButton>
