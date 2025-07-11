@@ -1,0 +1,45 @@
+import { LinkButton } from '@/components/static/LinkButton';
+import { PageBodySection } from '@/components/static/Page/PageBodySection';
+import { PhoneLink } from '@/components/static/PhoneLink';
+import { ProseWrapper } from '@/components/static/ProseWrapper';
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+
+const ElectionPollingPlacesFragment = gql(`
+  fragment ElectionPollingPlaces on ElectionsPage {
+    stateElectionContact {
+      title
+      phone
+    }
+    
+    boroughElectionContact {
+      title
+      phone
+    }
+  }
+`);
+
+export function ElectionPollingPlaces(props: {
+  data?: FragmentType<typeof ElectionPollingPlacesFragment> | null;
+}) {
+  const data = getFragmentData(ElectionPollingPlacesFragment, props.data);
+
+  return (
+    <PageBodySection title="Polling Places & Precincts">
+      <ProseWrapper>
+        <p>
+          The precincts and polling places for the Matanuska-Susitna Borough are
+          on the Polling Places & Precincts Page. If you don't know your
+          assigned polling place, you may find it online by using the Alaska
+          State Division of Elections Online Polling Place Locator, or contact
+          the Alaska State Division of Elections at{' '}
+          <PhoneLink phoneNumber={data?.stateElectionContact?.phone} /> (toll
+          free), or the Borough Clerk's Office at{' '}
+          <PhoneLink phoneNumber={data?.boroughElectionContact?.phone} />.
+        </p>
+        <LinkButton href="/elections/polling-places" className="not-prose">
+          View Polling Places & Precincts
+        </LinkButton>
+      </ProseWrapper>
+    </PageBodySection>
+  );
+}

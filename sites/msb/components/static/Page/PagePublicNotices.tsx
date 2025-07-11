@@ -7,7 +7,7 @@ export function PagePublicNotices(props: {
 }) {
   if (props.items && props.items.length > 0) {
     return (
-      <PageSection title="Public Notices & Announcements">
+      <PageSection title="Public Notices & Announcements" noMargins>
         <PublicNotices items={props.items} />
       </PageSection>
     );

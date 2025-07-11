@@ -15,7 +15,9 @@
     "wid:build": "pnpm turbo run build --filter=widgets",
     "wid:start": "pnpm turbo run start --filter=widgets",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "codegen": "pnpm turbo run codegen --filter=@msb/js-sdk",
+    "codegen:watch": "pnpm turbo run codegen:watch --filter=@msb/js-sdk"
   },
   "keywords": [],
   "author": "",

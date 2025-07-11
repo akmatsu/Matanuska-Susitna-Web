@@ -18,6 +18,14 @@
     "storybook": {
       "cache": false,
       "persistent": true
+    },
+    "codegen": {
+      "cache": false,
+      "persistent": false
+    },
+    "codegen:watch": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

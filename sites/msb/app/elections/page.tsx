@@ -6,19 +6,28 @@ import { ElectionPageHeader } from './components/ElectionPageHeader';
 import { Hero } from '@matsugov/ui';
 import { ElectionPageQuickLinks } from './components/ElectionPageQuickLinks';
 import { UpcomingElectionDetails } from './components/UpcomingElectionDetails';
+import { ElectionVoterInformation } from './components/ElectionVoterInformation';
+import { CandidateFilingInfo } from './components/CandidateFilingInfo';
+import { ElectionPollingPlaces } from './components/ElectionPollingPlaces';
+import { CandidateInfo } from './components/CandidateInfo';
+import { ElectionPageContact } from './components/ElectionPageContact';
 
 const getElections = gql(`
   query GetElections {
     electionsPage {
       heroImage
       ...ElectionPageHeader
-      
+      ...ElectionPollingPlaces
+      ...ElectionContact
     }
     elections(take: 2, orderBy:  {
       electionDate: desc
     }) {
       ...ElectionPageQuickLinks
       ...UpcomingElectionDetails
+      ...ElectionVoterInformation
+      ...CandidateFilingInfo
+      ...CandidateInfo
     }
   }
 `);
@@ -34,8 +43,6 @@ export default async function ElectionsPage() {
   }
 
   const currentElection = data.elections?.[0];
-  // const previousElection =
-  //   data.elections?.length === 2 ? data.elections?.[1] : null;
 
   return (
     <>
@@ -44,13 +51,14 @@ export default async function ElectionsPage() {
         <ElectionPageHeader data={page} />
         <ElectionPageQuickLinks data={currentElection} />
         <UpcomingElectionDetails data={currentElection} />
+        <ElectionVoterInformation data={currentElection} />
+        <ElectionPollingPlaces />
+        <CandidateFilingInfo data={currentElection} />
+        <CandidateInfo data={currentElection} />
 
-        {/* Voter information and Resources */}
-        {/* Polling places */}
-        {/* Candidate resources */}
         {/* Elections Official information */}
         {/* Results */}
-        {/* Contact */}
+        <ElectionPageContact data={page} />
       </PageContainer>
     </>
   );

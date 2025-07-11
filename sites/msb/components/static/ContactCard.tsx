@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Card, CardHeader, CardBody, CardTitle } from '@matsugov/ui/Card';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import { PhoneLink } from './PhoneLink';
 
 export const ContactFields = gql(`
   fragment ContactFields on Contact {
@@ -34,7 +35,7 @@ export function ContactCard({
         <ul>
           {c.phone && (
             <li>
-              <Link href={`tel:${c.phone}`}>{c.phone}</Link>
+              <PhoneLink phoneNumber={c.phone} />
             </li>
           )}
           {c.email && (

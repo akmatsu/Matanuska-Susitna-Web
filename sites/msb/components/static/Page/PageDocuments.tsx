@@ -16,7 +16,7 @@ export function PageDocuments(props: {
   const documents = getFragmentData(documentListFragment, props.documents);
   if (documents?.length)
     return (
-      <PageSection title="Documents">
+      <PageSection title="Documents" noMargins>
         <ul className="flex flex-col gap-2">
           {documents.map((doc) => (
             <DocumentButton key={doc.id} document={doc} />

@@ -15,7 +15,7 @@ export function PageDistricts(props: {
   const items = getFragmentData(districtListFragment, props.items);
   if (items?.length)
     return (
-      <PageSection title="Districts">
+      <PageSection title="Districts" noMargins>
         <ul>
           {items.map((district) => (
             <DistrictCard key={district.id} district={district} />

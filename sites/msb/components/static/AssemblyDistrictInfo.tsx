@@ -3,6 +3,7 @@ import { PageSection } from './Page';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import { PhoneLink } from './PhoneLink';
 
 const AssemblyMemberInfoFragment = gql(`
   fragment AssemblyMemberInfo on AssemblyDistrict {
@@ -24,7 +25,7 @@ export function AssemblyMemberInfo(props: {
 }) {
   const page = getFragmentData(AssemblyMemberInfoFragment, props.page);
   return (
-    <PageSection title="Assembly Member">
+    <PageSection title="Assembly Member" noMargins>
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between gap-4">
@@ -42,7 +43,7 @@ export function AssemblyMemberInfo(props: {
         </CardHeader>
         <CardBody>
           <p>{page.bio}</p>
-          <Link href={`tel:${page.phone}`}>{page.phone}</Link>
+          {page.phone && <PhoneLink phoneNumber={page.phone} />}
           <Link href={`mailto:${page.email}`}>{page.email}</Link>
         </CardBody>
       </Card>

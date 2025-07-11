@@ -1,9 +1,10 @@
+import { Link } from '@/components/static/Link';
 import { LinkButton } from '@/components/static/LinkButton';
-import { PageSection } from '@/components/static/Page';
+import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
+import { formatDate } from '@/utils/datetimehHelpers';
 import { DropdownButton } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import Link from 'next/link';
 
 const UpcomingElectionDetailsFragment = gql(`
   fragment UpcomingElectionDetails on Election {
@@ -53,13 +54,6 @@ export function UpcomingElectionDetails(props: {
 }) {
   const data = getFragmentData(UpcomingElectionDetailsFragment, props.data);
   if (!data) return null;
-
-  function formatDate(date: string) {
-    return new Date(date).toLocaleString('en-US', {
-      dateStyle: 'long',
-      timeStyle: 'short',
-    });
-  }
 
   const tableValues = [
     {
@@ -113,7 +107,7 @@ export function UpcomingElectionDetails(props: {
   ];
 
   return (
-    <PageSection title="Upcoming Election Details">
+    <PageBodySection title="Upcoming Election Details">
       <ProseWrapper>
         <table>
           <tbody>
@@ -169,7 +163,7 @@ export function UpcomingElectionDetails(props: {
           }
         })}
       </div>
-    </PageSection>
+    </PageBodySection>
   );
 }
 

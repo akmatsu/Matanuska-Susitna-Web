@@ -16,7 +16,7 @@ export function PageListItems(props: {
   const items = getFragmentData(pageListFragment, props.items);
   if (items?.length) {
     return (
-      <PageSection title={props.title}>
+      <PageSection title={props.title} noMargins>
         <ul>
           {items.map((item) => (
             <PageListItem

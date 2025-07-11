@@ -1,6 +1,7 @@
 import React from 'react';
 import { appConfig } from '@matsugov/app-config';
 import clsx from 'clsx';
+import { PhoneLink } from '../PhoneLink';
 
 export function Footer({
   navLinkAs = 'a',
@@ -84,9 +85,12 @@ export function Footer({
             ))}
           </div>
           <div className="flex gap-8 flex-wrap">
-            <Link className="text-base-darkest" href={`tel:${orgPhone}`}>
-              {orgPhone}
-            </Link>
+            <PhoneLink
+              as={Link}
+              phoneNumber={orgPhone}
+              className="text-base-darkest"
+            />
+
             <Link className="text-base-darkest" href={contactHref}>
               Contact Us
             </Link>
