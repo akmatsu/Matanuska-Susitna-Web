@@ -14,3 +14,4 @@ export * from './Tooltip';
 export * from './DropdownButton';
 export * from './PhoneLink';
 export * from './EmailLink';
+export * from './Table';
