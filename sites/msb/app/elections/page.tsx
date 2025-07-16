@@ -16,6 +16,7 @@ import { ElectionResultsSection } from './components/ElectionsResultsSection';
 
 const getElections = gql(`
   query GetElections {
+    ...ElectionResults
     electionsPage {
       heroImage
       ...ElectionPageHeader
@@ -32,7 +33,7 @@ const getElections = gql(`
       ...CandidateFilingInfo
       ...CandidateInfo
       ...ElectionsOfficialsInfo
-      ...ElectionResults
+      ...ElectionResult
     }
   }
 `);
@@ -62,7 +63,7 @@ export default async function ElectionsPage() {
         <CandidateFilingInfo data={currentElection} />
         <CandidateInfo data={currentElection} />
         <ElectionPageContact data={page} />
-        <ElectionResultsSection data={currentElection} />
+        <ElectionResultsSection data={currentElection} results={data} />
       </PageContainer>
     </>
   );
