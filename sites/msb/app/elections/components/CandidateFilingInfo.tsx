@@ -1,6 +1,6 @@
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { CodeLink } from '@/components/static/CodeLink';
-import { Link } from '@/components/static/Link';
+import { DocumentLink } from '@/components/static/DocumentLink';
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import {
@@ -14,20 +14,16 @@ const CandidateFilingInfoFragment = gql(`
   fragment CandidateFilingInfo on Election {
     title
     candidates {
-      title,
-      file {
-        url
-      }
+      id
+      ...DocumentLink
     }
     electionDate
     officesToBeFilled
     candidateFilingStartDate
     candidateFilingDeadline
     candidateFilingDocuments {
-      title
-      file {
-        url
-      }
+      id
+      ...DocumentLink
     }
   }
 `);
@@ -66,10 +62,10 @@ export function CandidateFilingInfo(props: {
         </p>
         <ul>
           {data?.candidateFilingDocuments?.map((doc) => {
-            if (!doc.file?.url) return null;
+            if (!doc) return null;
             return (
-              <li key={doc.title}>
-                <Link href={doc.file.url}>{doc.title}</Link>
+              <li key={doc.id}>
+                <DocumentLink data={doc} />
               </li>
             );
           })}

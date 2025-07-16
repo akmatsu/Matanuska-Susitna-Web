@@ -1,3 +1,4 @@
+import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { LinkButton } from '@/components/static/LinkButton';
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
@@ -7,10 +8,7 @@ import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 const CandidateInfoFragment = gql(`
   fragment CandidateInfo on Election {
     candidates {
-      title
-      file {
-        url
-      }
+      ...DocumentLink
     }
     candidateFilingDeadline
   }
@@ -33,16 +31,14 @@ export function CandidateInfo(props: {
 
   return (
     <PageBodySection title="Candidate Information">
-      {data?.candidates?.file?.url && (
-        <LinkButton href={data?.candidates.file?.url} className="mb-4">
-          View Candidates
-        </LinkButton>
-      )}
+      <DocumentLinkButton data={data?.candidates}>
+        View Candidates
+      </DocumentLinkButton>
       <ProseWrapper>
         <p>
           The candidate filing period ended on{' '}
           {formatDate(data?.candidateFilingDeadline)}.{' '}
-          {!data?.candidates?.file?.url && (
+          {!data?.candidates && (
             <span>
               We are still processing the candidate applications and will update
               this page once they are available.

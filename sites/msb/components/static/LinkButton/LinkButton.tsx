@@ -1,12 +1,14 @@
-import { ComponentProps } from 'react';
-import { Button } from '@matsugov/ui/Button';
+import { ComponentProps, ElementType } from 'react';
+import { Button, type ButtonProps } from '@matsugov/ui/Button';
 import { Link } from '../Link';
 
-export function LinkButton({
-  children,
-  href,
-  ...props
-}: ComponentProps<typeof Button> & ComponentProps<typeof Link>) {
+type LinkAs = typeof Link;
+
+export type LinkButtonProps = Omit<ButtonProps<LinkAs>, 'as'> & {
+  href: string;
+};
+
+export function LinkButton({ children, href, ...props }: LinkButtonProps) {
   return (
     <Button as={Link} href={href} {...props}>
       {children}

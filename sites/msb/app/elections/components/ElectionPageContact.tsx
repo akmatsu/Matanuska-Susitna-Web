@@ -1,4 +1,6 @@
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
+import { ProseWrapper } from '@/components/static/ProseWrapper';
+import { EmailLink, PhoneLink } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
 const ElectionContactFragment = gql(`
@@ -17,18 +19,25 @@ export function ElectionPageContact(props: {
   const data = getFragmentData(ElectionContactFragment, props.data);
   return (
     <PageBodySection title="Contact Us">
-      <p>
-        If you have any questions, please contact the{' '}
-        {data?.boroughElectionContact?.name} at:
-      </p>
-      <ul>
-        {data?.boroughElectionContact?.email && (
-          <li>Email: {data.boroughElectionContact.email}</li>
-        )}
-        {data?.boroughElectionContact?.phone && (
-          <li>Phone: {data.boroughElectionContact.phone}</li>
-        )}
-      </ul>
+      <ProseWrapper>
+        <p>
+          If you have any questions, please contact the{' '}
+          {data?.boroughElectionContact?.name} at:
+        </p>
+        <ul>
+          {data?.boroughElectionContact?.email && (
+            <li>
+              Email: <EmailLink email={data.boroughElectionContact.email} />
+            </li>
+          )}
+          {data?.boroughElectionContact?.phone && (
+            <li>
+              Phone:{' '}
+              <PhoneLink phoneNumber={data.boroughElectionContact.phone} />
+            </li>
+          )}
+        </ul>
+      </ProseWrapper>
     </PageBodySection>
   );
 }

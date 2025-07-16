@@ -1,12 +1,12 @@
+import { DocumentLinkButton } from '../DocumentLink';
 import { PageSection } from './PageSection';
 
-import { DocumentButton } from './DocumentButton';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
 const documentListFragment = gql(`
   fragment DocumentList on Document {
     id
-    ...DocumentFields
+    ...DocumentLink
   }
 `);
 
@@ -19,7 +19,7 @@ export function PageDocuments(props: {
       <PageSection title="Documents" noMargins>
         <ul className="flex flex-col gap-2">
           {documents.map((doc) => (
-            <DocumentButton key={doc.id} document={doc} />
+            <DocumentLinkButton key={doc.id} data={doc} />
           ))}
         </ul>
       </PageSection>

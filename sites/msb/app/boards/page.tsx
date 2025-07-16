@@ -7,10 +7,10 @@ import { notFound } from 'next/navigation';
 import { BoardsList } from './components/BoardsList';
 import { gql } from '@msb/js-sdk/gql';
 import { BoardDocuments } from '@/components/static/Page/BoardDocuments';
-import { DocumentLink } from '@/components/static/Page/DocumentLink';
 import Link from 'next/link';
 import { CodeLink } from '@/components/static/CodeLink';
 import { PhoneLink } from '@/components/static/PhoneLink';
+import { DocumentLink } from '@/components/static/DocumentLink';
 
 const getBoardsPage = gql(`
   query GetBoardsPage {
@@ -18,13 +18,13 @@ const getBoardsPage = gql(`
       ...PageBody
       ...HeroImage
       vacancyReport {
-        ...BoardDocumentLink
+        ...DocumentLink
       }
       documents {
         ...BoardDocumentList
       }
       applicationForm {
-        ...BoardDocumentLink
+        ...DocumentLink
       }
 
       contacts {
@@ -153,7 +153,7 @@ export default async function BoardsPage() {
               {page.applicationForm && (
                 <ul className="list-disc list-inside">
                   <li>
-                    <DocumentLink document={page.applicationForm} />
+                    <DocumentLink data={page.applicationForm} />
                   </li>
                 </ul>
               )}
@@ -181,7 +181,7 @@ export default async function BoardsPage() {
               {page.vacancyReport && (
                 <ul className="list-disc list-inside">
                   <li>
-                    <DocumentLink document={page.vacancyReport} />
+                    <DocumentLink data={page.vacancyReport} />
                   </li>
                 </ul>
               )}

@@ -1,7 +1,12 @@
-export function formatDate(date: string) {
+export function formatDate(
+  date: string,
+  opts?: {
+    hideTime?: boolean;
+  },
+) {
   return new Date(date).toLocaleString('en-US', {
     dateStyle: 'long',
-    timeStyle: 'short',
+    timeStyle: opts?.hideTime ? undefined : 'short',
   });
 }
 
