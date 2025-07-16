@@ -1,4 +1,9 @@
 'use client';
+import {
+  DocumentLink,
+  DocumentLinkButton,
+} from '@/components/static/DocumentLink';
+import { LinkButton } from '@/components/static/LinkButton';
 import { useSuspenseQuery } from '@msb/js-sdk/apollo';
 import { gql } from '@msb/js-sdk/gql';
 import { OrderDirection } from '@msb/js-sdk/graphql';
@@ -29,10 +34,7 @@ const getBoards = gql(`
       title
       slug
       directory {
-        title
-        file {
-          url
-        }
+        ...DocumentLink
       }
     }
   }
@@ -79,11 +81,7 @@ export function BoardListTable({
               </BoardTableData>
 
               <BoardTableData>
-                {board.directory?.file?.url && (
-                  <Link href={board.directory.file.url}>
-                    {board.directory.title}
-                  </Link>
-                )}
+                <DocumentLinkButton data={board.directory} />
               </BoardTableData>
             </tr>
           ))

@@ -1,10 +1,10 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { DocumentLink } from './DocumentLink';
+import { DocumentLink } from '../DocumentLink';
 
 const boardDocumentListFragment = gql(`
   fragment BoardDocumentList on Document {
     id
-    ...BoardDocumentLink
+    ...DocumentLink
   }
 `);
 
@@ -17,7 +17,7 @@ export function BoardDocuments(props: {
     <ul className="list-disc list-inside">
       {docs?.map((doc) => (
         <li key={doc.id} className="list-disc list-inside">
-          <DocumentLink document={doc} />
+          <DocumentLink data={doc} />
         </li>
       ))}
     </ul>

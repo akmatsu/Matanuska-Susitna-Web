@@ -1,4 +1,7 @@
-import { Link } from '@/components/static/Link';
+import {
+  DocumentLink,
+  DocumentLinkButton,
+} from '@/components/static/DocumentLink';
 import { LinkButton } from '@/components/static/LinkButton';
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
@@ -17,34 +20,22 @@ const UpcomingElectionDetailsFragment = gql(`
 
     electionBrochure {
       id
-      title
-      file {
-        url
-      }
+      ...DocumentLink
     }
 
     electionBallots {
       id
-      title
-      file {
-        url
-      }
+      ...DocumentLink
     }
 
     propositions {
       id
-      title
-      file {
-        url
-      }
+      ...DocumentLink
     }
 
     candidates {
       id
-      title
-      file {
-        url
-      }
+      ...DocumentLink
     }
   }
 `);
@@ -128,43 +119,19 @@ export function UpcomingElectionDetails(props: {
             return (
               <DropdownButton
                 key={index}
-                label={
-                  <>
-                    {doc.label}{' '}
-                    <span className="icon-[mdi--chevron-down] size-4 ml-2" />
-                  </>
-                }
+                label={doc.label}
                 items={doc.value.map((item) => {
-                  if (!item.file?.url) return null;
-                  return (
-                    <Link
-                      key={item.title || item.id}
-                      href={item.file?.url}
-                      target="_blank"
-                      className="hover:bg-primary-lighter block w-full rounded px-4 py-2"
-                    >
-                      {item.title}
-                    </Link>
-                  );
+                  if (!item) return null;
+                  return <DocumentLink data={item} key={item.id} />;
                 })}
               />
             );
           } else {
-            if (!doc.value.file?.url) return null;
-            return (
-              <LinkButton
-                key={index}
-                href={doc.value.file?.url}
-                target="_blank"
-              >
-                {doc.label}
-              </LinkButton>
-            );
+            if (!doc.value) return null;
+            return <DocumentLinkButton data={doc.value} key={doc.value.id} />;
           }
         })}
       </div>
     </PageBodySection>
   );
 }
-
-function DocumentLink() {}

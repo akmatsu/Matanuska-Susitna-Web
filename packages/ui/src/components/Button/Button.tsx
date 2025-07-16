@@ -1,27 +1,7 @@
 import React, { type JSX } from 'react';
 import clsx from 'clsx';
 
-/**
- * A customizable button component that supports multiple color variants, states, and polymorphic rendering
- * @component
- */
-export function Button<T extends React.ElementType = 'button'>({
-  className,
-  color = 'base',
-  type = 'button',
-  disabled,
-  href,
-  as,
-  block,
-  big,
-  icon,
-  rounded = true,
-  shadow = true,
-  square = false,
-  underline = false,
-  active = false,
-  ...props
-}: {
+export type ButtonProps<T extends React.ElementType = 'button'> = {
   className?: string;
   children?: React.ReactNode;
   type?: JSX.IntrinsicElements['button']['type'];
@@ -48,7 +28,30 @@ export function Button<T extends React.ElementType = 'button'>({
   square?: boolean;
   underline?: boolean;
   active?: boolean;
-} & Omit<React.ComponentPropsWithoutRef<T>, 'color'>) {
+} & Omit<React.ComponentPropsWithRef<T>, 'color'>;
+
+/**
+ * A customizable button component that supports multiple color variants, states, and polymorphic rendering
+ * @component
+ */
+
+export function Button<T extends React.ElementType = 'button'>({
+  className,
+  color = 'base',
+  type = 'button',
+  disabled,
+  href,
+  as,
+  block,
+  big,
+  icon,
+  rounded = true,
+  shadow = true,
+  square = false,
+  underline = false,
+  active = false,
+  ...props
+}: ButtonProps<T>) {
   const Component = as || (href ? 'a' : 'button');
 
   return (

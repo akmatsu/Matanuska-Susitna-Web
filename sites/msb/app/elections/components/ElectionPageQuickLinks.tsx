@@ -1,30 +1,21 @@
-import { LinkButton } from '@/components/static/LinkButton';
+import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
 const ElectionPageQuickLinksFragment = gql(`
   fragment ElectionPageQuickLinks on Election {
     candidates {
-      ...ElectionDocumentLink
+      ...DocumentLink
     }
     electionOfficialApplication {
-      ...ElectionDocumentLink
+      ...DocumentLink
     }
     absenteeVotingApplication {
-      ...ElectionDocumentLink
+      ...DocumentLink
     }
     result {
       document {
-        ...ElectionDocumentLink
+        ...DocumentLink
       }
-    }
-  }
-`);
-
-const ElectionDocumentLinkFragment = gql(`
-  fragment ElectionDocumentLink on Document {
-    title
-    file {
-      url
     }
   }
 `);
@@ -37,23 +28,10 @@ export function ElectionPageQuickLinks(props: {
 
   return (
     <div className="flex flex-wrap justify-center gap-4 my-4">
-      <ElectionDocumentLink data={data.candidates} />
-      <ElectionDocumentLink data={data.electionOfficialApplication} />
-      <ElectionDocumentLink data={data.absenteeVotingApplication} />
-      <ElectionDocumentLink data={data.result?.document} />
+      <DocumentLinkButton data={data.candidates} />
+      <DocumentLinkButton data={data.electionOfficialApplication} />
+      <DocumentLinkButton data={data.absenteeVotingApplication} />
+      <DocumentLinkButton data={data.result?.document} />
     </div>
-  );
-}
-
-export function ElectionDocumentLink(props: {
-  data?: FragmentType<typeof ElectionDocumentLinkFragment> | null;
-}) {
-  const data = getFragmentData(ElectionDocumentLinkFragment, props.data);
-  if (!data?.file?.url) return null;
-
-  return (
-    <LinkButton href={data.file.url} target="_blank">
-      {data.title}
-    </LinkButton>
   );
 }
