@@ -3,9 +3,11 @@ import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { formatDate } from '@/utils/datetimehHelpers';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import { ElectionResultsList } from './ElectionResultsList';
+import { LinkButton } from '@/components/static/LinkButton';
 
-const ElectionResultsFragment = gql(`
-  fragment ElectionResults on Election {
+const ElectionResultFragment = gql(`
+  fragment ElectionResult on Election {
     title
     electionDate
     result {
@@ -18,10 +20,20 @@ const ElectionResultsFragment = gql(`
   }
 `);
 
+const ElectionResultsFragment = gql(`
+    fragment ElectionResults on Query {
+      electionResults {
+        ...ElectionResultsList
+      } 
+    }
+`);
+
 export function ElectionResultsSection(props: {
-  data?: FragmentType<typeof ElectionResultsFragment> | null;
+  data?: FragmentType<typeof ElectionResultFragment> | null;
+  results?: FragmentType<typeof ElectionResultsFragment> | null;
 }) {
-  const data = getFragmentData(ElectionResultsFragment, props.data);
+  const data = getFragmentData(ElectionResultFragment, props.data);
+  const results = getFragmentData(ElectionResultsFragment, props.results);
   if (!data) {
     return null;
   }
@@ -48,6 +60,12 @@ export function ElectionResultsSection(props: {
           </p>
         )}
       </ProseWrapper>
+      <ElectionResultsList data={results?.electionResults} />
+      <div className="flex justify-center mt-4">
+        <LinkButton href="/elections/results" color="primary">
+          View All Results
+        </LinkButton>
+      </div>
     </PageBodySection>
   );
 }
