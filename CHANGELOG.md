@@ -1,3 +1,19 @@
+# [0.10.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.9.5...v0.10.0) (2025-07-17)
+
+
+### Bug Fixes
+
+* made some small changes to UI/UX look and behavior on the boards page ([900ef64](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/900ef643900be41563dd3c0b59eea8bcf2afb452))
+
+
+### Features
+
+* added polling places, candidate filing info, candidate info, and contacts section to elections page ([d6b83ea](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/d6b83ea4c2507b91489808d84fea092ed27958ec))
+* button component now defaults to base color instead of primary ([7ef1e34](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/7ef1e34498f2c13aeb93d4b79d742722b69ff840))
+* created the results search list ([6a510a8](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6a510a83d7eef8172a7085e0c915ae20d50d10ff))
+* created the table components ([6509b62](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6509b6212cd6ae4ee2709642cd280e2726f9ad75))
+* created the upcoming elections details section ([592633a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/592633a7186e956d515c68039ceb840497db55ea))
+
 ## [0.9.5](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.9.4...v0.9.5) (2025-06-27)
 
 
