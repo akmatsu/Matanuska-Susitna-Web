@@ -66,7 +66,7 @@ export function ElectionVoterInformation(props: {
           </ul>
         </blockquote>
         <p>
-          Contact the Borough Clerk's office at{' '}
+          Contact the Borough Clerk&apos;s office at{' '}
           <PhoneLink phoneNumber="9078618683" /> for more information.
         </p>
       </ProseWrapper>

@@ -1,5 +1,4 @@
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
-import { LinkButton } from '@/components/static/LinkButton';
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { formatDate } from '@/utils/datetimehHelpers';
@@ -36,9 +35,14 @@ export function CandidateInfo(props: {
       </DocumentLinkButton>
       <ProseWrapper>
         <p>
-          The candidate filing period ended on{' '}
-          {formatDate(data?.candidateFilingDeadline)}.{' '}
-          {!data?.candidates && (
+          {isAfterFilingDeadline
+            ? `The candidate filing period ended on ${formatDate(
+                data?.candidateFilingDeadline,
+              )}.`
+            : `The candidate filing period will end on ${formatDate(
+                data?.candidateFilingDeadline,
+              )}.`}
+          {isAfterFilingDeadline && !data?.candidates && (
             <span>
               We are still processing the candidate applications and will update
               this page once they are available.
