@@ -28,12 +28,12 @@ export function ElectionPollingPlaces(props: {
       <ProseWrapper>
         <p>
           The precincts and polling places for the Matanuska-Susitna Borough are
-          on the Polling Places & Precincts Page. If you don't know your
+          on the Polling Places & Precincts Page. If you don&apos;t know your
           assigned polling place, you may find it online by using the Alaska
           State Division of Elections Online Polling Place Locator, or contact
           the Alaska State Division of Elections at{' '}
           <PhoneLink phoneNumber={data?.stateElectionContact?.phone} /> (toll
-          free), or the Borough Clerk's Office at{' '}
+          free), or the Borough Clerk&apos;s Office at{' '}
           <PhoneLink phoneNumber={data?.boroughElectionContact?.phone} />.
         </p>
         <LinkButton href="/elections/polling-places" className="not-prose">

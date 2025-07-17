@@ -1,4 +1,3 @@
-import { ComponentProps, ElementType } from 'react';
 import { Button, type ButtonProps } from '@matsugov/ui/Button';
 import { Link } from '../Link';
 
