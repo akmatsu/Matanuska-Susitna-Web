@@ -9,10 +9,10 @@ import { UpcomingElectionDetails } from './components/UpcomingElectionDetails';
 import { ElectionVoterInformation } from './components/ElectionVoterInformation';
 import { CandidateFilingInfo } from './components/CandidateFilingInfo';
 import { ElectionPollingPlaces } from './components/ElectionPollingPlaces';
-import { CandidateInfo } from './components/CandidateInfo';
 import { ElectionPageContact } from './components/ElectionPageContact';
 import { ElectionOfficialsInfo } from './components/ElectionsOfficialsInfo';
 import { ElectionResultsSection } from './components/ElectionsResultsSection';
+import { AbsenteeVotingInfo } from './components/AbsenteeVotingInfo';
 
 const getElections = gql(`
   query GetElections {
@@ -31,7 +31,6 @@ const getElections = gql(`
       ...UpcomingElectionDetails
       ...ElectionVoterInformation
       ...CandidateFilingInfo
-      ...CandidateInfo
       ...ElectionsOfficialsInfo
       ...ElectionResult
     }
@@ -41,6 +40,13 @@ const getElections = gql(`
 export default async function ElectionsPage() {
   const { data } = await getClient().query({
     query: getElections,
+    context: {
+      fetchOptions: {
+        next: {
+          revalidate: 5,
+        },
+      },
+    },
   });
 
   const page = data.electionsPage;
@@ -57,13 +63,14 @@ export default async function ElectionsPage() {
         <ElectionPageHeader data={page} />
         <ElectionPageQuickLinks data={currentElection} />
         <UpcomingElectionDetails data={currentElection} />
-        <ElectionOfficialsInfo data={currentElection} contactData={page} />
         <ElectionVoterInformation data={currentElection} />
-        <ElectionPollingPlaces />
+        <ElectionOfficialsInfo data={currentElection} contactData={page} />
         <CandidateFilingInfo data={currentElection} />
-        <CandidateInfo data={currentElection} />
-        <ElectionPageContact data={page} />
+        <AbsenteeVotingInfo />
+
+        <ElectionPollingPlaces data={page} />
         <ElectionResultsSection data={currentElection} results={data} />
+        <ElectionPageContact data={page} />
       </PageContainer>
     </>
   );

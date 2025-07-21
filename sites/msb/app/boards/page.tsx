@@ -57,7 +57,7 @@ export default async function BoardsPage() {
     context: {
       fetchOptions: {
         next: {
-          revalidate: 15,
+          revalidate: 5,
         },
       },
     },
