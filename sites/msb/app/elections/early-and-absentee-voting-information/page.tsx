@@ -1,7 +1,7 @@
 import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
-import { Button, DataTable } from '@matsugov/ui';
+import { DataTable } from '@matsugov/ui';
 import { gql } from '@msb/js-sdk/gql';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import notFound from '@/app/not-found';
@@ -92,7 +92,7 @@ export default async function AbsenteeVotingPage() {
           </p>
           <p>
             <strong>
-              Please note: The Borough's absentee by-mail application is
+              Please note: The Borough&apos;s absentee by-mail application is
               separate from that of the Alaska State Division of Elections and
               the cities of Houston, Palmer, and Wasilla.
             </strong>
@@ -108,16 +108,16 @@ export default async function AbsenteeVotingPage() {
               <li>Carefully complete ALL sections of the application</li>
               <li>Omissions or errors may cause a delay in ballot mailing</li>
               <li>
-                Application MUST contain the applicant's signature; no one else
-                may sign for you!
+                Application MUST contain the applicant&apos;s signature; no one
+                else may sign for you!
               </li>
             </ul>
           </blockquote>
           <p>
             Ballot envelopes must be postmarked by Election Day, and received in
-            the mail by the Borough Clerk's Office no later than three calendar
-            days after the election. Hand-delivered ballots must be returned to
-            a Borough election official by 8 p.m. on Election Day.
+            the mail by the Borough Clerk&apos;s Office no later than three
+            calendar days after the election. Hand-delivered ballots must be
+            returned to a Borough election official by 8 p.m. on Election Day.
           </p>
           <p>
             The Voting Locations section contains precinct information, or if
@@ -162,7 +162,7 @@ export default async function AbsenteeVotingPage() {
                 cell: (_, row) =>
                   row.hours?.length ? (
                     row.hours.map((hour) => (
-                      <div>
+                      <div key={hour.id}>
                         <span className="font-semibold">{hour.day}</span>:{' '}
                         {hour.open && (
                           <span>

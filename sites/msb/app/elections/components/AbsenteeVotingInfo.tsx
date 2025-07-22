@@ -2,7 +2,7 @@ import { LinkButton } from '@/components/static/LinkButton';
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 
-export function AbsenteeVotingInfo(props: {}) {
+export function AbsenteeVotingInfo() {
   return (
     <PageBodySection title="Early/Absentee Voting Information">
       <ProseWrapper>
