@@ -1,3 +1,17 @@
+# [0.11.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.10.0...v0.11.0) (2025-07-22)
+
+
+### Bug Fixes
+
+* fixed linting issues ([8cac1c5](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8cac1c5a62645de319b90362991c19bd84c0c0b1))
+
+
+### Features
+
+* boards and elections page now revalidates every 5 minutes ([251888b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/251888b8125afbb4940171378d26b2e2399aaea9))
+* created the absentee and early voter information page ([dae5f7e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/dae5f7efe5d5907a8376633d5bf8666f8a24f575))
+* updated elections page ([deaafba](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/deaafba80d405e9d609143dfc0d05f89957886e7))
+
 # [0.10.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.9.5...v0.10.0) (2025-07-17)
 
 
