@@ -39,7 +39,10 @@ export function ElectionPollingPlaces(props: {
           free), or the Borough Clerk&apos;s Office at{' '}
           <PhoneLink phoneNumber={data?.boroughElectionContact?.phone} />.
         </p>
-        <LinkButton href="/elections/polling-places" className="not-prose">
+        <LinkButton
+          href="/elections/polling-places-and-precincts"
+          className="not-prose"
+        >
           View Polling Places & Precincts
         </LinkButton>
       </ProseWrapper>
