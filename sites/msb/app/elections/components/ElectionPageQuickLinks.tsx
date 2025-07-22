@@ -1,4 +1,5 @@
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
+import { LinkButton } from '@/components/static/LinkButton';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
 const ElectionPageQuickLinksFragment = gql(`
@@ -9,9 +10,7 @@ const ElectionPageQuickLinksFragment = gql(`
     electionOfficialApplication {
       ...DocumentLink
     }
-    absenteeVotingApplication {
-      ...DocumentLink
-    }
+    
     result {
       document {
         ...DocumentLink
@@ -30,7 +29,10 @@ export function ElectionPageQuickLinks(props: {
     <div className="flex flex-wrap justify-center gap-4 my-4">
       <DocumentLinkButton data={data.candidates} />
       <DocumentLinkButton data={data.electionOfficialApplication} />
-      <DocumentLinkButton data={data.absenteeVotingApplication} />
+
+      <LinkButton href="/elections/early-and-absentee-voting-information">
+        Apply for Absentee By-Mail Ballot
+      </LinkButton>
       <DocumentLinkButton data={data.result?.document} />
     </div>
   );

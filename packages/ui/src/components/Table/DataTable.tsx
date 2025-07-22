@@ -6,7 +6,7 @@ import { Thr } from './Thr';
 import { Tr } from './Tr';
 
 type Column<
-  T,
+  T extends object,
   K extends Extract<keyof T, string> = Extract<keyof T, string>,
 > = {
   key: K;

@@ -1,11 +1,14 @@
 import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
-import { Button, PhoneLink } from '@matsugov/ui';
+import { Button, DataTable } from '@matsugov/ui';
 import { gql } from '@msb/js-sdk/gql';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import notFound from '@/app/not-found';
 import { formatDate } from '@/utils/datetimehHelpers';
+import { PhoneLink } from '@/components/static/PhoneLink';
+import { format, subDays } from 'date-fns';
+import { DocumentLinkButton } from '@/components/static/DocumentLink';
 
 const getAbsenteeVotingInfo = gql(`
   query getAbsenteeVotingInfo {
@@ -20,10 +23,33 @@ const getAbsenteeVotingInfo = gql(`
         name
         ...ContactFields
       }
+      earlyVotingLocations(orderBy:  {
+         order: asc
+      }) {
+        order
+        title
+        address {
+          lineOne
+          lineTwo
+          city
+          state
+          zip
+        }
+        hours {
+          id
+          day
+          open
+          close
+        }
+      }
+
     }
     elections(take: 1, orderBy: { electionDate: desc}) {
       earlyVotingStartDate
       electionDate
+      absenteeVotingApplication {
+        ...DocumentLink
+      }
       absenteeApplicationDeadline
       absenteeVotingApplication {
         ...DocumentLink
@@ -46,9 +72,14 @@ export default async function AbsenteeVotingPage() {
       <PageTwoColumn
         rightSide={
           <>
-            <Button big block color="primary">
-              I'm a button
-            </Button>
+            <DocumentLinkButton
+              data={currentElection?.absenteeVotingApplication}
+              big
+              block
+              color="primary"
+            >
+              Apply for Absentee By-Mail Ballot
+            </DocumentLinkButton>
           </>
         }
       >
@@ -103,7 +134,81 @@ export default async function AbsenteeVotingPage() {
             , and continue through Monday, November 3, 2025, at the following
             locations and times:
           </p>
+          <h2>Early Voting Locations</h2>
         </ProseWrapper>
+        {page?.earlyVotingLocations && (
+          <DataTable
+            data={page.earlyVotingLocations}
+            columns={[
+              {
+                key: 'title',
+                label: 'Location',
+              },
+              {
+                key: 'address',
+                label: 'Address',
+                cell: (_, row) =>
+                  row.address && (
+                    <span>
+                      {row.address.lineOne},{' '}
+                      {row.address.lineTwo && `${row.address.lineTwo}, `}
+                      {row.address.city}, {row.address.state} {row.address.zip}
+                    </span>
+                  ),
+              },
+              {
+                key: 'hours',
+                label: 'Hours',
+                cell: (_, row) =>
+                  row.hours?.length ? (
+                    row.hours.map((hour) => (
+                      <div>
+                        <span className="font-semibold">{hour.day}</span>:{' '}
+                        {hour.open && (
+                          <span>
+                            {format(
+                              new Date().setHours(
+                                +hour.open.split(':')[0],
+                                +hour.open.split(':')[1],
+                              ),
+                              'h:mm a',
+                            )}
+                          </span>
+                        )}{' '}
+                        -{' '}
+                        {hour.close && (
+                          <span>
+                            {format(
+                              new Date().setHours(
+                                +hour.close.split(':')[0],
+                                +hour.close.split(':')[1],
+                              ),
+                              'h:mm a',
+                            )}
+                          </span>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      <span className="font-semibold">
+                        {format(
+                          currentElection?.earlyVotingStartDate,
+                          'MMM d, yyyy',
+                        )}{' '}
+                        -{' '}
+                        {format(
+                          subDays(currentElection?.electionDate, 1),
+                          'MMM d, yyyy',
+                        )}
+                      </span>
+                      : <span>Normal business hours</span>
+                    </>
+                  ),
+              },
+            ]}
+          />
+        )}
       </PageTwoColumn>
     </PageContainer>
   );
