@@ -1,3 +1,10 @@
+## [0.11.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.11.1...v0.11.2) (2025-07-23)
+
+
+### Bug Fixes
+
+* now user the selected bannger photo instead of a hardcoded one in the boards page ([9e08e01](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9e08e0156f5ee1ec0ba5c3f78e609fdbe366a328))
+
 ## [0.11.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.11.0...v0.11.1) (2025-07-23)
 
 
