@@ -148,8 +148,8 @@ export default async function BoardsPage() {
                 <Link href="mailto:jamie.jokhy@matsugov.us">
                   jamie.jokhy@matsugov.us
                 </Link>
-                , delivered or mail to the Borough Clerk&apos;s Office, 350 E.
-                Dahlia Ave, Palmer AK, 99645, or Faxed to 907-861-7845.
+                , delivered or mail to the Mat-Su Borough Clerk&apos;s Office,
+                350 E. Dahlia Ave, Palmer AK, 99645, or Faxed to 907-861-7845.
               </p>
               {page.applicationForm && (
                 <ul className="list-disc list-inside">
@@ -173,11 +173,11 @@ export default async function BoardsPage() {
             <CardBody>
               <p className="mb-4">
                 This report is pending Assembly confirmation. Please contact the
-                Borough Clerk&apos;s office for additional information regarding
-                the vacancy report. If you have questions about the application
-                process, please call the Borough Clerk&apos;s office at{' '}
-                <PhoneLink phoneNumber="9078618675" />. Thank you for your
-                interest in serving.
+                Mat-Su Borough Clerk&apos;s office for additional information
+                regarding the vacancy report. If you have questions about the
+                application process, please call the Mat-Su Borough Clerk&apos;s
+                office at <PhoneLink phoneNumber="9078618675" />. Thank you for
+                your interest in serving.
               </p>
               {page.vacancyReport && (
                 <ul className="list-disc list-inside">
