@@ -10,7 +10,7 @@ import { PhoneLink } from '@/components/static/PhoneLink';
 import { format, subDays } from 'date-fns';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 
-const getAbsenteeVotingInfo = gql(`
+const GetAbsenteeVotingInfo = gql(`
   query getAbsenteeVotingInfo {
     electionsPage {
       stateElectionContact {
@@ -51,15 +51,12 @@ const getAbsenteeVotingInfo = gql(`
         ...DocumentLink
       }
       absenteeApplicationDeadline
-      absenteeVotingApplication {
-        ...DocumentLink
-      }
     }
   }
 `);
 
 export default async function AbsenteeVotingPage() {
-  const { data } = await getClient().query({ query: getAbsenteeVotingInfo });
+  const { data } = await getClient().query({ query: GetAbsenteeVotingInfo });
   if (!data) {
     notFound();
   }
