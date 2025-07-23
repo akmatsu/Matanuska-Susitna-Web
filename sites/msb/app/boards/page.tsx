@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { CodeLink } from '@/components/static/CodeLink';
 import { PhoneLink } from '@/components/static/PhoneLink';
 import { DocumentLink } from '@/components/static/DocumentLink';
+import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
 
 const getBoardsPage = gql(`
   query GetBoardsPage {
@@ -75,7 +76,7 @@ export default async function BoardsPage() {
 
   return (
     <>
-      <Hero image="https://d1159zutbdy4l.cloudfront.net/public/uploads/acc9dacd-8633-4156-a476-5a5a22b957beoptimized_images/1920x1079_optimized_image.jpg?position=56.08838002993175% 38.41491556945659%" />
+      <PageHeroImage page={page} />
       <div className="max-w-5xl mx-auto px-4 py-16 flex flex-col gap-8 col-span-12">
         <PageBody page={page} hideType />
 
