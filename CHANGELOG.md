@@ -1,3 +1,10 @@
+# [0.12.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.11.2...v0.12.0) (2025-07-23)
+
+
+### Features
+
+* updated the boards page ([6f8f930](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6f8f93098aaa9b4a0407c75e4f88f3ca7847fb44))
+
 ## [0.11.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.11.1...v0.11.2) (2025-07-23)
 
 
