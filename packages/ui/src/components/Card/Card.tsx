@@ -1,18 +1,20 @@
 import clsx from 'clsx';
 import React from 'react';
 
+export type CardProps<T extends React.ElementType = 'div'> = {
+  children: React.ReactNode;
+  as?: T;
+  className?: string;
+  containerClassName?: string;
+} & React.ComponentProps<T>;
+
 export function Card<T extends React.ElementType = 'div'>({
   as = 'div',
   children,
   className,
   containerClassName,
   ...props
-}: {
-  children: React.ReactNode;
-  as?: T;
-  className?: string;
-  containerClassName?: string;
-} & React.ComponentProps<T>) {
+}: CardProps<T>) {
   const Component = as;
 
   return (

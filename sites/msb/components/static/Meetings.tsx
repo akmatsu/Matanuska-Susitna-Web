@@ -1,60 +1,32 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@matsugov/ui/Card';
 import { Button } from '@matsugov/ui/Button';
+import { calendar } from '@googleapis/calendar';
+import { MeetingCard } from './MeetingCard';
 
-export function Meetings() {
-  const meetings: {
-    date: string | number;
-    location: string;
-    title: string;
-  }[] = [
-    {
-      date: Date.now(),
-      location: '123 N Example Ave, Earth',
-      title: 'Nulla consectetur ad dolore',
-    },
-    {
-      date: Date.now(),
-      location: 'Somewhere, 123 E Example St, SomeCity, ST 12345, USA',
-      title: 'Incididunt in enim et ad velit',
-    },
-    {
-      date: Date.now(),
-      location: '123 N Example St, SomeCity',
-      title: 'Ea consequat incididunt',
-    },
-    {
-      date: Date.now(),
-      location: 'Latitude 62, SomeWhere',
-      title: 'Nulla sint sunt.',
-    },
-  ];
+export async function Meetings() {
+  const calApi = calendar('v3');
+  const res = await calApi.events.list({
+    key: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY,
+    calendarId: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_MAIN_ID,
+    timeMin: new Date().toISOString(),
+    singleEvents: true,
+    orderBy: 'startTime',
+    maxResults: 4,
+    q: 'planning commission',
+  });
 
-  function formatDate(d: string | number) {
-    const date = new Date(d);
-    return date.toLocaleDateString();
-  }
+  const items =
+    res.data.items?.map((item) => ({
+      id: item.id,
+      date: item.start?.date || item.start?.dateTime,
+      location: item.location || 'No location provided',
+      title: item.summary || 'No title provided',
+    })) || [];
+
   return (
     <>
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        {meetings.map((meeting) => (
-          <Card as="li" className="h-full" key={meeting.title}>
-            <CardHeader>
-              <CardTitle>{meeting.title}</CardTitle>
-              <span className="font-body-sm">{formatDate(meeting.date)}</span>
-            </CardHeader>
-            <CardBody>
-              <p>{meeting.location}</p>
-            </CardBody>
-            <CardFooter>
-              <Button color="primary">Add to Calendar</Button>
-            </CardFooter>
-          </Card>
+      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        {items.map((meeting) => (
+          <MeetingCard key={meeting.id} meeting={meeting} />
         ))}
       </ul>
       <div className="flex flex-row justify-center items-center w-full">
