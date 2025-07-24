@@ -1,8 +1,9 @@
+'use client';
 import { checkLinkProps, NextLinkProps } from '@/utils/linkPropsChecker';
 import NextLink from 'next/link';
 import React from 'react';
 
-export function Link({
+export function ClientLink({
   href,
   target,
   className,

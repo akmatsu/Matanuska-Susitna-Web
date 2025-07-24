@@ -40,7 +40,7 @@ export function ElectionPollingPlaces(props: {
           <PhoneLink phoneNumber={data?.boroughElectionContact?.phone} />.
         </p>
         <LinkButton
-          href="/elections/polling-places-and-precincts"
+          href="https://matsugov.us/maps/polling-places-and-precincts"
           className="not-prose"
         >
           View Polling Places & Precincts

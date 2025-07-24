@@ -26,7 +26,8 @@
     "./TwoColumnLayout": "./src/components/TwoColumnLayout/index.ts",
     "./Tooltip": "./src/components/Tooltip/index.ts",
     "./PhoneLink": "./src/components/PhoneLink.tsx",
-    "./EmailLink": "./src/components/EmailLink.tsx"
+    "./EmailLink": "./src/components/EmailLink.tsx",
+    "./AddressLink": "./src/components/AddressLink.tsx"
   },
   "scripts": {
     "test": "vitest"

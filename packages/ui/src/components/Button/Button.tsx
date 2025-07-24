@@ -81,7 +81,7 @@ export function Button<T extends React.ElementType = 'button'>({
           'px-6 py-4 text-xl': big && !icon && !square,
           'size-10': square && !big,
           'p-4': square && big,
-          'px-2': icon && !square,
+          'p-2 aspect-square': icon && !square,
           'font-bold': !square,
           underline: underline,
           'cursor-pointer': !disabled,
