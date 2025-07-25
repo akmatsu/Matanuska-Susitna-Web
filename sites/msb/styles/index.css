@@ -25,6 +25,33 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
+
+  /* Anchor tags */
+  a {
+    @apply text-primary underline;
+  }
+
+  a:hover {
+    @apply text-primary-dark;
+  }
+
+  a:focus {
+    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-blue-40v;
+  }
+  a:visited {
+    color: var(--color-purple-900);
+  }
+
+  /* Body element */
+  body {
+    color: var(--color-base-darkest);
+    background: var(--color-white);
+  }
+
+  /* Button focus state */
+  button {
+    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-blue-40v;
+  }
 }
 
 * {
@@ -38,5 +65,11 @@ html {
 .msb-md-body {
   table {
     width: 100%;
+  }
+}
+
+@layer components {
+  .focus-ring {
+    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-blue-40v;
   }
 }

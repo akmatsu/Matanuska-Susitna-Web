@@ -7,11 +7,10 @@ import {
   CardProps,
   CardTitle,
   PhoneLink,
-  Tooltip,
 } from '@matsugov/ui';
 import { format } from 'date-fns';
 import { AddressLink } from '../client/AddressLink';
-import { Link } from './Link';
+import { AddToCalendarButton } from './AddToCalendarButton';
 
 const phoneRx = /(\+?\d?.?\(?\d{3}\)?.?\d{3}.?\d{4})/g;
 
@@ -43,6 +42,10 @@ export function MeetingCard({
                 <span className="md:text-xl font-normal">
                   {format(meeting.date, 'yyyy')}
                 </span>
+                <br />
+                <span className="text-xs font-normal">
+                  {format(meeting.date, 'h:mm a')}
+                </span>
               </p>
             </div>
           </div>
@@ -71,9 +74,7 @@ export function MeetingCard({
             </address>
           </CardBody>
           <CardFooter className="justify-center sm:justify-end">
-            <Button className="text-xs" color="secondary">
-              Add to Calendar
-            </Button>
+            <AddToCalendarButton meeting={meeting} />
           </CardFooter>
         </div>
       </div>

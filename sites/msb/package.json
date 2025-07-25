@@ -15,6 +15,7 @@
     "@matsugov/ui": "workspace:^",
     "@msb/js-sdk": "workspace:^",
     "@msb/map": "workspace:^",
+    "@types/file-saver": "^2.0.7",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "file-saver": "^2.0.5",
