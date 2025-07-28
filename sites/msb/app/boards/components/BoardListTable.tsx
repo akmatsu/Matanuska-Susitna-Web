@@ -1,5 +1,8 @@
 'use client';
-import { DocumentLinkButton } from '@/components/static/DocumentLink';
+import {
+  DocumentLink,
+  DocumentLinkButton,
+} from '@/components/static/DocumentLink';
 import { DataTable } from '@matsugov/ui';
 import { useSuspenseQuery } from '@msb/js-sdk/apollo';
 import { gql } from '@msb/js-sdk/gql';
@@ -74,7 +77,9 @@ export function BoardListTable({
         {
           key: 'directory',
           label: 'Directory',
-          cell: (value, row) => <DocumentLinkButton data={row.directory} />,
+          cell: (value, row) => (
+            <DocumentLink data={row.directory}>View</DocumentLink>
+          ),
         },
       ]}
       data={boards}

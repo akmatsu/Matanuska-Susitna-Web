@@ -5,7 +5,6 @@ import React from 'react';
 export function Link({
   href,
   target,
-  className,
   referrerPolicy,
   hideExternalIcon,
   ...props
