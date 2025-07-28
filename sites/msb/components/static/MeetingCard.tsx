@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -13,17 +12,18 @@ import { AddressLink } from '../client/AddressLink';
 import { AddToCalendarButton } from './AddToCalendarButton';
 
 const phoneRx = /(\+?\d?.?\(?\d{3}\)?.?\d{3}.?\d{4})/g;
+export interface Meeting {
+  id?: string | null;
+  date?: string | null;
+  location: string;
+  title: string;
+}
 
 export function MeetingCard({
   meeting,
   ...props
 }: {
-  meeting: {
-    id?: string | null;
-    date?: string | null;
-    location: string;
-    title: string;
-  };
+  meeting: Meeting;
 } & Omit<CardProps, 'children'>) {
   const parts = meeting.title.split(/\((.+)\)/);
   const title = parts.shift();
@@ -32,9 +32,9 @@ export function MeetingCard({
 
   return (
     <Card {...props} className="h-full">
-      <div className="flex flex-col sm:flex-row">
+      <div className="flex flex-col sm:flex-row h-full">
         {meeting.date && (
-          <div className="bg-base-lightest p-2 flex justify-center items-center">
+          <div className="bg-base-lightest p-2 flex justify-center items-center h-full">
             <div className="bg-primary-dark aspect-square w-full h-full max-h-24 max-w-24 md:max-h-32 md:max-w-32 flex flex-col justify-center items-center text-white gap-2 rounded-full">
               <p className="md:text-xl font-bold text-center">
                 {format(meeting.date, 'MMM do')}
@@ -50,7 +50,7 @@ export function MeetingCard({
             </div>
           </div>
         )}
-        <div className="flex flex-col gap-4 w-full text-center sm:text-left">
+        <div className="flex flex-col justify-between gap-4 w-full text-center sm:text-left">
           <CardHeader>
             <CardTitle className="text-center sm:text-left">{title}</CardTitle>
             <span className="text-sm text-base-dark">
