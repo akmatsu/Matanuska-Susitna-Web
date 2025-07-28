@@ -1,4 +1,7 @@
-import { DocumentLinkButton } from '@/components/static/DocumentLink';
+import {
+  DocumentLink,
+  DocumentLinkButton,
+} from '@/components/static/DocumentLink';
 import { DataTable } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
@@ -43,7 +46,7 @@ export function ElectionResultsList(props: {
             key: 'document',
             label: 'Results',
             cell: (value, row) => (
-              <DocumentLinkButton data={row.document}>View</DocumentLinkButton>
+              <DocumentLink data={row.document}>View</DocumentLink>
             ),
           },
         ]}

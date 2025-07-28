@@ -61,8 +61,7 @@
 html {
   scroll-padding-top: 144px;
 }
-
-.msb-md-body {
+p .msb-md-body {
   table {
     width: 100%;
   }

@@ -1,4 +1,5 @@
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
+import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { LinkButton } from '@/components/static/LinkButton';
 import {
   PageActions,
@@ -9,6 +10,7 @@ import {
   PageListItems,
   PageSection,
 } from '@/components/static/Page';
+import { BoardMeetings } from '@/components/static/Page/BoardMeetings';
 import { ExternalActionButton } from '@/components/static/Page/ExternalActionButtont';
 import { PageContainer } from '@/components/static/Page/PageContainer';
 import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
@@ -24,8 +26,11 @@ const getBoardPage = gql(`
       description
       title
       ...HeroImage
-      meetingSchedule
       isActive
+      directory {
+        ...DocumentLink
+      }
+      ...BoardMeetings
       communities {
         ...PageList
       }
@@ -58,7 +63,6 @@ export default async function BoardPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const listName = 'board';
 
   const { data, error } = await getClient().query({
     query: getBoardPage,
@@ -86,12 +90,16 @@ export default async function BoardPage(props: {
         <PageTwoColumn
           rightSide={
             <>
+              {page.directory && (
+                <PageSection title="Directory">
+                  <DocumentLinkButton data={page.directory}>
+                    View Directory
+                  </DocumentLinkButton>
+                </PageSection>
+              )}
               <PageActions actions={page.actions} />
               <PageDocuments documents={page.documents} />
               <PageContacts contacts={page.contacts} />
-              <PageSection title="Meeting Schedule" noMargins>
-                <p>{page.meetingSchedule}</p>
-              </PageSection>
               <PageDistricts items={page.districts} />
               <PageListItems items={page.communities} title="Communities" />
             </>
@@ -120,7 +128,7 @@ export default async function BoardPage(props: {
             ) : undefined}
           </div>
 
-          <PageEvents listName={listName} />
+          <BoardMeetings data={page} />
         </PageTwoColumn>
       </PageContainer>
     </>
