@@ -19,21 +19,37 @@ const UpcomingElectionDetailsFragment = gql(`
 
     electionBrochure {
       id
+      title
+      file {
+        url
+      }
       ...DocumentLink
     }
 
     electionBallots {
       id
+      title
+      file {
+        url
+      }
       ...DocumentLink
     }
 
     propositions {
       id
+      title
+      file {
+        url
+      }
       ...DocumentLink
     }
 
     candidates {
       id
+      title
+      file {
+        url
+      }
       ...DocumentLink
     }
   }
@@ -119,10 +135,11 @@ export function UpcomingElectionDetails(props: {
               <DropdownButton
                 key={index}
                 label={doc.label}
-                items={doc.value.map((item) => {
-                  if (!item) return null;
-                  return <DocumentLink data={item} key={item.id} />;
-                })}
+                items={doc.value.map((item) => ({
+                  label: item.title || '',
+                  value: item.id,
+                  href: item.file?.url,
+                }))}
               />
             );
           } else {
