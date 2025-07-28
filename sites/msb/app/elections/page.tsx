@@ -17,6 +17,7 @@ import { AbsenteeVotingInfo } from './components/AbsenteeVotingInfo';
 const getElections = gql(`
   query GetElections {
     ...ElectionResults
+    ...GetAbsenteeVotingInfo
     electionsPage {
       heroImage
       ...ElectionPageHeader
@@ -24,7 +25,7 @@ const getElections = gql(`
       ...ElectionContact
       ...ElectionOfficialContact
     }
-    elections(take: 2, orderBy:  {
+    elections(take: 1, orderBy:  {
       electionDate: desc
     }) {
       ...ElectionPageQuickLinks
@@ -66,7 +67,7 @@ export default async function ElectionsPage() {
         <ElectionVoterInformation data={currentElection} />
         <ElectionOfficialsInfo data={currentElection} contactData={page} />
         <CandidateFilingInfo data={currentElection} />
-        <AbsenteeVotingInfo />
+        <AbsenteeVotingInfo data={data} />
 
         <ElectionPollingPlaces data={page} />
         <ElectionResultsSection data={currentElection} results={data} />

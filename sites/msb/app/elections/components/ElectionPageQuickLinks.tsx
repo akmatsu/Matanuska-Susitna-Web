@@ -30,7 +30,7 @@ export function ElectionPageQuickLinks(props: {
       <DocumentLinkButton data={data.candidates} />
       <DocumentLinkButton data={data.electionOfficialApplication} />
 
-      <LinkButton href="/elections/early-and-absentee-voting-information">
+      <LinkButton href="#early-absentee-voting-information">
         Early and Absentee Voting Information
       </LinkButton>
       <DocumentLinkButton data={data.result?.document} />
