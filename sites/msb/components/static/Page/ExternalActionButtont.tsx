@@ -15,9 +15,5 @@ export function ExternalActionButton(props: {
 }) {
   const action = getFragmentData(externalActionFragment, props.action);
   if (action?.url?.url)
-    return (
-      <LinkButton href={action.url.url} color="secondary">
-        {action.label}
-      </LinkButton>
-    );
+    return <LinkButton href={action.url.url}>{action.label}</LinkButton>;
 }

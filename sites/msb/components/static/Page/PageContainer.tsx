@@ -1,3 +1,4 @@
+import { Breadcrumbs } from '@/components/client/breadcrumbs';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -6,6 +7,7 @@ export function PageContainer<T extends React.ElementType>(props: {
   className?: string;
   as?: T;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  hideBreadcrumbs?: boolean;
 }) {
   const Tag = props.as || 'div';
   return (
@@ -22,6 +24,7 @@ export function PageContainer<T extends React.ElementType>(props: {
         props.className,
       )}
     >
+      {!props.hideBreadcrumbs && <Breadcrumbs />}
       {props.children}
     </Tag>
   );

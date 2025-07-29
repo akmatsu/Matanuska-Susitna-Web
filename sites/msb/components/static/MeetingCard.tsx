@@ -1,3 +1,7 @@
+import { format } from 'date-fns';
+import { AddressLink } from '../client/AddressLink';
+import { AddToCalendarButton } from './AddToCalendarButton';
+import { CalendarMeeting } from '@/utils/calendarHelpers';
 import {
   Card,
   CardBody,
@@ -5,29 +9,20 @@ import {
   CardHeader,
   CardProps,
   CardTitle,
-  PhoneLink,
-} from '@matsugov/ui';
-import { format } from 'date-fns';
-import { AddressLink } from '../client/AddressLink';
-import { AddToCalendarButton } from './AddToCalendarButton';
+} from '@matsugov/ui/Card';
+import { PhoneLink } from './PhoneLink';
 
 const phoneRx = /(\+?\d?.?\(?\d{3}\)?.?\d{3}.?\d{4})/g;
-export interface Meeting {
-  id?: string | null;
-  date?: string | null;
-  location: string;
-  title: string;
-}
 
 export function MeetingCard({
   meeting,
   ...props
 }: {
-  meeting: Meeting;
+  meeting: CalendarMeeting;
 } & Omit<CardProps, 'children'>) {
-  const parts = meeting.title.split(/\((.+)\)/);
-  const title = parts.shift();
-  const subTitle = parts.shift();
+  const parts = meeting.title?.split(/\((.+)\)/);
+  const title = parts?.shift();
+  const subTitle = parts?.shift();
   const subParts = subTitle?.split(phoneRx);
 
   return (

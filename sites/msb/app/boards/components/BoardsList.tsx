@@ -14,7 +14,7 @@ export function BoardsList() {
     <Card>
       <CardHeader className="flex gap-2 justify-between items-center">
         <CardTitle>Boards & Commissions</CardTitle>
-        <LinkButton href="https://matsugov.us/publicmeetings" color="primary">
+        <LinkButton href="/boards/public-meetings-calendar">
           View the Public Meetings Calendar
         </LinkButton>
       </CardHeader>

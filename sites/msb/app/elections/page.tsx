@@ -60,7 +60,7 @@ export default async function ElectionsPage() {
   return (
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
-      <PageContainer size="md">
+      <PageContainer size="md" hideBreadcrumbs>
         <ElectionPageHeader data={page} />
         <ElectionPageQuickLinks data={currentElection} />
         <UpcomingElectionDetails data={currentElection} />

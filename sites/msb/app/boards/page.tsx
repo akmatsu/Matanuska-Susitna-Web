@@ -12,6 +12,7 @@ import { CodeLink } from '@/components/static/CodeLink';
 import { PhoneLink } from '@/components/static/PhoneLink';
 import { DocumentLink } from '@/components/static/DocumentLink';
 import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
+import { PageContainer } from '@/components/static/Page';
 
 const getBoardsPage = gql(`
   query GetBoardsPage {
@@ -77,120 +78,123 @@ export default async function BoardsPage() {
   return (
     <>
       <PageHeroImage page={page} />
-      <div className="max-w-5xl mx-auto px-4 py-16 flex flex-col gap-8 col-span-12">
-        <PageBody page={page} hideType />
+      <PageContainer size="md">
+        <div className="flex flex-col gap-8">
+          <PageBody page={page} hideType />
 
-        <div className="grid grid-cols-12 gap-2">
-          <Card
-            containerClassName="col-span-12 md:col-span-6"
-            className="h-full"
-          >
-            <CardHeader>
-              <div className="max-w-fit">
-                <CardTitle>Requirements to Serve</CardTitle>
-                <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
-              </div>
-            </CardHeader>
-            <CardBody>
-              <p className="mb-4">
-                Borough Boards, commissions, and committees are governed by{' '}
-                <CodeLink code="4">MSB Title 4</CodeLink>, unless otherwise
-                provided by ordinance. Each board member shall be a registered
-                voter of the Borough, unless otherwise established in board
-                code. If you are applying for a position limited to a specific
-                geographic area, you must also be a resident of that area.
-              </p>
-              {page.ParliTrainingLink?.url?.url && (
-                <ul className="list-disc list-inside">
-                  <li>
-                    <Link
-                      href={page.ParliTrainingLink.url.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {page.ParliTrainingLink.label ||
-                        page.ParliTrainingLink.url.title}
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </CardBody>
-          </Card>
-          <Card
-            containerClassName="col-span-12 md:col-span-6"
-            className="h-full"
-          >
-            <CardHeader>
-              <div className="max-w-fit">
-                <CardTitle>Documents & Resources</CardTitle>
-                <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
-              </div>
-            </CardHeader>
-            <CardBody>
-              <BoardDocuments documents={page.documents} />
-            </CardBody>
-          </Card>
-          <Card
-            containerClassName="col-span-12 md:col-span-6"
-            className="h-full"
-          >
-            <CardHeader>
-              <div className="max-w-fit">
-                <CardTitle>How to Apply</CardTitle>
-                <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
-              </div>
-            </CardHeader>
-            <CardBody>
-              <p className="mb-4">
-                To apply for a board or commission, please fill out and submit
-                the Boards & Commissions Application. Completed applications can
-                be emailed to{' '}
-                <Link href="mailto:jamie.jokhy@matsugov.us">
-                  jamie.jokhy@matsugov.us
-                </Link>
-                , delivered or mail to the Mat-Su Borough Clerk&apos;s Office,
-                350 E. Dahlia Ave, Palmer AK, 99645, or Faxed to 907-861-7845.
-              </p>
-              {page.applicationForm && (
-                <ul className="list-disc list-inside">
-                  <li>
-                    <DocumentLink data={page.applicationForm} />
-                  </li>
-                </ul>
-              )}
-            </CardBody>
-          </Card>
-          <Card
-            containerClassName="col-span-12 md:col-span-6"
-            className="h-full"
-          >
-            <CardHeader>
-              <div className="max-w-fit">
-                <CardTitle>Vacancy Report</CardTitle>
-                <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
-              </div>
-            </CardHeader>
-            <CardBody>
-              <p className="mb-4">
-                This report is pending Assembly confirmation. Please contact the
-                Mat-Su Borough Clerk&apos;s office for additional information
-                regarding the vacancy report. If you have questions about the
-                application process, please call the Mat-Su Borough Clerk&apos;s
-                office at <PhoneLink phoneNumber="9078618675" />. Thank you for
-                your interest in serving.
-              </p>
-              {page.vacancyReport && (
-                <ul className="list-disc list-inside">
-                  <li>
-                    <DocumentLink data={page.vacancyReport} />
-                  </li>
-                </ul>
-              )}
-            </CardBody>
-          </Card>
+          <div className="grid grid-cols-12 gap-2">
+            <Card
+              containerClassName="col-span-12 md:col-span-6"
+              className="h-full"
+            >
+              <CardHeader>
+                <div className="max-w-fit">
+                  <CardTitle>Requirements to Serve</CardTitle>
+                  <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
+                </div>
+              </CardHeader>
+              <CardBody>
+                <p className="mb-4">
+                  Borough Boards, commissions, and committees are governed by{' '}
+                  <CodeLink code="4">MSB Title 4</CodeLink>, unless otherwise
+                  provided by ordinance. Each board member shall be a registered
+                  voter of the Borough, unless otherwise established in board
+                  code. If you are applying for a position limited to a specific
+                  geographic area, you must also be a resident of that area.
+                </p>
+                {page.ParliTrainingLink?.url?.url && (
+                  <ul className="list-disc list-inside">
+                    <li>
+                      <Link
+                        href={page.ParliTrainingLink.url.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {page.ParliTrainingLink.label ||
+                          page.ParliTrainingLink.url.title}
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </CardBody>
+            </Card>
+            <Card
+              containerClassName="col-span-12 md:col-span-6"
+              className="h-full"
+            >
+              <CardHeader>
+                <div className="max-w-fit">
+                  <CardTitle>Documents & Resources</CardTitle>
+                  <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
+                </div>
+              </CardHeader>
+              <CardBody>
+                <BoardDocuments documents={page.documents} />
+              </CardBody>
+            </Card>
+            <Card
+              containerClassName="col-span-12 md:col-span-6"
+              className="h-full"
+            >
+              <CardHeader>
+                <div className="max-w-fit">
+                  <CardTitle>How to Apply</CardTitle>
+                  <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
+                </div>
+              </CardHeader>
+              <CardBody>
+                <p className="mb-4">
+                  To apply for a board or commission, please fill out and submit
+                  the Boards & Commissions Application. Completed applications
+                  can be emailed to{' '}
+                  <Link href="mailto:jamie.jokhy@matsugov.us">
+                    jamie.jokhy@matsugov.us
+                  </Link>
+                  , delivered or mail to the Mat-Su Borough Clerk&apos;s Office,
+                  350 E. Dahlia Ave, Palmer AK, 99645, or Faxed to 907-861-7845.
+                </p>
+                {page.applicationForm && (
+                  <ul className="list-disc list-inside">
+                    <li>
+                      <DocumentLink data={page.applicationForm} />
+                    </li>
+                  </ul>
+                )}
+              </CardBody>
+            </Card>
+            <Card
+              containerClassName="col-span-12 md:col-span-6"
+              className="h-full"
+            >
+              <CardHeader>
+                <div className="max-w-fit">
+                  <CardTitle>Vacancy Report</CardTitle>
+                  <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
+                </div>
+              </CardHeader>
+              <CardBody>
+                <p className="mb-4">
+                  This report is pending Assembly confirmation. Please contact
+                  the Mat-Su Borough Clerk&apos;s office for additional
+                  information regarding the vacancy report. If you have
+                  questions about the application process, please call the
+                  Mat-Su Borough Clerk&apos;s office at{' '}
+                  <PhoneLink phoneNumber="9078618675" />. Thank you for your
+                  interest in serving.
+                </p>
+                {page.vacancyReport && (
+                  <ul className="list-disc list-inside">
+                    <li>
+                      <DocumentLink data={page.vacancyReport} />
+                    </li>
+                  </ul>
+                )}
+              </CardBody>
+            </Card>
+          </div>
+          <BoardsList />
         </div>
-        <BoardsList />
-      </div>
+      </PageContainer>
     </>
   );
 }

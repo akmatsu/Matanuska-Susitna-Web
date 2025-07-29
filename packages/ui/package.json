@@ -27,7 +27,8 @@
     "./Tooltip": "./src/components/Tooltip/index.ts",
     "./PhoneLink": "./src/components/PhoneLink.tsx",
     "./EmailLink": "./src/components/EmailLink.tsx",
-    "./AddressLink": "./src/components/AddressLink.tsx"
+    "./AddressLink": "./src/components/AddressLink.tsx",
+    "./DropdownButton": "./src/components/DropdownButton.tsx"
   },
   "scripts": {
     "test": "vitest"
