@@ -29,7 +29,10 @@ export function TextField({
 }: TextFieldProps) {
   return (
     <Field className={clsx({ 'w-full': fill })}>
-      <Label htmlFor={id} className={clsx({ 'sr-only': !showLabel })}>
+      <Label
+        htmlFor={id}
+        className={clsx('font-semibold', { 'sr-only': !showLabel })}
+      >
         {label}
       </Label>
       <Input

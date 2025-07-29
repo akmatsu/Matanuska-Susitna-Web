@@ -6,7 +6,6 @@ import {
   PageContacts,
   PageDistricts,
   PageDocuments,
-  PageEvents,
   PageListItems,
   PageSection,
 } from '@/components/static/Page';
@@ -92,7 +91,12 @@ export default async function BoardPage(props: {
             <>
               {page.directory && (
                 <PageSection title="Directory">
-                  <DocumentLinkButton data={page.directory}>
+                  <DocumentLinkButton
+                    data={page.directory}
+                    block
+                    big
+                    color="primary"
+                  >
                     View Directory
                   </DocumentLinkButton>
                 </PageSection>
@@ -114,10 +118,7 @@ export default async function BoardPage(props: {
               <ExternalActionButton action={page.linkToAgendas} />
               <ExternalActionButton action={page.linkToPublicOpinionMessage} />
               <ExternalActionButton action={page.linkToResolutions} />
-              <LinkButton
-                href="https://matsugov.us/publicmeetings"
-                color="secondary"
-              >
+              <LinkButton href="/boards/public-meetings-calendar">
                 Public Meetings Calendar
               </LinkButton>
             </div>

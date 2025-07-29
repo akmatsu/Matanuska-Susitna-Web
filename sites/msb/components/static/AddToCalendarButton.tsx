@@ -1,21 +1,18 @@
 'use client';
-import { ButtonProps, DropdownButton } from '@matsugov/ui';
+import { DropdownButton } from '@matsugov/ui/DropdownButton';
+import { ButtonProps } from '@matsugov/ui/Button';
 import { ComponentProps } from 'react';
 import { createEvent } from 'ics';
 import { saveAs } from 'file-saver';
 import slugify from 'voca/slugify';
 import { addMinutes, format } from 'date-fns';
+import { CalendarMeeting } from '@/utils/calendarHelpers';
 
 interface AddToCalendarButtonProps
   extends Omit<ComponentProps<typeof DropdownButton>, 'buttonProps' | 'label'> {
   label?: string;
   buttonProps?: Partial<ButtonProps>;
-  meeting: {
-    id?: string | null;
-    date?: string | null;
-    location: string;
-    title: string;
-  };
+  meeting: CalendarMeeting;
 }
 
 function createAndDownloadICSFile(
@@ -25,9 +22,13 @@ function createAndDownloadICSFile(
 
   const dt = new Date(meeting.date);
 
+  if (!meeting.title) {
+    return;
+  }
+
   createEvent(
     {
-      title: meeting.title,
+      title: meeting.title || undefined,
       start: [
         dt.getFullYear(),
         dt.getMonth() + 1,
@@ -36,7 +37,7 @@ function createAndDownloadICSFile(
         dt.getMinutes(),
       ],
       duration: { minutes: 30 },
-      location: meeting.location,
+      location: meeting.location || undefined,
     },
     (error, value) => {
       if (error) {
@@ -48,7 +49,7 @@ function createAndDownloadICSFile(
         type: 'text/calendar;charset=utf-8',
       });
 
-      saveAs(blob, `${slugify(meeting.title)}.ics`);
+      saveAs(blob, `${slugify(meeting.title || undefined)}.ics`);
     },
   );
 }
