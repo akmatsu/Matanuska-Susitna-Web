@@ -33,7 +33,10 @@ export async function searchCalendarEvents(
     process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ASSEMBLY_ID || '',
     process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_PLANNING_ID || '',
     process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_SERVICE_ID || '',
+    process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_COMMUNITY_ID || '',
   ];
+
+  console.log(calendarIds);
 
   const calApi = calendar('v3');
   const responses = await Promise.all(
@@ -59,6 +62,12 @@ export async function searchCalendarEvents(
     reqData[calendarIds[index]] = rest;
 
     if (it) it.forEach((item) => items.push(parseMeeting(item)));
+  });
+
+  items.sort((a, b) => {
+    const dateA = new Date(a.date || 0).getTime();
+    const dateB = new Date(b.date || 0).getTime();
+    return dateA - dateB;
   });
 
   if (opts?.limit) {

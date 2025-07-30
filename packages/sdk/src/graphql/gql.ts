@@ -53,7 +53,7 @@ type Documents = {
     "\n  fragment DocumentLink on Document {\n    title\n    file {\n      filename\n      url\n    }\n  }\n": typeof types.DocumentLinkFragmentDoc,
     "\n  fragment ActionFields on InternalLink {\n    id\n    label\n    item {\n      __typename\n      ... on BasePageWithSlug {\n        id\n        slug\n        title\n        description\n      }\n      ... on Url {\n        id\n        url\n        title\n        description\n      }\n    }\n  }\n": typeof types.ActionFieldsFragmentDoc,
     "\n  fragment BoardDocumentList on Document {\n    id\n    ...DocumentLink\n  }\n": typeof types.BoardDocumentListFragmentDoc,
-    "\n  fragment BoardMeetings on Board {\n    title\n    calendarId\n    calendarQueryString\n  }\n": typeof types.BoardMeetingsFragmentDoc,
+    "\n  fragment BoardMeetings on Board {\n    title\n    calendarId\n    calendarQueryString\n    type\n  }\n": typeof types.BoardMeetingsFragmentDoc,
     "\n  fragment DistrictDetailFields on AssemblyDistrict {\n    id\n    title\n    slug\n    description\n    memberName\n    photo {\n      file {\n        url\n      }\n    }\n  }\n": typeof types.DistrictDetailFieldsFragmentDoc,
     "\n  fragment ExternalActionButton on ExternalLink {\n    label\n    url {\n      url\n    }\n  }\n": typeof types.ExternalActionButtonFragmentDoc,
     "\n  fragment HourFields on OperatingHour {\n    day\n    open\n    close\n  }\n": typeof types.HourFieldsFragmentDoc,
@@ -125,7 +125,7 @@ const documents: Documents = {
     "\n  fragment DocumentLink on Document {\n    title\n    file {\n      filename\n      url\n    }\n  }\n": types.DocumentLinkFragmentDoc,
     "\n  fragment ActionFields on InternalLink {\n    id\n    label\n    item {\n      __typename\n      ... on BasePageWithSlug {\n        id\n        slug\n        title\n        description\n      }\n      ... on Url {\n        id\n        url\n        title\n        description\n      }\n    }\n  }\n": types.ActionFieldsFragmentDoc,
     "\n  fragment BoardDocumentList on Document {\n    id\n    ...DocumentLink\n  }\n": types.BoardDocumentListFragmentDoc,
-    "\n  fragment BoardMeetings on Board {\n    title\n    calendarId\n    calendarQueryString\n  }\n": types.BoardMeetingsFragmentDoc,
+    "\n  fragment BoardMeetings on Board {\n    title\n    calendarId\n    calendarQueryString\n    type\n  }\n": types.BoardMeetingsFragmentDoc,
     "\n  fragment DistrictDetailFields on AssemblyDistrict {\n    id\n    title\n    slug\n    description\n    memberName\n    photo {\n      file {\n        url\n      }\n    }\n  }\n": types.DistrictDetailFieldsFragmentDoc,
     "\n  fragment ExternalActionButton on ExternalLink {\n    label\n    url {\n      url\n    }\n  }\n": types.ExternalActionButtonFragmentDoc,
     "\n  fragment HourFields on OperatingHour {\n    day\n    open\n    close\n  }\n": types.HourFieldsFragmentDoc,
@@ -331,7 +331,7 @@ export function gql(source: "\n  fragment BoardDocumentList on Document {\n    i
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment BoardMeetings on Board {\n    title\n    calendarId\n    calendarQueryString\n  }\n"): (typeof documents)["\n  fragment BoardMeetings on Board {\n    title\n    calendarId\n    calendarQueryString\n  }\n"];
+export function gql(source: "\n  fragment BoardMeetings on Board {\n    title\n    calendarId\n    calendarQueryString\n    type\n  }\n"): (typeof documents)["\n  fragment BoardMeetings on Board {\n    title\n    calendarId\n    calendarQueryString\n    type\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

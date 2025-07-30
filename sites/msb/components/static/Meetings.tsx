@@ -17,7 +17,6 @@ export async function Meetings() {
           View all
         </LinkButton>
       </div>
-      a
     </>
   );
 }
