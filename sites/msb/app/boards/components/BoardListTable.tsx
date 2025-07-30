@@ -1,8 +1,5 @@
 'use client';
-import {
-  DocumentLink,
-  DocumentLinkButton,
-} from '@/components/static/DocumentLink';
+import { DocumentLink } from '@/components/static/DocumentLink';
 import { DataTable } from '@matsugov/ui';
 import { useSuspenseQuery } from '@msb/js-sdk/apollo';
 import { gql } from '@msb/js-sdk/gql';

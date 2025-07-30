@@ -6,11 +6,13 @@ export function Link({
   href,
   target,
   referrerPolicy,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   hideExternalIcon,
   ...props
 }: NextLinkProps & {
   hideExternalIcon?: boolean; // Optional prop to hide the external link icon
 }) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isExternal, ...rest } = checkLinkProps({
     href,
     target,
