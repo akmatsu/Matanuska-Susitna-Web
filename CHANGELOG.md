@@ -1,3 +1,10 @@
+## [0.13.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.13.0...v0.13.1) (2025-07-30)
+
+
+### Bug Fixes
+
+* removed reference to html document in electionResultsList ([029b073](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/029b073a96c4dbe4d9423f9c4edfc5b58e96ed76))
+
 # [0.13.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.12.0...v0.13.0) (2025-07-30)
 
 
