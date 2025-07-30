@@ -11,19 +11,20 @@ import {
 } from '@matsugov/ui';
 import { TextField } from '@matsugov/ui/TextField';
 import { format } from 'date-fns';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export function MeetingsSearch() {
   const [meetings, setMeetings] = useState<CalendarMeeting[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
-  const [limit, setLimit] = useState<number>(25);
   const [timeMin, setTimeMin] = useState<string>(
     format(new Date(), 'yyyy-MM-dd'),
   );
   const [timeMax, setTimeMax] = useState<string>('');
 
-  async function getMeetings(query: string) {
+  const limit = 25;
+
+  const getMeetings = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -43,13 +44,16 @@ export function MeetingsSearch() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [timeMin, timeMax, limit, query]);
 
-  useDebounce(() => getMeetings(query), 500, [query, timeMin, timeMax, limit]);
+  useDebounce(getMeetings, 500);
 
   return (
     <>
-      <form className="grid grid-cols-4 gap-4 mb-4">
+      <form
+        className="grid grid-cols-4 gap-4 mb-4"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <div className="col-span-4 md:col-span-2">
           <TextField
             id="meetings search"
