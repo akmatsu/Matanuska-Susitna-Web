@@ -1,3 +1,10 @@
+## [0.13.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.13.1...v0.13.2) (2025-07-30)
+
+
+### Bug Fixes
+
+* board meetings calendarId now determined programmtically, fixed board meeting sorting ([2fb6bec](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/2fb6bec6472b2e5352d8daa321fe393e8e110b37))
+
 ## [0.13.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.13.0...v0.13.1) (2025-07-30)
 
 
