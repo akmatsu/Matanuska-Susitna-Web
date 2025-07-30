@@ -1,3 +1,21 @@
+# [0.13.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.12.0...v0.13.0) (2025-07-30)
+
+
+### Bug Fixes
+
+* fixed dropdown button links on elections page ([69e1f79](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/69e1f79f436783721ab67020d3384809bf4becb9))
+
+
+### Features
+
+* board pages now display their upcoming meetings ([468aaed](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/468aaed120a4de97f87e8c04b158fe55a987888b))
+* created meetings search view ([e25f830](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e25f830185d503d9c1d32d1f464fb20cca1c0e57))
+* created the add to calendar functionality ([d474c74](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/d474c74ab121aaaf8df93fed90823f32ad53b723))
+* created the public meetings search page ([a15fd7f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a15fd7fb008ba6ccb9d1c3cbf76fbda8c239053f))
+* now fetching google calendar events and displaying them on the landing page ([75c241b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/75c241b7cf11c6599351348cf0db683f89e1892b))
+* now grabbing all of the upcoming meetings ([893a265](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/893a265f2531dcdafd06569eb27256e640db89ae))
+* removed early/absentee voting page and expanded early/abenstee voting section in elections page ([1fef999](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1fef9992ae25b6576520bd2e62850ef6da02d879))
+
 # [0.12.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.11.2...v0.12.0) (2025-07-23)
 
 
