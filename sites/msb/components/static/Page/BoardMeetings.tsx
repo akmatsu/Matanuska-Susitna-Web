@@ -44,6 +44,8 @@ export async function BoardMeetings(props: {
     query: data.calendarQueryString || data.title,
   });
 
+  if (!items || items.length === 0) return null;
+
   return (
     <PageSection title="Upcoming Meetings" noMargins>
       <ul className="grid grid-cols-1 gap-4">
