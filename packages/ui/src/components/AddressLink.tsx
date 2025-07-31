@@ -9,7 +9,10 @@ export function AddressLink<T extends ElementType = 'a'>(
     children?: React.ReactNode;
   },
 ) {
-  const encoded = encodeURIComponent(props.address);
+  const address = props.address?.replace(/^,\s+/, '').trim();
+  const encoded = encodeURIComponent(
+    address.replace(/^assembly\s+chambers,\s+/i, ''),
+  );
   const userAgent = navigator.userAgent;
   const LinkAs = props.as || 'a';
 
@@ -17,9 +20,9 @@ export function AddressLink<T extends ElementType = 'a'>(
     userAgent,
   );
 
-  const url = !isApple
+  const url = isApple
     ? `https://maps.apple.com/?q=${encoded}`
     : `https://www.google.com/maps/search/?api=1&query=${encoded}`;
 
-  return <LinkAs href={url}>{props.children || props.address}</LinkAs>;
+  return <LinkAs href={url}>{props.children || address}</LinkAs>;
 }
