@@ -61,7 +61,7 @@ export function MeetingCard({
     const match = partOne?.match(teamsRegex) || partTwo?.match(teamsRegex);
     meetingId = match?.[1]?.replace(/\s/g, '');
 
-    joinUrl = `https://teams.microsoft.com`;
+    joinUrl = `https://www.microsoft.com/en-us/microsoft-teams/join-a-meeting`;
   }
 
   function getAddress() {
