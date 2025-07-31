@@ -12,10 +12,15 @@ const BoardMeetingsFragment = gql(`
   }
 `);
 
-function getCalendarId(type: string): string {
+function getCalendarId(type: string, title: string): string {
   switch (type) {
     case 'board':
-      return process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_MAIN_ID || '';
+      const isAssembly =
+        title.toLocaleLowerCase() === 'assembly' ||
+        title.toLocaleLowerCase() === 'the assembly';
+      return isAssembly
+        ? process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ASSEMBLY_ID || ''
+        : process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_MAIN_ID || '';
     case 'ssa_board':
       return process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_SERVICE_ID || '';
     case 'fsa_board':
@@ -37,7 +42,7 @@ export async function BoardMeetings(props: {
   const data = getFragmentData(BoardMeetingsFragment, props.data);
 
   if (!data?.type || !data?.title) return null;
-  const calendarId = getCalendarId(data.type);
+  const calendarId = getCalendarId(data.type, data.title);
 
   const { items } = await searchCalendarEvents({
     calendarIds: [calendarId],
@@ -49,7 +54,13 @@ export async function BoardMeetings(props: {
   return (
     <PageSection title="Upcoming Meetings" noMargins>
       <ul className="grid grid-cols-1 gap-4">
-        {items?.map((event) => <MeetingCard key={event.id} meeting={event} />)}
+        {items?.map((event) => (
+          <MeetingCard
+            key={event.id}
+            meeting={event}
+            containerClassName="h-full"
+          />
+        ))}
       </ul>
     </PageSection>
   );
