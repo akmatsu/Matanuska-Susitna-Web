@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from '@matsugov/ui';
 import { TextField } from '@matsugov/ui/TextField';
-import { format } from 'date-fns';
+import { format, parse, startOfDay } from 'date-fns';
 import { useCallback, useState } from 'react';
 
 export function MeetingsSearch() {
@@ -18,7 +18,7 @@ export function MeetingsSearch() {
   const [loading, setLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
   const [timeMin, setTimeMin] = useState<string>(
-    format(new Date(), 'yyyy-MM-dd'),
+    format(startOfDay(new Date()), 'yyyy-MM-dd'),
   );
   const [timeMax, setTimeMax] = useState<string>('');
 
@@ -27,10 +27,20 @@ export function MeetingsSearch() {
   const getMeetings = useCallback(async () => {
     try {
       setLoading(true);
+
+      const timeMinUtc = startOfDay(
+        parse(timeMin, 'yyyy-MM-dd', new Date()),
+      ).toISOString();
+
+      const timeMaxUTC =
+        timeMax.length > 0
+          ? startOfDay(parse(timeMax, 'yyyy-MM-dd', new Date())).toISOString()
+          : '';
+
       const params = new URLSearchParams({
         query,
-        timeMin,
-        timeMax,
+        timeMin: timeMinUtc,
+        timeMax: timeMaxUTC,
         limit: limit.toString(),
       });
 

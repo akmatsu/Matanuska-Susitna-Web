@@ -89,6 +89,13 @@ function parseMeeting(item: calendar_v3.Schema$Event) {
   } satisfies CalendarMeeting;
 }
 
+function getTimeMin(timeMin?: string) {
+  if (timeMin) return new Date(timeMin).toISOString();
+  const now = new Date();
+  now.setHours(0, 0, 0, 0); // Set to start of the day
+  return now.toISOString();
+}
+
 function getCalendarParams(opts: {
   calendarId: string | undefined;
   query?: string;
@@ -100,9 +107,7 @@ function getCalendarParams(opts: {
   return {
     key: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY,
     calendarId: opts.calendarId,
-    timeMin: opts.timeMin
-      ? new Date(opts.timeMin).toISOString()
-      : new Date().toISOString(),
+    timeMin: getTimeMin(opts.timeMin),
     timeMax: opts.timeMax ? new Date(opts.timeMax).toISOString() : undefined,
     singleEvents: true,
     orderBy: 'startTime',
