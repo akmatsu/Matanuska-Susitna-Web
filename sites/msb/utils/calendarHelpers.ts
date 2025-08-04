@@ -36,8 +36,6 @@ export async function searchCalendarEvents(
     process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_COMMUNITY_ID || '',
   ];
 
-  console.log(calendarIds);
-
   const calApi = calendar('v3');
   const responses = await Promise.all(
     calendarIds.map((id) =>
