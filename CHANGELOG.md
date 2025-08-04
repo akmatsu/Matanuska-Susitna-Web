@@ -1,3 +1,11 @@
+# [0.15.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.14.1...v0.15.0) (2025-08-04)
+
+
+### Features
+
+* elections page now redirects non-logged in users to elections page ([352c856](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/352c85605fd89854443d35545592a9fbe4a6c905))
+* enabled Entra ID login ([65456cc](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/65456cc514b59a36711f3bf332df64021335677b))
+
 ## [0.14.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.14.0...v0.14.1) (2025-08-04)
 
 
