@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { appConfig } from '@matsugov/app-config';
 import clsx from 'clsx';
@@ -14,6 +15,7 @@ export function Footer({
   socialLinks = appConfig.orgSocialLinks,
   orgPhone = appConfig.orgPhone,
   contactHref = '#contact',
+  signIn,
 }: {
   navLinkAs?: React.ElementType;
   imageAs?: React.ElementType;
@@ -25,6 +27,7 @@ export function Footer({
   socialLinks?: { label: string; href: string }[];
   orgPhone?: string;
   contactHref?: string;
+  signIn?: () => void;
 }) {
   const Link = navLinkAs;
   const Image = imageAs;
@@ -94,6 +97,15 @@ export function Footer({
             <Link className="text-base-darkest" href={contactHref}>
               Contact Us
             </Link>
+
+            {signIn && (
+              <button
+                className="text-base-darkest underline cursor-pointer"
+                onClick={signIn}
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
       </div>

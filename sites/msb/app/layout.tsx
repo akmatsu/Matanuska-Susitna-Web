@@ -9,6 +9,7 @@ import { primaryNav } from '@/configs/config';
 import Image from 'next/image';
 import { SiteInfo } from '@/components/static/Header/SiteInfo';
 import Script from 'next/script';
+import { signIn } from '@/auth';
 
 export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',
@@ -39,7 +40,15 @@ export default async function RootLayout({
             {children}
           </main>
           <FeedbackButton />
-          <Footer navLinkAs={Link} navItems={primaryNav} imageAs={Image} />
+          <Footer
+            navLinkAs={Link}
+            navItems={primaryNav}
+            imageAs={Image}
+            signIn={async () => {
+              'use server';
+              await signIn();
+            }}
+          />
         </ApolloWrapper>
       </body>
       <Script
