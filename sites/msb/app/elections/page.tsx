@@ -41,7 +41,9 @@ const getElections = gql(`
 
 export default async function ElectionsPage() {
   const session = await auth();
-  if (!session) redirect('https://matsugov.us/elections');
+  if (!session?.user) redirect('https://matsugov.us/elections');
+
+  console.log(session);
 
   const { data } = await getClient().query({
     query: getElections,

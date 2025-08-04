@@ -34,8 +34,13 @@ export function ElectionResultsList(props: {
           {
             key: 'election',
             label: 'Election',
-            cell: (value, row) =>
-              row.election?.title || row.election?.electionDate,
+            cell: (value, row) => {
+              return (
+                row.election?.title ||
+                row.election?.electionDate ||
+                row.document?.title
+              );
+            },
           },
           {
             key: 'document',
