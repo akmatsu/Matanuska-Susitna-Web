@@ -1,3 +1,17 @@
+# [0.14.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.13.3...v0.14.0) (2025-08-04)
+
+
+### Features
+
+* added the crazyegg script ([ea50212](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ea50212620aab12139005d74e2408876770f6384))
+
+## [0.13.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.13.2...v0.13.3) (2025-07-30)
+
+
+### Bug Fixes
+
+* no longer showing upcoming meetings heading if no up coming meetinsg ([6187eee](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6187eee73398b0f908ecf0e77a938960876046d6))
+
 ## [0.13.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.13.1...v0.13.2) (2025-07-30)
 
 
