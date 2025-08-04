@@ -1,3 +1,10 @@
+## [0.14.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.14.0...v0.14.1) (2025-08-04)
+
+
+### Bug Fixes
+
+* added a redirect to msb payments page ([9d9fe6f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9d9fe6fdea40003d311d7482b252adce90e9039a))
+
 # [0.14.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.13.3...v0.14.0) (2025-08-04)
 
 
