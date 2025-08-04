@@ -1,3 +1,10 @@
+## [0.15.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.0...v0.15.1) (2025-08-04)
+
+
+### Bug Fixes
+
+* experimental fix for election page redirect, fixed election results document list name, limited election result list to 5 items ([3ec6f11](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/3ec6f119cc07ecc434ed2c8e99007221e867d0a0))
+
 # [0.15.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.14.1...v0.15.0) (2025-08-04)
 
 
