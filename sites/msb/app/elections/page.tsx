@@ -1,7 +1,7 @@
 import { PageContainer } from '@/components/static/Page';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { ElectionPageHeader } from './components/ElectionPageHeader';
 import { Hero } from '@matsugov/ui';
 import { ElectionPageQuickLinks } from './components/ElectionPageQuickLinks';
@@ -13,6 +13,7 @@ import { ElectionPageContact } from './components/ElectionPageContact';
 import { ElectionOfficialsInfo } from './components/ElectionsOfficialsInfo';
 import { ElectionResultsSection } from './components/ElectionsResultsSection';
 import { AbsenteeVotingInfo } from './components/AbsenteeVotingInfo';
+import { auth } from '@/auth';
 
 const getElections = gql(`
   query GetElections {
@@ -39,6 +40,9 @@ const getElections = gql(`
 `);
 
 export default async function ElectionsPage() {
+  const session = await auth();
+  if (!session) redirect('https://matsugov.us/elections');
+
   const { data } = await getClient().query({
     query: getElections,
     context: {
