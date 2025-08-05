@@ -46,6 +46,7 @@ export default async function RootLayout({
             imageAs={Image}
             signIn={async () => {
               'use server';
+              console.log(process.env.AUTH_TRUST_HOST);
               await signIn();
             }}
           />
