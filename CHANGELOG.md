@@ -1,3 +1,46 @@
+## [0.15.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.3...v0.15.4) (2025-08-05)
+
+
+### Bug Fixes
+
+* updated deps ([bea0f22](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/bea0f22ce4a5377d484b32b86aa57055555ed455))
+
+## [0.15.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.2...v0.15.3) (2025-08-05)
+
+
+### Bug Fixes
+
+* removed console.logs ([083171e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/083171e46e683d29daa1aee1a5db697953c51d47))
+
+## [0.15.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.1...v0.15.2) (2025-08-05)
+
+
+### Bug Fixes
+
+* set trustHost manually ([b4977c2](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/b4977c22a10596805288c4ed5314ffaa4ad22b53))
+
+## [0.15.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.0...v0.15.1) (2025-08-04)
+
+
+### Bug Fixes
+
+* experimental fix for election page redirect, fixed election results document list name, limited election result list to 5 items ([3ec6f11](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/3ec6f119cc07ecc434ed2c8e99007221e867d0a0))
+
+# [0.15.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.14.1...v0.15.0) (2025-08-04)
+
+
+### Features
+
+* elections page now redirects non-logged in users to elections page ([352c856](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/352c85605fd89854443d35545592a9fbe4a6c905))
+* enabled Entra ID login ([65456cc](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/65456cc514b59a36711f3bf332df64021335677b))
+
+## [0.14.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.14.0...v0.14.1) (2025-08-04)
+
+
+### Bug Fixes
+
+* added a redirect to msb payments page ([9d9fe6f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9d9fe6fdea40003d311d7482b252adce90e9039a))
+
 # [0.14.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.13.3...v0.14.0) (2025-08-04)
 
 

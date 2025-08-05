@@ -22,7 +22,7 @@ const ElectionResultFragment = gql(`
 
 const ElectionResultsFragment = gql(`
     fragment ElectionResults on Query {
-      electionResults {
+      electionResults(take: 5) {
         ...ElectionResultsList
       } 
     }
