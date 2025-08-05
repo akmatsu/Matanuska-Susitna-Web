@@ -1,3 +1,10 @@
+## [0.15.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.2...v0.15.3) (2025-08-05)
+
+
+### Bug Fixes
+
+* removed console.logs ([083171e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/083171e46e683d29daa1aee1a5db697953c51d47))
+
 ## [0.15.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.1...v0.15.2) (2025-08-05)
 
 
