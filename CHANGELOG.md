@@ -1,3 +1,10 @@
+## [0.15.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.3...v0.15.4) (2025-08-05)
+
+
+### Bug Fixes
+
+* updated deps ([bea0f22](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/bea0f22ce4a5377d484b32b86aa57055555ed455))
+
 ## [0.15.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.2...v0.15.3) (2025-08-05)
 
 
