@@ -5,15 +5,6 @@ const nextConfig = {
   basePath,
   transpilePackages: ['mui-color-input', '@msb/map', '@msb/js-sdk'],
   reactStrictMode: true,
-  env: {
-    AUTH_MICROSOFT_ENTRA_ID_ID: process.env.AUTH_MICROSOFT_ENTRA_ID_ID,
-    AUTH_MICROSOFT_ENTRA_ID_SECRET: process.env.AUTH_MICROSOFT_ENTRA_ID_SECRET,
-    AUTH_MICROSOFT_ENTRA_ID_TENANT_ID:
-      process.env.AUTH_MICROSOFT_ENTRA_ID_TENANT_ID,
-    AUTH_MICROSOFT_ENTRA_ID_ISSUER: process.env.AUTH_MICROSOFT_ENTRA_ID_ISSUER,
-    AUTH_URL: process.env.AUTH_URL,
-    AUTH_TRUST_HOST: process.env.AUTH_TRUST_HOST,
-  },
 
   experimental: {
     optimizePackageImports: [
