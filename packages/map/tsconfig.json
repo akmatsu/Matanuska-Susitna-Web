@@ -1,6 +1,5 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
-  "extends": "@tsconfig/vite-react/tsconfig.json",
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

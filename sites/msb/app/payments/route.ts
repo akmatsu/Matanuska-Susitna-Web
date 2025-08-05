@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
 
-export function GET(request: Request) {
+export function GET() {
   redirect('https://matsugov.us/payments');
 }
