@@ -55,6 +55,7 @@ export function makeClient({
           'OrgUnit',
           'BoardPage',
           'ElectionsPage',
+          'Topic',
         ],
         BasePageWithSlug: [
           'AssemblyDistrict',
@@ -66,6 +67,7 @@ export function makeClient({
           'Trail',
           'Service',
           'OrgUnit',
+          'Topic',
         ],
       },
     }),
