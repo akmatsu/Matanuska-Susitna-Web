@@ -22,16 +22,23 @@ export function ContactCard({
   isPrimary?: boolean;
 }) {
   const c = getFragmentData(ContactFields, contact);
-  const headerText = isPrimary ? 'Primary Contact' : 'Secondary Contact';
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{headerText}</CardTitle>
+        <CardTitle>
+          {c.name}
+          {isPrimary && (
+            <>
+              {' '}
+              <span className="text-sm font-semibold text-primary-dark italic">
+                Primary Contact
+              </span>
+            </>
+          )}
+        </CardTitle>
+        <p className="text-sm text-base mt-0.5">{c.title}</p>
       </CardHeader>
       <CardBody>
-        <p>
-          <span>{c.name}</span>
-        </p>
         <ul>
           {c.phone && (
             <li>

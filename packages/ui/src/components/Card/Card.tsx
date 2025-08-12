@@ -77,14 +77,29 @@ export function CardTitle<T extends React.ElementType = 'h4'>({
   children,
   as = 'h4',
   className,
+  titleSize = 'lg',
 }: {
   children: React.ReactNode;
   as?: T;
   className?: string;
+  /**
+   * Size of the title text.
+   * @default 'lg' */
+  titleSize?: 'sm' | 'md' | 'lg';
 } & React.ComponentProps<T>) {
   const Component = as;
   return (
-    <Component className={clsx('text-xl font-bold leading-none', className)}>
+    <Component
+      className={clsx(
+        'font-bold leading-none',
+        {
+          'text-sm': titleSize === 'sm',
+          'text-lg': titleSize === 'md',
+          'text-xl': titleSize === 'lg',
+        },
+        className,
+      )}
+    >
       {children}
     </Component>
   );
