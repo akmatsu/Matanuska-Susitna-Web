@@ -1,6 +1,8 @@
 import { Button } from '@matsugov/ui/Button';
 import Link from 'next/link';
 
+// export const
+
 export default function NotFound() {
   return (
     <section className="max-w-6xl mx-auto px-4 py-16 prose">

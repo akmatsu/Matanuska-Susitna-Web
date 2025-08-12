@@ -1,25 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { singular } from 'pluralize';
+import {
+  handleSearchRedirect,
+  SEARCH_MATCHERS,
+} from './middlware/handlers/searchRedirect';
 
 export const config = {
-  matcher: [
-    '/communities',
-    '/departments',
-    '/districts',
-    '/facilities',
-    '/parks',
-    '/public-notices',
-    '/services',
-    '/trails',
-    '/topics',
-  ],
+  // Order does not matter in matchers
+  matcher: [...SEARCH_MATCHERS],
 };
 
-export default function middleware(request: NextRequest) {
-  const type = request.nextUrl.pathname.split('/')[1];
-  const url = request.nextUrl.clone();
-  url.pathname = '/search';
-  url.searchParams.set('pages[refinementList][type][0]', singular(type));
+// Order matters in middleware, as they will be executed in the order listed
+const handlers = [handleSearchRedirect];
 
-  return NextResponse.redirect(url);
+export default async function middleware(req: NextRequest) {
+  for (const h of handlers) {
+    const res = await h(req);
+    if (res) return res; // If a handler returns a response, stop processing
+  }
+
+  return NextResponse.next();
 }
