@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { handleSearchRedirect } from './middlware/handlers/searchRedirect';
+import { handleSearchRedirect } from './middleware/handlers/searchRedirect';
+import { handleCmsRedirects } from './middleware/handlers/cmsRedirects';
+import { auth } from '@/auth';
 
 export const config = {
   // Order does not matter in matchers.
@@ -14,17 +16,18 @@ export const config = {
     '/services',
     '/trails',
     '/topics',
+    '/((?!api|_next/static|_next/image|.*\\.png$).*)',
   ],
 };
 
 // Order matters in middleware, as they will be executed in the order listed
-const handlers = [handleSearchRedirect];
+const handlers = [handleSearchRedirect, handleCmsRedirects];
 
-export default async function middleware(req: NextRequest) {
+export default auth(async (req) => {
   for (const h of handlers) {
     const res = await h(req);
     if (res) return res; // If a handler returns a response, stop processing
   }
 
   return NextResponse.next();
-}
+});

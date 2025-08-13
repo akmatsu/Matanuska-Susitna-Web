@@ -25,7 +25,8 @@
     ".next/types/**/*.ts",
     "./global.d.ts",
     "middleware.ts",
-    "app/[...slug]/route.ts"
+    "app/[slug]/route.ts",
+    "middleware/handlers/cmsRedirects.ts"
   ],
   "exclude": ["node_modules"]
 }
