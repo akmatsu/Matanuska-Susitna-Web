@@ -83,7 +83,7 @@ export async function filterAndZoom(opts: {
   itemKey: string;
 }): Promise<void> {
   try {
-    const layer = opts.view.map.findLayerById(
+    const layer = opts.view.map?.findLayerById(
       opts.layerId,
     ) as __esri.FeatureLayer;
     const geo = await _filter(opts.itemId, opts.itemKey, layer);
