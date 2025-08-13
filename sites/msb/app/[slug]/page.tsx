@@ -14,25 +14,10 @@ import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { Metadata } from 'next';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 const query = gql(`
-  query GetRedirectsOrTopic($path: String, $slug: String) {
-    redirect(where: { from: $path }) {
-      to {
-        item {
-          __typename
-          ... on BasePageWithSlug {
-            slug
-          }
-          ... on Url {
-            url
-          }
-        }
-      }
-      redirectMessage
-    }
-
+  query GetTopicPage($slug: String) {
     topic(where: { slug: $slug }) {
       ...HeroImage
       ...PageBody
@@ -83,11 +68,7 @@ const query = gql(`
 `);
 
 const metaQuery = gql(`
-  query GetRedirectOrTopicMeta($path: String, $slug: String) {
-    redirect(where: { from: $path }) {
-      id
-    }
-
+  query GetOrTopicMeta($slug: String) {
     topic(where: { slug: $slug }) {
       title
       description
@@ -96,34 +77,27 @@ const metaQuery = gql(`
 `);
 
 interface Props {
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{ slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
 
-  const path = '/' + params.slug.join('/');
-  const slug = params.slug.join('/');
-
   const { data } = await getClient().query({
     query: metaQuery,
     variables: {
-      slug,
-      path,
+      slug: params.slug,
     },
   });
 
-  const redirect = data.redirect;
   const topic = data.topic;
 
   return {
-    title: topic ? topic.title : redirect ? 'Redirecting...' : 'Page Not Found',
+    title: topic ? topic.title : 'Page Not Found',
     description: topic
       ? topic.description
-      : redirect
-        ? 'You are being redirected...'
-        : 'The page you are looking for does not exist.',
+      : 'The page you are looking for does not exist.',
   };
 }
 
@@ -133,22 +107,11 @@ export default async function page(props: Props) {
   const { data } = await getClient().query({
     query,
     variables: {
-      path: '/' + params.slug.join('/'),
-      slug: params.slug.join('/'),
+      slug: params.slug,
     },
   });
 
-  const redirectInfo = data?.redirect;
   const topic = data?.topic;
-
-  if (redirectInfo) {
-    const redirectUrl =
-      redirectInfo.to?.item?.__typename === 'Url'
-        ? redirectInfo.to.item.url
-        : redirectInfo.to?.item?.slug;
-
-    if (redirectUrl) return redirect(redirectUrl);
-  }
 
   if (!topic) return notFound();
 

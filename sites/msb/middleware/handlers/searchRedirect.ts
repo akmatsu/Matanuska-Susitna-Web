@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextAuthRequest } from 'next-auth';
+import { NextResponse } from 'next/server';
 import { singular } from 'pluralize';
 
 export const SEARCH_MATCHERS = [
@@ -17,7 +18,7 @@ const SEARCH_SET = new Set(
   SEARCH_MATCHERS.map((m) => (m.startsWith('/') ? m.slice(1) : m)),
 );
 
-export async function handleSearchRedirect(req: NextRequest) {
+export async function handleSearchRedirect(req: NextAuthRequest) {
   const path = req.nextUrl.pathname;
   const type = path.split('/')[1]; // first segment
 
