@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { handleSearchRedirect } from './middleware/handlers/searchRedirect';
 import { handleCmsRedirects } from './middleware/handlers/cmsRedirects';
 import { auth } from '@/auth';
