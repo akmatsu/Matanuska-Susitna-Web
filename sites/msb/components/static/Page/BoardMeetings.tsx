@@ -15,10 +15,8 @@ const BoardMeetingsFragment = gql(`
 function getCalendarId(type: string, title: string): string {
   switch (type) {
     case 'board':
-      const isAssembly =
-        title.toLocaleLowerCase() === 'assembly' ||
-        title.toLocaleLowerCase() === 'the assembly';
-      return isAssembly
+      return title.toLocaleLowerCase() === 'assembly' ||
+        title.toLocaleLowerCase() === 'the assembly'
         ? process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ASSEMBLY_ID || ''
         : process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_MAIN_ID || '';
     case 'ssa_board':
