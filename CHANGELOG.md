@@ -1,3 +1,17 @@
+# [0.16.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.4...v0.16.0) (2025-08-13)
+
+
+### Bug Fixes
+
+* fixed dates in meeting search ([b924f0c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/b924f0c111efb9c86dd30f0a8865f42772bc33d2))
+* fixed meeting search cards and layout ([46d90d6](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/46d90d6ad95f59d89c8f1b5dc5be0bf79b7e2884))
+* removed secondary contact label on contacts and reworked ui slightly ([8a13d77](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8a13d7723c77a451648454455fb66e10b1d3ab5d))
+
+
+### Features
+
+* implemented redirects and initial work on topic landing page ([0543585](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/0543585285f6c9a008087895699fc58f62b00f58))
+
 ## [0.15.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.15.3...v0.15.4) (2025-08-05)
 
 
