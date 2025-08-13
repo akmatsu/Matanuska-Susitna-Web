@@ -19,8 +19,8 @@ export default function PublicMeetingsPage() {
         <MeetingsSearch />
       </div>
       <p>
-        Can't find what you're looking for? <Link href="#">Return to top</Link>{' '}
-        and try using the search bar.
+        Can&apos;t find what you&apos;re looking for?{' '}
+        <Link href="#">Return to top</Link> and try using the search bar.
       </p>
     </PageContainer>
   );

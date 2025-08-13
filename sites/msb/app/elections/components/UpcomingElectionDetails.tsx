@@ -1,7 +1,4 @@
-import {
-  DocumentLink,
-  DocumentLinkButton,
-} from '@/components/static/DocumentLink';
+import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { formatDate } from '@/utils/datetimehHelpers';

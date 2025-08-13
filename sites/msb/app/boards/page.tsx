@@ -1,5 +1,4 @@
 import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
-import { Hero } from '@matsugov/ui/Hero';
 import * as next from 'next';
 import { PageBody } from '@/components/static/Page/PageBody';
 import { getClient } from '@/utils/apollo/ApolloClient';

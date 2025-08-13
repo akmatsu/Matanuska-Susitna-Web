@@ -1,7 +1,4 @@
-import {
-  DocumentLink,
-  DocumentLinkButton,
-} from '@/components/static/DocumentLink';
+import { DocumentLink } from '@/components/static/DocumentLink';
 import { DataTable } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 

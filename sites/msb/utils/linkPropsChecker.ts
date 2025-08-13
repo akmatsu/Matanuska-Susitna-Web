@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import { ComponentProps, HTMLAttributeReferrerPolicy } from 'react';
+import { ComponentProps } from 'react';
 
 export type NextLinkProps = ComponentProps<typeof Link>;
 

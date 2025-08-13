@@ -17,11 +17,12 @@ export function MeetingsSearch() {
   const [meetings, setMeetings] = useState<CalendarMeeting[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>('');
-  const [limit, setLimit] = useState<number>(25);
   const [timeMin, setTimeMin] = useState<string>(
     format(new Date(), 'yyyy-MM-dd'),
   );
   const [timeMax, setTimeMax] = useState<string>('');
+
+  const limit = 25;
 
   async function getMeetings(query: string) {
     try {
