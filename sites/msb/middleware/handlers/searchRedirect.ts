@@ -20,9 +20,10 @@ const SEARCH_SET = new Set(
 
 export async function handleSearchRedirect(req: NextAuthRequest) {
   const path = req.nextUrl.pathname;
-  const type = path.split('/')[1]; // first segment
+  const split = path.split('/');
+  const type = split[1];
 
-  if (!SEARCH_SET.has(type)) return; // Not our concern -> let next handler run
+  if (!SEARCH_SET.has(type) || split.length > 2) return; // Not our concern -> let next handler run
 
   const url = req.nextUrl.clone();
   url.pathname = '/search';
