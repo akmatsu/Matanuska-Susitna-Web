@@ -1,35 +1,13 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
-import {
-  PageActions,
-  PageBody,
-  PageContacts,
-  PageContainer,
-  PageDocuments,
-  PageListItems,
-  PageServices,
-} from '@/components/static/Page';
-import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
+import { PageListItems, PageServices } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
-import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
+import { BasePageWithActions } from '@/components/static/BasePageWithActions';
 
 const getPage = gql(`
   query GetPublicNotice($slug: String!) {
     publicNotice(where: { slug: $slug }) {
-      ...HeroImage
-      ...PageBody
-      contacts {
-        ...ContactList
-      }
-      documents {
-        ...DocumentList
-      }
-      actions {
-        ...ActionList
-      }
-      topics {
-        ...PageList
-      }
+      ...BasePageWithActionsInfo
       communities {
         ...PageList
       }
@@ -77,42 +55,33 @@ export default async function Page(props: {
   const page = data.publicNotice;
 
   if (!page) {
-    console.error('Park not found for slug:', slug);
+    console.error('Page not found for slug:', slug);
     return notFound();
   }
 
   return (
-    <>
-      <PageHeroImage page={page} />
-      <PageContainer className="relative">
-        <PageTwoColumn
-          rightSide={
-            <>
-              <PageActions actions={page.actions} />
-              <PageDocuments documents={page.documents} />
-              <PageContacts contacts={page.contacts} />
-
-              <PageListItems items={page.facilities} title="Facilities" />
-              <PageListItems items={page.parks} title="Parks" />
-              <PageListItems items={page.trails} title="Trails" />
-              <PageListItems items={page.boards} title="Boards" />
-              <PageListItems
-                items={page.orgUnits}
-                title="Departments & Divisions"
-              />
-              <PageListItems
-                items={page.assemblyDistricts}
-                title="Assembly Districts"
-              />
-              <PageListItems items={page.topics} title="Topics" />
-              <PageListItems items={page.communities} title="Communities" />
-            </>
-          }
-        >
-          <PageBody page={page} />
-          <PageServices services={page.services} />
-        </PageTwoColumn>
-      </PageContainer>
-    </>
+    <BasePageWithActions
+      data={page}
+      pageContainerProps={{ className: 'relative' }}
+      rightSide={
+        <>
+          <PageListItems items={page.facilities} title="Facilities" />
+          <PageListItems items={page.parks} title="Parks" />
+          <PageListItems items={page.trails} title="Trails" />
+          <PageListItems items={page.boards} title="Boards" />
+          <PageListItems
+            items={page.orgUnits}
+            title="Departments & Divisions"
+          />
+          <PageListItems
+            items={page.assemblyDistricts}
+            title="Assembly Districts"
+          />
+          <PageListItems items={page.communities} title="Communities" />
+        </>
+      }
+    >
+      <PageServices services={page.services} />
+    </BasePageWithActions>
   );
 }

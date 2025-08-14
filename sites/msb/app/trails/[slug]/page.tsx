@@ -1,21 +1,14 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
 import {
-  PageActions,
   PageAddress,
-  PageBody,
-  PageContacts,
-  PageContainer,
-  PageDocuments,
   PageEvents,
   PageListItems,
   PageServices,
   PageTrailInfo,
 } from '@/components/static/Page';
-import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
 import { gql } from '@msb/js-sdk/gql';
-import { PageTopics } from '@/components/static/Page/PageTopics';
-import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
+import { BasePageWithActions } from '@/components/static/BasePageWithActions';
 
 const trailQuery = gql(`
   query GetTrail(
@@ -24,23 +17,10 @@ const trailQuery = gql(`
     $orderDirection: OrderDirection = desc
   ) {
     trail(where: { slug: $slug }) {
-      ...PageBody
-      ...HeroImage
+      ...BasePageWithActionsInfo
       ...TrailInfo
-      topics {
-        ...TopicList
-      }
-      actions {
-        ...ActionList
-      }
-      documents {
-        ...DocumentList
-      }
       park {
         ...PageList
-      }
-      contacts {
-        ...ContactList
       }
       address {
         ...AddressFields
@@ -83,27 +63,18 @@ export default async function Page(props: {
   }
 
   return (
-    <>
-      <PageHeroImage page={page} />
-      <PageContainer className="relative">
-        <PageTwoColumn
-          rightSide={
-            <>
-              <PageActions actions={page.actions} />
-              <PageDocuments documents={page.documents} />
-              <PageContacts contacts={page.contacts} />
-              <PageAddress address={page.address} />
-              <PageTrailInfo trail={page} />
-              <PageTopics topics={page.topics} />
-              {page.park && <PageListItems items={[page.park]} title="Park" />}
-            </>
-          }
-        >
-          <PageBody page={page} />
-          <PageServices services={page.services} />
-          <PageEvents listName="Trail" />
-        </PageTwoColumn>
-      </PageContainer>
-    </>
+    <BasePageWithActions
+      data={page}
+      rightSide={
+        <>
+          <PageAddress address={page.address} />
+          <PageTrailInfo trail={page} />
+          {page.park && <PageListItems items={[page.park]} title="Park" />}
+        </>
+      }
+    >
+      <PageServices services={page.services} />
+      <PageEvents listName="Trail" />
+    </BasePageWithActions>
   );
 }

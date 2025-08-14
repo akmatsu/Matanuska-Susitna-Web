@@ -1,21 +1,15 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
 import {
-  PageActions,
   PageAddress,
-  PageBody,
-  PageContacts,
-  PageContainer,
-  PageDocuments,
   PageEvents,
   PageHours,
   PageListItems,
   PagePublicNotices,
   PageServices,
 } from '@/components/static/Page';
-import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
 import { gql } from '@msb/js-sdk/gql';
-import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
+import { BasePageWithActions } from '@/components/static/BasePageWithActions';
 
 const getPark = gql(`
   query GetPark(
@@ -24,17 +18,7 @@ const getPark = gql(`
     $orderDirection: OrderDirection = desc
   ) {
     park(where: { slug: $slug }) {
-      ...PageBody
-      ...HeroImage
-      actions {
-        ...ActionList
-      }
-      documents {
-        ...DocumentList
-      }
-      contacts {
-        ...ContactList
-      }
+      ...BasePageWithActionsInfo
       services {
         ...ServiceList
       }
@@ -88,28 +72,20 @@ export default async function Page(props: {
   const publicNotices = data.publicNotices;
 
   return (
-    <>
-      <PageHeroImage page={page} />
-      <PageContainer className="relative">
-        <PageTwoColumn
-          rightSide={
-            <>
-              <PageActions actions={page.actions} />
-              <PageDocuments documents={page.documents} />
-              <PageAddress address={page.address} />
-              <PageHours hours={page.hours} />
-              <PageContacts contacts={page.contacts} />
-              <PageListItems items={page.trails} title="Trails" />
-              <PageListItems items={page.facilities} title="Facilities" />
-            </>
-          }
-        >
-          <PageBody page={page} />
-          <PageServices services={page.services} />
-          <PagePublicNotices items={publicNotices} />
-          <PageEvents listName="Park" />
-        </PageTwoColumn>
-      </PageContainer>
-    </>
+    <BasePageWithActions
+      pageContainerProps={{ className: 'relative' }}
+      rightSide={
+        <>
+          <PageAddress address={page.address} />
+          <PageHours hours={page.hours} />
+          <PageListItems items={page.trails} title="Trails" />
+          <PageListItems items={page.facilities} title="Facilities" />
+        </>
+      }
+    >
+      <PageServices services={page.services} />
+      <PagePublicNotices items={publicNotices} />
+      <PageEvents listName="Park" />
+    </BasePageWithActions>
   );
 }

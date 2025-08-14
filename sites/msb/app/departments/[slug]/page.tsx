@@ -1,17 +1,11 @@
+import { BasePageWithActions } from '@/components/static/BasePageWithActions';
 import {
-  PageActions,
-  PageBody,
   PageChildrenOrgUnits,
-  PageContacts,
-  PageContainer,
-  PageDocuments,
   PageEvents,
   PageParentOrgUnit,
   PagePublicNotices,
   PageServices,
 } from '@/components/static/Page';
-import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
-import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
@@ -23,22 +17,9 @@ const getOrgUnit = gql(`
     $orderDirection: OrderDirection = desc
   ) {
     orgUnit(where: { slug: $slug }) {
-      ...PageBody
-      ...HeroImage
-      actions {
-        ...ActionList
-      }
-      documents {
-        ...DocumentList
-      }
-      topics {
-        ...TopicFields
-      }
+      ...BasePageWithActionsInfo
       children {
         ...ChildrenOrgUnits
-      }
-      contacts {
-        ...ContactList
       }
       parent {
         ...OrgUnitFields
@@ -81,26 +62,18 @@ export default async function DepartmentPage(props: {
   const page = data.orgUnit;
 
   return (
-    <>
-      <PageHeroImage page={page} />
-      <PageContainer className="relative">
-        <PageTwoColumn
-          rightSide={
-            <>
-              <PageActions actions={page.actions} />
-              <PageDocuments documents={page.documents} />
-              <PageContacts contacts={page.contacts} />
-              <PageParentOrgUnit item={page.parent} />
-              <PageChildrenOrgUnits items={page.children} />
-            </>
-          }
-        >
-          <PageBody page={page} />
-          <PageServices services={page.services} />
-          <PagePublicNotices items={data.publicNotices} />
-          <PageEvents listName="Department" />
-        </PageTwoColumn>
-      </PageContainer>
-    </>
+    <BasePageWithActions
+      data={page}
+      rightSide={
+        <>
+          <PageParentOrgUnit item={page.parent} />
+          <PageChildrenOrgUnits items={page.children} />
+        </>
+      }
+    >
+      <PageServices services={page.services} />
+      <PagePublicNotices items={data.publicNotices} />
+      <PageEvents listName="Department" />
+    </BasePageWithActions>
   );
 }

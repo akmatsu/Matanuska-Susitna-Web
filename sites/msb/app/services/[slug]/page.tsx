@@ -1,13 +1,6 @@
 import { PageSideNavController } from '@/components/client/Page/PageSideNavController';
-import {
-  PageActions,
-  PageBody,
-  PageContacts,
-  PageContainer,
-  PageDocuments,
-  PagePublicNotices,
-} from '@/components/static/Page';
-import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
+import { BasePageWithPrimaryAction } from '@/components/static/BasePageWithPrimaryAction';
+import { PagePublicNotices } from '@/components/static/Page';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
@@ -19,23 +12,7 @@ const getService = gql(`
     $orderDirection: OrderDirection = desc
   ) {
     service(where: { slug: $slug}) {
-      ...PageBody
-      ...HeroImage
-      documents {
-        ...DocumentList
-      }
-      primaryAction {
-        ...ExternalActionFields
-      }
-      secondaryActions {
-        ...ExternalActionFields
-      }
-      primaryContact {
-        ...ContactList
-      }
-      contacts {
-        ...ContactList
-      }
+      ...BasePageWithPrimaryActionInfo      
     }
 
     publicNotices(
@@ -70,30 +47,14 @@ export default async function ServicePage(props: {
   }
 
   const page = data.service;
+  const publicNotices = data.publicNotices;
 
   return (
-    <>
-      <PageHeroImage page={page} />
-      <PageContainer className="relative">
-        <PageSideNavController
-          rightSide={
-            <>
-              <PageActions
-                primaryAction={page.primaryAction}
-                secondaryActions={page.secondaryActions}
-              />
-              <PageDocuments documents={page.documents} />
-              <PageContacts
-                primaryContact={page.primaryContact}
-                contacts={page.contacts}
-              />
-            </>
-          }
-        >
-          <PageBody page={page} />
-          <PagePublicNotices />
-        </PageSideNavController>
-      </PageContainer>
-    </>
+    <BasePageWithPrimaryAction
+      data={page}
+      columnControllerAs={PageSideNavController}
+    >
+      <PagePublicNotices items={publicNotices} />
+    </BasePageWithPrimaryAction>
   );
 }

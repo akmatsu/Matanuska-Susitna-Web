@@ -1,15 +1,5 @@
-import {
-  PageActions,
-  PageAddress,
-  PageBody,
-  PageContacts,
-  PageContainer,
-  PageDocuments,
-  PageEvents,
-  PagePublicNotices,
-} from '@/components/static/Page';
-import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
-import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
+import { BasePageWithActions } from '@/components/static/BasePageWithActions';
+import { PageAddress, PagePublicNotices } from '@/components/static/Page';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
@@ -21,21 +11,7 @@ const getAssemblyDistrict = gql(`
     $orderDirection: OrderDirection = desc
   ) {
     assemblyDistrict(where: { slug: $slug }) {
-      ...HeroImage
-      ...PageBody      
-      documents {
-        ...DocumentList
-      }
-      actions {
-        ...ActionList
-      }
-      topics {
-        ...TopicFields
-      }
-      contacts {
-        ...ContactList
-      }
-      
+      ...BasePageWithActionsInfo
       ...AssemblyMemberInfo
       address {
         ...AddressFields
@@ -73,25 +49,11 @@ export default async function DistrictPage(props: {
   const page = data.assemblyDistrict;
   const publicNotices = data.publicNotices;
   return (
-    <>
-      <PageHeroImage page={page} />
-      <PageContainer className="relative">
-        <PageTwoColumn
-          rightSide={
-            <>
-              <PageActions actions={page.actions} />
-              <PageDocuments documents={page.documents} />
-              <PageAddress address={page.address} />
-              <PageContacts contacts={page.contacts} />
-            </>
-          }
-        >
-          <PageBody page={page} />
-
-          <PagePublicNotices items={publicNotices} />
-          <PageEvents listName="OrgUnit" />
-        </PageTwoColumn>
-      </PageContainer>
-    </>
+    <BasePageWithActions
+      data={page}
+      rightSide={<PageAddress address={page.address} />}
+    >
+      <PagePublicNotices items={publicNotices} />
+    </BasePageWithActions>
   );
 }
