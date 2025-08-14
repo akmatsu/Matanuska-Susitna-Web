@@ -1,3 +1,10 @@
+## [0.16.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.16.2...v0.16.3) (2025-08-14)
+
+
+### Bug Fixes
+
+* fixed search redirect bug ([e71ee7e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e71ee7e8e1d70181793431678609531f1a382c7f))
+
 ## [0.16.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.16.1...v0.16.2) (2025-08-13)
 
 
