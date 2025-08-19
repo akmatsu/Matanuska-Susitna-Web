@@ -30,7 +30,9 @@ export function Autocomplete() {
       router.push(value.url);
     } else if (value?.slug) {
       const type = toKebabCase(hitType ? '/' + pluralize(hitType) : '');
-      router.push(`${type}/${value.slug}`);
+      router.push(
+        type === '/topics' ? `/${value.slug}` : `${type}/${value.slug}`,
+      );
     } else if (value?.title) {
       router.push(`/search?pages[query]=${value.title}`);
     }

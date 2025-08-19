@@ -51,7 +51,7 @@ const query = gql(`
       facilities {
         ...FacilitiesList
       }
-      districts {
+      assemblyDistricts {
         ...DistrictList
       }
       communities {
@@ -123,7 +123,7 @@ export default async function page(props: Props) {
             <PageActions actions={topic.actions} />
             <PageDocuments documents={topic.documents} />
             <PageContacts contacts={topic.contacts} />
-            <PageDistricts items={topic.districts} />
+            <PageDistricts items={topic.assemblyDistricts} />
             <PageFacilities facilities={topic.facilities} />
             <PageListItems items={topic.trails} title="Trails" />
             <PageListItems items={topic.parks} title="Parks" />
