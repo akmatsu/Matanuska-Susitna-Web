@@ -6,8 +6,9 @@ import { Process, Step, DocCollectionWrapper } from './components';
 import remarkDirectiveRehype from 'remark-directive-rehype';
 import { ActionButtonWrapper } from './components/PrimaryActionButton';
 import { InternalLink } from './components/InternalLink';
-import { AnchorHTMLAttributes } from 'react';
+import { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react';
 import { visit } from 'unist-util-visit';
+import Image from 'next/image';
 
 /**
  * Remark plugin to filter out unsupported directives.
@@ -76,6 +77,16 @@ export function MarkdownRenderer(props: { children?: string | null }) {
         },
         process: Process,
         step: Step,
+        img: (props: ImgHTMLAttributes<HTMLImageElement>) => {
+          return (
+            <div className="w-full my-8">
+              <img {...props} className="w-full mb-0 mt-0"></img>
+              <div className="flex justify-center">
+                <span className="text-base text-center">{props.title}</span>
+              </div>
+            </div>
+          );
+        },
         'doc-collection': DocCollectionWrapper,
         'primary-action-button': ActionButtonWrapper,
         'internal-link': InternalLink,
