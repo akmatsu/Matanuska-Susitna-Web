@@ -1,3 +1,10 @@
+# [0.17.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.16.3...v0.17.0) (2025-08-19)
+
+
+### Features
+
+* added support for images in rich body text ([eec328f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/eec328fb53421408983ca2942f353fd2bd9f9bbb))
+
 ## [0.16.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.16.2...v0.16.3) (2025-08-14)
 
 
