@@ -19,7 +19,10 @@ export function SearchListItem({
 }) {
   const formattedListKey = toKebabCase(listKey);
 
-  const url = item.url || `/${formattedListKey}/${item.slug}`;
+  const url =
+    item.url || formattedListKey === 'topics'
+      ? `/${item.slug}`
+      : `/${formattedListKey}/${item.slug}`;
   return (
     <LinkCard href={url} as="li" linkAs={Link} className={className}>
       <CardHeader>
