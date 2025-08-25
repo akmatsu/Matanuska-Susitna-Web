@@ -22,31 +22,37 @@ export function InstantSearch() {
                 attribute="type"
                 title="Type"
                 sortBy={['name', 'count']}
+                showMore
               />
               <CustomRefinementList
                 attribute="districts"
                 title="Districts"
                 sortBy={['name', 'count']}
+                showMore
               />
               <CustomRefinementList
                 attribute="tags"
                 title="Tags"
                 sortBy={['name', 'count']}
+                showMore
               />
               <CustomRefinementList
                 attribute="departments"
                 title="Departments"
                 sortBy={['name', 'count']}
+                showMore
               />
               <CustomRefinementList
                 attribute="communities"
                 title="Communities"
                 sortBy={['name', 'count']}
+                showMore
               />
               <CustomRefinementList
                 attribute="related_pages"
                 title="Related Pages"
                 sortBy={['count', 'name']}
+                showMore
               />
             </DynamicWidgets>
           </div>
