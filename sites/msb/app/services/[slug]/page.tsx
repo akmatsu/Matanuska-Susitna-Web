@@ -1,26 +1,12 @@
-import { PageSideNavController } from '@/components/client/Page/PageSideNavController';
-import { BasePageWithPrimaryAction } from '@/components/static/BasePageWithPrimaryAction';
-import { PagePublicNotices } from '@/components/static/Page';
+import { BasePage } from '@/components/static/BasePage';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 
 const getService = gql(`
-  query GetService(
-    $slug: String!,
-    $take: Int = 5,
-    $orderDirection: OrderDirection = desc
-  ) {
+  query GetService($slug: String!, $now: DateTime!) {
     service(where: { slug: $slug}) {
-      ...BasePageWithPrimaryActionInfo      
-    }
-
-    publicNotices(
-      where: { services: { some: { slug: { equals: $slug } } } }, 
-      take: $take, 
-      orderBy: { urgency: $orderDirection }
-    ) {
-      ...PublicNoticeList
+      ...BasePageInfo      
     }
   }
 `);
@@ -34,6 +20,7 @@ export default async function ServicePage(props: {
     query: getService,
     variables: {
       slug,
+      now: new Date().toISOString(),
     },
   });
 
@@ -47,14 +34,6 @@ export default async function ServicePage(props: {
   }
 
   const page = data.service;
-  const publicNotices = data.publicNotices;
 
-  return (
-    <BasePageWithPrimaryAction
-      data={page}
-      columnControllerAs={PageSideNavController}
-    >
-      <PagePublicNotices items={publicNotices} />
-    </BasePageWithPrimaryAction>
-  );
+  return <BasePage data={page} containerSize="md" />;
 }

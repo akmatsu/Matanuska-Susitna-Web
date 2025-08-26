@@ -1,18 +1,7 @@
-import { format } from 'date-fns';
-import { AddressLink } from '../client/AddressLink';
-import { AddToCalendarButton } from './AddToCalendarButton';
 import { CalendarMeeting } from '@/utils/calendarHelpers';
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  CardProps,
-  CardTitle,
-} from '@matsugov/ui/Card';
+import { CardProps } from '@matsugov/ui/Card';
 import { PhoneLink } from './PhoneLink';
-import { LinkButton } from './LinkButton';
-import clsx from 'clsx';
+import { EventCard } from './Page/EventCard';
 
 const phoneRx = /(\+?\d?.?\(?\d{3}\)?.?\d{3}.?\d{4})/g;
 
@@ -80,6 +69,7 @@ export function MeetingCard({
 
   function getMeetingLocation() {
     const text = partTwo || (joinUrl ? meeting.location : '');
+    if (!text) return '';
     const cleanedText = text.replace('ID: ID:', 'ID:');
 
     const segments = [];
@@ -103,69 +93,27 @@ export function MeetingCard({
     return segments;
   }
 
+  if (!meeting.date) return null;
+
   return (
-    <Card
+    <EventCard
+      eventTitle={title}
+      date={meeting.date}
+      locationSlot={getMeetingLocation()}
+      location={meeting.location}
+      address={getAddress()}
+      subtitle={subParts?.map((part, index) =>
+        phoneRx.test(part) ? (
+          <span key={`${meeting.id}-${index}-phone`}>
+            {' '}
+            <PhoneLink phoneNumber={part.trim()}>{part.trim()}</PhoneLink>
+          </span>
+        ) : (
+          <span key={index}>{part}</span>
+        ),
+      )}
+      joinUrl={joinUrl}
       {...props}
-      className="h-full"
-      containerClassName={clsx('h-full w-full', containerClassName)}
-    >
-      <div className="flex flex-col sm:flex-row h-full w-full">
-        {meeting.date && (
-          <div className="bg-base-lightest p-2 flex justify-center items-center h-auto min-h-full">
-            <div className="bg-primary-dark aspect-square h-24 w-24 md:h-32 md:w-32 flex flex-col justify-center items-center text-white gap-2 rounded-full">
-              <p className="md:text-xl font-bold text-center">
-                {format(meeting.date, 'MMM do')}
-                <br />
-                <span className="md:text-xl font-normal">
-                  {format(meeting.date, 'yyyy')}
-                </span>
-                <br />
-                <span className="text-xs font-normal">
-                  {format(meeting.date, 'h:mm a')}
-                </span>
-              </p>
-            </div>
-          </div>
-        )}
-        <div className="flex flex-col justify-between gap-4 w-full text-center sm:text-left h-full">
-          <CardHeader>
-            <CardTitle className="text-center sm:text-left">{title}</CardTitle>
-            <span className="text-sm text-base-dark">
-              {subParts?.map((part, index) =>
-                phoneRx.test(part) ? (
-                  <span key={`${meeting.id}-${index}-phone`}>
-                    {' '}
-                    <PhoneLink phoneNumber={part.trim()}>
-                      {part.trim()}
-                    </PhoneLink>
-                  </span>
-                ) : (
-                  <span key={index}>{part}</span>
-                ),
-              )}
-            </span>
-          </CardHeader>
-          <CardBody>
-            <address className="not-italic">
-              <AddressLink address={getAddress()} />
-              <p>{getMeetingLocation()}</p>
-            </address>
-          </CardBody>
-          <CardFooter className="justify-center sm:justify-end">
-            {joinUrl && (
-              <LinkButton
-                href={joinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs"
-              >
-                Join {isZoom ? 'Zoom' : 'Teams'} Meeting
-              </LinkButton>
-            )}
-            <AddToCalendarButton meeting={meeting} />
-          </CardFooter>
-        </div>
-      </div>
-    </Card>
+    />
   );
 }

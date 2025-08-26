@@ -1,9 +1,7 @@
-import { BasePageWithActions } from '@/components/static/BasePageWithActions';
+import { BasePage } from '@/components/static/BasePage';
 import {
   PageChildrenOrgUnits,
-  PageEvents,
   PageParentOrgUnit,
-  PagePublicNotices,
   PageServices,
 } from '@/components/static/Page';
 import { getClient } from '@/utils/apollo/ApolloClient';
@@ -13,11 +11,10 @@ import { notFound } from 'next/navigation';
 const getOrgUnit = gql(`
   query GetOrgUnit(
     $slug: String!
-    $take: Int = 5
-    $orderDirection: OrderDirection = desc
+    $now: DateTime!
   ) {
     orgUnit(where: { slug: $slug }) {
-      ...BasePageWithActionsInfo
+      ...BasePageInfo
       children {
         ...ChildrenOrgUnits
       }
@@ -28,13 +25,7 @@ const getOrgUnit = gql(`
         ...ServiceList
       }
     }
-    publicNotices(
-      where: { orgUnits: { some: { slug: { equals: $slug } } } }
-      take: $take
-      orderBy: { urgency: $orderDirection }
-    ) {
-      ...PublicNoticeList
-    }
+    
   }
   `);
 
@@ -46,6 +37,7 @@ export default async function DepartmentPage(props: {
     query: getOrgUnit,
     variables: {
       slug,
+      now: new Date().toISOString(),
     },
   });
 
@@ -62,7 +54,7 @@ export default async function DepartmentPage(props: {
   const page = data.orgUnit;
 
   return (
-    <BasePageWithActions
+    <BasePage
       data={page}
       rightSide={
         <>
@@ -72,8 +64,6 @@ export default async function DepartmentPage(props: {
       }
     >
       <PageServices services={page.services} />
-      <PagePublicNotices items={data.publicNotices} />
-      <PageEvents listName="Department" />
-    </BasePageWithActions>
+    </BasePage>
   );
 }

@@ -2,23 +2,20 @@ import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
 import {
   PageAddress,
-  PageEvents,
   PageHours,
   PageListItems,
-  PagePublicNotices,
   PageServices,
 } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
-import { BasePageWithActions } from '@/components/static/BasePageWithActions';
+import { BasePage } from '@/components/static/BasePage';
 
 const getPark = gql(`
   query GetPark(
     $slug: String!
-    $take: Int = 5
-    $orderDirection: OrderDirection = desc
+    $now: DateTime!
   ) {
     park(where: { slug: $slug }) {
-      ...BasePageWithActionsInfo
+      ...BasePageInfo
       services {
         ...ServiceList
       }
@@ -35,14 +32,6 @@ const getPark = gql(`
         ...PageList
       }
     }
-
-    publicNotices(
-      where: { trails: { some: { slug: { equals: $slug } } } }
-      take: $take
-      orderBy: { urgency: $orderDirection }
-    ) {
-      ...PublicNoticeList
-    }
   }
 `);
 
@@ -54,6 +43,7 @@ export default async function Page(props: {
     query: getPark,
     variables: {
       slug,
+      now: new Date().toISOString(),
     },
   });
 
@@ -69,10 +59,8 @@ export default async function Page(props: {
     return notFound();
   }
 
-  const publicNotices = data.publicNotices;
-
   return (
-    <BasePageWithActions
+    <BasePage
       pageContainerProps={{ className: 'relative' }}
       rightSide={
         <>
@@ -84,8 +72,6 @@ export default async function Page(props: {
       }
     >
       <PageServices services={page.services} />
-      <PagePublicNotices items={publicNotices} />
-      <PageEvents listName="Park" />
-    </BasePageWithActions>
+    </BasePage>
   );
 }

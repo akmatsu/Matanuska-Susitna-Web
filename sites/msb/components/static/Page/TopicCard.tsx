@@ -1,7 +1,6 @@
 import React from 'react';
-import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import Link from 'next/link';
+import { Link } from '../Link';
 
 const topicFragment = gql(`
     fragment TopicFields on Topic {
@@ -12,26 +11,11 @@ const topicFragment = gql(`
   }
 `);
 
-export function TopicCard(props: {
+export function TopicItem(props: {
   topic: FragmentType<typeof topicFragment>;
   as?: React.ElementType;
   className?: string;
 }) {
   const topic = getFragmentData(topicFragment, props.topic);
-  return (
-    <LinkCard
-      as={props.as}
-      key={topic.slug}
-      className={`${props.className}`}
-      href={`/topics/${topic.slug}`}
-      linkAs={Link}
-    >
-      <CardHeader>
-        <CardTitle>{topic.title}</CardTitle>
-      </CardHeader>
-      <CardBody>
-        <p className="truncate">{topic.description}</p>
-      </CardBody>
-    </LinkCard>
-  );
+  return <Link href={`/${topic.slug}`}>{topic.title}</Link>;
 }

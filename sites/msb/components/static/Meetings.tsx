@@ -7,7 +7,7 @@ export async function Meetings() {
 
   return (
     <>
-      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+      <ul className="flex flex-col md:grid md:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         {items.map((meeting) => (
           <MeetingCard key={meeting.id} meeting={meeting} />
         ))}

@@ -1,10 +1,35 @@
+import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { PageSection } from './PageSection';
+import { EventInfo } from './EventInfo';
 
-export function PageEvents(props: { listName: string }) {
-  if (props.listName !== 'service' && props.listName !== 'events')
-    return (
-      <PageSection title="Upcoming Meetings" noMargins>
-        <div>muffins</div>
-      </PageSection>
-    );
+const PageEventsFragment = gql(`
+    fragment PageEvents on BasePageWithSlug {
+      events(take: 4, orderBy:  {
+         startDate: desc
+      }, where:  {
+         startDate:  {
+            gte: $now
+         }
+      }) {
+        id
+        ...EventInfo
+      }
+    }
+`);
+
+export function PageEvents(props: {
+  data: FragmentType<typeof PageEventsFragment>;
+}) {
+  const data = getFragmentData(PageEventsFragment, props.data);
+  if (!data?.events?.length) return null;
+
+  return (
+    <PageSection title="Upcoming Events" noMargins>
+      <ul>
+        {data.events.map((event) => (
+          <EventInfo key={event.id} data={event} />
+        ))}
+      </ul>
+    </PageSection>
+  );
 }

@@ -1,4 +1,3 @@
-import { Button } from '@matsugov/ui';
 import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import { Checkbox } from '@matsugov/ui/Checkbox';
 import clsx from 'clsx';

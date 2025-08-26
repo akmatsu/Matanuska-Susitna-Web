@@ -1,5 +1,5 @@
-import { BasePageWithActions } from '@/components/static/BasePageWithActions';
-import { PageAddress, PagePublicNotices } from '@/components/static/Page';
+import { BasePage } from '@/components/static/BasePage';
+import { PageAddress } from '@/components/static/Page';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
@@ -7,23 +7,14 @@ import { notFound } from 'next/navigation';
 const getAssemblyDistrict = gql(`
     query GetAssemblyDistrict(
     $slug: String!
-    $take: Int = 5
-    $orderDirection: OrderDirection = desc
+    $now: DateTime!
   ) {
     assemblyDistrict(where: { slug: $slug }) {
-      ...BasePageWithActionsInfo
+      ...BasePageInfo
       ...AssemblyMemberInfo
       address {
         ...AddressFields
       }
-    }
-
-    publicNotices(
-      where: { assemblyDistricts: { some: { slug: { equals: $slug } } } }
-      take: $take
-      orderBy: { urgency: $orderDirection }
-    ) {
-      ...PublicNoticeList
     }
   }
 `);
@@ -34,7 +25,7 @@ export default async function DistrictPage(props: {
   const { slug } = await props.params;
   const { data, errors, error } = await getClient().query({
     query: getAssemblyDistrict,
-    variables: { slug },
+    variables: { slug, now: new Date().toISOString() },
   });
 
   if (errors || error) {
@@ -47,13 +38,11 @@ export default async function DistrictPage(props: {
   }
 
   const page = data.assemblyDistrict;
-  const publicNotices = data.publicNotices;
+
   return (
-    <BasePageWithActions
+    <BasePage
       data={page}
       rightSide={<PageAddress address={page.address} />}
-    >
-      <PagePublicNotices items={publicNotices} />
-    </BasePageWithActions>
+    ></BasePage>
   );
 }

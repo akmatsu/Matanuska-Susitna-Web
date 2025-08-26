@@ -8,7 +8,6 @@ import { ActionButtonWrapper } from './components/PrimaryActionButton';
 import { InternalLink } from './components/InternalLink';
 import { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react';
 import { visit } from 'unist-util-visit';
-import Image from 'next/image';
 
 /**
  * Remark plugin to filter out unsupported directives.

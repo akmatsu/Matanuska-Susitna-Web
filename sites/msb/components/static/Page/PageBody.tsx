@@ -30,7 +30,7 @@ export function PageBody(props: {
           {page.__typename?.split(/(?=[A-Z])/).join(' ')}
         </p>
       )}
-      <h1>{page.title}</h1>
+      <h1 className="text-3xl">{page.title}</h1>
       {props.actionSlot}
       {page.body ? (
         <MarkdownRenderer>{page.body}</MarkdownRenderer>

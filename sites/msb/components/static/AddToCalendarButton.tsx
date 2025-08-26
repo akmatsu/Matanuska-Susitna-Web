@@ -76,6 +76,39 @@ export function AddToCalendarButton({
 
   const yahooStart = format(dt, "yyyyMMdd'T'HHmmss'Z'");
 
+  function makeGoogleParams() {
+    const params = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: meeting.title,
+      dates: `${dtStart}/${dtEnd}`,
+      details: 'Details about the meeting',
+      ...(meeting.location && { location: meeting.location }),
+    });
+    return params.toString();
+  }
+
+  function makeOutlookParams() {
+    const params = new URLSearchParams({
+      subject: meeting.title,
+      startdt: isoStart,
+      enddt: isoEnd,
+      body: 'Details about the meeting',
+      ...(meeting.location && { location: meeting.location }),
+    });
+    return params.toString();
+  }
+
+  function makeYahooParams() {
+    const params = new URLSearchParams({
+      title: meeting.title,
+      st: yahooStart,
+      dur: '0030',
+      ...(meeting.location && { location: meeting.location }),
+      details: 'Details about the meeting',
+    });
+    return params.toString();
+  }
+
   const items = [
     {
       label: 'Apple Calendar',
@@ -83,15 +116,15 @@ export function AddToCalendarButton({
     },
     {
       label: 'Google Calendar',
-      href: `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(meeting.title)}&dates=${dtStart}/${dtEnd}&details=${encodeURIComponent('Details about the meeting')}&location=${encodeURIComponent(meeting.location)}`,
+      href: `https://www.google.com/calendar/render?${makeGoogleParams()}`,
     },
     {
       label: 'Outlook Calendar',
-      href: `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(meeting.title)}&startdt=${isoStart}&enddt=${isoEnd}&body=${encodeURIComponent('Details about the meeting')}&location=${encodeURIComponent(meeting.location)}`,
+      href: `https://outlook.live.com/calendar/0/deeplink/compose?${makeOutlookParams()}`,
     },
     {
       label: 'Yahoo Calendar',
-      href: `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodeURIComponent(meeting.title)}&st=${yahooStart}&dur=0030&location=${encodeURIComponent(meeting.location)}&details=${encodeURIComponent('Details about the meeting')}`,
+      href: `https://calendar.yahoo.com/?${makeYahooParams()}`,
     },
     {
       label: 'iCal',

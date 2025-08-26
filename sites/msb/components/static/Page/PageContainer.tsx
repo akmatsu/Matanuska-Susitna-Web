@@ -6,7 +6,7 @@ export function PageContainer<T extends React.ElementType>(props: {
   children: React.ReactNode;
   className?: string;
   as?: T;
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
   hideBreadcrumbs?: boolean;
 }) {
   const Tag = props.as || 'div';
@@ -15,11 +15,12 @@ export function PageContainer<T extends React.ElementType>(props: {
       className={clsx(
         'mx-auto px-4 py-16',
         {
-          'max-w-full': props.size === 'xl',
-          'max-w-7xl': !props.size || props.size === 'lg',
-          'max-w-5xl': props.size === 'md',
-          'max-w-3xl': props.size === 'sm',
-          'max-w-2xl': props.size === 'xs',
+          'max-w-full': props.size === 'full',
+          'max-w-screen-xl': props.size === 'xl',
+          'max-w-screen-lg': !props.size || props.size === 'lg',
+          'max-w-4xl': props.size === 'md',
+          'max-w-screen-sm': props.size === 'sm',
+          'max-w-xl': props.size === 'xs',
         },
         props.className,
       )}

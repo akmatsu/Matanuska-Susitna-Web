@@ -29,6 +29,7 @@ export function ActionButton({
   big = true,
   block = true,
   target = '_blank',
+  blockOnMobile,
   ...props
 }: {
   action: FragmentType<typeof ActionFields>;
@@ -36,6 +37,7 @@ export function ActionButton({
   big?: boolean;
   block?: boolean;
   target?: string;
+  blockOnMobile?: boolean;
 }) {
   const action = getFragmentData(ActionFields, props.action);
 
@@ -69,6 +71,7 @@ export function ActionButton({
       target={target}
       big={big}
       block={block}
+      blockOnMobile={blockOnMobile}
       color="primary"
     >
       {action.label || action.item?.title}

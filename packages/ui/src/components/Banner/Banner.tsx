@@ -27,7 +27,7 @@ export function Banner({
     <Disclosure
       as={'section'}
       aria-label={label}
-      className="bg-base-lightest px-4"
+      className="bg-base-lightest px-4 border-b border-b-base-lighter"
     >
       <div className="mx-auto max-w-(--breakpoint-xl)">
         <DisclosureButton className="group py-1 text-xs text-left leading-none flex items-center">

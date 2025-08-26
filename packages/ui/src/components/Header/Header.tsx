@@ -50,9 +50,14 @@ export function Header({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-white min-h-12 lg:min-h-20 flex items-center justify-between pl-4 lg:pr-4 shadow-md">
+    <header className="bg-[#f6f8f9] min-h-12 lg:min-h-20 flex items-center justify-between pl-4 lg:pr-4 border-b border-b-base-lighter">
       <div className="flex items-center justify-between w-full min-h-full">
-        <NavLink href={homeHref} className="no-underline text-base-darkest">
+        <NavLink
+          href={homeHref}
+          className="no-underline text-base-darkest"
+          aria-label="Go to MSB home page"
+          title="MSB Home"
+        >
           <div className="flex items-center gap-2">
             <Image
               src={orgLogo}
@@ -93,6 +98,8 @@ export function Header({
             <NavLink
               href={searchHref}
               className="rounded-xs leading-none font-bold focus-ring shadow-2xs text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white size-8 flex items-center justify-center"
+              aria-label="Go to search page"
+              title="Search"
             >
               <span className="icon-[mdi--magnify] size-6"></span>
             </NavLink>
@@ -134,6 +141,8 @@ export function Header({
                   href={searchHref}
                   className="mt-4 w-full rounded-xs leading-none font-bold focus-ring shadow-2xs text-center bg-primary hover:bg-primary-dark active:bg-primary-darker text-white p-2 flex items-center justify-center"
                   onClick={() => setIsOpen(false)}
+                  aria-label="Search"
+                  title="Search"
                 >
                   <span className="icon-[mdi--magnify] size-6 mr-2"></span>
                   Search

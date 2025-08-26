@@ -1,11 +1,7 @@
-import { BasePageWithActions } from '@/components/static/BasePageWithActions';
+import { BasePage } from '@/components/static/BasePage';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { LinkButton } from '@/components/static/LinkButton';
-import {
-  PageDistricts,
-  PageListItems,
-  PageSection,
-} from '@/components/static/Page';
+import { PageListItems, PageSection } from '@/components/static/Page';
 import { BoardMeetings } from '@/components/static/Page/BoardMeetings';
 import { ExternalActionButton } from '@/components/static/Page/ExternalActionButtont';
 
@@ -14,9 +10,9 @@ import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 
 const getBoardPage = gql(`
-  query GetBoard($where: BoardWhereUniqueInput!) {
+  query GetBoard($where: BoardWhereUniqueInput!, $now: DateTime!) {
     board(where: $where) {
-      ...BasePageWithActionsInfo
+      ...BasePageInfo
       ...BoardMeetings
       directory {
         ...DocumentLink
@@ -24,9 +20,7 @@ const getBoardPage = gql(`
       communities {
         ...PageList
       }
-      districts {
-        ...DistrictList
-      }
+      
       linkToAgendas {
         ...ExternalActionButton
       }
@@ -49,6 +43,7 @@ export default async function BoardPage(props: {
     query: getBoardPage,
     variables: {
       where: { slug },
+      now: new Date().toISOString(),
     },
   });
 
@@ -79,7 +74,7 @@ export default async function BoardPage(props: {
   }
 
   return (
-    <BasePageWithActions
+    <BasePage
       data={page}
       rightSide={
         <>
@@ -95,7 +90,7 @@ export default async function BoardPage(props: {
               </DocumentLinkButton>
             </PageSection>
           )}
-          <PageDistricts items={page.districts} />
+
           <PageListItems items={page.communities} title="Communities" />
         </>
       }
@@ -104,6 +99,6 @@ export default async function BoardPage(props: {
       }}
     >
       <BoardMeetings />
-    </BasePageWithActions>
+    </BasePage>
   );
 }

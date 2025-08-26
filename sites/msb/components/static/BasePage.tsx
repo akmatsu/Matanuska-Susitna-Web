@@ -1,14 +1,17 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { PageHeroImage } from './Page/PageHeroImage';
 import {
+  PageActions,
   PageBody,
   PageContacts,
   PageContainer,
   PageDocuments,
-  PageListItems,
+  PageEvents,
+  PagePublicNotices,
 } from './Page';
 import { PageTwoColumn } from './Page/PageTwoColumn';
 import React, { ComponentProps } from 'react';
+import { PageTopics } from './Page/PageTopics';
 
 const BasePageFragment = gql(`
   fragment BasePageInfo on BasePageWithSlug {
@@ -24,8 +27,40 @@ const BasePageFragment = gql(`
     topics {
       ...PageList
     }
-    events {
-      id
+    ...PageEvents
+    ...PagePublicNotices
+    topics {
+      ...TopicList
+    }
+    communities {
+      ...PageList
+    }
+
+    orgUnits {
+      ...PageList
+    }
+
+    assemblyDistricts {
+      ...PageList
+    }
+    
+
+    ... on Service {
+      primaryContact {
+        ...ContactList
+      }
+      primaryAction {
+        ...ExternalActionFields
+      }
+      secondaryActions {
+        ...ExternalActionFields
+      }
+    }
+
+    ... on BasePageWithActions {
+      actions {
+        ...ActionList
+      }
     }
   }
 `);
@@ -43,36 +78,47 @@ export function BasePage<
   columnControllerProps?: Omit<ComponentProps<T>, 'rightSide'>;
   pageContainerProps?: Omit<ComponentProps<typeof PageContainer>, 'children'>;
   pageBodyProps?: Omit<ComponentProps<typeof PageBody>, 'page'>;
+  containerSize?: ComponentProps<typeof PageContainer>['size'];
 }) {
   const page = getFragmentData(BasePageFragment, props.data);
-  const ColumnControllerAs = props.columnControllerAs || PageTwoColumn;
 
   if (!page) return;
+
+  const primaryContact = 'primaryContact' in page ? page.primaryContact : null;
+  const primaryAction = 'primaryAction' in page ? page.primaryAction : null;
+  const secondaryActions =
+    'secondaryActions' in page ? page.secondaryActions : null;
+  const actions = 'actions' in page ? page.actions : null;
 
   return (
     <>
       {!props.hideHero && <PageHeroImage page={page} />}
-      <PageContainer {...props.pageContainerProps}>
-        <ColumnControllerAs
-          rightSide={
-            <>
-              {props.mapSlot}
-              {props.actionsSlot}
-              <PageDocuments documents={page.documents} />
-              <PageContacts contacts={page.contacts} />
-              {props.rightSide}
-            </>
-          }
-        >
-          <PageBody page={page} />
+      <PageContainer {...props.pageContainerProps} size={props.containerSize}>
+        <div className="flex flex-col gap-8">
+          <PageBody
+            page={page}
+            actionSlot={
+              <div className="not-prose flex flex-col gap-2">
+                <PageActions
+                  actions={actions}
+                  primaryAction={primaryAction}
+                  secondaryActions={secondaryActions}
+                />
+                <PageDocuments documents={page.documents} />
+              </div>
+            }
+          />
           {props.children}
-          <PageListItems title="Related topics" items={page.topics} />
-          <ul>
-            {page.events?.map((event) => {
-              return <li key={event.id}>{event.id}</li>;
-            })}
-          </ul>
-        </ColumnControllerAs>
+
+          <PageEvents data={page} />
+          <PagePublicNotices data={page} />
+
+          <PageContacts
+            contacts={page.contacts}
+            primaryContact={primaryContact}
+          />
+          <PageTopics topics={page.topics} />
+        </div>
       </PageContainer>
     </>
   );

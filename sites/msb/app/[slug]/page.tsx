@@ -1,8 +1,7 @@
-import { BasePageWithActions } from '@/components/static/BasePageWithActions';
+import { BasePage } from '@/components/static/BasePage';
 import {
   PageDistricts,
   PageListItems,
-  PagePublicNotices,
   PageServices,
 } from '@/components/static/Page';
 import { PageFacilities } from '@/components/static/Page/PageFacilities/PageFacilities';
@@ -12,12 +11,9 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 const query = gql(`
-  query GetTopicPage($slug: String) {
+  query GetTopicPage($slug: String, $now: DateTime!) {
     topic(where: { slug: $slug }) {
-      ...BasePageWithActionsInfo
-      publicNotices(take: 5 orderBy: { urgency: desc }) {
-        ...PublicNoticeList
-      }      
+      ...BasePageInfo 
       boards {
         ...PageList
       }
@@ -90,6 +86,7 @@ export default async function page(props: Props) {
     query,
     variables: {
       slug: params.slug,
+      now: new Date().toISOString(),
     },
   });
 
@@ -98,7 +95,7 @@ export default async function page(props: Props) {
   if (!topic) return notFound();
 
   return (
-    <BasePageWithActions
+    <BasePage
       data={topic}
       rightSide={
         <>
@@ -116,8 +113,8 @@ export default async function page(props: Props) {
       }
     >
       <PageServices services={topic.services} />
-      <PagePublicNotices items={topic.publicNotices} />
+
       <PageListItems items={topic.boards} title="Boards" />
-    </BasePageWithActions>
+    </BasePage>
   );
 }

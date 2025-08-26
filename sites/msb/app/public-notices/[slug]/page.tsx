@@ -2,12 +2,12 @@ import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
 import { PageListItems, PageServices } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
-import { BasePageWithActions } from '@/components/static/BasePageWithActions';
+import { BasePage } from '@/components/static/BasePage';
 
 const getPage = gql(`
-  query GetPublicNotice($slug: String!) {
+  query GetPublicNotice($slug: String!, $now: DateTime!) {
     publicNotice(where: { slug: $slug }) {
-      ...BasePageWithActionsInfo
+      ...BasePageInfo
       communities {
         ...PageList
       }
@@ -44,6 +44,7 @@ export default async function Page(props: {
     query: getPage,
     variables: {
       slug,
+      now: new Date().toISOString(),
     },
   });
 
@@ -60,7 +61,7 @@ export default async function Page(props: {
   }
 
   return (
-    <BasePageWithActions
+    <BasePage
       data={page}
       pageContainerProps={{ className: 'relative' }}
       rightSide={
@@ -82,6 +83,6 @@ export default async function Page(props: {
       }
     >
       <PageServices services={page.services} />
-    </BasePageWithActions>
+    </BasePage>
   );
 }

@@ -2,22 +2,22 @@ import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
 import {
   PageAddress,
-  PageEvents,
   PageListItems,
   PageServices,
   PageTrailInfo,
 } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
-import { BasePageWithActions } from '@/components/static/BasePageWithActions';
+import { BasePage } from '@/components/static/BasePage';
 
 const trailQuery = gql(`
   query GetTrail(
     $slug: String!
     $take: Int = 5
     $orderDirection: OrderDirection = desc
+    $now: DateTime!
   ) {
     trail(where: { slug: $slug }) {
-      ...BasePageWithActionsInfo
+      ...BasePageInfo
       ...TrailInfo
       park {
         ...PageList
@@ -47,6 +47,7 @@ export default async function Page(props: {
     query: trailQuery,
     variables: {
       slug,
+      now: new Date().toISOString(),
     },
   });
 
@@ -63,7 +64,7 @@ export default async function Page(props: {
   }
 
   return (
-    <BasePageWithActions
+    <BasePage
       data={page}
       rightSide={
         <>
@@ -74,7 +75,6 @@ export default async function Page(props: {
       }
     >
       <PageServices services={page.services} />
-      <PageEvents listName="Trail" />
-    </BasePageWithActions>
+    </BasePage>
   );
 }
