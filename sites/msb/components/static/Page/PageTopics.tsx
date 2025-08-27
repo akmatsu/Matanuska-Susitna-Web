@@ -19,7 +19,7 @@ export function PageTopics(props: {
     <PageSection title="Related Topics" noMargins>
       <ul>
         {topics.map((topic) => (
-          <TopicItem topic={topic} key={topic.id} className="my-2" as="li" />
+          <TopicItem topic={topic} key={topic.id} className="my-2" />
         ))}
       </ul>
     </PageSection>
