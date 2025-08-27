@@ -1,3 +1,10 @@
+# [0.18.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.17.0...v0.18.0) (2025-08-27)
+
+
+### Features
+
+* improved BasePage template and added missing relationships ([5c87bb7](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/5c87bb741e27d337dcf962bc6827ac3aab8018be))
+
 # [0.17.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.16.3...v0.17.0) (2025-08-19)
 
 
