@@ -7,11 +7,13 @@ import {
   PageContainer,
   PageDocuments,
   PageEvents,
+  PageListItems,
   PagePublicNotices,
 } from './Page';
 import { PageTwoColumn } from './Page/PageTwoColumn';
-import React, { ComponentProps } from 'react';
+import React, { ComponentProps, ReactNode } from 'react';
 import { PageTopics } from './Page/PageTopics';
+import clsx from 'clsx';
 
 const BasePageFragment = gql(`
   fragment BasePageInfo on BasePageWithSlug {
@@ -90,34 +92,89 @@ export function BasePage<
     'secondaryActions' in page ? page.secondaryActions : null;
   const actions = 'actions' in page ? page.actions : null;
 
+  const hasSideColumnContent = !!(
+    props.rightSide ||
+    props.mapSlot ||
+    primaryContact ||
+    primaryAction ||
+    actions?.length ||
+    secondaryActions?.length
+  );
+
+  function HideOnDesktop(props: { children: ReactNode; className?: string }) {
+    return (
+      <div className={`lg:hidden ${props.className}`}>{props.children}</div>
+    );
+  }
+
   return (
     <>
       {!props.hideHero && <PageHeroImage page={page} />}
-      <PageContainer {...props.pageContainerProps} size={props.containerSize}>
-        <div className="flex flex-col gap-8">
-          <PageBody
-            page={page}
-            actionSlot={
-              <div className="not-prose flex flex-col gap-2">
-                <PageActions
-                  actions={actions}
-                  primaryAction={primaryAction}
-                  secondaryActions={secondaryActions}
-                />
-                <PageDocuments documents={page.documents} />
-              </div>
-            }
-          />
-          {props.children}
+      <PageContainer {...props.pageContainerProps} size="lg" breakPoint="lg">
+        <div
+          className={clsx({
+            'lg:grid grid-cols-3 gap-8': hasSideColumnContent,
+          })}
+        >
+          {/* Main content */}
+          <div className="flex flex-col gap-8 col-span-2">
+            <PageBody
+              page={page}
+              actionSlot={
+                <HideOnDesktop className="not-prose flex flex-col gap-2">
+                  <PageActions
+                    actions={actions}
+                    primaryAction={primaryAction}
+                    secondaryActions={secondaryActions}
+                  />
+                  <PageDocuments documents={page.documents} />
+                </HideOnDesktop>
+              }
+            />
+            {props.children}
 
-          <PageEvents data={page} />
-          <PagePublicNotices data={page} />
+            <HideOnDesktop className="flex flex-col gap-8">
+              {props.rightSide}
+              <PageListItems
+                title="Assembly Districts"
+                items={page.assemblyDistricts}
+              />
+            </HideOnDesktop>
 
-          <PageContacts
-            contacts={page.contacts}
-            primaryContact={primaryContact}
-          />
-          <PageTopics topics={page.topics} />
+            <PageEvents data={page} />
+            <PagePublicNotices data={page} />
+
+            <HideOnDesktop>
+              <PageContacts
+                contacts={page.contacts}
+                primaryContact={primaryContact}
+              />
+            </HideOnDesktop>
+            <PageTopics topics={page.topics} />
+          </div>
+
+          <div
+            className={clsx('hidden', {
+              'lg:flex flex-col gap-8 col-span-1': hasSideColumnContent,
+            })}
+          >
+            {props.mapSlot}
+            <PageActions
+              actions={actions}
+              primaryAction={primaryAction}
+              secondaryActions={secondaryActions}
+            />
+            <PageDocuments documents={page.documents} />
+            <PageListItems
+              title="Assembly Districts"
+              items={page.assemblyDistricts}
+            />
+            <PageContacts
+              contacts={page.contacts}
+              primaryContact={primaryContact}
+            />
+            {props.rightSide}
+          </div>
         </div>
       </PageContainer>
     </>

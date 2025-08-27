@@ -13,6 +13,7 @@ const contactListFragment = gql(`
 export function PageContacts(props: {
   primaryContact?: FragmentType<typeof contactListFragment> | null;
   contacts?: FragmentType<typeof contactListFragment>[] | null;
+  className?: string;
 }) {
   const primaryContact = getFragmentData(
     contactListFragment,
@@ -21,7 +22,7 @@ export function PageContacts(props: {
   const contacts = getFragmentData(contactListFragment, props.contacts);
   if (primaryContact || !!contacts?.length)
     return (
-      <PageSection title="Contact" noMargins>
+      <PageSection title="Contact" noMargins className={props.className}>
         <ul className="flex flex-col gap-4 mb-4">
           {primaryContact && <ContactCard contact={primaryContact} isPrimary />}
           {contacts &&
@@ -29,11 +30,6 @@ export function PageContacts(props: {
               <ContactCard key={contact.id} contact={contact} />
             ))}
         </ul>
-        <div className="flex justify-center">
-          <LinkButton color="primary" href="/contacts" className="mb-4">
-            View Contacts Page
-          </LinkButton>
-        </div>
       </PageSection>
     );
 }

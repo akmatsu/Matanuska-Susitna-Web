@@ -21,9 +21,9 @@ export function PageDocuments(props: {
 
   if (documents.length > 3)
     return (
-      <ul className="flex gap-2 flex-wrap">
+      <ul className="flex flex-col gap-2">
         {documents.map((doc) => (
-          <DocumentLinkButton key={doc.id} data={doc} blockOnMobile />
+          <DocumentLinkButton key={doc.id} data={doc} block />
         ))}
       </ul>
     );
@@ -31,7 +31,7 @@ export function PageDocuments(props: {
   return (
     <DropdownButton
       buttonProps={{
-        blockOnMobile: true,
+        block: true,
       }}
       label="View Documents"
       items={documents.map((doc) => ({

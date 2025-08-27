@@ -113,7 +113,6 @@ export default async function page(props: Props) {
       }
     >
       <PageServices services={topic.services} />
-
       <PageListItems items={topic.boards} title="Boards" />
     </BasePage>
   );

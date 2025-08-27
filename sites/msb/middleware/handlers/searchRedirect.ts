@@ -5,7 +5,7 @@ import { singular } from 'pluralize';
 export const SEARCH_MATCHERS = [
   '/communities',
   '/departments',
-  '/districts',
+  '/assembly-districts',
   '/facilities',
   '/parks',
   '/public-notices',
@@ -27,7 +27,10 @@ export async function handleSearchRedirect(req: NextAuthRequest) {
 
   const url = req.nextUrl.clone();
   url.pathname = '/search';
-  url.searchParams.set('pages[refinementList][type][0]', singular(type));
+  url.searchParams.set(
+    'pages[refinementList][type][0]',
+    singular(type).replace('-', '_'),
+  );
 
   return NextResponse.redirect(url);
 }

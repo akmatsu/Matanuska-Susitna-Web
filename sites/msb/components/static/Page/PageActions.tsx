@@ -36,13 +36,13 @@ export function PageActions(props: {
 
   return (
     <>
-      <ul className="flex gap-2 flex-wrap">
+      <ul className="flex flex-col gap-2">
         {!!primary && primary?.url?.url && (
           <LinkButton
             href={primary.url.url}
             target="_blank"
             color="primary"
-            blockOnMobile
+            block
           >
             {primary.label || primary.url.title}
           </LinkButton>
@@ -56,7 +56,7 @@ export function PageActions(props: {
                   href={action.url.url}
                   target="_blank"
                   color="primary"
-                  blockOnMobile
+                  block
                 >
                   {action.label || action?.url?.title}
                 </LinkButton>
@@ -67,7 +67,7 @@ export function PageActions(props: {
         {!!actions && (
           <ul className="flex flex-col gap-2">
             {actions.map((action) => (
-              <ActionButton action={action} key={action.id} blockOnMobile />
+              <ActionButton action={action} key={action.id} block />
             ))}
           </ul>
         )}
