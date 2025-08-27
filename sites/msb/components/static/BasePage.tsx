@@ -10,7 +10,6 @@ import {
   PageListItems,
   PagePublicNotices,
 } from './Page';
-import { PageTwoColumn } from './Page/PageTwoColumn';
 import React, { ComponentProps, ReactNode } from 'react';
 import { PageTopics } from './Page/PageTopics';
 import clsx from 'clsx';
@@ -19,15 +18,11 @@ const BasePageFragment = gql(`
   fragment BasePageInfo on BasePageWithSlug {
     ...PageBody
     ...HeroImage
-    id
     contacts {
       ...ContactList
     }
     documents {
       ...DocumentList
-    }
-    topics {
-      ...PageList
     }
     ...PageEvents
     ...PagePublicNotices
@@ -37,15 +32,13 @@ const BasePageFragment = gql(`
     communities {
       ...PageList
     }
-
     orgUnits {
       ...PageList
     }
-
+    
     assemblyDistricts {
       ...PageList
     }
-    
 
     ... on Service {
       primaryContact {
@@ -67,24 +60,18 @@ const BasePageFragment = gql(`
   }
 `);
 
-export function BasePage<
-  T extends React.ElementType = typeof PageTwoColumn,
->(props: {
+export function BasePage(props: {
   data?: FragmentType<typeof BasePageFragment> | null;
   children?: React.ReactNode;
   rightSide?: React.ReactNode;
   hideHero?: boolean;
-  actionsSlot?: React.ReactNode;
   mapSlot?: React.ReactNode;
-  columnControllerAs?: T;
-  columnControllerProps?: Omit<ComponentProps<T>, 'rightSide'>;
   pageContainerProps?: Omit<ComponentProps<typeof PageContainer>, 'children'>;
   pageBodyProps?: Omit<ComponentProps<typeof PageBody>, 'page'>;
-  containerSize?: ComponentProps<typeof PageContainer>['size'];
 }) {
   const page = getFragmentData(BasePageFragment, props.data);
 
-  if (!page) return;
+  if (!page) return null;
 
   const primaryContact = 'primaryContact' in page ? page.primaryContact : null;
   const primaryAction = 'primaryAction' in page ? page.primaryAction : null;
@@ -98,19 +85,22 @@ export function BasePage<
     primaryContact ||
     primaryAction ||
     actions?.length ||
-    secondaryActions?.length
+    secondaryActions?.length ||
+    page.documents?.length ||
+    page.contacts?.length ||
+    page.assemblyDistricts?.length ||
+    page.communities?.length ||
+    page.orgUnits?.length
   );
-
-  function HideOnDesktop(props: { children: ReactNode; className?: string }) {
-    return (
-      <div className={`lg:hidden ${props.className}`}>{props.children}</div>
-    );
-  }
 
   return (
     <>
       {!props.hideHero && <PageHeroImage page={page} />}
-      <PageContainer {...props.pageContainerProps} size="lg" breakPoint="lg">
+      <PageContainer
+        {...props.pageContainerProps}
+        size={hasSideColumnContent ? 'lg' : 'sm'}
+        breakPoint="lg"
+      >
         <div
           className={clsx({
             'lg:grid grid-cols-3 gap-8': hasSideColumnContent,
@@ -130,6 +120,7 @@ export function BasePage<
                   <PageDocuments documents={page.documents} />
                 </HideOnDesktop>
               }
+              {...props.pageBodyProps}
             />
             {props.children}
 
@@ -138,6 +129,11 @@ export function BasePage<
               <PageListItems
                 title="Assembly Districts"
                 items={page.assemblyDistricts}
+              />
+              <PageListItems title="Communities" items={page.communities} />
+              <PageListItems
+                title="Departments & Divisions"
+                items={page.orgUnits}
               />
             </HideOnDesktop>
 
@@ -153,6 +149,7 @@ export function BasePage<
             <PageTopics topics={page.topics} />
           </div>
 
+          {/* Right sidebar */}
           <div
             className={clsx('hidden', {
               'lg:flex flex-col gap-8 col-span-1': hasSideColumnContent,
@@ -165,18 +162,31 @@ export function BasePage<
               secondaryActions={secondaryActions}
             />
             <PageDocuments documents={page.documents} />
+            {props.rightSide}
+
             <PageListItems
               title="Assembly Districts"
               items={page.assemblyDistricts}
             />
+            <PageListItems title="Communities" items={page.communities} />
+            <PageListItems
+              title="Departments & Divisions"
+              items={page.orgUnits}
+            />
+
             <PageContacts
               contacts={page.contacts}
               primaryContact={primaryContact}
             />
-            {props.rightSide}
           </div>
         </div>
       </PageContainer>
     </>
+  );
+}
+
+function HideOnDesktop(props: { children: ReactNode; className?: string }) {
+  return (
+    <div className={clsx('lg:hidden', props.className)}>{props.children}</div>
   );
 }

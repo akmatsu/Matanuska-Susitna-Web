@@ -17,9 +17,6 @@ const getBoardPage = gql(`
       directory {
         ...DocumentLink
       }
-      communities {
-        ...PageList
-      }
       
       linkToAgendas {
         ...ExternalActionButton
@@ -63,10 +60,13 @@ export default async function BoardPage(props: {
     if (page)
       return (
         <div className="flex flex-wrap gap-2 not-prose">
-          <ExternalActionButton action={page.linkToAgendas} />
-          <ExternalActionButton action={page.linkToPublicOpinionMessage} />
-          <ExternalActionButton action={page.linkToResolutions} />
-          <LinkButton href="/boards/public-meetings-calendar">
+          <ExternalActionButton action={page.linkToAgendas} blockOnMobile />
+          <ExternalActionButton
+            action={page.linkToPublicOpinionMessage}
+            blockOnMobile
+          />
+          <ExternalActionButton action={page.linkToResolutions} blockOnMobile />
+          <LinkButton href="/boards/public-meetings-calendar" blockOnMobile>
             Public Meetings Calendar
           </LinkButton>
         </div>
@@ -79,7 +79,7 @@ export default async function BoardPage(props: {
       rightSide={
         <>
           {page.directory && (
-            <PageSection title="Directory">
+            <PageSection noMargins title="Directory">
               <DocumentLinkButton
                 data={page.directory}
                 block
@@ -90,8 +90,6 @@ export default async function BoardPage(props: {
               </DocumentLinkButton>
             </PageSection>
           )}
-
-          <PageListItems items={page.communities} title="Communities" />
         </>
       }
       pageBodyProps={{

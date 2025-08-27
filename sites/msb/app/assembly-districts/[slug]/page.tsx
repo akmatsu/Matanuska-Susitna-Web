@@ -1,3 +1,4 @@
+import { AssemblyMemberInfo } from '@/components/static/AssemblyDistrictInfo';
 import { BasePage } from '@/components/static/BasePage';
 import { PageAddress } from '@/components/static/Page';
 import { getClient } from '@/utils/apollo/ApolloClient';
@@ -42,7 +43,12 @@ export default async function DistrictPage(props: {
   return (
     <BasePage
       data={page}
-      rightSide={<PageAddress address={page.address} />}
+      rightSide={
+        <>
+          <AssemblyMemberInfo page={page} />
+          <PageAddress address={page.address} />
+        </>
+      }
     ></BasePage>
   );
 }

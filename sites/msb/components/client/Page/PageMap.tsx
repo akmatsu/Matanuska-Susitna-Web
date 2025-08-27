@@ -14,13 +14,13 @@ export function PageMap(props: {
   map?: ComponentProps<typeof MapWrapper>;
 }) {
   const page = getFragmentData(pageMapFragment, props.page);
-  if (props.map && page?.title) {
-    return (
-      <PageSection title="Map" noMargins>
-        <div className="aspect-1/1 w-full overflow-hidden border rounded-sm">
-          <MapWrapper {...props.map} itemId={page.title.toUpperCase()} />
-        </div>
-      </PageSection>
-    );
-  }
+  if (!page?.title) return null;
+
+  return (
+    <PageSection title="Map" noMargins>
+      <div className="aspect-1/1 w-full overflow-hidden border rounded-sm">
+        <MapWrapper {...props.map} itemId={page.title.toUpperCase()} />
+      </div>
+    </PageSection>
+  );
 }

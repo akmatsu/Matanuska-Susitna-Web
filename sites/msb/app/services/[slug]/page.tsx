@@ -35,5 +35,5 @@ export default async function ServicePage(props: {
 
   const page = data.service;
 
-  return <BasePage data={page} containerSize="md" />;
+  return <BasePage data={page} />;
 }

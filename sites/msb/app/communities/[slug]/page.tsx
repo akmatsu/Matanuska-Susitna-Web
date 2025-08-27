@@ -1,6 +1,5 @@
-import { PageMap } from '@/components/client/Page/PageMap';
 import { BasePage } from '@/components/static/BasePage';
-import { PageServices } from '@/components/static/Page';
+import { PageListItems } from '@/components/static/Page';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
@@ -17,7 +16,7 @@ const getCommunityPage = gql(`
         ...PageList
       }
       services {
-        ...ServiceList
+        ...PageList
       }
       
     }
@@ -49,8 +48,8 @@ export default async function CommunityPage(props: {
   const page = data.community;
 
   return (
-    <BasePage data={page} mapSlot={<PageMap page={page} />}>
-      <PageServices services={page.services} />
+    <BasePage data={page}>
+      <PageListItems items={page.services} title="Service" />
     </BasePage>
   );
 }

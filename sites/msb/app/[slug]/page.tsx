@@ -1,9 +1,5 @@
 import { BasePage } from '@/components/static/BasePage';
-import {
-  PageDistricts,
-  PageListItems,
-  PageServices,
-} from '@/components/static/Page';
+import { PageListItems, PageServices } from '@/components/static/Page';
 import { PageFacilities } from '@/components/static/Page/PageFacilities/PageFacilities';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
@@ -23,18 +19,9 @@ const query = gql(`
       parks {
         ...PageList
       }
-      orgUnits {
-        ...PageList
-      }
       facilities {
         ...FacilitiesList
-      }
-      assemblyDistricts {
-        ...DistrictList
-      }
-      communities {
-        ...PageList
-      }
+      }            
       services {
         ...ServiceList
       }
@@ -99,15 +86,9 @@ export default async function page(props: Props) {
       data={topic}
       rightSide={
         <>
-          <PageDistricts items={topic.assemblyDistricts} />
           <PageFacilities facilities={topic.facilities} />
           <PageListItems items={topic.trails} title="Trails" />
           <PageListItems items={topic.parks} title="Parks" />
-          <PageListItems
-            items={topic.orgUnits}
-            title="Departments & Divisions"
-          />
-          <PageListItems items={topic.communities} title="Communities" />
           <PageListItems items={topic.plans} title="Plans" />
         </>
       }

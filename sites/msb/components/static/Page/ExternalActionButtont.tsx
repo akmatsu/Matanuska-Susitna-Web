@@ -12,8 +12,13 @@ const externalActionFragment = gql(`
 
 export function ExternalActionButton(props: {
   action?: FragmentType<typeof externalActionFragment> | null;
+  blockOnMobile?: boolean;
 }) {
   const action = getFragmentData(externalActionFragment, props.action);
   if (action?.url?.url)
-    return <LinkButton href={action.url.url}>{action.label}</LinkButton>;
+    return (
+      <LinkButton href={action.url.url} blockOnMobile={props.blockOnMobile}>
+        {action.label}
+      </LinkButton>
+    );
 }

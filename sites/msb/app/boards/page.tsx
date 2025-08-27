@@ -77,7 +77,7 @@ export default async function BoardsPage() {
   return (
     <>
       <PageHeroImage page={page} />
-      <PageContainer size="md">
+      <PageContainer size="lg" breakPoint="sm">
         <div className="flex flex-col gap-8">
           <PageBody page={page} hideType />
 
