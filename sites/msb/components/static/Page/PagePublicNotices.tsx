@@ -1,6 +1,5 @@
 import { PageSection } from './PageSection';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { PublicNoticeInfo } from './PublicNoticeInfo';
 import { PublicNoticeCard } from './PublicNoticeCard';
 
 const PagePublicNoticesFragment = gql(`

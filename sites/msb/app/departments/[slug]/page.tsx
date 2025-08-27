@@ -2,7 +2,6 @@ import { BasePage } from '@/components/static/BasePage';
 import {
   PageChildrenOrgUnits,
   PageParentOrgUnit,
-  PageServices,
 } from '@/components/static/Page';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';

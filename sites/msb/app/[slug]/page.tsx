@@ -1,5 +1,5 @@
 import { BasePage } from '@/components/static/BasePage';
-import { PageListItems, PageServices } from '@/components/static/Page';
+import { PageListItems } from '@/components/static/Page';
 import { PageFacilities } from '@/components/static/Page/PageFacilities/PageFacilities';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';

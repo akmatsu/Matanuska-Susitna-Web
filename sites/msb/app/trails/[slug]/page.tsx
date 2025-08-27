@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import {
   PageAddress,
   PageListItems,
-  PageServices,
   PageTrailInfo,
 } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';

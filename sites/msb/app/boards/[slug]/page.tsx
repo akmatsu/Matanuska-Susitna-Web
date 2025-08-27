@@ -1,7 +1,7 @@
 import { BasePage } from '@/components/static/BasePage';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { LinkButton } from '@/components/static/LinkButton';
-import { PageListItems, PageSection } from '@/components/static/Page';
+import { PageSection } from '@/components/static/Page';
 import { BoardMeetings } from '@/components/static/Page/BoardMeetings';
 import { ExternalActionButton } from '@/components/static/Page/ExternalActionButtont';
 

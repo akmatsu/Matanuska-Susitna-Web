@@ -1,6 +1,6 @@
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
-import { PageListItems, PageServices } from '@/components/static/Page';
+import { PageListItems } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
 import { BasePage } from '@/components/static/BasePage';
 

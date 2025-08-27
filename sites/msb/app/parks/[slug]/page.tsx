@@ -4,7 +4,6 @@ import {
   PageAddress,
   PageHours,
   PageListItems,
-  PageServices,
 } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
 import { BasePage } from '@/components/static/BasePage';

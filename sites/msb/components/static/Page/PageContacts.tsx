@@ -1,7 +1,6 @@
 import { ContactCard } from '@/components/static/ContactCard';
 import { PageSection } from './PageSection';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { LinkButton } from '../LinkButton';
 
 const contactListFragment = gql(`
   fragment ContactList on Contact {
