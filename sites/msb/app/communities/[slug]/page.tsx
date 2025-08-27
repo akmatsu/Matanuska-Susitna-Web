@@ -14,11 +14,7 @@ const getCommunityPage = gql(`
       ...PageMap
       boards {
         ...PageList
-      }
-      services {
-        ...PageList
-      }
-      
+      }      
     }
   }
 `);

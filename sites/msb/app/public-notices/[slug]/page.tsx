@@ -29,9 +29,6 @@ const getPage = gql(`
       boards {
         ...PageList
       }
-      services {
-        ...ServiceList
-      }
     }
   }
 `);
@@ -81,8 +78,6 @@ export default async function Page(props: {
           <PageListItems items={page.communities} title="Communities" />
         </>
       }
-    >
-      <PageServices services={page.services} />
-    </BasePage>
+    />
   );
 }

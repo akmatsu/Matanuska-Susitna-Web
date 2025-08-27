@@ -14,9 +14,6 @@ const getFacilityPage = gql(`
       park {
         ...PageList
       }
-      services {
-        ...ServiceList
-      }
       address {
         ...AddressFields
       }
@@ -56,8 +53,6 @@ export default async function Page(props: {
       rightSide={
         <>{page.park && <PageListItems items={[page.park]} title="Park" />}</>
       }
-    >
-      <PageServices services={page.services} />
-    </BasePage>
+    />
   );
 }

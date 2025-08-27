@@ -16,9 +16,6 @@ const getPark = gql(`
   ) {
     park(where: { slug: $slug }) {
       ...BasePageInfo
-      services {
-        ...ServiceList
-      }
       address {
         ...AddressFields
       }
@@ -70,8 +67,6 @@ export default async function Page(props: {
           <PageListItems items={page.facilities} title="Facilities" />
         </>
       }
-    >
-      <PageServices services={page.services} />
-    </BasePage>
+    />
   );
 }

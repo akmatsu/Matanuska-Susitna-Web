@@ -25,9 +25,6 @@ const trailQuery = gql(`
       address {
         ...AddressFields
       }
-      services {
-        ...ServiceList
-      }
     }
     publicNotices(
       where: { trails: { some: { slug: { equals: $slug } } } }
@@ -73,8 +70,6 @@ export default async function Page(props: {
           {page.park && <PageListItems items={[page.park]} title="Park" />}
         </>
       }
-    >
-      <PageServices services={page.services} />
-    </BasePage>
+    />
   );
 }

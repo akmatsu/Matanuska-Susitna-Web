@@ -21,9 +21,6 @@ const getOrgUnit = gql(`
       parent {
         ...OrgUnitFields
       }
-      services {
-        ...ServiceList
-      }
     }
     
   }
@@ -62,8 +59,6 @@ export default async function DepartmentPage(props: {
           <PageChildrenOrgUnits items={page.children} />
         </>
       }
-    >
-      <PageServices services={page.services} />
-    </BasePage>
+    />
   );
 }

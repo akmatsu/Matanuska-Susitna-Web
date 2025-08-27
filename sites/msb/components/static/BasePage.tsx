@@ -39,7 +39,9 @@ const BasePageFragment = gql(`
     assemblyDistricts {
       ...PageList
     }
-
+    services {
+      ...PageList
+    }
     ... on Service {
       primaryContact {
         ...ContactList
@@ -122,6 +124,7 @@ export function BasePage(props: {
               }
               {...props.pageBodyProps}
             />
+            <PageListItems title="Services" items={page.services} />
             {props.children}
 
             <HideOnDesktop className="flex flex-col gap-8">

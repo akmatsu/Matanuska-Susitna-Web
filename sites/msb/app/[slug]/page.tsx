@@ -22,9 +22,6 @@ const query = gql(`
       facilities {
         ...FacilitiesList
       }            
-      services {
-        ...ServiceList
-      }
       plans {
         ...PageList
       }
@@ -93,7 +90,6 @@ export default async function page(props: Props) {
         </>
       }
     >
-      <PageServices services={topic.services} />
       <PageListItems items={topic.boards} title="Boards" />
     </BasePage>
   );
