@@ -60,7 +60,7 @@ export default async function Home() {
         className="flex justify-center items-center"
         image={page?.heroImage}
       >
-        <div className="max-w-[500px] w-full">
+        <div className="max-w-[500px] w-full px-4">
           <SearchDynamicWrapper />
         </div>
       </Hero>

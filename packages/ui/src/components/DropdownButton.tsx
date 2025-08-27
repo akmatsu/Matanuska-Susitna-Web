@@ -19,7 +19,7 @@ export function DropdownButton<T extends React.ElementType = 'a'>(props: {
       </Button>
       <MenuItems
         anchor="bottom"
-        className="rounded shadow bg-white min-w-(--button-width) p-2 flex flex-col"
+        className="rounded border border-base-lighter shadow bg-white min-w-(--button-width) p-2 flex flex-col"
       >
         {props.items?.length ? (
           props.items?.map((item, index) => (

@@ -14,7 +14,7 @@ export default async function GovernmentPage() {
   return (
     <>
       <Hero image="https://d1159zutbdy4l.cloudfront.net/public/uploads/f9b79905-37f8-4f75-8d7a-7d51826f87ca/boroughfalljumbo.jpg" />
-      <PageContainer>
+      <PageContainer size="md" breakPoint="sm">
         <div className="grid grid-cols-12 gap-8">
           <div className="cols-12 md:col-span-8">
             <PageBodyNoFrag

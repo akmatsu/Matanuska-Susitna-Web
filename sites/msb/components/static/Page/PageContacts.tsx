@@ -12,6 +12,7 @@ const contactListFragment = gql(`
 export function PageContacts(props: {
   primaryContact?: FragmentType<typeof contactListFragment> | null;
   contacts?: FragmentType<typeof contactListFragment>[] | null;
+  className?: string;
 }) {
   const primaryContact = getFragmentData(
     contactListFragment,
@@ -20,15 +21,14 @@ export function PageContacts(props: {
   const contacts = getFragmentData(contactListFragment, props.contacts);
   if (primaryContact || !!contacts?.length)
     return (
-      <PageSection title="Contacts" noMargins>
-        {primaryContact && <ContactCard contact={primaryContact} isPrimary />}
-        {contacts && (
-          <ul className="flex flex-col" style={{ gap: '8px' }}>
-            {contacts.map((contact) => (
+      <PageSection title="Contact" noMargins className={props.className}>
+        <ul className="flex flex-col gap-4 mb-4">
+          {primaryContact && <ContactCard contact={primaryContact} isPrimary />}
+          {contacts &&
+            contacts.map((contact) => (
               <ContactCard key={contact.id} contact={contact} />
             ))}
-          </ul>
-        )}
+        </ul>
       </PageSection>
     );
 }

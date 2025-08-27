@@ -7,7 +7,7 @@ import { calendar, calendar_v3 } from '@googleapis/calendar';
 export interface CalendarMeeting {
   id?: string | null;
   date?: string | null;
-  location: string;
+  location?: string | null;
   title: string;
 }
 

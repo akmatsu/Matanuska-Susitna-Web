@@ -36,45 +36,42 @@ export function PageActions(props: {
 
   return (
     <>
-      {!!primary && primary?.url?.url && (
-        <LinkButton
-          href={primary.url.url}
-          className="margin-right-0 usa-link--external"
-          target="_blank"
-          big
-          block
-          color="primary"
-        >
-          {primary.label || primary.url.title}
-        </LinkButton>
-      )}
-      {!!secondaryActions && (
-        <ul className="flex flex-col gap-2">
-          {secondaryActions.map((action) => (
-            <>
+      <ul className="flex flex-col gap-2">
+        {!!primary && primary?.url?.url && (
+          <LinkButton
+            href={primary.url.url}
+            target="_blank"
+            color="primary"
+            block
+          >
+            {primary.label || primary.url.title}
+          </LinkButton>
+        )}
+        {!!secondaryActions &&
+          secondaryActions.map((action) => (
+            <div key={action.id} className="w-full">
               {action?.url?.url && (
                 <LinkButton
                   key={action.url.id}
                   href={action.url.url}
-                  className="margin-right-0 usa-link--external"
                   target="_blank"
-                  big
+                  color="primary"
                   block
                 >
                   {action.label || action?.url?.title}
                 </LinkButton>
               )}
-            </>
+            </div>
           ))}
-        </ul>
-      )}
-      {!!actions && (
-        <ul className="flex flex-col gap-2">
-          {actions.map((action) => (
-            <ActionButton action={action} key={action.id} />
-          ))}
-        </ul>
-      )}
+
+        {!!actions && (
+          <ul className="flex flex-col gap-2">
+            {actions.map((action) => (
+              <ActionButton action={action} key={action.id} block />
+            ))}
+          </ul>
+        )}
+      </ul>
     </>
   );
 }

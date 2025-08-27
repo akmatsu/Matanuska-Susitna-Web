@@ -26,7 +26,8 @@
     "./global.d.ts",
     "middleware.ts",
     "app/[slug]/route.ts",
-    "middleware/handlers/cmsRedirects.ts"
+    "middleware/handlers/cmsRedirects.ts",
+    "app/assembly-districts/[[...slug]]"
   ],
   "exclude": ["node_modules"]
 }

@@ -9,7 +9,7 @@ export const config = {
   matcher: [
     '/communities',
     '/departments',
-    '/districts',
+    '/assembly-districts',
     '/facilities',
     '/parks',
     '/public-notices',

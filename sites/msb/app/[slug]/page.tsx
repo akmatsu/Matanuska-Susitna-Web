@@ -1,40 +1,17 @@
-import {
-  PageActions,
-  PageBody,
-  PageContacts,
-  PageContainer,
-  PageDistricts,
-  PageDocuments,
-  PageListItems,
-  PagePublicNotices,
-  PageServices,
-} from '@/components/static/Page';
+import { BasePage } from '@/components/static/BasePage';
+import { PageListItems } from '@/components/static/Page';
 import { PageFacilities } from '@/components/static/Page/PageFacilities/PageFacilities';
-import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 const query = gql(`
-  query GetTopicPage($slug: String) {
+  query GetTopicPage($slug: String, $now: DateTime!) {
     topic(where: { slug: $slug }) {
-      ...HeroImage
-      ...PageBody
-      publicNotices(take: 5 orderBy: { urgency: desc }) {
-        ...PublicNoticeList
-      }
-      actions {
-        ...ActionList
-      }
+      ...BasePageInfo 
       boards {
         ...PageList
-      }
-      contacts {
-        ...ContactList
-      }
-      documents {
-        ...DocumentList
       }
       trails {
         ...PageList
@@ -42,24 +19,9 @@ const query = gql(`
       parks {
         ...PageList
       }
-      events {
-        id
-      }
-      orgUnits {
-        ...PageList
-      }
       facilities {
         ...FacilitiesList
-      }
-      assemblyDistricts {
-        ...DistrictList
-      }
-      communities {
-        ...PageList
-      }
-      services {
-        ...ServiceList
-      }
+      }            
       plans {
         ...PageList
       }
@@ -108,6 +70,7 @@ export default async function page(props: Props) {
     query,
     variables: {
       slug: params.slug,
+      now: new Date().toISOString(),
     },
   });
 
@@ -116,31 +79,18 @@ export default async function page(props: Props) {
   if (!topic) return notFound();
 
   return (
-    <PageContainer>
-      <PageTwoColumn
-        rightSide={
-          <>
-            <PageActions actions={topic.actions} />
-            <PageDocuments documents={topic.documents} />
-            <PageContacts contacts={topic.contacts} />
-            <PageDistricts items={topic.assemblyDistricts} />
-            <PageFacilities facilities={topic.facilities} />
-            <PageListItems items={topic.trails} title="Trails" />
-            <PageListItems items={topic.parks} title="Parks" />
-            <PageListItems
-              items={topic.orgUnits}
-              title="Departments & Divisions"
-            />
-            <PageListItems items={topic.communities} title="Communities" />
-            <PageListItems items={topic.plans} title="Plans" />
-          </>
-        }
-      >
-        <PageBody page={topic} />
-        <PageServices services={topic.services} />
-        <PagePublicNotices items={topic.publicNotices} />
-        <PageListItems items={topic.boards} title="Boards" />
-      </PageTwoColumn>
-    </PageContainer>
+    <BasePage
+      data={topic}
+      rightSide={
+        <>
+          <PageFacilities facilities={topic.facilities} />
+          <PageListItems items={topic.trails} title="Trails" />
+          <PageListItems items={topic.parks} title="Parks" />
+          <PageListItems items={topic.plans} title="Plans" />
+        </>
+      }
+    >
+      <PageListItems items={topic.boards} title="Boards" />
+    </BasePage>
   );
 }

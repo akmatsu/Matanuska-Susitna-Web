@@ -28,6 +28,7 @@ export type ButtonProps<T extends React.ElementType = 'button'> = {
   square?: boolean;
   underline?: boolean;
   active?: boolean;
+  blockOnMobile?: boolean;
 } & Omit<React.ComponentPropsWithRef<T>, 'color'>;
 
 /**
@@ -50,6 +51,9 @@ export function Button<T extends React.ElementType = 'button'>({
   square = false,
   underline = false,
   active = false,
+  title,
+  ariaLabel,
+  blockOnMobile,
   ...props
 }: ButtonProps<T>) {
   const Component = as || (href ? 'a' : 'button');
@@ -61,6 +65,8 @@ export function Button<T extends React.ElementType = 'button'>({
       type={Component === 'button' ? type : undefined}
       disabled={disabled}
       aria-disabled={disabled}
+      title={title || props.children?.toString()}
+      aria-label={ariaLabel || title || props.children?.toString()}
       className={clsx(
         'leading-none focus-ring text-center flex items-center justify-center no-underline transition-colors active:transition-none overflow-hidden',
         {
@@ -73,8 +79,9 @@ export function Button<T extends React.ElementType = 'button'>({
           'rounded-r': rounded === 'right',
 
           // Width group
-          'w-fit': !block && !icon && !square,
-          'w-full': block && !icon && !square,
+          'w-fit': !block && !blockOnMobile && !icon && !square,
+          'sm:w-fit': blockOnMobile,
+          'w-full': (blockOnMobile || block) && !icon && !square,
 
           // Padding and text size group
           'px-5 py-3': !big && !icon && !square,

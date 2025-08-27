@@ -1,6 +1,7 @@
 import { MarkdownRenderer } from '@components/server/MarkdownRenderer';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { ProseWrapper } from '../ProseWrapper';
+import React from 'react';
 
 const pageBodyFragment = gql(`
   fragment PageBody on BasePage {
@@ -15,6 +16,7 @@ export function PageBody(props: {
   noProse?: boolean;
   page?: FragmentType<typeof pageBodyFragment> | null;
   hideType?: boolean;
+  actionSlot?: React.ReactNode;
 }) {
   const page = getFragmentData(pageBodyFragment, props.page);
   if (!page?.body && !page?.description) {
@@ -28,8 +30,8 @@ export function PageBody(props: {
           {page.__typename?.split(/(?=[A-Z])/).join(' ')}
         </p>
       )}
-      <h1>{page.title}</h1>
-
+      <h1 className="text-3xl">{page.title}</h1>
+      {props.actionSlot}
       {page.body ? (
         <MarkdownRenderer>{page.body}</MarkdownRenderer>
       ) : page.description ? (

@@ -1,17 +1,4 @@
-import { PageMap } from '@/components/client/Page/PageMap';
-import {
-  PageActions,
-  PageBody,
-  PageContacts,
-  PageContainer,
-  PageDistricts,
-  PageDocuments,
-  PageEvents,
-  PagePublicNotices,
-  PageServices,
-} from '@/components/static/Page';
-import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
-import { PageTwoColumn } from '@/components/static/Page/PageTwoColumn';
+import { BasePage } from '@/components/static/BasePage';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
@@ -19,42 +6,14 @@ import { notFound } from 'next/navigation';
 const getCommunityPage = gql(`
   query GetCommunity(
     $slug: String!
-    $take: Int = 5
-    $orderDirection: OrderDirection = desc
+    $now: DateTime!
   ) {
     community(where: { slug: $slug }) {
-      ...PageBody
-      ...HeroImage
+      ...BasePageInfo
       ...PageMap
       boards {
         ...PageList
-      }
-      topics {
-        ...TopicFields
-      }
-      documents {
-        ...DocumentList
-      }
-      actions {
-        ...ActionList
-      }
-      services {
-        ...ServiceList
-      }
-      contacts {
-        ...ContactList
-      }
-      districts {
-        ...DistrictList      
-      }
-    }
-
-    publicNotices(
-      where: { communities: { some: { slug: { equals: $slug } } } }
-      take: $take
-      orderBy: { urgency: $orderDirection }
-    ) {
-      ...PublicNoticeList
+      }      
     }
   }
 `);
@@ -68,6 +27,7 @@ export default async function CommunityPage(props: {
     query: getCommunityPage,
     variables: {
       slug,
+      now: new Date().toISOString(),
     },
   });
 
@@ -81,28 +41,6 @@ export default async function CommunityPage(props: {
   }
 
   const page = data.community;
-  const publicNotices = data.publicNotices;
-  return (
-    <>
-      <PageHeroImage page={page} />
-      <PageContainer className="relative">
-        <PageTwoColumn
-          rightSide={
-            <>
-              <PageMap page={page} />
-              <PageActions actions={page.actions} />
-              <PageDocuments documents={page.documents} />
-              <PageContacts contacts={page.contacts} />
-              <PageDistricts items={page.districts} />
-            </>
-          }
-        >
-          <PageBody page={page} />
-          <PageServices services={page.services} />
-          <PagePublicNotices items={publicNotices} />
-          <PageEvents listName="Community" />
-        </PageTwoColumn>
-      </PageContainer>
-    </>
-  );
+
+  return <BasePage data={page} />;
 }

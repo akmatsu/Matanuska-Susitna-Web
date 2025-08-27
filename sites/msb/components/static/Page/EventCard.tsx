@@ -1,0 +1,104 @@
+import { AddressLink } from '@/components/client/AddressLink';
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  CardProps,
+  CardTitle,
+} from '@matsugov/ui';
+import clsx from 'clsx';
+import { ReactNode } from 'react';
+import { LinkButton } from '../LinkButton';
+import { AddToCalendarButton } from '../AddToCalendarButton';
+import { format } from 'date-fns';
+
+export function EventCard({
+  meetingType = 'Teams',
+  containerClassName,
+  eventTitle,
+  date,
+  locationSlot,
+  location,
+  address,
+  subtitle,
+  joinUrl,
+  ...props
+}: {
+  eventTitle?: string | null;
+  date?: string | null;
+  locationSlot?: ReactNode | null;
+  location?: string | null;
+  address?: string | null;
+  subtitle?: ReactNode | null;
+  joinUrl?: string | null;
+  meetingType?: string | null;
+} & Omit<CardProps, 'children'>) {
+  return (
+    <Card
+      {...props}
+      className="h-full"
+      containerClassName={clsx('h-full w-full', containerClassName)}
+    >
+      <div className="flex flex-col sm:flex-row h-full w-full">
+        {date && (
+          <div className="bg-base-lightest p-2 flex justify-center items-center h-auto min-h-full">
+            <div className="bg-primary-dark aspect-square h-24 w-24 md:h-32 md:w-32 flex flex-col justify-center items-center text-white gap-2 rounded-full">
+              <p className="md:text-xl font-bold text-center">
+                {format(date, 'MMM do')}
+                <br />
+                <span className="md:text-xl font-normal">
+                  {format(date, 'yyyy')}
+                </span>
+                <br />
+                <span className="text-xs font-normal">
+                  {format(date, 'h:mm a')}
+                </span>
+              </p>
+            </div>
+          </div>
+        )}
+        <div className="flex flex-col justify-between gap-4 w-full text-center sm:text-left h-full">
+          <CardHeader>
+            <CardTitle className="text-center sm:text-left">
+              {eventTitle}
+            </CardTitle>
+            {subtitle && (
+              <span className="text-sm text-base-dark">{subtitle}</span>
+            )}
+          </CardHeader>
+          <CardBody>
+            {address ||
+              (location && (
+                <address className="not-italic">
+                  {address && <AddressLink address={address} />}
+                  {location && <p>{locationSlot || location}</p>}
+                </address>
+              ))}
+          </CardBody>
+          <CardFooter className="justify-center sm:justify-end">
+            {joinUrl && (
+              <LinkButton
+                href={joinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs"
+              >
+                Join {meetingType} Meeting
+              </LinkButton>
+            )}
+            {eventTitle && date && (
+              <AddToCalendarButton
+                meeting={{
+                  location,
+                  date,
+                  title: eventTitle,
+                }}
+              />
+            )}
+          </CardFooter>
+        </div>
+      </div>
+    </Card>
+  );
+}

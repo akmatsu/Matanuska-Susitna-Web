@@ -1,7 +1,4 @@
-import { Button } from '@matsugov/ui/Button';
-import Link from 'next/link';
-
-// export const
+import { NotFoundBackButton } from '@/components/client/NotFoundBackButton';
 
 export default function NotFound() {
   return (
@@ -20,9 +17,7 @@ export default function NotFound() {
       <p>Please click the button below to navigate to our home page.</p>
 
       <div className="flex gap-2">
-        <Button as={Link} href="/" color="primary">
-          Go Back
-        </Button>
+        <NotFoundBackButton />
       </div>
     </section>
   );

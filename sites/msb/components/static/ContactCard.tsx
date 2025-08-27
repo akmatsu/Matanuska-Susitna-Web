@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Card, CardHeader, CardBody, CardTitle } from '@matsugov/ui/Card';
+import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { PhoneLink } from './PhoneLink';
 
@@ -30,13 +30,12 @@ export function ContactCard({
           {isPrimary && (
             <>
               {' '}
-              <span className="text-sm font-semibold text-primary-dark italic">
+              <span className="text-sm font-semibold text-base italic">
                 Primary Contact
               </span>
             </>
           )}
         </CardTitle>
-        <p className="text-sm text-base mt-0.5">{c.title}</p>
       </CardHeader>
       <CardBody>
         <ul>

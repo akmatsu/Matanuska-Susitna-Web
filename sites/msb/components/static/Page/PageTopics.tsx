@@ -1,5 +1,6 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { TopicCard } from './TopicCard';
+import { TopicItem } from './TopicCard';
+import { PageSection } from './PageSection';
 
 const topicListFragment = gql(`
   fragment TopicList on Topic {
@@ -12,14 +13,15 @@ export function PageTopics(props: {
   topics?: FragmentType<typeof topicListFragment>[] | null;
 }) {
   const topics = getFragmentData(topicListFragment, props.topics);
-  if (topics?.length) {
-    return (
+  if (!topics?.length) return null;
+
+  return (
+    <PageSection title="Related Topics" noMargins>
       <ul>
         {topics.map((topic) => (
-          <TopicCard topic={topic} key={topic.id} className="my-2" as="li" />
+          <TopicItem topic={topic} key={topic.id} className="my-2" as="li" />
         ))}
       </ul>
-    );
-  }
-  return null;
+    </PageSection>
+  );
 }

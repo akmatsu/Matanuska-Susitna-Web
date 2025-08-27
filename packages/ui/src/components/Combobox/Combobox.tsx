@@ -6,12 +6,14 @@ import {
   Combobox as HeadlessCombobox,
 } from '@headlessui/react';
 import React from 'react';
+import v from 'voca';
 
 export function Combobox<T = any>(props: {
   label?: string;
   value?: T | null;
   displayValueKey: keyof T;
   descriptionKey?: keyof T;
+  displayTypeKey?: keyof T;
   idKey: string;
   items?: T[];
   placeholder?: string;
@@ -61,7 +63,14 @@ export function Combobox<T = any>(props: {
             value={item}
             className="px-4 py-2 border-b border-b-base-lightest last:border-none group cursor-default select-none data-focus:bg-primary-light/10 data-[selected]:bg-light-/20"
           >
-            <h6 className="text-bold">
+            {props.displayTypeKey && (
+              <p className="text-xs text-base font-semibold">
+                {v
+                  .titleCase(item?.[props.displayTypeKey] as string)
+                  .replace('_', ' ')}
+              </p>
+            )}
+            <h6 className="font-semibold">
               {item?.[props.displayValueKey] as React.ReactNode}
             </h6>
             {props.descriptionKey && (

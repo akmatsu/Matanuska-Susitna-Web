@@ -1,9 +1,11 @@
 import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import { Checkbox } from '@matsugov/ui/Checkbox';
+import clsx from 'clsx';
 import { RefinementListProps, useRefinementList } from 'react-instantsearch';
 
 export function CustomRefinementList(props: RefinementListProps) {
-  const { items, refine } = useRefinementList(props);
+  const { items, refine, toggleShowMore, isShowingMore, canToggleShowMore } =
+    useRefinementList(props);
 
   function getLabel(str: string) {
     if (props.attribute === 'related_pages') {
@@ -13,12 +15,14 @@ export function CustomRefinementList(props: RefinementListProps) {
     return str;
   }
 
+  const text = isShowingMore ? 'Show less' : 'Show more';
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>{props.title}</CardTitle>
       </CardHeader>
-      <CardBody>
+      <CardBody className="overflow-y-auto">
         <ul role="list" className="flex flex-col gap-4 mb-4">
           {items.map((item) => (
             <li key={item.label}>
@@ -30,6 +34,19 @@ export function CustomRefinementList(props: RefinementListProps) {
             </li>
           ))}
         </ul>
+        {canToggleShowMore && (
+          <button
+            className={clsx(
+              'cursor-pointer text-primary after:align-middle after:size-5 after:icon-[mdi--chevron-down] after:transition-transform after:duration-300',
+              {
+                'after:rotate-180': isShowingMore,
+              },
+            )}
+            onClick={toggleShowMore}
+          >
+            {text}
+          </button>
+        )}
       </CardBody>
     </Card>
   );
