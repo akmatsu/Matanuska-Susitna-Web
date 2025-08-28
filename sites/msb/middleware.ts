@@ -16,6 +16,7 @@ export const config = {
     '/services',
     '/trails',
     '/topics',
+    '/plans',
     '/((?!api|_next/static|_next/image|.*\\.png$).*)',
   ],
 };

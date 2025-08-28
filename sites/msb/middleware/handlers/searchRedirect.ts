@@ -12,6 +12,7 @@ export const SEARCH_MATCHERS = [
   '/services',
   '/trails',
   '/topics',
+  '/plans',
 ];
 
 const SEARCH_SET = new Set(
