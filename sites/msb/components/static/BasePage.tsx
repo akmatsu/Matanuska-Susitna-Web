@@ -54,6 +54,12 @@ const BasePageFragment = gql(`
       }
     }
 
+    ... on Plan {
+      effort {
+        ...ExternalActionFields
+      }
+    }
+
     ... on BasePageWithActions {
       actions {
         ...ActionList
@@ -76,7 +82,12 @@ export function BasePage(props: {
   if (!page) return null;
 
   const primaryContact = 'primaryContact' in page ? page.primaryContact : null;
-  const primaryAction = 'primaryAction' in page ? page.primaryAction : null;
+  const primaryAction =
+    'primaryAction' in page
+      ? page.primaryAction
+      : 'effort' in page
+        ? page.effort
+        : null;
   const secondaryActions =
     'secondaryActions' in page ? page.secondaryActions : null;
   const actions = 'actions' in page ? page.actions : null;

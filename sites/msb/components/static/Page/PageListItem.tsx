@@ -13,7 +13,7 @@ const pageItemFragment = gql(`
 export function PageListItem(props: {
   item: FragmentType<typeof pageItemFragment>;
   title: string;
-  as: ElementType;
+  as?: ElementType;
 }) {
   const item = getFragmentData(pageItemFragment, props.item);
   return (

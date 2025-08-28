@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export default function SearchPage() {
   return (
-    <PageContainer>
+    <PageContainer size="lg" breakPoint="lg">
       <InstantSearch />
     </PageContainer>
   );
