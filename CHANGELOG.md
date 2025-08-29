@@ -1,3 +1,10 @@
+# [0.20.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.19.0...v0.20.0) (2025-08-29)
+
+
+### Features
+
+* updated banner and theme colors ([099a407](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/099a407a9f1ddd537e94ab56f449a5d0ec2ddcb1))
+
 # [0.19.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.18.0...v0.19.0) (2025-08-29)
 
 
