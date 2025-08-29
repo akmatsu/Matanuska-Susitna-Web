@@ -1,7 +1,6 @@
 import { BasePage } from '@/components/static/BasePage';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { PageSection } from '@/components/static/Page';
-import { ExternalActionButton } from '@/components/static/Page/ExternalActionButtont';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound, redirect } from 'next/navigation';
