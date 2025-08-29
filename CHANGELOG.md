@@ -1,3 +1,17 @@
+# [0.19.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.18.0...v0.19.0) (2025-08-29)
+
+
+### Bug Fixes
+
+* removed unused component props ([1410151](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/141015152a569e127b3e03822df167a88fa74d6e))
+* topic items are now list items ([ea1edb4](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ea1edb402c7f905f4210c55edaba220b083d2114))
+
+
+### Features
+
+* created the plans page template ([013f31d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/013f31d3b397135461e7b3c6837e31bc2394352a))
+* improved search ui/ux ([9cc3a59](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9cc3a5951b5adb07076ed20fb6156ae8fe005c8c))
+
 # [0.18.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.17.0...v0.18.0) (2025-08-27)
 
 
