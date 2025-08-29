@@ -1,17 +1,25 @@
 import { Field, Checkbox as HeadlessCheckbox, Label } from '@headlessui/react';
+import clsx from 'clsx';
 
 export function Checkbox({
   label,
   checked,
   onChange,
+  className,
 }: {
   checked?: boolean;
   onChange?: (checked: boolean) => void;
   label?: string;
   disabled?: boolean;
+  className?: string;
 }) {
   return (
-    <Field className="flex items-center gap-2">
+    <Field
+      className={clsx(
+        'flex items-center gap-2',
+        className,
+      )}
+    >
       <HeadlessCheckbox
         checked={checked}
         onChange={onChange}

@@ -83,7 +83,7 @@ export default async function BoardPage(props: {
               <DocumentLinkButton
                 data={page.directory}
                 block
-                big
+                size="lg"
                 color="primary"
               >
                 View Directory

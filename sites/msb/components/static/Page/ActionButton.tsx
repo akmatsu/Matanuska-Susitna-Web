@@ -1,6 +1,7 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { LinkButton } from '../LinkButton';
 import { LinkedItemUnion, Maybe } from '@msb/js-sdk/graphql';
+import { ButtonProps } from '@matsugov/ui';
 
 const ActionFields = gql(`
   fragment ActionFields on InternalLink {
@@ -26,16 +27,16 @@ const ActionFields = gql(`
 
 export function ActionButton({
   className,
-  big = true,
   block = true,
   target = '_blank',
   blockOnMobile,
+  size = 'lg',
   ...props
 }: {
   action: FragmentType<typeof ActionFields>;
   className?: string;
-  big?: boolean;
   block?: boolean;
+  size?: ButtonProps['size'];
   target?: string;
   blockOnMobile?: boolean;
 }) {
@@ -69,7 +70,7 @@ export function ActionButton({
       href={getUrl(action.item)}
       className={`margin-right-0 usa-link--external ${className}`}
       target={target}
-      big={big}
+      size={size}
       block={block}
       blockOnMobile={blockOnMobile}
       color="primary"
