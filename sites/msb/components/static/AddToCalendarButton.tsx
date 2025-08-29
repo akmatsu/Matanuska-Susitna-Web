@@ -62,7 +62,6 @@ export function AddToCalendarButton({
 }: AddToCalendarButtonProps) {
   const defaultButtonProps = {
     color: 'secondary' as const,
-    className: 'text-xs' as const,
     ...buttonProps,
   } satisfies ButtonProps;
 

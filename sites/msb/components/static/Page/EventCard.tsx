@@ -82,13 +82,17 @@ export function EventCard({
                 href={joinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs"
+                size="sm"
               >
                 Join {meetingType} Meeting
               </LinkButton>
             )}
             {eventTitle && date && (
               <AddToCalendarButton
+                buttonProps={{
+                  color: 'primary',
+                  size: 'sm',
+                }}
                 meeting={{
                   location,
                   date,
