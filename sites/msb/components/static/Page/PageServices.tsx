@@ -29,7 +29,7 @@ export function PageServices(props: {
             <LinkButton
               href={`/search?${QueryString.stringify({ pages: { refinementList: { ...props.filters, type: ['service'] } } })}`}
               className="mt-4"
-              big
+              size="lg"
               color="primary"
             >
               View all

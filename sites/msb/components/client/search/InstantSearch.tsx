@@ -1,73 +1,57 @@
 'use client';
-import { DynamicWidgets } from 'react-instantsearch';
+import { RefinementListDropdown } from '@/components/static/search/RefinementListDropdown';
 import { CoreSearchBox } from './CoreSearchBox';
 import {
   CoreSearchHits,
   CoreSearchPagination,
-  CustomRefinementList,
   InstantSearchWrapper,
 } from '@/components/static/search';
-import { ThreeColumnLayout } from '@/components/static/ThreeColumnLayout';
-import { LinkButton } from '@/components/static/LinkButton';
+import { CoreCurrentRefinements } from './CoreCurrentRefinements';
 
 export function InstantSearch() {
   return (
     <InstantSearchWrapper indexName="pages" routing>
-      <ThreeColumnLayout
-        left={
-          <div className="flex flex-col gap-4">
+      <h1 className="text-3xl font-bold mb-4">Search</h1>
+      <div className="grid grid-cols-3 gap-8">
+        <div className="col-span-3 flex flex-col gap-4">
+          <div>
             <CoreSearchBox />
-            <DynamicWidgets facets={['*']}>
-              <CustomRefinementList
+            <section className="flex gap-2 overflow-auto py-4 items-center">
+              <RefinementListDropdown
                 attribute="type"
                 title="Type"
                 sortBy={['name', 'count']}
+                limit={50}
+                showMoreLimit={1000}
                 showMore
               />
-              <CustomRefinementList
+              <RefinementListDropdown
                 attribute="districts"
                 title="Districts"
                 sortBy={['name', 'count']}
                 showMore
               />
-              <CustomRefinementList
+              <RefinementListDropdown
                 attribute="tags"
                 title="Tags"
                 sortBy={['name', 'count']}
                 showMore
               />
-              <CustomRefinementList
-                attribute="departments"
-                title="Departments"
-                sortBy={['name', 'count']}
-                showMore
-              />
-              <CustomRefinementList
+              <RefinementListDropdown
                 attribute="communities"
                 title="Communities"
                 sortBy={['name', 'count']}
                 showMore
               />
-              <CustomRefinementList
-                attribute="related_pages"
-                title="Related Pages"
-                sortBy={['count', 'name']}
-                showMore
-              />
-            </DynamicWidgets>
+            </section>
+            <CoreCurrentRefinements />
+            <section>
+              <CoreSearchHits />
+            </section>
           </div>
-        }
-        right={
-          <div className="flex flex-col gap-4">
-            <LinkButton href="/contact" block color="primary">
-              Contact Us
-            </LinkButton>
-          </div>
-        }
-      >
-        <CoreSearchHits />
-        <CoreSearchPagination />
-      </ThreeColumnLayout>
+          <CoreSearchPagination />
+        </div>
+      </div>
     </InstantSearchWrapper>
   );
 }

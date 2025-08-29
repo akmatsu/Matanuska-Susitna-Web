@@ -10,5 +10,12 @@ export function CoreSearchBox() {
 
     refine(event.currentTarget.value);
   }
-  return <Search defaultValue={query} onChange={handleSubmit} useIcon />;
+  return (
+    <Search
+      defaultValue={query}
+      onChange={handleSubmit}
+      onSubmit={(e) => e.preventDefault()}
+      useIcon
+    />
+  );
 }

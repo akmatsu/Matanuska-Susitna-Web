@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export default function SearchPage() {
   return (
-    <PageContainer size="lg" breakPoint="lg">
+    <PageContainer size="lg" breakPoint="lg" hideBreadcrumbs>
       <InstantSearch />
     </PageContainer>
   );

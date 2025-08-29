@@ -13,7 +13,7 @@ export async function Meetings() {
         ))}
       </ul>
       <div className="flex flex-row justify-center items-center w-full">
-        <LinkButton href="/boards/public-meetings" color="primary" big>
+        <LinkButton href="/boards/public-meetings" color="primary" size="lg">
           View all
         </LinkButton>
       </div>
