@@ -27,7 +27,7 @@ export function RefinementListDropdown(props: RefinementListProps) {
       label={props.title}
       buttonProps={{
         size: 'sm',
-        color: 'transparent',
+        color: 'primary',
         shadow: false,
         title: `View ${props.title} filters menu`,
       }}
