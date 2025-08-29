@@ -1,3 +1,10 @@
+# [0.21.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.20.0...v0.21.0) (2025-08-29)
+
+
+### Features
+
+* adjusted the colors of the events card element ([5d940b1](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/5d940b138146b7ffd3652a64c3cbc289b7d9331a))
+
 # [0.20.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.19.0...v0.20.0) (2025-08-29)
 
 
