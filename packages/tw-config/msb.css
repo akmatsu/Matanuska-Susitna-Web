@@ -13,16 +13,18 @@
   --color-base-darkest: var(--color-gray-90);
   --color-ink: var(--color-gray-90);
 
+  --color-surface-primary: #172f51;
+
   --color-primary-lighter: var(--color-blue-10);
   --color-primary-light: var(--color-blue-30);
-  --color-primary: var(--color-blue-warm-60v);
+  --color-primary: #3260ad;
   --color-primary-vivid: var(--color-blue-warm-60v);
   --color-primary-dark: var(--color-blue-warm-70v);
   --color-primary-darker: var(--color-blue-warm-80v);
 
   --color-secondary-lighter: var(--color-yellow-10v);
   --color-secondary-light: var(--color-yellow-20v);
-  --color-secondary: var(--color-yellow-20v);
+  --color-secondary: #face0b;
   --color-secondary-vivid: var(--color-yellow-cool-30v);
   --color-secondary-dark: var(--color-yellow-30v);
   --color-secondary-darker: var(--color-yellow-40v);

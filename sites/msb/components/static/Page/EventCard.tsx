@@ -43,7 +43,7 @@ export function EventCard({
       <div className="flex flex-col sm:flex-row h-full w-full">
         {date && (
           <div className="bg-base-lightest p-2 flex justify-center items-center h-auto min-h-full">
-            <div className="bg-primary-dark aspect-square h-24 w-24 md:h-32 md:w-32 flex flex-col justify-center items-center text-white gap-2 rounded-full">
+            <div className="bg-surface-primary aspect-square h-24 w-24 md:h-32 md:w-32 flex flex-col justify-center items-center text-white gap-2 rounded-full">
               <p className="md:text-xl font-bold text-center">
                 {format(date, 'MMM do')}
                 <br />

@@ -27,21 +27,21 @@ export function Banner({
     <Disclosure
       as={'section'}
       aria-label={label}
-      className="bg-base-lightest px-4 border-b border-b-base-lighter"
+      className="bg-surface-primary px-4 border-b border-b-base-lighter text-white"
     >
       <div className="mx-auto max-w-(--breakpoint-xl)">
-        <DisclosureButton className="group py-1 text-xs text-left leading-none flex items-center">
+        <DisclosureButton className="group py-1 text-xs text-left leading-none flex items-center cursor-pointer">
           <img
-            src={flagImage}
-            alt="US Flag"
-            className="w-4 inline-block mr-2"
+            src="/msb_icon_yellow.svg"
+            alt="MSB Logo"
+            className="size-8 inline-block mr-2"
           />
           <span>
             {label}{' '}
-            <span className="underline text-primary">
+            <span className="underline text-secondary">
               Here&apos;s how you know
             </span>
-            <span className="icon-[mdi--chevron-down] group-data-open:rotate-180 transition-transform size-4 text-primary align-bottom"></span>
+            <span className="icon-[mdi--chevron-down] group-data-open:rotate-180 transition-transform size-4 text-secondary align-bottom"></span>
           </span>
         </DisclosureButton>
 
@@ -52,11 +52,11 @@ export function Banner({
                 <img src={dotGovIcon} alt="Dot Gov Icon" className="size-10" />
                 <div>
                   <p>
-                    <strong>Official websites use .gov</strong>
+                    <strong>Official MSB websites use matsu.gov</strong>
                     <br />
                     <span>
-                      A <strong>.gov</strong> website belongs to an official
-                      government organization in the {orgName}.
+                      A <strong>matsu.gov</strong> website belongs to an
+                      official government site in the {orgName}.
                     </span>
                   </p>
                 </div>
@@ -73,9 +73,9 @@ export function Banner({
                     <span>
                       A <strong>lock</strong> ({' '}
                       <span className="icon-[mdi--lock] size-4"></span> ) or{' '}
-                      <strong>https://</strong> means you&apos;ve safely
-                      connected to the .gov website. Share sensitive information
-                      only on secure websites.
+                      <strong>https://</strong> means you&apos;ve securely
+                      connected to the website. Only share sensitive information
+                      on websites.
                     </span>
                   </p>
                 </div>
