@@ -32,7 +32,7 @@ export async function searchCalendarEvents(
     process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_MAIN_ID || '',
     process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ASSEMBLY_ID || '',
     process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_PLANNING_ID || '',
-    process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_SERVICE_ID || '',
+
     process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_COMMUNITY_ID || '',
   ];
 

@@ -53,7 +53,7 @@ export function LinkCard<T extends React.ElementType = 'div'>({
       <LinkComponent
         href={href}
         className={clsx(
-          'text-black overflow-hidden no-underline rounded-t bg-base-lightest border-b-primary border-b-4 hover:bg-base-lighter cursor-pointer transition-colors active:bg-base-light active:transition-none flex flex-col gap-4 shadow-md border border-base-lighter',
+          'text-black overflow-hidden no-underline rounded-t bg-base-lightest border-b-primary border-b-4 hover:bg-base-lighter hover:border-b-primary-dark cursor-pointer transition-colors active:bg-base-light active:transition-none flex flex-col gap-4 shadow-md border border-base-lighter',
           className,
         )}
       >

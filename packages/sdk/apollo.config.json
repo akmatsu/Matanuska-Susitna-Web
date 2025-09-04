@@ -2,7 +2,7 @@
   "client": {
     "service": {
       "name": "msb-cms",
-      "localSchemaFile": "../../../cms/apps/cms/schema.graphql"
+      "localSchemaFile": "../../../matanuska-susitna-cms/apps/cms/schema.graphql"
     },
     "includes": [
       "src/**/*.{ts,tsx,graphql}",

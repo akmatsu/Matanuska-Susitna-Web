@@ -4,9 +4,10 @@ import { plural } from 'pluralize';
 import slugify from 'voca/slugify';
 
 const toolbeltHighlightFragment = gql(`
-  fragment ToolbeltHighlight on Highlight {
+  fragment ToolbeltHighlight on featuredItem {
+    icon
     linkedItem {
-      label
+      label      
       item {
         __typename
         ... on BasePageWithSlug {
@@ -27,7 +28,6 @@ const toolbeltHighlightFragment = gql(`
 
 export function ToolbeltHighlight(props: {
   data: FragmentType<typeof toolbeltHighlightFragment>;
-  icon: string;
 }) {
   const item = getFragmentData(toolbeltHighlightFragment, props.data);
 
@@ -54,10 +54,12 @@ export function ToolbeltHighlight(props: {
   return (
     <Link
       href={url}
-      className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
+      className="group rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
     >
       <div className="flex flex-col items-center">
-        <span className={`iconify size-9 ${props.icon} text-green-600`}></span>
+        <span
+          className={`iconify size-9 ${item.icon} text-primary transition-colors group-hover:text-primary-dark`}
+        ></span>
         <span>{item.linkedItem?.label || item.linkedItem?.item?.title}</span>
       </div>
     </Link>
