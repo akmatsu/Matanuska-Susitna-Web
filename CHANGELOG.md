@@ -1,3 +1,17 @@
+# [0.22.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.21.0...v0.22.0) (2025-09-04)
+
+
+### Bug Fixes
+
+* fixed max width of banner content ([d9ba856](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/d9ba856acce482b3324e8a18045aa835c83c399b))
+
+
+### Features
+
+* highlights now support more page types ([823f813](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/823f813de3bb3427daee786bd4358394e77f3791))
+* now grabbing highlights and featured items on the home page ([c039c4f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/c039c4fa1c6d1e91602038c5c5224768b57d6ba5))
+* updated toolbelt to handle more items ([02c50aa](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/02c50aa0c32ad36a117fb122c7050a4660294e08))
+
 # [0.21.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.20.0...v0.21.0) (2025-08-29)
 
 
