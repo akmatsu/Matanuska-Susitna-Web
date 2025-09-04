@@ -1,3 +1,5 @@
+import { LinkedItemUnion } from '@msb/js-sdk/graphql';
+
 export function capitalizeFirstLetter(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -85,4 +87,21 @@ export function toPascalCase(str: string) {
 
 export function slugify(str: string) {
   return str.toLowerCase().replace(separatorRegex, '-');
+}
+
+export function getRedirectUrl(item?: LinkedItemUnion | null) {
+  if (!item) return null;
+  if ('url' in item) return item.url;
+  if ('slug' in item) return `/${getUrlSection(item.__typename)}${item.slug}`;
+  if (item?.__typename === 'HomePage') return '/';
+  if (item?.__typename === 'BoardPage') return '/boards';
+  if (item?.__typename === 'ElectionsPage') return '/elections';
+}
+
+function getUrlSection(str?: string) {
+  if (!str) return '';
+  if (str === 'OrgUnit') {
+    return 'departments/';
+  }
+  return `${slugify(str)}/`;
 }

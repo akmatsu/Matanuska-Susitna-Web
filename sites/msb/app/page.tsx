@@ -41,7 +41,7 @@ export default async function Home() {
     context: {
       fetchOptions: {
         next: {
-          revalidate: 15,
+          revalidate: 5,
         },
       },
     },

@@ -1,7 +1,7 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { LinkButton } from '../LinkButton';
-import { LinkedItemUnion, Maybe } from '@msb/js-sdk/graphql';
 import { ButtonProps } from '@matsugov/ui';
+import { getRedirectUrl } from '@/utils/stringHelpers';
 
 const ActionFields = gql(`
   fragment ActionFields on InternalLink {
@@ -18,6 +18,24 @@ const ActionFields = gql(`
       ... on Url {
         id
         url
+        title
+        description
+      }
+
+      ... on BasePage {
+        id
+        title
+        description
+      }
+
+      ... on ElectionsPage {
+        id
+        title
+        description
+      }
+
+      ... on HomePage {
+        id
         title
         description
       }
@@ -42,32 +60,13 @@ export function ActionButton({
 }) {
   const action = getFragmentData(ActionFields, props.action);
 
-  function getUrlSection(str?: string) {
-    if (!str) {
-      return '/';
-    }
-    if (str === 'OrgUnit') {
-      return '/departments/';
-    }
-    return `/${str.toLocaleLowerCase()}s/`;
-  }
-
-  function getUrl(item?: Maybe<LinkedItemUnion>) {
-    if (!item) {
-      return '';
-    }
-
-    return 'url' in item
-      ? item.url!
-      : 'slug' in item
-        ? `${getUrlSection(item.__typename)}${item.slug}`
-        : '';
-  }
+  const url = getRedirectUrl(action.item);
+  if (!url) return null;
 
   return (
     <LinkButton
       key={action.item?.id}
-      href={getUrl(action.item)}
+      href={url}
       className={`margin-right-0 usa-link--external ${className}`}
       target={target}
       size={size}

@@ -2,6 +2,9 @@ import { gql } from '@msb/js-sdk/gql';
 import { getClient } from '../../utils/apollo/ApolloClient';
 import { NextResponse } from 'next/server';
 import { NextAuthRequest } from 'next-auth';
+import { slugify } from 'voca';
+import { LinkedItemUnion } from '@msb/js-sdk/graphql';
+import { getRedirectUrl } from '@/utils/stringHelpers';
 
 const query = gql(`
   query getRedirects($path: String!) {
@@ -34,10 +37,9 @@ export async function handleCmsRedirects(req: NextAuthRequest) {
     const redirectInfo = data.redirect;
 
     if (redirectInfo) {
-      const redirectUrl =
-        redirectInfo.to?.item?.__typename === 'Url'
-          ? redirectInfo.to.item.url
-          : redirectInfo.to?.item?.slug;
+      const redirectUrl = getRedirectUrl(
+        redirectInfo.to?.item as LinkedItemUnion,
+      );
 
       if (redirectUrl) return NextResponse.redirect(redirectUrl);
     }
