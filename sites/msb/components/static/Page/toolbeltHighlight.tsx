@@ -21,6 +21,11 @@ const toolbeltHighlightFragment = gql(`
           url
           title          
         }
+
+        ... on BasePage {
+          id
+          title
+        }
       }
     }
   }
@@ -60,7 +65,7 @@ export function ToolbeltHighlight(props: {
         <span
           className={`iconify size-9 ${item.icon} text-primary transition-colors group-hover:text-primary-dark`}
         ></span>
-        <span>{item.linkedItem?.label || item.linkedItem?.item?.title}</span>
+        <span>{item.linkedItem?.label}</span>
       </div>
     </Link>
   );
