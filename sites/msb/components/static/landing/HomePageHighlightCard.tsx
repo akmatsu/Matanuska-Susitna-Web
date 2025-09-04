@@ -27,6 +27,14 @@ const homePageHighlightCardFragment = gql(`
           url
           title
         }
+
+        ... on BasePage {
+          title
+        }
+
+        ... on ElectionsPage {
+          title
+        }
       }
     }
   }
@@ -39,18 +47,24 @@ export function HomePageHighlightCard(props: {
 
   function getUrl() {
     if (item.linkedItem?.item) {
+      const typename = item.linkedItem.item.__typename;
       if (
         'url' in item.linkedItem.item &&
         typeof item.linkedItem.item.url === 'string'
       )
         return item.linkedItem.item.url;
       if ('slug' in item.linkedItem.item) {
-        const typename = item.linkedItem.item.__typename;
         if (typename === 'OrgUnit') {
           return `/departments/${item.linkedItem.item.slug}`;
         }
+        if (typename === 'Topic') {
+          return `/${item.linkedItem.item.slug}`;
+        }
         return `/${plural(slugify(typename))}/${item.linkedItem.item.slug}`;
       }
+      if (typename === 'BoardPage') return '/boards';
+      if (typename === 'ElectionsPage') return '/elections';
+      if (typename === 'HomePage') return '/';
     }
     return '';
   }
