@@ -29,7 +29,7 @@ export function Banner({
       aria-label={label}
       className="bg-surface-primary px-4 border-b border-b-base-lighter text-white"
     >
-      <div className="mx-auto max-w-(--breakpoint-xl)">
+      <div className="mx-auto">
         <DisclosureButton className="group py-1 text-xs text-left leading-none flex items-center cursor-pointer">
           <img
             src="/msb_icon_yellow.svg"
