@@ -18,9 +18,9 @@ export function PageToolbelt(props: {
   const items = data.featuredItems;
 
   return (
-    <section className="flex justify-center items-center bg-base-lightest py-4 px-2">
-      <div className=" max-w-[900px] w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 w-full">
+    <section className="flex justify-center  bg-base-lightest py-4 px-2">
+      <div className="max-w-6xl w-full">
+        <div className="flex flex-row flex-wrap justify-center gap-4 lg:gap-8 w-full h-full items-stretch">
           {items?.map((item) => {
             return <ToolbeltHighlight data={item} key={item.id} />;
           })}
