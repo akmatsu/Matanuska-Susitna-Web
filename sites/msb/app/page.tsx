@@ -17,12 +17,13 @@ const getHomePage = gql(`
       description
       heroImage
       ...ToolbeltItems
-      ...HomePageHighlights
     }
 
     publicNotices(take: $take, orderBy: $orderBy) {
       ...PublicNoticeList
     }
+
+    ...HomePageHighlights
   }
 `);
 
@@ -65,7 +66,7 @@ export default async function Home() {
         </div>
       </Hero>
       <PageToolbelt data={page} />
-      <HomePageHighlights data={page} />
+      <HomePageHighlights data={data} />
 
       <section className="max-w-6xl mx-auto px-4 py-16">
         <h2 className="mb-4 text-3xl font-bold">Upcoming Meetings</h2>

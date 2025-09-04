@@ -1,4 +1,10 @@
-import { CardHeader, CardMedia, CardTitle, LinkCard } from '@matsugov/ui';
+import {
+  CardBody,
+  CardHeader,
+  CardMedia,
+  CardTitle,
+  LinkCard,
+} from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import Image from 'next/image';
 import { plural } from 'pluralize';
@@ -8,6 +14,7 @@ const homePageHighlightCardFragment = gql(`
   fragment HomePageHighlightCard on Highlight {
     title
     image
+    message
     linkedItem {
       label
       item {
@@ -27,7 +34,6 @@ const homePageHighlightCardFragment = gql(`
 
 export function HomePageHighlightCard(props: {
   data: FragmentType<typeof homePageHighlightCardFragment>;
-  icon: string;
 }) {
   const item = getFragmentData(homePageHighlightCardFragment, props.data);
 
@@ -50,7 +56,7 @@ export function HomePageHighlightCard(props: {
   }
 
   return (
-    <LinkCard href={getUrl()}>
+    <LinkCard href={getUrl()} className="group h-full">
       {item.image && (
         <CardMedia className="aspect-[2] overflow-hidden relative">
           <Image
@@ -65,12 +71,14 @@ export function HomePageHighlightCard(props: {
 
       <CardHeader>
         <div className="flex items-center w-full gap-2">
-          <div className="bg-secondary text-base-darkest rounded-full p-2 flex items-center justify-center">
-            <span className={`iconify size-6 ${props.icon}`}></span>
-          </div>
-          <CardTitle>{item.title}</CardTitle>
+          <CardTitle className="text-primary transitions-colors group-hover:text-primary-dark">
+            {item.title}
+          </CardTitle>
         </div>
       </CardHeader>
+      <CardBody>
+        <p>{item.message}</p>
+      </CardBody>
     </LinkCard>
   );
 }
