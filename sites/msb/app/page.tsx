@@ -92,7 +92,7 @@ export default async function Home() {
           help.
         </p>
 
-        <LinkButton href="#" color="primary">
+        <LinkButton href="/departments" color="primary">
           Contact us
         </LinkButton>
       </section>

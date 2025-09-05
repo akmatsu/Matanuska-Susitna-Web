@@ -40,7 +40,7 @@ export function Combobox<T = any>(props: {
         displayValue={(item: any) => item?.[props.displayValueKey]}
         onChange={onChangeQuery}
         placeholder={props.placeholder}
-        className="border border-base-lighter h-10 px-2 focus:outline-hidden focus:ring-4 focus:ring-blue-40v w-full rounded-xs shadow-md bg-white"
+        className="border border-base-lighter h-10 px-2 focus:outline-hidden focus:ring-4 focus:ring-primary w-full rounded-xs shadow-md bg-white"
         autoFocus={props.autoFocus}
       ></ComboboxInput>
       <ComboboxOptions
