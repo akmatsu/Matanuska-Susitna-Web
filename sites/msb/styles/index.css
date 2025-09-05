@@ -6,7 +6,7 @@
 @source './pages/**/*.{js,ts,jsx,tsx,mdx}';
 @source '../node_modules/@matsugov/ui/src/**/*.{js,ts,jsx,tsx,mdx}';
 @source '../node_modules/@msb/map/src/**/*.{js,ts,jsx,tsx,mdx}';
-@source inline('icon-[mdi--{pets,message-alert,home,briefcase,legal,excavator}]');
+@source inline('icon-[mdi--{pets,message-alert,home,briefcase,legal,excavator,cart,road-variant,microphone,pier-crane,server,money,fire-truck,house-group,file-document,user-tie}]');
 
 /* @config '../tailwind.config.js'; */
 
