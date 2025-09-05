@@ -1,3 +1,10 @@
+## [0.23.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.23.0...v0.23.1) (2025-09-05)
+
+
+### Bug Fixes
+
+* fixed departments links breaking on some pages ([1fb8e61](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1fb8e610deaa29145812ca47c422f87f41a71b32))
+
 # [0.23.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.22.0...v0.23.0) (2025-09-05)
 
 
