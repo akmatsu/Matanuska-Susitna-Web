@@ -11,20 +11,21 @@
   --color-base-dark: var(--color-gray-cool-60);
   --color-base-darker: var(--color-gray-cool-70);
   --color-base-darkest: var(--color-gray-90);
-  --color-ink: var(--color-gray-90);
+  --color-ink: #2a2a2a;
 
-  --color-surface-primary: #172f51;
+  --color-surface-primary: #162e50;
+  --color-surface-base: #f6fbf9;
 
   --color-primary-lighter: var(--color-blue-10);
   --color-primary-light: var(--color-blue-30);
-  --color-primary: #3260ad;
+  --color-primary: #3160ad;
   --color-primary-vivid: var(--color-blue-warm-60v);
   --color-primary-dark: var(--color-blue-warm-70v);
   --color-primary-darker: var(--color-blue-warm-80v);
 
   --color-secondary-lighter: var(--color-yellow-10v);
   --color-secondary-light: var(--color-yellow-20v);
-  --color-secondary: #face0b;
+  --color-secondary: #f9cf0e;
   --color-secondary-vivid: var(--color-yellow-cool-30v);
   --color-secondary-dark: var(--color-yellow-30v);
   --color-secondary-darker: var(--color-yellow-40v);
@@ -49,7 +50,7 @@
 
   --color-error-lighter: var(--color-red-warm-10);
   --color-error-light: var(--color-red-warm-30v);
-  --color-error: var(--color-red-warm-50v);
+  --color-error: #c9332f;
   --color-error-dark: var(--color-red-60v);
   --color-error-darker: var(--color-red-70);
 

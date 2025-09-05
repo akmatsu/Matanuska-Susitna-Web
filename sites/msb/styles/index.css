@@ -10,6 +10,10 @@
 
 /* @config '../tailwind.config.js'; */
 
+:root {
+  --tw-prose-body: var(--color-ink);
+}
+
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -37,7 +41,7 @@
   }
 
   a:focus {
-    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-blue-40v;
+    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-primary;
   }
   a:visited {
     color: var(--color-purple-900);
@@ -51,7 +55,7 @@
 
   /* Button focus state */
   button {
-    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-blue-40v;
+    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-primary;
   }
 }
 
@@ -70,6 +74,6 @@ p .msb-md-body {
 
 @layer components {
   .focus-ring {
-    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-blue-40v;
+    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-primary;
   }
 }

@@ -44,6 +44,7 @@ export default async function RootLayout({
             navLinkAs={Link}
             navItems={primaryNav}
             imageAs={Image}
+            contactHref="/departments"
             signIn={async () => {
               'use server';
               await signIn();

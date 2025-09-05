@@ -50,7 +50,7 @@ export function Header({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-[#f6f8f9] min-h-12 lg:min-h-20 flex items-center justify-between pl-4 lg:pr-4 border-b border-b-base-lighter">
+    <header className="bg-surface-base min-h-12 lg:min-h-20 flex items-center justify-between pl-4 lg:pr-4 border-b border-b-base-lighter">
       <div className="flex items-center justify-between w-full min-h-full">
         <NavLink
           href={homeHref}

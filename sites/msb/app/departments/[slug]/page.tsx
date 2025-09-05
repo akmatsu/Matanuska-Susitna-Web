@@ -14,6 +14,7 @@ const getOrgUnit = gql(`
   ) {
     orgUnit(where: { slug: $slug }) {
       ...BasePageInfo
+      showPage
       children {
         ...ChildrenOrgUnits
       }
@@ -38,12 +39,12 @@ export default async function DepartmentPage(props: {
   });
 
   if (errors || error) {
-    console.error('Error fetching community data:', errors || error);
+    console.error('Error fetching org unit data:', errors || error);
     return notFound();
   }
 
-  if (!data?.orgUnit) {
-    console.error('Community not found for slug:', slug);
+  if (!data?.orgUnit || data.orgUnit?.showPage === 'no') {
+    console.error('Org Unit not found for slug:', slug);
     return notFound();
   }
 

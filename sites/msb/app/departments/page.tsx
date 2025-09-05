@@ -18,14 +18,15 @@ const query = gql(`
     }
 
     orgUnits(where: {
-      OR: [
-        {type: {
-          equals: "department"
-        }}
+      AND: [
         {
-          type: {
-            equals: "office"
-          }
+          OR: [
+            { type: { equals: "department" } },
+            { type: { equals: "office" } }
+          ]
+        },
+        {
+          showPage: { equals: "yes" }
         }
       ]
     }) {
@@ -50,7 +51,7 @@ export default async function DepartmentsPage() {
   if (!page) return null;
 
   return (
-    <div>
+    <div className="flex flex-col gap-8">
       <PageContainer size={pageSize} breakPoint={pageSize}>
         <ProseWrapper>
           <h1>{page.title}</h1>
@@ -86,14 +87,14 @@ export default async function DepartmentsPage() {
       <section>
         <PageContainer size={pageSize} breakPoint="sm" hideBreadcrumbs>
           <h2 className="text-2xl font-bold mb-4">Departments</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {departments.map((d) => (
               <Link
                 href={`/departments/${d.slug}`}
                 key={d.id}
-                className="flex gap-3 col-span-1 w-full text-black no-underline group rounded transition-colors overflow-hidden border border-base-lighter hover:border-base-light "
+                className="flex flex-col md:flex-row gap-3 col-span-1 w-full text-black no-underline group rounded transition-colors overflow-hidden border border-base-lighter hover:border-base-light "
               >
-                <div className="h-full bg-base-lightest p-4">
+                <div className="h-fit md:h-full bg-base-lightest p-4 w-full md:w-fit flex justify-center items-center">
                   <div className="aspect-square size-20 p-4 rounded-full bg-primary group-hover:bg-primary-dark justify-center items-center flex transition-colors">
                     <span className={clsx('size-full text-white', d.icon)} />
                   </div>
