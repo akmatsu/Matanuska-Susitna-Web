@@ -1,3 +1,11 @@
+# [0.23.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.22.0...v0.23.0) (2025-09-05)
+
+
+### Features
+
+* created the departments page; ([ba903ab](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ba903ab79c26b13dc117d2042c91c6e568f7203d))
+* finished departments page, no longer grabbing hidden pages ([a959a14](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a959a14ec7fbbee4d07c1ec2150443871c871ce7))
+
 # [0.22.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.21.0...v0.22.0) (2025-09-04)
 
 
