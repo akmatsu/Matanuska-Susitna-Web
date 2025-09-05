@@ -8,7 +8,6 @@ export const config = {
   // NOTE: Must be an inline literal for Next.js static analysis. Do not reference imported identifiers.
   matcher: [
     '/communities',
-    '/departments',
     '/assembly-districts',
     '/facilities',
     '/parks',

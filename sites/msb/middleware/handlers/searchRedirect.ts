@@ -4,7 +4,6 @@ import { singular } from 'pluralize';
 
 export const SEARCH_MATCHERS = [
   '/communities',
-  '/departments',
   '/assembly-districts',
   '/facilities',
   '/parks',
