@@ -148,6 +148,7 @@ export function BasePage(props: {
               <PageListItems
                 title="Departments & Divisions"
                 items={page.orgUnits}
+                type="departments"
               />
             </HideOnDesktop>
 
@@ -186,6 +187,7 @@ export function BasePage(props: {
             <PageListItems
               title="Departments & Divisions"
               items={page.orgUnits}
+              type="departments"
             />
 
             <PageContacts

@@ -70,6 +70,7 @@ export default async function Page(props: {
           <PageListItems
             items={page.orgUnits}
             title="Departments & Divisions"
+            type="departments"
           />
           <PageListItems
             items={page.assemblyDistricts}

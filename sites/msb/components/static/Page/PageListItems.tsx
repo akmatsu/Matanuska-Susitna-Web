@@ -12,6 +12,7 @@ const pageListFragment = gql(`
 export function PageListItems(props: {
   items?: FragmentType<typeof pageListFragment>[] | null;
   title: string;
+  type?: string;
 }) {
   const items = getFragmentData(pageListFragment, props.items);
   if (items?.length) {
@@ -23,7 +24,7 @@ export function PageListItems(props: {
               key={item.id}
               item={item}
               as="li"
-              title={props.title}
+              title={props.type || props.title}
             />
           ))}
         </ul>

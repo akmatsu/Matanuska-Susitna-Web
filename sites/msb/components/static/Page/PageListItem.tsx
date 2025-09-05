@@ -1,6 +1,7 @@
 import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { ElementType } from 'react';
+import slugify from 'voca/slugify';
 
 const pageItemFragment = gql(`
   fragment PageItem on BasePageWithSlug {
@@ -20,7 +21,7 @@ export function PageListItem(props: {
     <LinkCard
       as={props.as}
       className="my-2"
-      href={`/${props.title.toLowerCase().replace(/\s/gi, '-')}/${item.slug}`}
+      href={`/${slugify(props.title).toLowerCase()}/${item.slug}`}
     >
       <CardHeader>
         <CardTitle>{item.title}</CardTitle>
