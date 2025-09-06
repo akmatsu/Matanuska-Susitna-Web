@@ -5,6 +5,7 @@ import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 const pageSize = 'lg';
 
@@ -41,14 +42,23 @@ const query = gql(`
 `);
 
 export default async function DepartmentsPage() {
-  const { data } = await getClient().query({ query });
+  const { data } = await getClient().query({
+    query,
+    context: {
+      fetchOptions: {
+        next: {
+          revalidate: 5,
+        },
+      },
+    },
+  });
   const page = data.landingPage;
 
   const offices = data.orgUnits?.filter((d) => d.type === 'office') || [];
   const departments =
     data.orgUnits?.filter((d) => d.type === 'department') || [];
 
-  if (!page) return null;
+  if (!page) return notFound();
 
   return (
     <div className="flex flex-col gap-8">
