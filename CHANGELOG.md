@@ -1,3 +1,10 @@
+# [0.24.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.23.1...v0.24.0) (2025-09-06)
+
+
+### Features
+
+* added cache revalidate window ([9caa81a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9caa81a47d8f630430e886f705da6feef1edbd93))
+
 ## [0.23.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.23.0...v0.23.1) (2025-09-05)
 
 
