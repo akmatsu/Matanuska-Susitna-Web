@@ -1,3 +1,10 @@
+# [0.25.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.24.0...v0.25.0) (2025-09-08)
+
+
+### Features
+
+* now pulling department description from description field ([41cddbb](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/41cddbb064f9c19b53cb5bfcf14ad0349dd2a197))
+
 # [0.24.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.23.1...v0.24.0) (2025-09-06)
 
 
