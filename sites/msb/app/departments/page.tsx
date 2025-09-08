@@ -113,7 +113,7 @@ export default async function DepartmentsPage() {
                   <h3 className="text-xl font-semibold text-primary group-hover:text-primary-dark transitions-colors">
                     {d.title}
                   </h3>
-                  <p>{d.duties}</p>
+                  <p>{d.description}</p>
                 </div>
               </Link>
             ))}
