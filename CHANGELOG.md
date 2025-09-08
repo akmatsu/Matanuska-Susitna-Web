@@ -1,3 +1,10 @@
+# [0.27.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.26.1...v0.27.0) (2025-09-08)
+
+
+### Features
+
+* changed colors of icons and added a border on featured icons card ([4f05447](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/4f0544793cd1367f93c278594814fc0af973a233))
+
 ## [0.26.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.26.0...v0.26.1) (2025-09-08)
 
 
