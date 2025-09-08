@@ -1,3 +1,10 @@
+# [0.26.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.25.1...v0.26.0) (2025-09-08)
+
+
+### Features
+
+* now sorting departments alphabetically ([b48c197](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/b48c197d6f84834252eab954ef34134540859888))
+
 ## [0.25.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.25.0...v0.25.1) (2025-09-08)
 
 
