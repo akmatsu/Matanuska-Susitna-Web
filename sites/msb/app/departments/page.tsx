@@ -30,6 +30,8 @@ const query = gql(`
           showPage: { equals: "yes" }
         }
       ]
+    }, orderBy:  {
+       title: asc
     }) {
       id
       title
