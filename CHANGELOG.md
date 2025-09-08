@@ -1,3 +1,10 @@
+## [0.25.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.25.0...v0.25.1) (2025-09-08)
+
+
+### Bug Fixes
+
+* no longer using duties on departments pages ([4d556b6](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/4d556b6b44780621ac152a08a930bae07b3f0f68))
+
 # [0.25.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.24.0...v0.25.0) (2025-09-08)
 
 
