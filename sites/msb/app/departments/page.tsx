@@ -33,7 +33,7 @@ const query = gql(`
     }) {
       id
       title
-      duties
+      description
       slug
       type
       icon
@@ -87,7 +87,7 @@ export default async function DepartmentsPage() {
                   <h3 className="text-xl font-semibold text-secondary">
                     {o.title}
                   </h3>
-                  <p className="text-white">{o.duties}</p>
+                  <p className="text-white">{o.description}</p>
                 </div>
               </Link>
             ))}
