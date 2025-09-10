@@ -1,4 +1,5 @@
 import { BasePage } from '@/components/static/BasePage';
+import { PageListItems } from '@/components/static/Page';
 import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
@@ -42,5 +43,12 @@ export default async function CommunityPage(props: {
 
   const page = data.community;
 
-  return <BasePage data={page} />;
+  return (
+    <BasePage
+      data={page}
+      rightSide={
+        page.boards && <PageListItems items={page.boards} title="Boards" />
+      }
+    />
+  );
 }

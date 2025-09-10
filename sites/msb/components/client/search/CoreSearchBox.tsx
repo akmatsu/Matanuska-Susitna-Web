@@ -1,10 +1,10 @@
 'use client';
 import { Search } from '@matsugov/ui/Search';
 import type { ChangeEvent } from 'react';
-import { useSearchBox } from 'react-instantsearch';
+import { SearchBoxProps, useSearchBox } from 'react-instantsearch';
 
-export function CoreSearchBox() {
-  const { query, refine } = useSearchBox();
+export function CoreSearchBox(props: SearchBoxProps) {
+  const { query, refine } = useSearchBox(props, { skipSuspense: true });
   function handleSubmit(event: ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
 

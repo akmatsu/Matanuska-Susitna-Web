@@ -4,7 +4,7 @@ import { ComponentProps } from 'react';
 import { Hits, useHits } from 'react-instantsearch';
 
 export function CoreSearchHits(props: ComponentProps<typeof Hits>) {
-  const { items } = useHits(props);
+  const { items } = useHits(props, { skipSuspense: true });
 
   return (
     <ul role="list" className="flex flex-col gap-4 mb-4">
