@@ -1,3 +1,10 @@
+## [0.27.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.27.1...v0.27.2) (2025-09-10)
+
+
+### Bug Fixes
+
+* made some internal changes to search components to make search page more stable ([129f451](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/129f45124d3a6b20119f249388b99f354609285f))
+
 ## [0.27.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.27.0...v0.27.1) (2025-09-10)
 
 
