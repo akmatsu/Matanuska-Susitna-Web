@@ -57,6 +57,7 @@ export default async function Page(props: {
 
   return (
     <BasePage
+      data={page}
       pageContainerProps={{ className: 'relative' }}
       rightSide={
         <>

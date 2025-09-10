@@ -10,7 +10,7 @@ export function RefinementListDropdown(props: RefinementListProps) {
     isShowingMore,
     toggleShowMore,
     isFromSearch,
-  } = useRefinementList(props);
+  } = useRefinementList(props, { skipSuspense: true });
 
   function getLabel(str: string) {
     if (props.attribute === 'related_pages') {

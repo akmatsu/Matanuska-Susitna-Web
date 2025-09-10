@@ -14,7 +14,6 @@ const typesenseInstantSearchAdapter = new TypesenseInstantsearchAdapter({
       },
     ],
   },
-
   additionalSearchParameters: {
     num_typos: 3,
     query_by: 'title,description,body,districts,tags,departments,communities',
@@ -33,7 +32,9 @@ export function InstantSearchWrapper(props: {
     <InstantSearchNext
       searchClient={searchClient}
       indexName={props.indexName}
-      routing={props.routing}
+      routing={
+        props.routing ? { router: { cleanUrlOnDispose: true } } : undefined
+      }
       future={{
         preserveSharedStateOnUnmount: true,
       }}

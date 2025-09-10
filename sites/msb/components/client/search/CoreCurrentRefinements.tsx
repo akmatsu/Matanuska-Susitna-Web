@@ -8,7 +8,9 @@ import {
 import v from 'voca';
 
 export function CoreCurrentRefinements(props: CurrentRefinementsProps) {
-  const { items, refine } = useCurrentRefinements(props);
+  const { items, refine } = useCurrentRefinements(props, {
+    skipSuspense: true,
+  });
   if (!items?.length) return null;
   return (
     <div className="relative -mx-4">

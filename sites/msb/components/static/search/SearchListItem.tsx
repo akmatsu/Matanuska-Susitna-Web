@@ -1,6 +1,7 @@
 import { toKebabCase } from '@/utils/stringHelpers';
 import { LinkCard, CardHeader, CardBody, CardTitle } from '@matsugov/ui/Card';
 import Link from 'next/link';
+import { plural } from 'pluralize';
 import v from 'voca';
 
 export function SearchListItem({
@@ -19,7 +20,7 @@ export function SearchListItem({
   listKey: string;
   className?: string;
 }) {
-  const formattedListKey = toKebabCase(listKey);
+  const formattedListKey = plural(v.slugify(listKey));
 
   const url =
     item.url || formattedListKey === 'topics'

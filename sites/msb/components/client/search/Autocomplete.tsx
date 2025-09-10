@@ -12,7 +12,7 @@ import slugify from 'voca/slugify';
 type UseAutocompleteProps = AutocompleteConnectorParams;
 
 function useAutocomplete(props?: UseAutocompleteProps) {
-  return useConnector(connectAutocomplete, props);
+  return useConnector(connectAutocomplete, props, { skipSuspense: true });
 }
 
 export function Autocomplete() {
