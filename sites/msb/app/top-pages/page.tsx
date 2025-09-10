@@ -8,6 +8,7 @@ import { getRedirectUrl } from '@/utils/stringHelpers';
 import { gql } from '@msb/js-sdk/gql';
 import { subDays } from 'date-fns';
 import { notFound } from 'next/navigation';
+import { PageViewsList } from './components/SortablePageList';
 
 const query = gql(`
   query GetTopPages($topPagesDate: DateTime!, $trendingPagesDate: DateTime!) {
@@ -32,33 +33,7 @@ const query = gql(`
       where: { date: { gte: $trendingPagesDate }},
       take: 100 
     ) {
-      id
-      item {
-        __typename
-        ... on BasePageWithSlug {
-          id
-          slug
-        }
-
-        ... on ElectionsPage {
-          id
-          title
-        }
-
-        ... on Url {
-          title
-          url
-        }
-
-        ... on AssemblyDistrict {
-          title
-          slug
-        }
-
-        ... on BasePage {
-          title
-        }
-      }
+      ...PageViewsList
     }
 
     topPages: pageViews(
@@ -66,33 +41,7 @@ const query = gql(`
       where: { date: { gte: $topPagesDate}}, 
       take: 10 
     ) {
-      id
-      item {
-        __typename
-        ... on BasePageWithSlug {
-          id
-          slug
-        }
-
-        ... on ElectionsPage {
-          id
-          title
-        }
-
-        ... on Url {
-          title
-          url
-        }
-
-        ... on AssemblyDistrict {
-          title
-          slug
-        }
-
-        ... on BasePage {
-          title
-        }
-      }
+      ...PageViewsList
     }
   }
 `);
@@ -109,42 +58,26 @@ export default async function TopPages() {
   if (!data.landingPage) return notFound();
 
   return (
-    <PageContainer>
+    <PageContainer size="lg" breakPoint="sm">
       <ProseWrapper>
-        <h1 className="mb-6">{data.landingPage.title}</h1>
+        <h1>{data.landingPage.title}</h1>
         <MarkdownRenderer>{data.landingPage.body}</MarkdownRenderer>
-        <section>
-          <h2 className="mt-12 mb-6">Top Pages</h2>
-          <ol>
-            {data.topPages?.map((page) => (
-              <li key={page.id}>
-                <Link href={getRedirectUrl(page.item) || ''}>
-                  {page.item?.title}
-                </Link>
-              </li>
-            ))}
-          </ol>
-        </section>
-        <section>
-          <h2 className="mt-12 mb-6">Trending Pages</h2>
-          <ol>
-            {data.trendingPages?.map((page) => (
-              <li key={page.id}>
-                <Link href={getRedirectUrl(page.item) || ''}>
-                  {page.item?.title}
-                </Link>
-              </li>
-            ))}
-          </ol>
-        </section>
-        <section>
-          <h2 className="mt-12 mb-6">Highlights</h2>
-          <ul>
-            {data.highlights?.map((item) => (
-              <HomePageHighlightCard data={item} key={item.id} />
-            ))}
-          </ul>
-        </section>
+        <div className="lg:grid grid-cols-5 gap-8">
+          <div className="col-span-3 lg:col-span-3">
+            <PageViewsList data={data.topPages} title="Top Pages" />
+            <PageViewsList data={data.trendingPages} title="Trending Pages" />
+          </div>
+          <div className="hidden lg:block col-span-2">
+            <section>
+              <h2>Highlights</h2>
+              <ul className="not-prose flex flex-col gap-4">
+                {data.highlights?.map((item) => (
+                  <HomePageHighlightCard data={item} key={item.id} />
+                ))}
+              </ul>
+            </section>
+          </div>
+        </div>
       </ProseWrapper>
     </PageContainer>
   );
