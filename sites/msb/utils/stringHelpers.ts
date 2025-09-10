@@ -1,4 +1,5 @@
-import { LinkedItemUnion } from '@msb/js-sdk/graphql';
+import { LinkedItemUnion, PageViewItemUnion } from '@msb/js-sdk/graphql';
+import { plural } from 'pluralize';
 
 export function capitalizeFirstLetter(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -89,7 +90,13 @@ export function slugify(str: string) {
   return str.toLowerCase().replace(separatorRegex, '-');
 }
 
-export function getRedirectUrl(item?: LinkedItemUnion | null) {
+export function getRedirectUrl(
+  item?: {
+    __typename?: string;
+    url?: string | null;
+    slug?: string | null;
+  } | null,
+) {
   if (!item) return null;
   if ('url' in item) return item.url;
   if ('slug' in item) return `/${getUrlSection(item.__typename)}${item.slug}`;
@@ -103,5 +110,5 @@ function getUrlSection(str?: string) {
   if (str === 'OrgUnit') {
     return 'departments/';
   }
-  return `${slugify(str)}/`;
+  return `${plural(slugify(str))}/`;
 }
