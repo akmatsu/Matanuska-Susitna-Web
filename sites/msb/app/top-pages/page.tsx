@@ -1,14 +1,12 @@
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { HomePageHighlightCard } from '@/components/static/landing/HomePageHighlightCard';
-import { Link } from '@/components/static/Link';
 import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { getClient } from '@/utils/apollo/ApolloClient';
-import { getRedirectUrl } from '@/utils/stringHelpers';
 import { gql } from '@msb/js-sdk/gql';
 import { subDays } from 'date-fns';
 import { notFound } from 'next/navigation';
-import { PageViewsList } from './components/SortablePageList';
+import { PageViewsListWrapper } from './components/PageViewsListWrapper';
 
 const query = gql(`
   query GetTopPages($topPagesDate: DateTime!, $trendingPagesDate: DateTime!) {
@@ -21,7 +19,7 @@ const query = gql(`
 
     highlights(orderBy:  {
        priority: asc
-    }) {
+    }, take: 10) {
       id
       createdAt
       priority
@@ -64,8 +62,11 @@ export default async function TopPages() {
         <MarkdownRenderer>{data.landingPage.body}</MarkdownRenderer>
         <div className="lg:grid grid-cols-5 gap-8">
           <div className="col-span-3 lg:col-span-3">
-            <PageViewsList data={data.topPages} title="Top Pages" />
-            <PageViewsList data={data.trendingPages} title="Trending Pages" />
+            <PageViewsListWrapper data={data.topPages} title="Top Pages" />
+            <PageViewsListWrapper
+              data={data.trendingPages}
+              title="Trending Pages"
+            />
           </div>
           <div className="hidden lg:block col-span-2">
             <section>

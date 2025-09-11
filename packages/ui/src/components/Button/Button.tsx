@@ -30,6 +30,7 @@ export type ButtonProps<T extends React.ElementType = 'button'> = {
   underline?: boolean;
   active?: boolean;
   blockOnMobile?: boolean;
+  outlined?: boolean;
 } & Omit<React.ComponentPropsWithRef<T>, 'color'>;
 
 /**
@@ -55,6 +56,7 @@ export function Button<T extends React.ElementType = 'button'>({
   ariaLabel,
   blockOnMobile,
   size = 'md',
+  outlined,
   ...props
 }: ButtonProps<T>) {
   const Component = as || (href ? 'a' : 'button');
@@ -71,7 +73,7 @@ export function Button<T extends React.ElementType = 'button'>({
       className={clsx(
         'leading-none focus-ring text-center flex items-center justify-center no-underline transition-colors active:transition-none min-w-fit',
         {
-          shadow,
+          shadow: shadow && !outlined,
           // Rounded corners group
           'rounded-none': !rounded || rounded === 'none',
           rounded: rounded === true,
@@ -103,31 +105,35 @@ export function Button<T extends React.ElementType = 'button'>({
 
           // Color variants group
           'bg-transparent text-base border border-base-lighter hover:border-base-light':
-            color === 'transparent' && !disabled && !active,
+            color === 'transparent' && !disabled && !active && !outlined,
           'bg-primary hover:bg-primary-dark active:bg-primary-darker text-base-lightest':
-            color === 'primary' && !disabled && !active,
+            color === 'primary' && !disabled && !active && !outlined,
           'bg-secondary hover:bg-secondary-dark active:bg-secondary-darker text-black':
-            color === 'secondary' && !disabled && !active,
+            color === 'secondary' && !disabled && !active && !outlined,
           'bg-accent-cool hover:bg-accent-cool-dark active:bg-accent-cool-darker text-black active:text-white':
-            color === 'accent-cool' && !disabled && !active,
+            color === 'accent-cool' && !disabled && !active && !outlined,
           'bg-accent-warm hover:bg-accent-warm-dark active:bg-accent-warm-darker text-black hover:text-white active:text-white':
-            color === 'accent-warm' && !disabled && !active,
+            color === 'accent-warm' && !disabled && !active && !outlined,
           'bg-base hover:bg-base-dark active:bg-base-darker text-white':
-            color === 'base' && !disabled && !active,
+            color === 'base' && !disabled && !active && !outlined,
           'bg-base-lightest hover:bg-base-lighter hover:border-base-light hover:text-base-dark active:bg-base-light active:border-base text-base border border-base-lighter':
-            color === 'base-light' && !disabled && !active,
+            color === 'base-light' && !disabled && !active && !outlined,
           'bg-error hover:bg-error-dark active:bg-error-darker text-white':
-            color === 'error' && !disabled && !active,
+            color === 'error' && !disabled && !active && !outlined,
           'bg-warning hover:bg-warning-dark active:bg-warning-darker text-white':
-            color === 'warning' && !disabled && !active,
+            color === 'warning' && !disabled && !active && !outlined,
           'bg-success hover:bg-success-dark active:bg-success-darker text-white':
-            color === 'success' && !disabled && !active,
+            color === 'success' && !disabled && !active && !outlined,
           'bg-base-darkest hover:bg-base-darker active:bg-base-dark text-white':
-            color === 'black' && !disabled && !active,
+            color === 'black' && !disabled && !active && !outlined,
 
           'bg-primary  active:bg-primary-darker text-base-lightest':
             color === 'primary' && !disabled && active,
           'bg-primary text-white': color === 'secondary' && !disabled && active,
+
+          // Outlined variants
+          'bg-transparent text-primary border border-primary hover:border-primary-dark hover:text-primary-dark active:border-primary-darker active:text-primary-darker':
+            color === 'primary' && !disabled && !active && outlined,
         },
         className,
       )}
