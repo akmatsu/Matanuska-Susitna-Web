@@ -19,7 +19,7 @@ const query = gql(`
 
     highlights(orderBy:  {
        priority: asc
-    }, take: 10) {
+    }, take: 8) {
       id
       createdAt
       priority
