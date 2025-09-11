@@ -60,15 +60,23 @@ export default async function TopPages() {
       <ProseWrapper>
         <h1>{data.landingPage.title}</h1>
         <MarkdownRenderer>{data.landingPage.body}</MarkdownRenderer>
-        <div className="lg:grid grid-cols-5 gap-8">
-          <div className="col-span-3 lg:col-span-3">
+        <div className="md:grid grid-cols-5 gap-8">
+          <div className="col-span-5 md:col-span-3">
             <PageViewsListWrapper data={data.topPages} title="Top Pages" />
             <PageViewsListWrapper
               data={data.trendingPages}
               title="Trending Pages"
             />
+            <section className="md:hidden">
+              <h2>Highlights</h2>
+              <ul className="not-prose flex flex-col gap-4">
+                {data.highlights?.map((item) => (
+                  <HomePageHighlightCard data={item} key={item.id} />
+                ))}
+              </ul>
+            </section>
           </div>
-          <div className="hidden lg:block col-span-2">
+          <div className="hidden md:block col-span-2">
             <section>
               <h2>Highlights</h2>
               <ul className="not-prose flex flex-col gap-4">

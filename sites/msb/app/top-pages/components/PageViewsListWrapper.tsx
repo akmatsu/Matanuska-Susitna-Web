@@ -75,8 +75,10 @@ export function PageViewsListWrapper({
 
   return (
     <div>
-      <div className="flex mt-12 justify-between items-center">
-        <h2 className="text-2xl font-bold mb-0 mt-0">{props.title}</h2>
+      <div className="flex mt-12 justify-between items-center flex-wrap gap-2">
+        <h2 className="text-2xl font-bold mb-0 mt-0 whitespace-nowrap">
+          {props.title}
+        </h2>
         <div className="flex">
           <Button
             size="md"
