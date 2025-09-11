@@ -13,6 +13,7 @@ import { ElectionPageContact } from './components/ElectionPageContact';
 import { ElectionOfficialsInfo } from './components/ElectionsOfficialsInfo';
 import { ElectionResultsSection } from './components/ElectionsResultsSection';
 import { AbsenteeVotingInfo } from './components/AbsenteeVotingInfo';
+import { PageViewTracker } from '@/components/client/PageViewTracker';
 
 const getElections = gql(`
   query GetElections {
@@ -76,6 +77,7 @@ export default async function ElectionsPage() {
         <ElectionResultsSection data={currentElection} results={data} />
         <ElectionPageContact data={page} />
       </PageContainer>
+      <PageViewTracker pageId="1" pageType="ElectionsPage" />
     </>
   );
 }

@@ -29,5 +29,21 @@ export default auth(async (req) => {
     if (res) return res; // If a handler returns a response, stop processing
   }
 
+  // Non-blocking PATCH request to page view tracker
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (apiUrl) {
+    // Fire and forget, do not await
+    fetch(`${apiUrl}/api/page-views`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        path: req.nextUrl.pathname,
+        userAgent: req.headers.get('user-agent'),
+      }),
+    }).catch(() => {}); // Ignore errors
+  }
+
   return NextResponse.next();
 });

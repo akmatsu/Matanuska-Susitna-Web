@@ -13,9 +13,12 @@ import {
 import React, { ComponentProps, ReactNode } from 'react';
 import { PageTopics } from './Page/PageTopics';
 import clsx from 'clsx';
+import { PageViewTracker } from '../client/PageViewTracker';
 
 const BasePageFragment = gql(`
   fragment BasePageInfo on BasePageWithSlug {
+    id
+    __typename
     ...PageBody
     ...HeroImage
     contacts {
@@ -197,6 +200,7 @@ export function BasePage(props: {
           </div>
         </div>
       </PageContainer>
+      <PageViewTracker pageId={page.id} pageType={page.__typename} />
     </>
   );
 }
