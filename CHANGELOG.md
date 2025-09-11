@@ -1,3 +1,18 @@
+# [0.28.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.27.2...v0.28.0) (2025-09-11)
+
+
+### Bug Fixes
+
+* fixed linting errors and warnings ([7b30a18](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/7b30a18b59251b4d4c077779207420525424c83c))
+
+
+### Features
+
+* can now sort top pages and trending pages ([07f068f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/07f068f523109600bf3e176eebf1b508abe650a0))
+* ensured the top-pages page is responsive ([dbe4341](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/dbe43416e11fabbfeb70b719f72058f0683cfdd6))
+* implemented page view counters ([8e36b68](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8e36b68c97d1c4675fcb5bfe828e9d0c85369a7c))
+* now only grabbing 8 highlights instead of 10 ([fe57b84](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fe57b841a60440cec8cfe3635bbd0575ca7bb767))
+
 ## [0.27.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.27.1...v0.27.2) (2025-09-10)
 
 
