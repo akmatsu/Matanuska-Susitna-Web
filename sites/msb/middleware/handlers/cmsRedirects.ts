@@ -2,7 +2,6 @@ import { gql } from '@msb/js-sdk/gql';
 import { getClient } from '../../utils/apollo/ApolloClient';
 import { NextResponse } from 'next/server';
 import { NextAuthRequest } from 'next-auth';
-import { slugify } from 'voca';
 import { LinkedItemUnion } from '@msb/js-sdk/graphql';
 import { getRedirectUrl } from '@/utils/stringHelpers';
 
