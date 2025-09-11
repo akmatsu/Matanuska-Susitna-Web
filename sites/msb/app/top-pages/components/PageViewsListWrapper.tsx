@@ -54,12 +54,10 @@ export function PageViewsListWrapper({
     (PVLF & { rank: number })[]
   >(data?.map((view, index) => ({ ...view, rank: index + 1 })) || []);
 
-  if (!data) return null;
-
   useEffect(() => {
     if (sortBy === 'popularity') {
       setViewsWithRanks(
-        data.map((view, index) => ({ ...view, rank: index + 1 })),
+        data?.map((view, index) => ({ ...view, rank: index + 1 })) || [],
       );
     } else if (sortBy === 'alphabetical') {
       setViewsWithRanks((v) => {
@@ -71,7 +69,9 @@ export function PageViewsListWrapper({
         });
       });
     }
-  }, [sortBy]);
+  }, [sortBy, data]);
+
+  if (!data) return null;
 
   return (
     <div>
