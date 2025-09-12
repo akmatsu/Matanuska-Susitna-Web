@@ -45,6 +45,9 @@ const BasePageFragment = gql(`
     services {
       ...PageList
     }
+    plans {
+      ...PageList
+    }
     ... on Service {
       primaryContact {
         ...ContactList
@@ -186,6 +189,7 @@ export function BasePage(props: {
             />
             {props.rightSide}
             <PageListItems title="Communities" items={page.communities} />
+            <PageListItems title="Plans" items={page.plans} />
             <PageListItems
               title="Departments & Divisions"
               items={page.orgUnits}
