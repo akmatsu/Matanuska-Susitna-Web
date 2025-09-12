@@ -180,12 +180,11 @@ export function BasePage(props: {
               secondaryActions={secondaryActions}
             />
             <PageDocuments documents={page.documents} />
-            {props.rightSide}
-
             <PageListItems
               title="Assembly Districts"
               items={page.assemblyDistricts}
             />
+            {props.rightSide}
             <PageListItems title="Communities" items={page.communities} />
             <PageListItems
               title="Departments & Divisions"
