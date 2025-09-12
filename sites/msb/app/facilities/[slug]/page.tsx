@@ -52,7 +52,7 @@ export default async function Page(props: {
     <BasePage
       data={page}
       rightSide={
-        <>{page.park && <PageListItems items={[page.park]} title="Park" />}</>
+        <>{page.park && <PageListItems items={[page.park]} title="Parks" />}</>
       }
     />
   );
