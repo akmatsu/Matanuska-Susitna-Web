@@ -86,7 +86,6 @@ export default async function page(props: Props) {
           <PageFacilities facilities={topic.facilities} />
           <PageListItems items={topic.trails} title="Trails" />
           <PageListItems items={topic.parks} title="Parks" />
-          <PageListItems items={topic.plans} title="Plans" />
         </>
       }
     >
