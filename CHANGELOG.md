@@ -1,3 +1,11 @@
+# [0.29.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.28.1...v0.29.0) (2025-09-12)
+
+
+### Features
+
+* assembly districts are now listed above boards ([fdb7095](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fdb7095c140375ea3eec9ede93e13ec5766d7642))
+* trails and parks should now display on community pages ([8a6e107](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8a6e1077d711a55dde6847e202dc34ed1414cf2a))
+
 ## [0.28.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.28.0...v0.28.1) (2025-09-12)
 
 
