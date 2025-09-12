@@ -1,3 +1,10 @@
+## [0.30.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.1...v0.30.2) (2025-09-12)
+
+
+### Bug Fixes
+
+* removed duplicate plans on topics page ([d594c92](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/d594c9262d8af17bb81793c2c219eb2cc5d00f68))
+
 ## [0.30.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.0...v0.30.1) (2025-09-12)
 
 
