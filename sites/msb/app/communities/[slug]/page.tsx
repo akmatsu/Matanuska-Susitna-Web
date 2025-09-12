@@ -19,6 +19,12 @@ const getCommunityPage = gql(`
       facilities {
         ...FacilitiesList
       }
+      parks {
+        ...PageList
+      }
+      trails {
+        ...PageList
+      }
     }
   }
 `);
@@ -46,7 +52,11 @@ export default async function CommunityPage(props: {
   }
 
   const page = data.community;
-  const hasSideContent = !!page.boards?.length || !!page.facilities?.length;
+  const hasSideContent =
+    !!page.boards?.length ||
+    !!page.facilities?.length ||
+    !!page.parks?.length ||
+    !!page.trails?.length;
 
   return (
     <BasePage
@@ -58,6 +68,10 @@ export default async function CommunityPage(props: {
               <PageListItems items={page.boards} title="Boards" />
             )}
             {page.facilities && <PageFacilities facilities={page.facilities} />}
+            {page.parks && <PageListItems items={page.parks} title="Parks" />}
+            {page.trails && (
+              <PageListItems items={page.trails} title="Trails" />
+            )}
           </>
         )
       }
