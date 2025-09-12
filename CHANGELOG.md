@@ -1,3 +1,10 @@
+# [0.30.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.29.0...v0.30.0) (2025-09-12)
+
+
+### Features
+
+* plans now showing on pages ([eaecc16](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/eaecc16090091723c11ff02a3ceca2bb89d5b114))
+
 # [0.29.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.28.1...v0.29.0) (2025-09-12)
 
 
