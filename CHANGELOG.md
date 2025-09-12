@@ -1,3 +1,10 @@
+## [0.28.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.28.0...v0.28.1) (2025-09-12)
+
+
+### Bug Fixes
+
+* facilities should now display on community pages ([f59a1ef](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f59a1eff0aa3a1c72f42d0429ce407255dae4d1a))
+
 # [0.28.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.27.2...v0.28.0) (2025-09-11)
 
 
