@@ -1,3 +1,10 @@
+## [0.30.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.0...v0.30.1) (2025-09-12)
+
+
+### Bug Fixes
+
+* parks links show now have correct URL ([217a843](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/217a84398a333b4fb4b345a774e4cac72984a11c))
+
 # [0.30.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.29.0...v0.30.0) (2025-09-12)
 
 
