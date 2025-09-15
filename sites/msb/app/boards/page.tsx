@@ -55,13 +55,6 @@ export const metadata: Metadata = {
 export default async function BoardsPage() {
   const { data, errors, error } = await getClientHandler({
     query: getBoardsPage,
-    context: {
-      fetchOptions: {
-        next: {
-          revalidate: 60 * 5,
-        },
-      },
-    },
   });
 
   if (error) {

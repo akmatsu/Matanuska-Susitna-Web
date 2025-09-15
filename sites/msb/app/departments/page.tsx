@@ -46,13 +46,6 @@ const query = gql(`
 export default async function DepartmentsPage() {
   const { data } = await getClientHandler({
     query,
-    context: {
-      fetchOptions: {
-        next: {
-          revalidate: 5,
-        },
-      },
-    },
   });
   const page = data.landingPage;
 
