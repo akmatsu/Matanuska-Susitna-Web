@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import { PageViewsListFragment as PVLF } from '@msb/js-sdk/graphql';
 
 const PageViewsListFragment = gql(`
-  fragment PageViewsList on PageView {
-    id
+  fragment PageViewsList on TopPage {
+    pageId
     item {
       __typename
       ... on BasePageWithSlug {
@@ -111,7 +111,7 @@ export function PageViewsListWrapper({
         </THead>
         <tbody>
           {viewsWithRanks.map((page) => (
-            <Tr key={page.id}>
+            <Tr key={page.pageId}>
               <Td>
                 <Link href={getRedirectUrl(page.item) || ''}>
                   {page.item?.title}

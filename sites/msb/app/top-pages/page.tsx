@@ -26,18 +26,16 @@ const query = gql(`
       ...HomePageHighlightCard
     }
 
-    trendingPages: pageViews(
-      orderBy: { views: desc },
-      where: { date: { gte: $trendingPagesDate }},
-      take: 100 
+    topPages: topPages(
+      after: $topPagesDate
+      take: 10 
     ) {
       ...PageViewsList
     }
 
-    topPages: pageViews(
-      orderBy: { views: desc }, 
-      where: { date: { gte: $topPagesDate}}, 
-      take: 10 
+    trendingPages: topPages(
+      after: $trendingPagesDate
+      take: 100 
     ) {
       ...PageViewsList
     }
