@@ -1,3 +1,10 @@
+## [0.30.5](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.4...v0.30.5) (2025-09-15)
+
+
+### Bug Fixes
+
+* improved top pages data fetching ([9ed32a8](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9ed32a88058ee44ae6267c8fa4d2a5aec2ea9fe4))
+
 ## [0.30.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.3...v0.30.4) (2025-09-15)
 
 
