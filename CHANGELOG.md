@@ -1,3 +1,10 @@
+## [0.30.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.2...v0.30.3) (2025-09-15)
+
+
+### Bug Fixes
+
+* experimental fix for caching issues ([31f71d2](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/31f71d2c2619cedf05a3346d55d564924d578464))
+
 ## [0.30.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.1...v0.30.2) (2025-09-12)
 
 
