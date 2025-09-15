@@ -1,3 +1,10 @@
+## [0.30.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.3...v0.30.4) (2025-09-15)
+
+
+### Bug Fixes
+
+* now using the default next cache revalidate time ([42cd2a9](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/42cd2a9d119c7ee42f2978d20e9cd4d744a5b67e))
+
 ## [0.30.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.2...v0.30.3) (2025-09-15)
 
 
