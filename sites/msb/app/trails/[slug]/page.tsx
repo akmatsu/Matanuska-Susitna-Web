@@ -1,4 +1,3 @@
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
 import {
   PageAddress,
@@ -7,6 +6,7 @@ import {
 } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
 import { BasePage } from '@/components/static/BasePage';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const trailQuery = gql(`
   query GetTrail(
@@ -39,7 +39,7 @@ export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const { data, errors, error } = await getClient().query({
+  const { data, errors, error } = await getClientHandler({
     query: trailQuery,
     variables: {
       slug,

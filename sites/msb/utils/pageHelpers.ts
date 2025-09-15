@@ -1,5 +1,5 @@
 import { TypedDocumentNode } from '@msb/js-sdk/apollo';
-import { getClient } from './apollo/ApolloClient';
+import { getClientHandler } from './apollo/utils';
 
 export async function getPageMeta<
   TQuery extends TypedDocumentNode<
@@ -8,17 +8,10 @@ export async function getPageMeta<
   > = TypedDocumentNode<any, { where: { slug: string } }>,
 >(listName: string, query: TQuery, slug: string) {
   try {
-    const { data } = await getClient().query({
+    const { data } = await getClientHandler({
       query,
       variables: {
         where: { slug },
-      },
-      context: {
-        fetchOptions: {
-          next: {
-            revalidate: 300,
-          },
-        },
       },
     });
 

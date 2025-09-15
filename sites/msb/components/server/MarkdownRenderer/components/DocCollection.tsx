@@ -1,5 +1,5 @@
 import { DocumentLink } from '@/components/static/DocumentLink';
-import { getClient } from '@/utils/apollo/ApolloClient';
+import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
 
 const getDocCollection = gql(`
@@ -16,7 +16,7 @@ const getDocCollection = gql(`
 `);
 
 export async function DocCollection({ id }: { id: string }) {
-  const { data } = await getClient().query({
+  const { data } = await getClientHandler({
     query: getDocCollection,
     variables: {
       where: {

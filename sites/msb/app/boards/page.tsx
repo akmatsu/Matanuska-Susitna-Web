@@ -1,7 +1,6 @@
 import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import { Metadata } from 'next';
 import { PageBody } from '@/components/static/Page/PageBody';
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { notFound } from 'next/navigation';
 import { BoardsList } from './components/BoardsList';
 import { gql } from '@msb/js-sdk/gql';
@@ -12,6 +11,7 @@ import { PhoneLink } from '@/components/static/PhoneLink';
 import { DocumentLink } from '@/components/static/DocumentLink';
 import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
 import { PageContainer } from '@/components/static/Page';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const getBoardsPage = gql(`
   query GetBoardsPage {
@@ -53,12 +53,12 @@ export const metadata: Metadata = {
 };
 
 export default async function BoardsPage() {
-  const { data, errors, error } = await getClient().query({
+  const { data, errors, error } = await getClientHandler({
     query: getBoardsPage,
     context: {
       fetchOptions: {
         next: {
-          revalidate: 5,
+          revalidate: 60 * 5,
         },
       },
     },

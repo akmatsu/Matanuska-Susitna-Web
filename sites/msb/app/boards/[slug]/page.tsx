@@ -4,10 +4,9 @@ import { LinkButton } from '@/components/static/LinkButton';
 import { PageSection } from '@/components/static/Page';
 import { BoardMeetings } from '@/components/static/Page/BoardMeetings';
 import { ExternalActionButton } from '@/components/static/Page/ExternalActionButtont';
-
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const getBoardPage = gql(`
   query GetBoard($where: BoardWhereUniqueInput!, $now: DateTime!) {
@@ -36,7 +35,7 @@ export default async function BoardPage(props: {
 }) {
   const { slug } = await props.params;
 
-  const { data, error } = await getClient().query({
+  const { data, error } = await getClientHandler({
     query: getBoardPage,
     variables: {
       where: { slug },

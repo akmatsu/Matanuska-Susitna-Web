@@ -3,9 +3,9 @@ import {
   PageChildrenOrgUnits,
   PageParentOrgUnit,
 } from '@/components/static/Page';
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const getOrgUnit = gql(`
   query GetOrgUnit(
@@ -30,7 +30,7 @@ export default async function DepartmentPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const { data, errors, error } = await getClient().query({
+  const { data, errors, error } = await getClientHandler({
     query: getOrgUnit,
     variables: {
       slug,

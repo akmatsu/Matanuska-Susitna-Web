@@ -1,9 +1,9 @@
 import { BasePage } from '@/components/static/BasePage';
 import { PageListItems } from '@/components/static/Page';
 import { PageFacilities } from '@/components/static/Page/PageFacilities/PageFacilities';
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const getCommunityPage = gql(`
   query GetCommunity(
@@ -34,7 +34,7 @@ export default async function CommunityPage(props: {
 }) {
   const { slug } = await props.params;
 
-  const { data, errors, error } = await getClient().query({
+  const { data, errors, error } = await getClientHandler({
     query: getCommunityPage,
     variables: {
       slug,

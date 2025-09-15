@@ -1,11 +1,11 @@
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const pageSize = 'lg';
 
@@ -44,7 +44,7 @@ const query = gql(`
 `);
 
 export default async function DepartmentsPage() {
-  const { data } = await getClient().query({
+  const { data } = await getClientHandler({
     query,
     context: {
       fetchOptions: {

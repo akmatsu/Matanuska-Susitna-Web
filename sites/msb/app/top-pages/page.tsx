@@ -2,11 +2,11 @@ import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { HomePageHighlightCard } from '@/components/static/landing/HomePageHighlightCard';
 import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { subDays } from 'date-fns';
 import { notFound } from 'next/navigation';
 import { PageViewsListWrapper } from './components/PageViewsListWrapper';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const query = gql(`
   query GetTopPages($topPagesDate: DateTime!, $trendingPagesDate: DateTime!) {
@@ -45,7 +45,7 @@ const query = gql(`
 `);
 
 export default async function TopPages() {
-  const { data } = await getClient().query({
+  const { data } = await getClientHandler({
     query,
     variables: {
       topPagesDate: subDays(new Date(), 30).toISOString(),

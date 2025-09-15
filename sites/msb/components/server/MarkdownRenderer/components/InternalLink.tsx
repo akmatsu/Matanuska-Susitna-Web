@@ -1,4 +1,3 @@
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { GetInternalLinkDataQuery } from '@msb/js-sdk/graphql';
 import { Tooltip } from '@matsugov/ui/Tooltip';
 import clsx from 'clsx';
@@ -6,6 +5,7 @@ import Link from 'next/link';
 import { plural } from 'pluralize';
 import v from 'voca';
 import { gql } from '@msb/js-sdk/gql';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const getInternalLinkData = gql(`
   query GetInternalLinkData($id: ID!, $list: String!) {
@@ -51,7 +51,7 @@ export async function InternalLink(props: {
   children: string;
 }) {
   if (props.list && props.itemID) {
-    const { data, errors, error } = await getClient().query({
+    const { data, errors, error } = await getClientHandler({
       query: getInternalLinkData,
       variables: {
         id: props.itemID,

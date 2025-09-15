@@ -31,6 +31,13 @@ export default async function Page({
         id: id,
       },
     },
+    context: {
+      fetchOptions: {
+        next: {
+          revalidate: 60 * 5,
+        },
+      },
+    },
   });
 
   if (error) {

@@ -48,6 +48,11 @@ export async function searchCalendarEvents(
           timeMin: opts?.timeMin,
           timeMax: opts?.timeMax,
         }),
+        {
+          next: {
+            revalidate: 60 * 60,
+          },
+        },
       ),
     ),
   );

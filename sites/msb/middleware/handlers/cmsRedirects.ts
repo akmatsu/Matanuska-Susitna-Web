@@ -1,9 +1,9 @@
 import { gql } from '@msb/js-sdk/gql';
-import { getClient } from '../../utils/apollo/ApolloClient';
 import { NextResponse } from 'next/server';
 import { NextAuthRequest } from 'next-auth';
 import { LinkedItemUnion } from '@msb/js-sdk/graphql';
 import { getRedirectUrl } from '@/utils/stringHelpers';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const query = gql(`
   query getRedirects($path: String!) {
@@ -26,7 +26,7 @@ const query = gql(`
 export async function handleCmsRedirects(req: NextAuthRequest) {
   // If user is not an admin they will be redirected.
   if (!req.auth) {
-    const { data } = await getClient().query({
+    const { data } = await getClientHandler({
       query,
       variables: {
         path: req.nextUrl.pathname,

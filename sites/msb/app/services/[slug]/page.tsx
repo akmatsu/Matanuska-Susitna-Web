@@ -1,7 +1,7 @@
 import { BasePage } from '@/components/static/BasePage';
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const getService = gql(`
   query GetService($slug: String!, $now: DateTime!) {
@@ -16,7 +16,7 @@ export default async function ServicePage(props: {
 }) {
   const { slug } = await props.params;
 
-  const { data, errors, error } = await getClient().query({
+  const { data, errors, error } = await getClientHandler({
     query: getService,
     variables: {
       slug,

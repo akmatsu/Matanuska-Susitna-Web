@@ -1,7 +1,7 @@
 import { BasePage } from '@/components/static/BasePage';
 import { PageListItems } from '@/components/static/Page';
 import { PageFacilities } from '@/components/static/Page/PageFacilities/PageFacilities';
-import { getClient } from '@/utils/apollo/ApolloClient';
+import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -46,7 +46,7 @@ interface Props {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
 
-  const { data } = await getClient().query({
+  const { data } = await getClientHandler({
     query: metaQuery,
     variables: {
       slug: params.slug,
@@ -66,7 +66,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function page(props: Props) {
   const params = await props.params;
 
-  const { data } = await getClient().query({
+  const { data } = await getClientHandler({
     query,
     variables: {
       slug: params.slug,

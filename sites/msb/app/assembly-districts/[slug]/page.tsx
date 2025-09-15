@@ -1,7 +1,7 @@
 import { AssemblyMemberInfo } from '@/components/static/AssemblyDistrictInfo';
 import { BasePage } from '@/components/static/BasePage';
 import { PageAddress } from '@/components/static/Page';
-import { getClient } from '@/utils/apollo/ApolloClient';
+import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 
@@ -24,7 +24,7 @@ export default async function DistrictPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const { data, errors, error } = await getClient().query({
+  const { data, errors, error } = await getClientHandler({
     query: getAssemblyDistrict,
     variables: { slug, now: new Date().toISOString() },
   });

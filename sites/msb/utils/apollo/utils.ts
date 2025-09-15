@@ -1,5 +1,6 @@
 import { type QueryOptions, type OperationVariables } from '@msb/js-sdk/client';
 import { getClient } from './ApolloClient';
+import { NEXT_DEFAULT_REVALIDATE } from '@/configs/config';
 
 export async function getClientHandler<
   T = any,
@@ -7,12 +8,15 @@ export async function getClientHandler<
 >(options: QueryOptions<TVariables, T>) {
   return getClient().query({
     ...options,
+    fetchPolicy: 'network-only', // Always fetch from network to ensure fresh data
     context: {
       ...options.context,
       fetchOptions: {
         ...options.context?.fetchOptions,
         next: {
-          revalidate: options.context?.fetchOptions?.next?.revalidate ?? 60, // Default revalidation time
+          revalidate:
+            options.context?.fetchOptions?.next?.revalidate ??
+            NEXT_DEFAULT_REVALIDATE,
           ...options.context?.fetchOptions?.next,
         },
       },

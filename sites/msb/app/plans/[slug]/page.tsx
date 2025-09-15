@@ -1,12 +1,12 @@
 import { BasePage } from '@/components/static/BasePage';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { PageSection } from '@/components/static/Page';
-import { getClient } from '@/utils/apollo/ApolloClient';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound, redirect } from 'next/navigation';
 import { DropdownButton } from '../../../../../packages/ui/src/components';
 import { PageListItem } from '@/components/static/Page/PageListItem';
 import { PagesLinkList } from '@/components/static/Page/PagesLinkList';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const PlanQuery = gql(`
   query GetPlan($slug: String!, $now: DateTime!) {
@@ -55,7 +55,7 @@ export default async function PlanPage(props: {
 }) {
   const { slug } = await props.params;
 
-  const { data, errors, error } = await getClient().query({
+  const { data, errors, error } = await getClientHandler({
     query: PlanQuery,
     variables: {
       slug,

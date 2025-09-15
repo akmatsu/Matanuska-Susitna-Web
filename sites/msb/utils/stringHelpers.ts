@@ -1,4 +1,3 @@
-import { LinkedItemUnion, PageViewItemUnion } from '@msb/js-sdk/graphql';
 import { plural } from 'pluralize';
 
 export function capitalizeFirstLetter(str: string) {

@@ -38,13 +38,6 @@ export default async function Home() {
         },
       ],
     },
-    context: {
-      fetchOptions: {
-        next: {
-          revalidate: 5,
-        },
-      },
-    },
   });
 
   if (error) {
