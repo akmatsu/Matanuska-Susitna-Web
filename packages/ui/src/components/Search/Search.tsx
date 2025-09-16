@@ -12,6 +12,7 @@ export interface SearchProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string;
   big?: boolean;
+  loading?: boolean;
 }
 
 export function Search({
@@ -23,6 +24,7 @@ export function Search({
   onSubmit,
   onChange,
   defaultValue,
+  loading,
 }: SearchProps) {
   return (
     <form role="search" className={className} onSubmit={onSubmit}>
@@ -38,6 +40,7 @@ export function Search({
           rounded="left"
           fill={true}
           shadow={false}
+          loading={loading}
         />
         <Button
           type="submit"

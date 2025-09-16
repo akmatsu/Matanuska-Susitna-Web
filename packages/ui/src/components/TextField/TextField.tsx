@@ -12,6 +12,7 @@ type TextFieldProps = {
   rounded?: boolean | 'none' | 'pill' | 'left' | 'right';
   shadow?: boolean;
   fill?: boolean;
+  loading?: boolean;
 } & InputProps;
 
 export function TextField({
@@ -25,10 +26,11 @@ export function TextField({
   rounded = true,
   shadow = true,
   fill = false,
+  loading,
   ...fieldProps
 }: TextFieldProps) {
   return (
-    <Field className={clsx({ 'w-full': fill })}>
+    <Field className={clsx('relative', { 'w-full': fill })}>
       <Label
         htmlFor={id}
         className={clsx('font-semibold', { 'sr-only': !showLabel })}
@@ -55,6 +57,11 @@ export function TextField({
         defaultValue={defaultValue}
         {...fieldProps}
       />
+      {loading && (
+        <div className="h-full aspect-square absolute right-0 bottom-0">
+          <span className="icon-[mdi--loading] animate-spin size-full text-primary"></span>
+        </div>
+      )}
     </Field>
   );
 }
