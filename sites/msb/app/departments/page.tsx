@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';
+import { LinkIconCard } from '@/components/static/LinkIconCard';
 
 const pageSize = 'lg';
 
@@ -94,23 +95,13 @@ export default async function DepartmentsPage() {
           <h2 className="text-2xl font-bold mb-4">Departments</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {departments.map((d) => (
-              <Link
-                href={`/departments/${d.slug}`}
+              <LinkIconCard
                 key={d.id}
-                className="flex flex-col md:flex-row gap-3 col-span-1 w-full text-black no-underline group rounded transition-colors overflow-hidden border border-base-lighter hover:border-base-light "
-              >
-                <div className="h-fit md:h-full bg-base-lightest p-4 w-full md:w-fit flex justify-center items-center">
-                  <div className="aspect-square size-20 p-4 rounded-full bg-primary group-hover:bg-primary-dark justify-center items-center flex transition-colors">
-                    <span className={clsx('size-full text-white', d.icon)} />
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold text-primary group-hover:text-primary-dark transitions-colors">
-                    {d.title}
-                  </h3>
-                  <p>{d.description}</p>
-                </div>
-              </Link>
+                href={`/departments/${d.slug}`}
+                icon={d.icon}
+                title={d.title}
+                description={d.description}
+              />
             ))}
           </div>
         </PageContainer>
