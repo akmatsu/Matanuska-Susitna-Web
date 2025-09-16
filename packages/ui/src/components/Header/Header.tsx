@@ -115,10 +115,10 @@ export function Header({
             color="secondary"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Subscribe to Notifications"
-            title="Subscribe to Notifications"
+            aria-label="Get Email Updates"
+            title="Get Email Updates"
           >
-            Subscribe to Notifications
+            Get Email Updates
           </Button>
         </nav>
 
@@ -164,6 +164,20 @@ export function Header({
                   Search
                 </NavLink>
               )}
+              <Button
+                as={NavLink}
+                href="https://public.govdelivery.com/accounts/AKMATSUGOV/subscriber/new"
+                className="before:icon-[mdi--email-fast-outline] before:mr-2 before:size-6 mt-4"
+                size="sm"
+                color="secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Get Email Updates"
+                title="Get Email Updates"
+                block
+              >
+                Get Email Updates
+              </Button>
             </div>
           </div>
         </div>
