@@ -1,3 +1,11 @@
+# [0.32.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.31.0...v0.32.0) (2025-09-16)
+
+
+### Features
+
+* added email subscription button ([7886171](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/7886171778e652605a5dcbdea520ccfea879d819))
+* added email updates button to mobile nav menu ([efe6890](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/efe68904f78e29ddd69b69fb2bfa870d4ff4d02d))
+
 # [0.31.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.5...v0.31.0) (2025-09-16)
 
 
