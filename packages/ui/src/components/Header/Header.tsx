@@ -1,6 +1,7 @@
 'use client';
 import { appConfig } from '@matsugov/app-config';
 import { useState } from 'react';
+import { Button } from '../Button';
 
 type HeaderProps = {
   /** The name of the organization */
@@ -69,7 +70,7 @@ export function Header({
             <span className="text-sm lg:text-2xl font-bold">{orgName}</span>
           </div>
         </NavLink>
-
+        {/* Mobile Nav Toggle */}
         <div className="lg:hidden">
           <button
             onClick={() => setIsOpen(true)}
@@ -81,6 +82,7 @@ export function Header({
           </button>
         </div>
 
+        {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-4">
           <ul className="flex items-center gap-4">
             {navItems.map(({ label, href }) => (
@@ -94,6 +96,7 @@ export function Header({
               </li>
             ))}
           </ul>
+
           {search && (
             <NavLink
               href={searchHref}
@@ -104,6 +107,19 @@ export function Header({
               <span className="icon-[mdi--magnify] size-6"></span>
             </NavLink>
           )}
+          <Button
+            as={NavLink}
+            href="https://public.govdelivery.com/accounts/AKMATSUGOV/subscriber/new"
+            className="before:icon-[mdi--email-fast-outline] before:mr-2 before:size-6"
+            size="sm"
+            color="secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Subscribe to Notifications"
+            title="Subscribe to Notifications"
+          >
+            Subscribe to Notifications
+          </Button>
         </nav>
 
         {/* Mobile Nav Drawer */}
