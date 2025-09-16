@@ -1,3 +1,10 @@
+## [0.33.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.33.0...v0.33.1) (2025-09-16)
+
+
+### Bug Fixes
+
+* added loading indicators and error messages to search ([8003ee3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8003ee349ff15ea5cfed7a2ce1ef9862ceec521c))
+
 # [0.33.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.32.0...v0.33.0) (2025-09-16)
 
 
