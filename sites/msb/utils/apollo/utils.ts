@@ -8,12 +8,11 @@ export async function getClientHandler<
 >(options: QueryOptions<TVariables, T>) {
   return getClient().query({
     ...options,
-    fetchPolicy: 'no-cache', // Always fetch from network
+    fetchPolicy: 'no-cache',
     context: {
       ...options.context,
       fetchOptions: {
         ...options.context?.fetchOptions,
-        cache: 'no-store',
         next: {
           revalidate:
             options.context?.fetchOptions?.next?.revalidate ??

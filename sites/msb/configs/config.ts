@@ -9,4 +9,4 @@ export const primaryNav = [
 export const NEXT_DEFAULT_REVALIDATE = process.env
   .NEXT_PUBLIC_DEFAULT_REVALIDATE
   ? parseInt(process.env.NEXT_PUBLIC_DEFAULT_REVALIDATE, 10)
-  : 60 * 5;
+  : 60;
