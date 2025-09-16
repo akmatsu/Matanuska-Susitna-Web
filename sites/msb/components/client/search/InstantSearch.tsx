@@ -36,12 +36,6 @@ export function InstantSearch() {
                     showMore
                   />
                   <RefinementListDropdown
-                    attribute="tags"
-                    title="Tags"
-                    sortBy={['name', 'count']}
-                    showMore
-                  />
-                  <RefinementListDropdown
                     attribute="communities"
                     title="Communities"
                     sortBy={['name', 'count']}
