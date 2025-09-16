@@ -1,3 +1,10 @@
+# [0.33.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.32.0...v0.33.0) (2025-09-16)
+
+
+### Features
+
+* improved search weights ([e3321b6](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e3321b6b9d5eb26f24d1c8901528365c45e4cac1))
+
 # [0.32.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.31.0...v0.32.0) (2025-09-16)
 
 
