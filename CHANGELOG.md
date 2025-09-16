@@ -1,3 +1,15 @@
+# [0.31.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.5...v0.31.0) (2025-09-16)
+
+
+### Bug Fixes
+
+* fixed lint error ([750a38b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/750a38be4a5a0a466c232333bd355fc4b53466a6))
+
+
+### Features
+
+* updated the government page ([fcab435](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fcab435df5948abe7a7138b84f8359693321b499))
+
 ## [0.30.5](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.30.4...v0.30.5) (2025-09-15)
 
 
