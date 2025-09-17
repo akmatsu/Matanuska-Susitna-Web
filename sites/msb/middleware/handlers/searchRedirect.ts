@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 import { singular } from 'pluralize';
 
 export const SEARCH_MATCHERS = [
-  '/communities',
   '/assembly-districts',
   '/facilities',
   '/parks',

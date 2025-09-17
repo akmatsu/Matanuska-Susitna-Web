@@ -7,7 +7,6 @@ export const config = {
   // Order does not matter in matchers.
   // NOTE: Must be an inline literal for Next.js static analysis. Do not reference imported identifiers.
   matcher: [
-    '/communities',
     '/assembly-districts',
     '/facilities',
     '/parks',
