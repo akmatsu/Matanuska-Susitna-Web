@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { primaryNav } from '@/configs/config';
 import Image from 'next/image';
 import { SiteInfo } from '@/components/static/Header/SiteInfo';
-import Script from 'next/script';
+import { CookieBanner } from '@matsugov/ui/CookieBanner';
 import { signIn } from '@/auth';
 
 export const metadata: Metadata = {
@@ -51,12 +51,8 @@ export default async function RootLayout({
             }}
           />
         </ApolloWrapper>
+        <CookieBanner />
       </body>
-      <Script
-        src="//script.crazyegg.com/pages/scripts/0127/8089.js"
-        async
-        type="text/javascript"
-      />
     </html>
   );
 }
