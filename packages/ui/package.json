@@ -29,7 +29,8 @@
     "./EmailLink": "./src/components/EmailLink.tsx",
     "./AddressLink": "./src/components/AddressLink.tsx",
     "./DropdownButton": "./src/components/DropdownButton.tsx",
-    "./CookieBanner": "./src/components/CookieBanner.tsx"
+    "./CookieBanner": "./src/components/CookieBanner.tsx",
+    "./CookieBannerContext": "./src/components/CookieBannerContext.tsx"
   },
   "scripts": {
     "test": "vitest"

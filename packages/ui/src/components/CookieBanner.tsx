@@ -1,42 +1,32 @@
 'use client';
-import { useEffect, useState } from 'react';
 import { Card, CardBody, CardFooter, CardHeader, CardTitle } from './Card';
 import { Button } from './Button';
+import { useCookieBanner } from './CookieBannerContext';
 
 export function CookieBanner(props: {
   linkAs?: React.ElementType;
   linkHref?: string;
 }) {
-  const [showBanner, setShowBanner] = useState(false);
+  const {
+    shouldShowCookieBanner,
+    hideCookieBanner,
+    acceptCookies,
+    declineCookies,
+  } = useCookieBanner();
 
-  useEffect(() => {
-    const consent = localStorage.getItem('cookie-consent');
-    if (!consent) setShowBanner(true);
-    if (consent === 'accepted') loadAnalytics();
-  }, []);
+  if (!shouldShowCookieBanner) return null;
+
+  const Link = props.linkAs || 'a';
 
   function handleAccept() {
-    localStorage.setItem('cookie-consent', 'accepted');
-    loadAnalytics();
-    setShowBanner(false);
+    acceptCookies();
+    hideCookieBanner();
   }
 
   function handleDecline() {
-    localStorage.setItem('cookie-consent', 'declined');
-    setShowBanner(false);
+    declineCookies();
+    hideCookieBanner();
   }
-
-  function loadAnalytics() {
-    const script = document.createElement('script');
-    script.src = '//script.crazyegg.com/pages/scripts/0127/8089.js';
-    script.async = true;
-    script.type = 'text/javascript';
-    document.body.appendChild(script);
-  }
-
-  if (!showBanner) return null;
-
-  const Link = props.linkAs || 'a';
 
   return (
     <Card className="fixed bottom-0 left-0 m-2 max-w-[530px]" dark>

@@ -3,6 +3,7 @@ import React from 'react';
 import { appConfig } from '@matsugov/app-config';
 import clsx from 'clsx';
 import { PhoneLink } from '../PhoneLink';
+import { useCookieBanner } from '../CookieBannerContext';
 
 export function Footer({
   navLinkAs = 'a',
@@ -31,6 +32,7 @@ export function Footer({
 }) {
   const Link = navLinkAs;
   const Image = imageAs;
+  const { showCookieBanner } = useCookieBanner();
 
   return (
     <footer>
@@ -106,6 +108,12 @@ export function Footer({
                 Login
               </button>
             )}
+            <button
+              className="text-base-darkest underline cursor-pointer"
+              onClick={showCookieBanner}
+            >
+              Change Cookie Settings
+            </button>
           </div>
         </div>
       </div>
