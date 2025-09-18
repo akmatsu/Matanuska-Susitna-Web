@@ -28,7 +28,8 @@
     "./PhoneLink": "./src/components/PhoneLink.tsx",
     "./EmailLink": "./src/components/EmailLink.tsx",
     "./AddressLink": "./src/components/AddressLink.tsx",
-    "./DropdownButton": "./src/components/DropdownButton.tsx"
+    "./DropdownButton": "./src/components/DropdownButton.tsx",
+    "./CookieBanner": "./src/components/CookieBanner.tsx"
   },
   "scripts": {
     "test": "vitest"

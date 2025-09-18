@@ -6,6 +6,7 @@ export type CardProps<T extends React.ElementType = 'div'> = {
   as?: T;
   className?: string;
   containerClassName?: string;
+  dark?: boolean;
 } & React.ComponentProps<T>;
 
 export function Card<T extends React.ElementType = 'div'>({
@@ -13,6 +14,7 @@ export function Card<T extends React.ElementType = 'div'>({
   children,
   className,
   containerClassName,
+  dark,
   ...props
 }: CardProps<T>) {
   const Component = as;
@@ -21,7 +23,11 @@ export function Card<T extends React.ElementType = 'div'>({
     <Component {...props} className={containerClassName}>
       <div
         className={clsx(
-          'bg-white rounded-xs border border-base-lighter flex flex-col gap-4 shadow-md',
+          'rounded flex flex-col gap-4 shadow-md',
+          {
+            'bg-white border border-base-lighter': !dark,
+            'bg-surface-primary text-white border border-base-darkest': dark,
+          },
           className,
         )}
       >
@@ -141,12 +147,7 @@ export function CardFooter({
   className?: string;
 }) {
   return (
-    <div
-      className={clsx(
-        'px-6 last:pb-6 flex flex-row gap-2 first:pt-6',
-        className,
-      )}
-    >
+    <div className={clsx('px-6 last:pb-6 flex gap-2 first:pt-6', className)}>
       {children}
     </div>
   );
