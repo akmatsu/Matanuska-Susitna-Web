@@ -10,6 +10,8 @@ import Image from 'next/image';
 import { SiteInfo } from '@/components/static/Header/SiteInfo';
 import { CookieBanner } from '@matsugov/ui/CookieBanner';
 import { signIn } from '@/auth';
+import { CookieBannerProvider } from '@matsugov/ui/CookieBannerContext';
+import { AnalyticsScript } from '@/components/client/AnalyticsScript';
 
 export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',
@@ -34,24 +36,27 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <ApolloWrapper apiUrl={process.env.NEXT_PUBLIC_API_URL ?? ''}>
-          <SiteInfo />
-          <Header navItems={primaryNav} navLinkAs={Link} imageAs={Image} />
-          <main id="main-content" className="position-relative">
-            {children}
-          </main>
-          <FeedbackButton />
-          <Footer
-            navLinkAs={Link}
-            navItems={primaryNav}
-            imageAs={Image}
-            contactHref="/departments"
-            signIn={async () => {
-              'use server';
-              await signIn();
-            }}
-          />
+          <CookieBannerProvider>
+            <SiteInfo />
+            <Header navItems={primaryNav} navLinkAs={Link} imageAs={Image} />
+            <main id="main-content" className="position-relative">
+              {children}
+            </main>
+            <FeedbackButton />
+            <Footer
+              navLinkAs={Link}
+              navItems={primaryNav}
+              imageAs={Image}
+              contactHref="/departments"
+              signIn={async () => {
+                'use server';
+                await signIn();
+              }}
+            />
+            <CookieBanner />
+            <AnalyticsScript />
+          </CookieBannerProvider>
         </ApolloWrapper>
-        <CookieBanner />
       </body>
     </html>
   );
