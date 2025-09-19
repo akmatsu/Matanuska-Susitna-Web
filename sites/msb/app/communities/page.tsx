@@ -121,7 +121,7 @@ export default async function Communities() {
                   </ul>
                 </section>
                 <section>
-                  <h3 className="text-lg">Officers & Boards</h3>
+                  <h3 className="text-lg">Communities</h3>
                   <ul className="not-prose grid grid-cols-2 gap-2">
                     {towns?.map((town) => (
                       <li key={town.id}>
