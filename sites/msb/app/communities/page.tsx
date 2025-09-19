@@ -81,11 +81,11 @@ export default async function Communities() {
   });
 
   const page = data.landingPage;
+  if (!page) return notFound();
+
   const cities = data.cities;
   const towns = data.towns;
   const events = data.events;
-  if (!page) return notFound();
-
   const highlights = page.highlights;
 
   return (
