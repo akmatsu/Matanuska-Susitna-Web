@@ -6,6 +6,8 @@ import { PageContainer } from '@/components/static/Page';
 import clsx from 'clsx';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
+import { LinkButton } from '@/components/static/LinkButton';
+import { Link } from '@/components/static/Link';
 
 const query = gql(`
   query CommunitiesPage {
@@ -33,6 +35,7 @@ const query = gql(`
     }) {
       id
       title
+      slug
     }
 
     towns: communities(where: {
@@ -44,6 +47,7 @@ const query = gql(`
     }) {
       id
       title
+      slug
     }
   }
 `);
@@ -85,7 +89,23 @@ export default async function Communities() {
                   <h3 className="mt-0 text-lg">Cities</h3>
                   <ul className="not-prose flex flex-col sm:flex-row gap-4 items-stretch justify-center">
                     {cities?.map((city) => (
-                      <li key={city.id}>{city.title}</li>
+                      <li key={city.id}>
+                        <LinkButton href={`/communities/${city.slug}`}>
+                          {city.title}
+                        </LinkButton>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+                <section>
+                  <h3 className="text-lg">Officers & Boards</h3>
+                  <ul className="not-prose grid grid-cols-2 gap-2">
+                    {towns?.map((town) => (
+                      <li key={town.id}>
+                        <Link href={`/communities/${town.slug}`}>
+                          {town.title}
+                        </Link>
+                      </li>
                     ))}
                   </ul>
                 </section>
