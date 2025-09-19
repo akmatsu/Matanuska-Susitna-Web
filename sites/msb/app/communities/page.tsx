@@ -12,7 +12,7 @@ import { HomePageHighlightCard } from '@/components/static/landing/HomePageHighl
 import { EventInfo } from '@/components/static/Page/EventInfo';
 
 const query = gql(`
-  query CommunitiesPage {
+  query CommunitiesPage($now: DateTime!) {
     landingPage(where: {
       title: "Communities"
     }) {
@@ -61,6 +61,9 @@ const query = gql(`
                equals: "published"
             }
          }
+      }
+      startDate:  {
+         gte: $now
       }
     }) {
       id
