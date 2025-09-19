@@ -1,3 +1,10 @@
+## [0.34.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.34.1...v0.34.2) (2025-09-19)
+
+
+### Bug Fixes
+
+* events page only shows upcoming events, not old events ([1d6687f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1d6687fd8f2db7b5aeb97e0e3a998fd75e75c671))
+
 ## [0.34.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.34.0...v0.34.1) (2025-09-19)
 
 
