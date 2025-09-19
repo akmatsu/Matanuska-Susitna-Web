@@ -75,6 +75,9 @@ const query = gql(`
 export default async function Communities() {
   const { data } = await getClientHandler({
     query,
+    variables: {
+      now: new Date().toISOString(),
+    },
   });
 
   const page = data.landingPage;
