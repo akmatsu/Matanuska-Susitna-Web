@@ -1,3 +1,10 @@
+## [0.34.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.34.0...v0.34.1) (2025-09-19)
+
+
+### Bug Fixes
+
+* fixed communities title ([b81c850](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/b81c850c914af4aca938c1ec10cc4a98df463f6c))
+
 # [0.34.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.33.2...v0.34.0) (2025-09-19)
 
 
