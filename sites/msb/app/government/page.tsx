@@ -167,7 +167,7 @@ export default async function GovernmentPage() {
               </section>
             </ProseWrapper>
           </div>
-          {highlights && (
+          {!!highlights?.length && (
             <div className="col-span-5 sm:col-span-2">
               <ul className="not-prose flex flex-col gap-4">
                 {highlights.map((item) => (
