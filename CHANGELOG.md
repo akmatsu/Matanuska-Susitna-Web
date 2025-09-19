@@ -1,3 +1,13 @@
+# [0.34.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.33.2...v0.34.0) (2025-09-19)
+
+
+### Features
+
+* can now change cookie settings from the footer ([1a3f688](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1a3f688baf2fe52b617301a5733419f7d6b8145f))
+* created the cookie policy banner ([dd0bf3d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/dd0bf3d60042d81d8b5f95433e8b65de1db40e82))
+* finished creating the communities page ([f4c1e29](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f4c1e292f8e886b0c2bcf50c7d2d6d6f29b2a15d))
+* fixed public notice sorting ([25dd4d1](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/25dd4d103f7ffb0872944140170039dafb9fc38e))
+
 ## [0.33.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.33.1...v0.33.2) (2025-09-16)
 
 
