@@ -42,6 +42,7 @@ export function ElectionPollingPlaces(props: {
         <LinkButton
           href="https://matsugov.us/maps/polling-places-and-precincts"
           className="not-prose"
+          color="primary"
         >
           View Polling Places & Precincts
         </LinkButton>

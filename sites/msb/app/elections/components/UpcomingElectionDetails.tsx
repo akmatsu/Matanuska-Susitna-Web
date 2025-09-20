@@ -1,9 +1,8 @@
-import { DocumentLinkButton } from '@/components/static/DocumentLink';
+import { DateTime } from '@/components/client/time';
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
-import { formatDate } from '@/utils/datetimehHelpers';
-import { DropdownButton } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import { format } from 'date-fns';
 
 const UpcomingElectionDetailsFragment = gql(`
   fragment UpcomingElectionDetails on Election {
@@ -13,42 +12,6 @@ const UpcomingElectionDetailsFragment = gql(`
     earlyVotingStartDate
     absenteeApplicationDeadline
     voterRegistrationDeadline
-
-    electionBrochure {
-      id
-      title
-      file {
-        url
-      }
-      ...DocumentLink
-    }
-
-    electionBallots {
-      id
-      title
-      file {
-        url
-      }
-      ...DocumentLink
-    }
-
-    propositions {
-      id
-      title
-      file {
-        url
-      }
-      ...DocumentLink
-    }
-
-    candidates {
-      id
-      title
-      file {
-        url
-      }
-      ...DocumentLink
-    }
   }
 `);
 
@@ -61,51 +24,47 @@ export function UpcomingElectionDetails(props: {
   const tableValues = [
     {
       label: 'Election Date',
-      value: data.electionDate ? formatDate(data.electionDate) : 'TBD',
+      value: data.electionDate ? (
+        <DateTime date={data.electionDate} formatStr="PPPp" />
+      ) : (
+        'TBD'
+      ),
     },
     {
       label: 'Candidate Filing Period',
       value:
-        data.candidateFilingStartDate && data.candidateFilingDeadline
-          ? `${formatDate(data.candidateFilingStartDate)} - ${formatDate(data.candidateFilingDeadline)}`
-          : 'TBD',
+        data.candidateFilingStartDate && data.candidateFilingDeadline ? (
+          <>
+            <DateTime date={data.candidateFilingStartDate} formatStr="PPPp" /> -{' '}
+            <DateTime date={data.candidateFilingDeadline} formatStr="PPPp" />
+          </>
+        ) : (
+          'TBD'
+        ),
     },
     {
       label: 'Early Voting Begins',
-      value: data.earlyVotingStartDate
-        ? formatDate(data.earlyVotingStartDate)
-        : 'TBD',
+      value: data.earlyVotingStartDate ? (
+        <DateTime date={data.earlyVotingStartDate} formatStr="PPPp" />
+      ) : (
+        'TBD'
+      ),
     },
     {
       label: 'Absentee Application Deadline',
-      value: data.absenteeApplicationDeadline
-        ? formatDate(data.absenteeApplicationDeadline)
-        : 'TBD',
+      value: data.absenteeApplicationDeadline ? (
+        <DateTime date={data.absenteeApplicationDeadline} formatStr="PPPp" />
+      ) : (
+        'TBD'
+      ),
     },
     {
       label: 'Voter Registration Deadline',
-      value: data.voterRegistrationDeadline
-        ? formatDate(data.voterRegistrationDeadline)
-        : 'TBD',
-    },
-  ];
-
-  const documents = [
-    {
-      label: 'Election Brochure',
-      value: data.electionBrochure,
-    },
-    {
-      label: 'Election Ballots',
-      value: data.electionBallots,
-    },
-    {
-      label: 'Propositions',
-      value: data.propositions,
-    },
-    {
-      label: 'Candidates',
-      value: data.candidates,
+      value: data.voterRegistrationDeadline ? (
+        <DateTime date={data.voterRegistrationDeadline} formatStr="PPPp" />
+      ) : (
+        'TBD'
+      ),
     },
   ];
 
@@ -123,28 +82,6 @@ export function UpcomingElectionDetails(props: {
           </tbody>
         </table>
       </ProseWrapper>
-      <div className="flex gap-4 justify-center flex-wrap my-4">
-        {documents.map((doc, index) => {
-          if (!doc.value) return null;
-          if (Array.isArray(doc.value)) {
-            if (doc.value.length === 0) return null;
-            return (
-              <DropdownButton
-                key={index}
-                label={doc.label}
-                items={doc.value.map((item) => ({
-                  label: item.title || '',
-                  value: item.id,
-                  href: item.file?.url,
-                }))}
-              />
-            );
-          } else {
-            if (!doc.value) return null;
-            return <DocumentLinkButton data={doc.value} key={doc.value.id} />;
-          }
-        })}
-      </div>
     </PageBodySection>
   );
 }

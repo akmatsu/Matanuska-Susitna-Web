@@ -1,14 +1,11 @@
+import { DateTime } from '@/components/client/time';
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { CodeLink } from '@/components/static/CodeLink';
 import { DocumentLink } from '@/components/static/DocumentLink';
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
-import {
-  formatDate,
-  formatDateDayMonthYear,
-  getDayOfWeekFromDate,
-} from '@/utils/datetimehHelpers';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import { format } from 'date-fns';
 
 const CandidateFilingInfoFragment = gql(`
   fragment CandidateFilingInfo on Election {
@@ -53,11 +50,11 @@ export function CandidateFilingInfo(props: {
         <p>
           The candidate filing period for {data?.title} starts on{' '}
           <span className="font-semibold">
-            {formatDate(data?.candidateFilingStartDate)}
+            <DateTime date={data?.candidateFilingStartDate} formatStr="PPPp" />
           </span>{' '}
           and ends on{' '}
           <span className="font-semibold">
-            {formatDate(data?.candidateFilingDeadline)}
+            <DateTime date={data?.candidateFilingDeadline} formatStr="PPPp" />
           </span>
         </p>
         <ul>
@@ -103,8 +100,7 @@ export function CandidateFilingInfo(props: {
         <p>
           The Matanuska-Susitna Borough will hold a regular election on{' '}
           <span className="font-semibold">
-            {getDayOfWeekFromDate(data.electionDate)},{' '}
-            {formatDateDayMonthYear(data.electionDate)}
+            <DateTime date={data.electionDate} formatStr="PPPP" />
           </span>
           .
         </p>

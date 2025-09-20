@@ -1,7 +1,7 @@
+import { DateTime } from '@/components/client/time';
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { PhoneLink } from '@/components/static/PhoneLink';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
-import { formatDate } from '@/utils/datetimehHelpers';
 import { DataTable } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { format, subDays } from 'date-fns';
@@ -106,11 +106,16 @@ export function AbsenteeVotingInfo(props: {
         </p>
         <p>
           Early/Absentee In-Person voting will begin on{' '}
-          {formatDate(currentElection?.earlyVotingStartDate, {
-            hideTime: true,
-          })}
-          , and continue through Monday, November 3, 2025, at the following
-          locations and times:
+          <DateTime
+            date={currentElection?.earlyVotingStartDate}
+            formatStr="PPP"
+          />
+          , and continue through{' '}
+          <DateTime
+            date={subDays(new Date(currentElection?.electionDate), 1)}
+            formatStr="PPP"
+          />
+          , at the following locations and times:
         </p>
         <h2 className="mb-4">Early Voting Locations</h2>
       </ProseWrapper>

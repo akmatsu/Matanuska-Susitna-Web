@@ -2,9 +2,10 @@ import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { gql } from '../../../../../packages/sdk/src/graphql/gql';
 import { FragmentType, getFragmentData } from '@msb/js-sdk/gql';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
-import { formatDate, getYear } from '@/utils/datetimehHelpers';
 import { Link } from '@/components/static/Link';
 import { PhoneLink } from '@/components/static/PhoneLink';
+import { format } from 'date-fns';
+import { DateTime } from '@/components/client/time';
 
 const ElectionVoterInformationFragment = gql(`
   fragment ElectionVoterInformation on Election {    
@@ -32,8 +33,9 @@ export function ElectionVoterInformation(props: {
 
         {data?.electionDate && data?.voterRegistrationDeadline && (
           <p className="font-bold">
-            The deadline to qualify to vote in the {getYear(data.electionDate)}{' '}
-            Election is {formatDate(data.voterRegistrationDeadline)}.
+            The deadline to qualify to vote in the{' '}
+            <DateTime date={data.electionDate} formatStr="yyyy" /> Election is{' '}
+            <DateTime date={data.voterRegistrationDeadline} formatStr="PPPp" />.
           </p>
         )}
         <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">

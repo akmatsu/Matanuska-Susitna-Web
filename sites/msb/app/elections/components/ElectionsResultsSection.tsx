@@ -1,10 +1,11 @@
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
-import { formatDate } from '@/utils/datetimehHelpers';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { ElectionResultsList } from './ElectionResultsList';
 import { LinkButton } from '@/components/static/LinkButton';
+import { format } from 'date-fns';
+import { DateTime } from '@/components/client/time';
 
 const ElectionResultFragment = gql(`
   fragment ElectionResult on Election {
@@ -54,7 +55,7 @@ export function ElectionResultsSection(props: {
             The results of {data.title} will be posted after the elections takes
             place on{' '}
             <span className="font-semibold">
-              {formatDate(data.electionDate, { hideTime: true })}
+              <DateTime date={data.electionDate} formatStr="PPP" />
             </span>
             .
           </p>
