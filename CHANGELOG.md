@@ -1,3 +1,10 @@
+## [0.34.5](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.34.4...v0.34.5) (2025-09-20)
+
+
+### Bug Fixes
+
+* fixes and improvements to elections page ([1933e68](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1933e68b11e6e44b5991e13d0796ed58bca0fe4b))
+
 ## [0.34.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.34.3...v0.34.4) (2025-09-19)
 
 
