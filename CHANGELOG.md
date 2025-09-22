@@ -1,3 +1,10 @@
+# [0.39.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.38.0...v0.39.0) (2025-09-22)
+
+
+### Features
+
+* pagesections automatically get IDs now ([f8f4c33](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f8f4c33dde407f3367045f933bfa8b553c06843b))
+
 # [0.38.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.37.0...v0.38.0) (2025-09-22)
 
 
