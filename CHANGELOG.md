@@ -1,3 +1,10 @@
+# [0.38.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.37.0...v0.38.0) (2025-09-22)
+
+
+### Features
+
+* now displaying times in alaska time ([37de462](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/37de4626e0cbf50eb2687c9b1e188f2a1fbcb23c))
+
 # [0.37.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.36.0...v0.37.0) (2025-09-22)
 
 
