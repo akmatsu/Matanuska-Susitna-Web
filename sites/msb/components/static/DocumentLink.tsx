@@ -4,7 +4,7 @@ import { LinkButton } from './LinkButton';
 import { Link } from './Link';
 import clsx from 'clsx';
 
-const DocumentLinkFragment = gql(`
+const documentLinkFragment = gql(`
   fragment DocumentLink on Document {
     title
     file {
@@ -16,7 +16,7 @@ const DocumentLinkFragment = gql(`
 
 type DocumentLinkProps<C extends ElementType> = {
   as?: C;
-  data?: FragmentType<typeof DocumentLinkFragment> | null;
+  data?: FragmentType<typeof documentLinkFragment> | null;
   hideIcon?: boolean;
 } & Omit<ComponentProps<C>, 'href' | 'hideExternalIcon'>;
 
@@ -29,7 +29,7 @@ export function DocumentLink<C extends ElementType = typeof Link>({
   as,
   ...props
 }: DocumentLinkProps<C>) {
-  const data = getFragmentData(DocumentLinkFragment, propsData);
+  const data = getFragmentData(documentLinkFragment, propsData);
 
   if (!data?.file?.url) {
     return null;

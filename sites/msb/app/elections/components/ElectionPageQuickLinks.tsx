@@ -17,6 +17,7 @@ const ElectionPageQuickLinksFragment = gql(`
         ...DocumentLink
       }
     }
+
     electionBrochure {
       id
       title
@@ -36,15 +37,6 @@ const ElectionPageQuickLinksFragment = gql(`
     }
 
     propositions {
-      id
-      title
-      file {
-        url
-      }
-      ...DocumentLink
-    }
-
-    candidates {
       id
       title
       file {
@@ -73,10 +65,6 @@ export function ElectionPageQuickLinks(props: {
     {
       label: 'Propositions',
       value: data.propositions,
-    },
-    {
-      label: 'Candidates',
-      value: data.candidates,
     },
   ];
 
