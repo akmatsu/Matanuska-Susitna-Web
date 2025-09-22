@@ -91,21 +91,21 @@ export default async function PlanPage(props: {
         useSideBar ? (
           <>
             {page.currentDocument?.document && (
-              <PageSection noMargins title="Current Adopted Plan">
+              <PageSection title="Current Adopted Plan">
                 <DocumentLinkButton data={page.currentDocument.document} block>
                   {page.currentDocument.label}
                 </DocumentLinkButton>
               </PageSection>
             )}
             {page.draftDocument?.document && (
-              <PageSection noMargins title="Draft Plan">
+              <PageSection title="Draft Plan">
                 <DocumentLinkButton data={page.draftDocument.document} block>
                   {page.draftDocument.label}
                 </DocumentLinkButton>
               </PageSection>
             )}
             {!!page.pastDocuments?.length && (
-              <PageSection noMargins title="Past Plans">
+              <PageSection title="Past Plans">
                 {page.pastDocuments.length > 2 ? (
                   page.pastDocuments.map((doc) => (
                     <DocumentLinkButton key={doc.id} data={doc.document} block>
@@ -128,16 +128,12 @@ export default async function PlanPage(props: {
               </PageSection>
             )}
             {page.parent && (
-              <PageSection noMargins title="Parent Plan">
+              <PageSection title="Parent Plan">
                 <PageListItem item={page.parent} title="plan" />
               </PageSection>
             )}
 
-            <PagesLinkList
-              noMargins
-              data={page.components}
-              title="Related Plans"
-            />
+            <PagesLinkList data={page.components} title="Related Plans" />
           </>
         ) : undefined
       }

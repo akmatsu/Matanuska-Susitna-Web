@@ -50,7 +50,7 @@ export async function BoardMeetings(props: {
   if (!items || items.length === 0) return null;
 
   return (
-    <PageSection title="Upcoming Meetings" noMargins>
+    <PageSection title="Upcoming Meetings">
       <ul className="grid grid-cols-1 gap-4">
         {items?.map((event) => (
           <MeetingCard

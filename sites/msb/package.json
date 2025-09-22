@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client-integration-nextjs": "^0.12.3",
+    "@date-fns/tz": "^1.4.1",
     "@googleapis/calendar": "^11.0.1",
     "@matsugov/ui": "workspace:^",
     "@msb/js-sdk": "workspace:^",

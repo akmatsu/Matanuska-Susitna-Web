@@ -25,7 +25,7 @@ export function AssemblyMemberInfo(props: {
 }) {
   const page = getFragmentData(AssemblyMemberInfoFragment, props.page);
   return (
-    <PageSection title="Assembly Member" noMargins>
+    <PageSection title="Assembly Member">
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between gap-4">

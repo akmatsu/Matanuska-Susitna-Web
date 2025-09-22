@@ -32,7 +32,7 @@ export function PagePublicNotices(props: {
   });
 
   return (
-    <PageSection title="Public Notices & Announcements" noMargins>
+    <PageSection title="Public Notices & Announcements">
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
         {sorted.map((notice, i) => (
           <PublicNoticeCard

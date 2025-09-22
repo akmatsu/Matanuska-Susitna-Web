@@ -16,7 +16,7 @@ export function PageTopics(props: {
   if (!topics?.length) return null;
 
   return (
-    <PageSection title="Related Topics" noMargins>
+    <PageSection title="Related Topics">
       <ul>
         {topics.map((topic) => (
           <TopicItem topic={topic} key={topic.id} className="my-2" />

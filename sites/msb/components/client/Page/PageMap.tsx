@@ -17,7 +17,7 @@ export function PageMap(props: {
   if (!page?.title) return null;
 
   return (
-    <PageSection title="Map" noMargins>
+    <PageSection title="Map">
       <div className="aspect-1/1 w-full overflow-hidden border rounded-sm">
         <MapWrapper {...props.map} itemId={page.title.toUpperCase()} />
       </div>

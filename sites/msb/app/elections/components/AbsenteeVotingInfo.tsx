@@ -1,10 +1,9 @@
-import { DateTime } from '@/components/client/time';
-import { PageBodySection } from '@/components/static/Page/PageBodySection';
+import { DateTime } from '@/components/client/DateTime';
+import { PageSection } from '@/components/static/Page';
 import { PhoneLink } from '@/components/static/PhoneLink';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
-import { DataTable } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { format, subDays } from 'date-fns';
+import { subDays } from 'date-fns';
 
 const GetAbsenteeVotingInfo = gql(`
   fragment GetAbsenteeVotingInfo on Query {
@@ -19,27 +18,8 @@ const GetAbsenteeVotingInfo = gql(`
         name
         ...ContactFields
       }
-      earlyVotingLocations(orderBy:  {
-         order: asc
-      }) {
-        order
-        title
-        address {
-          lineOne
-          lineTwo
-          city
-          state
-          zip
-        }
-        hours {
-          id
-          day
-          open
-          close
-        }
-      }
-
     }
+
     elections(take: 1, orderBy: { electionDate: desc}) {
       earlyVotingStartDate
       electionDate
@@ -61,7 +41,7 @@ export function AbsenteeVotingInfo(props: {
   if (!page) return null;
 
   return (
-    <PageBodySection title="Early/Absentee Voting Information">
+    <PageSection title="Early/Absentee Voting Information" headerSize="lg">
       <ProseWrapper>
         <p>
           Any registered voter of the Borough may apply for a ballot to be
@@ -117,81 +97,7 @@ export function AbsenteeVotingInfo(props: {
           />
           , at the following locations and times:
         </p>
-        <h2 className="mb-4">Early Voting Locations</h2>
       </ProseWrapper>
-      {page?.earlyVotingLocations && (
-        <DataTable
-          data={page.earlyVotingLocations}
-          columns={[
-            {
-              key: 'title',
-              label: 'Location',
-            },
-            {
-              key: 'address',
-              label: 'Address',
-              cell: (_, row) =>
-                row.address && (
-                  <span>
-                    {row.address.lineOne},{' '}
-                    {row.address.lineTwo && `${row.address.lineTwo}, `}
-                    {row.address.city}, {row.address.state} {row.address.zip}
-                  </span>
-                ),
-            },
-            {
-              key: 'hours',
-              label: 'Hours',
-              cell: (_, row) =>
-                row.hours?.length ? (
-                  row.hours.map((hour) => (
-                    <div key={hour.id}>
-                      <span className="font-semibold">{hour.day}</span>:{' '}
-                      {hour.open && (
-                        <span>
-                          {format(
-                            new Date().setHours(
-                              +hour.open.split(':')[0],
-                              +hour.open.split(':')[1],
-                            ),
-                            'h:mm a',
-                          )}
-                        </span>
-                      )}{' '}
-                      -{' '}
-                      {hour.close && (
-                        <span>
-                          {format(
-                            new Date().setHours(
-                              +hour.close.split(':')[0],
-                              +hour.close.split(':')[1],
-                            ),
-                            'h:mm a',
-                          )}
-                        </span>
-                      )}
-                    </div>
-                  ))
-                ) : (
-                  <>
-                    <span className="font-semibold">
-                      {format(
-                        currentElection?.earlyVotingStartDate,
-                        'MMM d, yyyy',
-                      )}{' '}
-                      -{' '}
-                      {format(
-                        subDays(currentElection?.electionDate, 1),
-                        'MMM d, yyyy',
-                      )}
-                    </span>
-                    : <span>Normal business hours</span>
-                  </>
-                ),
-            },
-          ]}
-        />
-      )}
-    </PageBodySection>
+    </PageSection>
   );
 }

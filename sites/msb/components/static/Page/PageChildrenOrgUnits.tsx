@@ -15,7 +15,7 @@ export function PageChildrenOrgUnits(props: {
   const items = getFragmentData(childrenOrgUnitsFragment, props.items);
   if (items?.length)
     return (
-      <PageSection title="Division" noMargins>
+      <PageSection title="Division">
         <ul className="flex flex-col gap-2">
           {items.map((child) => (
             <OrgUnitCard orgUnit={child} key={child.id} />

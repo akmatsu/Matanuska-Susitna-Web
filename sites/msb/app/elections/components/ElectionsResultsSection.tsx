@@ -1,10 +1,10 @@
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
-import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { ElectionResultsList } from './ElectionResultsList';
 import { LinkButton } from '@/components/static/LinkButton';
-import { DateTime } from '@/components/client/time';
+import { DateTime } from '@/components/client/DateTime';
+import { PageSection } from '@/components/static/Page';
 
 const ElectionResultFragment = gql(`
   fragment ElectionResult on Election {
@@ -39,7 +39,7 @@ export function ElectionResultsSection(props: {
   }
 
   return (
-    <PageBodySection title="Election Results">
+    <PageSection title="Election Results" headerSize="lg">
       <ProseWrapper>
         {data.result?.document ? (
           <>
@@ -66,6 +66,6 @@ export function ElectionResultsSection(props: {
           View All Results
         </LinkButton>
       </div>
-    </PageBodySection>
+    </PageSection>
   );
 }

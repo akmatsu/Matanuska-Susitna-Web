@@ -16,7 +16,7 @@ export function PageHours(props: {
   const hours = getFragmentData(hourListFragment, props.hours);
   if (hours?.length)
     return (
-      <PageSection title="Hours" noMargins>
+      <PageSection title="Hours">
         <div className="flex flex-col gap-4">
           <Card>
             <CardBody>

@@ -78,7 +78,7 @@ export default async function BoardPage(props: {
       rightSide={
         <>
           {page.directory && (
-            <PageSection noMargins title="Directory">
+            <PageSection title="Directory">
               <DocumentLinkButton
                 data={page.directory}
                 block

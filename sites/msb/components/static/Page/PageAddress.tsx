@@ -20,7 +20,7 @@ export function PageAddress(props: {
 
   if (address) {
     return (
-      <PageSection title="Address" noMargins>
+      <PageSection title="Address">
         <div className="flex flex-col">
           <Card>
             <CardHeader>

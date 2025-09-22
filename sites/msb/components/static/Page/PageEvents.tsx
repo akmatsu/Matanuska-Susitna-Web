@@ -24,7 +24,7 @@ export function PageEvents(props: {
   if (!data?.events?.length) return null;
 
   return (
-    <PageSection title="Upcoming Events" noMargins>
+    <PageSection title="Upcoming Events">
       <ul>
         {data.events.map((event) => (
           <EventInfo key={event.id} data={event} />

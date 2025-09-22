@@ -21,7 +21,7 @@ export function PageContacts(props: {
   const contacts = getFragmentData(contactListFragment, props.contacts);
   if (primaryContact || !!contacts?.length)
     return (
-      <PageSection title="Contact" noMargins className={props.className}>
+      <PageSection title="Contact" className={props.className}>
         <ul className="flex flex-col gap-4 mb-4">
           {primaryContact && <ContactCard contact={primaryContact} isPrimary />}
           {contacts &&

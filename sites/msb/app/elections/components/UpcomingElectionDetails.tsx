@@ -1,8 +1,8 @@
-import { DateTime } from '@/components/client/time';
-import { PageBodySection } from '@/components/static/Page/PageBodySection';
+import { DateTime } from '@/components/client/DateTime';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { format } from 'date-fns';
+import { TimezoneName } from '@/components/client/TimezoneName';
+import { PageSection } from '@/components/static/Page';
 
 const UpcomingElectionDetailsFragment = gql(`
   fragment UpcomingElectionDetails on Election {
@@ -25,7 +25,7 @@ export function UpcomingElectionDetails(props: {
     {
       label: 'Election Date',
       value: data.electionDate ? (
-        <DateTime date={data.electionDate} formatStr="PPPp" />
+        <DateTime date={data.electionDate} formatStr="PPP" />
       ) : (
         'TBD'
       ),
@@ -69,7 +69,7 @@ export function UpcomingElectionDetails(props: {
   ];
 
   return (
-    <PageBodySection title="Upcoming Election Details">
+    <PageSection title="Upcoming Election Details" headerSize="lg">
       <ProseWrapper>
         <table>
           <tbody>
@@ -82,6 +82,6 @@ export function UpcomingElectionDetails(props: {
           </tbody>
         </table>
       </ProseWrapper>
-    </PageBodySection>
+    </PageSection>
   );
 }

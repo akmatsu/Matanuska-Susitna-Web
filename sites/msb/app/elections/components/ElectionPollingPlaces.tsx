@@ -1,6 +1,6 @@
 import { Link } from '@/components/static/Link';
 import { LinkButton } from '@/components/static/LinkButton';
-import { PageBodySection } from '@/components/static/Page/PageBodySection';
+import { PageSection } from '@/components/static/Page';
 import { PhoneLink } from '@/components/static/PhoneLink';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
@@ -25,7 +25,7 @@ export function ElectionPollingPlaces(props: {
   const data = getFragmentData(ElectionPollingPlacesFragment, props.data);
 
   return (
-    <PageBodySection title="Polling Places & Precincts">
+    <PageSection title="Polling Places & Precincts" headerSize="lg">
       <ProseWrapper>
         <p>
           The precincts and polling places for the Matanuska-Susitna Borough are
@@ -47,6 +47,6 @@ export function ElectionPollingPlaces(props: {
           View Polling Places & Precincts
         </LinkButton>
       </ProseWrapper>
-    </PageBodySection>
+    </PageSection>
   );
 }

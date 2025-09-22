@@ -1,5 +1,5 @@
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
-import { PageBodySection } from '@/components/static/Page/PageBodySection';
+import { PageSection } from '@/components/static/Page';
 import { PhoneLink } from '@/components/static/PhoneLink';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
@@ -42,7 +42,7 @@ export function ElectionOfficialsInfo(props: {
   }
 
   return (
-    <PageBodySection title="Elections Officials Wanted">
+    <PageSection title="Elections Officials Wanted" headerSize="lg">
       <ProseWrapper>
         <p className="font-bold">
           Are you interested in serving as an Election Official for the next
@@ -70,6 +70,6 @@ export function ElectionOfficialsInfo(props: {
           Training and compensation are provided.
         </p>
       </ProseWrapper>
-    </PageBodySection>
+    </PageSection>
   );
 }

@@ -1,11 +1,11 @@
-import { PageBodySection } from '@/components/static/Page/PageBodySection';
 import { gql } from '../../../../../packages/sdk/src/graphql/gql';
 import { FragmentType, getFragmentData } from '@msb/js-sdk/gql';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { Link } from '@/components/static/Link';
 import { PhoneLink } from '@/components/static/PhoneLink';
 import { format } from 'date-fns';
-import { DateTime } from '@/components/client/time';
+import { DateTime } from '@/components/client/DateTime';
+import { PageSection } from '@/components/static/Page';
 
 const ElectionVoterInformationFragment = gql(`
   fragment ElectionVoterInformation on Election {    
@@ -20,7 +20,7 @@ export function ElectionVoterInformation(props: {
   const data = getFragmentData(ElectionVoterInformationFragment, props.data);
 
   return (
-    <PageBodySection title="Voter Information and Resources">
+    <PageSection title="Voter Information and Resources" headerSize="lg">
       <ProseWrapper>
         <p>
           In order for your vote to be counted for any regular Borough election,
@@ -72,6 +72,6 @@ export function ElectionVoterInformation(props: {
           <PhoneLink phoneNumber="9078618683" /> for more information.
         </p>
       </ProseWrapper>
-    </PageBodySection>
+    </PageSection>
   );
 }

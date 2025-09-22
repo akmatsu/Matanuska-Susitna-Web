@@ -14,11 +14,13 @@ import { ElectionResultsSection } from './components/ElectionsResultsSection';
 import { AbsenteeVotingInfo } from './components/AbsenteeVotingInfo';
 import { PageViewTracker } from '@/components/client/PageViewTracker';
 import { getClientHandler } from '@/utils/apollo/utils';
+import { EarlyVotingLocations } from './components/EarlyVotingLocations';
 
 const getElections = gql(`
   query GetElections {
     ...ElectionResults
     ...GetAbsenteeVotingInfo
+    ...GetEarlyVotingLocations
     electionsPage {
       heroImage
       ...ElectionPageHeader
@@ -55,17 +57,21 @@ export default async function ElectionsPage() {
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
       <PageContainer size="md" breakPoint="sm" hideBreadcrumbs>
-        <ElectionPageHeader data={page} />
-        <ElectionPageQuickLinks data={currentElection} />
-        <UpcomingElectionDetails data={currentElection} />
-        <ElectionVoterInformation data={currentElection} />
-        <ElectionOfficialsInfo data={currentElection} contactData={page} />
-        <CandidateFilingInfo data={currentElection} />
-        <AbsenteeVotingInfo data={data} />
-
-        <ElectionPollingPlaces data={page} />
-        <ElectionResultsSection data={currentElection} results={data} />
-        <ElectionPageContact data={page} />
+        <div className="flex flex-col gap-16 col-span-5 md:col-span-3">
+          <div>
+            <ElectionPageHeader data={page} />
+            <ElectionPageQuickLinks data={currentElection} />
+          </div>
+          <UpcomingElectionDetails data={currentElection} />
+          <ElectionVoterInformation data={currentElection} />
+          <ElectionOfficialsInfo data={currentElection} contactData={page} />
+          <CandidateFilingInfo data={currentElection} />
+          <AbsenteeVotingInfo data={data} />
+          <EarlyVotingLocations data={data} />
+          <ElectionPollingPlaces data={page} />
+          <ElectionResultsSection data={currentElection} results={data} />
+          <ElectionPageContact data={page} />
+        </div>
       </PageContainer>
       <PageViewTracker pageId="1" pageType="ElectionsPage" />
     </>

@@ -1,11 +1,10 @@
-import { DateTime } from '@/components/client/time';
+import { DateTime } from '@/components/client/DateTime';
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { CodeLink } from '@/components/static/CodeLink';
 import { DocumentLink } from '@/components/static/DocumentLink';
-import { PageBodySection } from '@/components/static/Page/PageBodySection';
+import { PageSection } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { format } from 'date-fns';
 
 const CandidateFilingInfoFragment = gql(`
   fragment CandidateFilingInfo on Election {
@@ -45,7 +44,7 @@ export function CandidateFilingInfo(props: {
   }
 
   return (
-    <PageBodySection title="Candidate Filing Information">
+    <PageSection title="Candidate Filing Information" headerSize="lg">
       <ProseWrapper>
         <p>
           The candidate filing period for {data?.title} starts on{' '}
@@ -107,6 +106,6 @@ export function CandidateFilingInfo(props: {
         The following offices will be filled in this election:
         <MarkdownRenderer>{data.officesToBeFilled}</MarkdownRenderer>
       </ProseWrapper>
-    </PageBodySection>
+    </PageSection>
   );
 }

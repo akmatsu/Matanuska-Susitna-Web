@@ -1,4 +1,4 @@
-import { PageBodySection } from '@/components/static/Page/PageBodySection';
+import { PageSection } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { EmailLink, PhoneLink } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
@@ -18,7 +18,7 @@ export function ElectionPageContact(props: {
 }) {
   const data = getFragmentData(ElectionContactFragment, props.data);
   return (
-    <PageBodySection title="Contact Us">
+    <PageSection title="Contact Us" headerSize="lg">
       <ProseWrapper>
         <p>
           If you have any questions, please contact the{' '}
@@ -38,6 +38,6 @@ export function ElectionPageContact(props: {
           )}
         </ul>
       </ProseWrapper>
-    </PageBodySection>
+    </PageSection>
   );
 }
