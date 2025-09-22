@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import v from 'voca';
 
 export function PageSection({
   title,
@@ -31,6 +32,7 @@ export function PageSection({
             'text-3xl': headerSize === 'lg',
             'text-xl': headerSize === 'sm',
           })}
+          id={v.slugify(title)}
         >
           {title}
         </h2>
