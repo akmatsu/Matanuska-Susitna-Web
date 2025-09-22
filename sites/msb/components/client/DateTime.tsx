@@ -1,4 +1,4 @@
-'use client';
+import { tz } from '@date-fns/tz';
 import { format } from 'date-fns';
 
 export function DateTime({
@@ -13,7 +13,13 @@ export function DateTime({
   if (!date) return <>{fallback}</>;
 
   try {
-    return <>{format(new Date(date), formatStr)}</>;
+    return (
+      <>
+        {format(new Date(date), formatStr, {
+          in: tz('America/Anchorage'),
+        })}
+      </>
+    );
   } catch {
     return <>{fallback}</>;
   }
