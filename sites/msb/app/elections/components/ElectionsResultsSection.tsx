@@ -4,7 +4,6 @@ import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { ElectionResultsList } from './ElectionResultsList';
 import { LinkButton } from '@/components/static/LinkButton';
-import { format } from 'date-fns';
 import { DateTime } from '@/components/client/time';
 
 const ElectionResultFragment = gql(`

@@ -8,6 +8,14 @@ const ElectionPageQuickLinksFragment = gql(`
     candidates {
       ...DocumentLink
     }
+    documents {
+      id
+      title
+      file {
+        url
+      }
+      ...DocumentLink
+    }
     electionOfficialApplication {
       ...DocumentLink
     }
@@ -70,6 +78,10 @@ export function ElectionPageQuickLinks(props: {
 
   return (
     <div className="flex flex-wrap justify-center gap-4 my-4">
+      {!!data.documents?.length &&
+        data.documents.map((doc) => (
+          <DocumentLinkButton data={doc} key={doc.id} color="primary" />
+        ))}
       <DocumentLinkButton data={data.candidates} color="primary" />
       <DocumentLinkButton
         data={data.electionOfficialApplication}
