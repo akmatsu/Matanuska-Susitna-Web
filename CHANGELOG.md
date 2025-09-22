@@ -1,3 +1,10 @@
+# [0.35.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.34.5...v0.35.0) (2025-09-22)
+
+
+### Features
+
+* fixed build errors ([1639003](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1639003cfb94d165a32c2276074883d5bf095b9e))
+
 ## [0.34.5](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.34.4...v0.34.5) (2025-09-20)
 
 
