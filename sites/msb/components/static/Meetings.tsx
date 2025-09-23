@@ -7,7 +7,7 @@ import { TZDate } from '@date-fns/tz';
 export async function Meetings() {
   const { items } = await searchCalendarEvents({
     limit: 4,
-    timeMin: startOfDay(new TZDate('America/Anchorage')).toISOString(),
+    timeMin: startOfDay(TZDate.tz('America/Anchorage')).toISOString(),
   });
 
   return (
