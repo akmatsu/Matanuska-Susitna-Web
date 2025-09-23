@@ -1,9 +1,14 @@
 import { MeetingCard } from './MeetingCard';
 import { LinkButton } from './LinkButton';
 import { searchCalendarEvents } from '@/utils/calendarHelpers';
+import { startOfDay } from 'date-fns';
+import { TZDate } from '@date-fns/tz';
 
 export async function Meetings() {
-  const { items } = await searchCalendarEvents({ limit: 4 });
+  const { items } = await searchCalendarEvents({
+    limit: 4,
+    timeMin: startOfDay(new TZDate()).toISOString(),
+  });
 
   return (
     <>

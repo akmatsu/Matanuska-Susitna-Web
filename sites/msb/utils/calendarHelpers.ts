@@ -50,7 +50,7 @@ export async function searchCalendarEvents(
         }),
         {
           next: {
-            revalidate: 60 * 60,
+            revalidate: 60, // revalidate this request every 60 seconds
           },
         },
       ),
