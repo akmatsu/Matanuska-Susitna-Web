@@ -12,7 +12,7 @@ interface AddToCalendarButtonProps
   extends Omit<ComponentProps<typeof DropdownButton>, 'buttonProps' | 'label'> {
   label?: string;
   buttonProps?: Partial<ButtonProps>;
-  meeting: CalendarMeeting;
+  meeting: CalendarMeeting & { details?: string };
 }
 
 function createAndDownloadICSFile(
@@ -38,6 +38,7 @@ function createAndDownloadICSFile(
       ],
       duration: { minutes: 30 },
       location: meeting.location || undefined,
+      description: meeting.details || undefined,
     },
     (error, value) => {
       if (error) {
@@ -80,7 +81,7 @@ export function AddToCalendarButton({
       action: 'TEMPLATE',
       text: meeting.title,
       dates: `${dtStart}/${dtEnd}`,
-      details: 'Details about the meeting',
+      details: meeting.details || '',
       ...(meeting.location && { location: meeting.location }),
     });
     return params.toString();
@@ -91,7 +92,7 @@ export function AddToCalendarButton({
       subject: meeting.title,
       startdt: isoStart,
       enddt: isoEnd,
-      body: 'Details about the meeting',
+      body: meeting.details || '',
       ...(meeting.location && { location: meeting.location }),
     });
     return params.toString();
@@ -103,7 +104,7 @@ export function AddToCalendarButton({
       st: yahooStart,
       dur: '0030',
       ...(meeting.location && { location: meeting.location }),
-      details: 'Details about the meeting',
+      details: meeting.details || '',
     });
     return params.toString();
   }

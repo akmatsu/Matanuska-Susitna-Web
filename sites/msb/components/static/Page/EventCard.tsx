@@ -97,8 +97,9 @@ export function EventCard({
                   size: 'sm',
                 }}
                 meeting={{
-                  location,
+                  location: `${address || location || ''}`,
                   date,
+                  details: `${address || ''}${location || ''}`,
                   title: eventTitle,
                 }}
               />
