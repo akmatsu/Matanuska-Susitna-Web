@@ -1,3 +1,10 @@
+# [0.42.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.41.0...v0.42.0) (2025-09-23)
+
+
+### Features
+
+* Added support for iframes ([8d36b7e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8d36b7ef12c819c2cda96b3f915dbca45f217ab3))
+
 # [0.41.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.40.1...v0.41.0) (2025-09-23)
 
 
