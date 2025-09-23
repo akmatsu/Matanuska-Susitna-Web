@@ -1,3 +1,10 @@
+## [0.42.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.42.0...v0.42.1) (2025-09-23)
+
+
+### Bug Fixes
+
+* fixed date error ([0651125](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/0651125d74ad75a5ae0e1a8ac1ebe0cfe0dd9de8))
+
 # [0.42.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.41.0...v0.42.0) (2025-09-23)
 
 
