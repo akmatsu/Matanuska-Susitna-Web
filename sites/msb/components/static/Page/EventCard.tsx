@@ -11,7 +11,6 @@ import clsx from 'clsx';
 import { ReactNode } from 'react';
 import { LinkButton } from '../LinkButton';
 import { AddToCalendarButton } from '../AddToCalendarButton';
-import { format } from 'date-fns';
 import { DateTime } from '@/components/client/DateTime';
 
 export function EventCard({
@@ -69,13 +68,16 @@ export function EventCard({
             )}
           </CardHeader>
           <CardBody>
-            {address ||
-              (location && (
-                <address className="not-italic">
-                  {address && <AddressLink address={address} />}
-                  {location && <p>{locationSlot || location}</p>}
-                </address>
-              ))}
+            {(address || location) && (
+              <address className="not-italic">
+                {address && <p>{address}</p>}
+                {locationSlot ? (
+                  <p>{locationSlot}</p>
+                ) : location && location !== address ? (
+                  <p>{location}</p>
+                ) : null}
+              </address>
+            )}
           </CardBody>
           <CardFooter className="justify-center sm:justify-end">
             {joinUrl && (

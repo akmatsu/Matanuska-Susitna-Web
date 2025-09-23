@@ -113,6 +113,7 @@ export function MeetingCard({
         ),
       )}
       joinUrl={joinUrl}
+      meetingType={isZoom ? 'Zoom' : isTeams ? 'Teams' : 'Virtual'}
       {...props}
     />
   );

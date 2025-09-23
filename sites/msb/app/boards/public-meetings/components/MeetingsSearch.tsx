@@ -90,14 +90,10 @@ export function MeetingsSearch() {
           />
         </div>
       </form>
-      <ul className="list-none pl-0">
+      <ul className="list-none pl-0 flex flex-col gap-4">
         {loading ? (
           Array.from({ length: limit }).map((_, index) => (
-            <Card
-              className="animate-pulse h-full w-full"
-              containerClassName="not-last:mb-4"
-              key={index}
-            >
+            <Card className="animate-pulse h-full w-full" key={index}>
               <div className="flex flex-col sm:flex-row h-full">
                 <div className="bg-base-lightest p-2 flex justify-center items-center h-auto min-h-full">
                   <div className="bg-base-light aspect-square h-full max-h-24 max-w-24 md:max-h-32 md:max-w-32 flex flex-col justify-center items-center text-white gap-2 rounded-full"></div>
@@ -122,11 +118,7 @@ export function MeetingsSearch() {
           ))
         ) : meetings.length > 0 ? (
           meetings.map((meeting) => (
-            <MeetingCard
-              key={meeting.id}
-              meeting={meeting}
-              containerClassName="not-last:mb-4"
-            />
+            <MeetingCard key={meeting.id} meeting={meeting} />
           ))
         ) : (
           <li className="w-full flex justify-center items-center">
