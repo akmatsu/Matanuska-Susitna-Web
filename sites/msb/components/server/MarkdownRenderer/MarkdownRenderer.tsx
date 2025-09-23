@@ -8,6 +8,7 @@ import { ActionButtonWrapper } from './components/PrimaryActionButton';
 import { InternalLink } from './components/InternalLink';
 import { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react';
 import { visit } from 'unist-util-visit';
+import { MDIframe } from './components/MdIframe';
 
 /**
  * Remark plugin to filter out unsupported directives.
@@ -44,6 +45,7 @@ export function MarkdownRenderer(props: { children?: string | null }) {
     'doc-collection',
     'primary-action-button',
     'internal-link',
+    'iframe',
   ];
 
   return (
@@ -89,6 +91,7 @@ export function MarkdownRenderer(props: { children?: string | null }) {
         'doc-collection': DocCollectionWrapper,
         'primary-action-button': ActionButtonWrapper,
         'internal-link': InternalLink,
+        iframe: MDIframe,
       }}
     >
       {props.children?.replace(/<br\s*\/?>/gi, '')}
