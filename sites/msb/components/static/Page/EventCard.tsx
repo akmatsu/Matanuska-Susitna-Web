@@ -12,6 +12,7 @@ import { ReactNode } from 'react';
 import { LinkButton } from '../LinkButton';
 import { AddToCalendarButton } from '../AddToCalendarButton';
 import { format } from 'date-fns';
+import { DateTime } from '@/components/client/DateTime';
 
 export function EventCard({
   meetingType = 'Teams',
@@ -45,14 +46,14 @@ export function EventCard({
           <div className="bg-base-lightest p-2 flex justify-center items-center h-auto min-h-full">
             <div className="bg-surface-primary aspect-square h-24 w-24 md:h-32 md:w-32 flex flex-col justify-center items-center text-white gap-2 rounded-full">
               <p className="md:text-xl font-bold text-center">
-                {format(date, 'MMM do')}
+                <DateTime date={date} formatStr="MMM do" />
                 <br />
                 <span className="md:text-xl font-normal">
-                  {format(date, 'yyyy')}
+                  <DateTime date={date} formatStr="yyyy" />
                 </span>
                 <br />
                 <span className="text-xs font-normal">
-                  {format(date, 'h:mm a')}
+                  <DateTime date={date} formatStr="h:mm a" />
                 </span>
               </p>
             </div>

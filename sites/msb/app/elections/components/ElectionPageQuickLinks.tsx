@@ -44,14 +44,7 @@ const ElectionPageQuickLinksFragment = gql(`
       ...DocumentLink
     }
 
-    propositions {
-      id
-      title
-      file {
-        url
-      }
-      ...DocumentLink
-    }
+    propositionsCount
   }
 `);
 
@@ -69,10 +62,6 @@ export function ElectionPageQuickLinks(props: {
     {
       label: 'Sample Election Ballots',
       value: data.electionBallots,
-    },
-    {
-      label: 'Propositions',
-      value: data.propositions,
     },
   ];
 
@@ -119,6 +108,11 @@ export function ElectionPageQuickLinks(props: {
       <LinkButton href="#early-absentee-voting-information" color="primary">
         Early and Absentee Voting Information
       </LinkButton>
+      {!!data.propositionsCount && (
+        <LinkButton href="#ballot-propositions" color="primary">
+          Propositions
+        </LinkButton>
+      )}
     </div>
   );
 }

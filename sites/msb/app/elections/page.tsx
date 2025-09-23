@@ -15,12 +15,14 @@ import { AbsenteeVotingInfo } from './components/AbsenteeVotingInfo';
 import { PageViewTracker } from '@/components/client/PageViewTracker';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { EarlyVotingLocations } from './components/EarlyVotingLocations';
+import { BallotPropositions } from './components/BallotPropositions';
 
 const getElections = gql(`
   query GetElections {
     ...ElectionResults
     ...GetAbsenteeVotingInfo
     ...GetEarlyVotingLocations
+    ...Election_BallotPropositions
     electionsPage {
       heroImage
       ...ElectionPageHeader
@@ -69,6 +71,7 @@ export default async function ElectionsPage() {
           <AbsenteeVotingInfo data={data} />
           <EarlyVotingLocations data={data} />
           <ElectionPollingPlaces data={page} />
+          <BallotPropositions data={data} />
           <ElectionResultsSection data={currentElection} results={data} />
           <ElectionPageContact data={page} />
         </div>
