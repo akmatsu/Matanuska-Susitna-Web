@@ -1,3 +1,10 @@
+## [0.40.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.40.0...v0.40.1) (2025-09-23)
+
+
+### Bug Fixes
+
+* now adding meeting details when adding events to calendars ([ba2e18b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ba2e18be672016a871883cd16619d420868a2fdb))
+
 # [0.40.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.39.0...v0.40.0) (2025-09-23)
 
 
