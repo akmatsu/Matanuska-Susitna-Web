@@ -1,3 +1,11 @@
+# [0.40.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.39.0...v0.40.0) (2025-09-23)
+
+
+### Features
+
+* added ballot propositions to elections page ([8d95f4d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8d95f4db8e52e6b0a17f9dd9f59c565e56f4b50d))
+* fixed team and zoom meetings button and now showing meeting IDs and passwords ([f22c390](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f22c3904b6a8f76560022c73097f6244a276a456))
+
 # [0.39.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.38.0...v0.39.0) (2025-09-22)
 
 
