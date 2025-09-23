@@ -1,3 +1,11 @@
+# [0.41.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.40.1...v0.41.0) (2025-09-23)
+
+
+### Features
+
+* fixed meetings showing up for previous days ([e5fece1](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e5fece143b2818d068f3bd34c53580507e627f50))
+* improved calendar search ([fd6b329](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fd6b32928ea5961b05197ecd459d58ecf2e8630a))
+
 ## [0.40.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.40.0...v0.40.1) (2025-09-23)
 
 
