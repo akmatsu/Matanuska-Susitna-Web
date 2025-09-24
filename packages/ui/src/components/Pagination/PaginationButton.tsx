@@ -7,11 +7,15 @@ export function PaginationButton({
   currentPage,
   as = 'a',
   onClick,
+  disabled = false,
+  children,
 }: {
   page: number | string;
   currentPage: number | string;
   as?: React.ElementType;
   onClick?: (page: string | number) => void;
+  disabled?: boolean;
+  children?: React.ReactNode;
 }) {
   const active = page == currentPage;
   const [href, setHref] = useState(`page=${page}`);
@@ -40,9 +44,9 @@ export function PaginationButton({
       underline
       shadow={false}
       onClick={handleClick}
-      disabled={active}
+      disabled={disabled}
     >
-      {page}
+      {children ?? page}
     </Button>
   );
 }

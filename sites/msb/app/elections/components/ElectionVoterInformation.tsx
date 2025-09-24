@@ -38,6 +38,18 @@ export function ElectionVoterInformation(props: {
             <DateTime date={data.voterRegistrationDeadline} formatStr="PPPp" />.
           </p>
         )}
+        <p>
+          You can update or register to vote online or print a Voter
+          Registration Application from the Alaska State Division of Elections
+          at{' '}
+          <a href="https://www.elections.alaska.gov">
+            www.elections.alaska.gov
+          </a>{' '}
+          or you may register to vote at Alaska State Division of Elections
+          office or the Borough Clerk's office. Voter registration applications
+          are also available at the City Clerk's Offices in Houston, Palmer, and
+          Wasilla.
+        </p>
         <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">
           <h3 className="mt-0">Voter Qualifications</h3>
           <p className="before:content-none after:content-none">

@@ -19,7 +19,7 @@ export function PageDocuments(props: {
   const documents = getFragmentData(documentListFragment, props.documents);
   if (!documents?.length) return null;
 
-  if (documents.length > 2)
+  if (documents.length <= 2)
     return (
       <ul className="flex flex-col gap-2">
         {documents.map((doc) => (
