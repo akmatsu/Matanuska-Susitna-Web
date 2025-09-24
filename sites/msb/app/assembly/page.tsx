@@ -57,9 +57,9 @@ export default async function AssemblyPage() {
             <div className="flex flex-wrap gap-4 md:gap-8 justify-center">
               {districts?.map((district) => (
                 <Link
-                  href={`/assembly-districts/${district.title}`}
+                  href={`/assembly-districts/${district.slug}`}
                   className="not-prose flex flex-col items-center text-ink no-underline hover:bg-base-lightest rounded p-2 transition-colors group"
-                  key={district.title}
+                  key={district.slug}
                 >
                   <Image
                     src={district.photo?.file?.url || ''}
