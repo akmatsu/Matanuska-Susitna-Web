@@ -1,3 +1,11 @@
+# [0.43.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.42.1...v0.43.0) (2025-09-24)
+
+
+### Features
+
+* created the assembly page ([9c0078a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9c0078ad269ce843d1e672430644b7207e1e95c5))
+* created the assembly page ([3f02601](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/3f02601834b4b121d3c1c437df9502d8ecde745a))
+
 ## [0.42.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.42.0...v0.42.1) (2025-09-23)
 
 
