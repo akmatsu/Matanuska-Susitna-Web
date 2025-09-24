@@ -6,6 +6,7 @@ import { plural } from 'pluralize';
 import v from 'voca';
 import { gql } from '@msb/js-sdk/gql';
 import { getClientHandler } from '@/utils/apollo/utils';
+import { getRedirectUrl } from '@/utils/stringHelpers';
 
 const getInternalLinkData = gql(`
   query GetInternalLinkData($id: ID!, $list: String!) {
@@ -22,6 +23,13 @@ const getInternalLinkData = gql(`
       ... on Url {
         title
         url
+      }
+
+      ... on Document {
+        title
+        file {
+          url
+        }
       }
     }
   }
@@ -59,7 +67,7 @@ export async function InternalLink(props: {
       },
     });
 
-    const url = getUrl(data, props.list);
+    const url = getRedirectUrl(data.getInternalLink, props.list);
 
     const isExternalLink =
       !!url?.startsWith('http://') || !!url?.startsWith('https://');
