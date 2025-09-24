@@ -94,11 +94,13 @@ export function getRedirectUrl(
     __typename?: string;
     url?: string | null;
     slug?: string | null;
+    file?: { url?: string | null } | null;
   } | null,
 ) {
   if (!item) return null;
   if ('url' in item) return item.url;
   if ('slug' in item) return `/${getUrlSection(item.__typename)}${item.slug}`;
+  if ('file' in item) return item.file?.url || null;
   if (item?.__typename === 'HomePage') return '/';
   if (item?.__typename === 'BoardPage') return '/boards';
   if (item?.__typename === 'ElectionsPage') return '/elections';

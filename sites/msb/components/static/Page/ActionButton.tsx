@@ -39,6 +39,15 @@ const ActionFields = gql(`
         title
         description
       }
+
+      ... on Document {
+        id
+        title
+        description
+        file {
+          url
+        }
+      }
     }
   }
 `);
