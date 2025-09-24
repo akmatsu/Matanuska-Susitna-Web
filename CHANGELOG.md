@@ -1,3 +1,10 @@
+## [0.43.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.43.0...v0.43.1) (2025-09-24)
+
+
+### Bug Fixes
+
+* fixed assembly district pages going to incorrect location ([141be1d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/141be1d975654b07f2bf499a55c39e820b19ef27))
+
 # [0.43.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.42.1...v0.43.0) (2025-09-24)
 
 
