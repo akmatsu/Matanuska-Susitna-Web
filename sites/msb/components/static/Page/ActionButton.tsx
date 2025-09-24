@@ -57,7 +57,7 @@ export function ActionButton({
   block = true,
   target = '_blank',
   blockOnMobile,
-  size = 'lg',
+  size = 'md',
   ...props
 }: {
   action: FragmentType<typeof ActionFields>;

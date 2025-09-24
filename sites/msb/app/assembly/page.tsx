@@ -1,5 +1,7 @@
 import { BasePage } from '@/components/static/BasePage';
+import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { Link } from '@/components/static/Link';
+import { LinkButton } from '@/components/static/LinkButton';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
 import Image from 'next/image';
@@ -44,6 +46,11 @@ export default async function AssemblyPage() {
   return (
     <BasePage
       data={page}
+      mapSlot={
+        page?.directory && (
+          <DocumentLinkButton data={page.directory} block color="primary" />
+        )
+      }
       pageBodyProps={{
         actionSlot: (
           <div className="flex flex-col gap-4">
