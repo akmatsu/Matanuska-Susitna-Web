@@ -40,6 +40,12 @@ export async function handleCmsRedirects(req: NextAuthRequest) {
         redirectInfo.to?.item as LinkedItemUnion,
       );
 
+      if (redirectUrl?.startsWith('/')) {
+        // Handle relative redirects within the site.
+        const url = new URL(redirectUrl, req.url);
+        return NextResponse.redirect(url);
+      }
+
       if (redirectUrl) return NextResponse.redirect(redirectUrl);
     }
   }

@@ -111,8 +111,13 @@ export function getRedirectUrl(
 
 function getUrlSection(str?: string) {
   if (!str) return '';
+  if (str === 'Topic' || str === 'LandingPage') {
+    return '';
+  }
+
   if (str === 'OrgUnit') {
     return 'departments/';
   }
+
   return `${plural(slugify(str))}/`;
 }
