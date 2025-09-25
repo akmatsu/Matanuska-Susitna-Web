@@ -1,3 +1,10 @@
+## [0.46.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.46.0...v0.46.1) (2025-09-25)
+
+
+### Bug Fixes
+
+* fixed internal redirects ([f192b8f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f192b8f4cee7d8cea22672ab486b394ae4c9443e))
+
 # [0.46.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.45.0...v0.46.0) (2025-09-25)
 
 
