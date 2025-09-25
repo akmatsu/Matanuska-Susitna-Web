@@ -1,3 +1,16 @@
+# [0.45.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.44.0...v0.45.0) (2025-09-25)
+
+
+### Bug Fixes
+
+* fixed some search results linking to incorrect locations ([5221356](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/52213569775c9fb76ca28a5f39791b2fa8a2d16a))
+
+
+### Features
+
+* fixed pagination on search page ([1130b08](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1130b08df839b06c2763737601c47fe638dfe1a9))
+* fixed search results for boards pointing at the incorrect types ([294b4cf](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/294b4cf5f99802d2b6002fedf8a4ffbc2ed8a83d))
+
 # [0.44.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.43.1...v0.44.0) (2025-09-24)
 
 
