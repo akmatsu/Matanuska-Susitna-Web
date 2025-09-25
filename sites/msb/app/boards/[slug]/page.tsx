@@ -11,6 +11,7 @@ import { getClientHandler } from '@/utils/apollo/utils';
 const getBoardPage = gql(`
   query GetBoard($where: BoardWhereUniqueInput!, $now: DateTime!) {
     board(where: $where) {
+      title
       ...BasePageInfo
       ...BoardMeetings
       directory {
@@ -65,8 +66,17 @@ export default async function BoardPage(props: {
             blockOnMobile
           />
           <ExternalActionButton action={page.linkToResolutions} blockOnMobile />
-          <LinkButton href="/boards/public-meetings-calendar" blockOnMobile>
-            Public Meetings Calendar
+          <LinkButton
+            href={
+              page.title === 'School Board'
+                ? 'https://www.matsuk12.us/about-us/calendars'
+                : '/boards/public-meetings-calendar'
+            }
+            blockOnMobile
+          >
+            {page.title === 'School Board'
+              ? 'School District Calendar'
+              : 'Public Meetings Calendar'}
           </LinkButton>
         </div>
       );
