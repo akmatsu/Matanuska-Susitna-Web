@@ -14,9 +14,27 @@ export function CoreSearchHits(props: ComponentProps<typeof Hits>) {
           key={item.slug}
           item={item}
           listKey={pluralize(
-            item.type === 'orgUnit' || item.type === 'org-unit'
+            item.type === 'orgUnit' ||
+              item.type === 'org-unit' ||
+              item.type === 'office' ||
+              item.type === 'division' ||
+              item.type === 'department'
               ? 'department'
-              : item.type,
+              : item.type === 'community_council' ||
+                  item.type === 'ssa_board' ||
+                  item.type === 'fsa_board' ||
+                  item.type === 'rsa_board'
+                ? 'board'
+                : item.type === 'city' || item.type === 'community'
+                  ? 'community'
+                  : item.type === 'legislative' || item.type === 'strategic'
+                    ? 'plan'
+                    : item.type === 'AKMATSUGOV_PublicNotice' ||
+                        item.type === 'MSB_AirQuality' ||
+                        item.type === 'AKMATSUGOV_CommunityDevelopment' ||
+                        item.type === 'MSB_RoadConstruction'
+                      ? 'public-notice'
+                      : item.type,
           )}
         />
       ))}

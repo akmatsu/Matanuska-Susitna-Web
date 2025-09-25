@@ -42,7 +42,7 @@ export function Autocomplete() {
                   value?.type === 'MSB_AirQuality' ||
                   value?.type === 'AKMATSUGOV_CommunityDevelopment' ||
                   value?.type === 'MSB_RoadConstruction'
-                ? 'publicNotice'
+                ? 'public-notice'
                 : value?.type;
 
     if (value?.url) {
