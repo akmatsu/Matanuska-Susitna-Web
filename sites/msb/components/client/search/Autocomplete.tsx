@@ -23,9 +23,28 @@ export function Autocomplete() {
   function onChange(value?: Hit | null) {
     const hitType = !value
       ? undefined
-      : value?.type === 'orgUnit' || value?.type === 'org-unit'
+      : value?.type === 'orgUnit' ||
+          value?.type === 'org-unit' ||
+          value?.type === 'office' ||
+          value?.type === 'division' ||
+          value?.type === 'department'
         ? 'department'
-        : value?.type;
+        : value?.type === 'community_council' ||
+            value?.type === 'ssa_board' ||
+            value?.type === 'fsa_board' ||
+            value?.type === 'rsa_board'
+          ? 'board'
+          : value?.type === 'city' || value?.type === 'community'
+            ? 'community'
+            : value?.type === 'legislative' || value?.type === 'strategic'
+              ? 'plan'
+              : value?.type === 'AKMATSUGOV_PublicNotice' ||
+                  value?.type === 'MSB_AirQuality' ||
+                  value?.type === 'AKMATSUGOV_CommunityDevelopment' ||
+                  value?.type === 'MSB_RoadConstruction'
+                ? 'publicNotice'
+                : value?.type;
+
     if (value?.url) {
       router.push(value.url);
     } else if (value?.slug) {
