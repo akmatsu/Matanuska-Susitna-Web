@@ -1,3 +1,10 @@
+# [0.46.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.45.0...v0.46.0) (2025-09-25)
+
+
+### Features
+
+* school board page now links to school disctict calendar ([6db2115](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6db211571f4bd97936e2f8b2c73996647b92c729))
+
 # [0.45.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.44.0...v0.45.0) (2025-09-25)
 
 
