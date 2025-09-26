@@ -1,5 +1,9 @@
 import { notFound } from 'next/navigation';
-import { PageListItems } from '@/components/static/Page';
+import {
+  PageAddress,
+  PageHours,
+  PageListItems,
+} from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
 import { BasePage } from '@/components/static/BasePage';
 import { getClientHandler } from '@/utils/apollo/utils';
@@ -18,7 +22,7 @@ const getFacilityPage = gql(`
         ...AddressFields
       }
       hours {
-        ...HourFields
+        ...HourList
       }
     }
   }
@@ -52,7 +56,11 @@ export default async function Page(props: {
     <BasePage
       data={page}
       rightSide={
-        <>{page.park && <PageListItems items={[page.park]} title="Parks" />}</>
+        <>
+          <PageAddress address={page.address} />
+          <PageHours hours={page.hours} />
+          {page.park && <PageListItems items={[page.park]} title="Parks" />}
+        </>
       }
     />
   );

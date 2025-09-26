@@ -1,6 +1,6 @@
 import { BasePage } from '@/components/static/BasePage';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
-import { PageSection } from '@/components/static/Page';
+import { PageListItems, PageSection } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound, redirect } from 'next/navigation';
 import { DropdownButton } from '../../../../../packages/ui/src/components';
@@ -46,6 +46,18 @@ const PlanQuery = gql(`
           ...DocumentLink
         }
       }
+      parks {
+        ...PageList
+      }
+      facilities {
+        ...PageList
+      }
+      trails {
+        ...PageList
+      }
+      boards {
+        ...PageList
+      }
     }
   }
 `);
@@ -88,54 +100,56 @@ export default async function PlanPage(props: {
     <BasePage
       data={page}
       rightSide={
-        useSideBar ? (
-          <>
-            {page.currentDocument?.document && (
-              <PageSection title="Current Adopted Plan">
-                <DocumentLinkButton data={page.currentDocument.document} block>
-                  {page.currentDocument.label}
-                </DocumentLinkButton>
-              </PageSection>
-            )}
-            {page.draftDocument?.document && (
-              <PageSection title="Draft Plan">
-                <DocumentLinkButton data={page.draftDocument.document} block>
-                  {page.draftDocument.label}
-                </DocumentLinkButton>
-              </PageSection>
-            )}
-            {!!page.pastDocuments?.length && (
-              <PageSection title="Past Plans">
-                {page.pastDocuments.length > 2 ? (
-                  page.pastDocuments.map((doc) => (
-                    <DocumentLinkButton key={doc.id} data={doc.document} block>
-                      {doc.label}
-                    </DocumentLinkButton>
-                  ))
-                ) : (
-                  <DropdownButton
-                    buttonProps={{
-                      block: true,
-                    }}
-                    label="View Past Plans"
-                    items={page.pastDocuments.map((doc) => ({
-                      label: doc.label || '',
-                      href: doc.document?.file?.url,
-                      value: doc.id,
-                    }))}
-                  />
-                )}
-              </PageSection>
-            )}
-            {page.parent && (
-              <PageSection title="Parent Plan">
-                <PageListItem item={page.parent} title="plan" />
-              </PageSection>
-            )}
+        <>
+          {page.currentDocument?.document && (
+            <PageSection title="Current Adopted Plan">
+              <DocumentLinkButton data={page.currentDocument.document} block>
+                {page.currentDocument.label}
+              </DocumentLinkButton>
+            </PageSection>
+          )}
+          {page.draftDocument?.document && (
+            <PageSection title="Draft Plan">
+              <DocumentLinkButton data={page.draftDocument.document} block>
+                {page.draftDocument.label}
+              </DocumentLinkButton>
+            </PageSection>
+          )}
+          {!!page.pastDocuments?.length && (
+            <PageSection title="Past Plans">
+              {page.pastDocuments.length > 2 ? (
+                page.pastDocuments.map((doc) => (
+                  <DocumentLinkButton key={doc.id} data={doc.document} block>
+                    {doc.label}
+                  </DocumentLinkButton>
+                ))
+              ) : (
+                <DropdownButton
+                  buttonProps={{
+                    block: true,
+                  }}
+                  label="View Past Plans"
+                  items={page.pastDocuments.map((doc) => ({
+                    label: doc.label || '',
+                    href: doc.document?.file?.url,
+                    value: doc.id,
+                  }))}
+                />
+              )}
+            </PageSection>
+          )}
+          {page.parent && (
+            <PageSection title="Parent Plan">
+              <PageListItem item={page.parent} title="plan" />
+            </PageSection>
+          )}
 
-            <PagesLinkList data={page.components} title="Related Plans" />
-          </>
-        ) : undefined
+          <PagesLinkList data={page.components} title="Related Plans" />
+          <PageListItems items={page.facilities} title="Facilities" />
+          <PageListItems items={page.parks} title="Parks" />
+          <PageListItems items={page.trails} title="Trails" />
+          <PageListItems items={page.boards} title="Boards" />
+        </>
       }
     />
   );

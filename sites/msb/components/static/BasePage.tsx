@@ -48,6 +48,11 @@ const BasePageFragment = gql(`
     plans {
       ...PageList
     }
+    ... on BasePageWithActions {
+      actions {
+        ...ActionList
+      }
+    }
     ... on Service {
       primaryContact {
         ...ContactList
@@ -59,16 +64,9 @@ const BasePageFragment = gql(`
         ...ExternalActionFields
       }
     }
-
     ... on Plan {
       effort {
         ...ExternalActionFields
-      }
-    }
-
-    ... on BasePageWithActions {
-      actions {
-        ...ActionList
       }
     }
   }

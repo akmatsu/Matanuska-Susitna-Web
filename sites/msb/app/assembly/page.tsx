@@ -30,6 +30,7 @@ const GetAssemblyDistricts = gql(`
       directory {
         ...DocumentLink
       }
+      
     }
   }
 `);

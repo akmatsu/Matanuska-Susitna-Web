@@ -1,6 +1,7 @@
 import { BasePage } from '@/components/static/BasePage';
 import {
   PageChildrenOrgUnits,
+  PageListItems,
   PageParentOrgUnit,
 } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
@@ -21,8 +22,19 @@ const getOrgUnit = gql(`
       parent {
         ...OrgUnitFields
       }
+      parks {
+        ...PageList
+      }
+      facilities {
+        ...PageList
+      }
+      trails {
+        ...PageList
+      }
+      boards {
+        ...PageList
+      }
     }
-    
   }
   `);
 
@@ -57,6 +69,10 @@ export default async function DepartmentPage(props: {
         <>
           <PageParentOrgUnit item={page.parent} />
           <PageChildrenOrgUnits items={page.children} />
+          <PageListItems items={page.facilities} title="Facilities" />
+          <PageListItems items={page.parks} title="Parks" />
+          <PageListItems items={page.trails} title="Trails" />
+          <PageListItems items={page.boards} title="Boards" />
         </>
       }
     />

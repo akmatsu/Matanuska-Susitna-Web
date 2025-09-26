@@ -11,8 +11,6 @@ import { getClientHandler } from '@/utils/apollo/utils';
 const trailQuery = gql(`
   query GetTrail(
     $slug: String!
-    $take: Int = 5
-    $orderDirection: OrderDirection = desc
     $now: DateTime!
   ) {
     trail(where: { slug: $slug }) {
@@ -24,13 +22,6 @@ const trailQuery = gql(`
       address {
         ...AddressFields
       }
-    }
-    publicNotices(
-      where: { trails: { some: { slug: { equals: $slug } } } }
-      take: $take
-      orderBy: { urgency: $orderDirection }
-    ) {
-      ...PublicNoticeList
     }
   }
 `);
@@ -55,7 +46,7 @@ export default async function Page(props: {
   const page = data.trail;
 
   if (!page) {
-    console.error('Park not found for slug:', slug);
+    console.error('Trail not found for slug:', slug);
     return notFound();
   }
 

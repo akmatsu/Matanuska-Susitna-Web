@@ -8,12 +8,6 @@ const getPage = gql(`
   query GetPublicNotice($slug: String!, $now: DateTime!) {
     publicNotice(where: { slug: $slug }) {
       ...BasePageInfo
-      communities {
-        ...PageList
-      }
-      assemblyDistricts {
-        ...PageList
-      }
       parks {
         ...PageList
       }
@@ -21,9 +15,6 @@ const getPage = gql(`
         ...PageList
       }
       trails {
-        ...PageList
-      }
-      orgUnits {
         ...PageList
       }
       boards {
@@ -67,16 +58,6 @@ export default async function Page(props: {
           <PageListItems items={page.parks} title="Parks" />
           <PageListItems items={page.trails} title="Trails" />
           <PageListItems items={page.boards} title="Boards" />
-          <PageListItems
-            items={page.orgUnits}
-            title="Departments & Divisions"
-            type="departments"
-          />
-          <PageListItems
-            items={page.assemblyDistricts}
-            title="Assembly Districts"
-          />
-          <PageListItems items={page.communities} title="Communities" />
         </>
       }
     />

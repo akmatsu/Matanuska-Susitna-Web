@@ -114,7 +114,7 @@ export function Button<T extends React.ElementType = 'button'>({
             color === 'accent-cool' && !disabled && !active && !outlined,
           'bg-accent-warm hover:bg-accent-warm-dark active:bg-accent-warm-darker text-black hover:text-white active:text-white':
             color === 'accent-warm' && !disabled && !active && !outlined,
-          'bg-base hover:bg-base-dark active:bg-base-darker text-white':
+          'bg-base-dark hover:bg-base-darker active:bg-base-darkest text-white':
             color === 'base' && !disabled && !active && !outlined,
           'bg-base-lightest hover:bg-base-lighter hover:border-base-light hover:text-base-dark active:bg-base-light active:border-base text-base border border-base-lighter':
             color === 'base-light' && !disabled && !active && !outlined,
