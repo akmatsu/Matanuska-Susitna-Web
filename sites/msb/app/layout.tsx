@@ -17,14 +17,6 @@ export const metadata: Metadata = {
   title: 'The Matanuska-Susitna Borough',
   description:
     'The official website of the Matanuska-Susitna Borough in Alaska',
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
-  },
 };
 
 export default async function RootLayout({
