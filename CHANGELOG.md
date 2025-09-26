@@ -1,3 +1,10 @@
+# [0.49.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.48.0...v0.49.0) (2025-09-26)
+
+
+### Features
+
+* changed topics to be a link list and moved them below contacts ([87b143f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/87b143f5ba4d4a809b27534ea21192d6c95b6eab))
+
 # [0.48.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.47.1...v0.48.0) (2025-09-26)
 
 
