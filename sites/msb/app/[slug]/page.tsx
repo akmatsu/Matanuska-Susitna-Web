@@ -22,9 +22,6 @@ const query = gql(`
       facilities {
         ...FacilitiesList
       }            
-      plans {
-        ...PageList
-      }
     }
   }
 `);

@@ -11,7 +11,6 @@ import {
   PagePublicNotices,
 } from './Page';
 import React, { ComponentProps, ReactNode } from 'react';
-import { PageTopics } from './Page/PageTopics';
 import clsx from 'clsx';
 import { PageViewTracker } from '../client/PageViewTracker';
 
@@ -29,23 +28,35 @@ const BasePageFragment = gql(`
     }
     ...PageEvents
     ...PagePublicNotices
-    topics {
+    topics(orderBy:  {
+       title: asc
+    }) {
       ...PageList
     }
-    communities {
+    communities(orderBy:  {
+       title: asc
+    }) {
       ...PageList
     }
-    orgUnits {
+    orgUnits(orderBy:  {
+       title: asc
+    }) {
       ...PageList
     }
-    
-    assemblyDistricts {
+
+    assemblyDistricts(orderBy:  {
+       title: asc
+    }) {
       ...PageList
     }
-    services {
+    services(orderBy:  {
+       title: asc
+    }) {
       ...PageList
     }
-    plans {
+    plans(orderBy:  {
+       title: asc
+    }) {
       ...PageList
     }
     ... on BasePageWithActions {

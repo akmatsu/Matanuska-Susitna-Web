@@ -140,7 +140,7 @@ export default async function PlanPage(props: {
           )}
           {page.parent && (
             <PageSection title="Parent Plan">
-              <PageListItem item={page.parent} title="plan" />
+              <PageListItem item={page.parent} />
             </PageSection>
           )}
 
