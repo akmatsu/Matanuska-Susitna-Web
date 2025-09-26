@@ -7,6 +7,23 @@ import { DropdownButton } from '../../../../../packages/ui/src/components';
 import { PageListItem } from '@/components/static/Page/PageListItem';
 import { PagesLinkList } from '@/components/static/Page/PagesLinkList';
 import { getClientHandler } from '@/utils/apollo/utils';
+import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+
+const metaQuery = gql(`
+  query GetPlanMeta($slug: String!) {
+    plan(where: { slug: $slug }) {
+      title
+      description
+    }
+  }
+`);
+
+export const generateMetadata: GenerateMetadataFunction = async ({
+  params,
+}) => {
+  const { slug } = await params;
+  return getPageMeta('plan', metaQuery, slug);
+};
 
 const PlanQuery = gql(`
   query GetPlan($slug: String!, $now: DateTime!) {

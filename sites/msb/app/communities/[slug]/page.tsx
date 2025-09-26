@@ -4,6 +4,23 @@ import { PageFacilities } from '@/components/static/Page/PageFacilities/PageFaci
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';
+import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+
+const metaQuery = gql(`
+  query GetCommunityMeta($slug: String!) {
+    community(where: { slug: $slug }) {
+      title
+      description
+    }
+  }
+`);
+
+export const generateMetadata: GenerateMetadataFunction = async ({
+  params,
+}) => {
+  const { slug } = await params;
+  return getPageMeta('community', metaQuery, slug);
+};
 
 const getCommunityPage = gql(`
   query GetCommunity(

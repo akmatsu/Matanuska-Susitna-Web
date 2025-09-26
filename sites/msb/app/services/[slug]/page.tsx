@@ -3,6 +3,23 @@ import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { PageListItems } from '@/components/static/Page';
+import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+
+const metaQuery = gql(`
+  query GetServiceMeta($slug: String!) {
+    service(where: { slug: $slug }) {
+      title
+      description
+    }
+  }
+`);
+
+export const generateMetadata: GenerateMetadataFunction = async ({
+  params,
+}) => {
+  const { slug } = await params;
+  return getPageMeta('service', metaQuery, slug);
+};
 
 const getService = gql(`
   query GetService($slug: String!, $now: DateTime!) {

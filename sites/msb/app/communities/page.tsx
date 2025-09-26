@@ -11,6 +11,37 @@ import { Link } from '@/components/static/Link';
 import { HomePageHighlightCard } from '@/components/static/landing/HomePageHighlightCard';
 import { EventInfo } from '@/components/static/Page/EventInfo';
 
+const metaQuery = gql(`
+  query GetCommunitiesPageMeta {
+    landingPage(where: { title: "Communities" }) {
+      title
+      description
+    }
+  }
+`);
+
+export async function generateMetadata() {
+  try {
+    const { data } = await getClientHandler({
+      query: metaQuery,
+    });
+    return {
+      title: `MSB - ${data?.landingPage?.title || 'Communities'}`,
+      description: data?.landingPage?.description,
+    };
+  } catch (error: any) {
+    console.error('Apollo query failed: ', JSON.stringify(error));
+    if (error.networkError?.result?.errors) {
+      console.error(
+        'Network error: ',
+        JSON.stringify(error.networkError.result.errors, null, 2),
+      );
+    }
+
+    throw error;
+  }
+}
+
 const query = gql(`
   query CommunitiesPage($now: DateTime!) {
     landingPage(where: {

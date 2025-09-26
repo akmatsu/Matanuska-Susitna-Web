@@ -8,6 +8,24 @@ import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';
 
+import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+
+const metaQuery = gql(`
+  query GetBoardMeta($slug: String!) {
+    board(where: { slug: $slug }) {
+      title
+      description
+    }
+  }
+`);
+
+export const generateMetadata: GenerateMetadataFunction = async ({
+  params,
+}) => {
+  const { slug } = await params;
+  return getPageMeta('board', metaQuery, slug);
+};
+
 const getBoardPage = gql(`
   query GetBoard($where: BoardWhereUniqueInput!, $now: DateTime!) {
     board(where: $where) {

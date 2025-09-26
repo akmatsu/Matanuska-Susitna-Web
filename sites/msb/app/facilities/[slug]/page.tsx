@@ -8,6 +8,24 @@ import { gql } from '@msb/js-sdk/gql';
 import { BasePage } from '@/components/static/BasePage';
 import { getClientHandler } from '@/utils/apollo/utils';
 
+import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+
+const metaQuery = gql(`
+  query GetFacilityMeta($slug: String!) {
+    facility(where: { slug: $slug }) {
+      title
+      description
+    }
+  }
+`);
+
+export const generateMetadata: GenerateMetadataFunction = async ({
+  params,
+}) => {
+  const { slug } = await params;
+  return getPageMeta('facility', metaQuery, slug);
+};
+
 const getFacilityPage = gql(`
   query GetFacility(
     $slug: String!

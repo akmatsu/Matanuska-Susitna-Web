@@ -6,6 +6,37 @@ import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
 import Image from 'next/image';
 
+const metaQuery = gql(`
+  query GetAssemblyPageMeta {
+    board(where: { title: "Assembly" }) {
+      title
+      description
+    }
+  }
+`);
+
+export async function generateMetadata() {
+  try {
+    const { data } = await getClientHandler({
+      query: metaQuery,
+    });
+    return {
+      title: `MSB - ${data?.board?.title || 'Assembly'}`,
+      description: data?.board?.description,
+    };
+  } catch (error: any) {
+    console.error('Apollo query failed: ', JSON.stringify(error));
+    if (error.networkError?.result?.errors) {
+      console.error(
+        'Network error: ',
+        JSON.stringify(error.networkError.result.errors, null, 2),
+      );
+    }
+
+    throw error;
+  }
+}
+
 const GetAssemblyDistricts = gql(`
   query GetAssemblyDistricts($now: DateTime!) {
     assemblyDistricts(orderBy:  {

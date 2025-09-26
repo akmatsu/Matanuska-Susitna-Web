@@ -8,6 +8,37 @@ import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { LinkIconCard } from '@/components/static/LinkIconCard';
 
+const metaQuery = gql(`
+  query GetDepartmentsPageMeta {
+    landingPage(where: { title: "Departments" }) {
+      title
+      description
+    }
+  }
+`);
+
+export async function generateMetadata() {
+  try {
+    const { data } = await getClientHandler({
+      query: metaQuery,
+    });
+    return {
+      title: `MSB - ${data?.landingPage?.title || 'Departments'}`,
+      description: data?.landingPage?.description,
+    };
+  } catch (error: any) {
+    console.error('Apollo query failed: ', JSON.stringify(error));
+    if (error.networkError?.result?.errors) {
+      console.error(
+        'Network error: ',
+        JSON.stringify(error.networkError.result.errors, null, 2),
+      );
+    }
+
+    throw error;
+  }
+}
+
 const pageSize = 'lg';
 
 const query = gql(`

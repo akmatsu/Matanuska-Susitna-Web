@@ -17,6 +17,37 @@ import { getClientHandler } from '@/utils/apollo/utils';
 import { EarlyVotingLocations } from './components/EarlyVotingLocations';
 import { BallotPropositions } from './components/BallotPropositions';
 
+const metaQuery = gql(`
+  query GetElectionsPageMeta {
+    electionsPage {
+      title
+      description
+    }
+  }
+`);
+
+export async function generateMetadata() {
+  try {
+    const { data } = await getClientHandler({
+      query: metaQuery,
+    });
+    return {
+      title: `MSB - ${data?.electionsPage?.title || 'Elections'}`,
+      description: data?.electionsPage?.description,
+    };
+  } catch (error: any) {
+    console.error('Apollo query failed: ', JSON.stringify(error));
+    if (error.networkError?.result?.errors) {
+      console.error(
+        'Network error: ',
+        JSON.stringify(error.networkError.result.errors, null, 2),
+      );
+    }
+
+    throw error;
+  }
+}
+
 const getElections = gql(`
   query GetElections {
     ...ElectionResults

@@ -3,8 +3,24 @@ import { PageListItems } from '@/components/static/Page';
 import { PageFacilities } from '@/components/static/Page/PageFacilities/PageFacilities';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
-import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+
+const metaQuery = gql(`
+  query GetTopicMeta($slug: String!) {
+    topic(where: { slug: $slug }) {
+      title
+      description
+    }
+  }
+`);
+
+export const generateMetadata: GenerateMetadataFunction = async ({
+  params,
+}) => {
+  const { slug } = await params;
+  return getPageMeta('topic', metaQuery, slug);
+};
 
 const query = gql(`
   query GetTopicPage($slug: String, $now: DateTime!) {
@@ -26,38 +42,9 @@ const query = gql(`
   }
 `);
 
-const metaQuery = gql(`
-  query GetOrTopicMeta($slug: String) {
-    topic(where: { slug: $slug }) {
-      title
-      description
-    }
-  }
-`);
-
 interface Props {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}
-
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params;
-
-  const { data } = await getClientHandler({
-    query: metaQuery,
-    variables: {
-      slug: params.slug,
-    },
-  });
-
-  const topic = data.topic;
-
-  return {
-    title: topic ? topic.title : 'Page Not Found',
-    description: topic
-      ? topic.description
-      : 'The page you are looking for does not exist.',
-  };
 }
 
 export default async function page(props: Props) {

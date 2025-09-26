@@ -3,6 +3,23 @@ import { PageListItems } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
 import { BasePage } from '@/components/static/BasePage';
 import { getClientHandler } from '@/utils/apollo/utils';
+import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+
+const metaQuery = gql(`
+  query GetPublicNoticeMeta($slug: String!) {
+    publicNotice(where: { slug: $slug }) {
+      title
+      description
+    }
+  }
+`);
+
+export const generateMetadata: GenerateMetadataFunction = async ({
+  params,
+}) => {
+  const { slug } = await params;
+  return getPageMeta('publicNotice', metaQuery, slug);
+};
 
 const getPage = gql(`
   query GetPublicNotice($slug: String!, $now: DateTime!) {

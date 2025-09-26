@@ -7,6 +7,25 @@ import {
 import { gql } from '@msb/js-sdk/gql';
 import { BasePage } from '@/components/static/BasePage';
 import { getClientHandler } from '@/utils/apollo/utils';
+import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+
+const metaQuery = gql(`
+  query GetTrailMeta(
+    $slug: String!
+  ) {
+    trail(where: { slug: $slug }) {
+      title
+      description
+    }
+  }
+`);
+
+export const generateMetadata: GenerateMetadataFunction = async ({
+  params,
+}) => {
+  const { slug } = await params;
+  return getPageMeta('trail', metaQuery, slug);
+};
 
 const trailQuery = gql(`
   query GetTrail(

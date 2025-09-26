@@ -11,6 +11,37 @@ import { gql } from '@msb/js-sdk/gql';
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
+const metaQuery = gql(`
+  query GetGovernmentPageMeta {
+    landingPage(where: { title: "Government" }) {
+      title
+      description
+    }
+  }
+`);
+
+export async function generateMetadata() {
+  try {
+    const { data } = await getClientHandler({
+      query: metaQuery,
+    });
+    return {
+      title: `MSB - ${data?.landingPage?.title || 'Government'}`,
+      description: data?.landingPage?.description,
+    };
+  } catch (error: any) {
+    console.error('Apollo query failed: ', JSON.stringify(error));
+    if (error.networkError?.result?.errors) {
+      console.error(
+        'Network error: ',
+        JSON.stringify(error.networkError.result.errors, null, 2),
+      );
+    }
+
+    throw error;
+  }
+}
+
 const query = gql(`
   query GovernmentPage {
     landingPage(where:  {

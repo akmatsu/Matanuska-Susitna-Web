@@ -8,6 +8,24 @@ import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';
 
+import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+
+const metaQuery = gql(`
+  query GetOrgUnitMeta($slug: String!) {
+    orgUnit(where: { slug: $slug }) {
+      title
+      description
+    }
+  }
+`);
+
+export const generateMetadata: GenerateMetadataFunction = async ({
+  params,
+}) => {
+  const { slug } = await params;
+  return getPageMeta('orgUnit', metaQuery, slug);
+};
+
 const getOrgUnit = gql(`
   query GetOrgUnit(
     $slug: String!

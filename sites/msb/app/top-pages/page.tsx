@@ -8,6 +8,37 @@ import { notFound } from 'next/navigation';
 import { PageViewsListWrapper } from './components/PageViewsListWrapper';
 import { getClientHandler } from '@/utils/apollo/utils';
 
+const metaQuery = gql(`
+  query GetTopPagesMeta {
+    landingPage(where: { title: "Top Pages" }) {
+      title
+      description
+    }
+  }
+`);
+
+export async function generateMetadata() {
+  try {
+    const { data } = await getClientHandler({
+      query: metaQuery,
+    });
+    return {
+      title: `MSB - ${data?.landingPage?.title || 'Top Pages'}`,
+      description: data?.landingPage?.description,
+    };
+  } catch (error: any) {
+    console.error('Apollo query failed: ', JSON.stringify(error));
+    if (error.networkError?.result?.errors) {
+      console.error(
+        'Network error: ',
+        JSON.stringify(error.networkError.result.errors, null, 2),
+      );
+    }
+
+    throw error;
+  }
+}
+
 const query = gql(`
   query GetTopPages($topPagesDate: DateTime!, $trendingPagesDate: DateTime!) {
     landingPage(where: { title: "Top Pages" }) {

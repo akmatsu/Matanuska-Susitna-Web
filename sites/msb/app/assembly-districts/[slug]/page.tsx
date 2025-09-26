@@ -5,6 +5,24 @@ import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 
+import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+
+const metaQuery = gql(`
+  query GetAssemblyDistrictMeta($slug: String!) {
+    assemblyDistrict(where: { slug: $slug }) {
+      title
+      description
+    }
+  }
+`);
+
+export const generateMetadata: GenerateMetadataFunction = async ({
+  params,
+}) => {
+  const { slug } = await params;
+  return getPageMeta('assemblyDistrict', metaQuery, slug);
+};
+
 const getAssemblyDistrict = gql(`
     query GetAssemblyDistrict(
     $slug: String!
