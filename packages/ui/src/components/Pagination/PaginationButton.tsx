@@ -29,8 +29,8 @@ export function PaginationButton({
   }, []);
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
-    if (onClick) {
-      e.preventDefault();
+    e.preventDefault();
+    if (onClick && !disabled) {
       onClick(page);
     }
   }
