@@ -105,7 +105,7 @@ type Documents = {
     "\n  fragment PageList on BasePageWithSlug {\n    id\n    ...PageItem\n  }\n": typeof types.PageListFragmentDoc,
     "\n  fragment PagePublicNotices on BasePageWithSlug {\n    publicNotices(take: 5 orderBy: { urgency: desc }) {\n      id\n      urgency\n      publishAt\n      ...PublicNoticeFields\n    }\n  }\n": typeof types.PagePublicNoticesFragmentDoc,
     "\n  fragment ServiceList on Service {\n    id\n    ...ServiceFields\n  }\n": typeof types.ServiceListFragmentDoc,
-    "\n  fragment ToolbeltItems on HomePage {\n    featuredItems(take: 7, orderBy: {order: asc}) {\n      id\n      ...ToolbeltHighlight\n    }\n  }\n": typeof types.ToolbeltItemsFragmentDoc,
+    "\n  fragment ToolbeltItems on HomePage {\n    featuredItems(take: 9, orderBy: {order: asc}) {\n      id\n      ...ToolbeltHighlight\n    }\n  }\n": typeof types.ToolbeltItemsFragmentDoc,
     "\n  fragment TopicList on Topic {\n    id\n    ...TopicFields\n  }\n": typeof types.TopicListFragmentDoc,
     "\n  fragment TrailInfo on Trail {\n    spring\n    summer\n    fall\n    winter\n    hiking\n    biking\n    horsebackRiding\n    crossCountrySkiing\n    snowshoeing\n    atv\n    dirtBiking\n    snowMachining\n    dogWalking\n    frisbeeGolf\n    running\n    mushing\n    open\n    difficulty\n    length\n    elevationChange\n    open\n  }\n": typeof types.TrailInfoFragmentDoc,
     "\n  fragment PageLinkList on BasePageWithSlug {\n    id\n    slug\n    title\n  }\n": typeof types.PageLinkListFragmentDoc,
@@ -212,7 +212,7 @@ const documents: Documents = {
     "\n  fragment PageList on BasePageWithSlug {\n    id\n    ...PageItem\n  }\n": types.PageListFragmentDoc,
     "\n  fragment PagePublicNotices on BasePageWithSlug {\n    publicNotices(take: 5 orderBy: { urgency: desc }) {\n      id\n      urgency\n      publishAt\n      ...PublicNoticeFields\n    }\n  }\n": types.PagePublicNoticesFragmentDoc,
     "\n  fragment ServiceList on Service {\n    id\n    ...ServiceFields\n  }\n": types.ServiceListFragmentDoc,
-    "\n  fragment ToolbeltItems on HomePage {\n    featuredItems(take: 7, orderBy: {order: asc}) {\n      id\n      ...ToolbeltHighlight\n    }\n  }\n": types.ToolbeltItemsFragmentDoc,
+    "\n  fragment ToolbeltItems on HomePage {\n    featuredItems(take: 9, orderBy: {order: asc}) {\n      id\n      ...ToolbeltHighlight\n    }\n  }\n": types.ToolbeltItemsFragmentDoc,
     "\n  fragment TopicList on Topic {\n    id\n    ...TopicFields\n  }\n": types.TopicListFragmentDoc,
     "\n  fragment TrailInfo on Trail {\n    spring\n    summer\n    fall\n    winter\n    hiking\n    biking\n    horsebackRiding\n    crossCountrySkiing\n    snowshoeing\n    atv\n    dirtBiking\n    snowMachining\n    dogWalking\n    frisbeeGolf\n    running\n    mushing\n    open\n    difficulty\n    length\n    elevationChange\n    open\n  }\n": types.TrailInfoFragmentDoc,
     "\n  fragment PageLinkList on BasePageWithSlug {\n    id\n    slug\n    title\n  }\n": types.PageLinkListFragmentDoc,
@@ -609,7 +609,7 @@ export function gql(source: "\n  fragment ServiceList on Service {\n    id\n    
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment ToolbeltItems on HomePage {\n    featuredItems(take: 7, orderBy: {order: asc}) {\n      id\n      ...ToolbeltHighlight\n    }\n  }\n"): (typeof documents)["\n  fragment ToolbeltItems on HomePage {\n    featuredItems(take: 7, orderBy: {order: asc}) {\n      id\n      ...ToolbeltHighlight\n    }\n  }\n"];
+export function gql(source: "\n  fragment ToolbeltItems on HomePage {\n    featuredItems(take: 9, orderBy: {order: asc}) {\n      id\n      ...ToolbeltHighlight\n    }\n  }\n"): (typeof documents)["\n  fragment ToolbeltItems on HomePage {\n    featuredItems(take: 9, orderBy: {order: asc}) {\n      id\n      ...ToolbeltHighlight\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

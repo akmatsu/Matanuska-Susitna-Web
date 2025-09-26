@@ -3,7 +3,7 @@ import { ToolbeltHighlight } from './toolbeltHighlight';
 
 const toolbeltItemsFragment = gql(`
   fragment ToolbeltItems on HomePage {
-    featuredItems(take: 7, orderBy: {order: asc}) {
+    featuredItems(take: 9, orderBy: {order: asc}) {
       id
       ...ToolbeltHighlight
     }
@@ -19,7 +19,7 @@ export function PageToolbelt(props: {
 
   return (
     <section className="flex justify-center  bg-base-lightest py-4 px-2">
-      <div className="max-w-6xl w-full">
+      <div className="max-w-7xl w-full">
         <div className="flex flex-row flex-wrap justify-center gap-4 lg:gap-8 w-full h-full items-stretch">
           {items?.map((item) => {
             return <ToolbeltHighlight data={item} key={item.id} />;
