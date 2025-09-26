@@ -1,3 +1,12 @@
+# [0.50.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.49.0...v0.50.0) (2025-09-26)
+
+
+### Features
+
+* added additional icons to inline ([6c80583](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6c80583222d82f997e49e04c4b65e2ddf744bcf5))
+* every page now has generated metadata ([863555d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/863555ddf3c99de511ca6f45047dfaa25cb7d29f))
+* now generating a sitemap ([d26bcee](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/d26bcee808402b8b7012b123863d2529cfab6a29))
+
 # [0.49.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.48.0...v0.49.0) (2025-09-26)
 
 
