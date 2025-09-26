@@ -1,3 +1,10 @@
+# [0.47.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.46.2...v0.47.0) (2025-09-26)
+
+
+### Features
+
+* related topics moved to the side bar ([69841eb](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/69841eb9ce4096267f44dc88680b643de44f48f3))
+
 ## [0.46.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.46.1...v0.46.2) (2025-09-26)
 
 
