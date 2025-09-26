@@ -1,3 +1,15 @@
+# [0.51.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.50.0...v0.51.0) (2025-09-26)
+
+
+### Bug Fixes
+
+* triggering build; ([ef60d24](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ef60d249a5ee34e46b7a174fc6f9466cbc8b7a4d))
+
+
+### Features
+
+* increased toolbet size to 9 ([a29ee6f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a29ee6f944620614f146bfc83763750d7a100719))
+
 # [0.50.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.49.0...v0.50.0) (2025-09-26)
 
 
