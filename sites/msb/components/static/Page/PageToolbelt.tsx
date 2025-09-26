@@ -15,6 +15,7 @@ export function PageToolbelt(props: {
 }) {
   if (!props.data) return null;
   const data = getFragmentData(toolbeltItemsFragment, props.data);
+
   const items = data.featuredItems;
 
   return (
