@@ -93,6 +93,9 @@ export function Button<T extends React.ElementType = 'button'>({
           'px-5 py-3': size === 'md' && !icon && !square,
           'px-6 py-4 text-xl': size === 'lg' && !icon && !square,
           'size-10': square && size === 'md',
+          'size-14': square && size === 'lg',
+          'p-3 text-sm': square && size === 'sm',
+          'p-2 text-xs': square && size === 'xs',
           'p-4': square && size === 'lg',
           'p-2 aspect-square': size === 'md' && icon && !square,
 

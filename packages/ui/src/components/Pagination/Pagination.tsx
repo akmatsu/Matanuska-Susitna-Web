@@ -6,6 +6,7 @@ type PaginationProps = {
   totalPages?: number;
   linkAs?: React.ElementType;
   onLinkClick?: (page: string | number) => void;
+  size?: React.ComponentProps<typeof PaginationButton>['size'];
 };
 
 export function Pagination({
@@ -13,6 +14,7 @@ export function Pagination({
   totalPages = 1,
   linkAs = 'a',
   onLinkClick,
+  size,
 }: PaginationProps) {
   const maxSlots = 3;
   const showOverflow = totalPages > maxSlots;
@@ -41,6 +43,7 @@ export function Pagination({
           onClick={onLinkClick}
           disabled={currentPage <= 1}
           aria-label="Previous"
+          size={size}
         >
           <span aria-hidden="true" className="icon-[mdi--arrow-left]"></span>
         </PaginationButton>
@@ -52,6 +55,7 @@ export function Pagination({
               currentPage={currentPage}
               as={linkAs}
               onClick={onLinkClick}
+              size={size}
             />
             <li>
               <div className="flex items-end justify-center size-9">
@@ -68,6 +72,7 @@ export function Pagination({
             currentPage={currentPage}
             as={linkAs}
             onClick={onLinkClick}
+            size={size}
           />
         ))}
 
@@ -83,6 +88,7 @@ export function Pagination({
               currentPage={currentPage}
               as={linkAs}
               onClick={onLinkClick}
+              size={size}
             />
           </>
         )}
@@ -95,6 +101,7 @@ export function Pagination({
           onClick={onLinkClick}
           disabled={currentPage >= totalPages}
           aria-label="Next"
+          size={size}
         >
           <span aria-hidden="true" className="icon-[mdi--arrow-right]"></span>
         </PaginationButton>

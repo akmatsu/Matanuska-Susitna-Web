@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { useEffect, useState } from 'react';
 import { Button } from '../Button';
 export function PaginationButton({
@@ -9,6 +9,7 @@ export function PaginationButton({
   onClick,
   disabled = false,
   children,
+  size,
 }: {
   page: number | string;
   currentPage: number | string;
@@ -16,6 +17,7 @@ export function PaginationButton({
   onClick?: (page: string | number) => void;
   disabled?: boolean;
   children?: React.ReactNode;
+  size?: ComponentProps<typeof Button>['size'];
 }) {
   const active = page == currentPage;
   const [href, setHref] = useState(`page=${page}`);
@@ -45,6 +47,7 @@ export function PaginationButton({
       shadow={false}
       onClick={handleClick}
       disabled={disabled}
+      size={size}
     >
       {children ?? page}
     </Button>
