@@ -13,6 +13,7 @@ import {
 import React, { ComponentProps, ReactNode } from 'react';
 import clsx from 'clsx';
 import { PageViewTracker } from '../client/PageViewTracker';
+import { PageTopics } from './Page/PageTopics';
 
 const BasePageFragment = gql(`
   fragment BasePageInfo on BasePageWithSlug {
@@ -31,7 +32,7 @@ const BasePageFragment = gql(`
     topics(orderBy:  {
        title: asc
     }) {
-      ...PageList
+      ...TopicList
     }
     communities(orderBy:  {
        title: asc
@@ -155,7 +156,7 @@ export function BasePage(props: {
 
             <HideOnDesktop className="flex flex-col gap-8">
               {props.rightSide}
-              <PageListItems items={page.topics} title="Related Topics" />
+
               <PageListItems
                 title="Assembly Districts"
                 items={page.assemblyDistricts}
@@ -175,6 +176,7 @@ export function BasePage(props: {
                 contacts={page.contacts}
                 primaryContact={primaryContact}
               />
+              <PageTopics topics={page.topics} />
             </HideOnDesktop>
           </div>
 
@@ -191,7 +193,7 @@ export function BasePage(props: {
               secondaryActions={secondaryActions}
             />
             <PageDocuments documents={page.documents} />
-            <PageListItems title="Related Topics" items={page.topics} />
+
             <PageListItems
               title="Assembly Districts"
               items={page.assemblyDistricts}
@@ -208,6 +210,7 @@ export function BasePage(props: {
               contacts={page.contacts}
               primaryContact={primaryContact}
             />
+            <PageTopics topics={page.topics} />
           </div>
         </div>
       </PageContainer>
