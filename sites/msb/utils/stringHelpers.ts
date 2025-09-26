@@ -115,6 +115,10 @@ function getUrlSection(str?: string) {
     return '';
   }
 
+  if (str === 'AssemblyDistrict') {
+    return 'assembly-districts/';
+  }
+
   if (str === 'OrgUnit') {
     return 'departments/';
   }

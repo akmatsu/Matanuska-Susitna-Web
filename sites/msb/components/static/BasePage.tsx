@@ -30,7 +30,7 @@ const BasePageFragment = gql(`
     ...PageEvents
     ...PagePublicNotices
     topics {
-      ...TopicList
+      ...PageList
     }
     communities {
       ...PageList
@@ -144,6 +144,7 @@ export function BasePage(props: {
 
             <HideOnDesktop className="flex flex-col gap-8">
               {props.rightSide}
+              <PageListItems items={page.topics} title="Related Topics" />
               <PageListItems
                 title="Assembly Districts"
                 items={page.assemblyDistricts}
@@ -152,7 +153,6 @@ export function BasePage(props: {
               <PageListItems
                 title="Departments & Divisions"
                 items={page.orgUnits}
-                type="departments"
               />
             </HideOnDesktop>
 
@@ -165,7 +165,6 @@ export function BasePage(props: {
                 primaryContact={primaryContact}
               />
             </HideOnDesktop>
-            <PageTopics topics={page.topics} />
           </div>
 
           {/* Right sidebar */}
@@ -181,6 +180,7 @@ export function BasePage(props: {
               secondaryActions={secondaryActions}
             />
             <PageDocuments documents={page.documents} />
+            <PageListItems title="Related Topics" items={page.topics} />
             <PageListItems
               title="Assembly Districts"
               items={page.assemblyDistricts}
@@ -191,7 +191,6 @@ export function BasePage(props: {
             <PageListItems
               title="Departments & Divisions"
               items={page.orgUnits}
-              type="departments"
             />
 
             <PageContacts

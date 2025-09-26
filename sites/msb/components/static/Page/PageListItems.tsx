@@ -12,7 +12,6 @@ const pageListFragment = gql(`
 export function PageListItems(props: {
   items?: FragmentType<typeof pageListFragment>[] | null;
   title: string;
-  type?: string;
 }) {
   const items = getFragmentData(pageListFragment, props.items);
   if (items?.length) {
@@ -20,12 +19,7 @@ export function PageListItems(props: {
       <PageSection title={props.title}>
         <ul>
           {items.map((item) => (
-            <PageListItem
-              key={item.id}
-              item={item}
-              as="li"
-              title={props.type || props.title}
-            />
+            <PageListItem key={item.id} item={item} as="li" />
           ))}
         </ul>
       </PageSection>
