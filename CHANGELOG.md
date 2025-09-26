@@ -1,3 +1,11 @@
+# [0.48.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.47.1...v0.48.0) (2025-09-26)
+
+
+### Features
+
+* document collections are now paginated and only show 5 items at a time ([83fa3c1](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/83fa3c18bc019553ec723b652b763f757de8ea99))
+* implemented doc collection pagination and sorting ([352a4f8](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/352a4f829fff50ae6f143ebaefd40019815a200f))
+
 ## [0.47.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.47.0...v0.47.1) (2025-09-26)
 
 
