@@ -14,6 +14,10 @@ import { CookieBannerProvider } from '@matsugov/ui/CookieBannerContext';
 import { AnalyticsScript } from '@/components/client/AnalyticsScript';
 
 export const metadata: Metadata = {
+  metadataBase:
+    process.env.NODE_ENV === 'production'
+      ? new URL('https://matsu.gov')
+      : undefined,
   title: 'The Matanuska-Susitna Borough',
   description:
     'The official website of the Matanuska-Susitna Borough in Alaska',
