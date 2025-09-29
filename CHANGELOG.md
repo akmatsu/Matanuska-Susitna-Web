@@ -1,3 +1,10 @@
+# [0.52.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.51.0...v0.52.0) (2025-09-29)
+
+
+### Features
+
+* fixed toolbelt links ([443b0fe](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/443b0fec3fcc9675b5f8f75bc0d6fc7690b64e0c))
+
 # [0.51.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.50.0...v0.51.0) (2025-09-26)
 
 
