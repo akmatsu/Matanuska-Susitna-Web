@@ -1,3 +1,10 @@
+## [0.54.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.54.0...v0.54.1) (2025-09-29)
+
+
+### Bug Fixes
+
+* added metadatabase ([742d7bb](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/742d7bbcd9ac0a7ff6c274d60a22e56b6ca5bdc5))
+
 # [0.54.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.53.0...v0.54.0) (2025-09-29)
 
 
