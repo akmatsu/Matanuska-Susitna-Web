@@ -1,3 +1,10 @@
+# [0.55.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.54.1...v0.55.0) (2025-09-29)
+
+
+### Features
+
+* added the MSB problem report button and the borough address ([319e0aa](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/319e0aa80fb0aac48609f9a36a95d15bd105dad1))
+
 ## [0.54.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.54.0...v0.54.1) (2025-09-29)
 
 
