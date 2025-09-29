@@ -43,7 +43,7 @@ export function AssemblyMemberInfo(props: {
         </CardHeader>
         <CardBody>
           <p>{page.bio}</p>
-          {page.phone && <PhoneLink phoneNumber={page.phone} />}
+          <p>{page.phone && <PhoneLink phoneNumber={page.phone} />}</p>
           <Link href={`mailto:${page.email}`}>{page.email}</Link>
         </CardBody>
       </Card>
