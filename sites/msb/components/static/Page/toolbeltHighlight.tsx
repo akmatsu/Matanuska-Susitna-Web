@@ -1,3 +1,4 @@
+import { getRedirectUrl } from '@/utils/stringHelpers';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import Link from 'next/link';
 import { plural } from 'pluralize';
@@ -36,25 +37,9 @@ export function ToolbeltHighlight(props: {
 }) {
   const item = getFragmentData(toolbeltHighlightFragment, props.data);
 
-  function getUrl() {
-    if (item.linkedItem?.item) {
-      if (
-        'url' in item.linkedItem.item &&
-        typeof item.linkedItem.item.url === 'string'
-      )
-        return item.linkedItem.item.url;
-      if ('slug' in item.linkedItem.item) {
-        const typename = item.linkedItem.item.__typename;
-        if (typename === 'OrgUnit') {
-          return `/departments/${item.linkedItem.item.slug}`;
-        }
-        return `/${plural(slugify(typename))}/${item.linkedItem.item.slug}`;
-      }
-    }
-    return '';
-  }
+  const url = getRedirectUrl(item.linkedItem?.item);
 
-  const url = getUrl();
+  if (!url) return null;
 
   return (
     <Link
