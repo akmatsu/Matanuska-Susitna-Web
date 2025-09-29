@@ -1,3 +1,10 @@
+# [0.56.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.55.0...v0.56.0) (2025-09-29)
+
+
+### Features
+
+* added a logout button ([d9ad0e3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/d9ad0e3f00b1ffba231600b9e623ec2348233f06))
+
 # [0.55.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.54.1...v0.55.0) (2025-09-29)
 
 
