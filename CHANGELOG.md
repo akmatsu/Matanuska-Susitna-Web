@@ -1,3 +1,10 @@
+## [0.56.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.56.0...v0.56.1) (2025-09-29)
+
+
+### Bug Fixes
+
+* fixed wrapping phone numbers ([d5b8e13](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/d5b8e13a6d8a35bac317de437f371bf3aeb34c7c))
+
 # [0.56.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.55.0...v0.56.0) (2025-09-29)
 
 
