@@ -1,3 +1,10 @@
+# [0.54.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.53.0...v0.54.0) (2025-09-29)
+
+
+### Features
+
+* added opengraph-image-alt ([99f7290](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/99f7290a5a9b8d8fc3f44b3c5a98b55c662906bd))
+
 # [0.53.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.52.0...v0.53.0) (2025-09-29)
 
 
