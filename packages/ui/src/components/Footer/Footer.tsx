@@ -16,7 +16,10 @@ export function Footer({
   socialLinks = appConfig.orgSocialLinks,
   orgPhone = appConfig.orgPhone,
   contactHref = '#contact',
+  logout,
+  login,
   signIn,
+  signOut,
 }: {
   navLinkAs?: React.ElementType;
   imageAs?: React.ElementType;
@@ -28,7 +31,10 @@ export function Footer({
   socialLinks?: { label: string; href: string }[];
   orgPhone?: string;
   contactHref?: string;
+  login?: boolean;
+  logout?: boolean;
   signIn?: () => void;
+  signOut?: () => void;
 }) {
   const Link = navLinkAs;
   const Image = imageAs;
@@ -100,12 +106,20 @@ export function Footer({
               Contact Us
             </Link>
 
-            {signIn && (
+            {login && (
               <button
                 className="text-base-darkest underline cursor-pointer"
                 onClick={signIn}
               >
                 Login
+              </button>
+            )}
+            {logout && (
+              <button
+                className="text-base-darkest underline cursor-pointer"
+                onClick={signOut}
+              >
+                Logout
               </button>
             )}
             <button
