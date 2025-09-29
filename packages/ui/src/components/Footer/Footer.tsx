@@ -114,6 +114,14 @@ export function Footer({
             >
               Change Cookie Settings
             </button>
+            <Link
+              className="text-base-darkest"
+              href="https://www.google.com/maps/place/350+E+Dahlia+Ave,+Palmer,+AK+99645/@61.5997207,-149.1088657,18z/data=!3m1!4b1!4m6!3m5!1s0x56c91defcd78fbef:0x10f2f90bd0714dc4!8m2!3d61.59972!4d-149.1082031!16s%2Fg%2F11snnmm1yd?entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              350 E Dahlia Ave, Palmer, AK 99645
+            </Link>
           </div>
         </div>
       </div>
