@@ -1,3 +1,10 @@
+# [0.53.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.52.0...v0.53.0) (2025-09-29)
+
+
+### Features
+
+* added an opengraph-image ([df67243](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/df67243026fe376d0d5e41c8a31995a9e9a72c58))
+
 # [0.52.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.51.0...v0.52.0) (2025-09-29)
 
 
