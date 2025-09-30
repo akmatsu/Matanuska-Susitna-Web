@@ -1,3 +1,10 @@
+## [0.58.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.0...v0.58.1) (2025-09-30)
+
+
+### Bug Fixes
+
+* employee mail and services link now matches rest of links ([7dc21b3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/7dc21b3f82e00b9edbd5292e828402f27dc53e92))
+
 # [0.58.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.57.0...v0.58.0) (2025-09-30)
 
 
