@@ -61,7 +61,9 @@ const BasePageFragment = gql(`
       ...PageList
     }
     ... on BasePageWithActions {
-      actions {
+      actions(orderBy:  {
+         label: asc
+      }) {
         ...ActionList
       }
     }
