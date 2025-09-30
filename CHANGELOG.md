@@ -1,3 +1,10 @@
+## [0.56.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.56.1...v0.56.2) (2025-09-30)
+
+
+### Bug Fixes
+
+* topic links should work now ([54216bf](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/54216bf8bb4245cfaab5e11d6b914789b17da875))
+
 ## [0.56.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.56.0...v0.56.1) (2025-09-29)
 
 
