@@ -1,3 +1,10 @@
+# [0.58.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.57.0...v0.58.0) (2025-09-30)
+
+
+### Features
+
+* now sorting actions alphabetically, added link to employee mail and services ([4c53073](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/4c530735ca489e6b7bd3abcbdb07f083330bd0af))
+
 # [0.57.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.56.2...v0.57.0) (2025-09-30)
 
 
