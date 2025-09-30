@@ -1,3 +1,10 @@
+# [0.57.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.56.2...v0.57.0) (2025-09-30)
+
+
+### Features
+
+* sorting actions alphabetically ([78af2c2](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/78af2c2dda1fbd7a08b4f6194fd547d62d5c5ec1))
+
 ## [0.56.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.56.1...v0.56.2) (2025-09-30)
 
 
