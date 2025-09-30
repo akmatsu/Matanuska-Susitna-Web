@@ -3,6 +3,37 @@ import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 
 export default function PublicMeetingsCalendar() {
+  // Google Calendar environment variables (from .env)
+  const calendarSrcs = [
+    {
+      src: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_MAIN_ID,
+      color: '8D6F47', // default color for main calendar
+    },
+    {
+      src: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ASSEMBLY_ID,
+      color: '23333333', // default color for assembly calendar
+    },
+    {
+      src: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_PLANNING_ID,
+      color: '5229A3', // default color for planning calendar
+    },
+    {
+      src: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_COMMUNITY_ID,
+      color: '28754E', // default color for community calendar
+    },
+  ];
+
+  const baseUrl =
+    'https://www.google.com/calendar/embed?showTitle=0&mode=MONTH&height=650&wkst=1&bgcolor=%23FFFFFF&color=%238D6F47&ctz=America%2FAnchorage';
+  const srcParams = calendarSrcs
+    .filter((cal) => typeof cal.src === 'string' && cal.src.length > 0)
+    .map(
+      (cal) =>
+        `&src=${encodeURIComponent(cal.src ?? '')}&color=%23${cal.color}`,
+    )
+    .join('');
+  const iframeSrc = `${baseUrl}${srcParams}`;
+
   return (
     <PageContainer size="sm">
       <ProseWrapper>
@@ -14,11 +45,7 @@ export default function PublicMeetingsCalendar() {
           </Link>
         </p>
         <iframe
-          src="https://www.google.com/calendar/embed?showTitle=0&mode=MONTH&height=650&wkst=1&bgcolor=%23FFFFFF&color=%238D6F47&ctz=America%2FAnchorage&
-src=clerk%40matsugov.net&color=23333333&
-src=matsugov.net_ovu1nmb4chppv20t71o0ihdbm8%40group.calendar.google.com&color=%236B3304&src=matsugov.net_657jgel3jsj90ktoc3upv1nl8g%40group.calendar.google.com&color=%23853104&src=matsugov.net_uc0iae00jdhsckigicilq7o59k%40group.calendar.google.com&color=%238D6F47&src=matsugov.net_l667h3678fe88nknu4ebmjjuf8%40group.calendar.google.com&color=%2328754E&
-src=publicaffairs%40matsugov.net&color=%235F6B02&
-src=matsugov.net_qa8ttdh9oppcalp31g4ad7gv5s%40group.calendar.google.com&color=%235229A3"
+          src={iframeSrc}
           className="w-full h-[650px] border-0"
           title="Public Meetings Calendar"
         />
