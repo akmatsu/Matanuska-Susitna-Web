@@ -101,6 +101,7 @@ export function getRedirectUrl(
   if (!item) return null;
   const typename = list || item.__typename;
   if ('url' in item) return item.url;
+  if (typename === 'Topic') return `/${item.slug}`;
   if ('slug' in item) return `/${getUrlSection(typename)}${item.slug}`;
   if ('file' in item) return item.file?.url || null;
 
