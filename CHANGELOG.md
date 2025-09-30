@@ -1,3 +1,10 @@
+## [0.58.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.1...v0.58.2) (2025-09-30)
+
+
+### Bug Fixes
+
+* FSA calendar should now appear on calendar view ([fe8af22](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fe8af221a4b12966287d67fc2a189dff917e9a1b))
+
 ## [0.58.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.0...v0.58.1) (2025-09-30)
 
 
