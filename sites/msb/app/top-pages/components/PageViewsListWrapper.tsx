@@ -31,6 +31,11 @@ const PageViewsListFragment = gql(`
         slug
       }
 
+      ... on Topic {
+        title
+        slug
+      }
+
       ... on BasePage {
         title
       }
@@ -69,6 +74,8 @@ export function PageViewsListWrapper({
         });
       });
     }
+
+    console.log(data);
   }, [sortBy, data]);
 
   if (!data) return null;

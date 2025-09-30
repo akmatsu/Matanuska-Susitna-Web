@@ -161,7 +161,7 @@ export default async function GovernmentPage() {
                     </ul>
                   </section>
                   <section>
-                    <h3 className="mt-0">Law</h3>
+                    <h3 className="mt-0">Regulations</h3>
                     <ul className="not-prose">
                       <li>
                         <Link href="/code">Borough Code</Link>
@@ -170,7 +170,7 @@ export default async function GovernmentPage() {
                         <Link href="/legislation">Legislation</Link>
                       </li>
                       <li>
-                        <Link href="/plans">Adopted Plans</Link>
+                        <Link href="/plans">Land Use Plans</Link>
                       </li>
                     </ul>
                   </section>

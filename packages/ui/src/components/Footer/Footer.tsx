@@ -136,6 +136,10 @@ export function Footer({
             >
               350 E Dahlia Ave, Palmer, AK 99645
             </Link>
+
+            <Link href="https://matsugov.us/join-us/employeeservices">
+              Employee Mail & Services
+            </Link>
           </div>
         </div>
       </div>
