@@ -15,10 +15,11 @@ const typesenseInstantSearchAdapter = new TypesenseInstantsearchAdapter({
     ],
   },
   additionalSearchParameters: {
-    num_typos: 3,
+    num_typos: 5,
     query_by: 'title,tags,description,body,districts,departments,communities',
     query_by_weights: '5,3,2,1,1,1,1',
     sort_by: '_text_match:desc,title:asc',
+    split_join_tokens: 'always',
   },
 });
 

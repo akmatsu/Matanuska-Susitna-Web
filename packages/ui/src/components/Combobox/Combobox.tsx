@@ -5,7 +5,7 @@ import {
   ComboboxOption,
   Combobox as HeadlessCombobox,
 } from '@headlessui/react';
-import React from 'react';
+import React, { Key } from 'react';
 import v from 'voca';
 
 export function Combobox<T = any>(props: {
@@ -59,7 +59,7 @@ export function Combobox<T = any>(props: {
         </ComboboxOption>
         {props.items?.map((item, index) => (
           <ComboboxOption
-            key={index}
+            key={(item?.[props.idKey as keyof typeof item] as Key) || index}
             value={item}
             className="px-4 py-2 border-b border-b-base-lightest last:border-none group cursor-default select-none data-focus:bg-primary-light/10 data-[selected]:bg-light-/20"
           >

@@ -11,7 +11,7 @@ export function CoreSearchHits(props: ComponentProps<typeof Hits>) {
     <ul role="list" className="flex flex-col gap-4 mb-4">
       {items.map((item: any) => (
         <SearchListItem
-          key={item.slug}
+          key={item.id}
           item={item}
           listKey={pluralize(
             item.type === 'orgUnit' ||
