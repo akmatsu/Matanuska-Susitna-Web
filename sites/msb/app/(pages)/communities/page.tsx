@@ -1,6 +1,5 @@
 import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
-import notFound from '../not-found';
 import { Hero } from '@matsugov/ui';
 import { PageContainer, PageSection } from '@/components/static/Page';
 import clsx from 'clsx';
@@ -10,6 +9,7 @@ import { LinkButton } from '@/components/static/LinkButton';
 import { Link } from '@/components/static/Link';
 import { HomePageHighlightCard } from '@/components/static/landing/HomePageHighlightCard';
 import { EventInfo } from '@/components/static/Page/EventInfo';
+import { notFound } from 'next/navigation';
 
 const metaQuery = gql(`
   query GetCommunitiesPageMeta {

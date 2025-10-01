@@ -3,6 +3,22 @@
 import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 
+function isVisible(el: Element) {
+  while (el) {
+    const style = window.getComputedStyle(el);
+    if (
+      style.display === 'none' ||
+      style.visibility === 'hidden' ||
+      style.opacity === '0'
+    )
+      return false;
+
+    el = el.parentElement!;
+  }
+
+  return true;
+}
+
 export function InPageNavigation({
   borderPosition = 'right',
 }: {
@@ -12,52 +28,62 @@ export function InPageNavigation({
   const [headings, setHeadings] = useState<HTMLHeadingElement[]>([]);
 
   useEffect(() => {
-    // Get all h1, h2 and h3 elements from the prose section
-    const elements = Array.from(
-      document.querySelector('.prose')?.querySelectorAll('h2, h3') || [],
-    );
+    function getVisibleHeadings() {
+      // Get all h1, h2 and h3 elements from the main section
+      const elements = Array.from(
+        document.querySelector('main')?.querySelectorAll('h1, h2, h3') || [],
+      ).filter(isVisible);
 
-    // Ensure each heading has an ID
-    elements.forEach((heading) => {
-      if (!heading.id) {
-        // Convert heading text to kebab case for ID
-        const id =
-          heading.textContent
-            ?.toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/(^-|-$)/g, '') ||
-          `heading-${Math.random().toString(36).substring(2, 9)}`;
+      // Ensure each heading has an ID
+      elements.forEach((heading) => {
+        if (!heading.id) {
+          // Convert heading text to kebab case for ID
+          const id =
+            heading.textContent
+              ?.toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/(^-|-$)/g, '') ||
+            `heading-${Math.random().toString(36).substring(2, 9)}`;
 
-        heading.id = id;
-      }
-    });
+          heading.id = id;
+        }
+      });
 
-    setHeadings(elements as HTMLHeadingElement[]);
+      setHeadings(elements as HTMLHeadingElement[]);
 
-    // Set up intersection observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: '-20% 0px -80% 0px',
-      },
-    );
+      // Set up intersection observer
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveId(entry.target.id);
+            }
+          });
+        },
+        {
+          rootMargin: '-20% 0px -80% 0px',
+        },
+      );
 
-    // Observe all heading elements
-    elements.forEach((heading) => observer.observe(heading));
+      // Observe all heading elements
+      elements.forEach((heading) => observer.observe(heading));
+      return observer;
+    }
 
-    return () => observer.disconnect();
+    const observer = getVisibleHeadings();
+
+    window.addEventListener('resize', getVisibleHeadings);
+
+    return () => {
+      window.removeEventListener('resize', getVisibleHeadings);
+      observer.disconnect();
+    };
   }, []);
 
   if (headings.length === 0) return null;
 
   return (
-    <nav className="fixed max-h-[calc(100vh-2rem)] overflow-y-auto">
+    <nav className="max-h-[calc(100vh-2rem)] overflow-y-auto">
       <h3 className="text-sm font-bold mb-2">On this page</h3>
       <ul
         className={clsx(
@@ -88,7 +114,7 @@ export function InPageNavigation({
                   'font-bold': tag === 'h2' || tag === 'h1',
                 })}
               >
-                {text}
+                {tag === 'h1' ? <strong>Top</strong> : text}
               </a>
             </li>
           );

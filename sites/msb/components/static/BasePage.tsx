@@ -14,6 +14,7 @@ import React, { ComponentProps, ReactNode } from 'react';
 import clsx from 'clsx';
 import { PageViewTracker } from '../client/PageViewTracker';
 import { PageTopics } from './Page/PageTopics';
+import { InPageNavigation } from '@matsugov/ui/InPageNavigation';
 
 const BasePageFragment = gql(`
   fragment BasePageInfo on BasePageWithSlug {
@@ -127,96 +128,103 @@ export function BasePage(props: {
   return (
     <>
       {!props.hideHero && <PageHeroImage page={page} />}
-      <PageContainer
-        {...props.pageContainerProps}
-        size={hasSideColumnContent ? 'lg' : 'sm'}
-        breakPoint="lg"
-      >
-        <div
-          className={clsx({
-            'lg:grid grid-cols-3 gap-8': hasSideColumnContent,
-          })}
+      <div className="flex justify-center relative">
+        <div className="absolute left-0 top-0 h-full  hidden min-[1385px]:block">
+          <div className="sticky top-0 right-0">
+            <InPageNavigation />
+          </div>
+        </div>
+        <PageContainer
+          {...props.pageContainerProps}
+          size={hasSideColumnContent ? 'lg' : 'sm'}
+          breakPoint="lg"
         >
-          {/* Main content */}
-          <div className="flex flex-col gap-8 col-span-2">
-            <PageBody
-              page={page}
-              actionSlot={
-                <HideOnDesktop className="not-prose flex flex-col gap-2">
-                  <PageActions
-                    actions={actions}
-                    primaryAction={primaryAction}
-                    secondaryActions={secondaryActions}
-                  />
-                  <PageDocuments documents={page.documents} />
-                </HideOnDesktop>
-              }
-              {...props.pageBodyProps}
-            />
-            <PageListItems title="Services" items={page.services} />
-            {props.children}
+          <div
+            className={clsx({
+              'lg:grid grid-cols-3 gap-8': hasSideColumnContent,
+            })}
+          >
+            {/* Main content */}
+            <div className="flex flex-col gap-8 col-span-2">
+              <PageBody
+                page={page}
+                actionSlot={
+                  <HideOnDesktop className="not-prose flex flex-col gap-2">
+                    <PageActions
+                      actions={actions}
+                      primaryAction={primaryAction}
+                      secondaryActions={secondaryActions}
+                    />
+                    <PageDocuments documents={page.documents} />
+                  </HideOnDesktop>
+                }
+                {...props.pageBodyProps}
+              />
+              <PageListItems title="Services" items={page.services} />
+              {props.children}
 
-            <HideOnDesktop className="flex flex-col gap-8">
-              {props.rightSide}
+              <HideOnDesktop className="flex flex-col gap-8">
+                {props.rightSide}
+
+                <PageListItems
+                  title="Assembly Districts"
+                  items={page.assemblyDistricts}
+                />
+                <PageListItems title="Communities" items={page.communities} />
+                <PageListItems
+                  title="Departments & Divisions"
+                  items={page.orgUnits}
+                />
+              </HideOnDesktop>
+
+              <PageEvents data={page} />
+              <PagePublicNotices data={page} />
+
+              <HideOnDesktop>
+                <PageContacts
+                  contacts={page.contacts}
+                  primaryContact={primaryContact}
+                />
+                <PageTopics topics={page.topics} />
+              </HideOnDesktop>
+            </div>
+
+            {/* Right sidebar */}
+            <div
+              className={clsx('hidden', {
+                'lg:flex flex-col gap-8 col-span-1': hasSideColumnContent,
+              })}
+            >
+              {props.mapSlot}
+              <PageActions
+                actions={actions}
+                primaryAction={primaryAction}
+                secondaryActions={secondaryActions}
+              />
+              <PageDocuments documents={page.documents} />
 
               <PageListItems
                 title="Assembly Districts"
                 items={page.assemblyDistricts}
               />
+              {props.rightSide}
               <PageListItems title="Communities" items={page.communities} />
+              <PageListItems title="Plans" items={page.plans} />
               <PageListItems
                 title="Departments & Divisions"
                 items={page.orgUnits}
               />
-            </HideOnDesktop>
 
-            <PageEvents data={page} />
-            <PagePublicNotices data={page} />
-
-            <HideOnDesktop>
               <PageContacts
                 contacts={page.contacts}
                 primaryContact={primaryContact}
               />
               <PageTopics topics={page.topics} />
-            </HideOnDesktop>
+            </div>
           </div>
-
-          {/* Right sidebar */}
-          <div
-            className={clsx('hidden', {
-              'lg:flex flex-col gap-8 col-span-1': hasSideColumnContent,
-            })}
-          >
-            {props.mapSlot}
-            <PageActions
-              actions={actions}
-              primaryAction={primaryAction}
-              secondaryActions={secondaryActions}
-            />
-            <PageDocuments documents={page.documents} />
-
-            <PageListItems
-              title="Assembly Districts"
-              items={page.assemblyDistricts}
-            />
-            {props.rightSide}
-            <PageListItems title="Communities" items={page.communities} />
-            <PageListItems title="Plans" items={page.plans} />
-            <PageListItems
-              title="Departments & Divisions"
-              items={page.orgUnits}
-            />
-
-            <PageContacts
-              contacts={page.contacts}
-              primaryContact={primaryContact}
-            />
-            <PageTopics topics={page.topics} />
-          </div>
-        </div>
-      </PageContainer>
-      <PageViewTracker pageId={page.id} pageType={page.__typename} />
+        </PageContainer>
+        <PageViewTracker pageId={page.id} pageType={page.__typename} />
+      </div>
     </>
   );
 }
