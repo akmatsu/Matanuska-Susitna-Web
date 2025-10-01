@@ -1,3 +1,11 @@
+## [0.58.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.2...v0.58.3) (2025-10-01)
+
+
+### Bug Fixes
+
+* fixed issue with duplicate keys in search results ([4b81c17](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/4b81c17b7abe6ce42f754a4857ae04c5b1a5d58c))
+* improved search results ([c93368c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/c93368c035378ebfbd98a6b721a95ffce7859df8))
+
 ## [0.58.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.1...v0.58.2) (2025-09-30)
 
 
