@@ -1,3 +1,10 @@
+## [0.58.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.3...v0.58.4) (2025-10-02)
+
+
+### Bug Fixes
+
+* actions now appear on assembly page ([b459c5c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/b459c5c5add60115b511ae64b810cb29e2549e95))
+
 ## [0.58.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.2...v0.58.3) (2025-10-01)
 
 
