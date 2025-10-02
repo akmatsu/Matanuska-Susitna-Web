@@ -1,12 +1,13 @@
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { PublicNotices } from '@/components/static/landing';
 import { HomePageHighlightCard } from '@/components/static/landing/HomePageHighlightCard';
+import { DarkFlatCard } from '@/components/static/LandingPage/ProminentCard';
 import { Link } from '@/components/static/Link';
-import { LinkButton } from '@/components/static/LinkButton';
 import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { Hero } from '@matsugov/ui';
+import { Text } from '@matsugov/ui/Text';
 import { gql } from '@msb/js-sdk/gql';
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
@@ -60,6 +61,25 @@ const query = gql(`
         ...HomePageHighlightCard
       }
     }
+
+    orgUnits(where: {
+      AND: [
+        {type:  {
+          equals: "office"
+        }},
+        {showPage:  {
+          equals: "yes"
+        }}
+      ]
+    }) {
+      id
+      title
+      description
+      slug
+      type
+      icon
+    },
+
     publicNotices(take: 5, orderBy: { urgency: desc }) {
       ...PublicNoticeList
     }
@@ -73,6 +93,7 @@ export default async function GovernmentPage() {
 
   const page = data.landingPage;
   const publicNotices = data.publicNotices;
+  const offices = data.orgUnits;
   if (!page) return notFound();
 
   const highlights = page.highlights;
@@ -80,7 +101,51 @@ export default async function GovernmentPage() {
   return (
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
-      <PageContainer size={highlights?.length ? 'lg' : 'sm'} breakPoint="sm">
+      <section>
+        <PageContainer size="lg" breakPoint="sm">
+          <ProseWrapper>
+            <Text className="mt-0" type="heading1">
+              {page.title}
+            </Text>
+            {page.body ? (
+              <MarkdownRenderer>{page.body}</MarkdownRenderer>
+            ) : (
+              <p>{page.description}</p>
+            )}
+          </ProseWrapper>
+        </PageContainer>
+      </section>
+      <div className="bg-surface-primary text-white pb-8">
+        <PageContainer size="lg" breakPoint="sm" hideBreadcrumbs>
+          <section>
+            <Text type="heading2">Elected</Text>
+          </section>
+          <section>
+            <Text type="heading2">Officers</Text>
+            {offices?.length && (
+              <div className="flex gap-4 flex-wrap items-stretch justify-center">
+                {offices?.map((o) => (
+                  <DarkFlatCard
+                    key={o.id}
+                    title={o.title!}
+                    icon={o.icon}
+                    href={`/departments/${o.slug}`}
+                    description={o.description || null}
+                  />
+                ))}
+              </div>
+            )}
+          </section>
+          <section>
+            <Text type="heading2">Boards & Commissions</Text>
+          </section>
+        </PageContainer>
+      </div>
+      <PageContainer
+        size={highlights?.length ? 'lg' : 'sm'}
+        breakPoint="sm"
+        hideBreadcrumbs
+      >
         <div
           className={clsx('grid', {
             'grid-cols-5 gap-8': !!highlights?.length,
@@ -88,56 +153,6 @@ export default async function GovernmentPage() {
         >
           <div className="col-span-5 sm:col-span-3">
             <ProseWrapper>
-              <section>
-                <h1 className="mt-0">{page.title}</h1>
-                {page.body ? (
-                  <MarkdownRenderer>{page.body}</MarkdownRenderer>
-                ) : (
-                  <p>{page.description}</p>
-                )}
-              </section>
-
-              <section className="border-y pb-4 pt-1 border-base-light">
-                <h2 className="mt-0">Leaders</h2>
-                <section>
-                  <h3 className="mt-0 text-lg">Elected</h3>
-                  <ul className="not-prose flex flex-col sm:flex-row gap-4 items-stretch justify-center">
-                    <li className="w-full">
-                      <LinkButton href="/mayor" block color="primary">
-                        Mayor
-                      </LinkButton>
-                    </li>
-                    <li className="w-full">
-                      <LinkButton href="/assembly" block color="primary">
-                        Assembly
-                      </LinkButton>
-                    </li>
-                  </ul>
-                </section>
-                <section>
-                  <h3 className="text-lg">Officers & Boards</h3>
-                  <ul className="not-prose grid grid-cols-2 gap-2">
-                    <li>
-                      <Link href="/departments/borough-manager">
-                        Borough Manager
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/departments/borough-clerk">
-                        Borough Clerk
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/departments/borough-attorney">
-                        Borough Attorney
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/boards">Boards</Link>
-                    </li>
-                  </ul>
-                </section>
-              </section>
               <section className="border-b pb-4 pt-1 border-base-light">
                 <h2 className="mt-1">Resources</h2>
                 <div className="grid grid-cols-2 gap-4">
