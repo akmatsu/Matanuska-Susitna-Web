@@ -2,11 +2,11 @@ import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { gql } from '@msb/js-sdk/gql';
-import clsx from 'clsx';
-import Link from 'next/link';
+import { Text } from '@matsugov/ui/Text';
 import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { LinkIconCard } from '@/components/static/LinkIconCard';
+import { DarkFlatCard } from '@/components/static/LandingPage/ProminentCard';
 
 const metaQuery = gql(`
   query GetDepartmentsPageMeta {
@@ -97,33 +97,23 @@ export default async function DepartmentsPage() {
       </PageContainer>
       <section className="bg-surface-primary text-white pb-8">
         <PageContainer size={pageSize} breakPoint="sm" hideBreadcrumbs>
-          <h2 className="text-2xl font-bold mb-4">Officers</h2>
+          <Text type="heading2">Officers</Text>
           <div className="flex gap-4 flex-wrap items-stretch justify-center">
             {offices.map((o) => (
-              <Link
-                href={`/departments/${o.slug}`}
+              <DarkFlatCard
                 key={o.id}
-                className="flex gap-3 max-w-xs text-white no-underline group hover:bg-white/3 p-2 rounded transition-colors"
-              >
-                <div>
-                  <div className="aspect-square size-20 p-4 rounded-full bg-primary justify-center items-center flex">
-                    <span className={clsx('size-full', o.icon)} />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-secondary">
-                    {o.title}
-                  </h3>
-                  <p className="text-white">{o.description}</p>
-                </div>
-              </Link>
+                title={o.title!}
+                icon={o.icon}
+                description={o.description}
+                href={`/departments/${o.slug}`}
+              />
             ))}
           </div>
         </PageContainer>
       </section>
       <section>
         <PageContainer size={pageSize} breakPoint="sm" hideBreadcrumbs>
-          <h2 className="text-2xl font-bold mb-4">Departments</h2>
+          <Text type="heading2">Departments</Text>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {departments.map((d) => (
               <LinkIconCard
