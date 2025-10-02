@@ -146,6 +146,7 @@ export function BasePage(props: {
                 <>
                   {props.pageBodyProps?.actionSlot}
                   <HideOnDesktop className="not-prose flex flex-col gap-2">
+                    {props.mapSlot}
                     <PageActions
                       actions={actions}
                       primaryAction={primaryAction}
