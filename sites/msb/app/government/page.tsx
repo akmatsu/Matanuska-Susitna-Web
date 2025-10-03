@@ -189,7 +189,7 @@ export default async function GovernmentPage() {
                   <DarkFlatCard
                     title="Boards"
                     icon="icon-[mdi--account-group]"
-                    href="/boards?type=community_council#boards-and-commissions"
+                    href="/boards#boards-and-commissions"
                     className="w-[96px] text-center h-full"
                     light
                     vertical
@@ -205,7 +205,7 @@ export default async function GovernmentPage() {
                   <DarkFlatCard
                     title="FSA Boards"
                     icon="icon-[mdi--fire-truck]"
-                    href="/boards?type=community_council#boards-and-commissions"
+                    href="/boards?type=fsa_board#boards-and-commissions"
                     className="w-[96px] text-center h-full"
                     light
                     vertical
@@ -213,7 +213,7 @@ export default async function GovernmentPage() {
                   <DarkFlatCard
                     title="RSA Boards"
                     icon="icon-[mdi--road-variant]"
-                    href="/boards?type=community_council#boards-and-commissions"
+                    href="/boards?type=rsa_board#boards-and-commissions"
                     light
                     className="w-[96px] text-center h-full"
                     vertical
@@ -221,7 +221,7 @@ export default async function GovernmentPage() {
                   <DarkFlatCard
                     title="SSA Boards"
                     icon="icon-[mdi--water-pump]"
-                    href="/boards?type=community_council#boards-and-commissions"
+                    href="/boards?type=ssa_board#boards-and-commissions"
                     className="w-[96px] text-center h-full"
                     light
                     vertical
