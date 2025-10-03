@@ -1,3 +1,10 @@
+## [0.59.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.59.1...v0.59.2) (2025-10-03)
+
+
+### Bug Fixes
+
+* fixed board links ([ab43e7c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ab43e7c32b5f7139e71efb830b007327f706a808))
+
 ## [0.59.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.59.0...v0.59.1) (2025-10-03)
 
 
