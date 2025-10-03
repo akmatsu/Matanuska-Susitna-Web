@@ -5,15 +5,18 @@ import { BoardsListFilter } from './BoardListFilter';
 import { BoardListTable } from './BoardListTable';
 import { Suspense, useState } from 'react';
 import { BoardListLoading } from './BoardListLoading';
+import { useSearchParams } from 'next/navigation';
 
 export function BoardsList() {
-  const [type, setType] = useState<string>('board');
+  const searchParams = useSearchParams();
+
+  const [type, setType] = useState<string>(searchParams.get('type') || 'board');
   const [search, setSearch] = useState<string | undefined>();
 
   return (
     <Card>
       <CardHeader className="flex gap-2 justify-between items-center">
-        <CardTitle>Boards & Commissions</CardTitle>
+        <CardTitle id="boards-and-commissions">Boards & Commissions</CardTitle>
         <LinkButton href="/boards/public-meetings-calendar">
           View the Public Meetings Calendar
         </LinkButton>

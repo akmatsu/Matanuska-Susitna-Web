@@ -1,3 +1,45 @@
+## [0.59.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.59.1...v0.59.2) (2025-10-03)
+
+
+### Bug Fixes
+
+* fixed board links ([ab43e7c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ab43e7c32b5f7139e71efb830b007327f706a808))
+
+## [0.59.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.59.0...v0.59.1) (2025-10-03)
+
+
+### Bug Fixes
+
+* fix build errors ([cd1fa7b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/cd1fa7b83fcb13fa3298f5923db3a42a733f5e45))
+
+# [0.59.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.4...v0.59.0) (2025-10-03)
+
+
+### Bug Fixes
+
+* fixed lint errors ([a8ccdf9](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a8ccdf9d0c2a6da2e4369f1245afd1b4fd973c01))
+
+
+### Features
+
+* added the officers section to the government page ([fc5be91](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fc5be91efe0ada4967c693f3defff54a9d8eb778))
+* updated the government page ([421d377](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/421d377185c9ab93ecdc719bd8db4015ca6cb36b))
+
+## [0.58.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.3...v0.58.4) (2025-10-02)
+
+
+### Bug Fixes
+
+* actions now appear on assembly page ([b459c5c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/b459c5c5add60115b511ae64b810cb29e2549e95))
+
+## [0.58.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.2...v0.58.3) (2025-10-01)
+
+
+### Bug Fixes
+
+* fixed issue with duplicate keys in search results ([4b81c17](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/4b81c17b7abe6ce42f754a4857ae04c5b1a5d58c))
+* improved search results ([c93368c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/c93368c035378ebfbd98a6b721a95ffce7859df8))
+
 ## [0.58.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.1...v0.58.2) (2025-09-30)
 
 

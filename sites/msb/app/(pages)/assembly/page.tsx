@@ -2,9 +2,11 @@ import { BasePage } from '@/components/static/BasePage';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { Link } from '@/components/static/Link';
 import { LinkButton } from '@/components/static/LinkButton';
+import { PageSection } from '@/components/static/Page';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
 const metaQuery = gql(`
   query GetAssemblyPageMeta {
@@ -74,6 +76,8 @@ export default async function AssemblyPage() {
 
   const page = data?.board;
   const districts = data?.assemblyDistricts;
+
+  if (!page) return notFound();
 
   return (
     <BasePage
