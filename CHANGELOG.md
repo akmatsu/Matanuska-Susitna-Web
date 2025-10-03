@@ -1,3 +1,16 @@
+# [0.59.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.4...v0.59.0) (2025-10-03)
+
+
+### Bug Fixes
+
+* fixed lint errors ([a8ccdf9](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a8ccdf9d0c2a6da2e4369f1245afd1b4fd973c01))
+
+
+### Features
+
+* added the officers section to the government page ([fc5be91](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fc5be91efe0ada4967c693f3defff54a9d8eb778))
+* updated the government page ([421d377](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/421d377185c9ab93ecdc719bd8db4015ca6cb36b))
+
 ## [0.58.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.58.3...v0.58.4) (2025-10-02)
 
 
