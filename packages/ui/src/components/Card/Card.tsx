@@ -84,10 +84,12 @@ export function CardTitle<T extends React.ElementType = 'h4'>({
   as = 'h4',
   className,
   titleSize = 'lg',
+  id,
 }: {
   children: React.ReactNode;
   as?: T;
   className?: string;
+  id?: string;
   /**
    * Size of the title text.
    * @default 'lg' */
@@ -96,6 +98,7 @@ export function CardTitle<T extends React.ElementType = 'h4'>({
   const Component = as;
   return (
     <Component
+      id={id}
       className={clsx(
         'font-bold leading-none',
         {

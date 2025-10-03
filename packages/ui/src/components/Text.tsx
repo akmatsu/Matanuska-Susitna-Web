@@ -11,6 +11,7 @@ export type TextColor =
 
 export type TextType =
   | 'body'
+  | 'body-sm'
   | 'heading1'
   | 'heading2'
   | 'heading3'
@@ -42,6 +43,7 @@ export function Text({
           'text-accent-warm': color === 'accent',
           'text-4xl font-bold': type === 'heading1',
           'text-2xl font-bold': type === 'heading2',
+          'text-sm': type === 'body-sm',
           'text-xl font-semibold': type === 'heading3',
           'mb-4':
             !props.noMargins && (type === 'heading1' || type === 'heading2'),
@@ -57,8 +59,6 @@ export function Text({
 
 function getType(type: TextType): keyof JSX.IntrinsicElements {
   switch (type) {
-    case 'body':
-      return 'p';
     case 'heading1':
       return 'h1';
     case 'heading2':
