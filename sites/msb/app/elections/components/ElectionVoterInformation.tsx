@@ -46,9 +46,9 @@ export function ElectionVoterInformation(props: {
             www.elections.alaska.gov
           </a>{' '}
           or you may register to vote at Alaska State Division of Elections
-          office or the Borough Clerk's office. Voter registration applications
-          are also available at the City Clerk's Offices in Houston, Palmer, and
-          Wasilla.
+          office or the Borough Clerk&apos;s office. Voter registration
+          applications are also available at the City Clerk&apos;s Offices in
+          Houston, Palmer, and Wasilla.
         </p>
         <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">
           <h3 className="mt-0">Voter Qualifications</h3>
