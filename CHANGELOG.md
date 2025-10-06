@@ -1,3 +1,10 @@
+# [0.61.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.60.0...v0.61.0) (2025-10-06)
+
+
+### Features
+
+* updated footer UI ([9407d8e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9407d8ef27c3ba7cdd0330a5948d05a10c739e7f))
+
 # [0.60.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.59.2...v0.60.0) (2025-10-06)
 
 
