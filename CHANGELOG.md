@@ -1,3 +1,15 @@
+# [0.60.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.59.2...v0.60.0) (2025-10-06)
+
+
+### Bug Fixes
+
+* made hero image more mobile friendly, updated footer layout, cookie banner no longer covers footer ([50c38eb](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/50c38eba3eb759939298af71b4d83923c0612446))
+
+
+### Features
+
+* fixed hero image responsiveness ([f58a8d0](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f58a8d0927560f262de9fd03a1dcd131adf94726))
+
 ## [0.59.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.59.1...v0.59.2) (2025-10-03)
 
 
