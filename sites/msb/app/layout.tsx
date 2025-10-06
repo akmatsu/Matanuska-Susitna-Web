@@ -46,6 +46,7 @@ export default async function RootLayout({
               navLinkAs={Link}
               imageAs={Image}
               contactHref="/departments"
+              navItems={primaryNav}
               login={!a?.user}
               logout={!!a?.user}
               signIn={async () => {
