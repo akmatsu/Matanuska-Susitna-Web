@@ -31,7 +31,9 @@ export function InPageNavigation({
     function getVisibleHeadings() {
       // Get all h1, h2 and h3 elements from the main section
       const elements = Array.from(
-        document.querySelector('main')?.querySelectorAll('h1, h2, h3') || [],
+        document
+          .querySelector('div#main-content')
+          ?.querySelectorAll('h1, h2, h3') || [],
       ).filter(isVisible);
 
       // Ensure each heading has an ID
@@ -94,7 +96,7 @@ export function InPageNavigation({
           },
         )}
       >
-        {headings.map((heading) => {
+        {headings.map((heading, index) => {
           const id = heading.id;
           const text = heading.textContent;
           const tag = heading.tagName.toLowerCase();
@@ -114,7 +116,7 @@ export function InPageNavigation({
                   'font-bold': tag === 'h2' || tag === 'h1',
                 })}
               >
-                {tag === 'h1' ? <strong>Top</strong> : text}
+                {tag === 'h1' && index === 0 ? <strong>Top</strong> : text}
               </a>
             </li>
           );

@@ -129,8 +129,8 @@ export function BasePage(props: {
     <>
       {!props.hideHero && <PageHeroImage page={page} />}
       <div className="flex justify-center relative">
-        <div className="absolute left-0 top-0 h-full  hidden min-[1385px]:block">
-          <div className="sticky top-0 right-0">
+        <div className="absolute left-0 top-0 h-full hidden min-[1415px]:block">
+          <div className="sticky top-0 left-0 pl-4 pt-4">
             <InPageNavigation />
           </div>
         </div>
@@ -145,7 +145,7 @@ export function BasePage(props: {
             })}
           >
             {/* Main content */}
-            <div className="flex flex-col gap-8 col-span-2">
+            <div className="flex flex-col gap-8 col-span-2" id="main-content">
               <PageBody
                 page={page}
                 {...props.pageBodyProps}
