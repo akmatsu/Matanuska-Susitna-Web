@@ -44,7 +44,7 @@ export function Hero({
       >
         <Image
           src={url}
-          layout="fill"
+          fill
           objectFit="cover"
           alt="Hero Image"
           style={{ objectPosition: pos }}

@@ -2,12 +2,14 @@
 import React from 'react';
 import { LinkButton } from '@/components/static/LinkButton/LinkButton';
 import { usePathname } from 'next/navigation';
+import { CookieBanner } from '@matsugov/ui/CookieBanner';
 
 export const FeedbackButton = () => {
   const pathname = usePathname();
 
   return (
-    <div className="sticky bottom-2 flex justify-end mr-2">
+    <div className="sticky bottom-2 flex justify-end mr-2 items-end">
+      <CookieBanner />
       <div className="flex flex-col items-end gap-2">
         <LinkButton
           href="https://problemreporter.matsugov.us/"

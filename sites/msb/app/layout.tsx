@@ -44,7 +44,6 @@ export default async function RootLayout({
             <FeedbackButton />
             <Footer
               navLinkAs={Link}
-              navItems={primaryNav}
               imageAs={Image}
               contactHref="/departments"
               login={!a?.user}
@@ -58,7 +57,6 @@ export default async function RootLayout({
                 await signOut();
               }}
             />
-            <CookieBanner />
             <AnalyticsScript />
           </CookieBannerProvider>
         </ApolloWrapper>
