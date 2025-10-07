@@ -71,8 +71,16 @@ export function Footer({
               action: () => showCookieBanner(),
             },
             {
-              label: 'Sign Up for Email Updates',
+              label: 'Email & SMS Updates',
               href: 'https://public.govdelivery.com/accounts/AKMATSUGOV/subscriber/new',
+            },
+            {
+              label: 'Volunteer Opportunities',
+              href: 'https://www.governmentjobs.com/careers/matsugov/transferjobs',
+            },
+            {
+              label: 'Serve on a Borough Board',
+              href: 'https://matsu.gov/boards',
             },
           ]}
         />
@@ -82,6 +90,22 @@ export function Footer({
           title="Employees"
           items={[
             {
+              label: 'Benefits',
+              href: 'https://benefits.matsugov.us/',
+            },
+            {
+              label: 'Employee Mail & Services',
+              href: 'https://matsugov.us/join-us/employeeservices',
+            },
+            {
+              label: 'First Responder Links',
+              href: 'https://matsugovus.sharepoint.com/sites/EmergencyServices',
+            },
+            {
+              label: 'Intranet',
+              href: 'https://matsugovus.sharepoint.com/',
+            },
+            {
               label: 'Login',
               action: signIn,
               condition: login,
@@ -90,10 +114,6 @@ export function Footer({
               label: 'Logout',
               action: signOut,
               condition: logout,
-            },
-            {
-              label: 'Employee Mail & Services',
-              href: 'https://matsugov.us/join-us/employeeservices',
             },
           ]}
         />
