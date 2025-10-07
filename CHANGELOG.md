@@ -1,3 +1,15 @@
+# [0.62.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.61.0...v0.62.0) (2025-10-07)
+
+
+### Bug Fixes
+
+* pagination now scrolls to top on new pages ([581775e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/581775e76303cf0212fe1dfa39e9ff90b6df53fd))
+
+
+### Features
+
+* can now set a query parameter on meetings search page ([9e63dbd](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9e63dbd224297d53ee2f97b55dc4410cc6c7bfac))
+
 # [0.61.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.60.0...v0.61.0) (2025-10-06)
 
 
