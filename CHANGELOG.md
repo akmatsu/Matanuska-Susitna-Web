@@ -1,3 +1,41 @@
+# [0.63.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.62.0...v0.63.0) (2025-10-07)
+
+
+### Features
+
+* updated links in footer ([f6203c6](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f6203c63822235670d84db3378afa021251e78ed))
+
+# [0.62.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.61.0...v0.62.0) (2025-10-07)
+
+
+### Bug Fixes
+
+* pagination now scrolls to top on new pages ([581775e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/581775e76303cf0212fe1dfa39e9ff90b6df53fd))
+
+
+### Features
+
+* can now set a query parameter on meetings search page ([9e63dbd](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9e63dbd224297d53ee2f97b55dc4410cc6c7bfac))
+
+# [0.61.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.60.0...v0.61.0) (2025-10-06)
+
+
+### Features
+
+* updated footer UI ([9407d8e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9407d8ef27c3ba7cdd0330a5948d05a10c739e7f))
+
+# [0.60.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.59.2...v0.60.0) (2025-10-06)
+
+
+### Bug Fixes
+
+* made hero image more mobile friendly, updated footer layout, cookie banner no longer covers footer ([50c38eb](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/50c38eba3eb759939298af71b4d83923c0612446))
+
+
+### Features
+
+* fixed hero image responsiveness ([f58a8d0](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f58a8d0927560f262de9fd03a1dcd131adf94726))
+
 ## [0.59.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.59.1...v0.59.2) (2025-10-03)
 
 

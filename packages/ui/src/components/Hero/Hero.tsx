@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import Image from 'next/image';
 
 type HeroProps = {
   image?: string | null;
@@ -11,7 +12,6 @@ type HeroProps = {
 
 export function Hero({
   image = 'https://d1159zutbdy4l.cloudfront.net/public/uploads/9a6d51bb-9b20-4008-ac82-4100120ed080/Butte-Fall-jumbo2.jpg',
-  height = '300px',
   position,
   className,
   children,
@@ -37,14 +37,22 @@ export function Hero({
   if (url)
     return (
       <section
-        className={clsx(`w-full bg-cover `, className)}
-        style={{
-          backgroundImage: `url(${url})`,
-          backgroundPosition: pos,
-          height,
-        }}
+        className={clsx(
+          `w-full h-[150px] md:h-[200px] lg:h-[250px] xl:h-[300px] relative`,
+          className,
+        )}
       >
-        {children}
+        <Image
+          src={url}
+          fill
+          objectFit="cover"
+          alt="Hero Image"
+          style={{ objectPosition: pos }}
+          className="absolute top-0 z-0"
+        />
+        <div className="relative z-10 w-full h-full flex justify-center items-center">
+          {children}
+        </div>
       </section>
     );
 }

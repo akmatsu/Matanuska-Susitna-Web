@@ -11,12 +11,14 @@ import {
 } from '@matsugov/ui';
 import { TextField } from '@matsugov/ui/TextField';
 import { format, parse, startOfDay } from 'date-fns';
+import { useSearchParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
 export function MeetingsSearch() {
+  const params = useSearchParams();
   const [meetings, setMeetings] = useState<CalendarMeeting[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [query, setQuery] = useState<string>('');
+  const [query, setQuery] = useState<string>(params.get('q') || '');
   const [timeMin, setTimeMin] = useState<string>(
     format(startOfDay(new Date()), 'yyyy-MM-dd'),
   );
