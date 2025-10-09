@@ -1,4 +1,4 @@
-import { BasePage } from '@/components/static/BasePage';
+import { BasePage } from '@/components/static/BasePage/BasePage';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { PageListItems, PageSection } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';

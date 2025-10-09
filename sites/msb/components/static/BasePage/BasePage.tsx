@@ -1,5 +1,5 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { PageHeroImage } from './Page/PageHeroImage';
+import { PageHeroImage } from '../Page/PageHeroImage';
 import {
   PageActions,
   PageBody,
@@ -9,12 +9,13 @@ import {
   PageEvents,
   PageListItems,
   PagePublicNotices,
-} from './Page';
-import React, { ComponentProps, ReactNode } from 'react';
+} from '../Page';
+import React, { ComponentProps } from 'react';
 import clsx from 'clsx';
-import { PageViewTracker } from '../client/PageViewTracker';
-import { PageTopics } from './Page/PageTopics';
+import { PageViewTracker } from '../../client/PageViewTracker';
+import { PageTopics } from '../Page/PageTopics';
 import { InPageNavigation } from '@matsugov/ui/InPageNavigation';
+import { HideOnDesktop } from './HideOnDesktop';
 
 const BasePageFragment = gql(`
   fragment BasePageInfo on BasePageWithSlug {
@@ -230,11 +231,5 @@ export function BasePage(props: {
         <PageViewTracker pageId={page.id} pageType={page.__typename} />
       </div>
     </>
-  );
-}
-
-function HideOnDesktop(props: { children: ReactNode; className?: string }) {
-  return (
-    <div className={clsx('lg:hidden', props.className)}>{props.children}</div>
   );
 }

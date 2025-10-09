@@ -1,4 +1,4 @@
-import { BasePage } from '@/components/static/BasePage';
+import { BasePage } from '@/components/static/BasePage/BasePage';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { Link } from '@/components/static/Link';
 import { LinkButton } from '@/components/static/LinkButton';

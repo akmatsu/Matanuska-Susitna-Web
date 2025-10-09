@@ -1,4 +1,4 @@
-import { BasePage } from '@/components/static/BasePage';
+import { BasePage } from '@/components/static/BasePage/BasePage';
 import {
   PageChildrenOrgUnits,
   PageListItems,

@@ -1,4 +1,4 @@
-import { BasePage } from '@/components/static/BasePage';
+import { BasePage } from '@/components/static/BasePage/BasePage';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';

@@ -1,5 +1,5 @@
 import { AssemblyMemberInfo } from '@/components/static/AssemblyDistrictInfo';
-import { BasePage } from '@/components/static/BasePage';
+import { BasePage } from '@/components/static/BasePage/BasePage';
 import { PageAddress, PageListItems } from '@/components/static/Page';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';

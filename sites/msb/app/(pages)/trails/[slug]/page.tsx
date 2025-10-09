@@ -5,7 +5,7 @@ import {
   PageTrailInfo,
 } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
-import { BasePage } from '@/components/static/BasePage';
+import { BasePage } from '@/components/static/BasePage/BasePage';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
 
