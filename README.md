@@ -11,7 +11,7 @@ This is a monorepo containing all of the MSB's public facing web services. You c
 - [pnpm](https://pnpm.io/installation) (`npm install -g pnpm`)
 - [MSB CMS](https://github.com/akmatsu/matanuska-susitna-cms) - Follow dev environment setup instruction in the README
 
-### Local Dev Setup
+### Local Dev Setup for Main Website
 
 1. Make sure you've installed all the [prerequisites](#prerequisites).
 1. Install dependencies:
@@ -23,7 +23,7 @@ pnpm install
 3. Setup your environment variables. Copy the example env files and fill in the required values:
 
 ```bash
-cp .env.example .env
+cp sites/msb/.env.example sites/msb/.env
 ```
 
 4. Start the development server:
@@ -32,46 +32,32 @@ cp .env.example .env
 pnpm msb:dev
 ```
 
-The app will be running at [`http://localhost:3000`](http://localhost:3000).
+### Local Dev Setup for Widget Website
 
-## 🏢 Sites
+1. Make sure you've installed all the [prerequisites](#prerequisites).
+1. Install dependencies:
 
-These are websites that are stored in this monorepo. Each site has its own documentation and setup instructions.
+```bash
+pnpm install
+```
 
-### [Main Website](./sites/msb/)
+3. Setup your environment variables. Copy the example env files and fill in the required values:
 
-The primary website of the Matanuska-Susitna Borough built with Next.js.
+```bash
+cp sites/msb/.env.example sites/msb/.env
+```
 
-- **Tech Stack**: Next.js, React, TypeScript
-- **Content Source**: MSB CMS
-- **Development**: `pnpm run msb:dev`
+4. Start the development server:
 
-### [Widget Website](./sites/widgets/)
+```bash
+pnpm wid:dev
+```
 
-A collection of reusable widgets for MSB websites, intended for use in iframes.
-
-- **Tech Stack**: Next.js, React, TypeScript
-- **Content Source**: MSB CMS
-- **Development**: `pnpm run wid:dev`
-
-## 📦 Packages
-
-Internal packages used across the monorepo. Each package is independently versioned and published.
-
-### [MSB UI Library](./packages/ui/)
-
-A comprehensive React component library used throughout MSB websites.
-
-- **Tech Stack**: React, TypeScript, Tailwind CSS
-- **Documentation**: See [UI Documentation](./packages/ui/README.md)
+The app will be running at [`http://localhost:3001`](http://localhost:3001).
 
 ## 🛠 Available Scripts
 
-- `pnpm dev` - Start all services in development mode
-- `pnpm build` - Build all packages and applications
-- `pnpm test` - Run tests across all packages
-- `pnpm lint` - Run ESLint across all packages
-- `pnpm format` - Format code with Prettier
+Review [package.json](./package.json) for a full list of available scripts.
 
 ## 📝 Contributing
 
