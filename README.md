@@ -6,57 +6,37 @@ This is a monorepo containing all of the MSB's public facing web services. You c
 
 ### Prerequisites
 
-- Node.js 16+
-- pnpm (`npm install -g pnpm`)
-- Git
+- [Node.js](https://nodejs.org/en/download) - Follow instructions based on your OS.
+- [TypeSense server](https://typesense.org/docs/guide/install-typesense.html#option-2-local-machine-self-hosting) - self-hosted, look for your OS instructions If you're a borough employee using WSL, follow [DEB package instructions](https://typesense.org/docs/guide/install-typesense.html#deb-package-on-ubuntu-debian).
+- [pnpm](https://pnpm.io/installation) (`npm install -g pnpm`)
+- [MSB CMS](https://github.com/akmatsu/matanuska-susitna-cms) - Follow dev environment setup instruction in the README
 
-### Setup
+### Local Dev Setup
 
-1. Clone the repository:
-
-```bash
-git clone https://git.ad.matsugov.us/web/msb.git
-cd msb
-```
-
-2. Install dependencies:
+1. Make sure you've installed all the [prerequisites](#prerequisites).
+1. Install dependencies:
 
 ```bash
 pnpm install
 ```
 
-3. Build all packages:
+3. Setup your environment variables. Copy the example env files and fill in the required values:
 
 ```bash
-pnpm build
+cp .env.example .env
 ```
 
-### Development
-
-Start all services in development mode:
+4. Start the development server:
 
 ```bash
-pnpm dev
+pnpm msb:dev
 ```
 
-For UI component development:
-
-```bash
-pnpm run storybook
-```
+The app will be running at [`http://localhost:3000`](http://localhost:3000).
 
 ## 🏢 Sites
 
 These are websites that are stored in this monorepo. Each site has its own documentation and setup instructions.
-
-### [MSB CMS](./sites/msb/)
-
-A Strapi CMS application that serves as our content management system.
-
-- **Tech Stack**: Strapi, PostgreSQL
-- **Purpose**: Central content management for MSB websites
-- **Development**: `pnpm dev --filter cms`
-- **Documentation**: See [CMS Documentation](./sites/msb/README.md)
 
 ### [Main Website](./sites/msb/)
 
@@ -64,8 +44,15 @@ The primary website of the Matanuska-Susitna Borough built with Next.js.
 
 - **Tech Stack**: Next.js, React, TypeScript
 - **Content Source**: MSB CMS
-- **Development**: `pnpm dev --filter web`
-- **Documentation**: See [Website Documentation](./sites/msb/README.md)
+- **Development**: `pnpm run msb:dev`
+
+### [Widget Website](./sites/widgets/)
+
+A collection of reusable widgets for MSB websites, intended for use in iframes.
+
+- **Tech Stack**: Next.js, React, TypeScript
+- **Content Source**: MSB CMS
+- **Development**: `pnpm run wid:dev`
 
 ## 📦 Packages
 
@@ -76,7 +63,6 @@ Internal packages used across the monorepo. Each package is independently versio
 A comprehensive React component library used throughout MSB websites.
 
 - **Tech Stack**: React, TypeScript, Tailwind CSS
-- **Development**: `pnpm run storybook --filter ui`
 - **Documentation**: See [UI Documentation](./packages/ui/README.md)
 
 ## 🛠 Available Scripts
@@ -86,7 +72,6 @@ A comprehensive React component library used throughout MSB websites.
 - `pnpm test` - Run tests across all packages
 - `pnpm lint` - Run ESLint across all packages
 - `pnpm format` - Format code with Prettier
-- `pnpm storybook` - Start Storybook for UI development
 
 ## 📝 Contributing
 
