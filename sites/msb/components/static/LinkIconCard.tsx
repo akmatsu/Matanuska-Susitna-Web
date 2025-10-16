@@ -9,20 +9,39 @@ export function LinkIconCard(props: {
   className?: string;
 }) {
   return (
+    // <Link
+    //   href={props.href}
+    //   className={clsx(
+    //     'flex flex-col md:flex-row gap-3 col-span-1 w-full text-black no-underline group rounded transition-colors border border-base-light hover:border-base h-full',
+    //     props.className,
+    //   )}
+    // >
+    //   <div className="h-fit md:h-full bg-base-lightest w-full md:w-fit flex justify-center items-center p-4">
+    //     <div className="aspect-square size-20 rounded-full bg-primary group-hover:bg-primary-dark justify-center items-center flex transition-colors">
+    //       <span className={clsx('text-white size-12', props.icon)} />
+    //     </div>
+    //   </div>
+    //   <div className="p-4">
+    //     <h3 className="text-xl font-semibold text-primary group-hover:text-primary-dark transition-colors">
+    //       {props.title}
+    //     </h3>
+    //     <p>{props.description}</p>
+    //   </div>
+    // </Link>
     <Link
       href={props.href}
       className={clsx(
-        'flex flex-col md:flex-row gap-3 col-span-1 w-full text-black no-underline group rounded transition-colors overflow-hidden border border-base-lighter hover:border-base-light',
+        'flex flex-row gap-3 w-full text-black no-underline group rounded transition-colors border border-base-light hover:border-base h-full',
         props.className,
       )}
     >
-      <div className="h-fit md:h-full bg-base-lightest p-4 w-full md:w-fit flex justify-center items-center">
-        <div className="aspect-square size-20 p-4 rounded-full bg-primary group-hover:bg-primary-dark justify-center items-center flex transition-colors">
-          <span className={clsx('size-full text-white', props.icon)} />
+      <div className="h-full bg-base-lightest w-full md:w-fit flex justify-center items-center p-4">
+        <div className="aspect-square size-20 rounded-full bg-primary group-hover:bg-primary-dark justify-center items-center flex transition-colors">
+          <span className={clsx('text-white size-12', props.icon)} />
         </div>
       </div>
       <div className="p-4">
-        <h3 className="text-xl font-semibold text-primary group-hover:text-primary-dark transitions-colors">
+        <h3 className="text-xl font-semibold text-primary group-hover:text-primary-dark transition-colors">
           {props.title}
         </h3>
         <p>{props.description}</p>

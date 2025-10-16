@@ -168,19 +168,18 @@ export function BasePage(props: {
               <PageListItems title="Services" items={page.services} />
               {props.children}
 
-              <HideOnDesktop className="flex flex-col gap-8">
-                {props.rightSide}
+              {props.rightSide}
 
-                <PageListItems
-                  title="Assembly Districts"
-                  items={page.assemblyDistricts}
-                />
-                <PageListItems title="Communities" items={page.communities} />
-                <PageListItems
-                  title="Departments & Divisions"
-                  items={page.orgUnits}
-                />
-              </HideOnDesktop>
+              <PageListItems
+                title="Assembly Districts"
+                items={page.assemblyDistricts}
+              />
+              <PageListItems title="Communities" items={page.communities} />
+              <PageListItems
+                title="Departments & Divisions"
+                items={page.orgUnits}
+              />
+              <PageListItems title="Plans" items={page.plans} />
 
               <PageEvents data={page} />
               <PagePublicNotices data={page} />
@@ -214,11 +213,6 @@ export function BasePage(props: {
               />
               {props.rightSide}
               <PageListItems title="Communities" items={page.communities} />
-              <PageListItems title="Plans" items={page.plans} />
-              <PageListItems
-                title="Departments & Divisions"
-                items={page.orgUnits}
-              />
 
               <PageContacts
                 contacts={page.contacts}

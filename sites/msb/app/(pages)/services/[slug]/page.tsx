@@ -66,16 +66,11 @@ export default async function ServicePage(props: {
   const page = data.service;
 
   return (
-    <BasePage
-      data={page}
-      rightSide={
-        <>
-          <PageListItems items={page.parks} title="Parks" />
-          <PageListItems items={page.trails} title="Trails" />
-          <PageListItems items={page.facilities} title="Facilities" />
-          <PageListItems items={page.boards} title="Boards" />
-        </>
-      }
-    />
+    <BasePage data={page}>
+      <PageListItems items={page.parks} title="Parks" />
+      <PageListItems items={page.trails} title="Trails" />
+      <PageListItems items={page.facilities} title="Facilities" />
+      <PageListItems items={page.boards} title="Boards" />
+    </BasePage>
   );
 }
