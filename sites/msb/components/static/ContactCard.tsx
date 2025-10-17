@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui/Card';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { PhoneLink } from './PhoneLink';
+import { Surface } from './Surface';
+import { Text } from '@matsugov/ui/Text';
 
 export const ContactFields = gql(`
   fragment ContactFields on Contact {
@@ -23,34 +25,27 @@ export function ContactCard({
 }) {
   const c = getFragmentData(ContactFields, contact);
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
-          {c.name}
-          {isPrimary && (
-            <>
-              {' '}
-              <span className="text-sm font-semibold text-base italic">
-                Primary Contact
-              </span>
-            </>
-          )}
-        </CardTitle>
-      </CardHeader>
-      <CardBody>
+    <Surface className="p-4">
+      <Text type="card-header">{c.name}</Text>
+      <Text type="subtitle" className="-mt-2">
+        {c.title}
+      </Text>
+      <ul>
         <ul>
           {c.phone && (
-            <li>
+            <li className="truncate">
               <PhoneLink phoneNumber={c.phone} />
             </li>
           )}
           {c.email && (
-            <li>
-              <Link href={`mailto:${c.email}`}>{c.email}</Link>
+            <li className="truncate">
+              <Link href={`mailto:${c.email}`} className="truncate">
+                {c.email}
+              </Link>
             </li>
           )}
         </ul>
-      </CardBody>
-    </Card>
+      </ul>
+    </Surface>
   );
 }

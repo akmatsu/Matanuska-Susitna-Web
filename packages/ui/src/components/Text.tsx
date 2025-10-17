@@ -16,7 +16,8 @@ export type TextType =
   | 'heading2'
   | 'heading3'
   | 'subtitle'
-  | 'label';
+  | 'label'
+  | 'card-header';
 
 export interface TextProps {
   children?: React.ReactNode;
@@ -44,10 +45,12 @@ export function Text({
       'text-accent-warm': color === 'accent',
       'text-4xl font-bold': type === 'heading1',
       'text-2xl font-bold': type === 'heading2',
+      'text-sm font-semibold text-base-darker mb-2': type === 'subtitle',
       'text-sm': type === 'body-sm',
-      'text-xl font-semibold': type === 'heading3',
+      'text-xl font-semibold': type === 'heading3' || type === 'card-header',
       'mb-4': !noMargins && (type === 'heading1' || type === 'heading2'),
       'mb-3': !noMargins && type === 'heading3',
+      'mb-2': !noMargins && type === 'card-header',
     },
     className,
   );

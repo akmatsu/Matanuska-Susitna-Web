@@ -23,7 +23,7 @@ export function Card<T extends React.ElementType = 'div'>({
     <Component {...props} className={containerClassName}>
       <div
         className={clsx(
-          'rounded flex flex-col gap-4 shadow-md',
+          'rounded flex flex-col gap-4',
           {
             'bg-white border border-base-lighter': !dark,
             'bg-surface-primary text-white border border-base-darkest': dark,
