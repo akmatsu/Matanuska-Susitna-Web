@@ -130,21 +130,24 @@ export function BasePage(props: {
     <>
       {!props.hideHero && <PageHeroImage page={page} />}
       <div className="flex justify-center relative">
-        <div className="absolute left-0 top-0 h-full hidden min-[1415px]:block">
-          <div className="sticky top-0 left-0 pl-4 pt-4">
-            <InPageNavigation />
-          </div>
-        </div>
         <PageContainer
           {...props.pageContainerProps}
-          size={hasSideColumnContent ? 'lg' : 'sm'}
-          breakPoint="lg"
+          size={hasSideColumnContent ? 'xl' : 'sm'}
+          breakPoint="md"
         >
           <div
             className={clsx({
-              'lg:grid grid-cols-3 gap-8': hasSideColumnContent,
+              'md:grid md:grid-cols-3 lg:grid-cols-4 gap-8':
+                hasSideColumnContent,
             })}
           >
+            <aside className="hidden md:block col-span-1 relative w-full">
+              <div className="absolute left-0 top-0 h-full w-full">
+                <div className="sticky top-0 left-0 pt-4 w-full">
+                  <InPageNavigation />
+                </div>
+              </div>
+            </aside>
             {/* Main content */}
             <div className="flex flex-col gap-8 col-span-2" id="main-content">
               <PageBody

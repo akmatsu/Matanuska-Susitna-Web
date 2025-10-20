@@ -1,6 +1,6 @@
 import { LinkCard, CardHeader, CardBody, CardTitle } from '@matsugov/ui/Card';
 import Link from 'next/link';
-import { plural } from 'pluralize';
+import { plural, singular } from 'pluralize';
 import v from 'voca';
 import { LinkIconCard } from '../LinkIconCard';
 
@@ -32,6 +32,7 @@ export function SearchListItem({
       <LinkIconCard
         href={url}
         title={item.title}
+        subtitle={v.titleCase(singular(listKey)).replace(/[_-]/g, ' ')}
         icon={getIcon(item.type)}
         description={item.description}
       />
@@ -45,6 +46,8 @@ function getIcon(type?: string) {
       return 'icon-[mdi--image-description]';
     case 'assemblyDistrict':
       return 'icon-[mdi--home-city]';
+    case 'assembly_district':
+      return 'icon-[mdi--home-city]';
     case 'board':
       return 'icon-[mdi--user-group]';
     case 'community':
@@ -55,11 +58,17 @@ function getIcon(type?: string) {
       return 'icon-[mdi--office-building]';
     case 'department':
       return 'icon-[mdi--user-badge]';
+    case 'orgUnit':
+      return 'icon-[mdi--user-badge]';
     case 'park':
       return 'icon-[mdi--pine-tree]';
     case 'plan':
       return 'icon-[mdi--chart-line]';
     case 'publicNotice':
+      return 'icon-[mdi--bullhorn]';
+    case 'public-notice':
+      return 'icon-[mdi--bullhorn]';
+    case 'public_notice':
       return 'icon-[mdi--bullhorn]';
     case 'service':
       return 'icon-[mdi--help-outline]';
@@ -67,5 +76,7 @@ function getIcon(type?: string) {
       return 'icon-[mdi--idea]';
     case 'trail':
       return 'icon-[mdi--hiking]';
+    case 'office':
+      return 'icon-[mdi--user-tie]';
   }
 }

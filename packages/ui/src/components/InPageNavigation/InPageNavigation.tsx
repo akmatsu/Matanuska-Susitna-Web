@@ -85,11 +85,11 @@ export function InPageNavigation({
   if (headings.length === 0) return null;
 
   return (
-    <nav className="max-h-[calc(100vh-2rem)] overflow-y-auto">
+    <nav className="max-h-[calc(100vh-2rem)] overflow-y-auto w-full">
       <h3 className="text-sm font-bold mb-2">On this page</h3>
       <ul
         className={clsx(
-          'space-y-2 text-xs border-base-light border-collapse w-48 max-w-full',
+          'space-y-2 text-xs border-base-light border-collapse w-48 max-w-full w-full',
           {
             'border-r': borderPosition === 'right',
             'border-l': borderPosition === 'left',

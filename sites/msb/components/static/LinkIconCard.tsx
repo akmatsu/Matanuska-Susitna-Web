@@ -9,6 +9,7 @@ export function LinkIconCard(props: {
   href: string;
   icon?: string | null;
   title?: string | null;
+  subtitle?: string | null;
   description?: string | null;
   className?: string;
 }) {
@@ -27,11 +28,18 @@ export function LinkIconCard(props: {
         <Text
           color="primary"
           type="card-header"
-          className="group-hover:text-primary-dark"
+          className={clsx('group-hover:text-primary-dark', {
+            'mb-0!': props.subtitle,
+          })}
         >
           {props.title}
         </Text>
-        <p>{props.description}</p>
+        {props.subtitle && (
+          <Text type="label" className="mb-3">
+            {props.subtitle}
+          </Text>
+        )}
+        <Text type="body">{props.description}</Text>
       </div>
     </Surface>
   );
