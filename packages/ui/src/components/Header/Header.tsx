@@ -109,7 +109,7 @@ export function Header({
           )}
           <Button
             as={NavLink}
-            href="https://public.govdelivery.com/accounts/AKMATSUGOV/subscriber/new"
+            href="https://public.govdelivery.com/accounts/AKMATSUGOV/signup/47997"
             className="before:icon-[mdi--email-fast-outline] before:mr-2 before:size-6"
             size="sm"
             color="secondary"
