@@ -11,7 +11,8 @@ const compat = new FlatCompat({
 
 export default tseslint.config(
   gitignore({
-    root: true,
+    files: ['.gitignore'],
+    strict: false,
   }),
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],

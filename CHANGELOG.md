@@ -1,3 +1,10 @@
+# [0.64.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.63.0...v0.64.0) (2025-10-22)
+
+
+### Features
+
+* changed email subscriber url ([00a58b9](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/00a58b9df6d74e0901568177bf6055a88711ddeb))
+
 # [0.63.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.62.0...v0.63.0) (2025-10-07)
 
 
