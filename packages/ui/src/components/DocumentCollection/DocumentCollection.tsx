@@ -6,7 +6,9 @@ import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 const documentCollectionFragment = gql(`
   fragment DocumentCollectionDisplay on DocumentCollection {
     title
-    documents {
+    documents(orderBy:  {
+       title: asc
+    }) {
       id
       ...DocumentButton
     }
