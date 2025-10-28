@@ -1,3 +1,9 @@
+import { PageContainer } from '@/components/static/Page';
+import { ProseWrapper } from '@/components/static/ProseWrapper';
+import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui';
+import { Text } from '@matsugov/ui/Text';
+import v from 'voca';
+
 type Point = {
   x: number;
   y: number;
@@ -86,6 +92,40 @@ export default async function TrailsUpdatesPage() {
     throw new Error('Invalid data format received');
   }
 
-  console.log(data);
-  return <div>Trails updates page!</div>;
+  return (
+    <PageContainer size="lg" breakPoint="sm">
+      <ProseWrapper>
+        <h1>Trail Updates</h1>
+        <ul className="space-y-4 not-prose">
+          {data.features.map(({ attributes: a }) => {
+            return (
+              <Card key={a.objectid} as="li">
+                <CardHeader>
+                  <CardTitle>{a.name}</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  {Object.entries(a).map(([key, value]) => {
+                    if (key === 'objectid' || key === 'globalid') {
+                      return null;
+                    }
+                    if (value === null || value === '') {
+                      return null;
+                    }
+                    return (
+                      <Text key={key}>
+                        <span className="font-semibold">
+                          {v.capitalize(key.replace(/_/gi, ' '))}:{' '}
+                        </span>
+                        {value}
+                      </Text>
+                    );
+                  })}
+                </CardBody>
+              </Card>
+            );
+          })}
+        </ul>
+      </ProseWrapper>
+    </PageContainer>
+  );
 }
