@@ -1,3 +1,9 @@
+import { PageContainer } from '@/components/static/Page';
+import { ProseWrapper } from '@/components/static/ProseWrapper';
+import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui';
+import { Text } from '@matsugov/ui/Text';
+import v from 'voca';
+
 type Point = {
   x: number;
   y: number;
@@ -73,19 +79,120 @@ interface TrailUpdateInfo {
   features: Array<TrailUpdateInfoFeature>;
 }
 
-export default async function TrailsUpdatesPage() {
-  const res = await fetch(
-    'https://services.arcgis.com/fX5IGselyy1TirdY/arcgis/rest/services/survey123_93749356aa2b46008e16a7d4eb986373_results/FeatureServer/0/query?where=1%3D1&objectIds=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&relationParam=&returnGeodetic=false&outFields=*&returnGeometry=true&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&defaultSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&collation=&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnTrueCurves=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pjson&token=',
+export default async function TrailsUpdatesPage(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const searchParams = await props.searchParams;
+
+  const maintainer = Array.isArray(searchParams.maintainer)
+    ? searchParams.maintainer[0]
+    : searchParams.maintainer;
+
+  const where = maintainer
+    ? `trail_maintenance_partner="${maintainer.replace(/"/g, '\\"')}"`
+    : '1=1';
+
+  console.log(where);
+
+  const url = new URL(
+    'https://services.arcgis.com/fX5IGselyy1TirdY/arcgis/rest/services/survey123_93749356aa2b46008e16a7d4eb986373_results/FeatureServer/0/query',
   );
+
+  const query = new URLSearchParams({
+    where,
+    objectIds: '',
+    geometry: '',
+    geometryType: 'esriGeometryEnvelope',
+    inSR: '',
+    spatialRel: 'esriSpatialRelIntersects',
+    resultType: 'none',
+    distance: '0.0',
+    units: 'esriSRUnit_Meter',
+    relationParam: '',
+    returnGeodetic: 'false',
+    outFields: '*',
+    returnGeometry: 'true',
+    featureEncoding: 'esriDefault',
+    multipatchOption: 'xyFootprint',
+    maxAllowableOffset: '',
+    geometryPrecision: '',
+    outSR: '',
+    defaultSR: '',
+    datumTransformation: '',
+    applyVCSProjection: 'false',
+    returnIdsOnly: 'false',
+    returnUniqueIdsOnly: 'false',
+    returnCountOnly: 'false',
+    returnExtentOnly: 'false',
+    returnQueryGeometry: 'false',
+    returnDistinctValues: 'false',
+    cacheHint: 'false',
+    collation: '',
+    orderByFields: '',
+    groupByFieldsForStatistics: '',
+    outStatistics: '',
+    having: '',
+    resultOffset: '',
+    resultRecordCount: '',
+    returnZ: 'false',
+    returnM: 'false',
+    returnTrueCurves: 'false',
+    returnExceededLimitFeatures: 'true',
+    quantizationParameters: '',
+    sqlFormat: 'none',
+    f: 'pjson',
+    token: '',
+  });
+
+  url.search = query.toString();
+
+  const res = await fetch(url.toString());
+
   if (!res.ok) {
     throw new Error('Failed to fetch trail updates');
   }
   const data: TrailUpdateInfo | null | undefined = await res.json();
 
+  console.log(data);
+
   if (!data) {
     throw new Error('Invalid data format received');
   }
 
-  console.log(data);
-  return <div>Trails updates page!</div>;
+  return (
+    <PageContainer size="lg" breakPoint="sm">
+      <ProseWrapper>
+        <h1>Trail Updates</h1>
+        <ul className="space-y-4 not-prose">
+          {data.features?.map(({ attributes: a }) => {
+            return (
+              <Card key={a.objectid} as="li">
+                <CardHeader>
+                  <CardTitle>{a.name}</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  {Object.entries(a).map(([key, value]) => {
+                    if (key === 'objectid' || key === 'globalid') {
+                      return null;
+                    }
+                    if (value === null || value === '') {
+                      return null;
+                    }
+                    return (
+                      <Text key={key}>
+                        <span className="font-semibold">
+                          {v.capitalize(key.replace(/_/gi, ' '))}:{' '}
+                        </span>
+                        {value}
+                      </Text>
+                    );
+                  })}
+                </CardBody>
+              </Card>
+            );
+          })}
+        </ul>
+      </ProseWrapper>
+    </PageContainer>
+  );
 }
