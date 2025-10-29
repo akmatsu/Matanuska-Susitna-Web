@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { JSX } from 'react';
+import React from 'react';
 
 export type TextColor =
   | 'default'

@@ -1,5 +1,10 @@
-import { from, HttpLink } from '@apollo/client';
-import { onError } from '@apollo/client/link/error';
+import { ApolloLink } from '@apollo/client';
+import {
+  CombinedGraphQLErrors,
+  CombinedProtocolErrors,
+} from '@apollo/client/errors';
+import { ErrorLink } from '@apollo/client/link/error';
+import { HttpLink } from '@apollo/client/link/http';
 import { ApolloClient, InMemoryCache } from '@apollo/client-integration-nextjs';
 
 export function makeClient({
@@ -10,9 +15,9 @@ export function makeClient({
   apiUrl: string;
   apiEndpoint?: string;
 }) {
-  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
-    if (graphQLErrors) {
-      graphQLErrors.forEach(({ message, locations, path, extensions }) => {
+  const errorLink = new ErrorLink(({ error, operation }) => {
+    if (CombinedGraphQLErrors.is(error)) {
+      error.errors.forEach(({ message, locations, path, extensions }) => {
         console.error(`[GraphQL error]: Message: ${message}`, {
           path,
           locations,
@@ -20,14 +25,16 @@ export function makeClient({
           code: extensions?.code,
         });
       });
-    }
-    if (networkError) {
-      console.error('[Network error]:', networkError, 'operation: ', operation);
+    } else if (CombinedProtocolErrors.is(error)) {
+      console.error('[Protocol error]:', error, 'operation: ', operation);
+    } else {
+      console.error(`[Network error]: ${error}`);
     }
   });
 
   const httpLink = new HttpLink({
     uri: `${opts?.apiUrl}${apiEndpoint}`,
+    credentials: 'include',
 
     /**
      * (this does not work if you are rendering your page with `export const dynamic = "force-static"`)
@@ -88,7 +95,9 @@ export function makeClient({
         ],
       },
     }),
-    link: from([errorLink, httpLink]),
+
+    link: ApolloLink.from([httpLink, errorLink]),
+
     defaultOptions: {
       query: {
         errorPolicy: 'all', // This allows partial data to be returned even if there are errors
