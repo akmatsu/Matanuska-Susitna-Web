@@ -89,7 +89,7 @@ export default async function TrailsUpdatesPage(props: {
     : searchParams.maintainer;
 
   const where = maintainer
-    ? `trail_maintenance_partner="${maintainer.replace(/"/g, '\\"')}"`
+    ? `trail_maintenance_partner='${maintainer.replace(/"/g, '\\"')}'`
     : '1=1';
 
   console.log(where);
