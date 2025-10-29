@@ -48,6 +48,7 @@ export function Text({
       'text-xl font-semibold': type === 'heading3',
       'mb-4': !noMargins && (type === 'heading1' || type === 'heading2'),
       'mb-3': !noMargins && type === 'heading3',
+      'text-lg font-semibold text-base-dark': type === 'subtitle',
     },
     className,
   );
