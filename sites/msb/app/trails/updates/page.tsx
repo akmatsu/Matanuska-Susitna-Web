@@ -1,83 +1,22 @@
 import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
-import { Card, CardBody, CardHeader, CardTitle } from '@matsugov/ui';
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardTitle,
+  Table,
+  Td,
+  Th,
+  THead,
+  Tr,
+} from '@matsugov/ui';
 import { Text } from '@matsugov/ui/Text';
 import v from 'voca';
+import { getTrailUpdates } from './utils';
+import { format } from 'date-fns';
 
-type Point = {
-  x: number;
-  y: number;
-};
-
-type FeatureAttributes = {
-  objectid: number;
-  globalid: string;
-  CreationDate: number;
-  Creator: string;
-  EditDate: number;
-  Editor: string;
-  _date: number;
-  name: string;
-  trail_maintenance_partner: string;
-  trails_maintained: string;
-  current_weather: string;
-  date_of_last_snowfall: number;
-  depth_of_last_snowfall: string;
-  current_loose_snow_base: string;
-  packed_trail_base: string;
-  trail_conditions: string;
-  date_of_last_grooming: number;
-  trail_closures: string;
-  hazards: string;
-  describe_hazard: string;
-  comments: string;
-};
-
-interface TrailUpdateInfoFieldDomain {
-  type: string;
-  name: string;
-  codedValues: Array<TrailUpdateInfoFieldDomainCodedValue>;
-}
-
-interface TrailUpdateInfoFieldDomainCodedValue {
-  name: string;
-  code: string;
-}
-
-interface TrailUpdateInfoField {
-  name: string;
-  type: string;
-  alias: string;
-  sqlType: string;
-  length?: number;
-  domain: TrailUpdateInfoFieldDomain | null;
-  defaultValue: any;
-}
-
-interface TrailUpdateInfoSpatialReference {
-  wkid: number;
-  latestWkid: number;
-}
-
-interface TrailUpdateInfoUniqueIdField {
-  name: string;
-  isSystemMaintained: boolean;
-}
-
-interface TrailUpdateInfoFeature {
-  attributes: FeatureAttributes;
-  geometry: Point;
-}
-
-interface TrailUpdateInfo {
-  objectIdFieldName: string;
-  globalIdFieldName: string;
-  geometryType: string;
-  uniqueIdField: TrailUpdateInfoUniqueIdField;
-  spatialReference: TrailUpdateInfoSpatialReference;
-  fields: Array<TrailUpdateInfoField>;
-  features: Array<TrailUpdateInfoFeature>;
-}
+import { TrailsUpdateSearchFilters } from './SearchFilters';
 
 export default async function TrailsUpdatesPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -88,105 +27,76 @@ export default async function TrailsUpdatesPage(props: {
     ? searchParams.maintainer[0]
     : searchParams.maintainer;
 
-  const where = maintainer
-    ? `trail_maintenance_partner='${maintainer.replace(/"/g, '\\"')}'`
-    : '1=1';
+  const query = Array.isArray(searchParams.query)
+    ? searchParams.query[0]
+    : searchParams.query;
 
-  console.log(where);
-
-  const url = new URL(
-    'https://services.arcgis.com/fX5IGselyy1TirdY/arcgis/rest/services/survey123_93749356aa2b46008e16a7d4eb986373_results/FeatureServer/0/query',
-  );
-
-  const query = new URLSearchParams({
-    where,
-    objectIds: '',
-    geometry: '',
-    geometryType: 'esriGeometryEnvelope',
-    inSR: '',
-    spatialRel: 'esriSpatialRelIntersects',
-    resultType: 'none',
-    distance: '0.0',
-    units: 'esriSRUnit_Meter',
-    relationParam: '',
-    returnGeodetic: 'false',
-    outFields: '*',
-    returnGeometry: 'true',
-    featureEncoding: 'esriDefault',
-    multipatchOption: 'xyFootprint',
-    maxAllowableOffset: '',
-    geometryPrecision: '',
-    outSR: '',
-    defaultSR: '',
-    datumTransformation: '',
-    applyVCSProjection: 'false',
-    returnIdsOnly: 'false',
-    returnUniqueIdsOnly: 'false',
-    returnCountOnly: 'false',
-    returnExtentOnly: 'false',
-    returnQueryGeometry: 'false',
-    returnDistinctValues: 'false',
-    cacheHint: 'false',
-    collation: '',
-    orderByFields: '',
-    groupByFieldsForStatistics: '',
-    outStatistics: '',
-    having: '',
-    resultOffset: '',
-    resultRecordCount: '',
-    returnZ: 'false',
-    returnM: 'false',
-    returnTrueCurves: 'false',
-    returnExceededLimitFeatures: 'true',
-    quantizationParameters: '',
-    sqlFormat: 'none',
-    f: 'pjson',
-    token: '',
-  });
-
-  url.search = query.toString();
-
-  const res = await fetch(url.toString());
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch trail updates');
-  }
-  const data: TrailUpdateInfo | null | undefined = await res.json();
-
-  console.log(data);
-
-  if (!data) {
-    throw new Error('Invalid data format received');
-  }
+  const data = await getTrailUpdates({ maintainer, query });
 
   return (
     <PageContainer size="lg" breakPoint="sm">
       <ProseWrapper>
         <h1>Trail Updates</h1>
+
+        <TrailsUpdateSearchFilters />
         <ul className="space-y-4 not-prose">
           {data.features?.map(({ attributes: a }) => {
             return (
               <Card key={a.objectid} as="li">
                 <CardHeader>
-                  <CardTitle>{a.name}</CardTitle>
+                  <CardTitle titleSize="lg">{a.name}</CardTitle>
+                  <Text type="body-sm" className="text-base-dark italic">
+                    From{' '}
+                    {a.trail_maintenance_partner
+                      .toLocaleLowerCase()
+                      .split(/[\s_]+/)
+                      .map((part) => v.capitalize(part))
+                      .join(' ')
+                      .split('-')
+                      .map((part) => v.capitalize(part))
+                      .join('-')}{' '}
+                    on {format(a._date, 'MMMM dd, yyyy')}
+                  </Text>
                 </CardHeader>
                 <CardBody>
-                  {Object.entries(a).map(([key, value]) => {
-                    if (key === 'objectid' || key === 'globalid') {
-                      return null;
-                    }
-                    if (value === null || value === '') {
-                      return null;
-                    }
-                    return (
-                      <Text key={key}>
-                        <span className="font-semibold">
-                          {v.capitalize(key.replace(/_/gi, ' '))}:{' '}
-                        </span>
-                        {value}
-                      </Text>
-                    );
-                  })}
+                  <Table>
+                    <THead>
+                      <Tr>
+                        <Th>Key</Th>
+                        <Th>Value</Th>
+                      </Tr>
+                    </THead>
+                    <tbody>
+                      {Object.entries(a).map(([key, value]) => {
+                        if (
+                          key === 'objectid' ||
+                          key === 'globalid' ||
+                          key === 'name' ||
+                          key === 'CreationDate' ||
+                          key === 'Creator' ||
+                          key === 'EditDate' ||
+                          key === 'Editor' ||
+                          key === 'trail_maintenance_partner' ||
+                          key === '_date'
+                        ) {
+                          return null;
+                        }
+                        if (value === null || value === '') {
+                          return null;
+                        }
+                        return (
+                          <Tr key={key}>
+                            <Td>
+                              <span className="font-semibold">
+                                {v.capitalize(key.replace(/[_-]/gi, ' '))}
+                              </span>
+                            </Td>
+                            <Td>{value}</Td>
+                          </Tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
                 </CardBody>
               </Card>
             );
