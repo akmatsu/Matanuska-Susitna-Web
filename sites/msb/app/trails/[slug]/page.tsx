@@ -49,7 +49,7 @@ export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const { data, errors, error } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: trailQuery,
     variables: {
       slug,
@@ -57,12 +57,12 @@ export default async function Page(props: {
     },
   });
 
-  if (errors || error) {
-    console.error('Error fetching trail data:', errors || error);
+  if (error) {
+    console.error('Error fetching trail data:', error);
     return notFound();
   }
 
-  const page = data.trail;
+  const page = data?.trail;
 
   if (!page) {
     console.error('Trail not found for slug:', slug);

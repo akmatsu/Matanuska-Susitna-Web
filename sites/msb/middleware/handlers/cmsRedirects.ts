@@ -33,7 +33,7 @@ export async function handleCmsRedirects(req: NextAuthRequest) {
       },
     });
 
-    const redirectInfo = data.redirect;
+    const redirectInfo = data?.redirect;
 
     if (redirectInfo) {
       const redirectUrl = getRedirectUrl(

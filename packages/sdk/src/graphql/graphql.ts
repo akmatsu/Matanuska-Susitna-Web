@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
+export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -23357,6 +23357,7 @@ export type Trail = BasePage & BasePageWithActions & BasePageWithSlug & {
   id: Scalars['ID']['output'];
   length?: Maybe<Scalars['String']['output']>;
   liveUrl?: Maybe<Scalars['String']['output']>;
+  maintainer?: Maybe<Scalars['String']['output']>;
   makeDrafts?: Maybe<Scalars['String']['output']>;
   mushing?: Maybe<Scalars['Boolean']['output']>;
   open?: Maybe<Scalars['Boolean']['output']>;
@@ -23630,6 +23631,7 @@ export type TrailCreateInput = {
   hiking?: InputMaybe<Scalars['Boolean']['input']>;
   horsebackRiding?: InputMaybe<Scalars['Boolean']['input']>;
   length?: InputMaybe<Scalars['String']['input']>;
+  maintainer?: InputMaybe<Scalars['String']['input']>;
   makeDrafts?: InputMaybe<Scalars['String']['input']>;
   mushing?: InputMaybe<Scalars['Boolean']['input']>;
   open?: InputMaybe<Scalars['Boolean']['input']>;
@@ -23693,6 +23695,7 @@ export type TrailDraft = {
   id: Scalars['ID']['output'];
   length?: Maybe<Scalars['String']['output']>;
   liveUrl?: Maybe<Scalars['String']['output']>;
+  maintainer?: Maybe<Scalars['String']['output']>;
   mushing?: Maybe<Scalars['Boolean']['output']>;
   open?: Maybe<Scalars['Boolean']['output']>;
   orgUnits?: Maybe<Array<OrgUnit>>;
@@ -23933,6 +23936,7 @@ export type TrailDraftCreateInput = {
   hiking?: InputMaybe<Scalars['Boolean']['input']>;
   horsebackRiding?: InputMaybe<Scalars['Boolean']['input']>;
   length?: InputMaybe<Scalars['String']['input']>;
+  maintainer?: InputMaybe<Scalars['String']['input']>;
   mushing?: InputMaybe<Scalars['Boolean']['input']>;
   open?: InputMaybe<Scalars['Boolean']['input']>;
   orgUnits?: InputMaybe<OrgUnitRelateToManyForCreateInput>;
@@ -23984,6 +23988,7 @@ export type TrailDraftOrderByInput = {
   horsebackRiding?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   length?: InputMaybe<OrderDirection>;
+  maintainer?: InputMaybe<OrderDirection>;
   mushing?: InputMaybe<OrderDirection>;
   open?: InputMaybe<OrderDirection>;
   publish?: InputMaybe<OrderDirection>;
@@ -24041,6 +24046,7 @@ export type TrailDraftUpdateInput = {
   hiking?: InputMaybe<Scalars['Boolean']['input']>;
   horsebackRiding?: InputMaybe<Scalars['Boolean']['input']>;
   length?: InputMaybe<Scalars['String']['input']>;
+  maintainer?: InputMaybe<Scalars['String']['input']>;
   mushing?: InputMaybe<Scalars['Boolean']['input']>;
   open?: InputMaybe<Scalars['Boolean']['input']>;
   orgUnits?: InputMaybe<OrgUnitRelateToManyForUpdateInput>;
@@ -24095,6 +24101,7 @@ export type TrailDraftWhereInput = {
   horsebackRiding?: InputMaybe<BooleanFilter>;
   id?: InputMaybe<IdFilter>;
   length?: InputMaybe<StringFilter>;
+  maintainer?: InputMaybe<StringNullableFilter>;
   mushing?: InputMaybe<BooleanFilter>;
   open?: InputMaybe<BooleanFilter>;
   orgUnits?: InputMaybe<OrgUnitManyRelationFilter>;
@@ -24149,6 +24156,7 @@ export type TrailOrderByInput = {
   horsebackRiding?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   length?: InputMaybe<OrderDirection>;
+  maintainer?: InputMaybe<OrderDirection>;
   makeDrafts?: InputMaybe<OrderDirection>;
   mushing?: InputMaybe<OrderDirection>;
   open?: InputMaybe<OrderDirection>;
@@ -24221,6 +24229,7 @@ export type TrailUpdateInput = {
   hiking?: InputMaybe<Scalars['Boolean']['input']>;
   horsebackRiding?: InputMaybe<Scalars['Boolean']['input']>;
   length?: InputMaybe<Scalars['String']['input']>;
+  maintainer?: InputMaybe<Scalars['String']['input']>;
   makeDrafts?: InputMaybe<Scalars['String']['input']>;
   mushing?: InputMaybe<Scalars['Boolean']['input']>;
   open?: InputMaybe<Scalars['Boolean']['input']>;
@@ -24285,6 +24294,7 @@ export type TrailVersion = {
   isLive?: Maybe<Trail>;
   length?: Maybe<Scalars['String']['output']>;
   liveUrl?: Maybe<Scalars['String']['output']>;
+  maintainer?: Maybe<Scalars['String']['output']>;
   mushing?: Maybe<Scalars['Boolean']['output']>;
   open?: Maybe<Scalars['Boolean']['output']>;
   orgUnits?: Maybe<Array<OrgUnit>>;
@@ -24526,6 +24536,7 @@ export type TrailVersionCreateInput = {
   horsebackRiding?: InputMaybe<Scalars['Boolean']['input']>;
   isLive?: InputMaybe<TrailRelateToOneForCreateInput>;
   length?: InputMaybe<Scalars['String']['input']>;
+  maintainer?: InputMaybe<Scalars['String']['input']>;
   mushing?: InputMaybe<Scalars['Boolean']['input']>;
   open?: InputMaybe<Scalars['Boolean']['input']>;
   orgUnits?: InputMaybe<OrgUnitRelateToManyForCreateInput>;
@@ -24577,6 +24588,7 @@ export type TrailVersionOrderByInput = {
   horsebackRiding?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   length?: InputMaybe<OrderDirection>;
+  maintainer?: InputMaybe<OrderDirection>;
   mushing?: InputMaybe<OrderDirection>;
   open?: InputMaybe<OrderDirection>;
   publishAt?: InputMaybe<OrderDirection>;
@@ -24646,6 +24658,7 @@ export type TrailVersionUpdateInput = {
   horsebackRiding?: InputMaybe<Scalars['Boolean']['input']>;
   isLive?: InputMaybe<TrailRelateToOneForUpdateInput>;
   length?: InputMaybe<Scalars['String']['input']>;
+  maintainer?: InputMaybe<Scalars['String']['input']>;
   mushing?: InputMaybe<Scalars['Boolean']['input']>;
   open?: InputMaybe<Scalars['Boolean']['input']>;
   orgUnits?: InputMaybe<OrgUnitRelateToManyForUpdateInput>;
@@ -24701,6 +24714,7 @@ export type TrailVersionWhereInput = {
   id?: InputMaybe<IdFilter>;
   isLive?: InputMaybe<TrailWhereInput>;
   length?: InputMaybe<StringFilter>;
+  maintainer?: InputMaybe<StringNullableFilter>;
   mushing?: InputMaybe<BooleanFilter>;
   open?: InputMaybe<BooleanFilter>;
   orgUnits?: InputMaybe<OrgUnitManyRelationFilter>;
@@ -24761,6 +24775,7 @@ export type TrailWhereInput = {
   horsebackRiding?: InputMaybe<BooleanFilter>;
   id?: InputMaybe<IdFilter>;
   length?: InputMaybe<StringFilter>;
+  maintainer?: InputMaybe<StringNullableFilter>;
   mushing?: InputMaybe<BooleanFilter>;
   open?: InputMaybe<BooleanFilter>;
   orgUnits?: InputMaybe<OrgUnitManyRelationFilter>;
@@ -25713,7 +25728,21 @@ export type GetAllPagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetAllPagesQuery = { __typename?: 'Query', boardPage?: { __typename?: 'BoardPage', updatedAt?: any | null } | null, communities?: Array<{ __typename?: 'Community', slug?: string | null, updatedAt?: any | null }> | null, electionsPage?: { __typename?: 'ElectionsPage', updatedAt?: any | null } | null, facilities?: Array<{ __typename?: 'Facility', slug?: string | null, updatedAt?: any | null }> | null, homePage?: { __typename?: 'HomePage', updatedAt?: any | null } | null, orgUnits?: Array<{ __typename?: 'OrgUnit', slug?: string | null, updatedAt?: any | null }> | null, parks?: Array<{ __typename?: 'Park', slug?: string | null, updatedAt?: any | null }> | null, plans?: Array<{ __typename?: 'Plan', slug?: string | null, updatedAt?: any | null }> | null, publicNotices?: Array<{ __typename?: 'PublicNotice', slug?: string | null, updatedAt?: any | null }> | null, services?: Array<{ __typename?: 'Service', slug?: string | null, updatedAt?: any | null }> | null, topics?: Array<{ __typename?: 'Topic', slug?: string | null, updatedAt?: any | null }> | null, trails?: Array<{ __typename?: 'Trail', slug?: string | null, updatedAt?: any | null }> | null };
 
-export type PageViewsListFragment = { __typename?: 'TopPage', pageId: string, item?: { __typename: 'AssemblyDistrict', id: string, slug?: string | null, title?: string | null } | { __typename: 'Board', id: string, slug?: string | null, title?: string | null } | { __typename: 'Community', id: string, slug?: string | null, title?: string | null } | { __typename: 'ElectionsPage', id: string, title?: string | null } | { __typename: 'Facility', id: string, slug?: string | null, title?: string | null } | { __typename: 'OrgUnit', id: string, slug?: string | null, title?: string | null } | { __typename: 'Park', id: string, slug?: string | null, title?: string | null } | { __typename: 'Plan', id: string, slug?: string | null, title?: string | null } | { __typename: 'PublicNotice', id: string, slug?: string | null, title?: string | null } | { __typename: 'Service', id: string, slug?: string | null, title?: string | null } | { __typename: 'Topic', id: string, slug?: string | null, title?: string | null } | { __typename: 'Trail', id: string, slug?: string | null, title?: string | null } | { __typename: 'Url', title?: string | null, url?: string | null } | null } & { ' $fragmentName'?: 'PageViewsListFragment' };
+export type PageViewsListFragment = { __typename?: 'TopPage', pageId: string, item?:
+    | { __typename: 'AssemblyDistrict', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'Board', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'Community', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'ElectionsPage', id: string, title?: string | null }
+    | { __typename: 'Facility', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'OrgUnit', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'Park', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'Plan', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'PublicNotice', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'Service', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'Topic', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'Trail', id: string, slug?: string | null, title?: string | null }
+    | { __typename: 'Url', title?: string | null, url?: string | null }
+   | null } & { ' $fragmentName'?: 'PageViewsListFragment' };
 
 export type GetTopPagesMetaQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -25787,7 +25816,21 @@ type PageMap_Topic_Fragment = { __typename?: 'Topic', title?: string | null } & 
 
 type PageMap_Trail_Fragment = { __typename?: 'Trail', title?: string | null } & { ' $fragmentName'?: 'PageMap_Trail_Fragment' };
 
-export type PageMapFragment = PageMap_AssemblyDistrict_Fragment | PageMap_Board_Fragment | PageMap_BoardPage_Fragment | PageMap_Community_Fragment | PageMap_Event_Fragment | PageMap_Facility_Fragment | PageMap_OrgUnit_Fragment | PageMap_Park_Fragment | PageMap_Plan_Fragment | PageMap_PublicNotice_Fragment | PageMap_Service_Fragment | PageMap_Topic_Fragment | PageMap_Trail_Fragment;
+export type PageMapFragment =
+  | PageMap_AssemblyDistrict_Fragment
+  | PageMap_Board_Fragment
+  | PageMap_BoardPage_Fragment
+  | PageMap_Community_Fragment
+  | PageMap_Event_Fragment
+  | PageMap_Facility_Fragment
+  | PageMap_OrgUnit_Fragment
+  | PageMap_Park_Fragment
+  | PageMap_Plan_Fragment
+  | PageMap_PublicNotice_Fragment
+  | PageMap_Service_Fragment
+  | PageMap_Topic_Fragment
+  | PageMap_Trail_Fragment
+;
 
 export type GetAlertsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -25813,7 +25856,22 @@ export type GetInternalLinkDataQueryVariables = Exact<{
 }>;
 
 
-export type GetInternalLinkDataQuery = { __typename?: 'Query', getInternalLink?: { __typename?: 'AssemblyDistrict', title?: string | null, slug?: string | null } | { __typename?: 'Board', title?: string | null, slug?: string | null } | { __typename?: 'BoardPage', title?: string | null } | { __typename?: 'Community', title?: string | null, slug?: string | null } | { __typename?: 'Document', title?: string | null, file?: { __typename?: 'FileFieldOutput', url: string } | null } | { __typename?: 'Facility', title?: string | null, slug?: string | null } | { __typename?: 'HomePage' } | { __typename?: 'OrgUnit', title?: string | null, slug?: string | null } | { __typename?: 'Park', title?: string | null, slug?: string | null } | { __typename?: 'PublicNotice', title?: string | null, slug?: string | null } | { __typename?: 'Service', title?: string | null, slug?: string | null } | { __typename?: 'Topic', title?: string | null, slug?: string | null } | { __typename?: 'Trail', title?: string | null, slug?: string | null } | { __typename?: 'Url', title?: string | null, url?: string | null } | null };
+export type GetInternalLinkDataQuery = { __typename?: 'Query', getInternalLink?:
+    | { __typename?: 'AssemblyDistrict', title?: string | null, slug?: string | null }
+    | { __typename?: 'Board', title?: string | null, slug?: string | null }
+    | { __typename?: 'BoardPage', title?: string | null }
+    | { __typename?: 'Community', title?: string | null, slug?: string | null }
+    | { __typename?: 'Document', title?: string | null, file?: { __typename?: 'FileFieldOutput', url: string } | null }
+    | { __typename?: 'Facility', title?: string | null, slug?: string | null }
+    | { __typename?: 'HomePage' }
+    | { __typename?: 'OrgUnit', title?: string | null, slug?: string | null }
+    | { __typename?: 'Park', title?: string | null, slug?: string | null }
+    | { __typename?: 'PublicNotice', title?: string | null, slug?: string | null }
+    | { __typename?: 'Service', title?: string | null, slug?: string | null }
+    | { __typename?: 'Topic', title?: string | null, slug?: string | null }
+    | { __typename?: 'Trail', title?: string | null, slug?: string | null }
+    | { __typename?: 'Url', title?: string | null, url?: string | null }
+   | null };
 
 export type GetServicePrimaryActionQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -26217,13 +26275,42 @@ type BasePageInfo_Trail_Fragment = (
   & { ' $fragmentRefs'?: { 'PageBody_Trail_Fragment': PageBody_Trail_Fragment;'HeroImage_Trail_Fragment': HeroImage_Trail_Fragment;'PageEvents_Trail_Fragment': PageEvents_Trail_Fragment;'PagePublicNotices_Trail_Fragment': PagePublicNotices_Trail_Fragment } }
 ) & { ' $fragmentName'?: 'BasePageInfo_Trail_Fragment' };
 
-export type BasePageInfoFragment = BasePageInfo_AssemblyDistrict_Fragment | BasePageInfo_Board_Fragment | BasePageInfo_Community_Fragment | BasePageInfo_Event_Fragment | BasePageInfo_Facility_Fragment | BasePageInfo_OrgUnit_Fragment | BasePageInfo_Park_Fragment | BasePageInfo_Plan_Fragment | BasePageInfo_PublicNotice_Fragment | BasePageInfo_Service_Fragment | BasePageInfo_Topic_Fragment | BasePageInfo_Trail_Fragment;
+export type BasePageInfoFragment =
+  | BasePageInfo_AssemblyDistrict_Fragment
+  | BasePageInfo_Board_Fragment
+  | BasePageInfo_Community_Fragment
+  | BasePageInfo_Event_Fragment
+  | BasePageInfo_Facility_Fragment
+  | BasePageInfo_OrgUnit_Fragment
+  | BasePageInfo_Park_Fragment
+  | BasePageInfo_Plan_Fragment
+  | BasePageInfo_PublicNotice_Fragment
+  | BasePageInfo_Service_Fragment
+  | BasePageInfo_Topic_Fragment
+  | BasePageInfo_Trail_Fragment
+;
 
 export type ContactFieldsFragment = { __typename?: 'Contact', id: string, name?: string | null, phone?: string | null, email?: string | null, title?: string | null } & { ' $fragmentName'?: 'ContactFieldsFragment' };
 
 export type DocumentLinkFragment = { __typename?: 'Document', title?: string | null, file?: { __typename?: 'FileFieldOutput', filename: string, url: string } | null } & { ' $fragmentName'?: 'DocumentLinkFragment' };
 
-export type ActionFieldsFragment = { __typename?: 'InternalLink', id: string, label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, slug?: string | null, title?: string | null, description?: string | null } | { __typename: 'Board', id: string, slug?: string | null, title?: string | null, description?: string | null } | { __typename: 'BoardPage', id: string, title?: string | null, description?: string | null } | { __typename: 'Community', id: string, slug?: string | null, title?: string | null, description?: string | null } | { __typename: 'Document', id: string, title?: string | null, description?: string | null, file?: { __typename?: 'FileFieldOutput', url: string } | null } | { __typename: 'ElectionsPage', id: string, title?: string | null, description?: string | null } | { __typename: 'Facility', id: string, slug?: string | null, title?: string | null, description?: string | null } | { __typename: 'HomePage', id: string, title?: string | null, description?: string | null } | { __typename: 'OrgUnit', id: string, slug?: string | null, title?: string | null, description?: string | null } | { __typename: 'Park', id: string, slug?: string | null, title?: string | null, description?: string | null } | { __typename: 'Plan', id: string, slug?: string | null, title?: string | null, description?: string | null } | { __typename: 'Service', id: string, slug?: string | null, title?: string | null, description?: string | null } | { __typename: 'Topic', id: string, slug?: string | null, title?: string | null, description?: string | null } | { __typename: 'Trail', id: string, slug?: string | null, title?: string | null, description?: string | null } | { __typename: 'Url', id: string, url?: string | null, title?: string | null, description?: string | null } | null } & { ' $fragmentName'?: 'ActionFieldsFragment' };
+export type ActionFieldsFragment = { __typename?: 'InternalLink', id: string, label?: string | null, item?:
+    | { __typename: 'AssemblyDistrict', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'Board', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'BoardPage', id: string, title?: string | null, description?: string | null }
+    | { __typename: 'Community', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'Document', id: string, title?: string | null, description?: string | null, file?: { __typename?: 'FileFieldOutput', url: string } | null }
+    | { __typename: 'ElectionsPage', id: string, title?: string | null, description?: string | null }
+    | { __typename: 'Facility', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'HomePage', id: string, title?: string | null, description?: string | null }
+    | { __typename: 'OrgUnit', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'Park', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'Plan', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'Service', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'Topic', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'Trail', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'Url', id: string, url?: string | null, title?: string | null, description?: string | null }
+   | null } & { ' $fragmentName'?: 'ActionFieldsFragment' };
 
 export type BoardDocumentListFragment = (
   { __typename?: 'Document', id: string }
@@ -26277,7 +26364,21 @@ type PageBody_Topic_Fragment = { __typename: 'Topic', title?: string | null, bod
 
 type PageBody_Trail_Fragment = { __typename: 'Trail', title?: string | null, body?: string | null, description?: string | null } & { ' $fragmentName'?: 'PageBody_Trail_Fragment' };
 
-export type PageBodyFragment = PageBody_AssemblyDistrict_Fragment | PageBody_Board_Fragment | PageBody_BoardPage_Fragment | PageBody_Community_Fragment | PageBody_Event_Fragment | PageBody_Facility_Fragment | PageBody_OrgUnit_Fragment | PageBody_Park_Fragment | PageBody_Plan_Fragment | PageBody_PublicNotice_Fragment | PageBody_Service_Fragment | PageBody_Topic_Fragment | PageBody_Trail_Fragment;
+export type PageBodyFragment =
+  | PageBody_AssemblyDistrict_Fragment
+  | PageBody_Board_Fragment
+  | PageBody_BoardPage_Fragment
+  | PageBody_Community_Fragment
+  | PageBody_Event_Fragment
+  | PageBody_Facility_Fragment
+  | PageBody_OrgUnit_Fragment
+  | PageBody_Park_Fragment
+  | PageBody_Plan_Fragment
+  | PageBody_PublicNotice_Fragment
+  | PageBody_Service_Fragment
+  | PageBody_Topic_Fragment
+  | PageBody_Trail_Fragment
+;
 
 export type ChildrenOrgUnitsFragment = (
   { __typename?: 'OrgUnit', id: string }
@@ -26359,7 +26460,20 @@ type PageEvents_Trail_Fragment = { __typename?: 'Trail', events?: Array<(
     & { ' $fragmentRefs'?: { 'EventInfoFragment': EventInfoFragment } }
   )> | null } & { ' $fragmentName'?: 'PageEvents_Trail_Fragment' };
 
-export type PageEventsFragment = PageEvents_AssemblyDistrict_Fragment | PageEvents_Board_Fragment | PageEvents_Community_Fragment | PageEvents_Event_Fragment | PageEvents_Facility_Fragment | PageEvents_OrgUnit_Fragment | PageEvents_Park_Fragment | PageEvents_Plan_Fragment | PageEvents_PublicNotice_Fragment | PageEvents_Service_Fragment | PageEvents_Topic_Fragment | PageEvents_Trail_Fragment;
+export type PageEventsFragment =
+  | PageEvents_AssemblyDistrict_Fragment
+  | PageEvents_Board_Fragment
+  | PageEvents_Community_Fragment
+  | PageEvents_Event_Fragment
+  | PageEvents_Facility_Fragment
+  | PageEvents_OrgUnit_Fragment
+  | PageEvents_Park_Fragment
+  | PageEvents_Plan_Fragment
+  | PageEvents_PublicNotice_Fragment
+  | PageEvents_Service_Fragment
+  | PageEvents_Topic_Fragment
+  | PageEvents_Trail_Fragment
+;
 
 export type FacilitiesListFragment = (
   { __typename?: 'Facility', id: string }
@@ -26394,7 +26508,21 @@ type HeroImage_Topic_Fragment = { __typename?: 'Topic', heroImage?: string | nul
 
 type HeroImage_Trail_Fragment = { __typename?: 'Trail', heroImage?: string | null } & { ' $fragmentName'?: 'HeroImage_Trail_Fragment' };
 
-export type HeroImageFragment = HeroImage_AssemblyDistrict_Fragment | HeroImage_Board_Fragment | HeroImage_BoardPage_Fragment | HeroImage_Community_Fragment | HeroImage_Event_Fragment | HeroImage_Facility_Fragment | HeroImage_OrgUnit_Fragment | HeroImage_Park_Fragment | HeroImage_Plan_Fragment | HeroImage_PublicNotice_Fragment | HeroImage_Service_Fragment | HeroImage_Topic_Fragment | HeroImage_Trail_Fragment;
+export type HeroImageFragment =
+  | HeroImage_AssemblyDistrict_Fragment
+  | HeroImage_Board_Fragment
+  | HeroImage_BoardPage_Fragment
+  | HeroImage_Community_Fragment
+  | HeroImage_Event_Fragment
+  | HeroImage_Facility_Fragment
+  | HeroImage_OrgUnit_Fragment
+  | HeroImage_Park_Fragment
+  | HeroImage_Plan_Fragment
+  | HeroImage_PublicNotice_Fragment
+  | HeroImage_Service_Fragment
+  | HeroImage_Topic_Fragment
+  | HeroImage_Trail_Fragment
+;
 
 export type HourListFragment = (
   { __typename?: 'OperatingHour', id: string }
@@ -26425,7 +26553,20 @@ type PageItem_Topic_Fragment = { __typename: 'Topic', title?: string | null, slu
 
 type PageItem_Trail_Fragment = { __typename: 'Trail', title?: string | null, slug?: string | null, description?: string | null } & { ' $fragmentName'?: 'PageItem_Trail_Fragment' };
 
-export type PageItemFragment = PageItem_AssemblyDistrict_Fragment | PageItem_Board_Fragment | PageItem_Community_Fragment | PageItem_Event_Fragment | PageItem_Facility_Fragment | PageItem_OrgUnit_Fragment | PageItem_Park_Fragment | PageItem_Plan_Fragment | PageItem_PublicNotice_Fragment | PageItem_Service_Fragment | PageItem_Topic_Fragment | PageItem_Trail_Fragment;
+export type PageItemFragment =
+  | PageItem_AssemblyDistrict_Fragment
+  | PageItem_Board_Fragment
+  | PageItem_Community_Fragment
+  | PageItem_Event_Fragment
+  | PageItem_Facility_Fragment
+  | PageItem_OrgUnit_Fragment
+  | PageItem_Park_Fragment
+  | PageItem_Plan_Fragment
+  | PageItem_PublicNotice_Fragment
+  | PageItem_Service_Fragment
+  | PageItem_Topic_Fragment
+  | PageItem_Trail_Fragment
+;
 
 type PageList_AssemblyDistrict_Fragment = (
   { __typename?: 'AssemblyDistrict', id: string }
@@ -26487,7 +26628,20 @@ type PageList_Trail_Fragment = (
   & { ' $fragmentRefs'?: { 'PageItem_Trail_Fragment': PageItem_Trail_Fragment } }
 ) & { ' $fragmentName'?: 'PageList_Trail_Fragment' };
 
-export type PageListFragment = PageList_AssemblyDistrict_Fragment | PageList_Board_Fragment | PageList_Community_Fragment | PageList_Event_Fragment | PageList_Facility_Fragment | PageList_OrgUnit_Fragment | PageList_Park_Fragment | PageList_Plan_Fragment | PageList_PublicNotice_Fragment | PageList_Service_Fragment | PageList_Topic_Fragment | PageList_Trail_Fragment;
+export type PageListFragment =
+  | PageList_AssemblyDistrict_Fragment
+  | PageList_Board_Fragment
+  | PageList_Community_Fragment
+  | PageList_Event_Fragment
+  | PageList_Facility_Fragment
+  | PageList_OrgUnit_Fragment
+  | PageList_Park_Fragment
+  | PageList_Plan_Fragment
+  | PageList_PublicNotice_Fragment
+  | PageList_Service_Fragment
+  | PageList_Topic_Fragment
+  | PageList_Trail_Fragment
+;
 
 type PagePublicNotices_AssemblyDistrict_Fragment = { __typename?: 'AssemblyDistrict', publicNotices?: Array<(
     { __typename?: 'PublicNotice', id: string, urgency?: number | null, publishAt?: any | null }
@@ -26549,7 +26703,20 @@ type PagePublicNotices_Trail_Fragment = { __typename?: 'Trail', publicNotices?: 
     & { ' $fragmentRefs'?: { 'PublicNoticeFieldsFragment': PublicNoticeFieldsFragment } }
   )> | null } & { ' $fragmentName'?: 'PagePublicNotices_Trail_Fragment' };
 
-export type PagePublicNoticesFragment = PagePublicNotices_AssemblyDistrict_Fragment | PagePublicNotices_Board_Fragment | PagePublicNotices_Community_Fragment | PagePublicNotices_Event_Fragment | PagePublicNotices_Facility_Fragment | PagePublicNotices_OrgUnit_Fragment | PagePublicNotices_Park_Fragment | PagePublicNotices_Plan_Fragment | PagePublicNotices_PublicNotice_Fragment | PagePublicNotices_Service_Fragment | PagePublicNotices_Topic_Fragment | PagePublicNotices_Trail_Fragment;
+export type PagePublicNoticesFragment =
+  | PagePublicNotices_AssemblyDistrict_Fragment
+  | PagePublicNotices_Board_Fragment
+  | PagePublicNotices_Community_Fragment
+  | PagePublicNotices_Event_Fragment
+  | PagePublicNotices_Facility_Fragment
+  | PagePublicNotices_OrgUnit_Fragment
+  | PagePublicNotices_Park_Fragment
+  | PagePublicNotices_Plan_Fragment
+  | PagePublicNotices_PublicNotice_Fragment
+  | PagePublicNotices_Service_Fragment
+  | PagePublicNotices_Topic_Fragment
+  | PagePublicNotices_Trail_Fragment
+;
 
 export type ServiceListFragment = (
   { __typename?: 'Service', id: string }
@@ -26592,7 +26759,20 @@ type PageLinkList_Topic_Fragment = { __typename?: 'Topic', id: string, slug?: st
 
 type PageLinkList_Trail_Fragment = { __typename?: 'Trail', id: string, slug?: string | null, title?: string | null } & { ' $fragmentName'?: 'PageLinkList_Trail_Fragment' };
 
-export type PageLinkListFragment = PageLinkList_AssemblyDistrict_Fragment | PageLinkList_Board_Fragment | PageLinkList_Community_Fragment | PageLinkList_Event_Fragment | PageLinkList_Facility_Fragment | PageLinkList_OrgUnit_Fragment | PageLinkList_Park_Fragment | PageLinkList_Plan_Fragment | PageLinkList_PublicNotice_Fragment | PageLinkList_Service_Fragment | PageLinkList_Topic_Fragment | PageLinkList_Trail_Fragment;
+export type PageLinkListFragment =
+  | PageLinkList_AssemblyDistrict_Fragment
+  | PageLinkList_Board_Fragment
+  | PageLinkList_Community_Fragment
+  | PageLinkList_Event_Fragment
+  | PageLinkList_Facility_Fragment
+  | PageLinkList_OrgUnit_Fragment
+  | PageLinkList_Park_Fragment
+  | PageLinkList_Plan_Fragment
+  | PageLinkList_PublicNotice_Fragment
+  | PageLinkList_Service_Fragment
+  | PageLinkList_Topic_Fragment
+  | PageLinkList_Trail_Fragment
+;
 
 export type PublicNoticeFieldsFragment = { __typename?: 'PublicNotice', id: string, title?: string | null, description?: string | null, slug?: string | null, heroImage?: string | null, urgency?: number | null } & { ' $fragmentName'?: 'PublicNoticeFieldsFragment' };
 
@@ -26602,9 +26782,41 @@ export type ServiceFieldsFragment = { __typename?: 'Service', id: string, title?
 
 export type TopicFieldsFragment = { __typename?: 'Topic', id: string, title?: string | null, slug?: string | null, description?: string | null } & { ' $fragmentName'?: 'TopicFieldsFragment' };
 
-export type ToolbeltHighlightFragment = { __typename?: 'featuredItem', icon?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', id: string, slug?: string | null, title?: string | null } | { __typename: 'Board', id: string, slug?: string | null, title?: string | null } | { __typename: 'BoardPage', id: string, title?: string | null } | { __typename: 'Community', id: string, slug?: string | null, title?: string | null } | { __typename: 'Document' } | { __typename: 'ElectionsPage' } | { __typename: 'Facility', id: string, slug?: string | null, title?: string | null } | { __typename: 'HomePage' } | { __typename: 'OrgUnit', id: string, slug?: string | null, title?: string | null } | { __typename: 'Park', id: string, slug?: string | null, title?: string | null } | { __typename: 'Plan', id: string, slug?: string | null, title?: string | null } | { __typename: 'Service', id: string, slug?: string | null, title?: string | null } | { __typename: 'Topic', id: string, slug?: string | null, title?: string | null } | { __typename: 'Trail', id: string, slug?: string | null, title?: string | null } | { __typename: 'Url', id: string, url?: string | null, title?: string | null } | null } | null } & { ' $fragmentName'?: 'ToolbeltHighlightFragment' };
+export type ToolbeltHighlightFragment = { __typename?: 'featuredItem', icon?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, item?:
+      | { __typename: 'AssemblyDistrict', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'Board', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'BoardPage', id: string, title?: string | null }
+      | { __typename: 'Community', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'Document' }
+      | { __typename: 'ElectionsPage' }
+      | { __typename: 'Facility', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'HomePage' }
+      | { __typename: 'OrgUnit', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'Park', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'Plan', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'Service', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'Topic', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'Trail', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'Url', id: string, url?: string | null, title?: string | null }
+     | null } | null } & { ' $fragmentName'?: 'ToolbeltHighlightFragment' };
 
-export type HomePageHighlightCardFragment = { __typename?: 'Highlight', title?: string | null, image?: string | null, message?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, item?: { __typename: 'AssemblyDistrict', slug?: string | null, title?: string | null } | { __typename: 'Board', slug?: string | null, title?: string | null } | { __typename: 'BoardPage', title?: string | null } | { __typename: 'Community', slug?: string | null, title?: string | null } | { __typename: 'Document' } | { __typename: 'ElectionsPage', title?: string | null } | { __typename: 'Facility', slug?: string | null, title?: string | null } | { __typename: 'HomePage' } | { __typename: 'OrgUnit', slug?: string | null, title?: string | null } | { __typename: 'Park', slug?: string | null, title?: string | null } | { __typename: 'Plan', slug?: string | null, title?: string | null } | { __typename: 'Service', slug?: string | null, title?: string | null } | { __typename: 'Topic', slug?: string | null, title?: string | null } | { __typename: 'Trail', slug?: string | null, title?: string | null } | { __typename: 'Url', url?: string | null, title?: string | null } | null } | null } & { ' $fragmentName'?: 'HomePageHighlightCardFragment' };
+export type HomePageHighlightCardFragment = { __typename?: 'Highlight', title?: string | null, image?: string | null, message?: string | null, linkedItem?: { __typename?: 'InternalLink', label?: string | null, item?:
+      | { __typename: 'AssemblyDistrict', slug?: string | null, title?: string | null }
+      | { __typename: 'Board', slug?: string | null, title?: string | null }
+      | { __typename: 'BoardPage', title?: string | null }
+      | { __typename: 'Community', slug?: string | null, title?: string | null }
+      | { __typename: 'Document' }
+      | { __typename: 'ElectionsPage', title?: string | null }
+      | { __typename: 'Facility', slug?: string | null, title?: string | null }
+      | { __typename: 'HomePage' }
+      | { __typename: 'OrgUnit', slug?: string | null, title?: string | null }
+      | { __typename: 'Park', slug?: string | null, title?: string | null }
+      | { __typename: 'Plan', slug?: string | null, title?: string | null }
+      | { __typename: 'Service', slug?: string | null, title?: string | null }
+      | { __typename: 'Topic', slug?: string | null, title?: string | null }
+      | { __typename: 'Trail', slug?: string | null, title?: string | null }
+      | { __typename: 'Url', url?: string | null, title?: string | null }
+     | null } | null } & { ' $fragmentName'?: 'HomePageHighlightCardFragment' };
 
 export type HomePageHighlightsFragment = { __typename?: 'Query', highlights?: Array<(
     { __typename?: 'Highlight', id: string, createdAt?: any | null, priority?: number | null }
@@ -26621,7 +26833,23 @@ export type GetRedirectsQueryVariables = Exact<{
 }>;
 
 
-export type GetRedirectsQuery = { __typename?: 'Query', redirect?: { __typename?: 'Redirect', to?: { __typename?: 'InternalLink', item?: { __typename: 'AssemblyDistrict', slug?: string | null } | { __typename: 'Board', slug?: string | null } | { __typename: 'BoardPage' } | { __typename: 'Community', slug?: string | null } | { __typename: 'Document' } | { __typename: 'ElectionsPage' } | { __typename: 'Facility', slug?: string | null } | { __typename: 'HomePage' } | { __typename: 'OrgUnit', slug?: string | null } | { __typename: 'Park', slug?: string | null } | { __typename: 'Plan', slug?: string | null } | { __typename: 'Service', slug?: string | null } | { __typename: 'Topic', slug?: string | null } | { __typename: 'Trail', slug?: string | null } | { __typename: 'Url', url?: string | null } | null } | null } | null };
+export type GetRedirectsQuery = { __typename?: 'Query', redirect?: { __typename?: 'Redirect', to?: { __typename?: 'InternalLink', item?:
+        | { __typename: 'AssemblyDistrict', slug?: string | null }
+        | { __typename: 'Board', slug?: string | null }
+        | { __typename: 'BoardPage' }
+        | { __typename: 'Community', slug?: string | null }
+        | { __typename: 'Document' }
+        | { __typename: 'ElectionsPage' }
+        | { __typename: 'Facility', slug?: string | null }
+        | { __typename: 'HomePage' }
+        | { __typename: 'OrgUnit', slug?: string | null }
+        | { __typename: 'Park', slug?: string | null }
+        | { __typename: 'Plan', slug?: string | null }
+        | { __typename: 'Service', slug?: string | null }
+        | { __typename: 'Topic', slug?: string | null }
+        | { __typename: 'Trail', slug?: string | null }
+        | { __typename: 'Url', url?: string | null }
+       | null } | null } | null };
 
 export type GetDocumentCollectionWidgetQueryVariables = Exact<{
   where: DocumentCollectionWhereUniqueInput;

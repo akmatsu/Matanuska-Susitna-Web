@@ -1,7 +1,6 @@
 import { DateTime } from '@/components/client/DateTime';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { TimezoneName } from '@/components/client/TimezoneName';
 import { PageSection } from '@/components/static/Page';
 
 const UpcomingElectionDetailsFragment = gql(`

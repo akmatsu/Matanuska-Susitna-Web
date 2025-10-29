@@ -1,12 +1,14 @@
 {
   "extends": ["@tsconfig/recommended/tsconfig.json"],
+
   "compilerOptions": {
     "plugins": [
       {
         "name": "@0no-co/graphqlsp",
         "schema": "http://localhost:3333/api/graphql"
       }
-    ]
+    ],
+    "jsx": "react-jsx"
   },
   "include": ["./src/**/*.ts"]
 }
