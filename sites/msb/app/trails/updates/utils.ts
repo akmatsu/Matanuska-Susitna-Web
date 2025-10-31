@@ -1,3 +1,5 @@
+import { format, subMonths } from 'date-fns';
+
 type Point = {
   x: number;
   y: number;
@@ -76,6 +78,7 @@ interface TrailUpdateInfo {
 export async function getTrailUpdates(opts?: {
   maintainer?: string;
   query?: string;
+  date?: string;
 }) {
   const filters: string[] = [];
 
@@ -112,7 +115,8 @@ export async function getTrailUpdates(opts?: {
     filters.push(`(${queryConditions.join(' OR ')})`);
   }
 
-  const where = filters.length ? filters.join(' AND ') : '1=1';
+  let where = filters.length ? filters.join(' AND ') : '1=1';
+  where += ` AND _date >= '${opts?.date || format(subMonths(new Date(), 1), 'yyyy-MM-dd')}'`;
 
   const url = new URL(
     'https://services.arcgis.com/fX5IGselyy1TirdY/arcgis/rest/services/survey123_93749356aa2b46008e16a7d4eb986373_results/FeatureServer/0/query',
@@ -131,7 +135,7 @@ export async function getTrailUpdates(opts?: {
     relationParam: '',
     returnGeodetic: 'false',
     outFields: '*',
-    returnGeometry: 'true',
+    returnGeometry: 'false',
     featureEncoding: 'esriDefault',
     multipatchOption: 'xyFootprint',
     maxAllowableOffset: '',
@@ -148,12 +152,11 @@ export async function getTrailUpdates(opts?: {
     returnDistinctValues: 'false',
     cacheHint: 'false',
     collation: '',
-    orderByFields: '',
-    groupByFieldsForStatistics: '',
+    orderByFields: '_date DESC',
     outStatistics: '',
     having: '',
-    resultOffset: '',
-    resultRecordCount: '',
+    resultOffset: '0',
+    resultRecordCount: '25',
     returnZ: 'false',
     returnM: 'false',
     returnTrueCurves: 'false',
