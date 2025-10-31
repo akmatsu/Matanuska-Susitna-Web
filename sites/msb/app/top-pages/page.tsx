@@ -82,7 +82,7 @@ export default async function TopPages() {
     },
   });
 
-  if (!data.landingPage) return notFound();
+  if (!data?.landingPage) return notFound();
 
   return (
     <PageContainer size="lg" breakPoint="sm">

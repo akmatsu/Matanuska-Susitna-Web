@@ -53,19 +53,20 @@ export const metadata: Metadata = {
 };
 
 export default async function BoardsPage() {
-  const { data, errors, error } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: getBoardsPage,
   });
 
   if (error) {
-    console.error('Error fetching boards page data:', JSON.stringify(errors));
+    console.error('Error fetching boards page data:', error);
     throw error;
   }
-  const page = data.boardPage;
 
-  if (!page) {
+  if (!data?.boardPage) {
     return notFound();
   }
+
+  const page = data.boardPage;
 
   return (
     <>

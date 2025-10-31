@@ -60,7 +60,7 @@ export default async function DepartmentPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const { data, errors, error } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: getOrgUnit,
     variables: {
       slug,
@@ -68,8 +68,8 @@ export default async function DepartmentPage(props: {
     },
   });
 
-  if (errors || error) {
-    console.error('Error fetching org unit data:', errors || error);
+  if (error) {
+    console.error('Error fetching org unit data:', error);
     return notFound();
   }
 

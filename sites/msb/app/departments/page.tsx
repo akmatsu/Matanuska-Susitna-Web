@@ -79,11 +79,11 @@ export default async function DepartmentsPage() {
   const { data } = await getClientHandler({
     query,
   });
-  const page = data.landingPage;
+  const page = data?.landingPage;
 
-  const offices = data.orgUnits?.filter((d) => d.type === 'office') || [];
+  const offices = data?.orgUnits?.filter((d) => d.type === 'office') || [];
   const departments =
-    data.orgUnits?.filter((d) => d.type === 'department') || [];
+    data?.orgUnits?.filter((d) => d.type === 'department') || [];
 
   if (!page) return notFound();
 

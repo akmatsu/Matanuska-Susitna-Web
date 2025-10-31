@@ -50,7 +50,7 @@ export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const { data, errors, error } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: getFacilityPage,
     variables: {
       slug,
@@ -58,12 +58,12 @@ export default async function Page(props: {
     },
   });
 
-  if (errors || error) {
-    console.error('Error fetching community data:', errors || error);
+  if (error) {
+    console.error('Error fetching community data:', error);
     return notFound();
   }
 
-  const page = data.facility;
+  const page = data?.facility;
 
   if (!page) {
     console.error('Facility not found for slug:', slug);
