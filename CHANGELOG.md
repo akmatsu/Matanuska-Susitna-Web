@@ -1,3 +1,24 @@
+# [0.65.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.64.0...v0.65.0) (2025-10-31)
+
+
+### Bug Fixes
+
+* fixed build errors ([e079fd3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e079fd351d40a4dde73e06015bc93a3ba2f8eea2))
+* fixed query not working when filtering by maintainer ([8445fbf](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8445fbfa7b82ba7c6d8aa9fa1c70e1dd64f9535f))
+
+
+### Features
+
+* added where filter ([643be12](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/643be121f75f44280d2c465bb7cd70e544831caf))
+* can now search for reports ([50dde8f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/50dde8fae267487946da55f5664810c72e0329ee))
+* implementing filtering on trails updates page ([0606a48](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/0606a481bbfeb646743deaa59a632cf8699f9096))
+* updated apollo and other dependencies ([27e6f89](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/27e6f89527667449231bc8b772e92bfbc20e40a1))
+
+
+### Reverts
+
+* Revert "chore: updated dependencies" ([830d655](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/830d65542be8003c00e85bb1dcd7e8ce65be6b77))
+
 # [0.64.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.63.0...v0.64.0) (2025-10-22)
 
 
