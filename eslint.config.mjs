@@ -28,6 +28,7 @@ export default tseslint.config(
     rules: {
       '@typescript-eslint/no-explicit-any': 'off', // Allow 'any' type
       '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/triple-slash-reference': 'off', // Allow triple-slash directives
     },
   },
 

@@ -1,8 +1,6 @@
 import { getRedirectUrl } from '@/utils/stringHelpers';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import Link from 'next/link';
-import { plural } from 'pluralize';
-import slugify from 'voca/slugify';
 
 const toolbeltHighlightFragment = gql(`
   fragment ToolbeltHighlight on featuredItem {
