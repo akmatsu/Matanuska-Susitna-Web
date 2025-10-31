@@ -2,7 +2,6 @@ import { getRedirectUrl } from '@/utils/stringHelpers';
 import { CardBody, CardHeader, CardTitle, LinkCard } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { ElementType } from 'react';
-import slugify from 'voca/slugify';
 
 const pageItemFragment = gql(`
   fragment PageItem on BasePageWithSlug {
