@@ -84,7 +84,7 @@ export default async function PlanPage(props: {
 }) {
   const { slug } = await props.params;
 
-  const { data, errors, error } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: PlanQuery,
     variables: {
       slug,
@@ -92,26 +92,20 @@ export default async function PlanPage(props: {
     },
   });
 
-  if (errors || error) {
-    console.error('Error fetching plan data:', errors || error);
+  if (error) {
+    console.error('Error fetching plan data:', error);
     throw error;
   }
 
-  const page = data.plan;
-
-  if (!page) {
+  if (!data?.plan) {
     console.error('Plan not found for slug:', slug);
     return notFound();
   }
 
+  const page = data.plan;
+
   if (!!page.autoRedirectToExternalWebsite && page.effort?.url?.url)
     return redirect(page.effort.url.url);
-
-  const useSideBar =
-    page.currentDocument?.document ||
-    !!page.pastDocuments?.length ||
-    !!page.components?.length ||
-    page.parent;
 
   return (
     <BasePage

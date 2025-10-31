@@ -105,6 +105,10 @@ export default async function GovernmentPage() {
     query,
   });
 
+  if (!data) {
+    return notFound();
+  }
+
   const page = data.landingPage;
   const publicNotices = data.publicNotices;
   const offices = data.orgUnits;

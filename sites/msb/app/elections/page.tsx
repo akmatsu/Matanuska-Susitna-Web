@@ -79,12 +79,12 @@ export default async function ElectionsPage() {
     query: getElections,
   });
 
-  const page = data.electionsPage;
+  const page = data?.electionsPage;
   if (!page) {
     notFound();
   }
 
-  const currentElection = data.elections?.[0];
+  const currentElection = data?.elections?.[0];
 
   return (
     <>

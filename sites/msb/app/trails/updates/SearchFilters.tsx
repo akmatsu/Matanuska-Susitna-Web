@@ -5,11 +5,7 @@ import { Select } from '@matsugov/ui/Select';
 import { useCallback } from 'react';
 import { format, subMonths } from 'date-fns';
 
-export function TrailsUpdateSearchFilters({
-  maintainerOptions = [],
-}: {
-  maintainerOptions?: string[];
-}) {
+export function TrailsUpdateSearchFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
