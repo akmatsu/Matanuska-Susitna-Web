@@ -31,7 +31,8 @@
     "./DropdownButton": "./src/components/DropdownButton.tsx",
     "./CookieBanner": "./src/components/CookieBanner.tsx",
     "./CookieBannerContext": "./src/components/CookieBannerContext.tsx",
-    "./Text": "./src/components/Text.tsx"
+    "./Text": "./src/components/Text.tsx",
+    "./Select": "./src/components/Select/index.ts"
   },
   "scripts": {
     "test": "vitest"

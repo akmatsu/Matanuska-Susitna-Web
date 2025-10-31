@@ -19,7 +19,6 @@ export function TextField({
   id,
   name,
   placeholder,
-  defaultValue,
   className,
   label,
   showLabel = true,
@@ -39,7 +38,7 @@ export function TextField({
       </Label>
       <Input
         className={clsx(
-          'border border-base-lighter h-10 px-2 focus:outline-hidden focus:ring-4 focus:ring-blue-primary w-full',
+          'border border-base-lighter h-10 px-2 focus-ring w-full bg-white',
           {
             'rounded-none': !rounded || rounded === 'none',
             rounded: rounded === true,
@@ -54,7 +53,6 @@ export function TextField({
         id={id}
         name={name}
         placeholder={placeholder}
-        defaultValue={defaultValue}
         {...fieldProps}
       />
       {loading && (
