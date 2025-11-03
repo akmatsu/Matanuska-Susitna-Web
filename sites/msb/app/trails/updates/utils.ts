@@ -27,6 +27,8 @@ type FeatureAttributes = {
   hazards: string;
   describe_hazard: string;
   comments: string;
+  system_name?: string;
+  system_name_other?: string;
 };
 
 interface TrailUpdateInfoFieldDomain {

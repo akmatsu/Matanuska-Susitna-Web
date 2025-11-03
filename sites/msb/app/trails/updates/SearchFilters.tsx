@@ -62,7 +62,7 @@ export function TrailsUpdateSearchFilters() {
           'PETERSVILLE COMMUNITY NON-PROFIT CORP',
           'SKEETAWK',
           'SKWENTNA TRAIL GROOMING COMMITTEE',
-          'VALLEY MOUNTAIN BIKERS AND HIKERS',
+          'VALLEY MOUNTAIN BIKERS AND HIKE',
           'WILLOW TRAIL COMMITTEE',
           'MAT-SU BOROUGH',
         ]}

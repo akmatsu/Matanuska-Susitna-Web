@@ -42,6 +42,10 @@ export default async function TrailsUpdatesPage(props: {
     <PageContainer size="lg" breakPoint="sm">
       <ProseWrapper>
         <h1>Trail Updates</h1>
+        <p>
+          See winter grooming reports here, submitted weekly by our Trail Care
+          Partners.
+        </p>
 
         <div className="mb-4 not-prose">
           <TrailsUpdateSearchFilters />
@@ -52,9 +56,7 @@ export default async function TrailsUpdatesPage(props: {
               return (
                 <Card key={a.objectid} as="li">
                   <CardHeader>
-                    <CardTitle titleSize="lg">{a.name}</CardTitle>
-                    <Text type="body-sm" className="text-base-dark italic">
-                      From{' '}
+                    <CardTitle titleSize="lg">
                       <Link href={`?maintainer=${a.trail_maintenance_partner}`}>
                         {a.trail_maintenance_partner
                           .toLocaleLowerCase()
@@ -64,8 +66,10 @@ export default async function TrailsUpdatesPage(props: {
                           .split('-')
                           .map((part) => v.capitalize(part))
                           .join('-')}
-                      </Link>{' '}
-                      on <DateTime date={a._date} formatStr="MMMM dd, yyyy" />
+                      </Link>
+                    </CardTitle>
+                    <Text type="body-sm" className="text-base-dark italic">
+                      <DateTime date={a._date} formatStr="MMMM dd, yyyy" />
                     </Text>
                   </CardHeader>
                   <CardBody>
@@ -77,6 +81,17 @@ export default async function TrailsUpdatesPage(props: {
                         </Tr>
                       </THead>
                       <tbody>
+                        {(a.system_name || a.system_name_other) && (
+                          <Tr>
+                            <Td>
+                              <span className="font-semibold">System Name</span>
+                            </Td>
+                            <Td>
+                              {a.system_name?.replace(/_/gi, ' ') ||
+                                a.system_name_other?.replace(/_/gi, ' ')}
+                            </Td>
+                          </Tr>
+                        )}
                         {Object.entries(a).map(([key, value]) => {
                           if (
                             key === 'objectid' ||
@@ -87,7 +102,9 @@ export default async function TrailsUpdatesPage(props: {
                             key === 'EditDate' ||
                             key === 'Editor' ||
                             key === 'trail_maintenance_partner' ||
-                            key === '_date'
+                            key === '_date' ||
+                            key === 'system_name' ||
+                            key === 'system_name_other'
                           ) {
                             return null;
                           }
@@ -98,7 +115,11 @@ export default async function TrailsUpdatesPage(props: {
                             <Tr key={key}>
                               <Td>
                                 <span className="font-semibold">
-                                  {v.capitalize(key.replace(/[_-]/gi, ' '))}
+                                  {v.capitalize(key.replace(/[_-]/gi, ' '))}{' '}
+                                  {(key === 'depth_of_last_snowfall' ||
+                                    key === 'current_loose_snow_base' ||
+                                    key === 'packed_trail_base') &&
+                                    '(in)'}
                                 </span>
                               </Td>
                               <Td>
