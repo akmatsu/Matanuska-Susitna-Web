@@ -1,3 +1,10 @@
+# [0.66.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.65.0...v0.66.0) (2025-11-05)
+
+
+### Features
+
+* now displaying fax and website links on contacts ([6c24bbc](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6c24bbcd1df6fa4b6030a5d6978a6a9ff60cc0b5))
+
 # [0.65.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.64.0...v0.65.0) (2025-10-31)
 
 
