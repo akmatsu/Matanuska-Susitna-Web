@@ -194,7 +194,7 @@ export default async function GovernmentPage() {
                     title="Boards"
                     icon="icon-[mdi--account-group]"
                     href="/boards#boards-and-commissions"
-                    className="w-[96px] text-center h-full"
+                    className="w-24 text-center h-full"
                     light
                     vertical
                   />
@@ -202,7 +202,7 @@ export default async function GovernmentPage() {
                     title="Community Councils"
                     icon="icon-[mdi--home-group]"
                     href="/boards?type=community_council#boards-and-commissions"
-                    className="w-[96px] text-center h-full"
+                    className="w-24 text-center h-full"
                     light
                     vertical
                   />
@@ -210,7 +210,7 @@ export default async function GovernmentPage() {
                     title="FSA Boards"
                     icon="icon-[mdi--fire-truck]"
                     href="/boards?type=fsa_board#boards-and-commissions"
-                    className="w-[96px] text-center h-full"
+                    className="w-24 text-center h-full"
                     light
                     vertical
                   />
@@ -219,14 +219,14 @@ export default async function GovernmentPage() {
                     icon="icon-[mdi--road-variant]"
                     href="/boards?type=rsa_board#boards-and-commissions"
                     light
-                    className="w-[96px] text-center h-full"
+                    className="w-24 text-center h-full"
                     vertical
                   />
                   <DarkFlatCard
                     title="SSA Boards"
                     icon="icon-[mdi--water-pump]"
                     href="/boards?type=ssa_board#boards-and-commissions"
-                    className="w-[96px] text-center h-full"
+                    className="w-24 text-center h-full"
                     light
                     vertical
                   />

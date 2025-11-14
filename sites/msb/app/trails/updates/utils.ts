@@ -21,7 +21,13 @@ type FeatureAttributes = {
   depth_of_last_snowfall: string;
   current_loose_snow_base: string;
   packed_trail_base: string;
-  trail_conditions: string;
+  /**
+   * @deprecated Use {@link FeatureAttributes.trail_conditions_|trail_conditions_} instead
+   *
+   * TODO: Remove this field after ensuring no dependencies exist.
+   */
+  trail_conditions?: string | null;
+  trail_conditions_?: string | null;
   date_of_last_grooming: number;
   trail_closures: string;
   hazards: string;

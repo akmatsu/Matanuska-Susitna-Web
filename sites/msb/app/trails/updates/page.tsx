@@ -17,7 +17,7 @@ import { getTrailUpdates } from './utils';
 
 import { TrailsUpdateSearchFilters } from './SearchFilters';
 import { DateTime } from '@/components/client/DateTime';
-import { Link } from '@/components/static/Link';
+import { LinkButton } from '@/components/static/LinkButton';
 
 export default async function TrailsUpdatesPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -38,10 +38,19 @@ export default async function TrailsUpdatesPage(props: {
 
   const data = await getTrailUpdates({ maintainer, query, date });
 
+  console.log(data);
+
   return (
     <PageContainer size="lg" breakPoint="sm">
       <ProseWrapper>
         <h1>Trail Updates</h1>
+        <LinkButton
+          href="https://experience.arcgis.com/experience/5af9eaa929f8452fbc6c0d344ee717d3/page/Winter-Trail-Grooming"
+          color="primary"
+          className="not-prose"
+        >
+          Winter Trail Grooming Map
+        </LinkButton>
         <p>
           See winter grooming reports here, submitted weekly by our Trail Care
           Partners.
@@ -57,16 +66,14 @@ export default async function TrailsUpdatesPage(props: {
                 <Card key={a.objectid} as="li">
                   <CardHeader>
                     <CardTitle titleSize="lg">
-                      <Link href={`?maintainer=${a.trail_maintenance_partner}`}>
-                        {a.trail_maintenance_partner
-                          .toLocaleLowerCase()
-                          .split(/[\s_]+/)
-                          .map((part) => v.capitalize(part))
-                          .join(' ')
-                          .split('-')
-                          .map((part) => v.capitalize(part))
-                          .join('-')}
-                      </Link>
+                      {(a.system_name || a.system_name_other)
+                        ?.toLocaleLowerCase()
+                        .split(/[\s_]+/)
+                        .map((part) => v.capitalize(part))
+                        .join(' ')
+                        .split('-')
+                        .map((part) => v.capitalize(part))
+                        .join('-')}
                     </CardTitle>
                     <Text type="body-sm" className="text-base-dark italic">
                       <DateTime date={a._date} formatStr="MMMM dd, yyyy" />
@@ -81,15 +88,33 @@ export default async function TrailsUpdatesPage(props: {
                         </Tr>
                       </THead>
                       <tbody>
-                        {(a.system_name || a.system_name_other) && (
+                        {a.trail_maintenance_partner && (
                           <Tr>
                             <Td>
-                              <span className="font-semibold">System Name</span>
+                              <span className="font-semibold">Maintainer</span>
                             </Td>
                             <Td>
-                              {a.system_name?.replace(/_/gi, ' ') ||
-                                a.system_name_other?.replace(/_/gi, ' ')}
+                              {a.trail_maintenance_partner
+                                ?.toLocaleLowerCase()
+                                .split(/[\s_]+/)
+                                .map((part) => v.capitalize(part))
+                                .join(' ')
+                                .split('-')
+                                .map((part) => v.capitalize(part))
+                                .join('-')}
                             </Td>
+                          </Tr>
+                        )}
+                        {/* Fall back to deprecated trail_conditions if trail_conditions_ is not available */}
+                        {(a.trail_conditions_ || a.trail_conditions) && (
+                          <Tr>
+                            <Td>
+                              <span className="font-semibold">
+                                Trail conditions
+                              </span>
+                            </Td>
+                            {/* Fall back to deprecated trail_conditions if trail_conditions_ is not available */}
+                            <Td>{a.trail_conditions_ || a.trail_conditions}</Td>
                           </Tr>
                         )}
                         {Object.entries(a).map(([key, value]) => {
@@ -104,7 +129,9 @@ export default async function TrailsUpdatesPage(props: {
                             key === 'trail_maintenance_partner' ||
                             key === '_date' ||
                             key === 'system_name' ||
-                            key === 'system_name_other'
+                            key === 'system_name_other' ||
+                            key === 'trail_conditions' ||
+                            key === 'trail_conditions_'
                           ) {
                             return null;
                           }
