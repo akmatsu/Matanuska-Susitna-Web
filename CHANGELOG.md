@@ -1,3 +1,10 @@
+# [0.68.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.67.0...v0.68.0) (2025-11-14)
+
+
+### Features
+
+* placed trails maintained above trail conditions ([de8deb7](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/de8deb776b0db3ad967eac265be9e2393080f811))
+
 # [0.67.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.66.0...v0.67.0) (2025-11-14)
 
 
