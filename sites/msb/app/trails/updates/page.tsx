@@ -105,6 +105,14 @@ export default async function TrailsUpdatesPage(props: {
                             </Td>
                           </Tr>
                         )}
+                        <Tr>
+                          <Td>
+                            <span className="font-semibold">
+                              Trails maintained
+                            </span>
+                          </Td>
+                          <Td>{a.trails_maintained}</Td>
+                        </Tr>
                         {/* Fall back to deprecated trail_conditions if trail_conditions_ is not available */}
                         {(a.trail_conditions_ || a.trail_conditions) && (
                           <Tr>
@@ -117,6 +125,7 @@ export default async function TrailsUpdatesPage(props: {
                             <Td>{a.trail_conditions_ || a.trail_conditions}</Td>
                           </Tr>
                         )}
+
                         {Object.entries(a).map(([key, value]) => {
                           if (
                             key === 'objectid' ||
@@ -131,7 +140,8 @@ export default async function TrailsUpdatesPage(props: {
                             key === 'system_name' ||
                             key === 'system_name_other' ||
                             key === 'trail_conditions' ||
-                            key === 'trail_conditions_'
+                            key === 'trail_conditions_' ||
+                            key === 'trails_maintained'
                           ) {
                             return null;
                           }
