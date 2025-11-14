@@ -1,3 +1,10 @@
+# [0.67.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.66.0...v0.67.0) (2025-11-14)
+
+
+### Features
+
+* updated trails updates page ([fe2d52b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fe2d52b8a8b4a668eec0db72e25741d5ed4271a6))
+
 # [0.66.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.65.0...v0.66.0) (2025-11-05)
 
 
