@@ -77,13 +77,22 @@ export default async function BoardPage(props: {
   function BoardPageActions() {
     if (page)
       return (
-        <div className="flex flex-wrap gap-2 not-prose">
-          <ExternalActionButton action={page.linkToAgendas} blockOnMobile />
+        <div className="flex flex-wrap gap-2 not-prose sm:mb-2">
+          <ExternalActionButton
+            action={page.linkToAgendas}
+            blockOnMobile
+            color="primary"
+          />
           <ExternalActionButton
             action={page.linkToPublicOpinionMessage}
             blockOnMobile
+            color="primary"
           />
-          <ExternalActionButton action={page.linkToResolutions} blockOnMobile />
+          <ExternalActionButton
+            action={page.linkToResolutions}
+            blockOnMobile
+            color="primary"
+          />
           <LinkButton
             href={
               page.title === 'School Board'
@@ -91,6 +100,7 @@ export default async function BoardPage(props: {
                 : '/boards/public-meetings-calendar'
             }
             blockOnMobile
+            color="primary"
           >
             {page.title === 'School Board'
               ? 'School District Calendar'
