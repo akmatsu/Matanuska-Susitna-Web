@@ -37,9 +37,4 @@ jobs:
           aws-region: us-east-2
 
       - name: Trigger AWS Amplify Build
-        run: |
-          aws amplify start-job \
-            --app-id d2hc61286ccr51 \
-            --branch-name "${GIT_REF_NAME}" \
-            --job-type RELEASE \
-            --region us-west-2
+        run: aws amplify start-job --app-id d2hc61286ccr51 --branch-name ${{github.ref_name}} --job-type RELEASE --region us-west-2
