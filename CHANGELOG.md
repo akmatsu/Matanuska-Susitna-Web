@@ -1,3 +1,10 @@
+## [0.68.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.1...v0.68.2) (2025-11-20)
+
+
+### Bug Fixes
+
+* improved mobile view of trails reports; now displaying "other" trail systems in title ([43f933d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/43f933d20bc1d1c72f3df51cd2ab66acfd9d308c))
+
 ## [0.68.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.0...v0.68.1) (2025-11-18)
 
 
