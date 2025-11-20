@@ -1,3 +1,7 @@
-export function Tr({ children }: { children: React.ReactNode }) {
-  return <tr className="not-odd:bg-neutral-100">{children}</tr>;
+import clsx from 'clsx';
+
+export function Tr({ className, ...props }: React.ComponentProps<'tr'>) {
+  return (
+    <tr className={clsx('not-odd:bg-neutral-100', className)} {...props} />
+  );
 }

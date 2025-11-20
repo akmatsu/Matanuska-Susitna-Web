@@ -22,7 +22,7 @@ export function Select({
   description?: string;
 } & SelectProps) {
   return (
-    <Field className="relative">
+    <Field className={clsx('relative')}>
       {label && <Label className="font-semibold block">{label}</Label>}
       <HSelect
         {...props}

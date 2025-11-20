@@ -39,7 +39,7 @@ export function TrailsUpdateSearchFilters() {
       onSubmit={(e) => {
         e.preventDefault();
       }}
-      className="flex flex-row gap-2 items-center"
+      className="flex flex-row gap-2 items-center flex-wrap"
     >
       <TextField
         id="search"
@@ -49,31 +49,33 @@ export function TrailsUpdateSearchFilters() {
         placeholder="Search for reports"
         maxLength={27}
       />
-      <Select
-        options={[
-          'All',
-          'AURORA DOG MUSHERS CLUB',
-          'BIG LAKE TRAILS',
-          'CURRY RIDGE RIDERS',
-          'DENALI NORDIC SKI CLUB',
-          'LAKE LOUISE SNOWMACHINE CLUB',
-          'MAT-SU SKI CLUB',
-          'MID-VALLEY TRAIL CLUB',
-          'PETERSVILLE COMMUNITY NON-PROFIT CORP',
-          'SKEETAWK',
-          'SKWENTNA TRAIL GROOMING COMMITTEE',
-          'VALLEY MOUNTAIN BIKERS AND HIKE',
-          'WILLOW TRAIL COMMITTEE',
-          'MAT-SU BOROUGH',
-        ]}
-        label="Maintainer"
-        defaultValue={maintainer}
-        onChange={(e) =>
-          router.push(
-            `?${createQueryString('maintainer', e.target.value.toLowerCase() === 'all' ? '' : e.target.value)}`,
-          )
-        }
-      />
+      <div className="w-full">
+        <Select
+          options={[
+            'All',
+            'AURORA DOG MUSHERS CLUB',
+            'BIG LAKE TRAILS',
+            'CURRY RIDGE RIDERS',
+            'DENALI NORDIC SKI CLUB',
+            'LAKE LOUISE SNOWMACHINE CLUB',
+            'MAT-SU SKI CLUB',
+            'MID-VALLEY TRAIL CLUB',
+            'PETERSVILLE COMMUNITY NON-PROFIT CORP',
+            'SKEETAWK',
+            'SKWENTNA TRAIL GROOMING COMMITTEE',
+            'VALLEY MOUNTAIN BIKERS AND HIKE',
+            'WILLOW TRAIL COMMITTEE',
+            'MAT-SU BOROUGH',
+          ]}
+          label="Maintainer"
+          defaultValue={maintainer}
+          onChange={(e) =>
+            router.push(
+              `?${createQueryString('maintainer', e.target.value.toLowerCase() === 'all' ? '' : e.target.value)}`,
+            )
+          }
+        />
+      </div>
       <TextField
         id="date"
         type="date"

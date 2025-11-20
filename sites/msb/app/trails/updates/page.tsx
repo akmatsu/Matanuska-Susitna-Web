@@ -63,17 +63,25 @@ export default async function TrailsUpdatesPage(props: {
           {data.features?.length ? (
             data.features?.map(({ attributes: a }) => {
               return (
-                <Card key={a.objectid} as="li">
+                <Card key={a.objectid} as="li" className="overflow-hidden">
                   <CardHeader>
                     <CardTitle titleSize="lg">
-                      {(a.system_name || a.system_name_other)
+                      {(
+                        a.system_name?.replace('other', '') +
+                          `${a.system_name_other ? `${a.system_name_other}` : ''}` ||
+                        a.system_name_other
+                      )
                         ?.toLocaleLowerCase()
                         .split(/[\s_]+/)
                         .map((part) => v.capitalize(part))
                         .join(' ')
                         .split('-')
                         .map((part) => v.capitalize(part))
-                        .join('-')}
+                        .join('-')
+                        .split(',')
+                        .map((part) => v.capitalize(part))
+                        .join(',')
+                        .replace(/,(\w)/gi, ', $1')}
                     </CardTitle>
                     <Text type="body-sm" className="text-base-dark italic">
                       <DateTime date={a._date} formatStr="MMMM dd, yyyy" />
@@ -165,8 +173,10 @@ export default async function TrailsUpdatesPage(props: {
                                     date={value}
                                     formatStr="MMMM dd, yyyy"
                                   />
+                                ) : typeof value === 'string' ? (
+                                  value.replace(/_/gi, ' ')
                                 ) : (
-                                  value
+                                  String(value)
                                 )}
                               </Td>
                             </Tr>

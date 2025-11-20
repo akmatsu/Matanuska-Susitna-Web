@@ -1,7 +1,13 @@
-export function Th(props: { children: React.ReactNode }) {
+import clsx from 'clsx';
+
+export function Th({ className, ...props }: React.ComponentProps<'th'>) {
   return (
-    <th className="border border-base-light py-1 px-4 text-left">
-      {props.children}
-    </th>
+    <th
+      className={clsx(
+        'border border-base-light py-1 px-4 text-left',
+        className,
+      )}
+      {...props}
+    />
   );
 }

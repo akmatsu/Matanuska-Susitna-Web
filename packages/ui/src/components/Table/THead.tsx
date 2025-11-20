@@ -1,3 +1,3 @@
-export function THead(props: { children: React.ReactNode }) {
-  return <thead>{props.children}</thead>;
+export function THead(props: React.ComponentProps<'thead'>) {
+  return <thead {...props} />;
 }

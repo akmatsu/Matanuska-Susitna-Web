@@ -1,3 +1,5 @@
-export function Thr({ children }: { children: React.ReactNode }) {
-  return <tr className="bg-neutral-200">{children}</tr>;
+import clsx from 'clsx';
+
+export function Thr({ className, ...props }: React.ComponentProps<'tr'>) {
+  return <tr className={clsx('bg-neutral-200', className)} {...props} />;
 }
