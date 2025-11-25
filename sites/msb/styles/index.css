@@ -6,7 +6,8 @@
 @source './pages/**/*.{js,ts,jsx,tsx,mdx}';
 @source '../node_modules/@matsugov/ui/src/**/*.{js,ts,jsx,tsx,mdx}';
 @source '../node_modules/@msb/map/src/**/*.{js,ts,jsx,tsx,mdx}';
-@source inline('icon-[mdi--{pets,message-alert,home,briefcase,legal,excavator,cart,road-variant,microphone,pier-crane,server,money,fire-truck,house-group,file-document,user-tie,account-group,cart-variant,contract-outline}], icon-[fa7-solid--magnifying-glass-dollar]');
+@source inline('icon-[mdi--{pets,message-alert,home,briefcase,legal,excavator,cart,road-variant,microphone,pier-crane,server,money,fire-truck,house-group,file-document,user-tie,account-group,cart-variant,contract-outline}]');
+@source inline('icon-[fa7-solid--magnifying-glass-dollar]');
 
 /* @config '../tailwind.config.js'; */
 
