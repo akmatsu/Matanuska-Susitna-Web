@@ -1,3 +1,10 @@
+## [0.69.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.69.0...v0.69.1) (2025-11-25)
+
+
+### Bug Fixes
+
+* fixed broken icons on home page ([777740e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/777740e3c82d4762f326390a2eae68432bd48691))
+
 # [0.69.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.2...v0.69.0) (2025-11-25)
 
 
