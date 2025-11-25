@@ -1,3 +1,10 @@
+# [0.69.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.2...v0.69.0) (2025-11-25)
+
+
+### Features
+
+* added new inline icon to index.css ([91745d2](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/91745d21352fd8fafe79e45c64963849e4860905))
+
 ## [0.68.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.1...v0.68.2) (2025-11-20)
 
 
