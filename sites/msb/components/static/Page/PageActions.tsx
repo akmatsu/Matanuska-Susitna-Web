@@ -42,6 +42,7 @@ export function PageActions(props: {
             href={primary.url.url}
             target="_blank"
             color="primary"
+            size="lg"
             block
           >
             {primary.label || primary.url.title}
@@ -56,6 +57,7 @@ export function PageActions(props: {
                   href={action.url.url}
                   target="_blank"
                   color="primary"
+                  size="lg"
                   block
                 >
                   {action.label || action?.url?.title}
@@ -67,7 +69,7 @@ export function PageActions(props: {
         {!!actions && (
           <ul className="flex flex-col gap-2">
             {actions.map((action) => (
-              <ActionButton action={action} key={action.id} block />
+              <ActionButton action={action} key={action.id} block size="lg" />
             ))}
           </ul>
         )}

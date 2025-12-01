@@ -17,7 +17,7 @@ export function PageListItems(props: {
   if (items?.length) {
     return (
       <PageSection title={props.title}>
-        <ul>
+        <ul className="flex gap-2 flex-col">
           {items.map((item) => (
             <PageListItem key={item.id} item={item} as="li" />
           ))}

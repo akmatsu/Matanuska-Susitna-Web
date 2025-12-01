@@ -16,7 +16,7 @@ export function PageContainer<T extends React.ElementType>(props: {
   return (
     <Tag
       className={clsx(
-        'mx-auto px-4 py-4 max-w-xl',
+        'mx-auto px-4 py-4 max-w-xl w-full',
         {
           'sm:max-w-full': props.size === 'full' && props.breakPoint === 'sm',
           'sm:max-w-screen-xl':

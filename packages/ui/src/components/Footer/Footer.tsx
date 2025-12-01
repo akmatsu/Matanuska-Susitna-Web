@@ -133,7 +133,7 @@ export function Footer({
         </section>
       </div>
 
-      <div className="px-4 py-5 bg-primary text-white flex flex-col justify-center items-center text-sm">
+      <div className="px-4 py-5 bg-surface-primary text-white flex flex-col justify-center items-center text-sm">
         <p className="text-center">
           Main Borough Building:{' '}
           <FooterLink
@@ -210,6 +210,7 @@ function SocialIcon({
       target="_blank"
       className="bg-primary size-14 aspect-square rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors"
       as={as}
+      aria-label={props.label}
     >
       <span
         className={clsx('iconify size-8  text-white', {

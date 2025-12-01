@@ -59,6 +59,7 @@ export function Autocomplete() {
 
   return (
     <Combobox<Hit>
+      label="Search Website..."
       displayValueKey="title"
       displayTypeKey="type"
       idKey="id"
@@ -66,7 +67,6 @@ export function Autocomplete() {
       items={indices[0].hits}
       onChangeQuery={(e) => refine(e.target.value)}
       onChange={onChange}
-      placeholder="Search Website..."
       autoFocus
     />
   );

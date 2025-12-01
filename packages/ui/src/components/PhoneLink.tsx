@@ -4,11 +4,13 @@ export function PhoneLink<T extends ElementType = 'a'>({
   phoneNumber,
   as,
   children,
+  icon,
   ...props
 }: Omit<Omit<ComponentProps<T>, 'href'>, 'children'> & {
   phoneNumber: string;
   as?: T;
   children?: ReactNode;
+  icon?: boolean;
 }) {
   const LinkAs = as || 'a';
   const matches = phoneNumber.match(/(\d)?.*(\d{3}).*(\d{3}).*(\d{4})/);
@@ -20,6 +22,20 @@ export function PhoneLink<T extends ElementType = 'a'>({
   const lineNumber = matches?.[4];
 
   const formattedPhoneNumber = `${formattedCountryCode}${formattedAreaCode}${centralOfficeCode}-${lineNumber}`;
+
+  if (icon) {
+    return (
+      <LinkAs
+        href={`tel:${countryCode}${areaCode}${centralOfficeCode}${lineNumber}`}
+        aria-label={`Call ${formattedPhoneNumber}`}
+        title={`Call ${formattedPhoneNumber}`}
+        className="flex size-8 rounded-full items-center justify-center bg-primary"
+        {...props}
+      >
+        <span className="icon-[mdi--phone] text-white size-5" />
+      </LinkAs>
+    );
+  }
 
   return (
     <LinkAs

@@ -1,7 +1,8 @@
 import { LinkCard, CardHeader, CardBody, CardTitle } from '@matsugov/ui/Card';
 import Link from 'next/link';
-import { plural } from 'pluralize';
+import { plural, singular } from 'pluralize';
 import v from 'voca';
+import { LinkIconCard } from '../LinkIconCard';
 
 export function SearchListItem({
   item,
@@ -27,19 +28,55 @@ export function SearchListItem({
       ? `/${item.slug}`
       : `/${formattedListKey}/${item.slug}`);
   return (
-    <LinkCard href={url} as="li" linkAs={Link} className={className}>
-      <CardHeader>
-        {item.type && (
-          <p className="text-sm text-base-dark font-semibold">
-            {v.titleCase(item.type).replace('_', ' ')}
-          </p>
-        )}
-        <CardTitle>{item.title}</CardTitle>
-      </CardHeader>
-
-      <CardBody>
-        <p>{item.description}</p>
-      </CardBody>
-    </LinkCard>
+    <li>
+      <LinkIconCard
+        href={url}
+        title={item.title}
+        subtitle={v.titleCase(singular(listKey)).replace(/[_-]/g, ' ')}
+        icon={getIcon(item.type)}
+        description={item.description}
+      />
+    </li>
   );
+}
+
+function getIcon(type?: string) {
+  switch (type) {
+    default:
+      return 'icon-[mdi--image-description]';
+    case 'assemblyDistrict':
+      return 'icon-[mdi--home-city]';
+    case 'assembly_district':
+      return 'icon-[mdi--home-city]';
+    case 'board':
+      return 'icon-[mdi--user-group]';
+    case 'community':
+      return 'icon-[mdi--home-group]';
+    case 'event':
+      return 'icon-[mdi--event]';
+    case 'facility':
+      return 'icon-[mdi--office-building]';
+    case 'department':
+      return 'icon-[mdi--user-badge]';
+    case 'orgUnit':
+      return 'icon-[mdi--user-badge]';
+    case 'park':
+      return 'icon-[mdi--pine-tree]';
+    case 'plan':
+      return 'icon-[mdi--chart-line]';
+    case 'publicNotice':
+      return 'icon-[mdi--bullhorn]';
+    case 'public-notice':
+      return 'icon-[mdi--bullhorn]';
+    case 'public_notice':
+      return 'icon-[mdi--bullhorn]';
+    case 'service':
+      return 'icon-[mdi--help-outline]';
+    case 'topic':
+      return 'icon-[mdi--idea]';
+    case 'trail':
+      return 'icon-[mdi--hiking]';
+    case 'office':
+      return 'icon-[mdi--user-tie]';
+  }
 }

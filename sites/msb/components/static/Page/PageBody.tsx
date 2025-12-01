@@ -19,7 +19,7 @@ export function PageBody(props: {
   actionSlot?: React.ReactNode;
 }) {
   const page = getFragmentData(pageBodyFragment, props.page);
-  if (!page?.body && !page?.description) {
+  if (!page?.body && !page?.description && !page?.title) {
     return null;
   }
 

@@ -1,32 +1,46 @@
 import clsx from 'clsx';
 import Link from 'next/link';
+import { Surface, SurfaceIconWrapper } from './Surface';
+import { Icon } from './Icon';
+import { Avatar } from './Avatar';
+import { Text } from '@matsugov/ui/Text';
 
 export function LinkIconCard(props: {
   href: string;
   icon?: string | null;
   title?: string | null;
+  subtitle?: string | null;
   description?: string | null;
   className?: string;
 }) {
   return (
-    <Link
+    <Surface
+      as={Link}
       href={props.href}
-      className={clsx(
-        'flex flex-col md:flex-row gap-3 col-span-1 w-full text-black no-underline group rounded transition-colors overflow-hidden border border-base-lighter hover:border-base-light',
-        props.className,
-      )}
+      className={clsx('flex flex-col sm:flex-row gap-3', props.className)}
     >
-      <div className="h-fit md:h-full bg-base-lightest p-4 w-full md:w-fit flex justify-center items-center">
-        <div className="aspect-square size-20 p-4 rounded-full bg-primary group-hover:bg-primary-dark justify-center items-center flex transition-colors">
-          <span className={clsx('size-full text-white', props.icon)} />
-        </div>
-      </div>
+      <SurfaceIconWrapper>
+        <Avatar color="primary">
+          <Icon name={props.icon} color="white" size="xl" />
+        </Avatar>
+      </SurfaceIconWrapper>
       <div className="p-4">
-        <h3 className="text-xl font-semibold text-primary group-hover:text-primary-dark transitions-colors">
+        <Text
+          color="primary"
+          type="card-header"
+          className={clsx('group-hover:text-primary-dark', {
+            'mb-0!': props.subtitle,
+          })}
+        >
           {props.title}
-        </h3>
-        <p>{props.description}</p>
+        </Text>
+        {props.subtitle && (
+          <Text type="label" className="mb-3">
+            {props.subtitle}
+          </Text>
+        )}
+        <Text type="body">{props.description}</Text>
       </div>
-    </Link>
+    </Surface>
   );
 }

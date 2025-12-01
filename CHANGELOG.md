@@ -1,3 +1,24 @@
+## [0.69.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.69.0...v0.69.1) (2025-11-25)
+
+
+### Bug Fixes
+
+* fixed broken icons on home page ([777740e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/777740e3c82d4762f326390a2eae68432bd48691))
+
+# [0.69.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.2...v0.69.0) (2025-11-25)
+
+
+### Features
+
+* added new inline icon to index.css ([91745d2](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/91745d21352fd8fafe79e45c64963849e4860905))
+
+## [0.68.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.1...v0.68.2) (2025-11-20)
+
+
+### Bug Fixes
+
+* improved mobile view of trails reports; now displaying "other" trail systems in title ([43f933d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/43f933d20bc1d1c72f3df51cd2ab66acfd9d308c))
+
 ## [0.68.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.0...v0.68.1) (2025-11-18)
 
 
