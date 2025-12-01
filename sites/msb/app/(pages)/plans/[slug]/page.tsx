@@ -3,7 +3,7 @@ import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { PageListItems, PageSection } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound, redirect } from 'next/navigation';
-import { DropdownButton } from '../../../../../packages/ui/src/components';
+import { DropdownButton } from '@matsugov/ui';
 import { PageListItem } from '@/components/static/Page/PageListItem';
 import { PagesLinkList } from '@/components/static/Page/PagesLinkList';
 import { getClientHandler } from '@/utils/apollo/utils';

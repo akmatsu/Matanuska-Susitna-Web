@@ -1,5 +1,3 @@
-import { LinkCard, CardHeader, CardBody, CardTitle } from '@matsugov/ui/Card';
-import Link from 'next/link';
 import { plural, singular } from 'pluralize';
 import v from 'voca';
 import { LinkIconCard } from '../LinkIconCard';
@@ -35,6 +33,7 @@ export function SearchListItem({
         subtitle={v.titleCase(singular(listKey)).replace(/[_-]/g, ' ')}
         icon={getIcon(item.type)}
         description={item.description}
+        className={className}
       />
     </li>
   );

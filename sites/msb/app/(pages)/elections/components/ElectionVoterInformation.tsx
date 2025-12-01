@@ -1,4 +1,4 @@
-import { gql } from '../../../../../packages/sdk/src/graphql/gql';
+import { gql } from '@msb/js-sdk/gql';
 import { FragmentType, getFragmentData } from '@msb/js-sdk/gql';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { Link } from '@/components/static/Link';

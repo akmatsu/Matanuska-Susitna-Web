@@ -31,12 +31,6 @@ const BasePageMainContentFragment = gql(`
       ...PageList
     }
 
-    communities(orderBy:  {
-       title: asc
-    }) {
-      ...PageList
-    }
-
     services(orderBy:  {
        title: asc
     }) {
