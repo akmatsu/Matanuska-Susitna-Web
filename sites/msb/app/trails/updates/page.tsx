@@ -38,8 +38,6 @@ export default async function TrailsUpdatesPage(props: {
 
   const data = await getTrailUpdates({ maintainer, query, date });
 
-  console.log(data);
-
   return (
     <PageContainer size="lg" breakPoint="sm">
       <ProseWrapper>
