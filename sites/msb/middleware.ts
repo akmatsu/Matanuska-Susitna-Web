@@ -23,6 +23,18 @@ export const config = {
 const handlers = [handleSearchRedirect, handleCmsRedirects];
 
 export default auth(async (req) => {
+  if (
+    !req.auth &&
+    process.env.DEPLOY_ENV === 'stage' &&
+    process.env.NODE_ENV === 'production'
+  )
+    return NextResponse.redirect(
+      new URL(
+        '/api/auth/signin?callbackUrl=' + encodeURIComponent(req.url),
+        req.url,
+      ),
+    );
+
   for (const h of handlers) {
     const res = await h(req);
     if (res) return res; // If a handler returns a response, stop processing

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - stage
     paths:
       - sites/msb/**
       - packages/sdk/**
@@ -17,12 +18,6 @@ permissions:
 
 jobs:
   deploy:
-    env:
-      NEXT_PUBLIC_API_URL: https://cms-internal.matsu.gov
-      NEXT_PUBLIC_TYPESENSE_API_KEY: ${{ secrets.NEXT_PUBLIC_TYPESENSE_API_KEY }}
-      NEXT_PUBLIC_TYPESENSE_HOST: search.matsu.gov
-      NEXT_PUBLIC_TYPESENSE_PORT: 443
-      NEXT_PUBLIC_TYPESENSE_PROTOCOL: https
     concurrency:
       group: ci-msb-${{github.ref}}
       cancel-in-progress: false
@@ -36,5 +31,4 @@ jobs:
           aws-region: us-east-2
 
       - name: Trigger AWS Amplify Build
-        run: |
-          aws amplify start-job --app-id d2hc61286ccr51 --branch-name main --job-type RELEASE --region us-west-2
+        run: aws amplify start-job --app-id d2hc61286ccr51 --branch-name ${{github.ref_name}} --job-type RELEASE --region us-west-2

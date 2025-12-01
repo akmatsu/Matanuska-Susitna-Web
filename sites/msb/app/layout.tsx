@@ -12,15 +12,20 @@ import { signIn, signOut, auth } from '@/auth';
 import { CookieBannerProvider } from '@matsugov/ui/CookieBannerContext';
 import { AnalyticsScript } from '@/components/client/AnalyticsScript';
 
-export const metadata: Metadata = {
-  metadataBase:
-    process.env.NODE_ENV === 'production'
-      ? new URL('https://matsu.gov')
-      : undefined,
-  title: 'The Matanuska-Susitna Borough',
-  description:
-    'The official website of the Matanuska-Susitna Borough in Alaska',
-};
+export const metadata: Metadata =
+  process.env.DEPLOY_ENV === 'production'
+    ? {
+        metadataBase: new URL('https://matsu.gov'),
+        title: 'The Matanuska-Susitna Borough',
+        description:
+          'The official website of the Matanuska-Susitna Borough in Alaska',
+      }
+    : {
+        robots: 'noindex,nofollow',
+        title: 'MSB (Development)',
+        description:
+          'Development environment for the Matanuska-Susitna Borough website, not for public use.',
+      };
 
 export default async function RootLayout({
   children,

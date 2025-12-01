@@ -53,6 +53,9 @@ const query = gql(`
 `);
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (process.env.DEPLOY_ENV !== 'production') {
+    return [];
+  }
   const baseUrl = 'https://matsu.gov';
   const { data } = await getClientHandler({
     query,
