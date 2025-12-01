@@ -7,7 +7,6 @@ const phoneRx = /(\+?\d?.?\(?\d{3}\)?.?\d{3}.?\d{4})/g;
 
 export function MeetingCard({
   meeting,
-  containerClassName,
   ...props
 }: {
   meeting: CalendarMeeting;

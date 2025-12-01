@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { primaryNav } from '@/configs/config';
 import Image from 'next/image';
 import { SiteInfo } from '@/components/static/Header/SiteInfo';
-import { CookieBanner } from '@matsugov/ui/CookieBanner';
 import { signIn, signOut, auth } from '@/auth';
 import { CookieBannerProvider } from '@matsugov/ui/CookieBannerContext';
 import { AnalyticsScript } from '@/components/client/AnalyticsScript';
@@ -29,7 +28,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const a = await auth();
-  console.log(a);
 
   return (
     <html lang="en">

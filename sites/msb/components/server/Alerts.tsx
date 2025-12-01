@@ -43,9 +43,9 @@ export async function Alerts() {
 
     return (
       <>
-        {!!data.alerts?.length && (
+        {!!data?.alerts?.length && (
           <ul>
-            {data.alerts.map((alert) => (
+            {data?.alerts.map((alert) => (
               <li key={alert.id}>
                 <Alert
                   type={getAlertType(alert.urgency!)}

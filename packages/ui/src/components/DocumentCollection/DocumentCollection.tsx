@@ -6,7 +6,9 @@ import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 const documentCollectionFragment = gql(`
   fragment DocumentCollectionDisplay on DocumentCollection {
     title
-    documents {
+    documents(orderBy:  {
+       title: asc
+    }) {
       id
       ...DocumentButton
     }
@@ -90,15 +92,15 @@ function Document({
     <li className="my-2">
       <Link
         href={doc.file?.url}
-        className={clsx('flex items-center gap-1 flex-nowrap', {
+        className={clsx('flex items-center gap-1', {
           'justify-between': !centerLabel,
         })}
         target={isInternal ? '_parent' : '_blank'}
         download={fileType === 'PDF' ? undefined : doc.file?.filename}
         color="primary"
       >
-        <span className="truncate">
-          <span className="truncate">
+        <span>
+          <span>
             {doc.title} {''}
           </span>
           <span className="text-xs">

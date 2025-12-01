@@ -1,12 +1,16 @@
+import { clsx } from 'clsx';
+import React from 'react';
+
 export function Td({
   children,
-  colSpan,
-}: {
-  children: React.ReactNode;
-  colSpan?: number;
-}) {
+  className,
+  ...props
+}: React.ComponentProps<'td'>) {
   return (
-    <td className="border border-base-lighter px-4 py-2" colSpan={colSpan}>
+    <td
+      className={clsx('border border-base-lighter px-4 py-2', className)}
+      {...props}
+    >
       {children}
     </td>
   );

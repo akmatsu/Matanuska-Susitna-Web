@@ -45,7 +45,7 @@ export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const { data, errors, error } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: getPage,
     variables: {
       slug,
@@ -53,17 +53,17 @@ export default async function Page(props: {
     },
   });
 
-  if (errors || error) {
-    console.error('Error fetching community data:', errors || error);
+  if (error) {
+    console.error('Error fetching community data:', error);
+    return notFound();
+  }
+
+  if (!data?.publicNotice) {
+    console.error('Public notice not found for slug:', slug);
     return notFound();
   }
 
   const page = data.publicNotice;
-
-  if (!page) {
-    console.error('Page not found for slug:', slug);
-    return notFound();
-  }
 
   return (
     <BasePage

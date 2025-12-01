@@ -102,9 +102,9 @@ export function CardTitle<T extends React.ElementType = 'h4'>({
       className={clsx(
         'font-bold leading-none',
         {
-          'text-sm': titleSize === 'sm',
-          'text-lg': titleSize === 'md',
-          'text-xl': titleSize === 'lg',
+          'text-lg': titleSize === 'sm',
+          'text-xl': titleSize === 'md',
+          'text-2xl': titleSize === 'lg',
         },
         className,
       )}

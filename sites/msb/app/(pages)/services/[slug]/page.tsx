@@ -46,7 +46,7 @@ export default async function ServicePage(props: {
 }) {
   const { slug } = await props.params;
 
-  const { data, errors, error } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: getService,
     variables: {
       slug,
@@ -54,8 +54,8 @@ export default async function ServicePage(props: {
     },
   });
 
-  if (errors) {
-    console.error('Error fetching service page data:', JSON.stringify(errors));
+  if (error) {
+    console.error('Error fetching service page data:', error);
     throw error;
   }
 

@@ -66,26 +66,26 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages = [
     {
       url: baseUrl,
-      lastModified: data.homePage?.updatedAt || new Date(),
+      lastModified: data?.homePage?.updatedAt || new Date(),
       changeFrequency: 'daily',
       priority: 1,
     },
     {
       url: `${baseUrl}/boards`,
-      lastModified: data.boardPage?.updatedAt || new Date(),
+      lastModified: data?.boardPage?.updatedAt || new Date(),
       changeFrequency: 'monthly',
       priority: 0.5,
     },
     {
       url: `${baseUrl}/elections`,
-      lastModified: data.electionsPage?.updatedAt || new Date(),
+      lastModified: data?.electionsPage?.updatedAt || new Date(),
       changeFrequency: 'monthly',
       priority: 0.5,
     },
   ] satisfies MetadataRoute.Sitemap;
 
-  if (data.communities)
-    data.communities.forEach((c) => {
+  if (data?.communities)
+    data?.communities.forEach((c) => {
       pages.push({
         url: `${baseUrl}/communities/${c.slug}`,
         lastModified: c.updatedAt || new Date(),
@@ -94,8 +94,8 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  if (data.facilities)
-    data.facilities.forEach((f) => {
+  if (data?.facilities)
+    data?.facilities.forEach((f) => {
       pages.push({
         url: `${baseUrl}/facilities/${f.slug}`,
         lastModified: f.updatedAt || new Date(),
@@ -104,8 +104,8 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  if (data.orgUnits)
-    data.orgUnits.forEach((o) => {
+  if (data?.orgUnits)
+    data?.orgUnits.forEach((o) => {
       pages.push({
         url: `${baseUrl}/departments/${o.slug}`,
         lastModified: o.updatedAt || new Date(),
@@ -114,8 +114,8 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  if (data.parks)
-    data.parks.forEach((p) => {
+  if (data?.parks)
+    data?.parks.forEach((p) => {
       pages.push({
         url: `${baseUrl}/parks/${p.slug}`,
         lastModified: p.updatedAt || new Date(),
@@ -124,8 +124,8 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  if (data.plans)
-    data.plans.forEach((p) => {
+  if (data?.plans)
+    data?.plans.forEach((p) => {
       pages.push({
         url: `${baseUrl}/plans/${p.slug}`,
         lastModified: p.updatedAt || new Date(),
@@ -134,8 +134,8 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  if (data.publicNotices)
-    data.publicNotices.forEach((pn) => {
+  if (data?.publicNotices)
+    data?.publicNotices.forEach((pn) => {
       pages.push({
         url: `${baseUrl}/public-notices/${pn.slug}`,
         lastModified: pn.updatedAt || new Date(),
@@ -144,8 +144,8 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  if (data.services)
-    data.services.forEach((s) => {
+  if (data?.services)
+    data?.services.forEach((s) => {
       pages.push({
         url: `${baseUrl}/services/${s.slug}`,
         lastModified: s.updatedAt || new Date(),
@@ -154,8 +154,8 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  if (data.topics)
-    data.topics.forEach((t) => {
+  if (data?.topics)
+    data?.topics.forEach((t) => {
       pages.push({
         url: `${baseUrl}/${t.slug}`,
         lastModified: t.updatedAt || new Date(),
@@ -164,8 +164,8 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  if (data.trails)
-    data.trails.forEach((t) => {
+  if (data?.trails)
+    data?.trails.forEach((t) => {
       pages.push({
         url: `${baseUrl}/trails/${t.slug}`,
         lastModified: t.updatedAt || new Date(),

@@ -111,7 +111,7 @@ export default async function Communities() {
     },
   });
 
-  const page = data.landingPage;
+  const page = data?.landingPage;
   if (!page) return notFound();
 
   const cities = data.cities;

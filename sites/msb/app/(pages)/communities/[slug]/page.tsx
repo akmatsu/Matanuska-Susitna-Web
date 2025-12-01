@@ -51,7 +51,7 @@ export default async function CommunityPage(props: {
 }) {
   const { slug } = await props.params;
 
-  const { data, errors, error } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: getCommunityPage,
     variables: {
       slug,
@@ -59,8 +59,8 @@ export default async function CommunityPage(props: {
     },
   });
 
-  if (errors || error) {
-    console.error('Error fetching community data:', errors || error);
+  if (error) {
+    console.error('Error fetching community data:', error);
     return notFound();
   }
   if (!data?.community) {

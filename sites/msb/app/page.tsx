@@ -28,7 +28,7 @@ const getHomePage = gql(`
 `);
 
 export default async function Home() {
-  const { data, error, errors } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: getHomePage,
     variables: {
       take: 5,
@@ -41,12 +41,12 @@ export default async function Home() {
   });
 
   if (error) {
-    console.error('Error fetching home page data:', JSON.stringify(errors));
+    console.error('Error fetching home page data:', error);
     throw error;
   }
 
-  const page = data.homePage;
-  const publicNotices = data.publicNotices || [];
+  const page = data?.homePage;
+  const publicNotices = data?.publicNotices || [];
 
   return (
     <div>

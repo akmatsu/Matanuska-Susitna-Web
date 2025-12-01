@@ -8,6 +8,8 @@ import { gql } from '@msb/js-sdk/gql';
 import { BasePage } from '@/components/static/BasePage/BasePage';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+import { LinkButton } from '@/components/static/LinkButton';
+import v from 'voca';
 
 const metaQuery = gql(`
   query GetTrailMeta(
@@ -41,6 +43,7 @@ const trailQuery = gql(`
       address {
         ...AddressFields
       }
+      maintainer
     }
   }
 `);
@@ -49,7 +52,7 @@ export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const { data, errors, error } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: trailQuery,
     variables: {
       slug,
@@ -57,12 +60,12 @@ export default async function Page(props: {
     },
   });
 
-  if (errors || error) {
-    console.error('Error fetching trail data:', errors || error);
+  if (error) {
+    console.error('Error fetching trail data:', error);
     return notFound();
   }
 
-  const page = data.trail;
+  const page = data?.trail;
 
   if (!page) {
     console.error('Trail not found for slug:', slug);
@@ -72,6 +75,30 @@ export default async function Page(props: {
   return (
     <BasePage
       data={page}
+      pageBodyProps={{
+        actionSlot: (
+          <>
+            {page.maintainer && (
+              <LinkButton
+                href={`/trails/updates?maintainer=${page.maintainer}`}
+                size="md"
+                color="primary"
+                className="not-prose"
+              >
+                View trail reports from{' '}
+                {page.maintainer
+                  .toLocaleLowerCase()
+                  .split(/[\s_]+/)
+                  .map((part) => v.capitalize(part))
+                  .join(' ')
+                  .split('-')
+                  .map((part) => v.capitalize(part))
+                  .join('-')}
+              </LinkButton>
+            )}
+          </>
+        ),
+      }}
       rightSide={
         <>
           <PageAddress address={page.address} />

@@ -54,13 +54,13 @@ export default async function DistrictPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const { data, errors, error } = await getClientHandler({
+  const { data, error } = await getClientHandler({
     query: getAssemblyDistrict,
     variables: { slug, now: new Date().toISOString() },
   });
 
-  if (errors || error) {
-    console.error('Error fetching community data:', errors || error);
+  if (error) {
+    console.error('Error fetching community data:', error);
     return notFound();
   }
   if (!data?.assemblyDistrict) {

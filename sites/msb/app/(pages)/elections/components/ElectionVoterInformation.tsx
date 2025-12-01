@@ -3,7 +3,6 @@ import { FragmentType, getFragmentData } from '@msb/js-sdk/gql';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { Link } from '@/components/static/Link';
 import { PhoneLink } from '@/components/static/PhoneLink';
-import { format } from 'date-fns';
 import { DateTime } from '@/components/client/DateTime';
 import { PageSection } from '@/components/static/Page';
 

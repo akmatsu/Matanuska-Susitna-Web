@@ -75,6 +75,10 @@ export function Footer({
               href: 'https://public.govdelivery.com/accounts/AKMATSUGOV/subscriber/new',
             },
             {
+              label: 'Job Opportunities',
+              href: 'https://www.governmentjobs.com/careers/matsugov',
+            },
+            {
               label: 'Volunteer Opportunities',
               href: 'https://www.governmentjobs.com/careers/matsugov/transferjobs',
             },

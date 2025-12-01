@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { JSX } from 'react';
+import React from 'react';
 
 export type TextColor =
   | 'default'
@@ -52,6 +52,7 @@ export function Text({
       'text-lg font-semibold mb-3': type === 'card-header',
       'mb-4': !noMargins && (type === 'heading1' || type === 'heading2'),
       'mb-3': !noMargins && type === 'heading3',
+      'text-lg font-semibold text-base-dark': type === 'subtitle',
     },
     className,
   );

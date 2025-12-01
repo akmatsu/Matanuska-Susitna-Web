@@ -1,5 +1,6 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { LinkButton } from '../LinkButton';
+import { ComponentProps } from 'react';
 
 const externalActionFragment = gql(`
   fragment ExternalActionButton on ExternalLink {
@@ -10,14 +11,23 @@ const externalActionFragment = gql(`
   }
 `);
 
-export function ExternalActionButton(props: {
+export function ExternalActionButton({
+  action: a,
+  blockOnMobile,
+  ...props
+}: {
   action?: FragmentType<typeof externalActionFragment> | null;
   blockOnMobile?: boolean;
-}) {
-  const action = getFragmentData(externalActionFragment, props.action);
+} & Omit<ComponentProps<typeof LinkButton>, 'href'>) {
+  const action = getFragmentData(externalActionFragment, a);
+
   if (action?.url?.url)
     return (
-      <LinkButton href={action.url.url} blockOnMobile={props.blockOnMobile}>
+      <LinkButton
+        href={action.url.url}
+        blockOnMobile={blockOnMobile}
+        {...props}
+      >
         {action.label}
       </LinkButton>
     );

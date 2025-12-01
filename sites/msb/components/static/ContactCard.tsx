@@ -12,12 +12,19 @@ export const ContactFields = gql(`
     phone
     email
     title
+    fax
+    website {
+      url {
+        url
+        title
+      }
+      label
+    }
   }
 `);
 
 export function ContactCard({
   contact,
-  isPrimary,
 }: {
   contact: FragmentType<typeof ContactFields>;
   isPrimary?: boolean;
@@ -47,6 +54,24 @@ export function ContactCard({
                 title={`Email ${c.email}`}
               >
                 <span className="icon-[mdi--email] text-white size-5" />
+              </Link>
+            </li>
+          )}
+          {c.fax && (
+            <li className="flex gap-1 items-center">
+              <div className="inline-flex items-center justify-center bg-primary p-1 rounded-full">
+                <span className="icon-[mdi--fax] text-white size-4" />
+              </div>
+              <PhoneLink phoneNumber={c.fax} />
+            </li>
+          )}
+          {c.website && c.website.url?.url && (
+            <li className="flex gap-1 items-center">
+              <div className="inline-flex items-center justify-center bg-primary p-1 rounded-full">
+                <span className="icon-[mdi--web] text-white size-4" />
+              </div>
+              <Link href={c.website.url.url}>
+                {c.website.label || c.website.url.title || c.website.url.url}
               </Link>
             </li>
           )}

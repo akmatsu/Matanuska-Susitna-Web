@@ -1,3 +1,73 @@
+## [0.69.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.69.0...v0.69.1) (2025-11-25)
+
+
+### Bug Fixes
+
+* fixed broken icons on home page ([777740e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/777740e3c82d4762f326390a2eae68432bd48691))
+
+# [0.69.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.2...v0.69.0) (2025-11-25)
+
+
+### Features
+
+* added new inline icon to index.css ([91745d2](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/91745d21352fd8fafe79e45c64963849e4860905))
+
+## [0.68.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.1...v0.68.2) (2025-11-20)
+
+
+### Bug Fixes
+
+* improved mobile view of trails reports; now displaying "other" trail systems in title ([43f933d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/43f933d20bc1d1c72f3df51cd2ab66acfd9d308c))
+
+## [0.68.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.68.0...v0.68.1) (2025-11-18)
+
+
+### Bug Fixes
+
+* updated calendar button UI ([fa7b200](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fa7b200d429461578a4b495978dbb193e5061789))
+
+# [0.68.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.67.0...v0.68.0) (2025-11-14)
+
+
+### Features
+
+* placed trails maintained above trail conditions ([de8deb7](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/de8deb776b0db3ad967eac265be9e2393080f811))
+
+# [0.67.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.66.0...v0.67.0) (2025-11-14)
+
+
+### Features
+
+* updated trails updates page ([fe2d52b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fe2d52b8a8b4a668eec0db72e25741d5ed4271a6))
+
+# [0.66.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.65.0...v0.66.0) (2025-11-05)
+
+
+### Features
+
+* now displaying fax and website links on contacts ([6c24bbc](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6c24bbcd1df6fa4b6030a5d6978a6a9ff60cc0b5))
+
+# [0.65.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.64.0...v0.65.0) (2025-10-31)
+
+
+### Bug Fixes
+
+* fixed build errors ([e079fd3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e079fd351d40a4dde73e06015bc93a3ba2f8eea2))
+* fixed query not working when filtering by maintainer ([8445fbf](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8445fbfa7b82ba7c6d8aa9fa1c70e1dd64f9535f))
+
+
+### Features
+
+* added where filter ([643be12](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/643be121f75f44280d2c465bb7cd70e544831caf))
+* can now search for reports ([50dde8f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/50dde8fae267487946da55f5664810c72e0329ee))
+* implementing filtering on trails updates page ([0606a48](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/0606a481bbfeb646743deaa59a632cf8699f9096))
+* updated apollo and other dependencies ([27e6f89](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/27e6f89527667449231bc8b772e92bfbc20e40a1))
+
+
+### Reverts
+
+* Revert "chore: updated dependencies" ([830d655](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/830d65542be8003c00e85bb1dcd7e8ce65be6b77))
+
 # [0.64.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.63.0...v0.64.0) (2025-10-22)
 
 
