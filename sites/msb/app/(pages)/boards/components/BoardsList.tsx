@@ -15,7 +15,7 @@ export function BoardsList() {
 
   return (
     <Card>
-      <CardHeader className="flex gap-2 justify-between items-center">
+      <CardHeader className="flex gap-2 justify-between items-center flex-wrap">
         <CardTitle id="boards-and-commissions">Boards & Commissions</CardTitle>
         <LinkButton href="/boards/public-meetings-calendar">
           View the Public Meetings Calendar

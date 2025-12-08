@@ -1,3 +1,17 @@
+# [0.70.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.69.2...v0.70.0) (2025-12-06)
+
+
+### Features
+
+* fixed build errors ([98dd609](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/98dd60928f3aae527b4b182090a85fe35a10da9d))
+
+## [0.69.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.69.1...v0.69.2) (2025-12-06)
+
+
+### Bug Fixes
+
+* fixed overflow isses on boards page ([9ba5713](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9ba5713fc3fcefa2640bcf464ca3059a3b740d01))
+
 ## [0.69.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.69.0...v0.69.1) (2025-11-25)
 
 
