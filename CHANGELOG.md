@@ -1,3 +1,10 @@
+## [0.70.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.70.0...v0.70.1) (2025-12-08)
+
+
+### Bug Fixes
+
+* patched depedencies, including critical nextjs update ([d7a5746](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/d7a57466a19473c55f8141fcce5b3259b9dc65fd))
+
 # [0.70.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.69.2...v0.70.0) (2025-12-06)
 
 
