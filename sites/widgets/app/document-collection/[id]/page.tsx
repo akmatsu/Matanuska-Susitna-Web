@@ -24,7 +24,7 @@ export default async function Page({
   const doNotCenterLabel = center_label === 'false';
   const hideTitle = hide_title === 'true';
 
-  const { data, loading, error } = await getClient().query({
+  const { data, error } = await getClient().query({
     query: getDocCollection,
     variables: {
       where: {
@@ -46,11 +46,13 @@ export default async function Page({
     return <div className="w-screen h-screen">{error.message}</div>;
   }
 
+  if (!data) {
+    return <div className="w-screen h-screen">No Data</div>;
+  }
+
   return (
     <div className="w-screen h-screen">
-      {loading ? (
-        <p>Loading...</p>
-      ) : data.documentCollection ? (
+      {data.documentCollection ? (
         <DocumentCollection
           linkAs={Link}
           centerLabel={!doNotCenterLabel}
