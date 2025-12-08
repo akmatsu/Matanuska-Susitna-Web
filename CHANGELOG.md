@@ -1,3 +1,11 @@
+## [0.70.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.70.1...v0.70.2) (2025-12-08)
+
+
+### Bug Fixes
+
+* directory link should now appear at the top of the boards page ([e4d6c2c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e4d6c2c437cba677d1ab350ec9a66806a97737a7))
+* fixed widgets build errors ([ef1e099](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ef1e099adf9c4a2f23e0f23e41c782fd9744b964))
+
 ## [0.70.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.70.0...v0.70.1) (2025-12-08)
 
 
