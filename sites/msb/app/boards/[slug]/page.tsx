@@ -113,7 +113,7 @@ export default async function BoardPage(props: {
   return (
     <BasePage
       data={page}
-      rightSide={
+      mapSlot={
         <>
           {page.directory && (
             <PageSection title="Directory">
