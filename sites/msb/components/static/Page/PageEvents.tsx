@@ -4,15 +4,17 @@ import { EventInfo } from './EventInfo';
 
 const PageEventsFragment = gql(`
     fragment PageEvents on BasePageWithSlug {
-      events(take: 4, orderBy:  {
-         startDate: desc
-      }, where:  {
-         startDate:  {
-            gte: $now
-         }
-      }) {
-        id
-        ...EventInfo
+      ... on BasePageWithDefaultRelationships {
+        events(take: 4, orderBy:  {
+          startDate: desc
+        }, where:  {
+          startDate:  {
+              gte: $now
+          }
+        }) {
+          id
+          ...EventInfo
+        }
       }
     }
 `);
@@ -21,12 +23,13 @@ export function PageEvents(props: {
   data: FragmentType<typeof PageEventsFragment>;
 }) {
   const data = getFragmentData(PageEventsFragment, props.data);
-  if (!data?.events?.length) return null;
+  const events = 'events' in data ? data.events : null;
+  if (!events?.length) return null;
 
   return (
     <PageSection title="Upcoming Events">
       <ul>
-        {data.events.map((event) => (
+        {events.map((event) => (
           <EventInfo key={event.id} data={event} />
         ))}
       </ul>

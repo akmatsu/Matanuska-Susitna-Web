@@ -29,37 +29,41 @@ const BasePageFragment = gql(`
     }
     ...PageEvents
     ...PagePublicNotices
-    topics(orderBy:  {
-       title: asc
-    }) {
-      ...TopicList
-    }
-    communities(orderBy:  {
-       title: asc
-    }) {
-      ...PageList
-    }
-    orgUnits(orderBy:  {
-       title: asc
-    }) {
-      ...PageList
+
+    ... on BasePageWithDefaultRelationships {
+      topics(orderBy:  {
+        title: asc
+      }) {
+        ...TopicList
+      }
+      communities(orderBy:  {
+        title: asc
+      }) {
+        ...PageList
+      }
+      orgUnits(orderBy:  {
+        title: asc
+      }) {
+        ...PageList
+      }
+
+      assemblyDistricts(orderBy:  {
+        title: asc
+      }) {
+        ...PageList
+      }
+      services(orderBy:  {
+        title: asc
+      }) {
+        ...PageList
+      }
+      plans(orderBy:  {
+        title: asc
+      }) {
+        ...PageList
+      }
     }
 
-    assemblyDistricts(orderBy:  {
-       title: asc
-    }) {
-      ...PageList
-    }
-    services(orderBy:  {
-       title: asc
-    }) {
-      ...PageList
-    }
-    plans(orderBy:  {
-       title: asc
-    }) {
-      ...PageList
-    }
     ... on BasePageWithActions {
       actions(orderBy:  {
          label: asc
@@ -67,6 +71,7 @@ const BasePageFragment = gql(`
         ...ActionList
       }
     }
+
     ... on Service {
       primaryContact {
         ...ContactList
@@ -78,6 +83,7 @@ const BasePageFragment = gql(`
         ...ExternalActionFields
       }
     }
+    
     ... on Plan {
       effort {
         ...ExternalActionFields
@@ -109,6 +115,13 @@ export function BasePage(props: {
   const secondaryActions =
     'secondaryActions' in page ? page.secondaryActions : null;
   const actions = 'actions' in page ? page.actions : null;
+  const services = 'services' in page ? page.services : null;
+  const communities = 'communities' in page ? page.communities : null;
+  const orgUnits = 'orgUnits' in page ? page.orgUnits : null;
+  const assemblyDistricts =
+    'assemblyDistricts' in page ? page.assemblyDistricts : null;
+  const topics = 'topics' in page ? page.topics : null;
+  const plans = 'plans' in page ? page.plans : null;
 
   const hasSideColumnContent = !!(
     props.rightSide ||
@@ -119,9 +132,9 @@ export function BasePage(props: {
     secondaryActions?.length ||
     page.documents?.length ||
     page.contacts?.length ||
-    page.assemblyDistricts?.length ||
-    page.communities?.length ||
-    page.orgUnits?.length
+    services?.length ||
+    communities?.length ||
+    orgUnits?.length
   );
 
   return (
@@ -157,7 +170,7 @@ export function BasePage(props: {
                 </>
               }
             />
-            <PageListItems title="Services" items={page.services} />
+            <PageListItems title="Services" items={services} />
             {props.children}
 
             <HideOnDesktop className="flex flex-col gap-8">
@@ -165,13 +178,10 @@ export function BasePage(props: {
 
               <PageListItems
                 title="Assembly Districts"
-                items={page.assemblyDistricts}
+                items={assemblyDistricts}
               />
-              <PageListItems title="Communities" items={page.communities} />
-              <PageListItems
-                title="Departments & Divisions"
-                items={page.orgUnits}
-              />
+              <PageListItems title="Communities" items={communities} />
+              <PageListItems title="Departments & Divisions" items={orgUnits} />
             </HideOnDesktop>
 
             <PageEvents data={page} />
@@ -182,7 +192,7 @@ export function BasePage(props: {
                 contacts={page.contacts}
                 primaryContact={primaryContact}
               />
-              <PageTopics topics={page.topics} />
+              <PageTopics topics={topics} />
             </HideOnDesktop>
           </div>
 
@@ -202,21 +212,18 @@ export function BasePage(props: {
 
             <PageListItems
               title="Assembly Districts"
-              items={page.assemblyDistricts}
+              items={assemblyDistricts}
             />
             {props.rightSide}
-            <PageListItems title="Communities" items={page.communities} />
-            <PageListItems title="Plans" items={page.plans} />
-            <PageListItems
-              title="Departments & Divisions"
-              items={page.orgUnits}
-            />
+            <PageListItems title="Communities" items={communities} />
+            <PageListItems title="Plans" items={plans} />
+            <PageListItems title="Departments & Divisions" items={orgUnits} />
 
             <PageContacts
               contacts={page.contacts}
               primaryContact={primaryContact}
             />
-            <PageTopics topics={page.topics} />
+            <PageTopics topics={topics} />
           </div>
         </div>
       </PageContainer>
