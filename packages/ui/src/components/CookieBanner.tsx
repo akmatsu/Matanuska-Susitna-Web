@@ -38,7 +38,7 @@ export function CookieBanner(props: {
           This website uses cookies for analytics to improve your experience. By
           accepting all cookies you are agreeing to our{' '}
           <Link
-            href={props.linkHref || '/policies/cookies'}
+            href={props.linkHref || '/policies/cookie-policy'}
             className="text-secondary"
           >
             Cookie Policy
