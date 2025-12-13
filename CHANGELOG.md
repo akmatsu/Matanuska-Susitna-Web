@@ -1,3 +1,11 @@
+# [0.71.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.70.2...v0.71.0) (2025-12-13)
+
+
+### Features
+
+* added policy page ([1ff7f2e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1ff7f2e126fe104914675076595183926193d006))
+* updated cookie policy link in cookie banner ([01a7b81](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/01a7b815c6ad5adb582909fd0b97cff1b77cd0a1))
+
 ## [0.70.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.70.1...v0.70.2) (2025-12-08)
 
 
