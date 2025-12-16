@@ -67,7 +67,7 @@ export function PublicNoticeCard({
             <Image
               src={
                 item.heroImage?.split('?')[0] ||
-                'https://d1159zutbdy4l.cloudfront.net/public/uploads/7d2a895e-d867-4959-b953-80bf2ea95aa3/Borough-Seal.png'
+                'https://d1159zutbdy4l.cloudfront.net/public/uploads/549025a4-d712-4f57-93b9-edcb2f6b1d6aoptimized_images/1920x248_optimized_image.jpg'
               }
               alt={item.title!}
               loading="lazy"
