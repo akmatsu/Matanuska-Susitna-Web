@@ -1,3 +1,10 @@
+## [0.71.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.71.0...v0.71.1) (2025-12-16)
+
+
+### Bug Fixes
+
+* fixed image loading error on mobile ([6175dee](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6175dee735add4508c398c1ff67cbc29f1c0d8e5))
+
 # [0.71.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.70.2...v0.71.0) (2025-12-13)
 
 
