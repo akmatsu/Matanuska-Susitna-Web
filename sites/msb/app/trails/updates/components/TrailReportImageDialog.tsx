@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@matsugov/ui';
+import { Button, Card, CardBody } from '@matsugov/ui';
 import { Dialog, DialogPanel, DialogTitle } from '@matsugov/ui/Dialog';
 import { Text } from '@matsugov/ui/Text';
 import { useState } from 'react';
@@ -10,11 +10,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@matsugov/ui/Carousel';
+import Image from 'next/image';
 
 export function TrailReportImageDialog(props: { images?: string[] }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
 
-  function open() {
+  function open(slide?: number) {
+    setSlideIndex(slide ?? 0);
     setIsOpen(true);
   }
 
@@ -23,10 +26,33 @@ export function TrailReportImageDialog(props: { images?: string[] }) {
   }
 
   return (
-    <>
-      <Button size="sm" onClick={open}>
-        View Images
-      </Button>
+    <div>
+      <Text type="heading3" className="mb-0">
+        Images
+      </Text>
+      <div className="flex flex-row flex-wrap gap-2">
+        {props.images?.map((src, index) => (
+          <>
+            <button
+              onClick={() => open(index)}
+              key={index}
+              title="View Image"
+              aria-label="View Image"
+              className="size-24 rounded"
+            >
+              <Image
+                src={src}
+                alt={`Trail Report Image ${index + 1}`}
+                quality={25}
+                width={100}
+                height={25}
+                className="object-cover rounded cursor-pointer h-full w-full"
+              />
+            </button>
+          </>
+        ))}
+      </div>
+
       <Dialog
         open={isOpen}
         as="div"
@@ -39,17 +65,8 @@ export function TrailReportImageDialog(props: { images?: string[] }) {
               transition
               className="w-screen h-screen min-h-screen bg-black/10 p-6 backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
             >
-              <div className="flex justify-between items-center">
-                <DialogTitle as="h3" className="font-medium">
-                  <Text type="heading3">Images</Text>
-                </DialogTitle>
-                <Button
-                  onClick={close}
-                  color="black"
-                  icon
-                  size="sm"
-                  title="Close"
-                >
+              <div className="flex justify-end items-center">
+                <Button onClick={close} color="black" icon title="Close">
                   <span className="icon-[mdi--close] size-6" />
                   <span className="sr-only">Close</span>
                 </Button>
@@ -59,6 +76,7 @@ export function TrailReportImageDialog(props: { images?: string[] }) {
                   className="w-full"
                   opts={{
                     loop: true,
+                    startIndex: slideIndex,
                   }}
                 >
                   <CarouselContent>
@@ -68,7 +86,7 @@ export function TrailReportImageDialog(props: { images?: string[] }) {
                           <img
                             src={src}
                             alt={`Trail Report Image ${index + 1}`}
-                            className="w-full h-auto max-h-[80vh] object-contain rounded"
+                            className="max-h-[85vh] object-contain rounded w-full h-full"
                           />
                         </CarouselItem>
                       );
@@ -82,6 +100,6 @@ export function TrailReportImageDialog(props: { images?: string[] }) {
           </div>
         </div>
       </Dialog>
-    </>
+    </div>
   );
 }

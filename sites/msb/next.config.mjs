@@ -27,6 +27,7 @@ const nextConfig = {
       new URL('https://images.matsu.gov/**'),
       new URL('https://msb-cms-documents.s3.us-west-2.amazonaws.com/**'),
       new URL('https://picsum.photos/**'),
+      new URL('https://services.arcgis.com/**'),
       ...(process.env.NODE_ENV === 'development'
         ? [new URL('http://localhost:3333/**')]
         : []),
