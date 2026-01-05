@@ -1,3 +1,10 @@
+# [0.72.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.71.1...v0.72.0) (2026-01-05)
+
+
+### Features
+
+* can now view attached images in trail reports ([0ce6eb8](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/0ce6eb802ec6ed14cb42b57faf08f3785b22a697))
+
 ## [0.71.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.71.0...v0.71.1) (2025-12-16)
 
 
