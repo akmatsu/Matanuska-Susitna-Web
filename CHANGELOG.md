@@ -1,3 +1,10 @@
+# [0.73.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.72.0...v0.73.0) (2026-01-05)
+
+
+### Features
+
+* now displaying image as a thumbnail instead of a button ([de6481b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/de6481be1fe79c7f3e383149f05acb5786f8e0f8))
+
 # [0.72.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.71.1...v0.72.0) (2026-01-05)
 
 
