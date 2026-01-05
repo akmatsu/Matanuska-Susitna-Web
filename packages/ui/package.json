@@ -32,7 +32,9 @@
     "./CookieBanner": "./src/components/CookieBanner.tsx",
     "./CookieBannerContext": "./src/components/CookieBannerContext.tsx",
     "./Text": "./src/components/Text.tsx",
-    "./Select": "./src/components/Select/index.ts"
+    "./Select": "./src/components/Select/index.ts",
+    "./Dialog": "./src/components/Dialog/index.ts",
+    "./Carousel": "./src/components/Carousel/index.tsx"
   },
   "scripts": {
     "test": "vitest"
@@ -70,7 +72,9 @@
     "@headlessui/react": "^2.2.9",
     "@matsugov/app-config": "workspace:^",
     "clsx": "^2.1.1",
-    "resize-observer-polyfill": "^1.5.1"
+    "embla-carousel-react": "^8.6.0",
+    "resize-observer-polyfill": "^1.5.1",
+    "tailwind-merge": "^3.4.0"
   },
   "postcss": {
     "plugins": {

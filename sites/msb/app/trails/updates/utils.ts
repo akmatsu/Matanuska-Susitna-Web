@@ -5,7 +5,7 @@ type Point = {
   y: number;
 };
 
-type FeatureAttributes = {
+export type FeatureAttributes = {
   objectid: number;
   globalid: string;
   CreationDate: number;
@@ -73,7 +73,7 @@ interface TrailUpdateInfoFeature {
   geometry: Point;
 }
 
-interface TrailUpdateInfo {
+export interface TrailUpdateInfo {
   objectIdFieldName: string;
   globalIdFieldName: string;
   geometryType: string;
@@ -81,6 +81,61 @@ interface TrailUpdateInfo {
   spatialReference: TrailUpdateInfoSpatialReference;
   fields: Array<TrailUpdateInfoField>;
   features: Array<TrailUpdateInfoFeature>;
+}
+
+export interface TrailUpdateAttachmentInfo {
+  fields: Array<{
+    name: string;
+    type: string;
+    alias: string;
+    sqlType: string;
+    domain?: null | string;
+    defaultValue?: null | string;
+    length?: number;
+  }>;
+  attachmentGroups: Array<{
+    parentObjectId: number;
+    attachmentGlobalId: string;
+    attachmentInfos: Array<{
+      id: number;
+      globalId: string;
+      name: string;
+      contentType: string;
+      size: number;
+      keywords: string;
+      url: string;
+      exitInfo: null;
+    }>;
+  }>;
+}
+
+export async function getTrailUpdateImages(id: string | number) {
+  const url = new URL(
+    'https://services.arcgis.com/fX5IGselyy1TirdY/ArcGIS/rest/services/survey123_93749356aa2b46008e16a7d4eb986373_results/FeatureServer/0/queryAttachments',
+  );
+
+  const query = new URLSearchParams({
+    objectIds: String(id),
+    returnUrl: 'true',
+    returnCountOnly: 'false',
+    returnDistinctKeywords: 'false',
+    cacheHint: 'false',
+    f: 'pjson',
+  });
+
+  url.search = query.toString();
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`Failed to fetch trail update images: ${res.statusText}`);
+  }
+  const data = (await res.json()) as TrailUpdateAttachmentInfo;
+
+  if (!data) {
+    throw new Error('Invalid data format received for trail update images');
+  }
+
+  return data;
 }
 
 export async function getTrailUpdates(opts?: {
@@ -179,10 +234,10 @@ export async function getTrailUpdates(opts?: {
 
   const res = await fetch(url.toString());
   if (!res.ok) {
-    console.log(res);
     throw new Error(`Failed to fetch trail updates: ${res.statusText}`);
   }
   const data = (await res.json()) as TrailUpdateInfo;
+
   if (!data) {
     throw new Error('Invalid data format received');
   }

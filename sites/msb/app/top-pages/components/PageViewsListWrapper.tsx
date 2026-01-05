@@ -74,8 +74,6 @@ export function PageViewsListWrapper({
         });
       });
     }
-
-    console.log(data);
   }, [sortBy, data]);
 
   if (!data) return null;
