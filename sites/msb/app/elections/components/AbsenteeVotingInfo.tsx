@@ -1,4 +1,5 @@
 import { DateTime } from '@/components/client/DateTime';
+import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { PageSection } from '@/components/static/Page';
 import { PhoneLink } from '@/components/static/PhoneLink';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
@@ -43,6 +44,11 @@ export function AbsenteeVotingInfo(props: {
   return (
     <PageSection title="Early/Absentee Voting Information" headerSize="lg">
       <ProseWrapper>
+        <DocumentLinkButton
+          data={currentElection?.absenteeVotingApplication}
+          color="primary"
+          className="not-prose"
+        />
         <p>
           Any registered voter of the Borough may apply for a ballot to be
           mailed to them by submitting an Absentee By-Mail Ballot Application
