@@ -86,6 +86,14 @@ export function AbsenteeVotingInfo(props: {
               </ul>
             </blockquote>
             <p>
+              Once the ballots are ready for distribution and upon timely
+              receipt of an application, the official ballot and voting material
+              will be mailed to the applicant at the ballot mailing address
+              provided on the application. Upon receiving the ballot, applicants
+              need to carefully follow <strong>ALL</strong> instructions to
+              ensure that the ballot is properly cast.
+            </p>
+            <p>
               Ballot envelopes must be postmarked by Election Day, and received
               in the mail by the Borough Clerk&apos;s Office no later than three
               calendar days after the election. Hand-delivered ballots must be
@@ -111,6 +119,18 @@ export function AbsenteeVotingInfo(props: {
               />
               , at the following locations and times:
             </p>
+            <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">
+              <h3 className="mt-0">Voting Assistance</h3>
+              <p className="before:content-none after:content-none">
+                A touch screen voting unit will be available at the Mat-Su
+                Borough Building at at the Divisions of Elections, Mat-Su
+                Regional Office 15 days prior to the election. Touch screen
+                voting is intended for the blind, disabled, and voters with
+                reading difficulties. The touch screen units allow disabled
+                voters to vote unassisted with magnified, high contrast, and
+                audio ballot.
+              </p>
+            </blockquote>
           </>
         )}
       </ProseWrapper>

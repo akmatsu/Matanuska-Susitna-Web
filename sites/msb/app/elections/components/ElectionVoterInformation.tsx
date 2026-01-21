@@ -43,7 +43,7 @@ export function ElectionVoterInformation(props: {
                 is{' '}
                 <DateTime
                   date={data.voterRegistrationDeadline}
-                  formatStr="PPPp"
+                  formatStr="PPP"
                 />
                 .
               </p>
