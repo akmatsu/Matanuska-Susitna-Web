@@ -1,3 +1,10 @@
+# [0.75.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.74.0...v0.75.0) (2026-01-21)
+
+
+### Features
+
+* added overrides and updated default text ([8501eea](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8501eea78deea2520e48c33076f42744b7cc72a9))
+
 # [0.74.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.73.0...v0.74.0) (2026-01-21)
 
 
