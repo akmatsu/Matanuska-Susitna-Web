@@ -1,3 +1,4 @@
+import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { PageSection } from '@/components/static/Page';
 import { PhoneLink } from '@/components/static/PhoneLink';
@@ -7,6 +8,7 @@ import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 const ElectionOfficialsInfoFragment = gql(`
   fragment ElectionsOfficialsInfo on Election {
     electionOfficialApplicationDeadline
+    electionOfficialBody
     electionOfficialApplication {
       ...DocumentLink
     }
@@ -44,31 +46,39 @@ export function ElectionOfficialsInfo(props: {
   return (
     <PageSection title="Elections Officials Wanted" headerSize="lg">
       <ProseWrapper>
-        <p className="font-bold">
-          Are you interested in serving as an Election Official for the next
-          Borough Election?
-        </p>
+        {data?.electionOfficialBody ? (
+          <MarkdownRenderer>{data.electionOfficialBody}</MarkdownRenderer>
+        ) : (
+          <>
+            <p className="font-bold">
+              Are you interested in serving as an Election Official for the next
+              Borough Election?
+            </p>
 
-        <DocumentLinkButton
-          data={data?.electionOfficialApplication}
-          color="primary"
-          className="not-prose"
-        />
+            <DocumentLinkButton
+              data={data?.electionOfficialApplication}
+              color="primary"
+              className="not-prose"
+            />
 
-        <p>
-          The Borough Clerk&apos;s Office is always looking for dependable
-          workers for our elections. If you are interested in applying to serve
-          as an election worker for the upcoming election, please apply with the
-          Borough Clerk&apos;s Office. You may print out the application from
-          the link above.
-        </p>
-        <p>
-          Applications are also available by contacting the{' '}
-          {contactData?.boroughElectionContact?.name} at{' '}
-          <PhoneLink phoneNumber={contactData?.boroughElectionContact?.phone} />
-          . In order to serve, you must be a registered voter of the Borough.
-          Training and compensation are provided.
-        </p>
+            <p>
+              The Borough Clerk&apos;s Office is always looking for dependable
+              workers for our elections. If you are interested in applying to
+              serve as an election worker for the upcoming election, please
+              apply with the Borough Clerk&apos;s Office. You may print out the
+              application from the link above.
+            </p>
+            <p>
+              Applications are also available by contacting the{' '}
+              {contactData?.boroughElectionContact?.name} at{' '}
+              <PhoneLink
+                phoneNumber={contactData?.boroughElectionContact?.phone}
+              />
+              . In order to serve, you must be a registered voter of the
+              Borough. Training and compensation are provided.
+            </p>
+          </>
+        )}
       </ProseWrapper>
     </PageSection>
   );

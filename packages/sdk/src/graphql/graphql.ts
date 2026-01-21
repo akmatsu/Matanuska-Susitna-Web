@@ -82,7 +82,7 @@ export type AlertWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type AssemblyDistrict = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type AssemblyDistrict = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'AssemblyDistrict';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -1930,7 +1930,7 @@ export enum BlueHarvestImageOrderDirection {
   Desc = 'desc'
 }
 
-export type Board = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type Board = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'Board';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -2661,7 +2661,7 @@ export type BoardOrderByInput = {
   updatedAt?: InputMaybe<OrderDirection>;
 };
 
-export type BoardPage = BasePage & {
+export type BoardPage = BasePage & WithTitle & {
   __typename?: 'BoardPage';
   ParliTrainingLink?: Maybe<ExternalLink>;
   actions?: Maybe<Array<InternalLink>>;
@@ -3329,7 +3329,7 @@ export type BooleanFilter = {
   not?: InputMaybe<BooleanFilter>;
 };
 
-export type Community = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type Community = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'Community';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -4884,7 +4884,7 @@ export type DateTimeNullableFilter = {
   notIn?: InputMaybe<Array<Scalars['DateTime']['input']>>;
 };
 
-export type Document = {
+export type Document = WithTitle & {
   __typename?: 'Document';
   collections?: Maybe<Array<DocumentCollection>>;
   collectionsCount?: Maybe<Scalars['Int']['output']>;
@@ -5275,6 +5275,8 @@ export type Election = {
   __typename?: 'Election';
   absenteeApplicationDeadline?: Maybe<Scalars['DateTime']['output']>;
   absenteeVotingApplication?: Maybe<Document>;
+  absenteeVotingBody?: Maybe<Scalars['String']['output']>;
+  candidateBody?: Maybe<Scalars['String']['output']>;
   candidateFilingDeadline?: Maybe<Scalars['DateTime']['output']>;
   candidateFilingDocuments?: Maybe<Array<Document>>;
   candidateFilingDocumentsCount?: Maybe<Scalars['Int']['output']>;
@@ -5295,6 +5297,7 @@ export type Election = {
   electionDate?: Maybe<Scalars['DateTime']['output']>;
   electionOfficialApplication?: Maybe<Document>;
   electionOfficialApplicationDeadline?: Maybe<Scalars['DateTime']['output']>;
+  electionOfficialBody?: Maybe<Scalars['String']['output']>;
   heroImage?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   makeDrafts?: Maybe<Scalars['String']['output']>;
@@ -5316,6 +5319,7 @@ export type Election = {
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
   versions?: Maybe<Array<ElectionVersion>>;
   versionsCount?: Maybe<Scalars['Int']['output']>;
+  voterInfoBody?: Maybe<Scalars['String']['output']>;
   voterRegistrationDeadline?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -5434,6 +5438,8 @@ export type ElectionVersionsCountArgs = {
 export type ElectionCreateInput = {
   absenteeApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   absenteeVotingApplication?: InputMaybe<DocumentRelateToOneForCreateInput>;
+  absenteeVotingBody?: InputMaybe<Scalars['String']['input']>;
+  candidateBody?: InputMaybe<Scalars['String']['input']>;
   candidateFilingDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   candidateFilingDocuments?: InputMaybe<DocumentRelateToManyForCreateInput>;
   candidateFilingStartDate?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5450,6 +5456,7 @@ export type ElectionCreateInput = {
   electionDate?: InputMaybe<Scalars['DateTime']['input']>;
   electionOfficialApplication?: InputMaybe<DocumentRelateToOneForCreateInput>;
   electionOfficialApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
+  electionOfficialBody?: InputMaybe<Scalars['String']['input']>;
   heroImage?: InputMaybe<Scalars['String']['input']>;
   makeDrafts?: InputMaybe<Scalars['String']['input']>;
   officesToBeFilled?: InputMaybe<Scalars['String']['input']>;
@@ -5466,6 +5473,7 @@ export type ElectionCreateInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
   versions?: InputMaybe<ElectionVersionRelateToManyForCreateInput>;
+  voterInfoBody?: InputMaybe<Scalars['String']['input']>;
   voterRegistrationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -5473,6 +5481,8 @@ export type ElectionDraft = {
   __typename?: 'ElectionDraft';
   absenteeApplicationDeadline?: Maybe<Scalars['DateTime']['output']>;
   absenteeVotingApplication?: Maybe<Document>;
+  absenteeVotingBody?: Maybe<Scalars['String']['output']>;
+  candidateBody?: Maybe<Scalars['String']['output']>;
   candidateFilingDeadline?: Maybe<Scalars['DateTime']['output']>;
   candidateFilingDocuments?: Maybe<Array<Document>>;
   candidateFilingDocumentsCount?: Maybe<Scalars['Int']['output']>;
@@ -5490,6 +5500,7 @@ export type ElectionDraft = {
   electionDate?: Maybe<Scalars['DateTime']['output']>;
   electionOfficialApplication?: Maybe<Document>;
   electionOfficialApplicationDeadline?: Maybe<Scalars['DateTime']['output']>;
+  electionOfficialBody?: Maybe<Scalars['String']['output']>;
   heroImage?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   officesToBeFilled?: Maybe<Scalars['String']['output']>;
@@ -5508,6 +5519,7 @@ export type ElectionDraft = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+  voterInfoBody?: Maybe<Scalars['String']['output']>;
   voterRegistrationDeadline?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -5598,6 +5610,8 @@ export type ElectionDraftUserGroupsCountArgs = {
 export type ElectionDraftCreateInput = {
   absenteeApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   absenteeVotingApplication?: InputMaybe<DocumentRelateToOneForCreateInput>;
+  absenteeVotingBody?: InputMaybe<Scalars['String']['input']>;
+  candidateBody?: InputMaybe<Scalars['String']['input']>;
   candidateFilingDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   candidateFilingDocuments?: InputMaybe<DocumentRelateToManyForCreateInput>;
   candidateFilingStartDate?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5612,6 +5626,7 @@ export type ElectionDraftCreateInput = {
   electionDate?: InputMaybe<Scalars['DateTime']['input']>;
   electionOfficialApplication?: InputMaybe<DocumentRelateToOneForCreateInput>;
   electionOfficialApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
+  electionOfficialBody?: InputMaybe<Scalars['String']['input']>;
   heroImage?: InputMaybe<Scalars['String']['input']>;
   officesToBeFilled?: InputMaybe<Scalars['String']['input']>;
   original?: InputMaybe<ElectionRelateToOneForCreateInput>;
@@ -5626,6 +5641,7 @@ export type ElectionDraftCreateInput = {
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
+  voterInfoBody?: InputMaybe<Scalars['String']['input']>;
   voterRegistrationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -5637,6 +5653,8 @@ export type ElectionDraftManyRelationFilter = {
 
 export type ElectionDraftOrderByInput = {
   absenteeApplicationDeadline?: InputMaybe<OrderDirection>;
+  absenteeVotingBody?: InputMaybe<MyOrderDirection>;
+  candidateBody?: InputMaybe<MyOrderDirection>;
   candidateFilingDeadline?: InputMaybe<OrderDirection>;
   candidateFilingStartDate?: InputMaybe<OrderDirection>;
   candidatePacketAvailability?: InputMaybe<OrderDirection>;
@@ -5645,6 +5663,7 @@ export type ElectionDraftOrderByInput = {
   earlyVotingStartDate?: InputMaybe<OrderDirection>;
   electionDate?: InputMaybe<OrderDirection>;
   electionOfficialApplicationDeadline?: InputMaybe<OrderDirection>;
+  electionOfficialBody?: InputMaybe<MyOrderDirection>;
   heroImage?: InputMaybe<BlueHarvestImageOrderDirection>;
   id?: InputMaybe<OrderDirection>;
   officesToBeFilled?: InputMaybe<MyOrderDirection>;
@@ -5654,6 +5673,7 @@ export type ElectionDraftOrderByInput = {
   title?: InputMaybe<OrderDirection>;
   unpublishAt?: InputMaybe<OrderDirection>;
   updatedAt?: InputMaybe<OrderDirection>;
+  voterInfoBody?: InputMaybe<MyOrderDirection>;
   voterRegistrationDeadline?: InputMaybe<OrderDirection>;
 };
 
@@ -5677,6 +5697,8 @@ export type ElectionDraftUpdateArgs = {
 export type ElectionDraftUpdateInput = {
   absenteeApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   absenteeVotingApplication?: InputMaybe<DocumentRelateToOneForUpdateInput>;
+  absenteeVotingBody?: InputMaybe<Scalars['String']['input']>;
+  candidateBody?: InputMaybe<Scalars['String']['input']>;
   candidateFilingDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   candidateFilingDocuments?: InputMaybe<DocumentRelateToManyForUpdateInput>;
   candidateFilingStartDate?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5691,6 +5713,7 @@ export type ElectionDraftUpdateInput = {
   electionDate?: InputMaybe<Scalars['DateTime']['input']>;
   electionOfficialApplication?: InputMaybe<DocumentRelateToOneForUpdateInput>;
   electionOfficialApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
+  electionOfficialBody?: InputMaybe<Scalars['String']['input']>;
   heroImage?: InputMaybe<Scalars['String']['input']>;
   officesToBeFilled?: InputMaybe<Scalars['String']['input']>;
   original?: InputMaybe<ElectionRelateToOneForUpdateInput>;
@@ -5705,6 +5728,7 @@ export type ElectionDraftUpdateInput = {
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
+  voterInfoBody?: InputMaybe<Scalars['String']['input']>;
   voterRegistrationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -5714,6 +5738,8 @@ export type ElectionDraftWhereInput = {
   OR?: InputMaybe<Array<ElectionDraftWhereInput>>;
   absenteeApplicationDeadline?: InputMaybe<DateTimeNullableFilter>;
   absenteeVotingApplication?: InputMaybe<DocumentWhereInput>;
+  absenteeVotingBody?: InputMaybe<MyStringFilter>;
+  candidateBody?: InputMaybe<MyStringFilter>;
   candidateFilingDeadline?: InputMaybe<DateTimeNullableFilter>;
   candidateFilingDocuments?: InputMaybe<DocumentManyRelationFilter>;
   candidateFilingStartDate?: InputMaybe<DateTimeNullableFilter>;
@@ -5728,6 +5754,7 @@ export type ElectionDraftWhereInput = {
   electionDate?: InputMaybe<DateTimeFilter>;
   electionOfficialApplication?: InputMaybe<DocumentWhereInput>;
   electionOfficialApplicationDeadline?: InputMaybe<DateTimeNullableFilter>;
+  electionOfficialBody?: InputMaybe<MyStringFilter>;
   id?: InputMaybe<IdFilter>;
   officesToBeFilled?: InputMaybe<MyStringFilter>;
   original?: InputMaybe<ElectionWhereInput>;
@@ -5741,6 +5768,7 @@ export type ElectionDraftWhereInput = {
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
+  voterInfoBody?: InputMaybe<MyStringFilter>;
   voterRegistrationDeadline?: InputMaybe<DateTimeNullableFilter>;
 };
 
@@ -5751,6 +5779,8 @@ export type ElectionDraftWhereUniqueInput = {
 
 export type ElectionOrderByInput = {
   absenteeApplicationDeadline?: InputMaybe<OrderDirection>;
+  absenteeVotingBody?: InputMaybe<MyOrderDirection>;
+  candidateBody?: InputMaybe<MyOrderDirection>;
   candidateFilingDeadline?: InputMaybe<OrderDirection>;
   candidateFilingStartDate?: InputMaybe<OrderDirection>;
   candidatePacketAvailability?: InputMaybe<OrderDirection>;
@@ -5759,6 +5789,7 @@ export type ElectionOrderByInput = {
   earlyVotingStartDate?: InputMaybe<OrderDirection>;
   electionDate?: InputMaybe<OrderDirection>;
   electionOfficialApplicationDeadline?: InputMaybe<OrderDirection>;
+  electionOfficialBody?: InputMaybe<MyOrderDirection>;
   heroImage?: InputMaybe<BlueHarvestImageOrderDirection>;
   id?: InputMaybe<OrderDirection>;
   makeDrafts?: InputMaybe<OrderDirection>;
@@ -5770,6 +5801,7 @@ export type ElectionOrderByInput = {
   title?: InputMaybe<OrderDirection>;
   unpublishAt?: InputMaybe<OrderDirection>;
   updatedAt?: InputMaybe<OrderDirection>;
+  voterInfoBody?: InputMaybe<MyOrderDirection>;
   voterRegistrationDeadline?: InputMaybe<OrderDirection>;
 };
 
@@ -5848,6 +5880,8 @@ export type ElectionUpdateArgs = {
 export type ElectionUpdateInput = {
   absenteeApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   absenteeVotingApplication?: InputMaybe<DocumentRelateToOneForUpdateInput>;
+  absenteeVotingBody?: InputMaybe<Scalars['String']['input']>;
+  candidateBody?: InputMaybe<Scalars['String']['input']>;
   candidateFilingDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   candidateFilingDocuments?: InputMaybe<DocumentRelateToManyForUpdateInput>;
   candidateFilingStartDate?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5864,6 +5898,7 @@ export type ElectionUpdateInput = {
   electionDate?: InputMaybe<Scalars['DateTime']['input']>;
   electionOfficialApplication?: InputMaybe<DocumentRelateToOneForUpdateInput>;
   electionOfficialApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
+  electionOfficialBody?: InputMaybe<Scalars['String']['input']>;
   heroImage?: InputMaybe<Scalars['String']['input']>;
   makeDrafts?: InputMaybe<Scalars['String']['input']>;
   officesToBeFilled?: InputMaybe<Scalars['String']['input']>;
@@ -5880,6 +5915,7 @@ export type ElectionUpdateInput = {
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
   versions?: InputMaybe<ElectionVersionRelateToManyForUpdateInput>;
+  voterInfoBody?: InputMaybe<Scalars['String']['input']>;
   voterRegistrationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -5887,6 +5923,8 @@ export type ElectionVersion = {
   __typename?: 'ElectionVersion';
   absenteeApplicationDeadline?: Maybe<Scalars['DateTime']['output']>;
   absenteeVotingApplication?: Maybe<Document>;
+  absenteeVotingBody?: Maybe<Scalars['String']['output']>;
+  candidateBody?: Maybe<Scalars['String']['output']>;
   candidateFilingDeadline?: Maybe<Scalars['DateTime']['output']>;
   candidateFilingDocuments?: Maybe<Array<Document>>;
   candidateFilingDocumentsCount?: Maybe<Scalars['Int']['output']>;
@@ -5904,6 +5942,7 @@ export type ElectionVersion = {
   electionDate?: Maybe<Scalars['DateTime']['output']>;
   electionOfficialApplication?: Maybe<Document>;
   electionOfficialApplicationDeadline?: Maybe<Scalars['DateTime']['output']>;
+  electionOfficialBody?: Maybe<Scalars['String']['output']>;
   heroImage?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   isLive?: Maybe<Election>;
@@ -5923,6 +5962,7 @@ export type ElectionVersion = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userGroups?: Maybe<Array<UserGroup>>;
   userGroupsCount?: Maybe<Scalars['Int']['output']>;
+  voterInfoBody?: Maybe<Scalars['String']['output']>;
   voterRegistrationDeadline?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -6013,6 +6053,8 @@ export type ElectionVersionUserGroupsCountArgs = {
 export type ElectionVersionCreateInput = {
   absenteeApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   absenteeVotingApplication?: InputMaybe<DocumentRelateToOneForCreateInput>;
+  absenteeVotingBody?: InputMaybe<Scalars['String']['input']>;
+  candidateBody?: InputMaybe<Scalars['String']['input']>;
   candidateFilingDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   candidateFilingDocuments?: InputMaybe<DocumentRelateToManyForCreateInput>;
   candidateFilingStartDate?: InputMaybe<Scalars['DateTime']['input']>;
@@ -6027,6 +6069,7 @@ export type ElectionVersionCreateInput = {
   electionDate?: InputMaybe<Scalars['DateTime']['input']>;
   electionOfficialApplication?: InputMaybe<DocumentRelateToOneForCreateInput>;
   electionOfficialApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
+  electionOfficialBody?: InputMaybe<Scalars['String']['input']>;
   heroImage?: InputMaybe<Scalars['String']['input']>;
   isLive?: InputMaybe<ElectionRelateToOneForCreateInput>;
   officesToBeFilled?: InputMaybe<Scalars['String']['input']>;
@@ -6042,6 +6085,7 @@ export type ElectionVersionCreateInput = {
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
+  voterInfoBody?: InputMaybe<Scalars['String']['input']>;
   voterRegistrationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -6053,6 +6097,8 @@ export type ElectionVersionManyRelationFilter = {
 
 export type ElectionVersionOrderByInput = {
   absenteeApplicationDeadline?: InputMaybe<OrderDirection>;
+  absenteeVotingBody?: InputMaybe<MyOrderDirection>;
+  candidateBody?: InputMaybe<MyOrderDirection>;
   candidateFilingDeadline?: InputMaybe<OrderDirection>;
   candidateFilingStartDate?: InputMaybe<OrderDirection>;
   candidatePacketAvailability?: InputMaybe<OrderDirection>;
@@ -6061,6 +6107,7 @@ export type ElectionVersionOrderByInput = {
   earlyVotingStartDate?: InputMaybe<OrderDirection>;
   electionDate?: InputMaybe<OrderDirection>;
   electionOfficialApplicationDeadline?: InputMaybe<OrderDirection>;
+  electionOfficialBody?: InputMaybe<MyOrderDirection>;
   heroImage?: InputMaybe<BlueHarvestImageOrderDirection>;
   id?: InputMaybe<OrderDirection>;
   officesToBeFilled?: InputMaybe<MyOrderDirection>;
@@ -6070,6 +6117,7 @@ export type ElectionVersionOrderByInput = {
   title?: InputMaybe<OrderDirection>;
   unpublishAt?: InputMaybe<OrderDirection>;
   updatedAt?: InputMaybe<OrderDirection>;
+  voterInfoBody?: InputMaybe<MyOrderDirection>;
   voterRegistrationDeadline?: InputMaybe<OrderDirection>;
 };
 
@@ -6104,6 +6152,8 @@ export type ElectionVersionUpdateArgs = {
 export type ElectionVersionUpdateInput = {
   absenteeApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   absenteeVotingApplication?: InputMaybe<DocumentRelateToOneForUpdateInput>;
+  absenteeVotingBody?: InputMaybe<Scalars['String']['input']>;
+  candidateBody?: InputMaybe<Scalars['String']['input']>;
   candidateFilingDeadline?: InputMaybe<Scalars['DateTime']['input']>;
   candidateFilingDocuments?: InputMaybe<DocumentRelateToManyForUpdateInput>;
   candidateFilingStartDate?: InputMaybe<Scalars['DateTime']['input']>;
@@ -6118,6 +6168,7 @@ export type ElectionVersionUpdateInput = {
   electionDate?: InputMaybe<Scalars['DateTime']['input']>;
   electionOfficialApplication?: InputMaybe<DocumentRelateToOneForUpdateInput>;
   electionOfficialApplicationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
+  electionOfficialBody?: InputMaybe<Scalars['String']['input']>;
   heroImage?: InputMaybe<Scalars['String']['input']>;
   isLive?: InputMaybe<ElectionRelateToOneForUpdateInput>;
   officesToBeFilled?: InputMaybe<Scalars['String']['input']>;
@@ -6133,6 +6184,7 @@ export type ElectionVersionUpdateInput = {
   unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
+  voterInfoBody?: InputMaybe<Scalars['String']['input']>;
   voterRegistrationDeadline?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -6142,6 +6194,8 @@ export type ElectionVersionWhereInput = {
   OR?: InputMaybe<Array<ElectionVersionWhereInput>>;
   absenteeApplicationDeadline?: InputMaybe<DateTimeNullableFilter>;
   absenteeVotingApplication?: InputMaybe<DocumentWhereInput>;
+  absenteeVotingBody?: InputMaybe<MyStringFilter>;
+  candidateBody?: InputMaybe<MyStringFilter>;
   candidateFilingDeadline?: InputMaybe<DateTimeNullableFilter>;
   candidateFilingDocuments?: InputMaybe<DocumentManyRelationFilter>;
   candidateFilingStartDate?: InputMaybe<DateTimeNullableFilter>;
@@ -6156,6 +6210,7 @@ export type ElectionVersionWhereInput = {
   electionDate?: InputMaybe<DateTimeFilter>;
   electionOfficialApplication?: InputMaybe<DocumentWhereInput>;
   electionOfficialApplicationDeadline?: InputMaybe<DateTimeNullableFilter>;
+  electionOfficialBody?: InputMaybe<MyStringFilter>;
   id?: InputMaybe<IdFilter>;
   isLive?: InputMaybe<ElectionWhereInput>;
   officesToBeFilled?: InputMaybe<MyStringFilter>;
@@ -6170,6 +6225,7 @@ export type ElectionVersionWhereInput = {
   unpublishAt?: InputMaybe<DateTimeNullableFilter>;
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
+  voterInfoBody?: InputMaybe<MyStringFilter>;
   voterRegistrationDeadline?: InputMaybe<DateTimeNullableFilter>;
 };
 
@@ -6185,6 +6241,8 @@ export type ElectionWhereInput = {
   OR?: InputMaybe<Array<ElectionWhereInput>>;
   absenteeApplicationDeadline?: InputMaybe<DateTimeNullableFilter>;
   absenteeVotingApplication?: InputMaybe<DocumentWhereInput>;
+  absenteeVotingBody?: InputMaybe<MyStringFilter>;
+  candidateBody?: InputMaybe<MyStringFilter>;
   candidateFilingDeadline?: InputMaybe<DateTimeNullableFilter>;
   candidateFilingDocuments?: InputMaybe<DocumentManyRelationFilter>;
   candidateFilingStartDate?: InputMaybe<DateTimeNullableFilter>;
@@ -6201,6 +6259,7 @@ export type ElectionWhereInput = {
   electionDate?: InputMaybe<DateTimeFilter>;
   electionOfficialApplication?: InputMaybe<DocumentWhereInput>;
   electionOfficialApplicationDeadline?: InputMaybe<DateTimeNullableFilter>;
+  electionOfficialBody?: InputMaybe<MyStringFilter>;
   id?: InputMaybe<IdFilter>;
   officesToBeFilled?: InputMaybe<MyStringFilter>;
   owner?: InputMaybe<UserWhereInput>;
@@ -6216,6 +6275,7 @@ export type ElectionWhereInput = {
   updatedAt?: InputMaybe<DateTimeNullableFilter>;
   userGroups?: InputMaybe<UserGroupManyRelationFilter>;
   versions?: InputMaybe<ElectionVersionManyRelationFilter>;
+  voterInfoBody?: InputMaybe<MyStringFilter>;
   voterRegistrationDeadline?: InputMaybe<DateTimeNullableFilter>;
 };
 
@@ -6227,7 +6287,7 @@ export type ElectionWhereUniqueInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type ElectionsPage = {
+export type ElectionsPage = WithTitle & {
   __typename?: 'ElectionsPage';
   boroughElectionContact?: Maybe<Contact>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -6238,6 +6298,8 @@ export type ElectionsPage = {
   howElectionsWork?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   owner?: Maybe<User>;
+  pollingPlaceBody?: Maybe<Scalars['String']['output']>;
+  pollingPlacesLink?: Maybe<InternalLink>;
   referendumProcessDocument?: Maybe<Document>;
   stateElectionContact?: Maybe<Contact>;
   title?: Maybe<Scalars['String']['output']>;
@@ -6282,6 +6344,8 @@ export type ElectionsPageCreateInput = {
   heroImage?: InputMaybe<Scalars['String']['input']>;
   howElectionsWork?: InputMaybe<Scalars['String']['input']>;
   owner?: InputMaybe<UserRelateToOneForCreateInput>;
+  pollingPlaceBody?: InputMaybe<Scalars['String']['input']>;
+  pollingPlacesLink?: InputMaybe<InternalLinkRelateToOneForCreateInput>;
   referendumProcessDocument?: InputMaybe<DocumentRelateToOneForCreateInput>;
   stateElectionContact?: InputMaybe<ContactRelateToOneForCreateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -6295,6 +6359,7 @@ export type ElectionsPageOrderByInput = {
   heroImage?: InputMaybe<BlueHarvestImageOrderDirection>;
   howElectionsWork?: InputMaybe<MyOrderDirection>;
   id?: InputMaybe<OrderDirection>;
+  pollingPlaceBody?: InputMaybe<MyOrderDirection>;
   title?: InputMaybe<OrderDirection>;
   updatedAt?: InputMaybe<OrderDirection>;
 };
@@ -6312,6 +6377,8 @@ export type ElectionsPageUpdateInput = {
   heroImage?: InputMaybe<Scalars['String']['input']>;
   howElectionsWork?: InputMaybe<Scalars['String']['input']>;
   owner?: InputMaybe<UserRelateToOneForUpdateInput>;
+  pollingPlaceBody?: InputMaybe<Scalars['String']['input']>;
+  pollingPlacesLink?: InputMaybe<InternalLinkRelateToOneForUpdateInput>;
   referendumProcessDocument?: InputMaybe<DocumentRelateToOneForUpdateInput>;
   stateElectionContact?: InputMaybe<ContactRelateToOneForUpdateInput>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -6330,6 +6397,8 @@ export type ElectionsPageWhereInput = {
   howElectionsWork?: InputMaybe<MyStringFilter>;
   id?: InputMaybe<IdFilter>;
   owner?: InputMaybe<UserWhereInput>;
+  pollingPlaceBody?: InputMaybe<MyStringFilter>;
+  pollingPlacesLink?: InputMaybe<InternalLinkWhereInput>;
   referendumProcessDocument?: InputMaybe<DocumentWhereInput>;
   stateElectionContact?: InputMaybe<ContactWhereInput>;
   title?: InputMaybe<StringFilter>;
@@ -6342,7 +6411,7 @@ export type ElectionsPageWhereUniqueInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Event = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type Event = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'Event';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -7821,7 +7890,7 @@ export type ExternalLinkWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type Facility = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type Facility = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'Facility';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -9254,7 +9323,7 @@ export type HighlightWhereUniqueInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type HomePage = {
+export type HomePage = WithTitle & {
   __typename?: 'HomePage';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
@@ -9768,7 +9837,7 @@ export type LandingPageWhereUniqueInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type LinkedItemUnion = AssemblyDistrict | Board | BoardPage | Community | Document | ElectionsPage | Facility | HomePage | OrgUnit | Park | Plan | Service | Topic | Trail | Url;
+export type LinkedItemUnion = AssemblyDistrict | Board | BoardPage | Community | Document | ElectionsPage | Facility | HomePage | OrgUnit | Park | Plan | Policy | PublicNotice | Service | Topic | Trail | Url;
 
 export type Location = {
   __typename?: 'Location';
@@ -9955,6 +10024,16 @@ export type Mutation = {
   createPolicyDrafts?: Maybe<Array<Maybe<PolicyDraft>>>;
   createPolicyVersion?: Maybe<PolicyVersion>;
   createPolicyVersions?: Maybe<Array<Maybe<PolicyVersion>>>;
+  createPost?: Maybe<Post>;
+  createPostCategories?: Maybe<Array<Maybe<PostCategory>>>;
+  createPostCategory?: Maybe<PostCategory>;
+  createPostDraft?: Maybe<PostDraft>;
+  createPostDrafts?: Maybe<Array<Maybe<PostDraft>>>;
+  createPostImage?: Maybe<PostImage>;
+  createPostImages?: Maybe<Array<Maybe<PostImage>>>;
+  createPostVersion?: Maybe<PostVersion>;
+  createPostVersions?: Maybe<Array<Maybe<PostVersion>>>;
+  createPosts?: Maybe<Array<Maybe<Post>>>;
   createProposition?: Maybe<Proposition>;
   createPropositions?: Maybe<Array<Maybe<Proposition>>>;
   createPublicNotice?: Maybe<PublicNotice>;
@@ -10097,6 +10176,16 @@ export type Mutation = {
   deletePolicyDrafts?: Maybe<Array<Maybe<PolicyDraft>>>;
   deletePolicyVersion?: Maybe<PolicyVersion>;
   deletePolicyVersions?: Maybe<Array<Maybe<PolicyVersion>>>;
+  deletePost?: Maybe<Post>;
+  deletePostCategories?: Maybe<Array<Maybe<PostCategory>>>;
+  deletePostCategory?: Maybe<PostCategory>;
+  deletePostDraft?: Maybe<PostDraft>;
+  deletePostDrafts?: Maybe<Array<Maybe<PostDraft>>>;
+  deletePostImage?: Maybe<PostImage>;
+  deletePostImages?: Maybe<Array<Maybe<PostImage>>>;
+  deletePostVersion?: Maybe<PostVersion>;
+  deletePostVersions?: Maybe<Array<Maybe<PostVersion>>>;
+  deletePosts?: Maybe<Array<Maybe<Post>>>;
   deleteProposition?: Maybe<Proposition>;
   deletePropositions?: Maybe<Array<Maybe<Proposition>>>;
   deletePublicNotice?: Maybe<PublicNotice>;
@@ -10240,6 +10329,16 @@ export type Mutation = {
   updatePolicyDrafts?: Maybe<Array<Maybe<PolicyDraft>>>;
   updatePolicyVersion?: Maybe<PolicyVersion>;
   updatePolicyVersions?: Maybe<Array<Maybe<PolicyVersion>>>;
+  updatePost?: Maybe<Post>;
+  updatePostCategories?: Maybe<Array<Maybe<PostCategory>>>;
+  updatePostCategory?: Maybe<PostCategory>;
+  updatePostDraft?: Maybe<PostDraft>;
+  updatePostDrafts?: Maybe<Array<Maybe<PostDraft>>>;
+  updatePostImage?: Maybe<PostImage>;
+  updatePostImages?: Maybe<Array<Maybe<PostImage>>>;
+  updatePostVersion?: Maybe<PostVersion>;
+  updatePostVersions?: Maybe<Array<Maybe<PostVersion>>>;
+  updatePosts?: Maybe<Array<Maybe<Post>>>;
   updateProposition?: Maybe<Proposition>;
   updatePropositions?: Maybe<Array<Maybe<Proposition>>>;
   updatePublicNotice?: Maybe<PublicNotice>;
@@ -10802,6 +10901,56 @@ export type MutationCreatePolicyVersionArgs = {
 
 export type MutationCreatePolicyVersionsArgs = {
   data: Array<PolicyVersionCreateInput>;
+};
+
+
+export type MutationCreatePostArgs = {
+  data: PostCreateInput;
+};
+
+
+export type MutationCreatePostCategoriesArgs = {
+  data: Array<PostCategoryCreateInput>;
+};
+
+
+export type MutationCreatePostCategoryArgs = {
+  data: PostCategoryCreateInput;
+};
+
+
+export type MutationCreatePostDraftArgs = {
+  data: PostDraftCreateInput;
+};
+
+
+export type MutationCreatePostDraftsArgs = {
+  data: Array<PostDraftCreateInput>;
+};
+
+
+export type MutationCreatePostImageArgs = {
+  data: PostImageCreateInput;
+};
+
+
+export type MutationCreatePostImagesArgs = {
+  data: Array<PostImageCreateInput>;
+};
+
+
+export type MutationCreatePostVersionArgs = {
+  data: PostVersionCreateInput;
+};
+
+
+export type MutationCreatePostVersionsArgs = {
+  data: Array<PostVersionCreateInput>;
+};
+
+
+export type MutationCreatePostsArgs = {
+  data: Array<PostCreateInput>;
 };
 
 
@@ -11512,6 +11661,56 @@ export type MutationDeletePolicyVersionArgs = {
 
 export type MutationDeletePolicyVersionsArgs = {
   where: Array<PolicyVersionWhereUniqueInput>;
+};
+
+
+export type MutationDeletePostArgs = {
+  where: PostWhereUniqueInput;
+};
+
+
+export type MutationDeletePostCategoriesArgs = {
+  where: Array<PostCategoryWhereUniqueInput>;
+};
+
+
+export type MutationDeletePostCategoryArgs = {
+  where: PostCategoryWhereUniqueInput;
+};
+
+
+export type MutationDeletePostDraftArgs = {
+  where: PostDraftWhereUniqueInput;
+};
+
+
+export type MutationDeletePostDraftsArgs = {
+  where: Array<PostDraftWhereUniqueInput>;
+};
+
+
+export type MutationDeletePostImageArgs = {
+  where: PostImageWhereUniqueInput;
+};
+
+
+export type MutationDeletePostImagesArgs = {
+  where: Array<PostImageWhereUniqueInput>;
+};
+
+
+export type MutationDeletePostVersionArgs = {
+  where: PostVersionWhereUniqueInput;
+};
+
+
+export type MutationDeletePostVersionsArgs = {
+  where: Array<PostVersionWhereUniqueInput>;
+};
+
+
+export type MutationDeletePostsArgs = {
+  where: Array<PostWhereUniqueInput>;
 };
 
 
@@ -12277,6 +12476,61 @@ export type MutationUpdatePolicyVersionsArgs = {
 };
 
 
+export type MutationUpdatePostArgs = {
+  data: PostUpdateInput;
+  where: PostWhereUniqueInput;
+};
+
+
+export type MutationUpdatePostCategoriesArgs = {
+  data: Array<PostCategoryUpdateArgs>;
+};
+
+
+export type MutationUpdatePostCategoryArgs = {
+  data: PostCategoryUpdateInput;
+  where: PostCategoryWhereUniqueInput;
+};
+
+
+export type MutationUpdatePostDraftArgs = {
+  data: PostDraftUpdateInput;
+  where: PostDraftWhereUniqueInput;
+};
+
+
+export type MutationUpdatePostDraftsArgs = {
+  data: Array<PostDraftUpdateArgs>;
+};
+
+
+export type MutationUpdatePostImageArgs = {
+  data: PostImageUpdateInput;
+  where: PostImageWhereUniqueInput;
+};
+
+
+export type MutationUpdatePostImagesArgs = {
+  data: Array<PostImageUpdateArgs>;
+};
+
+
+export type MutationUpdatePostVersionArgs = {
+  data: PostVersionUpdateInput;
+  where: PostVersionWhereUniqueInput;
+};
+
+
+export type MutationUpdatePostVersionsArgs = {
+  data: Array<PostVersionUpdateArgs>;
+};
+
+
+export type MutationUpdatePostsArgs = {
+  data: Array<PostUpdateArgs>;
+};
+
+
 export type MutationUpdatePropositionArgs = {
   data: PropositionUpdateInput;
   where: PropositionWhereUniqueInput;
@@ -12602,7 +12856,7 @@ export enum OrderDirection {
   Desc = 'desc'
 }
 
-export type OrgUnit = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type OrgUnit = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'OrgUnit';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -14173,7 +14427,7 @@ export type PageViewWhereUniqueInput = {
   pageKey?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Park = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type Park = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'Park';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -15517,7 +15771,7 @@ export type PasswordState = {
   isSet: Scalars['Boolean']['output'];
 };
 
-export type Plan = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type Plan = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'Plan';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -17284,7 +17538,7 @@ export type PlanWhereUniqueInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Policy = BasePage & BasePageWithActions & BasePageWithSlug & {
+export type Policy = BasePage & BasePageWithActions & BasePageWithSlug & WithTitle & {
   __typename?: 'Policy';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -18025,6 +18279,940 @@ export type PolicyWhereUniqueInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type Post = {
+  __typename?: 'Post';
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
+  author?: Maybe<User>;
+  body?: Maybe<Scalars['String']['output']>;
+  canEdit?: Maybe<Scalars['String']['output']>;
+  categories?: Maybe<Array<PostCategory>>;
+  categoriesCount?: Maybe<Scalars['Int']['output']>;
+  contacts?: Maybe<Array<Contact>>;
+  contactsCount?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  currentVersion?: Maybe<PostVersion>;
+  description?: Maybe<Scalars['String']['output']>;
+  documents?: Maybe<Array<Document>>;
+  documentsCount?: Maybe<Scalars['Int']['output']>;
+  drafts?: Maybe<Array<PostDraft>>;
+  draftsCount?: Maybe<Scalars['Int']['output']>;
+  heroImage?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  images?: Maybe<Array<PostImage>>;
+  imagesCount?: Maybe<Scalars['Int']['output']>;
+  liveUrl?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  makeDrafts?: Maybe<Scalars['String']['output']>;
+  owner?: Maybe<User>;
+  publishAt?: Maybe<Scalars['DateTime']['output']>;
+  reviewDate?: Maybe<Scalars['DateTime']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  tags?: Maybe<Array<Tag>>;
+  tagsCount?: Maybe<Scalars['Int']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  unpublishAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userGroups?: Maybe<Array<UserGroup>>;
+  userGroupsCount?: Maybe<Scalars['Int']['output']>;
+  versions?: Maybe<Array<PostVersion>>;
+  versionsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type PostActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type PostActionsCountArgs = {
+  where?: InternalLinkWhereInput;
+};
+
+
+export type PostCategoriesArgs = {
+  cursor?: InputMaybe<PostCategoryWhereUniqueInput>;
+  orderBy?: Array<PostCategoryOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostCategoryWhereInput;
+};
+
+
+export type PostCategoriesCountArgs = {
+  where?: PostCategoryWhereInput;
+};
+
+
+export type PostContactsArgs = {
+  cursor?: InputMaybe<ContactWhereUniqueInput>;
+  orderBy?: Array<ContactOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: ContactWhereInput;
+};
+
+
+export type PostContactsCountArgs = {
+  where?: ContactWhereInput;
+};
+
+
+export type PostDocumentsArgs = {
+  cursor?: InputMaybe<DocumentWhereUniqueInput>;
+  orderBy?: Array<DocumentOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: DocumentWhereInput;
+};
+
+
+export type PostDocumentsCountArgs = {
+  where?: DocumentWhereInput;
+};
+
+
+export type PostDraftsArgs = {
+  cursor?: InputMaybe<PostDraftWhereUniqueInput>;
+  orderBy?: Array<PostDraftOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostDraftWhereInput;
+};
+
+
+export type PostDraftsCountArgs = {
+  where?: PostDraftWhereInput;
+};
+
+
+export type PostImagesArgs = {
+  cursor?: InputMaybe<PostImageWhereUniqueInput>;
+  orderBy?: Array<PostImageOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostImageWhereInput;
+};
+
+
+export type PostImagesCountArgs = {
+  where?: PostImageWhereInput;
+};
+
+
+export type PostTagsArgs = {
+  cursor?: InputMaybe<TagWhereUniqueInput>;
+  orderBy?: Array<TagOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TagWhereInput;
+};
+
+
+export type PostTagsCountArgs = {
+  where?: TagWhereInput;
+};
+
+
+export type PostUserGroupsArgs = {
+  cursor?: InputMaybe<UserGroupWhereUniqueInput>;
+  orderBy?: Array<UserGroupOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: UserGroupWhereInput;
+};
+
+
+export type PostUserGroupsCountArgs = {
+  where?: UserGroupWhereInput;
+};
+
+
+export type PostVersionsArgs = {
+  cursor?: InputMaybe<PostVersionWhereUniqueInput>;
+  orderBy?: Array<PostVersionOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostVersionWhereInput;
+};
+
+
+export type PostVersionsCountArgs = {
+  where?: PostVersionWhereInput;
+};
+
+export type PostCategory = {
+  __typename?: 'PostCategory';
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+export type PostCategoryCreateInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PostCategoryManyRelationFilter = {
+  every?: InputMaybe<PostCategoryWhereInput>;
+  none?: InputMaybe<PostCategoryWhereInput>;
+  some?: InputMaybe<PostCategoryWhereInput>;
+};
+
+export type PostCategoryOrderByInput = {
+  description?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+};
+
+export type PostCategoryRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<PostCategoryWhereUniqueInput>>;
+  create?: InputMaybe<Array<PostCategoryCreateInput>>;
+};
+
+export type PostCategoryRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<PostCategoryWhereUniqueInput>>;
+  create?: InputMaybe<Array<PostCategoryCreateInput>>;
+  disconnect?: InputMaybe<Array<PostCategoryWhereUniqueInput>>;
+  set?: InputMaybe<Array<PostCategoryWhereUniqueInput>>;
+};
+
+export type PostCategoryUpdateArgs = {
+  data: PostCategoryUpdateInput;
+  where: PostCategoryWhereUniqueInput;
+};
+
+export type PostCategoryUpdateInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PostCategoryWhereInput = {
+  AND?: InputMaybe<Array<PostCategoryWhereInput>>;
+  NOT?: InputMaybe<Array<PostCategoryWhereInput>>;
+  OR?: InputMaybe<Array<PostCategoryWhereInput>>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<IdFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type PostCategoryWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PostCreateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
+  author?: InputMaybe<UserRelateToOneForCreateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  categories?: InputMaybe<PostCategoryRelateToManyForCreateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  currentVersion?: InputMaybe<PostVersionRelateToOneForCreateInput>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  documents?: InputMaybe<DocumentRelateToManyForCreateInput>;
+  drafts?: InputMaybe<PostDraftRelateToManyForCreateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<PostImageRelateToManyForCreateInput>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  makeDrafts?: InputMaybe<Scalars['String']['input']>;
+  owner?: InputMaybe<UserRelateToOneForCreateInput>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<TagRelateToManyForCreateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
+  versions?: InputMaybe<PostVersionRelateToManyForCreateInput>;
+};
+
+export type PostDraft = {
+  __typename?: 'PostDraft';
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
+  author?: Maybe<User>;
+  body?: Maybe<Scalars['String']['output']>;
+  canEdit?: Maybe<Scalars['String']['output']>;
+  categories?: Maybe<Array<PostCategory>>;
+  categoriesCount?: Maybe<Scalars['Int']['output']>;
+  contacts?: Maybe<Array<Contact>>;
+  contactsCount?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  documents?: Maybe<Array<Document>>;
+  documentsCount?: Maybe<Scalars['Int']['output']>;
+  heroImage?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  images?: Maybe<Array<PostImage>>;
+  imagesCount?: Maybe<Scalars['Int']['output']>;
+  liveUrl?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  original?: Maybe<Post>;
+  owner?: Maybe<User>;
+  publish?: Maybe<Scalars['String']['output']>;
+  publishAt?: Maybe<Scalars['DateTime']['output']>;
+  reviewDate?: Maybe<Scalars['DateTime']['output']>;
+  tags?: Maybe<Array<Tag>>;
+  tagsCount?: Maybe<Scalars['Int']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  unpublishAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userGroups?: Maybe<Array<UserGroup>>;
+  userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type PostDraftActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type PostDraftActionsCountArgs = {
+  where?: InternalLinkWhereInput;
+};
+
+
+export type PostDraftCategoriesArgs = {
+  cursor?: InputMaybe<PostCategoryWhereUniqueInput>;
+  orderBy?: Array<PostCategoryOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostCategoryWhereInput;
+};
+
+
+export type PostDraftCategoriesCountArgs = {
+  where?: PostCategoryWhereInput;
+};
+
+
+export type PostDraftContactsArgs = {
+  cursor?: InputMaybe<ContactWhereUniqueInput>;
+  orderBy?: Array<ContactOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: ContactWhereInput;
+};
+
+
+export type PostDraftContactsCountArgs = {
+  where?: ContactWhereInput;
+};
+
+
+export type PostDraftDocumentsArgs = {
+  cursor?: InputMaybe<DocumentWhereUniqueInput>;
+  orderBy?: Array<DocumentOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: DocumentWhereInput;
+};
+
+
+export type PostDraftDocumentsCountArgs = {
+  where?: DocumentWhereInput;
+};
+
+
+export type PostDraftImagesArgs = {
+  cursor?: InputMaybe<PostImageWhereUniqueInput>;
+  orderBy?: Array<PostImageOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostImageWhereInput;
+};
+
+
+export type PostDraftImagesCountArgs = {
+  where?: PostImageWhereInput;
+};
+
+
+export type PostDraftTagsArgs = {
+  cursor?: InputMaybe<TagWhereUniqueInput>;
+  orderBy?: Array<TagOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TagWhereInput;
+};
+
+
+export type PostDraftTagsCountArgs = {
+  where?: TagWhereInput;
+};
+
+
+export type PostDraftUserGroupsArgs = {
+  cursor?: InputMaybe<UserGroupWhereUniqueInput>;
+  orderBy?: Array<UserGroupOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: UserGroupWhereInput;
+};
+
+
+export type PostDraftUserGroupsCountArgs = {
+  where?: UserGroupWhereInput;
+};
+
+export type PostDraftCreateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
+  author?: InputMaybe<UserRelateToOneForCreateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  categories?: InputMaybe<PostCategoryRelateToManyForCreateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  documents?: InputMaybe<DocumentRelateToManyForCreateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<PostImageRelateToManyForCreateInput>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  original?: InputMaybe<PostRelateToOneForCreateInput>;
+  owner?: InputMaybe<UserRelateToOneForCreateInput>;
+  publish?: InputMaybe<Scalars['String']['input']>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  tags?: InputMaybe<TagRelateToManyForCreateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
+};
+
+export type PostDraftManyRelationFilter = {
+  every?: InputMaybe<PostDraftWhereInput>;
+  none?: InputMaybe<PostDraftWhereInput>;
+  some?: InputMaybe<PostDraftWhereInput>;
+};
+
+export type PostDraftOrderByInput = {
+  body?: InputMaybe<MyOrderDirection>;
+  createdAt?: InputMaybe<OrderDirection>;
+  description?: InputMaybe<OrderDirection>;
+  heroImage?: InputMaybe<BlueHarvestImageOrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  location?: InputMaybe<OrderDirection>;
+  publish?: InputMaybe<OrderDirection>;
+  publishAt?: InputMaybe<OrderDirection>;
+  reviewDate?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+  unpublishAt?: InputMaybe<OrderDirection>;
+  updatedAt?: InputMaybe<OrderDirection>;
+};
+
+export type PostDraftRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<PostDraftWhereUniqueInput>>;
+  create?: InputMaybe<Array<PostDraftCreateInput>>;
+};
+
+export type PostDraftRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<PostDraftWhereUniqueInput>>;
+  create?: InputMaybe<Array<PostDraftCreateInput>>;
+  disconnect?: InputMaybe<Array<PostDraftWhereUniqueInput>>;
+  set?: InputMaybe<Array<PostDraftWhereUniqueInput>>;
+};
+
+export type PostDraftUpdateArgs = {
+  data: PostDraftUpdateInput;
+  where: PostDraftWhereUniqueInput;
+};
+
+export type PostDraftUpdateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
+  author?: InputMaybe<UserRelateToOneForUpdateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  categories?: InputMaybe<PostCategoryRelateToManyForUpdateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  documents?: InputMaybe<DocumentRelateToManyForUpdateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<PostImageRelateToManyForUpdateInput>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  original?: InputMaybe<PostRelateToOneForUpdateInput>;
+  owner?: InputMaybe<UserRelateToOneForUpdateInput>;
+  publish?: InputMaybe<Scalars['String']['input']>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  tags?: InputMaybe<TagRelateToManyForUpdateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
+};
+
+export type PostDraftWhereInput = {
+  AND?: InputMaybe<Array<PostDraftWhereInput>>;
+  NOT?: InputMaybe<Array<PostDraftWhereInput>>;
+  OR?: InputMaybe<Array<PostDraftWhereInput>>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
+  author?: InputMaybe<UserWhereInput>;
+  body?: InputMaybe<MyStringFilter>;
+  categories?: InputMaybe<PostCategoryManyRelationFilter>;
+  contacts?: InputMaybe<ContactManyRelationFilter>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  description?: InputMaybe<StringFilter>;
+  documents?: InputMaybe<DocumentManyRelationFilter>;
+  id?: InputMaybe<IdFilter>;
+  images?: InputMaybe<PostImageManyRelationFilter>;
+  location?: InputMaybe<StringFilter>;
+  original?: InputMaybe<PostWhereInput>;
+  owner?: InputMaybe<UserWhereInput>;
+  publishAt?: InputMaybe<DateTimeNullableFilter>;
+  reviewDate?: InputMaybe<DateTimeNullableFilter>;
+  tags?: InputMaybe<TagManyRelationFilter>;
+  title?: InputMaybe<StringFilter>;
+  unpublishAt?: InputMaybe<DateTimeNullableFilter>;
+  updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  userGroups?: InputMaybe<UserGroupManyRelationFilter>;
+};
+
+export type PostDraftWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type PostImage = {
+  __typename?: 'PostImage';
+  id: Scalars['ID']['output'];
+  image?: Maybe<Image>;
+  label?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Scalars['Int']['output']>;
+  post?: Maybe<Post>;
+};
+
+export type PostImageCreateInput = {
+  image?: InputMaybe<ImageRelateToOneForCreateInput>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Int']['input']>;
+  post?: InputMaybe<PostRelateToOneForCreateInput>;
+};
+
+export type PostImageManyRelationFilter = {
+  every?: InputMaybe<PostImageWhereInput>;
+  none?: InputMaybe<PostImageWhereInput>;
+  some?: InputMaybe<PostImageWhereInput>;
+};
+
+export type PostImageOrderByInput = {
+  id?: InputMaybe<OrderDirection>;
+  label?: InputMaybe<OrderDirection>;
+  order?: InputMaybe<OrderDirection>;
+};
+
+export type PostImageRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<PostImageWhereUniqueInput>>;
+  create?: InputMaybe<Array<PostImageCreateInput>>;
+};
+
+export type PostImageRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<PostImageWhereUniqueInput>>;
+  create?: InputMaybe<Array<PostImageCreateInput>>;
+  disconnect?: InputMaybe<Array<PostImageWhereUniqueInput>>;
+  set?: InputMaybe<Array<PostImageWhereUniqueInput>>;
+};
+
+export type PostImageUpdateArgs = {
+  data: PostImageUpdateInput;
+  where: PostImageWhereUniqueInput;
+};
+
+export type PostImageUpdateInput = {
+  image?: InputMaybe<ImageRelateToOneForUpdateInput>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Int']['input']>;
+  post?: InputMaybe<PostRelateToOneForUpdateInput>;
+};
+
+export type PostImageWhereInput = {
+  AND?: InputMaybe<Array<PostImageWhereInput>>;
+  NOT?: InputMaybe<Array<PostImageWhereInput>>;
+  OR?: InputMaybe<Array<PostImageWhereInput>>;
+  id?: InputMaybe<IdFilter>;
+  image?: InputMaybe<ImageWhereInput>;
+  label?: InputMaybe<StringFilter>;
+  order?: InputMaybe<IntNullableFilter>;
+  post?: InputMaybe<PostWhereInput>;
+};
+
+export type PostImageWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type PostOrderByInput = {
+  body?: InputMaybe<MyOrderDirection>;
+  createdAt?: InputMaybe<OrderDirection>;
+  description?: InputMaybe<OrderDirection>;
+  heroImage?: InputMaybe<BlueHarvestImageOrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  location?: InputMaybe<OrderDirection>;
+  makeDrafts?: InputMaybe<OrderDirection>;
+  publishAt?: InputMaybe<OrderDirection>;
+  reviewDate?: InputMaybe<OrderDirection>;
+  slug?: InputMaybe<OrderDirection>;
+  status?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+  unpublishAt?: InputMaybe<OrderDirection>;
+  updatedAt?: InputMaybe<OrderDirection>;
+};
+
+export type PostRelateToOneForCreateInput = {
+  connect?: InputMaybe<PostWhereUniqueInput>;
+  create?: InputMaybe<PostCreateInput>;
+};
+
+export type PostRelateToOneForUpdateInput = {
+  connect?: InputMaybe<PostWhereUniqueInput>;
+  create?: InputMaybe<PostCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type PostUpdateArgs = {
+  data: PostUpdateInput;
+  where: PostWhereUniqueInput;
+};
+
+export type PostUpdateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
+  author?: InputMaybe<UserRelateToOneForUpdateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  categories?: InputMaybe<PostCategoryRelateToManyForUpdateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  currentVersion?: InputMaybe<PostVersionRelateToOneForUpdateInput>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  documents?: InputMaybe<DocumentRelateToManyForUpdateInput>;
+  drafts?: InputMaybe<PostDraftRelateToManyForUpdateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<PostImageRelateToManyForUpdateInput>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  makeDrafts?: InputMaybe<Scalars['String']['input']>;
+  owner?: InputMaybe<UserRelateToOneForUpdateInput>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<TagRelateToManyForUpdateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
+  versions?: InputMaybe<PostVersionRelateToManyForUpdateInput>;
+};
+
+export type PostVersion = {
+  __typename?: 'PostVersion';
+  actions?: Maybe<Array<InternalLink>>;
+  actionsCount?: Maybe<Scalars['Int']['output']>;
+  author?: Maybe<User>;
+  body?: Maybe<Scalars['String']['output']>;
+  canEdit?: Maybe<Scalars['String']['output']>;
+  categories?: Maybe<Array<PostCategory>>;
+  categoriesCount?: Maybe<Scalars['Int']['output']>;
+  contacts?: Maybe<Array<Contact>>;
+  contactsCount?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  documents?: Maybe<Array<Document>>;
+  documentsCount?: Maybe<Scalars['Int']['output']>;
+  heroImage?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  images?: Maybe<Array<PostImage>>;
+  imagesCount?: Maybe<Scalars['Int']['output']>;
+  isLive?: Maybe<Post>;
+  liveUrl?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  original?: Maybe<Post>;
+  owner?: Maybe<User>;
+  publishAt?: Maybe<Scalars['DateTime']['output']>;
+  republish?: Maybe<Scalars['String']['output']>;
+  reviewDate?: Maybe<Scalars['DateTime']['output']>;
+  tags?: Maybe<Array<Tag>>;
+  tagsCount?: Maybe<Scalars['Int']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  unpublishAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  userGroups?: Maybe<Array<UserGroup>>;
+  userGroupsCount?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type PostVersionActionsArgs = {
+  cursor?: InputMaybe<InternalLinkWhereUniqueInput>;
+  orderBy?: Array<InternalLinkOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InternalLinkWhereInput;
+};
+
+
+export type PostVersionActionsCountArgs = {
+  where?: InternalLinkWhereInput;
+};
+
+
+export type PostVersionCategoriesArgs = {
+  cursor?: InputMaybe<PostCategoryWhereUniqueInput>;
+  orderBy?: Array<PostCategoryOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostCategoryWhereInput;
+};
+
+
+export type PostVersionCategoriesCountArgs = {
+  where?: PostCategoryWhereInput;
+};
+
+
+export type PostVersionContactsArgs = {
+  cursor?: InputMaybe<ContactWhereUniqueInput>;
+  orderBy?: Array<ContactOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: ContactWhereInput;
+};
+
+
+export type PostVersionContactsCountArgs = {
+  where?: ContactWhereInput;
+};
+
+
+export type PostVersionDocumentsArgs = {
+  cursor?: InputMaybe<DocumentWhereUniqueInput>;
+  orderBy?: Array<DocumentOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+  where?: DocumentWhereInput;
+};
+
+
+export type PostVersionDocumentsCountArgs = {
+  where?: DocumentWhereInput;
+};
+
+
+export type PostVersionImagesArgs = {
+  cursor?: InputMaybe<PostImageWhereUniqueInput>;
+  orderBy?: Array<PostImageOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostImageWhereInput;
+};
+
+
+export type PostVersionImagesCountArgs = {
+  where?: PostImageWhereInput;
+};
+
+
+export type PostVersionTagsArgs = {
+  cursor?: InputMaybe<TagWhereUniqueInput>;
+  orderBy?: Array<TagOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: TagWhereInput;
+};
+
+
+export type PostVersionTagsCountArgs = {
+  where?: TagWhereInput;
+};
+
+
+export type PostVersionUserGroupsArgs = {
+  cursor?: InputMaybe<UserGroupWhereUniqueInput>;
+  orderBy?: Array<UserGroupOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: UserGroupWhereInput;
+};
+
+
+export type PostVersionUserGroupsCountArgs = {
+  where?: UserGroupWhereInput;
+};
+
+export type PostVersionCreateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForCreateInput>;
+  author?: InputMaybe<UserRelateToOneForCreateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  categories?: InputMaybe<PostCategoryRelateToManyForCreateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForCreateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  documents?: InputMaybe<DocumentRelateToManyForCreateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<PostImageRelateToManyForCreateInput>;
+  isLive?: InputMaybe<PostRelateToOneForCreateInput>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  original?: InputMaybe<PostRelateToOneForCreateInput>;
+  owner?: InputMaybe<UserRelateToOneForCreateInput>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  republish?: InputMaybe<Scalars['String']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  tags?: InputMaybe<TagRelateToManyForCreateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForCreateInput>;
+};
+
+export type PostVersionManyRelationFilter = {
+  every?: InputMaybe<PostVersionWhereInput>;
+  none?: InputMaybe<PostVersionWhereInput>;
+  some?: InputMaybe<PostVersionWhereInput>;
+};
+
+export type PostVersionOrderByInput = {
+  body?: InputMaybe<MyOrderDirection>;
+  createdAt?: InputMaybe<OrderDirection>;
+  description?: InputMaybe<OrderDirection>;
+  heroImage?: InputMaybe<BlueHarvestImageOrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  location?: InputMaybe<OrderDirection>;
+  publishAt?: InputMaybe<OrderDirection>;
+  republish?: InputMaybe<OrderDirection>;
+  reviewDate?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+  unpublishAt?: InputMaybe<OrderDirection>;
+  updatedAt?: InputMaybe<OrderDirection>;
+};
+
+export type PostVersionRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<PostVersionWhereUniqueInput>>;
+  create?: InputMaybe<Array<PostVersionCreateInput>>;
+};
+
+export type PostVersionRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<PostVersionWhereUniqueInput>>;
+  create?: InputMaybe<Array<PostVersionCreateInput>>;
+  disconnect?: InputMaybe<Array<PostVersionWhereUniqueInput>>;
+  set?: InputMaybe<Array<PostVersionWhereUniqueInput>>;
+};
+
+export type PostVersionRelateToOneForCreateInput = {
+  connect?: InputMaybe<PostVersionWhereUniqueInput>;
+  create?: InputMaybe<PostVersionCreateInput>;
+};
+
+export type PostVersionRelateToOneForUpdateInput = {
+  connect?: InputMaybe<PostVersionWhereUniqueInput>;
+  create?: InputMaybe<PostVersionCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type PostVersionUpdateArgs = {
+  data: PostVersionUpdateInput;
+  where: PostVersionWhereUniqueInput;
+};
+
+export type PostVersionUpdateInput = {
+  actions?: InputMaybe<InternalLinkRelateToManyForUpdateInput>;
+  author?: InputMaybe<UserRelateToOneForUpdateInput>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  categories?: InputMaybe<PostCategoryRelateToManyForUpdateInput>;
+  contacts?: InputMaybe<ContactRelateToManyForUpdateInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  documents?: InputMaybe<DocumentRelateToManyForUpdateInput>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<PostImageRelateToManyForUpdateInput>;
+  isLive?: InputMaybe<PostRelateToOneForUpdateInput>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  original?: InputMaybe<PostRelateToOneForUpdateInput>;
+  owner?: InputMaybe<UserRelateToOneForUpdateInput>;
+  publishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  republish?: InputMaybe<Scalars['String']['input']>;
+  reviewDate?: InputMaybe<Scalars['DateTime']['input']>;
+  tags?: InputMaybe<TagRelateToManyForUpdateInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  unpublishAt?: InputMaybe<Scalars['DateTime']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userGroups?: InputMaybe<UserGroupRelateToManyForUpdateInput>;
+};
+
+export type PostVersionWhereInput = {
+  AND?: InputMaybe<Array<PostVersionWhereInput>>;
+  NOT?: InputMaybe<Array<PostVersionWhereInput>>;
+  OR?: InputMaybe<Array<PostVersionWhereInput>>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
+  author?: InputMaybe<UserWhereInput>;
+  body?: InputMaybe<MyStringFilter>;
+  categories?: InputMaybe<PostCategoryManyRelationFilter>;
+  contacts?: InputMaybe<ContactManyRelationFilter>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  description?: InputMaybe<StringFilter>;
+  documents?: InputMaybe<DocumentManyRelationFilter>;
+  id?: InputMaybe<IdFilter>;
+  images?: InputMaybe<PostImageManyRelationFilter>;
+  isLive?: InputMaybe<PostWhereInput>;
+  location?: InputMaybe<StringFilter>;
+  original?: InputMaybe<PostWhereInput>;
+  owner?: InputMaybe<UserWhereInput>;
+  publishAt?: InputMaybe<DateTimeNullableFilter>;
+  reviewDate?: InputMaybe<DateTimeNullableFilter>;
+  tags?: InputMaybe<TagManyRelationFilter>;
+  title?: InputMaybe<StringFilter>;
+  unpublishAt?: InputMaybe<DateTimeNullableFilter>;
+  updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  userGroups?: InputMaybe<UserGroupManyRelationFilter>;
+};
+
+export type PostVersionWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  isLive?: InputMaybe<PostWhereUniqueInput>;
+};
+
+export type PostWhereInput = {
+  AND?: InputMaybe<Array<PostWhereInput>>;
+  NOT?: InputMaybe<Array<PostWhereInput>>;
+  OR?: InputMaybe<Array<PostWhereInput>>;
+  actions?: InputMaybe<InternalLinkManyRelationFilter>;
+  author?: InputMaybe<UserWhereInput>;
+  body?: InputMaybe<MyStringFilter>;
+  categories?: InputMaybe<PostCategoryManyRelationFilter>;
+  contacts?: InputMaybe<ContactManyRelationFilter>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  currentVersion?: InputMaybe<PostVersionWhereInput>;
+  description?: InputMaybe<StringFilter>;
+  documents?: InputMaybe<DocumentManyRelationFilter>;
+  drafts?: InputMaybe<PostDraftManyRelationFilter>;
+  id?: InputMaybe<IdFilter>;
+  images?: InputMaybe<PostImageManyRelationFilter>;
+  location?: InputMaybe<StringFilter>;
+  owner?: InputMaybe<UserWhereInput>;
+  publishAt?: InputMaybe<DateTimeNullableFilter>;
+  reviewDate?: InputMaybe<DateTimeNullableFilter>;
+  slug?: InputMaybe<StringFilter>;
+  status?: InputMaybe<StringFilter>;
+  tags?: InputMaybe<TagManyRelationFilter>;
+  title?: InputMaybe<StringFilter>;
+  unpublishAt?: InputMaybe<DateTimeNullableFilter>;
+  updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  userGroups?: InputMaybe<UserGroupManyRelationFilter>;
+  versions?: InputMaybe<PostVersionManyRelationFilter>;
+};
+
+export type PostWhereUniqueInput = {
+  currentVersion?: InputMaybe<PostVersionWhereUniqueInput>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Proposition = {
   __typename?: 'Proposition';
   description?: Maybe<Scalars['String']['output']>;
@@ -18097,7 +19285,7 @@ export type PropositionWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type PublicNotice = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type PublicNotice = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'PublicNotice';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -19702,6 +20890,21 @@ export type Query = {
   policyVersion?: Maybe<PolicyVersion>;
   policyVersions?: Maybe<Array<PolicyVersion>>;
   policyVersionsCount?: Maybe<Scalars['Int']['output']>;
+  post?: Maybe<Post>;
+  postCategories?: Maybe<Array<PostCategory>>;
+  postCategoriesCount?: Maybe<Scalars['Int']['output']>;
+  postCategory?: Maybe<PostCategory>;
+  postDraft?: Maybe<PostDraft>;
+  postDrafts?: Maybe<Array<PostDraft>>;
+  postDraftsCount?: Maybe<Scalars['Int']['output']>;
+  postImage?: Maybe<PostImage>;
+  postImages?: Maybe<Array<PostImage>>;
+  postImagesCount?: Maybe<Scalars['Int']['output']>;
+  postVersion?: Maybe<PostVersion>;
+  postVersions?: Maybe<Array<PostVersion>>;
+  postVersionsCount?: Maybe<Scalars['Int']['output']>;
+  posts?: Maybe<Array<Post>>;
+  postsCount?: Maybe<Scalars['Int']['output']>;
   proposition?: Maybe<Proposition>;
   propositions?: Maybe<Array<Proposition>>;
   propositionsCount?: Maybe<Scalars['Int']['output']>;
@@ -20784,6 +21987,101 @@ export type QueryPolicyVersionsCountArgs = {
 };
 
 
+export type QueryPostArgs = {
+  where: PostWhereUniqueInput;
+};
+
+
+export type QueryPostCategoriesArgs = {
+  cursor?: InputMaybe<PostCategoryWhereUniqueInput>;
+  orderBy?: Array<PostCategoryOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostCategoryWhereInput;
+};
+
+
+export type QueryPostCategoriesCountArgs = {
+  where?: PostCategoryWhereInput;
+};
+
+
+export type QueryPostCategoryArgs = {
+  where: PostCategoryWhereUniqueInput;
+};
+
+
+export type QueryPostDraftArgs = {
+  where: PostDraftWhereUniqueInput;
+};
+
+
+export type QueryPostDraftsArgs = {
+  cursor?: InputMaybe<PostDraftWhereUniqueInput>;
+  orderBy?: Array<PostDraftOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostDraftWhereInput;
+};
+
+
+export type QueryPostDraftsCountArgs = {
+  where?: PostDraftWhereInput;
+};
+
+
+export type QueryPostImageArgs = {
+  where: PostImageWhereUniqueInput;
+};
+
+
+export type QueryPostImagesArgs = {
+  cursor?: InputMaybe<PostImageWhereUniqueInput>;
+  orderBy?: Array<PostImageOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostImageWhereInput;
+};
+
+
+export type QueryPostImagesCountArgs = {
+  where?: PostImageWhereInput;
+};
+
+
+export type QueryPostVersionArgs = {
+  where: PostVersionWhereUniqueInput;
+};
+
+
+export type QueryPostVersionsArgs = {
+  cursor?: InputMaybe<PostVersionWhereUniqueInput>;
+  orderBy?: Array<PostVersionOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostVersionWhereInput;
+};
+
+
+export type QueryPostVersionsCountArgs = {
+  where?: PostVersionWhereInput;
+};
+
+
+export type QueryPostsArgs = {
+  cursor?: InputMaybe<PostWhereUniqueInput>;
+  orderBy?: Array<PostOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PostWhereInput;
+};
+
+
+export type QueryPostsCountArgs = {
+  where?: PostWhereInput;
+};
+
+
 export type QueryPropositionArgs = {
   where: PropositionWhereUniqueInput;
 };
@@ -21194,7 +22492,7 @@ export type RedirectWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type Service = BasePage & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type Service = BasePage & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'Service';
   assemblyDistricts?: Maybe<Array<AssemblyDistrict>>;
   assemblyDistrictsCount?: Maybe<Scalars['Int']['output']>;
@@ -22705,7 +24003,7 @@ export type TopPage = {
   totalViews: Scalars['Int']['output'];
 };
 
-export type Topic = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type Topic = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'Topic';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -24142,7 +25440,7 @@ export type TopicWhereUniqueInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Trail = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & {
+export type Trail = BasePage & BasePageWithActions & BasePageWithDefaultRelationships & BasePageWithSlug & WithTitle & {
   __typename?: 'Trail';
   actions?: Maybe<Array<InternalLink>>;
   actionsCount?: Maybe<Scalars['Int']['output']>;
@@ -25633,7 +26931,7 @@ export type TrailWhereUniqueInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Url = {
+export type Url = WithTitle & {
   __typename?: 'Url';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
@@ -25925,6 +27223,11 @@ export type UserWhereUniqueInput = {
   authId?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type WithTitle = {
+  id: Scalars['ID']['output'];
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 export type FeaturedItem = {
@@ -26243,7 +27546,7 @@ export type GetAbsenteeVotingInfoFragment = { __typename?: 'Query', electionsPag
     ) | null, boroughElectionContact?: (
       { __typename?: 'Contact', phone?: string | null, name?: string | null }
       & { ' $fragmentRefs'?: { 'ContactFieldsFragment': ContactFieldsFragment } }
-    ) | null } | null, elections?: Array<{ __typename?: 'Election', earlyVotingStartDate?: any | null, electionDate?: any | null, absenteeApplicationDeadline?: any | null, absenteeVotingApplication?: (
+    ) | null } | null, elections?: Array<{ __typename?: 'Election', earlyVotingStartDate?: any | null, electionDate?: any | null, absenteeVotingBody?: string | null, absenteeApplicationDeadline?: any | null, absenteeVotingApplication?: (
       { __typename?: 'Document' }
       & { ' $fragmentRefs'?: { 'DocumentLinkFragment': DocumentLinkFragment } }
     ) | null }> | null } & { ' $fragmentName'?: 'GetAbsenteeVotingInfoFragment' };
@@ -26256,7 +27559,7 @@ export type Election_BallotPropositionsFragment = { __typename?: 'Query', electi
       & { ' $fragmentRefs'?: { 'DocumentLinkFragment': DocumentLinkFragment } }
     ) | null, boroughElectionContact?: { __typename?: 'Contact', name?: string | null, phone?: string | null } | null } | null } & { ' $fragmentName'?: 'Election_BallotPropositionsFragment' };
 
-export type CandidateFilingInfoFragment = { __typename?: 'Election', title?: string | null, electionDate?: any | null, officesToBeFilled?: string | null, candidateFilingStartDate?: any | null, candidateFilingDeadline?: any | null, candidates?: (
+export type CandidateFilingInfoFragment = { __typename?: 'Election', title?: string | null, electionDate?: any | null, officesToBeFilled?: string | null, candidateFilingStartDate?: any | null, candidateFilingDeadline?: any | null, candidateBody?: string | null, candidates?: (
     { __typename?: 'Document', id: string }
     & { ' $fragmentRefs'?: { 'DocumentLinkFragment': DocumentLinkFragment } }
   ) | null, candidateFilingDocuments?: Array<(
@@ -26293,16 +27596,19 @@ export type ElectionPageQuickLinksFragment = { __typename?: 'Election', proposit
     & { ' $fragmentRefs'?: { 'DocumentLinkFragment': DocumentLinkFragment } }
   )> | null } & { ' $fragmentName'?: 'ElectionPageQuickLinksFragment' };
 
-export type ElectionPollingPlacesFragment = { __typename?: 'ElectionsPage', stateElectionContact?: { __typename?: 'Contact', title?: string | null, phone?: string | null } | null, boroughElectionContact?: { __typename?: 'Contact', title?: string | null, phone?: string | null } | null } & { ' $fragmentName'?: 'ElectionPollingPlacesFragment' };
+export type ElectionPollingPlacesFragment = { __typename?: 'ElectionsPage', pollingPlaceBody?: string | null, pollingPlacesLink?: (
+    { __typename?: 'InternalLink' }
+    & { ' $fragmentRefs'?: { 'ActionFieldsFragment': ActionFieldsFragment } }
+  ) | null, stateElectionContact?: { __typename?: 'Contact', title?: string | null, phone?: string | null } | null, boroughElectionContact?: { __typename?: 'Contact', title?: string | null, phone?: string | null } | null } & { ' $fragmentName'?: 'ElectionPollingPlacesFragment' };
 
 export type ElectionResultsListFragment = { __typename?: 'ElectionResult', id: string, election?: { __typename?: 'Election', title?: string | null, electionDate?: any | null } | null, document?: (
     { __typename?: 'Document', title?: string | null }
     & { ' $fragmentRefs'?: { 'DocumentLinkFragment': DocumentLinkFragment } }
   ) | null } & { ' $fragmentName'?: 'ElectionResultsListFragment' };
 
-export type ElectionVoterInformationFragment = { __typename?: 'Election', voterRegistrationDeadline?: any | null, electionDate?: any | null } & { ' $fragmentName'?: 'ElectionVoterInformationFragment' };
+export type ElectionVoterInformationFragment = { __typename?: 'Election', voterRegistrationDeadline?: any | null, electionDate?: any | null, voterInfoBody?: string | null } & { ' $fragmentName'?: 'ElectionVoterInformationFragment' };
 
-export type ElectionsOfficialsInfoFragment = { __typename?: 'Election', electionOfficialApplicationDeadline?: any | null, electionOfficialApplication?: (
+export type ElectionsOfficialsInfoFragment = { __typename?: 'Election', electionOfficialApplicationDeadline?: any | null, electionOfficialBody?: string | null, electionOfficialApplication?: (
     { __typename?: 'Document' }
     & { ' $fragmentRefs'?: { 'DocumentLinkFragment': DocumentLinkFragment } }
   ) | null } & { ' $fragmentName'?: 'ElectionsOfficialsInfoFragment' };
@@ -27167,6 +28473,8 @@ export type ActionFieldsFragment = { __typename?: 'InternalLink', id: string, la
     | { __typename: 'OrgUnit', id: string, slug?: string | null, title?: string | null, description?: string | null }
     | { __typename: 'Park', id: string, slug?: string | null, title?: string | null, description?: string | null }
     | { __typename: 'Plan', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'Policy', id: string, slug?: string | null, title?: string | null, description?: string | null }
+    | { __typename: 'PublicNotice', id: string, slug?: string | null, title?: string | null, description?: string | null }
     | { __typename: 'Service', id: string, slug?: string | null, title?: string | null, description?: string | null }
     | { __typename: 'Topic', id: string, slug?: string | null, title?: string | null, description?: string | null }
     | { __typename: 'Trail', id: string, slug?: string | null, title?: string | null, description?: string | null }
@@ -27679,6 +28987,8 @@ export type ToolbeltHighlightFragment = { __typename?: 'featuredItem', icon?: st
       | { __typename: 'OrgUnit', id: string, slug?: string | null, title?: string | null }
       | { __typename: 'Park', id: string, slug?: string | null, title?: string | null }
       | { __typename: 'Plan', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'Policy', id: string, slug?: string | null, title?: string | null }
+      | { __typename: 'PublicNotice', id: string, slug?: string | null, title?: string | null }
       | { __typename: 'Service', id: string, slug?: string | null, title?: string | null }
       | { __typename: 'Topic', id: string, slug?: string | null, title?: string | null }
       | { __typename: 'Trail', id: string, slug?: string | null, title?: string | null }
@@ -27697,6 +29007,8 @@ export type HomePageHighlightCardFragment = { __typename?: 'Highlight', title?: 
       | { __typename: 'OrgUnit', slug?: string | null, title?: string | null }
       | { __typename: 'Park', slug?: string | null, title?: string | null }
       | { __typename: 'Plan', slug?: string | null, title?: string | null }
+      | { __typename: 'Policy', slug?: string | null, title?: string | null }
+      | { __typename: 'PublicNotice', slug?: string | null, title?: string | null }
       | { __typename: 'Service', slug?: string | null, title?: string | null }
       | { __typename: 'Topic', slug?: string | null, title?: string | null }
       | { __typename: 'Trail', slug?: string | null, title?: string | null }
@@ -27730,6 +29042,8 @@ export type GetRedirectsQuery = { __typename?: 'Query', redirect?: { __typename?
         | { __typename: 'OrgUnit', slug?: string | null }
         | { __typename: 'Park', slug?: string | null }
         | { __typename: 'Plan', slug?: string | null }
+        | { __typename: 'Policy', slug?: string | null }
+        | { __typename: 'PublicNotice', slug?: string | null }
         | { __typename: 'Service', slug?: string | null }
         | { __typename: 'Topic', slug?: string | null }
         | { __typename: 'Trail', slug?: string | null }
@@ -27750,16 +29064,17 @@ export const DocumentButtonFragmentDoc = {"kind":"Document","definitions":[{"kin
 export const DocumentCollectionDisplayFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentCollectionDisplay"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"DocumentCollection"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentButton"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentButton"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"filesize"}}]}}]}}]} as unknown as DocumentNode<DocumentCollectionDisplayFragment, unknown>;
 export const ContactFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"fax"}},{"kind":"Field","name":{"kind":"Name","value":"website"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]} as unknown as DocumentNode<ContactFieldsFragment, unknown>;
 export const DocumentLinkFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<DocumentLinkFragment, unknown>;
-export const GetAbsenteeVotingInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GetAbsenteeVotingInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"stateElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"earlyVotingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeVotingApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"absenteeApplicationDeadline"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"fax"}},{"kind":"Field","name":{"kind":"Name","value":"website"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<GetAbsenteeVotingInfoFragment, unknown>;
+export const GetAbsenteeVotingInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GetAbsenteeVotingInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"stateElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"earlyVotingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeVotingApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"absenteeVotingBody"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeApplicationDeadline"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"fax"}},{"kind":"Field","name":{"kind":"Name","value":"website"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<GetAbsenteeVotingInfoFragment, unknown>;
 export const Election_BallotPropositionsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Election_BallotPropositions"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"propositions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"order"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"referendumProcessDocument"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<Election_BallotPropositionsFragment, unknown>;
-export const CandidateFilingInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CandidateFilingInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"candidates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"officesToBeFilled"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingDocuments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<CandidateFilingInfoFragment, unknown>;
+export const CandidateFilingInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CandidateFilingInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"candidates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"officesToBeFilled"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"candidateBody"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingDocuments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<CandidateFilingInfoFragment, unknown>;
 export const GetEarlyVotingLocationsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GetEarlyVotingLocations"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"earlyVotingLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"order"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"order"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hours"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"day"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"earlyVotingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeVotingApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"absenteeApplicationDeadline"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<GetEarlyVotingLocationsFragment, unknown>;
 export const ElectionContactFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionContact"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<ElectionContactFragment, unknown>;
 export const ElectionPageHeaderFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionPageHeader"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"howElectionsWork"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]} as unknown as DocumentNode<ElectionPageHeaderFragment, unknown>;
 export const ElectionPageQuickLinksFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionPageQuickLinks"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"candidates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionBrochure"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionBallots"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"propositionsCount"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<ElectionPageQuickLinksFragment, unknown>;
-export const ElectionPollingPlacesFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionPollingPlaces"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"stateElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}}]} as unknown as DocumentNode<ElectionPollingPlacesFragment, unknown>;
-export const ElectionVoterInformationFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionVoterInformation"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"voterRegistrationDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}}]}}]} as unknown as DocumentNode<ElectionVoterInformationFragment, unknown>;
-export const ElectionsOfficialsInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionsOfficialsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplicationDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<ElectionsOfficialsInfoFragment, unknown>;
+export const ActionFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"HomePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ActionFieldsFragment, unknown>;
+export const ElectionPollingPlacesFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionPollingPlaces"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pollingPlacesLink"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pollingPlaceBody"}},{"kind":"Field","name":{"kind":"Name","value":"stateElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"HomePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ElectionPollingPlacesFragment, unknown>;
+export const ElectionVoterInformationFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionVoterInformation"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"voterRegistrationDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"voterInfoBody"}}]}}]} as unknown as DocumentNode<ElectionVoterInformationFragment, unknown>;
+export const ElectionsOfficialsInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionsOfficialsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplicationDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"electionOfficialBody"}},{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<ElectionsOfficialsInfoFragment, unknown>;
 export const ElectionOfficialContactFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionOfficialContact"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}}]} as unknown as DocumentNode<ElectionOfficialContactFragment, unknown>;
 export const ElectionResultFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionResult"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"isOfficial"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<ElectionResultFragment, unknown>;
 export const ElectionResultsListFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionResultsList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionResult"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"election"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}}]}},{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<ElectionResultsListFragment, unknown>;
@@ -27780,7 +29095,6 @@ export const TopicFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":
 export const TopicListFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TopicList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Topic"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"TopicFields"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TopicFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Topic"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]} as unknown as DocumentNode<TopicListFragment, unknown>;
 export const PageItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]} as unknown as DocumentNode<PageItemFragment, unknown>;
 export const PageListFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageItem"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]} as unknown as DocumentNode<PageListFragment, unknown>;
-export const ActionFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"HomePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ActionFieldsFragment, unknown>;
 export const ActionListFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionFields"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"HomePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ActionListFragment, unknown>;
 export const ExternalActionFieldsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ExternalActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ExternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<ExternalActionFieldsFragment, unknown>;
 export const BasePageInfoFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BasePageInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageBody"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"HeroImage"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentList"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageEvents"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PagePublicNotices"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithDefaultRelationships"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"topics"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TopicList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"communities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"orgUnits"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"assemblyDistricts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"plans"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithActions"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"actions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionList"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"primaryContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondaryActions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Plan"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"effort"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"fax"}},{"kind":"Field","name":{"kind":"Name","value":"website"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"EventInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Event"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"startDate"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PublicNoticeFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TopicFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Topic"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"HomePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageBody"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HeroImage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroImage"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageEvents"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithDefaultRelationships"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"4"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"startDate"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"startDate"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"EventInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PagePublicNotices"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithDefaultRelationships"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"5"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"urgency"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}},{"kind":"Field","name":{"kind":"Name","value":"publishAt"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PublicNoticeFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TopicList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Topic"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"TopicFields"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageItem"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionFields"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ExternalActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ExternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<BasePageInfoFragment, unknown>;
@@ -27825,7 +29139,7 @@ export const GetOrgUnitDocument = {"kind":"Document","definitions":[{"kind":"Ope
 export const GetDepartmentsPageMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDepartmentsPageMeta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"landingPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"StringValue","value":"Departments","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetDepartmentsPageMetaQuery, GetDepartmentsPageMetaQueryVariables>;
 export const GetDepartmentsPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDepartmentsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"landingPage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"StringValue","value":"Departments","block":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"body"}}]}},{"kind":"Field","name":{"kind":"Name","value":"orgUnits"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"AND"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"OR"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"type"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"equals"},"value":{"kind":"StringValue","value":"department","block":false}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"type"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"equals"},"value":{"kind":"StringValue","value":"office","block":false}}]}}]}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"showPage"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"equals"},"value":{"kind":"StringValue","value":"yes","block":false}}]}}]}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}}]}}]}}]} as unknown as DocumentNode<GetDepartmentsPageQuery, GetDepartmentsPageQueryVariables>;
 export const GetElectionsPageMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetElectionsPageMeta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetElectionsPageMetaQuery, GetElectionsPageMetaQueryVariables>;
-export const GetElectionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetElections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionResults"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GetAbsenteeVotingInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GetEarlyVotingLocations"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"Election_BallotPropositions"}},{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionPageHeader"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionPollingPlaces"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionContact"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionOfficialContact"}}]}},{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionPageQuickLinks"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"UpcomingElectionDetails"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionVoterInformation"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"CandidateFilingInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionsOfficialsInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionResult"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionResultsList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionResult"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"election"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}}]}},{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"fax"}},{"kind":"Field","name":{"kind":"Name","value":"website"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionResults"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionResults"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"5"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionResultsList"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GetAbsenteeVotingInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"stateElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"earlyVotingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeVotingApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"absenteeApplicationDeadline"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GetEarlyVotingLocations"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"earlyVotingLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"order"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"order"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hours"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"day"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"earlyVotingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeVotingApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"absenteeApplicationDeadline"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Election_BallotPropositions"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"propositions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"order"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"referendumProcessDocument"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionPageHeader"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"howElectionsWork"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionPollingPlaces"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"stateElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionContact"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionOfficialContact"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionPageQuickLinks"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"candidates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionBrochure"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionBallots"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"propositionsCount"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UpcomingElectionDetails"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"earlyVotingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeApplicationDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"voterRegistrationDeadline"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionVoterInformation"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"voterRegistrationDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CandidateFilingInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"candidates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"officesToBeFilled"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingDocuments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionsOfficialsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplicationDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionResult"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"isOfficial"}}]}}]}}]} as unknown as DocumentNode<GetElectionsQuery, GetElectionsQueryVariables>;
+export const GetElectionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetElections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionResults"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GetAbsenteeVotingInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GetEarlyVotingLocations"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"Election_BallotPropositions"}},{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionPageHeader"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionPollingPlaces"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionContact"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionOfficialContact"}}]}},{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionPageQuickLinks"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"UpcomingElectionDetails"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionVoterInformation"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"CandidateFilingInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionsOfficialsInfo"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionResult"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionResultsList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionResult"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"election"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}}]}},{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"fax"}},{"kind":"Field","name":{"kind":"Name","value":"website"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"HomePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionResults"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionResults"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"5"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionResultsList"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GetAbsenteeVotingInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"stateElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"earlyVotingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeVotingApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"absenteeVotingBody"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeApplicationDeadline"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GetEarlyVotingLocations"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"earlyVotingLocations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"order"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"order"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hours"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"day"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"earlyVotingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeVotingApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"absenteeApplicationDeadline"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Election_BallotPropositions"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"elections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"electionDate"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"propositions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"order"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionsPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"referendumProcessDocument"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionPageHeader"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"howElectionsWork"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionPollingPlaces"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pollingPlacesLink"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pollingPlaceBody"}},{"kind":"Field","name":{"kind":"Name","value":"stateElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}},{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionContact"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionOfficialContact"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"boroughElectionContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionPageQuickLinks"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"candidates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionBrochure"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionBallots"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"propositionsCount"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UpcomingElectionDetails"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"earlyVotingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"absenteeApplicationDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"voterRegistrationDeadline"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionVoterInformation"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"voterRegistrationDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"voterInfoBody"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CandidateFilingInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"candidates"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"officesToBeFilled"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingStartDate"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"candidateBody"}},{"kind":"Field","name":{"kind":"Name","value":"candidateFilingDocuments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionsOfficialsInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplicationDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"electionOfficialBody"}},{"kind":"Field","name":{"kind":"Name","value":"electionOfficialApplication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionResult"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Election"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}},{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"Field","name":{"kind":"Name","value":"isOfficial"}}]}}]}}]} as unknown as DocumentNode<GetElectionsQuery, GetElectionsQueryVariables>;
 export const GetResultsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetResults"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"search"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"electionResults"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"OR"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"election"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contains"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"mode"},"value":{"kind":"EnumValue","value":"insensitive"}}]}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contains"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"mode"},"value":{"kind":"EnumValue","value":"insensitive"}}]}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"description"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contains"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"mode"},"value":{"kind":"EnumValue","value":"insensitive"}}]}}]}}]}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ElectionResultsList"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ElectionResultsList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionResult"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"election"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"electionDate"}}]}},{"kind":"Field","name":{"kind":"Name","value":"document"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}}]}}]} as unknown as DocumentNode<GetResultsQuery, GetResultsQueryVariables>;
 export const GetFacilityMetaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFacilityMeta"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"facility"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetFacilityMetaQuery, GetFacilityMetaQueryVariables>;
 export const GetFacilityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFacility"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"now"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"facility"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"BasePageInfo"}},{"kind":"Field","name":{"kind":"Name","value":"park"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AddressFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"hours"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"HourList"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageBody"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HeroImage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"heroImage"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"fax"}},{"kind":"Field","name":{"kind":"Name","value":"website"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Contact"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFields"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentLink"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"filename"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DocumentList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentLink"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"EventInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Event"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"startDate"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageEvents"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithDefaultRelationships"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"4"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"startDate"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"startDate"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"EventInfo"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PublicNoticeFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PublicNotice"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"heroImage"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PagePublicNotices"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithDefaultRelationships"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publicNotices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"take"},"value":{"kind":"IntValue","value":"5"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"urgency"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"urgency"}},{"kind":"Field","name":{"kind":"Name","value":"publishAt"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PublicNoticeFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TopicFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Topic"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TopicList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Topic"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"TopicFields"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageItem"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Url"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ElectionsPage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"HomePage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Document"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ActionList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"InternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionFields"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ExternalActionFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ExternalLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"url"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HourFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OperatingHour"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"day"}},{"kind":"Field","name":{"kind":"Name","value":"open"}},{"kind":"Field","name":{"kind":"Name","value":"close"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BasePageInfo"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithSlug"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageBody"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"HeroImage"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"documents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DocumentList"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageEvents"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PagePublicNotices"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithDefaultRelationships"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"topics"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TopicList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"communities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"orgUnits"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"assemblyDistricts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"services"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"plans"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageList"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"BasePageWithActions"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"actions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ActionList"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Service"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"primaryContact"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactList"}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryAction"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}},{"kind":"Field","name":{"kind":"Name","value":"secondaryActions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Plan"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"effort"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ExternalActionFields"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AddressFields"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Location"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"lineOne"}},{"kind":"Field","name":{"kind":"Name","value":"lineTwo"}},{"kind":"Field","name":{"kind":"Name","value":"city"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"zip"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HourList"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OperatingHour"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"HourFields"}}]}}]} as unknown as DocumentNode<GetFacilityQuery, GetFacilityQueryVariables>;
