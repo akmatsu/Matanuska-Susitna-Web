@@ -1,3 +1,11 @@
+# [0.74.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.73.0...v0.74.0) (2026-01-21)
+
+
+### Features
+
+* added the absentee votin application ([a97a225](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a97a225d8eab0c10fdd2531c56470f5780344ceb))
+* updated elections page ([4490d07](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/4490d073209fbf33569d9995794ec3105c754ea6))
+
 # [0.73.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.72.0...v0.73.0) (2026-01-05)
 
 
