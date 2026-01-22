@@ -18,7 +18,8 @@ export function CoreSearchHits(props: ComponentProps<typeof Hits>) {
               item.type === 'org-unit' ||
               item.type === 'office' ||
               item.type === 'division' ||
-              item.type === 'department'
+              item.type === 'department' ||
+              item.type === 'Departments & Divisions'
               ? 'department'
               : item.type === 'community_council' ||
                   item.type === 'ssa_board' ||
