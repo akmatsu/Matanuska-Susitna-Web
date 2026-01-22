@@ -27,7 +27,8 @@ export function Autocomplete() {
           value?.type === 'org-unit' ||
           value?.type === 'office' ||
           value?.type === 'division' ||
-          value?.type === 'department'
+          value?.type === 'department' ||
+          value?.type === 'Departments & Divisions' 
         ? 'department'
         : value?.type === 'community_council' ||
             value?.type === 'ssa_board' ||
