@@ -1,3 +1,10 @@
+## [0.75.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.75.0...v0.75.1) (2026-01-22)
+
+
+### Bug Fixes
+
+* department search urls ([2ea1842](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/2ea1842cbefb9f9ff62a8da0cb0dddd8f103b967))
+
 # [0.75.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.74.0...v0.75.0) (2026-01-21)
 
 
