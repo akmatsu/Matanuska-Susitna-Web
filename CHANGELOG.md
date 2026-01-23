@@ -1,3 +1,10 @@
+# [0.76.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.75.1...v0.76.0) (2026-01-23)
+
+
+### Features
+
+* moved oma/parli training video link into new training & resources block ([faf7688](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/faf7688c81e922718eea6d6996c5f4a5a3f2ecc5))
+
 ## [0.75.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.75.0...v0.75.1) (2026-01-22)
 
 
