@@ -1,3 +1,10 @@
+## [0.76.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.76.0...v0.76.1) (2026-01-23)
+
+
+### Bug Fixes
+
+* election results are actually sorted by dates now ([08926f3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/08926f3c19b5e4df966e7a25cd284c052c947914))
+
 # [0.76.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.75.1...v0.76.0) (2026-01-23)
 
 
