@@ -7,12 +7,29 @@ import { TextField } from '@matsugov/ui/TextField';
 
 const getResults = gql(`
   query GetResults($search: String) {
-    electionResults(where: {
-      OR: [
-        { election: { title: { contains: $search, mode: insensitive } } },
-        { document: { title: { contains: $search, mode: insensitive } } }
-        { document: { description: { contains: $search, mode: insensitive } } }
-      ]
+    elections(
+      orderBy:  {
+         electionDate: desc
+      }
+      where: {
+        AND: [
+          {
+            OR: [
+              { title: { contains: $search, mode: insensitive } },
+              { result: { document: { title: { contains: $search, mode: insensitive } } } },
+              { result: { document: { description: { contains: $search, mode: insensitive } } } }
+            ]
+          },
+          {
+            result:  {
+               document: {
+                  title: {
+                    contains: ""
+                  }
+               }
+            }
+          }
+        ]
     }) {
       id
       ...ElectionResultsList
@@ -32,7 +49,7 @@ export function ElectionSearch() {
     console.error('Error fetching election results:', error);
     return;
   }
-  const results = data?.electionResults;
+  const results = data?.elections;
 
   return (
     <>

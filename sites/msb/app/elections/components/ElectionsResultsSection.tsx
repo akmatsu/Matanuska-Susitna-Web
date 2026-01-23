@@ -5,6 +5,7 @@ import { ElectionResultsList } from './ElectionResultsList';
 import { LinkButton } from '@/components/static/LinkButton';
 import { DateTime } from '@/components/client/DateTime';
 import { PageSection } from '@/components/static/Page';
+import { getClientHandler } from '@/utils/apollo/utils';
 
 const ElectionResultFragment = gql(`
   fragment ElectionResult on Election {
@@ -20,20 +21,31 @@ const ElectionResultFragment = gql(`
   }
 `);
 
-const ElectionResultsFragment = gql(`
-    fragment ElectionResults on Query {
-      electionResults(take: 5) {
-        ...ElectionResultsList
-      } 
+const getResults = gql(`
+  query GetElectionResults {
+    elections(take: 5, orderBy: { electionDate: desc }, where: {
+      result: {
+        document:  {
+           title:  {
+              contains: ""
+           }
+        }
+      }
+    }) {
+      ...ElectionResultsList
     }
+  }
 `);
 
-export function ElectionResultsSection(props: {
+export async function ElectionResultsSection(props: {
   data?: FragmentType<typeof ElectionResultFragment> | null;
-  results?: FragmentType<typeof ElectionResultsFragment> | null;
 }) {
   const data = getFragmentData(ElectionResultFragment, props.data);
-  const results = getFragmentData(ElectionResultsFragment, props.results);
+
+  const results = await getClientHandler({
+    query: getResults,
+  });
+
   if (!data) {
     return null;
   }
@@ -47,7 +59,11 @@ export function ElectionResultsSection(props: {
               The {data.result.isOfficial ? 'official' : 'unofficial'} results
               of {data.result.document.title} are now available.
             </p>
-            <DocumentLinkButton data={data.result.document} />
+            <DocumentLinkButton
+              data={data.result.document}
+              className="not-prose"
+              color="primary"
+            />
           </>
         ) : (
           <p>
@@ -60,7 +76,7 @@ export function ElectionResultsSection(props: {
           </p>
         )}
       </ProseWrapper>
-      <ElectionResultsList data={results?.electionResults} />
+      <ElectionResultsList data={results.data?.elections} />
       <div className="flex justify-center mt-4">
         <LinkButton href="/elections/results" color="primary">
           View All Results

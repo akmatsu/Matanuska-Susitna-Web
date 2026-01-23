@@ -50,7 +50,6 @@ export async function generateMetadata() {
 
 const getElections = gql(`
   query GetElections {
-    ...ElectionResults
     ...GetAbsenteeVotingInfo
     ...GetEarlyVotingLocations
     ...Election_BallotPropositions
@@ -103,7 +102,7 @@ export default async function ElectionsPage() {
           <EarlyVotingLocations data={data} />
           <ElectionPollingPlaces data={page} />
           <BallotPropositions data={data} />
-          <ElectionResultsSection data={currentElection} results={data} />
+          <ElectionResultsSection data={currentElection} />
           <ElectionPageContact data={page} />
         </div>
       </PageContainer>

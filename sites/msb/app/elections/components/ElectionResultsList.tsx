@@ -3,18 +3,17 @@ import { DataTable } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
 const ElectionResultsListFragment = gql(`
-  fragment ElectionResultsList on ElectionResult {
-    id
-    election {
-      title
-      electionDate
-    }
-    document {
-      title
-      ...DocumentLink
+  fragment ElectionResultsList on Election {
+    title
+    electionDate
+    result {
+      document {
+        title
+        ...DocumentLink
+      }
+      isOfficial
     }
   }
-  
 `);
 
 export function ElectionResultsList(props: {
@@ -32,21 +31,19 @@ export function ElectionResultsList(props: {
         data={data}
         columns={[
           {
-            key: 'election',
+            key: 'title',
             label: 'Election',
             cell: (value, row) => {
               return (
-                row.election?.title ||
-                row.election?.electionDate ||
-                row.document?.title
+                row.title || row.electionDate || row.result?.document?.title
               );
             },
           },
           {
-            key: 'document',
+            key: 'result',
             label: 'Results',
             cell: (value, row) => (
-              <DocumentLink data={row.document}>View</DocumentLink>
+              <DocumentLink data={row.result?.document}>View</DocumentLink>
             ),
           },
         ]}
