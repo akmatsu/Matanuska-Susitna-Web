@@ -1,3 +1,21 @@
+# [0.77.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.76.1...v0.77.0) (2026-01-26)
+
+
+### Bug Fixes
+
+* changed prose line spacing to 1.5 ([0c62c84](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/0c62c8457cde84924972762d5aa4964f5dba81d2))
+* fixed list item spacing in prose-wrapper ([c30a472](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/c30a472be0a183c9406571259092931bbd7a7502))
+* no longer showing a message about offices to fill when office to fill are not provided ([c93f64b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/c93f64b4f989becceb54163046b687e1b79d16f4))
+* smoothed out the language in election officials info ([40eeba3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/40eeba30b392f6d7bad7805cd5d443204b3248ca))
+
+
+### Features
+
+* absentee voting application now displayed at top of elections page ([55a05b6](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/55a05b6f9327b4f9af867ff25fe8cd535ab0aeea))
+* added years to elections date ([a8c399d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a8c399d207f2046a7e115631251288dc043547bf))
+* made request content changes to elections page ([a516462](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a516462e4e5ad833122738d6723bdd8d54c6f353))
+* now showing saturday and sunday hours on early voting locations ([1810db8](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1810db896e6ac4cbc05f31963be73d787e8ceda4))
+
 ## [0.76.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.76.0...v0.76.1) (2026-01-23)
 
 
