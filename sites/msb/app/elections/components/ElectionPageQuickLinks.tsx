@@ -19,6 +19,10 @@ const ElectionPageQuickLinksFragment = gql(`
     electionOfficialApplication {
       ...DocumentLink
     }
+
+    absenteeVotingApplication {
+      ...DocumentLink
+    }
     
     result {
       document {
@@ -76,6 +80,10 @@ export function ElectionPageQuickLinks(props: {
         data={data.electionOfficialApplication}
         color="primary"
       />
+      <DocumentLinkButton
+        data={data.absenteeVotingApplication}
+        color="primary"
+      />
 
       <DocumentLinkButton data={data.result?.document} color="primary" />
       {documents.map((doc, index) => {
@@ -105,7 +113,7 @@ export function ElectionPageQuickLinks(props: {
           );
         }
       })}
-      <LinkButton href="#early-absentee-voting-information" color="primary">
+      <LinkButton href="#absentee-voting-information" color="primary">
         Early and Absentee Voting Information
       </LinkButton>
       {!!data.propositionsCount && (
