@@ -1,8 +1,10 @@
 import { PageSection } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
+import { capitalizeFirstLetter } from '@/utils/stringHelpers';
 import { DataTable } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { format, subDays } from 'date-fns';
+import v from 'voca';
 
 const GetEarlyVotingLocations = gql(`
   fragment GetEarlyVotingLocations on Query {
@@ -73,34 +75,56 @@ export function EarlyVotingLocations(props: {
               label: 'Hours',
               cell: (_, row) =>
                 row.hours?.length ? (
-                  row.hours.map((hour) => (
-                    <div key={hour.id}>
-                      <span className="font-semibold">{hour.day}</span>:{' '}
-                      {hour.open && (
+                  <>
+                    {row.hours.map((hour) => (
+                      <div key={hour.id}>
+                        <span className="font-semibold">
+                          {hour.day === 'weekdays'
+                            ? 'Monday - Friday'
+                            : v.titleCase(hour.day || '')}
+                          :
+                        </span>{' '}
                         <span>
-                          {format(
-                            new Date().setHours(
-                              +hour.open.split(':')[0],
-                              +hour.open.split(':')[1],
-                            ),
-                            'h:mm a',
+                          {hour.open && (
+                            <span>
+                              {format(
+                                new Date().setHours(
+                                  +hour.open.split(':')[0],
+                                  +hour.open.split(':')[1],
+                                ),
+                                'h:mm a',
+                              )}
+                            </span>
+                          )}{' '}
+                          -{' '}
+                          {hour.close && (
+                            <span>
+                              {format(
+                                new Date().setHours(
+                                  +hour.close.split(':')[0],
+                                  +hour.close.split(':')[1],
+                                ),
+                                'h:mm a',
+                              )}
+                            </span>
                           )}
                         </span>
-                      )}{' '}
-                      -{' '}
-                      {hour.close && (
-                        <span>
-                          {format(
-                            new Date().setHours(
-                              +hour.close.split(':')[0],
-                              +hour.close.split(':')[1],
-                            ),
-                            'h:mm a',
-                          )}
-                        </span>
+                      </div>
+                    ))}
+                    {row.hours.some((hour) => hour.day === 'weekdays') &&
+                      row.hours.every((hour) => hour.day !== 'saturday') && (
+                        <div>
+                          <span className="font-semibold">Saturday:</span>{' '}
+                          Closed
+                        </div>
                       )}
-                    </div>
-                  ))
+                    {row.hours.some((hour) => hour.day === 'weekdays') &&
+                      row.hours.every((hour) => hour.day !== 'sunday') && (
+                        <div>
+                          <span className="font-semibold">Sunday:</span> Closed
+                        </div>
+                      )}
+                  </>
                 ) : (
                   <>
                     <span className="font-semibold">
