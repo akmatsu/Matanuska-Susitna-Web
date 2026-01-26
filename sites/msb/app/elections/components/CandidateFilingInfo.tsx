@@ -114,8 +114,12 @@ export function CandidateFilingInfo(props: {
               </span>
               .
             </p>
-            The following offices will be filled in this election:
-            <MarkdownRenderer>{data.officesToBeFilled}</MarkdownRenderer>
+            {data?.officesToBeFilled && (
+              <>
+                <p> The following offices will be filled in this election:</p>
+                <MarkdownRenderer>{data.officesToBeFilled}</MarkdownRenderer>
+              </>
+            )}
           </>
         )}
       </ProseWrapper>
