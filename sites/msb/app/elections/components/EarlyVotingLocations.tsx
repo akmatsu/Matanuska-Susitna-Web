@@ -1,6 +1,5 @@
 import { PageSection } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
-import { capitalizeFirstLetter } from '@/utils/stringHelpers';
 import { DataTable } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { format, subDays } from 'date-fns';
