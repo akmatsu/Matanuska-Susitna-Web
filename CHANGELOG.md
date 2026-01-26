@@ -1,3 +1,10 @@
+## [0.77.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.77.0...v0.77.1) (2026-01-26)
+
+
+### Bug Fixes
+
+* now showing full month names in upcoming election details ([7c18783](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/7c1878301ac816238ebd35be6ec6816850c4acaa))
+
 # [0.77.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.76.1...v0.77.0) (2026-01-26)
 
 
