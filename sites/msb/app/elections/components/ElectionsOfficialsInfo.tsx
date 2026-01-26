@@ -55,18 +55,12 @@ export function ElectionOfficialsInfo(props: {
               Borough Election?
             </p>
 
-            <DocumentLinkButton
-              data={data?.electionOfficialApplication}
-              color="primary"
-              className="not-prose"
-            />
-
             <p>
               The Borough Clerk&apos;s Office is always looking for dependable
               workers for our elections. If you are interested in applying to
               serve as an election worker for the upcoming election, please
-              apply with the Borough Clerk&apos;s Office. You may print out the
-              application from the link above.
+              apply with the Borough Clerk&apos;s Office. You may fill out the
+              online form or print the application.
             </p>
             <p>
               Applications are also available by contacting the{' '}
@@ -77,6 +71,11 @@ export function ElectionOfficialsInfo(props: {
               . In order to serve, you must be a registered voter of the
               Borough. Training and compensation are provided.
             </p>
+            <DocumentLinkButton
+              data={data?.electionOfficialApplication}
+              color="primary"
+              className="not-prose"
+            />
           </>
         )}
       </ProseWrapper>

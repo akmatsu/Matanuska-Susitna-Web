@@ -44,13 +44,8 @@ export function AbsenteeVotingInfo(props: {
   if (!page) return null;
 
   return (
-    <PageSection title="Early/Absentee Voting Information" headerSize="lg">
+    <PageSection title="Absentee Voting Information" headerSize="lg">
       <ProseWrapper>
-        <DocumentLinkButton
-          data={currentElection?.absenteeVotingApplication}
-          color="primary"
-          className="not-prose"
-        />
         {currentElection?.absenteeVotingBody ? (
           <MarkdownRenderer>
             {currentElection?.absenteeVotingBody}
@@ -62,6 +57,11 @@ export function AbsenteeVotingInfo(props: {
               mailed to them by submitting an Absentee By-Mail Ballot
               Application not later than seven days prior to Election Day.
             </p>
+            <DocumentLinkButton
+              data={currentElection?.absenteeVotingApplication}
+              color="primary"
+              className="not-prose"
+            />
             <p>
               <strong>
                 Please note: The Borough&apos;s absentee by-mail application is
@@ -75,10 +75,12 @@ export function AbsenteeVotingInfo(props: {
               </h3>
               <ul>
                 <li>
-                  Apply early to receive your Borough ballot in a timely manner
+                  Apply early to receive your Borough ballot in a timely manner;
                 </li>
-                <li>Carefully complete ALL sections of the application</li>
-                <li>Omissions or errors may cause a delay in ballot mailing</li>
+                <li>Carefully complete ALL sections of the application;</li>
+                <li>
+                  Omissions or errors may cause a delay in ballot mailing; and
+                </li>
                 <li>
                   Application MUST contain the applicant&apos;s signature; no
                   one else may sign for you!
@@ -119,18 +121,6 @@ export function AbsenteeVotingInfo(props: {
               />
               , at the following locations and times:
             </p>
-            <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">
-              <h3 className="mt-0">Voting Assistance</h3>
-              <p className="before:content-none after:content-none">
-                A touch screen voting unit will be available at the Mat-Su
-                Borough Building at at the Divisions of Elections, Mat-Su
-                Regional Office 15 days prior to the election. Touch screen
-                voting is intended for the blind, disabled, and voters with
-                reading difficulties. The touch screen units allow disabled
-                voters to vote unassisted with magnified, high contrast, and
-                audio ballot.
-              </p>
-            </blockquote>
           </>
         )}
       </ProseWrapper>

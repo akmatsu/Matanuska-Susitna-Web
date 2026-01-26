@@ -71,6 +71,7 @@ export function ElectionVoterInformation(props: {
                   <Link href="https://www.akleg.gov/basis/statutes.asp#15.05.010">
                     AS 15.05.010
                   </Link>
+                  ;
                 </li>
                 <li>
                   has been a resident of the Borough for 30 days immediately

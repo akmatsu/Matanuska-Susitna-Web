@@ -1,4 +1,5 @@
 import { PageSection } from '@/components/static/Page';
+import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { DataTable } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { format, subDays } from 'date-fns';
@@ -47,77 +48,91 @@ export function EarlyVotingLocations(props: {
   if (!page?.earlyVotingLocations?.length) return null;
   return (
     <PageSection title="Early Voting Locations" headerSize="lg">
-      <DataTable
-        data={page.earlyVotingLocations}
-        columns={[
-          {
-            key: 'title',
-            label: 'Location',
-          },
-          {
-            key: 'address',
-            label: 'Address',
-            cell: (_, row) =>
-              row.address && (
-                <span>
-                  {row.address.lineOne},{' '}
-                  {row.address.lineTwo && `${row.address.lineTwo}, `}
-                  {row.address.city}, {row.address.state} {row.address.zip}
-                </span>
-              ),
-          },
-          {
-            key: 'hours',
-            label: 'Hours',
-            cell: (_, row) =>
-              row.hours?.length ? (
-                row.hours.map((hour) => (
-                  <div key={hour.id}>
-                    <span className="font-semibold">{hour.day}</span>:{' '}
-                    {hour.open && (
-                      <span>
-                        {format(
-                          new Date().setHours(
-                            +hour.open.split(':')[0],
-                            +hour.open.split(':')[1],
-                          ),
-                          'h:mm a',
-                        )}
-                      </span>
-                    )}{' '}
-                    -{' '}
-                    {hour.close && (
-                      <span>
-                        {format(
-                          new Date().setHours(
-                            +hour.close.split(':')[0],
-                            +hour.close.split(':')[1],
-                          ),
-                          'h:mm a',
-                        )}
-                      </span>
-                    )}
-                  </div>
-                ))
-              ) : (
-                <>
-                  <span className="font-semibold">
-                    {format(
-                      currentElection?.earlyVotingStartDate,
-                      'MMM d, yyyy',
-                    )}{' '}
-                    -{' '}
-                    {format(
-                      subDays(currentElection?.electionDate, 1),
-                      'MMM d, yyyy',
-                    )}
+      <ProseWrapper>
+        <DataTable
+          data={page.earlyVotingLocations}
+          columns={[
+            {
+              key: 'title',
+              label: 'Location',
+            },
+            {
+              key: 'address',
+              label: 'Address',
+              cell: (_, row) =>
+                row.address && (
+                  <span>
+                    {row.address.lineOne},{' '}
+                    {row.address.lineTwo && `${row.address.lineTwo}, `}
+                    {row.address.city}, {row.address.state} {row.address.zip}
                   </span>
-                  : <span>Normal business hours</span>
-                </>
-              ),
-          },
-        ]}
-      />
+                ),
+            },
+            {
+              key: 'hours',
+              label: 'Hours',
+              cell: (_, row) =>
+                row.hours?.length ? (
+                  row.hours.map((hour) => (
+                    <div key={hour.id}>
+                      <span className="font-semibold">{hour.day}</span>:{' '}
+                      {hour.open && (
+                        <span>
+                          {format(
+                            new Date().setHours(
+                              +hour.open.split(':')[0],
+                              +hour.open.split(':')[1],
+                            ),
+                            'h:mm a',
+                          )}
+                        </span>
+                      )}{' '}
+                      -{' '}
+                      {hour.close && (
+                        <span>
+                          {format(
+                            new Date().setHours(
+                              +hour.close.split(':')[0],
+                              +hour.close.split(':')[1],
+                            ),
+                            'h:mm a',
+                          )}
+                        </span>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <span className="font-semibold">
+                      {format(
+                        currentElection?.earlyVotingStartDate,
+                        'MMM d, yyyy',
+                      )}{' '}
+                      -{' '}
+                      {format(
+                        subDays(currentElection?.electionDate, 1),
+                        'MMM d, yyyy',
+                      )}
+                    </span>
+                    : <span>Normal business hours</span>
+                  </>
+                ),
+            },
+          ]}
+        />
+
+        <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">
+          <h3 className="mt-0">Voting Assistance</h3>
+          <p className="before:content-none after:content-none">
+            A touch screen voting unit will be available at the Mat-Su Borough
+            Building at at the Divisions of Elections, Mat-Su Regional Office 15
+            days prior to the election. Touch screen voting is intended for the
+            blind, disabled, and voters with reading difficulties. The touch
+            screen units allow disabled voters to vote unassisted with
+            magnified, high contrast, and audio ballot.
+          </p>
+        </blockquote>
+      </ProseWrapper>
     </PageSection>
   );
 }
