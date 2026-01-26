@@ -24,7 +24,7 @@ export function UpcomingElectionDetails(props: {
     {
       label: 'Election Date',
       value: data.electionDate ? (
-        <DateTime date={data.electionDate} formatStr="MMMM do" />
+        <DateTime date={data.electionDate} formatStr="PPp" />
       ) : (
         'TBD'
       ),
@@ -34,15 +34,8 @@ export function UpcomingElectionDetails(props: {
       value:
         data.candidateFilingStartDate && data.candidateFilingDeadline ? (
           <>
-            <DateTime
-              date={data.candidateFilingStartDate}
-              formatStr="MMMM do p"
-            />{' '}
-            -{' '}
-            <DateTime
-              date={data.candidateFilingDeadline}
-              formatStr="MMMM do p"
-            />
+            <DateTime date={data.candidateFilingStartDate} formatStr="PPp" /> -{' '}
+            <DateTime date={data.candidateFilingDeadline} formatStr="PPp" />
           </>
         ) : (
           'TBD'
@@ -51,7 +44,7 @@ export function UpcomingElectionDetails(props: {
     {
       label: 'Early Voting Begins',
       value: data.earlyVotingStartDate ? (
-        <DateTime date={data.earlyVotingStartDate} formatStr="MMMM do" />
+        <DateTime date={data.earlyVotingStartDate} formatStr="PPp" />
       ) : (
         'TBD'
       ),
@@ -59,7 +52,7 @@ export function UpcomingElectionDetails(props: {
     {
       label: 'Absentee Application Deadline',
       value: data.absenteeApplicationDeadline ? (
-        <DateTime date={data.absenteeApplicationDeadline} formatStr="MMMM do" />
+        <DateTime date={data.absenteeApplicationDeadline} formatStr="PPp" />
       ) : (
         'TBD'
       ),
@@ -67,7 +60,7 @@ export function UpcomingElectionDetails(props: {
     {
       label: 'Voter Registration Deadline',
       value: data.voterRegistrationDeadline ? (
-        <DateTime date={data.voterRegistrationDeadline} formatStr="MMMM do" />
+        <DateTime date={data.voterRegistrationDeadline} formatStr="PPp" />
       ) : (
         'TBD'
       ),
