@@ -10,7 +10,7 @@ export function ProseWrapper(props: {
       className={clsx(
         !props.noProse && [
           // base styles
-          'prose max-w-none text-ink',
+          'prose max-w-none text-ink leading-normal',
 
           // Links
           'prose-a:text-primary',
