@@ -1,3 +1,11 @@
+## [0.77.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.77.1...v0.77.2) (2026-01-27)
+
+
+### Bug Fixes
+
+* fixed early and absentee voting information nav link ([aee8e80](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/aee8e80f2a0297240db15d6f3e7735986147d6c6))
+* typos and removed times from election dates except for candidate filing period ([ab55474](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ab55474fc871e4f3b062a285904f8b635f8e089d))
+
 ## [0.77.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.77.0...v0.77.1) (2026-01-26)
 
 
