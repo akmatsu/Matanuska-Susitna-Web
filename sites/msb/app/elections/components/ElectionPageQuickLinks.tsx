@@ -113,7 +113,7 @@ export function ElectionPageQuickLinks(props: {
           );
         }
       })}
-      <LinkButton href="#absentee-voting-information" color="primary">
+      <LinkButton href="#early-absentee-voting-information" color="primary">
         Early and Absentee Voting Information
       </LinkButton>
       {!!data.propositionsCount && (
