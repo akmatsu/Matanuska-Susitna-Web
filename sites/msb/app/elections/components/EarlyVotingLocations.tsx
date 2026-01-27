@@ -56,6 +56,7 @@ export function EarlyVotingLocations(props: {
             {
               key: 'title',
               label: 'Location',
+              cell: (_, row) => <span className="font-bold">{row.title}</span>,
             },
             {
               key: 'address',
