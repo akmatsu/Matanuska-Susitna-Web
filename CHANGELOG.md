@@ -1,3 +1,10 @@
+## [0.77.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.77.2...v0.77.3) (2026-01-27)
+
+
+### Bug Fixes
+
+* early voting locations location column is now bold ([ee8467e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ee8467ec2f3ba897fc79d2afeeb756af87685f69))
+
 ## [0.77.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.77.1...v0.77.2) (2026-01-27)
 
 
