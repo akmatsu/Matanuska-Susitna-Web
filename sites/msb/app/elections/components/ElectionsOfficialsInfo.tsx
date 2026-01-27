@@ -59,7 +59,7 @@ export function ElectionOfficialsInfo(props: {
               The Borough Clerk&apos;s Office is always looking for dependable
               workers for our elections. If you are interested in applying to
               serve as an election worker for the upcoming election, please
-              apply with the Borough Clerk&apos;s Office. You may fill out
+              apply with the Borough Clerk&apos;s Office. You may fill out the
               application online or print from the link below.
             </p>
             <p>

@@ -84,7 +84,7 @@ export function CandidateFilingInfo(props: {
                   <span className="font-semibold">Candidates for Assembly</span>{' '}
                   seats shall reside in the Borough and in the Assembly District
                   for which they file for one year immediately prior to the
-                  election and meets the requirements of{' '}
+                  election and meet the requirements of{' '}
                   <CodeLink code="2.12.030">MSB 2.12.030</CodeLink> and{' '}
                   <CodeLink code="25.15.010">25.15.010</CodeLink>
                 </li>

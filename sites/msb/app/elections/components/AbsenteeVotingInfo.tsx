@@ -44,7 +44,7 @@ export function AbsenteeVotingInfo(props: {
   if (!page) return null;
 
   return (
-    <PageSection title="Absentee Voting Information" headerSize="lg">
+    <PageSection title="Early/Absentee Voting Information" headerSize="lg">
       <ProseWrapper>
         {currentElection?.absenteeVotingBody ? (
           <MarkdownRenderer>
