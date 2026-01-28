@@ -1,3 +1,10 @@
+# [0.78.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.77.3...v0.78.0) (2026-01-28)
+
+
+### Features
+
+* added support for link buttons and callout blocks in markdown renderer ([bbdc177](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/bbdc17747ae8ac45319e43c508a39eee32ad33bf))
+
 ## [0.77.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.77.2...v0.77.3) (2026-01-27)
 
 
