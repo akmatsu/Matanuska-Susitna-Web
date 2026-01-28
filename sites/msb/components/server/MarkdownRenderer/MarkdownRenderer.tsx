@@ -9,6 +9,7 @@ import { InternalLink } from './components/InternalLink';
 import { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react';
 import { visit } from 'unist-util-visit';
 import { MDIframe } from './components/MdIframe';
+import { MdCallout } from './components/Callout';
 
 /**
  * Remark plugin to filter out unsupported directives.
@@ -46,6 +47,7 @@ export function MarkdownRenderer(props: { children?: string | null }) {
     'primary-action-button',
     'internal-link',
     'iframe',
+    'calloutBlock',
   ];
 
   return (
@@ -92,6 +94,7 @@ export function MarkdownRenderer(props: { children?: string | null }) {
         'primary-action-button': ActionButtonWrapper,
         'internal-link': InternalLink,
         iframe: MDIframe,
+        calloutblock: MdCallout,
       }}
     >
       {props.children?.replace(/<br\s*\/?>/gi, '')}

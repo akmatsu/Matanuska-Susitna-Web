@@ -2,6 +2,7 @@ import { ComponentProps } from 'react';
 import { Process } from './components/server/MarkdownRenderer/components/Process';
 import { InternalLink } from './components/server/MarkdownRenderer/components/InternalLink';
 import { Step } from './components/server/MarkdownRenderer/components/Step';
+import { MdCallout } from './components/server/MarkdownRenderer/components/Callout';
 
 declare module 'react' {
   namespace JSX {
@@ -11,6 +12,7 @@ declare module 'react' {
       'doc-collection': { id: string };
       'primary-action-button': { label: string };
       'internal-link': ComponentProps<typeof InternalLink>;
+      calloutblock: ComponentProps<typeof MdCallout>;
     }
   }
 }

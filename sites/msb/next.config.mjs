@@ -28,6 +28,7 @@ const nextConfig = {
       new URL('https://msb-cms-documents.s3.us-west-2.amazonaws.com/**'),
       new URL('https://picsum.photos/**'),
       new URL('https://services.arcgis.com/**'),
+      new URL('https://loremflickr.com/**'),
       ...(process.env.NODE_ENV === 'development'
         ? [new URL('http://localhost:3333/**')]
         : []),
