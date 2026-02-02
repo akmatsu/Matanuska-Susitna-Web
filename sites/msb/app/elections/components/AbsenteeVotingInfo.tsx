@@ -101,26 +101,6 @@ export function AbsenteeVotingInfo(props: {
               calendar days after the election. Hand-delivered ballots must be
               returned to a Borough election official by 8 p.m. on Election Day.
             </p>
-            <p>
-              The Voting Locations section contains precinct information, or if
-              you have questions, please call our office at{' '}
-              <PhoneLink phoneNumber={page?.boroughElectionContact?.phone} /> or
-              the {page?.stateElectionContact?.name} at{' '}
-              <PhoneLink phoneNumber={page?.stateElectionContact?.phone} />.
-            </p>
-            <p>
-              Early/Absentee In-Person voting will begin on{' '}
-              <DateTime
-                date={currentElection?.earlyVotingStartDate}
-                formatStr="PPP"
-              />
-              , and continue through{' '}
-              <DateTime
-                date={subDays(new Date(currentElection?.electionDate), 1)}
-                formatStr="PPP"
-              />
-              , at the following locations and times:
-            </p>
           </>
         )}
       </ProseWrapper>

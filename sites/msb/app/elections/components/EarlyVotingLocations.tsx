@@ -1,3 +1,4 @@
+import { DateTime } from '@/components/client/DateTime';
 import { PageSection } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { DataTable } from '@matsugov/ui';
@@ -50,6 +51,19 @@ export function EarlyVotingLocations(props: {
   return (
     <PageSection title="Early Voting Locations" headerSize="lg">
       <ProseWrapper>
+        <p>
+          Early/Absentee In-Person voting will begin on{' '}
+          <DateTime
+            date={currentElection?.earlyVotingStartDate}
+            formatStr="PPP"
+          />
+          , and continue through{' '}
+          <DateTime
+            date={subDays(new Date(currentElection?.electionDate), 1)}
+            formatStr="PPP"
+          />
+          , at the following locations and times:
+        </p>
         <DataTable
           data={page.earlyVotingLocations}
           columns={[
@@ -148,12 +162,13 @@ export function EarlyVotingLocations(props: {
         <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">
           <h3 className="mt-0">Voting Assistance</h3>
           <p className="before:content-none after:content-none">
-            A touch screen voting unit will be available at the Mat-Su Borough
-            Building at at the Divisions of Elections, Mat-Su Regional Office 15
-            days prior to the election. Touch screen voting is intended for the
-            blind, disabled, and voters with reading difficulties. The touch
-            screen units allow disabled voters to vote unassisted with
-            magnified, high contrast, and audio ballot.
+            A touch screen voting unit will be available during early/absentee
+            voting at the Mat-Su Borough Building and at the Divisions of
+            Elections, Mat-Su Regional Office, 15 days prior to the election.
+            Touch screen voting is intended for the blind, disabled, and voters
+            with reading difficulties. The touch screen units allow disabled
+            voters to vote unassisted with magnified, high contrast, and audio
+            ballot.
           </p>
         </blockquote>
       </ProseWrapper>

@@ -16,6 +16,7 @@ import { PageViewTracker } from '@/components/client/PageViewTracker';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { EarlyVotingLocations } from './components/EarlyVotingLocations';
 import { BallotPropositions } from './components/BallotPropositions';
+import { InitiativeAndReferendumProcess } from './components/InitiativeAndReferendumProcess';
 
 const metaQuery = gql(`
   query GetElectionsPageMeta {
@@ -53,6 +54,7 @@ const getElections = gql(`
     ...GetAbsenteeVotingInfo
     ...GetEarlyVotingLocations
     ...Election_BallotPropositions
+    ...GetInitiativeAndReferendumProcess
     electionsPage {
       heroImage
       ...ElectionPageHeader
@@ -89,7 +91,7 @@ export default async function ElectionsPage() {
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
       <PageContainer size="md" breakPoint="sm" hideBreadcrumbs>
-        <div className="flex flex-col gap-16 col-span-5 md:col-span-3">
+        <div className="flex flex-col gap-10 col-span-5 md:col-span-3">
           <div>
             <ElectionPageHeader data={page} />
             <ElectionPageQuickLinks data={currentElection} />
@@ -101,6 +103,7 @@ export default async function ElectionsPage() {
           <AbsenteeVotingInfo data={data} />
           <EarlyVotingLocations data={data} />
           <ElectionPollingPlaces data={page} />
+          <InitiativeAndReferendumProcess data={data} />
           <BallotPropositions data={data} />
           <ElectionResultsSection data={currentElection} />
           <ElectionPageContact data={page} />

@@ -19,9 +19,6 @@ const GetPropositions = gql(`
       }
     }
     electionsPage {
-      referendumProcessDocument {
-        ...DocumentLink
-      }
       boroughElectionContact {
         name
         phone
@@ -36,8 +33,7 @@ export function BallotPropositions(props: {
   const data = getFragmentData(GetPropositions, props.data);
   const propositions = data.elections?.[0]?.propositions;
 
-  if (!propositions?.length && !data.electionsPage?.referendumProcessDocument)
-    return null;
+  if (!propositions?.length) return null;
 
   return (
     <PageSection title="Ballot Propositions" headerSize="lg">
@@ -73,28 +69,6 @@ export function BallotPropositions(props: {
             </div>
           </section>
         ))}
-
-        {!!data.electionsPage?.referendumProcessDocument && (
-          <section>
-            <h3>Referendum Process</h3>
-            <div className="flex flex-col-reverse md:grid grid-cols-5 md:gap-6">
-              <div className="col-span-5 md:col-span-3">
-                <p>
-                  Are you interested in understanding how the
-                  initiative/referendum process works? See our fact sheet for
-                  more information.
-                </p>
-              </div>
-              <div className="md:block md:col-span-2">
-                <DocumentLinkButton
-                  data={data.electionsPage.referendumProcessDocument}
-                  className="not-prose md:w-full"
-                  color="primary"
-                />
-              </div>
-            </div>
-          </section>
-        )}
       </ProseWrapper>
     </PageSection>
   );

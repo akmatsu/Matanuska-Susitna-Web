@@ -28,12 +28,11 @@ export function ElectionVoterInformation(props: {
         ) : (
           <>
             <p>
-              In order for your vote to be counted for any regular Borough
-              election, you <span className="font-semibold">must</span> be
-              registered 30-days prior to the election. Upgrades to your voter
-              registration also fall under this deadline. Please register to
-              vote or update your voter information prior to the deadline to be
-              eligible to vote or have your vote count.
+              You <strong>must</strong> be registered to vote in the Borough
+              30-days prior to an election. Updates to your voter registration
+              also fall under this deadline. Please register to vote or update
+              your voter information prior to the deadline to be eligible to
+              vote.
             </p>
 
             {data?.electionDate && data?.voterRegistrationDeadline && (
