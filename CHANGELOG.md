@@ -1,3 +1,10 @@
+# [0.80.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.79.0...v0.80.0) (2026-02-03)
+
+
+### Features
+
+* added support for columns and text alignment in markdown renderer ([41b438d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/41b438dc505a1448d782ad1274c801e5901d23c9))
+
 # [0.79.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.78.1...v0.79.0) (2026-02-03)
 
 
