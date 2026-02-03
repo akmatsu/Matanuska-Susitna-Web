@@ -82,10 +82,7 @@ export function ElectionVoterInformation(props: {
                   election at which the person seeks to vote; and
                 </li>
                 <li>
-                  is not disqualified under{' '}
-                  <Link href="https://ltgov.alaska.gov/information/alaskas-constitution/">
-                    Article V of the State Constitution.
-                  </Link>
+                  is not disqualified under Article V of the State Constitution.
                 </li>
               </ul>
             </blockquote>
