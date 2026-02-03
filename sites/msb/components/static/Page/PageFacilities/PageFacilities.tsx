@@ -24,7 +24,7 @@ export function PageFacilities({
 
   return (
     <PageSection title={title}>
-      <ul>
+      <ul className="flex flex-col gap-4">
         {facilities.map((facility) => (
           <FacilityCard key={facility.id} facility={facility} />
         ))}
