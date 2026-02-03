@@ -1,3 +1,10 @@
+# [0.79.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.78.1...v0.79.0) (2026-02-03)
+
+
+### Features
+
+* facility hours now display in 12 hour time ([773e4a3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/773e4a3773eaa62197dd374ed068d1224801062d))
+
 ## [0.78.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.78.0...v0.78.1) (2026-02-03)
 
 
