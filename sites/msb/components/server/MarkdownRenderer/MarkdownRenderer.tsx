@@ -10,6 +10,7 @@ import { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react';
 import { visit } from 'unist-util-visit';
 import { MDIframe } from './components/MdIframe';
 import { MdCallout } from './components/Callout';
+import clsx from 'clsx';
 
 /**
  * Remark plugin to filter out unsupported directives.
@@ -48,6 +49,9 @@ export function MarkdownRenderer(props: { children?: string | null }) {
     'internal-link',
     'iframe',
     'calloutBlock',
+    'columns',
+    'column',
+    'textAlign',
   ];
 
   return (
@@ -95,6 +99,36 @@ export function MarkdownRenderer(props: { children?: string | null }) {
         'internal-link': InternalLink,
         iframe: MDIframe,
         calloutblock: MdCallout,
+        columns: (props) => {
+          console.log(props);
+          return (
+            <div
+              className={clsx('md:grid md:gap-6', {
+                'md:grid-cols-2': props.count === '2',
+                'md:grid-cols-3': props.count === '3',
+              })}
+            >
+              {props.children}
+            </div>
+          );
+        },
+        column: (props) => {
+          console.log(props);
+          return <div className="md:col-span-1">{props.children}</div>;
+        },
+        textalign: (props) => {
+          return (
+            <div
+              className={clsx({
+                'text-left': props.align === 'left',
+                'text-center': props.align === 'center',
+                'text-right': props.align === 'right',
+              })}
+            >
+              {props.children}
+            </div>
+          );
+        },
       }}
     >
       {props.children?.replace(/<br\s*\/?>/gi, '')}

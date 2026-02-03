@@ -13,6 +13,11 @@ declare module 'react' {
       'primary-action-button': { label: string };
       'internal-link': ComponentProps<typeof InternalLink>;
       calloutblock: ComponentProps<typeof MdCallout>;
+      columns: React.HTMLAttributes<HTMLDivElement> & { count?: string };
+      column: React.HTMLAttributes<HTMLDivElement>;
+      textalign: React.HTMLAttributes<HTMLDivElement> & {
+        align: 'left' | 'center' | 'right';
+      };
     }
   }
 }
