@@ -30,7 +30,11 @@ export function PageContainer<T extends React.ElementType>({
   return (
     <Tag
       className={clsx(
-        'mx-auto px-4 py-4 lg:w-full max-w-screen-2xl',
+        'mx-auto px-4 py-4 lg:w-full',
+        {
+          'max-w-screen-2xl': !props.hideSideNav,
+          'max-w-5xl': props.hideSideNav,
+        },
 
         props.className,
       )}
