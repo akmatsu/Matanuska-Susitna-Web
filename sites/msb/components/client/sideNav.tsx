@@ -16,6 +16,8 @@ type SideNavProps = {
   className?: string;
 };
 
+const ACTIVE_SCROLL_OFFSET = 120;
+
 function slugify(text: string, existingIds: Set<string>) {
   const base =
     text
@@ -71,6 +73,7 @@ export function SideNav({
   className,
 }: SideNavProps = {}) {
   const [headings, setHeadings] = useState<HeadingNode[]>([]);
+  const [activeHeadingId, setActiveHeadingId] = useState<string>();
 
   useEffect(() => {
     const main = document.querySelector('main');
@@ -155,6 +158,60 @@ export function SideNav({
     onHeadingsChange?.(headings.length > 0);
   }, [headings.length, onHeadingsChange]);
 
+  useEffect(() => {
+    if (headings.length === 0) {
+      setActiveHeadingId(undefined);
+      return undefined;
+    }
+
+    let frame = 0;
+
+    const getOffsetTop = (element: HTMLElement) =>
+      element.getBoundingClientRect().top + window.scrollY;
+
+    const updateActiveHeading = () => {
+      const scrollPosition = window.scrollY + ACTIVE_SCROLL_OFFSET;
+      let currentId: string | undefined;
+
+      for (const heading of headings) {
+        const element = document.getElementById(heading.id);
+        if (!element) {
+          continue;
+        }
+
+        if (getOffsetTop(element) <= scrollPosition) {
+          currentId = heading.id;
+        } else {
+          break;
+        }
+      }
+
+      const nextId = currentId ?? headings[0]?.id;
+      setActiveHeadingId((prev) => (nextId && prev === nextId ? prev : nextId));
+    };
+
+    const handleScroll = () => {
+      if (frame) {
+        return;
+      }
+
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        updateActiveHeading();
+      });
+    };
+
+    updateActiveHeading();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frame) {
+        cancelAnimationFrame(frame);
+      }
+    };
+  }, [headings]);
+
   const handleClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
     event.preventDefault();
     const target = document.getElementById(id);
@@ -164,6 +221,7 @@ export function SideNav({
 
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     history.replaceState(null, '', `#${id}`);
+    setActiveHeadingId(id);
     onNavigate?.();
   };
 
@@ -176,13 +234,36 @@ export function SideNav({
       aria-label="On this page"
       className={clsx('sticky top-4 w-full', className)}
     >
-      <p className="font-bold">On This Page</p>
-      <ol className="space-y-2 text-sm">
+      <p className="font-bold text-lg mb-4">On This Page</p>
+      <ol>
         {headings.map((heading) => (
-          <li key={heading.id} style={{ marginLeft: (heading.level - 1) * 12 }}>
+          <li
+            key={heading.id}
+            className={clsx('border-t p-1 border-r-4', {
+              'border-r-primary ': activeHeadingId === heading.id,
+              'bg-base-lightest': activeHeadingId === heading.id,
+            })}
+          >
             <Link
               href={`#${heading.id}`}
               onClick={(event) => handleClick(event, heading.id)}
+              className={clsx(
+                'no-underline text-base-darkest hover:underline hover:text-primary active:text-primary-dark',
+                {
+                  'ml-0': heading.level === 1,
+                  'ml-3': heading.level === 2,
+                  'ml-6': heading.level === 3,
+                  'font-semibold':
+                    heading.level === 1 && activeHeadingId !== heading.id,
+
+                  'text-sm': heading.level === 2,
+                  'text-xs': heading.level === 3,
+                  'text-black': activeHeadingId === heading.id,
+                },
+              )}
+              aria-current={
+                activeHeadingId === heading.id ? 'location' : undefined
+              }
             >
               {heading.text}
             </Link>
