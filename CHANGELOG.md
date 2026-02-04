@@ -1,3 +1,10 @@
+# [0.81.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.80.0...v0.81.0) (2026-02-04)
+
+
+### Features
+
+* added page side nav ([238540c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/238540cebd52bdaa38c53ff4215f15397acca8f1))
+
 # [0.80.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.79.0...v0.80.0) (2026-02-03)
 
 
