@@ -7,7 +7,6 @@ export function MdCallout(
     BlockquoteHTMLAttributes<HTMLQuoteElement> &
     ExtraProps,
 ) {
-  console.log(props.node?.properties.color);
   return (
     <Callout color={props.node?.properties.color as any}>
       {props.children}

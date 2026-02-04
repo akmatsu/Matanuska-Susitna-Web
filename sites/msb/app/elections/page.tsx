@@ -91,22 +91,27 @@ export default async function ElectionsPage() {
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
       <PageContainer size="md" breakPoint="sm" hideBreadcrumbs>
-        <div className="flex flex-col gap-10 col-span-5 md:col-span-3">
-          <div>
+        <div className="lg:grid lg:grid-cols-11 lg:gap-8 w-full">
+          <div className="flex flex-col gap-8 col-span-8">
             <ElectionPageHeader data={page} />
+            <div className="lg:hidden">
+              <ElectionPageQuickLinks data={currentElection} />
+            </div>
+            <UpcomingElectionDetails data={currentElection} />
+            <ElectionVoterInformation data={currentElection} />
+            <ElectionOfficialsInfo data={currentElection} contactData={page} />
+            <CandidateFilingInfo data={currentElection} />
+            <AbsenteeVotingInfo data={data} />
+            <EarlyVotingLocations data={data} />
+            <ElectionPollingPlaces data={page} />
+            <InitiativeAndReferendumProcess data={data} />
+            <BallotPropositions data={data} />
+            <ElectionResultsSection data={currentElection} />
+            <ElectionPageContact data={page} />
+          </div>
+          <div className="hidden lg:block lg:col-span-3 nav-ignore">
             <ElectionPageQuickLinks data={currentElection} />
           </div>
-          <UpcomingElectionDetails data={currentElection} />
-          <ElectionVoterInformation data={currentElection} />
-          <ElectionOfficialsInfo data={currentElection} contactData={page} />
-          <CandidateFilingInfo data={currentElection} />
-          <AbsenteeVotingInfo data={data} />
-          <EarlyVotingLocations data={data} />
-          <ElectionPollingPlaces data={page} />
-          <InitiativeAndReferendumProcess data={data} />
-          <BallotPropositions data={data} />
-          <ElectionResultsSection data={currentElection} />
-          <ElectionPageContact data={page} />
         </div>
       </PageContainer>
       <PageViewTracker pageId="1" pageType="ElectionsPage" />

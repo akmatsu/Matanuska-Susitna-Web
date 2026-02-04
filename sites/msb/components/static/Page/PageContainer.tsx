@@ -1,9 +1,10 @@
 import { Breadcrumbs } from '@/components/client/breadcrumbs';
+import { SideNav } from '@/components/client/sideNav';
+import { SideNavDrawer } from '@/components/client/SideNavDrawer';
 import clsx from 'clsx';
 import React from 'react';
 
 export function PageContainer<T extends React.ElementType>({
-  breakPoint = 'md',
   ...props
 }: {
   children: React.ReactNode;
@@ -20,55 +21,41 @@ export function PageContainer<T extends React.ElementType>({
 
   /** Whether to hide the breadcrumbs element */
   hideBreadcrumbs?: boolean;
+
+  /** Whether to hide the side navigation */
+  hideSideNav?: boolean;
 }) {
   const Tag = props.as || 'div';
+  const shouldShowSideNav = !props.hideSideNav;
   return (
     <Tag
       className={clsx(
-        'mx-auto px-4 py-4 max-w-xl',
-
-        breakPoint === 'sm' && {
-          'sm:max-w-full': props.size === 'full',
-          'sm:max-w-7xl': props.size === 'xl',
-          'sm:max-w-5xl': props.size === 'lg',
-          'sm:max-w-4xl': props.size === 'md',
-          'sm:max-w-screen-sm': props.size === 'sm',
-          'sm:max-w-xl': props.size === 'xs',
-        },
-
-        breakPoint === 'md' && {
-          'md:max-w-full': props.size === 'full',
-          'md:max-w-7xl': props.size === 'xl',
-          'md:max-w-5xl': props.size === 'lg',
-          'md:max-w-4xl': props.size === 'md',
-          'md:max-w-screen-sm': props.size === 'sm',
-          'md:max-w-xl': props.size === 'xs',
-        },
-
-        breakPoint === 'lg' && {
-          'lg:max-w-full': props.size === 'full',
-          'lg:max-w-7xl': props.size === 'xl',
-          'lg:max-w-5xl': props.size === 'lg',
-          'lg:max-w-4xl': props.size === 'md',
-          'lg:max-w-screen-sm': props.size === 'sm',
-          'lg:max-w-xl': props.size === 'xs',
-        },
-
-        breakPoint === 'xl' && {
-          'xl:max-w-full': props.size === 'full',
-          'xl:max-w-7xl': props.size === 'xl',
-          'xl:max-w-5xl': props.size === 'lg',
-          'xl:max-w-4xl': props.size === 'md',
-          'xl:max-w-screen-sm': props.size === 'sm',
-          'xl:max-w-xl': props.size === 'xs',
-        },
+        'mx-auto px-4 py-4 lg:w-full max-w-screen-2xl',
 
         props.className,
       )}
     >
-      {!props.hideBreadcrumbs && <Breadcrumbs />}
+      {shouldShowSideNav && <SideNavDrawer className="mb-4" />}
 
-      {props.children}
+      <div
+        className={clsx(
+          shouldShowSideNav && 'md:grid md:grid-cols-14 md:gap-8',
+        )}
+      >
+        {shouldShowSideNav && (
+          <aside className="relative hidden md:flex md:flex-col md:items-end md:col-span-3 w-full">
+            <div className="sticky top-4 w-full">
+              <SideNav />
+            </div>
+          </aside>
+        )}
+
+        <div className={clsx('md:col-span-11 w-full')}>
+          {!props.hideBreadcrumbs && <Breadcrumbs />}
+
+          {props.children}
+        </div>
+      </div>
     </Tag>
   );
 }

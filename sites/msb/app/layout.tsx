@@ -11,6 +11,7 @@ import { SiteInfo } from '@/components/static/Header/SiteInfo';
 import { signIn, signOut, auth } from '@/auth';
 import { CookieBannerProvider } from '@matsugov/ui/CookieBannerContext';
 import { AnalyticsScript } from '@/components/client/AnalyticsScript';
+import { SideNavDrawerProvider } from '../hooks/SideNavDrawerContext';
 
 export const metadata: Metadata = {
   metadataBase:
@@ -30,33 +31,35 @@ export default async function RootLayout({
   const a = await auth();
 
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body>
         <ApolloWrapper apiUrl={process.env.NEXT_PUBLIC_API_URL ?? ''}>
           <CookieBannerProvider>
-            <SiteInfo />
-            <Header navItems={primaryNav} navLinkAs={Link} imageAs={Image} />
-            <main id="main-content" className="position-relative">
-              {children}
-            </main>
-            <FeedbackButton />
-            <Footer
-              navLinkAs={Link}
-              imageAs={Image}
-              contactHref="/departments"
-              navItems={primaryNav}
-              login={!a?.user}
-              logout={!!a?.user}
-              signIn={async () => {
-                'use server';
-                await signIn();
-              }}
-              signOut={async () => {
-                'use server';
-                await signOut();
-              }}
-            />
-            <AnalyticsScript />
+            <SideNavDrawerProvider>
+              <SiteInfo />
+              <Header navItems={primaryNav} navLinkAs={Link} imageAs={Image} />
+              <main id="main-content" className="position-relative">
+                {children}
+              </main>
+              <FeedbackButton />
+              <Footer
+                navLinkAs={Link}
+                imageAs={Image}
+                contactHref="/departments"
+                navItems={primaryNav}
+                login={!a?.user}
+                logout={!!a?.user}
+                signIn={async () => {
+                  'use server';
+                  await signIn();
+                }}
+                signOut={async () => {
+                  'use server';
+                  await signOut();
+                }}
+              />
+              <AnalyticsScript />
+            </SideNavDrawerProvider>
           </CookieBannerProvider>
         </ApolloWrapper>
       </body>

@@ -70,7 +70,7 @@ function getType(type: TextType): string {
     case 'label':
       return 'p';
     case 'subtitle':
-      return 'h2';
+      return 'p';
     default:
       return 'p';
   }
