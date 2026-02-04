@@ -146,12 +146,12 @@ export function BasePage(props: {
         breakPoint="lg"
       >
         <div
-          className={clsx({
-            'lg:grid grid-cols-3 gap-8': hasSideColumnContent,
+          className={clsx('w-full', {
+            'lg:grid lg:grid-cols-11 lg:gap-8': hasSideColumnContent,
           })}
         >
           {/* Main content */}
-          <div className="flex flex-col gap-8 col-span-2">
+          <div className="flex flex-col gap-8 col-span-8">
             <PageBody
               page={page}
               {...props.pageBodyProps}
@@ -198,8 +198,8 @@ export function BasePage(props: {
 
           {/* Right sidebar */}
           <div
-            className={clsx('hidden', {
-              'lg:flex flex-col gap-8 col-span-1': hasSideColumnContent,
+            className={clsx('hidden nav-ignore', {
+              'lg:flex flex-col gap-8 col-span-3': hasSideColumnContent,
             })}
           >
             {props.mapSlot}

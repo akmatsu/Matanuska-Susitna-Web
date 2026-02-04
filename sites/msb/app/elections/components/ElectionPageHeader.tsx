@@ -18,14 +18,11 @@ export function ElectionPageHeader(props: {
 
   return (
     <PageSection>
-      <ProseWrapper className="text-center">
+      <ProseWrapper>
         <h1>{data.title}</h1>
         <p className="italic mb-0">{data.description}</p>
-        <div className="flex justify-center">
-          <div className="max-w-3xl">
-            <MarkdownRenderer>{data.howElectionsWork}</MarkdownRenderer>
-          </div>
-        </div>
+
+        <MarkdownRenderer>{data.howElectionsWork}</MarkdownRenderer>
       </ProseWrapper>
     </PageSection>
   );

@@ -43,7 +43,7 @@ export function ContactCard({
               <div className="inline-flex items-center justify-center bg-primary p-1 rounded-full">
                 <span className="icon-[mdi--phone] text-white size-4" />{' '}
               </div>
-              <PhoneLink phoneNumber={c.phone} />
+              <PhoneLink phoneNumber={c.phone} className="truncate" />
             </li>
           )}
           {c.email && (
@@ -51,7 +51,9 @@ export function ContactCard({
               <div className="inline-flex items-center justify-center bg-primary p-1 rounded-full">
                 <span className="icon-[mdi--email] text-white size-4" />
               </div>
-              <Link href={`mailto:${c.email}`}>{c.email}</Link>
+              <Link href={`mailto:${c.email}`} className="truncate">
+                {c.email}
+              </Link>
             </li>
           )}
           {c.fax && (

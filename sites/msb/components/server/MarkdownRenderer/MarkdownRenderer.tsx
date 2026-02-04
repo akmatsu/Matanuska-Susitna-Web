@@ -100,7 +100,6 @@ export function MarkdownRenderer(props: { children?: string | null }) {
         iframe: MDIframe,
         calloutblock: MdCallout,
         columns: (props) => {
-          console.log(props);
           return (
             <div
               className={clsx('md:grid md:gap-6', {
@@ -113,7 +112,6 @@ export function MarkdownRenderer(props: { children?: string | null }) {
           );
         },
         column: (props) => {
-          console.log(props);
           return <div className="md:col-span-1">{props.children}</div>;
         },
         textalign: (props) => {

@@ -8,6 +8,7 @@ export function Link({
   referrerPolicy,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   hideExternalIcon,
+  className,
   ...props
 }: NextLinkProps & {
   hideExternalIcon?: boolean; // Optional prop to hide the external link icon
@@ -24,5 +25,11 @@ export function Link({
     ...props,
   };
 
-  return <NextLink href={href} {...allProps}></NextLink>;
+  return (
+    <NextLink
+      href={href}
+      {...allProps}
+      className={`inline-block ${className ?? ''}`}
+    ></NextLink>
+  );
 }

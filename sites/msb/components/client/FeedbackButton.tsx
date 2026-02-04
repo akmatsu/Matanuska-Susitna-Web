@@ -1,15 +1,38 @@
 'use client';
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { LinkButton } from '@/components/static/LinkButton/LinkButton';
 import { usePathname } from 'next/navigation';
 import { CookieBanner } from '@matsugov/ui/CookieBanner';
+import { Button } from '@matsugov/ui';
+import { useSideNavDrawer } from '@/hooks/SideNavDrawerContext';
 
 export const FeedbackButton = () => {
   const pathname = usePathname();
+  const { open, panelRef } = useSideNavDrawer();
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    setShowButton(!!panelRef.current);
+    return () => setShowButton(false);
+  }, [pathname, panelRef]);
 
   return (
-    <div className="sticky bottom-2 flex justify-end mr-2 items-end">
-      <CookieBanner />
+    <div className="sticky bottom-2 flex justify-between mx-2 items-end">
+      <div className="flex flex-col gap-2">
+        <CookieBanner />
+        {showButton && (
+          <Button
+            className="md:hidden"
+            rounded="pill"
+            icon
+            color="primary"
+            onClick={open}
+            title="Open side nav drawer"
+          >
+            <span className="icon-[mdi--format-list-bulleted] size-8"></span>
+          </Button>
+        )}
+      </div>
       <div className="flex flex-col items-end gap-2">
         <LinkButton
           href="https://problemreporter.matsugov.us/"
