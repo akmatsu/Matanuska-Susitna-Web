@@ -22,7 +22,9 @@ const BasePageFragment = gql(`
     __typename
     ...PageBody
     ...HeroImage
-    contacts {
+    contacts(orderBy:  {
+       name: asc
+    }) {
       ...ContactList
     }
     documents {
