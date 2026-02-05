@@ -4,7 +4,6 @@ import {
   PageActions,
   PageBody,
   PageContacts,
-  PageContainer,
   PageDocuments,
   PageEvents,
   PageListItems,
@@ -14,7 +13,6 @@ import React, { ComponentProps, ReactNode } from 'react';
 import clsx from 'clsx';
 import { PageViewTracker } from '../client/PageViewTracker';
 import { PageTopics } from './Page/PageTopics';
-import { SideNav } from '../client/sideNav';
 import { PageColumnController } from '../client/PageColumnController';
 
 const BasePageFragment = gql(`
