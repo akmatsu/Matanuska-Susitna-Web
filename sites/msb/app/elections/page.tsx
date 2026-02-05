@@ -105,7 +105,8 @@ export default async function ElectionsPage() {
         <ElectionOfficialsInfo data={currentElection} contactData={page} />
         <CandidateFilingInfo data={currentElection} />
         <AbsenteeVotingInfo data={data} />
-        <EarlyVotingLocations data={data} />
+        {/* Hidden temporarily until we confirm times and location for DOE */}
+        {/* <EarlyVotingLocations data={data} /> */}
         <ElectionPollingPlaces data={page} />
         <InitiativeAndReferendumProcess data={data} />
         <BallotPropositions data={data} />

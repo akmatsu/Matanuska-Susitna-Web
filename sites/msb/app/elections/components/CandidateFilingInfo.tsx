@@ -94,9 +94,8 @@ export function CandidateFilingInfo(props: {
                     Candidates for the School Board
                   </span>{' '}
                   seats shall reside in the Borough and within the Assembly
-                  District boundaries for which they file (
-                  <CodeLink code="19.04">MSB 19.04</CodeLink>
-                  ).
+                  District boundaries for which they file
+                  <CodeLink code="19.04">MSB 19.04</CodeLink>.
                 </li>
 
                 <li>
