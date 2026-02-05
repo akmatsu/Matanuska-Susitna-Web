@@ -13,10 +13,9 @@ import { ElectionResultsSection } from './components/ElectionsResultsSection';
 import { AbsenteeVotingInfo } from './components/AbsenteeVotingInfo';
 import { PageViewTracker } from '@/components/client/PageViewTracker';
 import { getClientHandler } from '@/utils/apollo/utils';
-import { EarlyVotingLocations } from './components/EarlyVotingLocations';
+// import { EarlyVotingLocations } from './components/EarlyVotingLocations';
 import { BallotPropositions } from './components/BallotPropositions';
 import { InitiativeAndReferendumProcess } from './components/InitiativeAndReferendumProcess';
-import { SideNav } from '@/components/client/sideNav';
 import { SideNavDrawer } from '@/components/client/SideNavDrawer';
 import { PageColumnController } from '@/components/client/PageColumnController';
 
