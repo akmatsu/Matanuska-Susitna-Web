@@ -53,7 +53,7 @@ export function PageColumnController<T extends React.ElementType>({
           </div>
         )}
 
-        <div className={clsx('md:col-span-11 lg:col-span-8  w-full')}>
+        <div className={clsx('md:col-span-11 lg:col-span-8 w-full')}>
           {showBreadCrumbs && <Breadcrumbs />}
           <div className="flex flex-col gap-8 w-full">{props.children}</div>
         </div>
