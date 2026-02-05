@@ -122,11 +122,7 @@ export default async function Communities() {
   return (
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
-      <PageContainer
-        size={highlights?.length ? 'lg' : 'sm'}
-        breakPoint="sm"
-        hideSideNav
-      >
+      <PageContainer size={highlights?.length ? 'lg' : 'sm'}>
         <div
           className={clsx('grid', {
             'grid-cols-5 gap-8': !!highlights?.length,
