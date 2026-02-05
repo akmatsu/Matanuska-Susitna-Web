@@ -10,20 +10,11 @@ type SideNavDrawerProps = {
   hideOnDesktop?: boolean;
 };
 
-export function SideNavDrawer({
-  className,
-  hideOnDesktop = true,
-}: SideNavDrawerProps) {
+export function SideNavDrawer({ className }: SideNavDrawerProps) {
   const [hasHeadings, setHasHeadings] = useState(false);
 
   return (
-    <div
-      className={clsx(
-        hideOnDesktop && 'lg:hidden',
-        !hasHeadings && 'hidden',
-        className,
-      )}
-    >
+    <div className={clsx('lg:hidden', !hasHeadings && 'hidden', className)}>
       <Drawer title="On This Page" placement="left">
         {({ close }) => (
           <div className="p-2">

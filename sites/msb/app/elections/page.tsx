@@ -1,4 +1,3 @@
-import { PageContainer } from '@/components/static/Page';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 import { ElectionPageHeader } from './components/ElectionPageHeader';
@@ -17,6 +16,9 @@ import { getClientHandler } from '@/utils/apollo/utils';
 import { EarlyVotingLocations } from './components/EarlyVotingLocations';
 import { BallotPropositions } from './components/BallotPropositions';
 import { InitiativeAndReferendumProcess } from './components/InitiativeAndReferendumProcess';
+import { SideNav } from '@/components/client/sideNav';
+import { SideNavDrawer } from '@/components/client/SideNavDrawer';
+import { PageColumnController } from '@/components/client/PageColumnController';
 
 const metaQuery = gql(`
   query GetElectionsPageMeta {
@@ -90,30 +92,26 @@ export default async function ElectionsPage() {
   return (
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
-      <PageContainer size="md" breakPoint="sm" hideBreadcrumbs>
-        <div className="lg:grid lg:grid-cols-11 lg:gap-8 w-full">
-          <div className="flex flex-col gap-8 col-span-8">
-            <ElectionPageHeader data={page} />
-            <div className="lg:hidden">
-              <ElectionPageQuickLinks data={currentElection} />
-            </div>
-            <UpcomingElectionDetails data={currentElection} />
-            <ElectionVoterInformation data={currentElection} />
-            <ElectionOfficialsInfo data={currentElection} contactData={page} />
-            <CandidateFilingInfo data={currentElection} />
-            <AbsenteeVotingInfo data={data} />
-            <EarlyVotingLocations data={data} />
-            <ElectionPollingPlaces data={page} />
-            <InitiativeAndReferendumProcess data={data} />
-            <BallotPropositions data={data} />
-            <ElectionResultsSection data={currentElection} />
-            <ElectionPageContact data={page} />
-          </div>
-          <div className="hidden lg:block lg:col-span-3 nav-ignore">
-            <ElectionPageQuickLinks data={currentElection} />
-          </div>
+      <PageColumnController
+        right={<ElectionPageQuickLinks data={currentElection} />}
+      >
+        <SideNavDrawer />
+        <ElectionPageHeader data={page} />
+        <div className="lg:hidden">
+          <ElectionPageQuickLinks data={currentElection} />
         </div>
-      </PageContainer>
+        <UpcomingElectionDetails data={currentElection} />
+        <ElectionVoterInformation data={currentElection} />
+        <ElectionOfficialsInfo data={currentElection} contactData={page} />
+        <CandidateFilingInfo data={currentElection} />
+        <AbsenteeVotingInfo data={data} />
+        <EarlyVotingLocations data={data} />
+        <ElectionPollingPlaces data={page} />
+        <InitiativeAndReferendumProcess data={data} />
+        <BallotPropositions data={data} />
+        <ElectionResultsSection data={currentElection} />
+        <ElectionPageContact data={page} />
+      </PageColumnController>
       <PageViewTracker pageId="1" pageType="ElectionsPage" />
     </>
   );

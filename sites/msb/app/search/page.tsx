@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function SearchPage() {
   return (
-    <PageContainer size="lg" breakPoint="lg" hideBreadcrumbs>
+    <PageContainer size="lg">
       <InstantSearch />
     </PageContainer>
   );
