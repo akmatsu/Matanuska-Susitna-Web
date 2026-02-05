@@ -18,6 +18,7 @@ import { PageColumnController } from '../client/PageColumnController';
 const BasePageFragment = gql(`
   fragment BasePageInfo on BasePageWithSlug {
     id
+    
     __typename
     ...PageBody
     ...HeroImage
@@ -29,6 +30,7 @@ const BasePageFragment = gql(`
     }
     ...PageEvents
     ...PagePublicNotices
+    hideSideNav
 
     ... on BasePageWithDefaultRelationships {
       topics(orderBy:  {
@@ -145,6 +147,7 @@ export function BasePage(props: {
       {!props.hideHero && <PageHeroImage page={page} />}
       <PageColumnController
         {...props.pageContainerProps}
+        showSideNav={!page.hideSideNav}
         right={
           hasSideColumnContent && (
             <>

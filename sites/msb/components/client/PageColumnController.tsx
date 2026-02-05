@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SideNav } from './sideNav';
 import { useSideNavDrawer } from '@/hooks/SideNavDrawerContext';
 import { Breadcrumbs } from './breadcrumbs';
@@ -20,7 +20,17 @@ export function PageColumnController<T extends React.ElementType>({
 }) {
   const { headings } = useSideNavDrawer();
   const Tag = props.as || 'div';
-  const hasLeftColumn = showSideNav && headings.length > 1;
+  const [hasLeftColumn, setLeftColumn] = React.useState(
+    showSideNav && headings.length > 1,
+  );
+
+  useEffect(() => {
+    setLeftColumn(showSideNav && headings.length > 1);
+  }, [headings, showSideNav]);
+  // const hasLeftColumn = showSideNav && headings.length > 1;
+  // console.log('headings: ', headings);
+  // console.log('showSideNav: ', showSideNav);
+  // console.log('hasLeftColumn: ', hasLeftColumn);
   const hasRightColumn =
     !!props.right && React.Children.toArray(props.right).length > 0;
   const hasBothColumns = hasLeftColumn && hasRightColumn;
@@ -43,15 +53,14 @@ export function PageColumnController<T extends React.ElementType>({
             : hasRightColumn && 'lg:grid lg:grid-cols-11 lg:gap-8',
         )}
       >
-        {hasLeftColumn && (
-          <div
-            className={clsx(
-              'hidden md:flex md:flex-col md:col-span-3 w-full relative',
-            )}
-          >
-            <SideNav />
-          </div>
-        )}
+        <div
+          className={clsx(
+            'hidden  relative',
+            hasLeftColumn && 'md:flex md:flex-col md:col-span-3 w-full',
+          )}
+        >
+          <SideNav />
+        </div>
 
         <div className={clsx('md:col-span-11 lg:col-span-8 w-full')}>
           {showBreadCrumbs && <Breadcrumbs />}
