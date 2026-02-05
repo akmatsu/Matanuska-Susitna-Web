@@ -25,7 +25,7 @@ export default async function TrailsUpdatesPage(props: {
   const data = await getTrailUpdates({ maintainer, query, date });
 
   return (
-    <PageContainer size="lg" breakPoint="sm">
+    <PageContainer size="lg">
       <ProseWrapper>
         <h1>Trail Updates</h1>
         <LinkButton

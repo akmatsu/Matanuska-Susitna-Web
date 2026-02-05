@@ -1,11 +1,19 @@
 'use client';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 
+export type HeadingNode = {
+  id: string;
+  text: string;
+  level: number;
+};
+
 const SideNavDrawerContext = createContext({
   isOpen: false,
   open: () => {},
   close: () => {},
+  headings: [] as HeadingNode[],
   panelRef: { current: null as HTMLDivElement | null },
+  setHeadings: (headings: HeadingNode[]) => {},
 });
 
 export function SideNavDrawerProvider({
@@ -14,6 +22,7 @@ export function SideNavDrawerProvider({
   children: React.ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [headings, setHeadings] = useState<HeadingNode[]>([]);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   const open = () => setIsOpen(true);
@@ -46,8 +55,11 @@ export function SideNavDrawerProvider({
       panelRef.current?.focus();
     }
   }, [isOpen]);
+
   return (
-    <SideNavDrawerContext.Provider value={{ isOpen, open, close, panelRef }}>
+    <SideNavDrawerContext.Provider
+      value={{ isOpen, open, close, panelRef, headings, setHeadings }}
+    >
       {children}
     </SideNavDrawerContext.Provider>
   );

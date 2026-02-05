@@ -3,12 +3,7 @@
 import { MouseEvent, useEffect, useState } from 'react';
 import { Link } from '../static/Link';
 import clsx from 'clsx';
-
-type HeadingNode = {
-  id: string;
-  text: string;
-  level: number;
-};
+import { HeadingNode, useSideNavDrawer } from '@/hooks/SideNavDrawerContext';
 
 type SideNavProps = {
   onNavigate?: () => void;
@@ -72,7 +67,7 @@ export function SideNav({
   onHeadingsChange,
   className,
 }: SideNavProps = {}) {
-  const [headings, setHeadings] = useState<HeadingNode[]>([]);
+  const { headings, setHeadings } = useSideNavDrawer();
   const [activeHeadingId, setActiveHeadingId] = useState<string>();
 
   useEffect(() => {
@@ -155,11 +150,11 @@ export function SideNav({
   }, []);
 
   useEffect(() => {
-    onHeadingsChange?.(headings.length > 0);
+    onHeadingsChange?.(headings.length > 1);
   }, [headings.length, onHeadingsChange]);
 
   useEffect(() => {
-    if (headings.length === 0) {
+    if (headings.length <= 1) {
       setActiveHeadingId(undefined);
       return undefined;
     }
@@ -225,51 +220,53 @@ export function SideNav({
     onNavigate?.();
   };
 
-  if (headings.length === 0) {
+  if (headings.length <= 1) {
     return null;
   }
 
   return (
-    <nav
-      aria-label="On this page"
-      className={clsx('sticky top-4 w-full', className)}
-    >
-      <p className="font-bold text-lg mb-4">On This Page</p>
-      <ol>
-        {headings.map((heading) => (
-          <li
-            key={heading.id}
-            className={clsx('border-t p-1 border-r-4', {
-              'border-r-primary ': activeHeadingId === heading.id,
-              'bg-base-lightest': activeHeadingId === heading.id,
-            })}
-          >
-            <Link
-              href={`#${heading.id}`}
-              onClick={(event) => handleClick(event, heading.id)}
-              className={clsx(
-                'no-underline text-base-darkest hover:underline hover:text-primary active:text-primary-dark',
-                {
-                  'ml-0': heading.level === 1,
-                  'ml-3': heading.level === 2,
-                  'ml-6': heading.level === 3,
-                  'font-semibold':
-                    heading.level === 1 && activeHeadingId !== heading.id,
-
-                  'text-sm': heading.level === 2,
-                  'text-xs': heading.level === 3,
-                  'text-black': activeHeadingId === heading.id,
-                },
-              )}
-              aria-current={
-                activeHeadingId === heading.id ? 'location' : undefined
-              }
+    <aside className="sticky top-4 w-full">
+      <nav
+        aria-label="On this page"
+        className={clsx('sticky top-4 w-full', className)}
+      >
+        <p className="font-bold text-lg mb-4">On This Page</p>
+        <ol>
+          {headings.map((heading) => (
+            <li
+              key={heading.id}
+              className={clsx('border-t p-1 border-r-4', {
+                'border-r-primary ': activeHeadingId === heading.id,
+                'bg-base-lightest': activeHeadingId === heading.id,
+              })}
             >
-              {heading.text}
-            </Link>
-          </li>
-        ))}
-      </ol>
-    </nav>
+              <Link
+                href={`#${heading.id}`}
+                onClick={(event) => handleClick(event, heading.id)}
+                className={clsx(
+                  'no-underline text-base-darkest hover:underline hover:text-primary active:text-primary-dark inline-block',
+                  {
+                    'ml-0': heading.level === 1,
+                    'ml-3': heading.level === 2,
+                    'ml-6': heading.level === 3,
+                    'font-semibold':
+                      heading.level === 1 && activeHeadingId !== heading.id,
+
+                    'text-sm': heading.level === 2,
+                    'text-xs': heading.level === 3,
+                    'text-black': activeHeadingId === heading.id,
+                  },
+                )}
+                aria-current={
+                  activeHeadingId === heading.id ? 'location' : undefined
+                }
+              >
+                {heading.text}
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </aside>
   );
 }

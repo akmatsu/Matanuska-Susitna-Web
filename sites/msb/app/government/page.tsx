@@ -136,7 +136,7 @@ export default async function GovernmentPage() {
       {page.heroImage && <Hero image={page.heroImage} />}
       <div className="flex flex-col gap-8">
         <section>
-          <PageContainer size="lg" breakPoint="sm">
+          <PageContainer size="lg">
             <ProseWrapper>
               <h1 className="mt-0">{page.title}</h1>
               {page.body ? (
@@ -149,7 +149,7 @@ export default async function GovernmentPage() {
         </section>
         <div>
           <div className="bg-surface-primary text-white pb-8">
-            <PageContainer size="lg" breakPoint="sm" hideBreadcrumbs>
+            <PageContainer size="lg">
               <section>
                 <Text type="heading2">Elected</Text>
                 <div className="flex gap-4 flex-wrap items-stretch justify-center">
@@ -186,7 +186,7 @@ export default async function GovernmentPage() {
             </PageContainer>
           </div>
           <div className="bg-base-lightest">
-            <PageContainer size="lg" breakPoint="sm" hideBreadcrumbs>
+            <PageContainer size="lg">
               <section>
                 <Text type="heading2">Boards & Commissions</Text>
                 <div className="flex gap-8 justify-center sm:justify-between items-stretch flex-wrap">
@@ -235,11 +235,7 @@ export default async function GovernmentPage() {
             </PageContainer>
           </div>
         </div>
-        <PageContainer
-          size={highlights?.length ? 'lg' : 'sm'}
-          breakPoint="sm"
-          hideBreadcrumbs
-        >
+        <PageContainer size={highlights?.length ? 'lg' : 'sm'}>
           <div
             className={clsx('grid', {
               'grid-cols-5 gap-8': !!highlights?.length,

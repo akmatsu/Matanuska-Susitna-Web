@@ -85,7 +85,7 @@ export default async function TopPages() {
   if (!data?.landingPage) return notFound();
 
   return (
-    <PageContainer size="lg" breakPoint="sm">
+    <PageContainer size="lg">
       <ProseWrapper>
         <h1>{data.landingPage.title}</h1>
         <MarkdownRenderer>{data.landingPage.body}</MarkdownRenderer>

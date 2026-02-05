@@ -29,7 +29,7 @@ export function Link({
     <NextLink
       href={href}
       {...allProps}
-      className={`inline-block ${className ?? ''}`}
+      className={`${className ?? ''}`}
     ></NextLink>
   );
 }

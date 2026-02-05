@@ -89,14 +89,14 @@ export default async function DepartmentsPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <PageContainer size={pageSize} breakPoint={pageSize}>
+      <PageContainer size={pageSize}>
         <ProseWrapper>
           <h1>{page.title}</h1>
           <MarkdownRenderer>{page.body}</MarkdownRenderer>
         </ProseWrapper>
       </PageContainer>
       <section className="bg-surface-primary text-white pb-8">
-        <PageContainer size={pageSize} breakPoint="sm" hideBreadcrumbs>
+        <PageContainer size={pageSize}>
           <Text type="heading2">Officers</Text>
           <div className="flex gap-4 flex-wrap items-stretch justify-center">
             {offices.map((o) => (
@@ -112,7 +112,7 @@ export default async function DepartmentsPage() {
         </PageContainer>
       </section>
       <section>
-        <PageContainer size={pageSize} breakPoint="sm" hideBreadcrumbs>
+        <PageContainer size={pageSize}>
           <Text type="heading2">Departments</Text>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {departments.map((d) => (
