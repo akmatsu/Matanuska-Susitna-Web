@@ -35,7 +35,9 @@ const query = gql(`
       parks {
         ...PageList
       }
-      facilities {
+      facilities(orderBy:  {
+         title: asc
+      }) {
         ...FacilitiesList
       }            
     }
