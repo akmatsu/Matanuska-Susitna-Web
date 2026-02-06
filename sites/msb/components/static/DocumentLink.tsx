@@ -59,7 +59,8 @@ export function DocumentLink<C extends ElementType = typeof Link>({
         props.className,
       )}
     >
-      {children || data?.title || data?.file?.filename}
+      {children ||
+        (data?.title || data?.file?.filename)?.replace(/^\d+\s?-?.?\s/g, '')}
     </Comp>
   );
 }

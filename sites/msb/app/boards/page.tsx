@@ -21,7 +21,9 @@ const getBoardsPage = gql(`
       vacancyReport {
         ...DocumentLink
       }
-      documents {
+      documents(orderBy:  {
+         title: asc
+      }) {
         ...BoardDocumentList
       }
       applicationForm {

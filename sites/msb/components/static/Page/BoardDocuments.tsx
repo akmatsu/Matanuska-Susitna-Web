@@ -40,7 +40,10 @@ export function BoardDocuments(props: {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {parliTrainingLink.label || parliTrainingLink.url.title}
+            {(parliTrainingLink.label || parliTrainingLink.url.title)?.replace(
+              /^\d+\s?-?.?\s/g,
+              '',
+            )}
           </Link>
         </li>
       )}
