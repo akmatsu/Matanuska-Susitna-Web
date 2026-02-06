@@ -1,3 +1,22 @@
+# [0.81.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.80.0...v0.81.0) (2026-02-06)
+
+
+### Bug Fixes
+
+* adjusted width of pages with no sidenav ([10257f3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/10257f3e6b26451ba1f51b382c3a8e40bb34e433))
+* aplphabetically sorting facilities on libraries page ([290d656](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/290d65677d4809ffa330c79a14dfc740a2734412))
+* contacts now sorted alphabetically ([bb84a87](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/bb84a870e1a15612b5626164c23ae21460182138))
+* fixed build errors ([bce1326](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/bce132611a02b2e3ea17445feb3da3b4e81c2dc9))
+
+
+### Features
+
+* added page side nav ([08deb41](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/08deb414529c406b2f7a710348d40815a2d5175d))
+* fixed sorting of training documents in boards page ([5750c60](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/5750c6072952103175e6fc49d9c831dfd1af0ec5))
+* hid candidate filing info until we confirm DOE locations and times ([2936b50](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/2936b509ef3fffc40e8817843a20aa22f67bb66d))
+* improved UI of sidenav ([1999312](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1999312dc846f08f2ff7eb7fe786be4cf9dc2846))
+* now conditionally display side nav based on API settings ([ada8040](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ada804000f2aba68d472568e21c460030dae8284))
+
 # [0.81.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.80.0...v0.81.0) (2026-02-05)
 
 
