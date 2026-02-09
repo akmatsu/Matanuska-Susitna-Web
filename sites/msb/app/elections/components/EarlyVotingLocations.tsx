@@ -9,6 +9,7 @@ import v from 'voca';
 const GetEarlyVotingLocations = gql(`
   fragment GetEarlyVotingLocations on Query {
     electionsPage {
+      hideEarlyVotingLocations
       earlyVotingLocations(orderBy:  {
          order: asc
       }) {
@@ -47,7 +48,9 @@ export function EarlyVotingLocations(props: {
   const data = getFragmentData(GetEarlyVotingLocations, props.data);
   const page = data?.electionsPage;
   const currentElection = data?.elections?.[0];
-  if (!page?.earlyVotingLocations?.length) return null;
+  if (page?.hideEarlyVotingLocations || !page?.earlyVotingLocations?.length)
+    return null;
+
   return (
     <PageSection title="Early Voting Locations" headerSize="lg">
       <ProseWrapper>

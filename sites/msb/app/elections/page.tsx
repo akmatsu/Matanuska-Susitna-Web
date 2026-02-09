@@ -13,7 +13,7 @@ import { ElectionResultsSection } from './components/ElectionsResultsSection';
 import { AbsenteeVotingInfo } from './components/AbsenteeVotingInfo';
 import { PageViewTracker } from '@/components/client/PageViewTracker';
 import { getClientHandler } from '@/utils/apollo/utils';
-// import { EarlyVotingLocations } from './components/EarlyVotingLocations';
+import { EarlyVotingLocations } from './components/EarlyVotingLocations';
 import { BallotPropositions } from './components/BallotPropositions';
 import { InitiativeAndReferendumProcess } from './components/InitiativeAndReferendumProcess';
 import { SideNavDrawer } from '@/components/client/SideNavDrawer';
@@ -104,8 +104,7 @@ export default async function ElectionsPage() {
         <ElectionOfficialsInfo data={currentElection} contactData={page} />
         <CandidateFilingInfo data={currentElection} />
         <AbsenteeVotingInfo data={data} />
-        {/* Hidden temporarily until we confirm times and location for DOE */}
-        {/* <EarlyVotingLocations data={data} /> */}
+        <EarlyVotingLocations data={data} />
         <ElectionPollingPlaces data={page} />
         <InitiativeAndReferendumProcess data={data} />
         <BallotPropositions data={data} />
