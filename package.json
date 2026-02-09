@@ -43,5 +43,11 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.55.0"
   },
-  "packageManager": "pnpm@9.15.0"
+  "packageManager": "pnpm@9.15.0",
+  "pnpm": {
+    "overrides": {
+      "@types/node": "22.19.10",
+      "zon": "3.24.1"
+    }
+  }
 }
