@@ -15,9 +15,9 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@iconify/json": "^2.2.416",
-    "@iconify/tailwind4": "^1.2.0",
+    "@iconify/json": "^2.2.437",
+    "@iconify/tailwind4": "^1.2.1",
     "@tailwindcss/typography": "^0.5.19",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.18"
   }
 }
