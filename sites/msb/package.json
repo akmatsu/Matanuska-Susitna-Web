@@ -12,7 +12,7 @@
   "dependencies": {
     "@apollo/client-integration-nextjs": "^0.14.4",
     "@date-fns/tz": "^1.4.1",
-    "@googleapis/calendar": "^11.0.1",
+    "@googleapis/calendar": "^14.2.0",
     "@matsugov/ui": "workspace:^",
     "@msb/js-sdk": "workspace:^",
     "@msb/map": "workspace:^",
@@ -57,5 +57,10 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "vitest": "^3.2.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "zon": "3.24.1"
+    }
   }
 }

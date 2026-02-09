@@ -285,8 +285,8 @@ importers:
         specifier: ^1.4.1
         version: 1.4.1
       '@googleapis/calendar':
-        specifier: ^11.0.1
-        version: 11.0.1
+        specifier: ^14.2.0
+        version: 14.2.0
       '@matsugov/ui':
         specifier: workspace:^
         version: link:../../packages/ui
@@ -428,7 +428,7 @@ importers:
         version: link:../../packages/map
       next:
         specifier: ^15.5.12
-        version: 15.5.12(@opentelemetry/api@1.9.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 15.5.12(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
         specifier: ^19.2.4
         version: 19.2.4
@@ -1009,8 +1009,8 @@ packages:
   '@fontsource/source-sans-pro@5.2.5':
     resolution: {integrity: sha512-ypendqc4pYUc+EgF7qqPY9iVYEz1t/Qr03VojKxG/2g3dnpHa1B6DOlDxWQjQXDj5QrG6inEqGT0g+edjALZyg==}
 
-  '@googleapis/calendar@11.0.1':
-    resolution: {integrity: sha512-XR6/V8SjuOyGMMx5shcKB2Ouyqkw2OG5a1srCb6ifPkIJG5qu/aocQ4VVizPc89izgdCGaKqcSpRFNJUsUuizg==}
+  '@googleapis/calendar@14.2.0':
+    resolution: {integrity: sha512-oo6bikN3dl7n43vvknpPzJlCD8FZbs82h4bZLfDAx1wWRUkIusg6++RFQvOKF46rNXsUePqyVwnFx+8oOOyK1A==}
     engines: {node: '>=12.0.0'}
 
   '@gql.tada/internal@1.0.8':
@@ -4017,8 +4017,8 @@ packages:
     resolution: {integrity: sha512-eAmLkjDjAFCVXg7A1unxHsLf961m6y17QFqXqAXGj/gVkKFrEICfStRfwUlGNfeCEjNRa32JEWOUTlYXPyyKvA==}
     engines: {node: '>=14'}
 
-  googleapis-common@8.0.2-rc.0:
-    resolution: {integrity: sha512-JTcxRvmFa9Ec1uyfMEimEMeeKq1sHNZX3vn2qmoUMtnvixXXvcqTcbDZvEZXkEWpGlPlOf4joyep6/qs0BrLyg==}
+  googleapis-common@8.0.1:
+    resolution: {integrity: sha512-eCzNACUXPb1PW5l0ULTzMHaL/ltPRADoPgjBlT8jWsTbxkCp6siv+qKJ/1ldaybCthGwsYFYallF7u9AkU4L+A==}
     engines: {node: '>=18.0.0'}
 
   gopd@1.2.0:
@@ -7390,9 +7390,9 @@ snapshots:
 
   '@fontsource/source-sans-pro@5.2.5': {}
 
-  '@googleapis/calendar@11.0.1':
+  '@googleapis/calendar@14.2.0':
     dependencies:
-      googleapis-common: 8.0.2-rc.0
+      googleapis-common: 8.0.1
     transitivePeerDependencies:
       - supports-color
 
@@ -11046,7 +11046,7 @@ snapshots:
 
   google-logging-utils@1.1.3: {}
 
-  googleapis-common@8.0.2-rc.0:
+  googleapis-common@8.0.1:
     dependencies:
       extend: 3.0.2
       gaxios: 7.1.3
@@ -12303,30 +12303,6 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.5.12(@opentelemetry/api@1.9.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
-    dependencies:
-      '@next/env': 15.5.12
-      '@swc/helpers': 0.5.15
-      caniuse-lite: 1.0.30001769
-      postcss: 8.4.31
-      react: 19.2.4
-      react-dom: 19.2.4(react@19.2.4)
-      styled-jsx: 5.1.6(react@19.2.4)
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 15.5.12
-      '@next/swc-darwin-x64': 15.5.12
-      '@next/swc-linux-arm64-gnu': 15.5.12
-      '@next/swc-linux-arm64-musl': 15.5.12
-      '@next/swc-linux-x64-gnu': 15.5.12
-      '@next/swc-linux-x64-musl': 15.5.12
-      '@next/swc-win32-arm64-msvc': 15.5.12
-      '@next/swc-win32-x64-msvc': 15.5.12
-      '@opentelemetry/api': 1.9.0
-      sharp: 0.34.5
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-
   no-case@3.0.4:
     dependencies:
       lower-case: 2.0.2
@@ -13399,11 +13375,6 @@ snapshots:
       react: 19.2.4
     optionalDependencies:
       '@babel/core': 7.29.0
-
-  styled-jsx@5.1.6(react@19.2.4):
-    dependencies:
-      client-only: 0.0.1
-      react: 19.2.4
 
   super-regex@1.1.0:
     dependencies:
