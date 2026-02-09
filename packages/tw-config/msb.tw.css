@@ -1,4 +1,4 @@
-@import './uswds-colors.css';
+@import './uswds-colors.tw.css';
 @plugin '@iconify/tailwind4';
 @plugin '@tailwindcss/typography';
 

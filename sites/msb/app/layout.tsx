@@ -1,4 +1,4 @@
-import '@/styles/index.css';
+import './global.tw.css';
 import type { Metadata } from 'next';
 import { FeedbackButton } from '@/components/client/FeedbackButton';
 import { ApolloWrapper } from '@msb/js-sdk/components';

@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Matsu tailwind config",
   "main": "./tailwind.config.js",
-  "style": "./msb.css",
+  "style": "./msb.tw.css",
   "exports": {
     ".": "./tailwind.config.js",
-    "./msb.css": "./msb.css"
+    "./msb.css": "./msb.tw.css"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
