@@ -1,6 +1,6 @@
 'use client';
-import { Button, Card, CardBody } from '@matsugov/ui';
-import { Dialog, DialogPanel, DialogTitle } from '@matsugov/ui/Dialog';
+import { Button } from '@matsugov/ui';
+import { Dialog, DialogPanel } from '@matsugov/ui/Dialog';
 import { Text } from '@matsugov/ui/Text';
 import { useState } from 'react';
 import {
@@ -46,7 +46,7 @@ export function TrailReportImageDialog(props: { images?: string[] }) {
                 quality={25}
                 width={100}
                 height={25}
-                className="object-cover rounded cursor-pointer h-full w-full"
+                className="h-full w-full cursor-pointer rounded object-cover"
               />
             </button>
           </>
@@ -63,15 +63,15 @@ export function TrailReportImageDialog(props: { images?: string[] }) {
           <div className="flex h-full min-h-full items-center justify-center">
             <DialogPanel
               transition
-              className="w-screen h-screen min-h-screen bg-black/10 p-6 backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
+              className="h-screen min-h-screen w-screen bg-black/10 p-6 backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
             >
-              <div className="flex justify-end items-center">
+              <div className="flex items-center justify-end">
                 <Button onClick={close} color="black" icon title="Close">
                   <span className="icon-[mdi--close] size-6" />
                   <span className="sr-only">Close</span>
                 </Button>
               </div>
-              <div className="w-full h-full sm:px-12 flex justify-center items-center">
+              <div className="flex h-full w-full items-center justify-center sm:px-12">
                 <Carousel
                   className="w-full"
                   opts={{
@@ -86,7 +86,7 @@ export function TrailReportImageDialog(props: { images?: string[] }) {
                           <img
                             src={src}
                             alt={`Trail Report Image ${index + 1}`}
-                            className="max-h-[85vh] object-contain rounded w-full h-full"
+                            className="h-full max-h-[85vh] w-full rounded object-contain"
                           />
                         </CarouselItem>
                       );
