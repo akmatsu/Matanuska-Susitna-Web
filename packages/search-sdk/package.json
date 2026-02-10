@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.28.6",
-    "typesense": "^2.1.0"
+    "typesense": "^3.0.1"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
