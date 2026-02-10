@@ -25,7 +25,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
-    "@next/eslint-plugin-next": "^16.1.6",
+    "@next/eslint-plugin-next": "16.1.6",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
@@ -47,7 +47,14 @@
   "pnpm": {
     "overrides": {
       "@types/node": "22.19.10",
-      "zon": "3.24.1"
+      "zon": "3.24.1",
+      "@types/react": "19.2.13",
+      "@types/react-dom": "19.2.3"
     }
+  },
+  "dependencies": {
+    "next": "16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   }
 }
