@@ -56,7 +56,17 @@ export function Footer({
           </div>
         </Link>
 
-        <FooterSection title="Explore" items={navItems || []} linkAs={Link} />
+        <FooterSection
+          title="Explore"
+          items={[
+            ...(navItems ? navItems : []),
+            {
+              label: 'Accessibility Statement',
+              href: '/policies/accessibility-statement',
+            },
+          ]}
+          linkAs={Link}
+        />
 
         <FooterSection
           linkAs={Link}
