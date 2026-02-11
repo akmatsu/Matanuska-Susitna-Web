@@ -68,8 +68,11 @@
     "@fontsource/source-sans-pro": "^5.2.5",
     "@headlessui/react": "^2.2.9",
     "@matsugov/app-config": "workspace:^",
+    "@radix-ui/react-slot": "^1.2.4",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
+    "install": "^0.13.0",
+    "radix-ui": "^1.4.3",
     "resize-observer-polyfill": "^1.5.1",
     "tailwind-merge": "^3.4.0"
   },

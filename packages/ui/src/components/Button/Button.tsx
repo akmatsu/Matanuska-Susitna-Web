@@ -1,50 +1,50 @@
 import React, { type JSX } from 'react';
 import clsx from 'clsx';
+import { Slot } from 'radix-ui';
 
-export type ButtonProps<T extends React.ElementType = 'button'> = {
-  className?: string;
-  children?: React.ReactNode;
-  type?: JSX.IntrinsicElements['button']['type'];
-  onClick?: JSX.IntrinsicElements['button']['onClick'];
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'accent-cool'
-    | 'accent-warm'
-    | 'base'
-    | 'base-light'
-    | 'error'
-    | 'warning'
-    | 'success'
-    | 'black'
-    | 'transparent';
-  disabled?: boolean;
-  as?: T;
-  href?: string;
-  block?: boolean;
-  size?: 'xs' | 'sm' | 'md' | 'lg';
-  rounded?: boolean | 'none' | 'pill' | 'left' | 'right';
-  shadow?: boolean;
-  icon?: boolean;
-  square?: boolean;
-  underline?: boolean;
-  active?: boolean;
-  blockOnMobile?: boolean;
-  outlined?: boolean;
-} & Omit<React.ComponentPropsWithRef<T>, 'color'>;
+export type ButtonProps<T extends React.ElementType = 'button'> =
+  React.ComponentProps<'button'> & {
+    className?: string;
+    children?: React.ReactNode;
+    type?: JSX.IntrinsicElements['button']['type'];
+    onClick?: JSX.IntrinsicElements['button']['onClick'];
+    color?:
+      | 'primary'
+      | 'secondary'
+      | 'accent-cool'
+      | 'accent-warm'
+      | 'base'
+      | 'base-light'
+      | 'error'
+      | 'warning'
+      | 'success'
+      | 'black'
+      | 'transparent';
+    disabled?: boolean;
+    asChild?: boolean;
+    block?: boolean;
+    size?: 'xs' | 'sm' | 'md' | 'lg';
+    rounded?: boolean | 'none' | 'pill' | 'left' | 'right';
+    shadow?: boolean;
+    icon?: boolean;
+    square?: boolean;
+    underline?: boolean;
+    active?: boolean;
+    blockOnMobile?: boolean;
+    outlined?: boolean;
+  } & Omit<React.ComponentPropsWithRef<T>, 'color'>;
 
 /**
  * A customizable button component that supports multiple color variants, states, and polymorphic rendering
  * @component
  */
 
-export function Button<T extends React.ElementType = 'button'>({
+export function Button({
   className,
   color = 'base',
   type = 'button',
   disabled,
-  href,
-  as,
+  asChild,
   block,
   icon,
   rounded = true,
@@ -53,25 +53,23 @@ export function Button<T extends React.ElementType = 'button'>({
   underline = false,
   active = false,
   title,
-  ariaLabel,
   blockOnMobile,
   size = 'md',
   outlined,
   ...props
-}: ButtonProps<T>) {
-  const Component = as || (href ? 'a' : 'button');
+}: ButtonProps) {
+  const Component = asChild ? Slot.Root : 'button';
 
   return (
     <Component
       {...props}
-      href={href}
       type={Component === 'button' ? type : undefined}
       disabled={disabled}
       aria-disabled={disabled}
       title={title || props.children?.toString()}
-      aria-label={ariaLabel || title || props.children?.toString()}
+      aria-label={title || props.children?.toString()}
       className={clsx(
-        'leading-none focus-ring text-center flex items-center justify-center no-underline transition-colors active:transition-none min-w-fit',
+        'focus-ring flex min-w-fit items-center justify-center text-center leading-none no-underline transition-colors active:transition-none',
         {
           shadow: shadow && !outlined,
           // Rounded corners group
@@ -97,7 +95,7 @@ export function Button<T extends React.ElementType = 'button'>({
           'p-3 text-sm': square && size === 'sm',
           'p-2 text-xs': square && size === 'xs',
           'p-4': square && size === 'lg',
-          'p-2 aspect-square': size === 'md' && icon && !square,
+          'aspect-square p-2': size === 'md' && icon && !square,
 
           'font-bold': !square,
           underline: underline,
@@ -107,7 +105,7 @@ export function Button<T extends React.ElementType = 'button'>({
           'bg-disabled-lighter text-disabled-dark cursor-not-allowed': disabled,
 
           // Color variants group
-          'bg-transparent text-base border border-base-lighter hover:border-base-light':
+          'border-base-lighter hover:border-base-light border bg-transparent text-base':
             color === 'transparent' && !disabled && !active && !outlined,
           'bg-primary hover:bg-primary-dark active:bg-primary-darker text-base-lightest':
             color === 'primary' && !disabled && !active && !outlined,
@@ -119,7 +117,7 @@ export function Button<T extends React.ElementType = 'button'>({
             color === 'accent-warm' && !disabled && !active && !outlined,
           'bg-base-dark hover:bg-base-darker active:bg-base-darkest text-white':
             color === 'base' && !disabled && !active && !outlined,
-          'bg-base-lightest hover:bg-base-lighter hover:border-base-light hover:text-base-dark active:bg-base-light active:border-base text-base border border-base-lighter':
+          'bg-base-lightest hover:bg-base-lighter hover:border-base-light hover:text-base-dark active:bg-base-light active:border-base border-base-lighter border text-base':
             color === 'base-light' && !disabled && !active && !outlined,
           'bg-error hover:bg-error-dark active:bg-error-darker text-white':
             color === 'error' && !disabled && !active && !outlined,
@@ -130,12 +128,12 @@ export function Button<T extends React.ElementType = 'button'>({
           'bg-base-darkest hover:bg-base-darker active:bg-base-dark text-white':
             color === 'black' && !disabled && !active && !outlined,
 
-          'bg-primary  active:bg-primary-darker text-base-lightest':
+          'bg-primary active:bg-primary-darker text-base-lightest':
             color === 'primary' && !disabled && active,
           'bg-primary text-white': color === 'secondary' && !disabled && active,
 
           // Outlined variants
-          'bg-transparent text-primary border border-primary hover:border-primary-dark hover:text-primary-dark active:border-primary-darker active:text-primary-darker':
+          'text-primary border-primary hover:border-primary-dark hover:text-primary-dark active:border-primary-darker active:text-primary-darker border bg-transparent':
             color === 'primary' && !disabled && !active && outlined,
         },
         className,
