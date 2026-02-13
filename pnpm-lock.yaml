@@ -303,6 +303,9 @@ importers:
       '@googleapis/calendar':
         specifier: ^14.2.0
         version: 14.2.0
+      '@matsugov/app-config':
+        specifier: workspace:^
+        version: link:../../packages/app-config
       '@matsugov/ui':
         specifier: workspace:^
         version: link:../../packages/ui

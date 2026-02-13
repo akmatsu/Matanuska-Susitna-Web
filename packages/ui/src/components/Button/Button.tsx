@@ -84,10 +84,11 @@ export function Button({
           'sm:w-fit': blockOnMobile,
           'w-full': (blockOnMobile || block) && !icon && !square,
 
+          // Padding and text size group
           'px-2 py-1 text-xs': size === 'xs' && !icon && !square,
           'px-3 py-1.5 text-sm': size === 'sm' && !icon && !square,
-
-          // Padding and text size group
+          'p-1': size === 'sm' && icon,
+          'p-3': size === 'md' && icon,
           'px-5 py-3': size === 'md' && !icon && !square,
           'px-6 py-4 text-xl': size === 'lg' && !icon && !square,
           'size-10': square && size === 'md',

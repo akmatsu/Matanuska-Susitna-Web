@@ -24,27 +24,27 @@ export function Banner({
     <Disclosure
       as={'section'}
       aria-label={label}
-      className="bg-surface-primary px-4 border-b border-b-base-lighter text-white"
+      className="bg-surface-primary px-4 text-white"
     >
       <div className="mx-auto">
-        <DisclosureButton className="group py-1 text-xs text-left leading-none flex items-center cursor-pointer">
+        <DisclosureButton className="group flex cursor-pointer items-center py-1 text-left text-xs leading-none">
           <img
             src="/msb_icon_yellow.svg"
             alt="MSB Logo"
-            className="size-8 inline-block mr-2"
+            className="mr-2 inline-block size-8"
           />
           <span>
             {label}{' '}
-            <span className="underline text-secondary">
+            <span className="text-secondary underline">
               Here&apos;s how you know
             </span>
-            <span className="icon-[mdi--chevron-down] group-data-open:rotate-180 transition-transform size-4 text-secondary align-bottom"></span>
+            <span className="icon-[mdi--chevron-down] text-secondary size-4 align-bottom transition-transform group-data-open:rotate-180"></span>
           </span>
         </DisclosureButton>
 
         <DisclosurePanel className="py-6">
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <div className="w-full flex">
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+            <div className="flex w-full">
               <div className="flex gap-2">
                 <img src={dotGovIcon} alt="Dot Gov Icon" className="size-10" />
                 <div>
@@ -60,7 +60,7 @@ export function Banner({
               </div>
               <div></div>
             </div>
-            <div className="w-full flex">
+            <div className="flex w-full">
               <div className="flex gap-2">
                 <img src={httpsIcon} alt="Dot Gov Icon" className="size-10" />
                 <div>

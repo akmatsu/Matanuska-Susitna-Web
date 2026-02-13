@@ -2,16 +2,17 @@ import './global.tw.css';
 import type { Metadata } from 'next';
 import { FeedbackButton } from '@/components/client/FeedbackButton';
 import { ApolloWrapper } from '@msb/js-sdk/components';
-import { Footer } from '@matsugov/ui/Footer';
-import { Header } from '@matsugov/ui/Header';
-import Link from 'next/link';
-import { primaryNav } from '@/configs/config';
-import Image from 'next/image';
+// import { Footer } from '@matsugov/ui/Footer';
+// import { Header } from '@matsugov/ui/Header';
+// import Link from 'next/link';
+// import { primaryNav } from '@/configs/config';
+// import Image from 'next/image';
 import { SiteInfo } from '@/components/static/Header/SiteInfo';
 import { signIn, signOut, auth } from '@/auth';
 import { CookieBannerProvider } from '@matsugov/ui/CookieBannerContext';
 import { AnalyticsScript } from '@/components/client/AnalyticsScript';
 import { SideNavDrawerProvider } from '../hooks/SideNavDrawerContext';
+import { SiteHeader } from '@/components/static/Header/SiteHeader';
 
 export const metadata: Metadata = {
   metadataBase:
@@ -37,12 +38,13 @@ export default async function RootLayout({
           <CookieBannerProvider>
             <SideNavDrawerProvider>
               <SiteInfo />
-              <Header navItems={primaryNav} navLinkAs={Link} imageAs={Image} />
+              {/* <Header navItems={primaryNav} navLinkAs={Link} imageAs={Image} /> */}
+              <SiteHeader />
               <main id="main-content" className="position-relative">
                 {children}
               </main>
               <FeedbackButton />
-              <Footer
+              {/* <Footer
                 navLinkAs={Link}
                 imageAs={Image}
                 contactHref="/departments"
@@ -57,7 +59,7 @@ export default async function RootLayout({
                   'use server';
                   await signOut();
                 }}
-              />
+              /> */}
               <AnalyticsScript />
             </SideNavDrawerProvider>
           </CookieBannerProvider>
