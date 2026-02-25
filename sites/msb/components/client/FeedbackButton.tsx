@@ -26,7 +26,7 @@ export const FeedbackButton = () => {
           className="before:icon-[mdi--message-alert] before:mr-1 before:-mb-1 before:inline-block before:text-lg"
           color="primary"
         >
-          Give Website Feedback
+          Give Web site Feedback
         </LinkButton>
       </div>
     </div>
