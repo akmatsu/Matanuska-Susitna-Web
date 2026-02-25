@@ -175,7 +175,7 @@ export default async function Communities() {
                   <h3>All Borough Services</h3>
                   <ul className="not-prose">
                     <li>
-                      <Link href="/animal-care">Animal Cares</Link>
+                      <Link href="/animal-care">Animal Care</Link>
                     </li>
                     <li>
                       <Link href="/central-landfill">Central Landfill</Link>
