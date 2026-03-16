@@ -2,10 +2,11 @@
 import React, { ComponentProps } from 'react';
 import { useEffect, useState } from 'react';
 import { Button } from '../Button';
+import Link from 'next/link';
+
 export function PaginationButton({
   page,
   currentPage,
-  as = 'a',
   onClick,
   disabled = false,
   children,
@@ -13,7 +14,6 @@ export function PaginationButton({
 }: {
   page: number | string;
   currentPage: number | string;
-  as?: React.ElementType;
   onClick?: (page: string | number) => void;
   disabled?: boolean;
   children?: React.ReactNode;
@@ -39,17 +39,16 @@ export function PaginationButton({
 
   return (
     <Button
-      as={as}
       square
       color={active ? 'black' : 'transparent'}
-      href={href}
       underline
       shadow={false}
       onClick={handleClick}
       disabled={disabled}
       size={size}
+      asChild
     >
-      {children ?? page}
+      <Link href={href}>{children ?? page}</Link>
     </Button>
   );
 }

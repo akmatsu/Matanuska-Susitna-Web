@@ -4,7 +4,6 @@ import { PaginationButton } from './PaginationButton';
 type PaginationProps = {
   currentPage?: number;
   totalPages?: number;
-  linkAs?: React.ElementType;
   onLinkClick?: (page: string | number) => void;
   size?: React.ComponentProps<typeof PaginationButton>['size'];
 };
@@ -12,7 +11,6 @@ type PaginationProps = {
 export function Pagination({
   currentPage = 1,
   totalPages = 1,
-  linkAs = 'a',
   onLinkClick,
   size,
 }: PaginationProps) {
@@ -34,12 +32,11 @@ export function Pagination({
 
   return (
     <nav aria-label="Pagination">
-      <ul className="flex gap-2 justify-center items-center">
+      <ul className="flex items-center justify-center gap-2">
         {/* Previous Arrow */}
         <PaginationButton
           page={currentPage - 1}
           currentPage={currentPage}
-          as={linkAs}
           onClick={onLinkClick}
           disabled={currentPage <= 1}
           aria-label="Previous"
@@ -53,12 +50,11 @@ export function Pagination({
             <PaginationButton
               page={1}
               currentPage={currentPage}
-              as={linkAs}
               onClick={onLinkClick}
               size={size}
             />
             <li>
-              <div className="flex items-end justify-center size-9">
+              <div className="flex size-9 items-end justify-center">
                 <span>...</span>
               </div>
             </li>
@@ -70,7 +66,6 @@ export function Pagination({
             key={page}
             page={page}
             currentPage={currentPage}
-            as={linkAs}
             onClick={onLinkClick}
             size={size}
           />
@@ -79,14 +74,13 @@ export function Pagination({
         {showOverflow && currentRange[currentRange.length - 1] < totalPages && (
           <>
             <li>
-              <div className="flex items-end justify-center size-9">
+              <div className="flex size-9 items-end justify-center">
                 <span>...</span>
               </div>
             </li>
             <PaginationButton
               page={totalPages}
               currentPage={currentPage}
-              as={linkAs}
               onClick={onLinkClick}
               size={size}
             />
@@ -97,7 +91,6 @@ export function Pagination({
         <PaginationButton
           page={currentPage + 1}
           currentPage={currentPage}
-          as={linkAs}
           onClick={onLinkClick}
           disabled={currentPage >= totalPages}
           aria-label="Next"
