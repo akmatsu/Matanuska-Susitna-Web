@@ -27,15 +27,6 @@ export function CookieBannerProvider({
   const [shouldShowCookieBanner, setShouldShowCookieBanner] = useState(false);
   const [consent, setConsent] = useState<CookieConsent>(null);
 
-  useEffect(() => {
-    const stored = localStorage.getItem('cookie-consent') as CookieConsent;
-    if (!stored) {
-      showCookieBanner();
-    } else {
-      setConsent(stored);
-    }
-  });
-
   function hideCookieBanner() {
     setShouldShowCookieBanner(false);
   }
@@ -53,6 +44,15 @@ export function CookieBannerProvider({
     localStorage.setItem('cookie-consent', 'declined');
     setConsent('declined');
   }
+
+  useEffect(() => {
+    const stored = localStorage.getItem('cookie-consent') as CookieConsent;
+    if (!stored) {
+      showCookieBanner();
+    } else {
+      setConsent(stored);
+    }
+  }, []);
 
   return (
     <CookieBannerContext.Provider

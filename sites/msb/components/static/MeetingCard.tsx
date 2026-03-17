@@ -46,9 +46,6 @@ export function MeetingCard({
       joinUrl = `https://zoom.us/j/${meetingId}${passcode ? `?pwd=${passcode}` : ''}`;
     }
   } else if (isTeams) {
-    const match = partOne?.match(teamsRegex) || partTwo?.match(teamsRegex);
-    meetingId = match?.[1]?.replace(/\s/g, '');
-
     joinUrl = `https://www.microsoft.com/en-us/microsoft-teams/join-a-meeting`;
   }
 

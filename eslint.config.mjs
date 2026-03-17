@@ -1,15 +1,11 @@
+import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import pluginJs from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
-import { FlatCompat } from '@eslint/eslintrc';
 import gitignore from 'eslint-config-flat-gitignore';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
 
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-});
-
-export default tseslint.config(
+export default defineConfig(
   gitignore({
     files: ['.gitignore'],
     strict: false,
@@ -22,8 +18,17 @@ export default tseslint.config(
     },
   },
 
-  // TypeScript specific rules
-  ...tseslint.configs.recommended,
+  ...nextVitals,
+  ...nextTs,
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    'gql.ts',
+    'graphql.ts',
+  ]),
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off', // Allow 'any' type
@@ -31,33 +36,4 @@ export default tseslint.config(
       '@typescript-eslint/triple-slash-reference': 'off', // Allow triple-slash directives
     },
   },
-
-  // React specific rules
-  {
-    ...pluginReact.configs.flat.recommended,
-    files: ['**/*.{js,ts,jsx,tsx}'],
-    settings: {
-      react: {
-        version: 'detect', // Automatically detect the React version
-      },
-    },
-    rules: {
-      ...pluginReact.configs.flat.recommended.rules,
-      'react/react-in-jsx-scope': 'off', // Not needed with React 17+
-    },
-  },
-
-  ...compat
-    .config({
-      extends: ['next'],
-      settings: {
-        next: {
-          rootDir: 'sites/*',
-        },
-      },
-    })
-    .map((config) => ({
-      ...config,
-      files: ['sites/**/**/*.{js,jsx,ts,tsx}'],
-    })),
 );
