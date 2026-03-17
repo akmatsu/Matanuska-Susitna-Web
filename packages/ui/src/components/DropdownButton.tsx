@@ -21,15 +21,17 @@ export function DropdownButton<T extends React.ElementType = 'a'>(props: {
 }) {
   return (
     <Menu>
-      <Button as={MenuButton} {...props.buttonProps}>
-        {props.label}
-        {!props.hideIcon && (
-          <span className="icon-[mdi--chevron-down] size-4 ml-2" />
-        )}
+      <Button asChild {...props.buttonProps}>
+        <MenuButton>
+          {props.label}
+          {!props.hideIcon && (
+            <span className="icon-[mdi--chevron-down] ml-2 size-4" />
+          )}
+        </MenuButton>
       </Button>
       <MenuItems
         anchor="bottom"
-        className="rounded border border-base-lighter shadow bg-white min-w-(--button-width) p-2 flex flex-col"
+        className="border-base-lighter flex min-w-(--button-width) flex-col rounded border bg-white p-2 shadow"
       >
         {props.appendTop}
         {props.items?.length ? (
@@ -41,12 +43,12 @@ export function DropdownButton<T extends React.ElementType = 'a'>(props: {
                     label={v.replace(v.titleCase(item.label), /_|-/g, ' ')}
                     checked={item.isChecked}
                     onChange={item.action}
-                    className="p-2 rounded hover:bg-blue-100 cursor-pointer data-focus:bg-blue-100"
+                    className="cursor-pointer rounded p-2 hover:bg-blue-100 data-focus:bg-blue-100"
                   />
                 ) : (
                   <button
                     onClick={item.action}
-                    className="w-full text-left after:icon-[mdi--download] after:ml-1 after:-mb-1 p-2 hover:cursor-pointer transition-colors data-focus:bg-blue-100 rounded"
+                    className="after:icon-[mdi--download] w-full rounded p-2 text-left transition-colors after:-mb-1 after:ml-1 hover:cursor-pointer data-focus:bg-blue-100"
                   >
                     {item.label}
                   </button>
@@ -56,7 +58,7 @@ export function DropdownButton<T extends React.ElementType = 'a'>(props: {
                   href={item.href!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black p-2 w-full text-left no-underline after:icon-[mdi--external-link] after:ml-1 after:-mb-1 transition-colors  data-focus:bg-blue-100 rounded"
+                  className="after:icon-[mdi--external-link] w-full rounded p-2 text-left text-black no-underline transition-colors after:-mb-1 after:ml-1 data-focus:bg-blue-100"
                 >
                   {item.label}
                 </a>
@@ -65,7 +67,7 @@ export function DropdownButton<T extends React.ElementType = 'a'>(props: {
           ))
         ) : (
           <MenuItem>
-            <p className="text-gray-500 focus">No items available</p>
+            <p className="focus text-gray-500">No items available</p>
           </MenuItem>
         )}
         {props.appendBottom}

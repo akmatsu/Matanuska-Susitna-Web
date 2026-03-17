@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { PageBody } from '@/components/static/Page/PageBody';
 import { notFound } from 'next/navigation';
 import { BoardsList } from './components/BoardsList';
+import { BoardListLoading } from './components/BoardListLoading';
 import { gql } from '@msb/js-sdk/gql';
 import { BoardDocuments } from '@/components/static/Page/BoardDocuments';
 import Link from 'next/link';
@@ -12,6 +13,7 @@ import { DocumentLink } from '@/components/static/DocumentLink';
 import { PageHeroImage } from '@/components/static/Page/PageHeroImage';
 import { PageContainer } from '@/components/static/Page';
 import { getClientHandler } from '@/utils/apollo/utils';
+import { Suspense } from 'react';
 
 const getBoardsPage = gql(`
   query GetBoardsPage {
@@ -81,7 +83,7 @@ export default async function BoardsPage() {
               <CardHeader>
                 <div className="max-w-fit">
                   <CardTitle>Requirements to Serve</CardTitle>
-                  <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
+                  <div className="bg-secondary mt-1.5 h-1 max-w-full"></div>
                 </div>
               </CardHeader>
               <CardBody>
@@ -102,7 +104,7 @@ export default async function BoardsPage() {
               <CardHeader>
                 <div className="max-w-fit">
                   <CardTitle>Training & Resources</CardTitle>
-                  <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
+                  <div className="bg-secondary mt-1.5 h-1 max-w-full"></div>
                 </div>
               </CardHeader>
               <CardBody>
@@ -119,7 +121,7 @@ export default async function BoardsPage() {
               <CardHeader>
                 <div className="max-w-fit">
                   <CardTitle>How to Apply</CardTitle>
-                  <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
+                  <div className="bg-secondary mt-1.5 h-1 max-w-full"></div>
                 </div>
               </CardHeader>
               <CardBody>
@@ -134,7 +136,7 @@ export default async function BoardsPage() {
                   350 E. Dahlia Ave, Palmer AK, 99645, or Faxed to 907-861-7845.
                 </p>
                 {page.applicationForm && (
-                  <ul className="list-disc list-inside">
+                  <ul className="list-inside list-disc">
                     <li>
                       <DocumentLink data={page.applicationForm} />
                     </li>
@@ -149,7 +151,7 @@ export default async function BoardsPage() {
               <CardHeader>
                 <div className="max-w-fit">
                   <CardTitle>Vacancy Report</CardTitle>
-                  <div className="max-w-full bg-secondary h-1 mt-1.5"></div>
+                  <div className="bg-secondary mt-1.5 h-1 max-w-full"></div>
                 </div>
               </CardHeader>
               <CardBody>
@@ -163,7 +165,7 @@ export default async function BoardsPage() {
                   interest in serving.
                 </p>
                 {page.vacancyReport && (
-                  <ul className="list-disc list-inside">
+                  <ul className="list-inside list-disc">
                     <li>
                       <DocumentLink data={page.vacancyReport} />
                     </li>
@@ -172,7 +174,9 @@ export default async function BoardsPage() {
               </CardBody>
             </Card>
           </div>
-          <BoardsList />
+          <Suspense fallback={<BoardListLoading />}>
+            <BoardsList />
+          </Suspense>
         </div>
       </PageContainer>
     </>

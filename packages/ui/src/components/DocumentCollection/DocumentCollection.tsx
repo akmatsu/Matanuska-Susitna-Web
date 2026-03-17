@@ -1,7 +1,9 @@
-import { ComponentProps, ElementType } from 'react';
+import { ReactNode } from 'react';
 import { Button } from '../Button';
 import clsx from 'clsx';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import Link from 'next/link';
+import { React } from 'next/dist/server/route-modules/app-page/vendored/rsc/entrypoints';
 
 const documentCollectionFragment = gql(`
   fragment DocumentCollectionDisplay on DocumentCollection {
@@ -17,13 +19,11 @@ const documentCollectionFragment = gql(`
 
 export function DocumentCollection({
   collection,
-  linkAs = 'a',
   linkStyle = 'button',
   hideTitle = false,
   centerLabel = true,
 }: {
   collection: FragmentType<typeof documentCollectionFragment>;
-  linkAs?: ElementType;
   linkStyle?: 'button' | 'link';
   hideTitle?: boolean;
   label?: string;
@@ -41,7 +41,6 @@ export function DocumentCollection({
         {collectionData?.documents?.map((document) => (
           <Document
             document={document}
-            linkAs={linkAs}
             linkStyle={linkStyle}
             centerLabel={centerLabel}
             key={document.id}
@@ -65,22 +64,14 @@ const documentButtonFragment = gql(`
 
 function Document({
   document,
-  linkAs,
   linkStyle,
   centerLabel,
 }: {
   document: FragmentType<typeof documentButtonFragment>;
-  linkAs: ElementType;
   linkStyle: 'button' | 'link';
   centerLabel: boolean;
 }) {
   const doc = getFragmentData(documentButtonFragment, document);
-  const Link =
-    linkStyle === 'link'
-      ? linkAs
-      : (props: ComponentProps<typeof Button>) => (
-          <Button block as={linkAs} {...props}></Button>
-        );
 
   const fileType = doc.file?.filename.split('.').pop()?.toUpperCase();
   const isInternal =
@@ -88,17 +79,35 @@ function Document({
     doc.file?.url.includes('matsugov.us') ||
     doc.file?.url.includes('msb-cms-documents.s3.us-west-2.amazonaws.com');
 
+  const target = isInternal ? '_parent' : '_blank';
+  const download = fileType === 'PDF' ? undefined : doc.file?.filename;
+  const className = clsx('flex items-center gap-1', {
+    'justify-between': !centerLabel,
+  });
+
+  const Ln = (props: { children?: ReactNode }) => (
+    <Link
+      href={doc.file?.url!}
+      target={target}
+      download={download}
+      className={className}
+      {...props}
+    />
+  );
+
+  const Btn = (p: { children?: ReactNode }) => {
+    if (linkStyle === 'link') return <Ln>{p.children}</Ln>;
+    else
+      return (
+        <Button asChild block className={className} color="primary">
+          <Ln>{p.children}</Ln>
+        </Button>
+      );
+  };
+
   return (
     <li className="my-2">
-      <Link
-        href={doc.file?.url}
-        className={clsx('flex items-center gap-1', {
-          'justify-between': !centerLabel,
-        })}
-        target={isInternal ? '_parent' : '_blank'}
-        download={fileType === 'PDF' ? undefined : doc.file?.filename}
-        color="primary"
-      >
+      <Btn>
         <span>
           <span>
             {doc.title} {''}
@@ -115,7 +124,7 @@ function Document({
             'icon-[mdi--eye]': fileType === 'PDF' && isInternal,
           })}
         ></span>
-      </Link>
+      </Btn>
     </li>
   );
 }

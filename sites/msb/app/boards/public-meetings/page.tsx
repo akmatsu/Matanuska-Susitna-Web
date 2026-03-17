@@ -2,6 +2,7 @@ import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { Link } from '@/components/static/Link';
 import { MeetingsSearch } from './components/MeetingsSearch';
+import { Suspense } from 'react';
 
 export default function PublicMeetingsPage() {
   return (
@@ -16,7 +17,9 @@ export default function PublicMeetingsPage() {
         </p>
       </ProseWrapper>
       <div className="my-4">
-        <MeetingsSearch />
+        <Suspense fallback={<div>Loading meeting search...</div>}>
+          <MeetingsSearch />
+        </Suspense>
       </div>
       <p>
         Can&apos;t find what you&apos;re looking for?{' '}
