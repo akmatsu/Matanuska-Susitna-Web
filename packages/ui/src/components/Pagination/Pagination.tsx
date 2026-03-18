@@ -16,7 +16,7 @@ export function Pagination({
 }: PaginationProps) {
   const maxSlots = 3;
   const showOverflow = totalPages > maxSlots;
-  let currentRange: number[] = [];
+  let currentRange: number[];
 
   if (!showOverflow) {
     currentRange = Array.from({ length: totalPages }, (_, i) => i + 1);

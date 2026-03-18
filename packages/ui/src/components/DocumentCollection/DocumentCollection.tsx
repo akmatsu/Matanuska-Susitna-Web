@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import Link from 'next/link';
 import { React } from 'next/dist/server/route-modules/app-page/vendored/rsc/entrypoints';
+import { DocumentButtonFragment } from '@msb/js-sdk/graphql';
 
 const documentCollectionFragment = gql(`
   fragment DocumentCollectionDisplay on DocumentCollection {
@@ -74,40 +75,25 @@ function Document({
   const doc = getFragmentData(documentButtonFragment, document);
 
   const fileType = doc.file?.filename.split('.').pop()?.toUpperCase();
+
   const isInternal =
     doc.file?.url.includes('matsu.gov') ||
     doc.file?.url.includes('matsugov.us') ||
     doc.file?.url.includes('msb-cms-documents.s3.us-west-2.amazonaws.com');
 
-  const target = isInternal ? '_parent' : '_blank';
-  const download = fileType === 'PDF' ? undefined : doc.file?.filename;
   const className = clsx('flex items-center gap-1', {
     'justify-between': !centerLabel,
   });
 
-  const Ln = (props: { children?: ReactNode }) => (
-    <Link
-      href={doc.file?.url!}
-      target={target}
-      download={download}
-      className={className}
-      {...props}
-    />
-  );
-
-  const Btn = (p: { children?: ReactNode }) => {
-    if (linkStyle === 'link') return <Ln>{p.children}</Ln>;
-    else
-      return (
-        <Button asChild block className={className} color="primary">
-          <Ln>{p.children}</Ln>
-        </Button>
-      );
-  };
-
   return (
     <li className="my-2">
-      <Btn>
+      <Btn
+        linkStyle={linkStyle}
+        fileType={fileType}
+        isInternal={isInternal}
+        doc={doc}
+        className={className}
+      >
         <span>
           <span>
             {doc.title} {''}
@@ -128,6 +114,54 @@ function Document({
     </li>
   );
 }
+
+const Ln = ({
+  doc,
+  fileType,
+  isInternal,
+  ...props
+}: {
+  children?: ReactNode;
+  doc: DocumentButtonFragment;
+  fileType?: string;
+  isInternal?: boolean;
+}) => {
+  const target = isInternal ? '_parent' : '_blank';
+  const download = fileType === 'PDF' ? undefined : doc.file?.filename;
+
+  return (
+    <Link
+      href={doc.file?.url || '#'}
+      target={target}
+      download={download}
+      {...props}
+    />
+  );
+};
+
+const Btn = (p: {
+  children?: ReactNode;
+  linkStyle: 'button' | 'link';
+  fileType?: string;
+  isInternal?: boolean;
+  doc: DocumentButtonFragment;
+  className?: string;
+}) => {
+  if (p.linkStyle === 'link')
+    return (
+      <Ln doc={p.doc} fileType={p.fileType} isInternal={p.isInternal}>
+        {p.children}
+      </Ln>
+    );
+  else
+    return (
+      <Button asChild block className={p.className} color="primary">
+        <Ln doc={p.doc} fileType={p.fileType} isInternal={p.isInternal}>
+          {p.children}
+        </Ln>
+      </Button>
+    );
+};
 
 function formatFileSize(bytes: number): string {
   const units = ['B', 'KB', 'MB', 'GB'];

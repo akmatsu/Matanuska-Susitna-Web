@@ -3,7 +3,7 @@ import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { Button, Table, Td, Th, THead, Tr } from '@matsugov/ui';
 import { Link } from '@/components/static/Link';
 import { getRedirectUrl } from '@/utils/stringHelpers';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { PageViewsListFragment as PVLF } from '@msb/js-sdk/graphql';
 
 const PageViewsListFragment = gql(`
@@ -55,33 +55,26 @@ export function PageViewsListWrapper({
   const [sortBy, setSortBy] = useState<'popularity' | 'alphabetical'>(
     defaultSortBy,
   );
-  const [viewsWithRanks, setViewsWithRanks] = useState<
-    (PVLF & { rank: number })[]
-  >(data?.map((view, index) => ({ ...view, rank: index + 1 })) || []);
-
-  useEffect(() => {
-    if (sortBy === 'popularity') {
-      setViewsWithRanks(
-        data?.map((view, index) => ({ ...view, rank: index + 1 })) || [],
-      );
-    } else if (sortBy === 'alphabetical') {
-      setViewsWithRanks((v) => {
-        const c = [...v];
-        return c.sort((a, b) => {
-          const titleA = a.item?.title || '';
-          const titleB = b.item?.title || '';
-          return titleA.localeCompare(titleB);
-        });
-      });
-    }
-  }, [sortBy, data]);
 
   if (!data) return null;
 
+  let viewsWithRanks: (PVLF & { rank: number })[] = [];
+  if (sortBy === 'popularity') {
+    viewsWithRanks = data.map((view, index) => ({ ...view, rank: index + 1 }));
+  } else if (sortBy === 'alphabetical') {
+    viewsWithRanks = data
+      .map((view, index) => ({ ...view, rank: index + 1 }))
+      .sort((a, b) => {
+        const titleA = a.item?.title || '';
+        const titleB = b.item?.title || '';
+        return titleA.localeCompare(titleB);
+      });
+  }
+
   return (
     <div>
-      <div className="flex mt-12 justify-between items-center flex-wrap gap-2">
-        <h2 className="text-2xl font-bold mb-0 mt-0 whitespace-nowrap">
+      <div className="mt-12 flex flex-wrap items-center justify-between gap-2">
+        <h2 className="mt-0 mb-0 text-2xl font-bold whitespace-nowrap">
           {props.title}
         </h2>
         <div className="flex">

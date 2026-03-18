@@ -9,31 +9,32 @@ export function InPageNavigation({
   borderPosition?: 'left' | 'right';
 }) {
   const [activeId, setActiveId] = useState<string>('');
-  const [headings, setHeadings] = useState<HTMLHeadingElement[]>([]);
+  // const [headings, setHeadings] = useState<HTMLHeadingElement[]>([]);
+
+  // useEffect(() => {
+  // Get all h1, h2 and h3 elements from the prose section
+  const elements = Array.from(
+    document.querySelector('.prose')?.querySelectorAll('h2, h3') || [],
+  );
+
+  // Ensure each heading has an ID
+  elements.forEach((heading, index) => {
+    if (!heading.id) {
+      // Convert heading text to kebab case for ID
+      const id =
+        heading.textContent
+          ?.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '') ||
+        `heading-${index.toString(36).substring(2, 9)}`;
+
+      heading.id = id;
+    }
+  });
+
+  const headings = elements as HTMLHeadingElement[];
 
   useEffect(() => {
-    // Get all h1, h2 and h3 elements from the prose section
-    const elements = Array.from(
-      document.querySelector('.prose')?.querySelectorAll('h2, h3') || [],
-    );
-
-    // Ensure each heading has an ID
-    elements.forEach((heading) => {
-      if (!heading.id) {
-        // Convert heading text to kebab case for ID
-        const id =
-          heading.textContent
-            ?.toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/(^-|-$)/g, '') ||
-          `heading-${Math.random().toString(36).substring(2, 9)}`;
-
-        heading.id = id;
-      }
-    });
-
-    setHeadings(elements as HTMLHeadingElement[]);
-
     // Set up intersection observer
     const observer = new IntersectionObserver(
       (entries) => {
@@ -58,10 +59,10 @@ export function InPageNavigation({
 
   return (
     <nav className="fixed max-h-[calc(100vh-2rem)] overflow-y-auto">
-      <h3 className="text-sm font-bold mb-2">On this page</h3>
+      <h3 className="mb-2 text-sm font-bold">On this page</h3>
       <ul
         className={clsx(
-          'space-y-2 text-xs border-base-light border-collapse w-48 max-w-full',
+          'border-base-light w-48 max-w-full border-collapse space-y-2 text-xs',
           {
             'border-r': borderPosition === 'right',
             'border-l': borderPosition === 'left',
@@ -83,7 +84,7 @@ export function InPageNavigation({
             >
               <a
                 href={`#${id}`}
-                className={clsx(`block hover:underline px-4 `, {
+                className={clsx(`block px-4 hover:underline`, {
                   'text-primary hover:text-primary-dark': activeId !== id,
                   'font-bold': tag === 'h2' || tag === 'h1',
                 })}
