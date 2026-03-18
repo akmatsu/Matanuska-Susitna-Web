@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 type CookieConsent = 'accepted' | 'declined' | null;
 
@@ -24,8 +24,15 @@ export function CookieBannerProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [shouldShowCookieBanner, setShouldShowCookieBanner] = useState(false);
-  const [consent, setConsent] = useState<CookieConsent>(null);
+  const [shouldShowCookieBanner, setShouldShowCookieBanner] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return !localStorage.getItem('cookie-consent');
+  });
+  const [consent, setConsent] = useState<CookieConsent>(() => {
+    if (typeof window === 'undefined') return null;
+    const stored = localStorage.getItem('cookie-consent');
+    return (stored as CookieConsent) || null;
+  });
 
   function hideCookieBanner() {
     setShouldShowCookieBanner(false);
@@ -44,15 +51,6 @@ export function CookieBannerProvider({
     localStorage.setItem('cookie-consent', 'declined');
     setConsent('declined');
   }
-
-  useEffect(() => {
-    const stored = localStorage.getItem('cookie-consent') as CookieConsent;
-    if (!stored) {
-      showCookieBanner();
-    } else {
-      setConsent(stored);
-    }
-  }, []);
 
   return (
     <CookieBannerContext.Provider

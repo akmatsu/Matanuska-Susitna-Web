@@ -36,7 +36,7 @@ export default async function RootLayout({
           <main id="main-content" className="position-relative">
             <SideNavDrawerProvider>{children}</SideNavDrawerProvider>
           </main>
-          <FeedbackButton />
+
           {/* <Footer
                 navLinkAs={Link}
                 imageAs={Image}
@@ -54,6 +54,7 @@ export default async function RootLayout({
                     }}
                     /> */}
           <CookieBannerProvider>
+            <FeedbackButton />
             <SiteFooter />
             <AnalyticsScript />
           </CookieBannerProvider>

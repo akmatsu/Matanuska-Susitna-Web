@@ -29,7 +29,7 @@ export function CookieBanner(props: {
   }
 
   return (
-    <Card className="ml-2 max-w-[530px] absolute bottom-0 left-0 z-1" dark>
+    <Card className="absolute bottom-0 left-0 z-1 ml-2 max-w-132.5" dark>
       <CardHeader>
         <CardTitle>We Use Cookies</CardTitle>
       </CardHeader>
