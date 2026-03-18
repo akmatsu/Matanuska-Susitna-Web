@@ -2,23 +2,23 @@
 import { TextField } from '@matsugov/ui/TextField';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Select } from '@matsugov/ui/Select';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { format, subMonths } from 'date-fns';
 
 export function TrailsUpdateSearchFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const timeoutIdRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const query = searchParams.get('query') || undefined;
   const date = searchParams.get('date') || undefined;
   const maintainer = searchParams.get('maintainer') || undefined;
 
-  let timeoutId: NodeJS.Timeout;
   function handleSearch(value: string) {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current);
     }
-    timeoutId = setTimeout(() => {
+    timeoutIdRef.current = setTimeout(() => {
       router.push(`?${createQueryString('query', value)}`);
     }, 350);
   }
@@ -39,7 +39,7 @@ export function TrailsUpdateSearchFilters() {
       onSubmit={(e) => {
         e.preventDefault();
       }}
-      className="flex flex-row gap-2 items-center flex-wrap"
+      className="flex flex-row flex-wrap items-center gap-2"
     >
       <TextField
         id="search"

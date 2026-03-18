@@ -1,15 +1,18 @@
 'use client';
 import { Button } from '@matsugov/ui';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 
 export function NotFoundBackButton(props: { children?: ReactNode }) {
   const router = useRouter();
-  const [canGoBack, setCanGoBack] = useState(false);
+  // const [canGoBack, setCanGoBack] = useState(false);
 
-  useEffect(() => {
-    setCanGoBack(window.history.length > 1);
-  }, []);
+  // useEffect(() => {
+  //   setCanGoBack(window.history.length > 1);
+  // }, []);
+
+  const canGoBack = typeof window !== 'undefined' && window.history.length > 1;
+  // const canGoBack =
 
   function handleGoBack() {
     if (canGoBack) router.back();
