@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { handleSearchRedirect } from './middleware/handlers/searchRedirect';
 import { handleCmsRedirects } from './middleware/handlers/cmsRedirects';
-import { auth } from '@/auth';
+import { auth } from './auth';
 
 export const config = {
   // Order does not matter in matchers.

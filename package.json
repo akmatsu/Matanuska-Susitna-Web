@@ -15,6 +15,7 @@
     "wid:build": "pnpm turbo run build --filter=widgets",
     "wid:start": "pnpm turbo run start --filter=widgets",
     "lint": "eslint .",
+    "lint:errors": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
     "codegen": "pnpm turbo run codegen --filter=@msb/js-sdk",
     "codegen:watch": "pnpm turbo run codegen:watch --filter=@msb/js-sdk"
@@ -23,24 +24,37 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.3",
-    "@eslint/js": "^9.39.1",
-    "@next/eslint-plugin-next": "^15.5.7",
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^10.0.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^11.0.6",
+    "@semantic-release/github": "^12.0.6",
     "@semantic-release/release-notes-generator": "^14.1.0",
-    "eslint": "^9.39.1",
-    "eslint-config-flat-gitignore": "^2.1.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "globals": "^16.5.0",
-    "prettier": "^3.7.4",
-    "semantic-release": "^24.2.9",
-    "turbo": "^2.6.3",
+    "eslint": "^9.39.4",
+    "eslint-config-flat-gitignore": "^2.2.1",
+    "eslint-config-next": "^16.1.7",
+    "globals": "^17.4.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "semantic-release": "^25.0.3",
+    "turbo": "^2.8.17",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.49.0"
+    "typescript-eslint": "^8.57.1"
   },
-  "packageManager": "pnpm@9.15.0"
+  "packageManager": "pnpm@9.15.0",
+  "pnpm": {
+    "overrides": {
+      "@types/node": "22.19.10",
+      "zon": "3.24.1",
+      "@types/react": "19.2.13",
+      "@types/react-dom": "19.2.3",
+      "eslint": "^9.39.2"
+    }
+  },
+  "dependencies": {
+    "next": "16.1.7",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  }
 }

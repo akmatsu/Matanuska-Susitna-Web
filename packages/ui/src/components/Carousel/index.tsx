@@ -172,7 +172,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
 
 function CarouselPrevious({
   className,
-  variant = 'outline',
+  // variant = 'outline',
   size = 'sm',
   icon = true,
   ...props
@@ -182,7 +182,7 @@ function CarouselPrevious({
   return (
     <Button
       data-slot="carousel-previous"
-      variant={variant}
+      // variant={variant}
       size={size}
       icon={icon}
       className={cn(
@@ -204,7 +204,7 @@ function CarouselPrevious({
 
 function CarouselNext({
   className,
-  variant = 'outline',
+  // variant = 'outline',
   size = 'sm',
   icon = true,
   ...props
@@ -214,7 +214,7 @@ function CarouselNext({
   return (
     <Button
       data-slot="carousel-next"
-      variant={variant}
+      // variant={variant}
       size={size}
       icon={icon}
       className={cn(

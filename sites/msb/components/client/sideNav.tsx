@@ -147,7 +147,7 @@ export function SideNav({
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [setHeadings]);
 
   useEffect(() => {
     onHeadingsChange?.(headings.length > 1);
@@ -155,8 +155,7 @@ export function SideNav({
 
   useEffect(() => {
     if (headings.length <= 1) {
-      setActiveHeadingId(undefined);
-      return undefined;
+      return;
     }
 
     let frame = 0;
@@ -230,13 +229,13 @@ export function SideNav({
         aria-label="On this page"
         className={clsx('sticky top-4 w-full', className)}
       >
-        <p className="font-bold text-lg mb-4">On This Page</p>
+        <p className="mb-4 text-lg font-bold">On This Page</p>
         <ol>
           {headings.map((heading) => (
             <li
               key={heading.id}
-              className={clsx('border-t p-1 border-r-4', {
-                'border-r-primary ': activeHeadingId === heading.id,
+              className={clsx('border-t border-r-4 p-1', {
+                'border-r-primary': activeHeadingId === heading.id,
                 'bg-base-lightest': activeHeadingId === heading.id,
               })}
             >
@@ -244,7 +243,7 @@ export function SideNav({
                 href={`#${heading.id}`}
                 onClick={(event) => handleClick(event, heading.id)}
                 className={clsx(
-                  'no-underline text-base-darkest hover:underline hover:text-primary active:text-primary-dark inline-block',
+                  'text-base-darkest hover:text-primary active:text-primary-dark inline-block no-underline hover:underline',
                   {
                     'ml-0': heading.level === 1,
                     'ml-3': heading.level === 2,

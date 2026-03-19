@@ -1,7 +1,6 @@
 'use client';
-
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SideNav } from './sideNav';
 import { useSideNavDrawer } from '@/hooks/SideNavDrawerContext';
 import { Breadcrumbs } from './breadcrumbs';
@@ -20,17 +19,7 @@ export function PageColumnController<T extends React.ElementType>({
 }) {
   const { headings } = useSideNavDrawer();
   const Tag = props.as || 'div';
-  const [hasLeftColumn, setLeftColumn] = React.useState(
-    showSideNav && headings.length > 1,
-  );
-
-  useEffect(() => {
-    setLeftColumn(showSideNav && headings.length > 1);
-  }, [headings, showSideNav]);
-  // const hasLeftColumn = showSideNav && headings.length > 1;
-  // console.log('headings: ', headings);
-  // console.log('showSideNav: ', showSideNav);
-  // console.log('hasLeftColumn: ', hasLeftColumn);
+  const hasLeftColumn = showSideNav && headings.length > 1;
   const hasRightColumn =
     !!props.right && React.Children.toArray(props.right).length > 0;
   const hasBothColumns = hasLeftColumn && hasRightColumn;
@@ -55,22 +44,22 @@ export function PageColumnController<T extends React.ElementType>({
       >
         <div
           className={clsx(
-            'hidden  relative',
-            hasLeftColumn && 'md:flex md:flex-col md:col-span-3 w-full',
+            'relative hidden',
+            hasLeftColumn && 'w-full md:col-span-3 md:flex md:flex-col',
           )}
         >
           <SideNav />
         </div>
 
-        <div className={clsx('md:col-span-11 lg:col-span-8 w-full')}>
+        <div className={clsx('w-full md:col-span-11 lg:col-span-8')}>
           {showBreadCrumbs && <Breadcrumbs />}
-          <div className="flex flex-col gap-8 w-full">{props.children}</div>
+          <div className="flex w-full flex-col gap-8">{props.children}</div>
         </div>
 
         {hasRightColumn && (
           <div
             className={clsx(
-              'hidden lg:col-span-3 lg:flex lg:flex-col lg:gap-8 w-full nav-ignore relative',
+              'nav-ignore relative hidden w-full lg:col-span-3 lg:flex lg:flex-col lg:gap-8',
             )}
           >
             {props.right}

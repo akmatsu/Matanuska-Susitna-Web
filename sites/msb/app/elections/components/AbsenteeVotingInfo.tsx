@@ -1,11 +1,8 @@
-import { DateTime } from '@/components/client/DateTime';
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { PageSection } from '@/components/static/Page';
-import { PhoneLink } from '@/components/static/PhoneLink';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { subDays } from 'date-fns';
 
 const GetAbsenteeVotingInfo = gql(`
   fragment GetAbsenteeVotingInfo on Query {
@@ -69,7 +66,7 @@ export function AbsenteeVotingInfo(props: {
                 the cities of Houston, Palmer, and Wasilla.
               </strong>
             </p>
-            <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">
+            <blockquote className="rounded border-l-green-500 bg-green-100 not-italic">
               <h3 className="mt-0">
                 Things applicants need to know about the process
               </h3>

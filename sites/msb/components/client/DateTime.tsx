@@ -12,15 +12,24 @@ export function DateTime({
 }) {
   if (!date) return <>{fallback}</>;
 
-  try {
-    return (
-      <>
-        {format(new Date(date), formatStr, {
-          in: tz('America/Anchorage'),
-        })}
-      </>
-    );
-  } catch {
+  const parsedDate = new Date(date);
+  if (isNaN(parsedDate.getTime())) {
     return <>{fallback}</>;
   }
+
+  let formattedDate: string | null;
+
+  try {
+    formattedDate = format(parsedDate, formatStr, {
+      in: tz('America/Anchorage'),
+    });
+  } catch {
+    formattedDate = null;
+  }
+
+  if (!formattedDate) {
+    return <>{fallback}</>;
+  }
+
+  return <>{formattedDate}</>;
 }

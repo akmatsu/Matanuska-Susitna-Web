@@ -1,6 +1,6 @@
 'use client';
+import { LinkButton } from '@/components/static/LinkButton';
 import { Button } from '@matsugov/ui/Button';
-import Link from 'next/link';
 import { useEffect } from 'react';
 
 export default function Error({
@@ -15,11 +15,11 @@ export default function Error({
   }, [error]);
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-16 prose">
-      <div className="flex gap-2 items-center">
-        <h1 className="flex gap-2 items-center">
+    <section className="prose mx-auto max-w-6xl px-4 py-16">
+      <div className="flex items-center gap-2">
+        <h1 className="flex items-center gap-2">
           <span>An Error Occurred</span>
-          <span className="icon-[mdi--alert] size-10 text-error"></span>
+          <span className="icon-[mdi--alert] text-error size-10"></span>
         </h1>
       </div>
       <p>
@@ -32,9 +32,9 @@ export default function Error({
       <div className="flex gap-2">
         <Button onClick={reset}>Try again</Button>
 
-        <Button as={Link} href="/" color="primary">
-          Go Back
-        </Button>
+        <LinkButton href="/" color="primary">
+          Go back
+        </LinkButton>
       </div>
     </section>
   );

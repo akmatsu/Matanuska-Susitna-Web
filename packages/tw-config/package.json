@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Matsu tailwind config",
   "main": "./tailwind.config.js",
-  "style": "./msb.css",
+  "style": "./msb.tw.css",
   "exports": {
     ".": "./tailwind.config.js",
-    "./msb.css": "./msb.css"
+    "./msb.css": "./msb.tw.css"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,9 +15,9 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@iconify/json": "^2.2.416",
-    "@iconify/tailwind4": "^1.2.0",
+    "@iconify/json": "^2.2.450",
+    "@iconify/tailwind4": "^1.2.3",
     "@tailwindcss/typography": "^0.5.19",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.2.1"
   }
 }

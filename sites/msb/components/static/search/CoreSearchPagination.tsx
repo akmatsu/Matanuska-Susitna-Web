@@ -1,5 +1,4 @@
 import { Pagination } from '@matsugov/ui/Pagination';
-import Link from 'next/link';
 import { useEffect } from 'react';
 import { PaginationProps, usePagination } from 'react-instantsearch';
 
@@ -20,7 +19,6 @@ export function CoreSearchPagination(props: PaginationProps) {
     <Pagination
       currentPage={currentRefinement + 1}
       totalPages={nbPages}
-      linkAs={Link}
       onLinkClick={handleLinkCLick}
     />
   );

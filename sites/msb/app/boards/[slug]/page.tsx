@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';
 
 import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+import { ComponentProps } from 'react';
 
 const metaQuery = gql(`
   query GetBoardMeta($slug: String!) {
@@ -49,6 +50,8 @@ const getBoardPage = gql(`
   }
 `);
 
+type ActionButtonAction = ComponentProps<typeof ExternalActionButton>['action'];
+
 export default async function BoardPage(props: {
   params: Promise<{ slug: string }>;
 }) {
@@ -74,42 +77,6 @@ export default async function BoardPage(props: {
     return notFound();
   }
 
-  function BoardPageActions() {
-    if (page)
-      return (
-        <div className="flex flex-wrap gap-2 not-prose sm:mb-2">
-          <ExternalActionButton
-            action={page.linkToAgendas}
-            blockOnMobile
-            color="primary"
-          />
-          <ExternalActionButton
-            action={page.linkToPublicOpinionMessage}
-            blockOnMobile
-            color="primary"
-          />
-          <ExternalActionButton
-            action={page.linkToResolutions}
-            blockOnMobile
-            color="primary"
-          />
-          <LinkButton
-            href={
-              page.title === 'School Board'
-                ? 'https://www.matsuk12.us/about-us/calendars'
-                : '/boards/public-meetings-calendar'
-            }
-            blockOnMobile
-            color="primary"
-          >
-            {page.title === 'School Board'
-              ? 'School District Calendar'
-              : 'Public Meetings Calendar'}
-          </LinkButton>
-        </div>
-      );
-  }
-
   return (
     <BasePage
       data={page}
@@ -130,10 +97,57 @@ export default async function BoardPage(props: {
         </>
       }
       pageBodyProps={{
-        actionSlot: <BoardPageActions />,
+        actionSlot: page && (
+          <BoardPageActions
+            linkToAgendas={page.linkToAgendas}
+            linkToResolutions={page.linkToResolutions}
+            linkToPublicOpinionMessage={page.linkToPublicOpinionMessage}
+            pageTitle={page.title}
+          />
+        ),
       }}
     >
       <BoardMeetings />
     </BasePage>
+  );
+}
+
+function BoardPageActions(props: {
+  linkToAgendas: ActionButtonAction;
+  linkToResolutions: ActionButtonAction;
+  linkToPublicOpinionMessage: ActionButtonAction;
+  pageTitle?: string | null;
+}) {
+  return (
+    <div className="not-prose flex flex-wrap gap-2 sm:mb-2">
+      <ExternalActionButton
+        action={props.linkToAgendas}
+        blockOnMobile
+        color="primary"
+      />
+      <ExternalActionButton
+        action={props.linkToPublicOpinionMessage}
+        blockOnMobile
+        color="primary"
+      />
+      <ExternalActionButton
+        action={props.linkToResolutions}
+        blockOnMobile
+        color="primary"
+      />
+      <LinkButton
+        href={
+          props.pageTitle === 'School Board'
+            ? 'https://www.matsuk12.us/about-us/calendars'
+            : '/boards/public-meetings-calendar'
+        }
+        blockOnMobile
+        color="primary"
+      >
+        {props.pageTitle === 'School Board'
+          ? 'School District Calendar'
+          : 'Public Meetings Calendar'}
+      </LinkButton>
+    </div>
   );
 }

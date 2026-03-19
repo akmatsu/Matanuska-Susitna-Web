@@ -16,7 +16,7 @@ export function Alert({
 }) {
   return (
     <div
-      className={clsx('border-l-[0.5rem]', {
+      className={clsx('border-l-8', {
         'border-info bg-info-lighter': type === 'info',
         'border-warning bg-warning-lighter': type === 'warning',
         'border-success bg-success-lighter': type === 'success',
@@ -41,7 +41,7 @@ export function Alert({
         )}
         <div>
           {title && (
-            <h4 className="mb-2 leading-none font-bold text-xl">{title}</h4>
+            <h4 className="mb-2 text-xl leading-none font-bold">{title}</h4>
           )}
           {children}
         </div>
