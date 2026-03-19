@@ -1,3 +1,30 @@
+# [1.0.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.80.0...v1.0.0) (2026-03-19)
+
+
+### Bug Fixes
+
+* adjusted width of pages with no sidenav ([10257f3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/10257f3e6b26451ba1f51b382c3a8e40bb34e433))
+* aplphabetically sorting facilities on libraries page ([290d656](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/290d65677d4809ffa330c79a14dfc740a2734412))
+* contacts now sorted alphabetically ([bb84a87](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/bb84a870e1a15612b5626164c23ae21460182138))
+* fixed build errors ([bce1326](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/bce132611a02b2e3ea17445feb3da3b4e81c2dc9))
+
+
+### Features
+
+* added accessibility statement link to footer ([09df875](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/09df8751099badabc8af376d109f1784dc980547))
+* added page side nav ([08deb41](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/08deb414529c406b2f7a710348d40815a2d5175d))
+* early voting locations are now toggled from cms ([ff56069](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ff56069958bf34f02f367ab47715971000438564))
+* fixed sorting of training documents in boards page ([5750c60](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/5750c6072952103175e6fc49d9c831dfd1af0ec5))
+* hid candidate filing info until we confirm DOE locations and times ([2936b50](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/2936b509ef3fffc40e8817843a20aa22f67bb66d))
+* improved UI of sidenav ([1999312](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1999312dc846f08f2ff7eb7fe786be4cf9dc2846))
+* now conditionally display side nav based on API settings ([ada8040](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ada804000f2aba68d472568e21c460030dae8284))
+* update to nextjs 16 ([#98](https://github.com/akmatsu/Matanuska-Susitna-Web/issues/98)) ([52c1cc6](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/52c1cc66e0ebc4e59e0474137ed55d53c866ec9f))
+
+
+### BREAKING CHANGES
+
+* Updating to nextjs 16 https://nextjs.org/blog/next-16#breaking-changes-and-other-updates
+
 # [0.81.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.80.0...v0.81.0) (2026-02-25)
 
 
