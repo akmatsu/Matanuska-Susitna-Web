@@ -35,7 +35,8 @@
     "./Select": "./src/components/Select/index.ts",
     "./Dialog": "./src/components/Dialog/index.ts",
     "./Carousel": "./src/components/Carousel/index.tsx",
-    "./MobileMenu": "./src/components/MobileMenu.tsx"
+    "./MobileMenu": "./src/components/MobileMenu.tsx",
+    "./Img": "./src/components/Img.tsx"
   },
   "scripts": {
     "test": "vitest"

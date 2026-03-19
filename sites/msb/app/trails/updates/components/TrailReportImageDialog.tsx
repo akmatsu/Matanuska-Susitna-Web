@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import { Button } from '@matsugov/ui';
 import { Dialog, DialogPanel } from '@matsugov/ui/Dialog';

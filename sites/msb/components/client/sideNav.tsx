@@ -147,7 +147,7 @@ export function SideNav({
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [setHeadings]);
 
   useEffect(() => {
     onHeadingsChange?.(headings.length > 1);

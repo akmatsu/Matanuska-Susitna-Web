@@ -86,10 +86,16 @@ export function MarkdownRenderer(props: { children?: string | null }) {
         step: Step,
         img: (props: ImgHTMLAttributes<HTMLImageElement>) => {
           return (
-            <div className="w-full my-8">
-              <img {...props} className="w-full mb-0 mt-0"></img>
+            <div className="my-8 w-full">
+              {/* TODO: change this to a Next <Image /> component */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                {...props}
+                className="mt-0 mb-0 w-full"
+                alt={props.alt || props.title || 'Image'}
+              ></img>
               <div className="flex justify-center">
-                <span className="text-base text-center">{props.title}</span>
+                <span className="text-center text-base">{props.title}</span>
               </div>
             </div>
           );

@@ -4,6 +4,7 @@ import {
   DisclosurePanel,
 } from '@headlessui/react';
 import { appConfig } from '@matsugov/app-config';
+import { Img } from '../Img';
 
 type BannerProps = {
   label?: string;
@@ -28,11 +29,12 @@ export function Banner({
     >
       <div className="mx-auto">
         <DisclosureButton className="group flex cursor-pointer items-center py-1 text-left text-xs leading-none">
-          <img
+          <Img
             src="/msb_icon_yellow.svg"
             alt="MSB Logo"
-            className="mr-2 inline-block size-8"
+            className="mr-2 size-8"
           />
+
           <span>
             {label}{' '}
             <span className="text-secondary underline">
@@ -46,7 +48,8 @@ export function Banner({
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <div className="flex w-full">
               <div className="flex gap-2">
-                <img src={dotGovIcon} alt="Dot Gov Icon" className="size-10" />
+                <Img src={dotGovIcon} alt="Dot Gov Icon" className="size-10" />
+
                 <div>
                   <p>
                     <strong>Official MSB websites use matsu.gov</strong>
@@ -62,7 +65,7 @@ export function Banner({
             </div>
             <div className="flex w-full">
               <div className="flex gap-2">
-                <img src={httpsIcon} alt="Dot Gov Icon" className="size-10" />
+                <Img src={httpsIcon} alt="Dot Gov Icon" className="size-10" />
                 <div>
                   <p>
                     <strong>Secure .gov websites use HTTPS</strong>

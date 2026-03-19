@@ -13,6 +13,7 @@ const SideNavDrawerContext = createContext({
   close: () => {},
   headings: [] as HeadingNode[],
   panelRef: { current: null as HTMLDivElement | null },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setHeadings: (headings: HeadingNode[]) => {},
 });
 
