@@ -166,7 +166,7 @@ export function BasePage(props: {
                 items={assemblyDistricts}
               />
               {props.rightSide}
-              <PageListItems title="Communities" items={communities} />
+              {/* <PageListItems title="Communities" items={communities} /> */}
               <PageListItems title="Plans" items={plans} />
               <PageListItems title="Departments & Divisions" items={orgUnits} />
 
@@ -204,10 +204,11 @@ export function BasePage(props: {
           {props.rightSide}
 
           <PageListItems title="Assembly Districts" items={assemblyDistricts} />
-          <PageListItems title="Communities" items={communities} />
+
           <PageListItems title="Departments & Divisions" items={orgUnits} />
         </HideOnDesktop>
 
+        <PageListItems title="Communities" items={communities} />
         <PageEvents data={page} />
         <PagePublicNotices data={page} />
 
