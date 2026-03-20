@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.0.0...v1.1.0) (2026-03-20)
+
+
+### Features
+
+* added term dates to assembly member cards ([8472ab0](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8472ab08d05af8413152da24288a3acf6db92776))
+* moved communities into body of pages ([e1e1d4e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e1e1d4ecd614cdeba031a22f61ea1202e881645b))
+
 # [1.0.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v0.80.0...v1.0.0) (2026-03-19)
 
 
