@@ -71,18 +71,15 @@ export default async function DistrictPage(props: {
   const page = data.assemblyDistrict;
 
   return (
-    <BasePage
-      data={page}
-      rightSide={
-        <>
-          <AssemblyMemberInfo page={page} />
-          <PageAddress address={page.address} />
-          <PageListItems items={page.boards} title="Boards" />
-          <PageListItems items={page.facilities} title="Facilities" />
-          <PageListItems items={page.parks} title="Parks" />
-          <PageListItems items={page.trails} title="Trails" />
-        </>
-      }
-    ></BasePage>
+    <BasePage data={page} rightSide={<AssemblyMemberInfo page={page} />}>
+      <div className="lg:hidden">
+        <AssemblyMemberInfo page={page} />
+      </div>
+      <PageAddress address={page.address} />
+      <PageListItems items={page.boards} title="Boards" />
+      <PageListItems items={page.facilities} title="Facilities" />
+      <PageListItems items={page.parks} title="Parks" />
+      <PageListItems items={page.trails} title="Trails" />
+    </BasePage>
   );
 }

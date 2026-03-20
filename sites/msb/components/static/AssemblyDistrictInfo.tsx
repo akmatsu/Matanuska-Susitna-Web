@@ -31,8 +31,7 @@ export function AssemblyMemberInfo(props: {
     <PageSection title="Assembly Member">
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between gap-4">
-            <CardTitle>{page.memberName}</CardTitle>
+          <div className="flex flex-col items-center justify-between gap-4">
             {page.photo?.file?.url && (
               <Image
                 src={page.photo.file.url}
@@ -42,9 +41,10 @@ export function AssemblyMemberInfo(props: {
                 height={80}
               />
             )}
+            <CardTitle>{page.memberName}</CardTitle>
           </div>
         </CardHeader>
-        <CardBody>
+        <CardBody className="text-center">
           <p>{page.bio}</p>
           <p>{page.phone && <PhoneLink phoneNumber={page.phone} />}</p>
           <Link href={`mailto:${page.email}`}>{page.email}</Link>
