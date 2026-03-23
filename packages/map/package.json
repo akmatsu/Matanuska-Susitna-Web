@@ -9,15 +9,15 @@
   "license": "ISC",
   "devDependencies": {
     "@matsugov/tw-config": "workspace:^",
-    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "22.19.10",
-    "@types/react": "19.2.13",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "postcss": "^8.5.8",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "tailwindcss": "^4.2.1",
-    "typescript": "^5.9.3",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2",
     "vite-plugin-dts": "^4.5.4"
   },
   "peerDependencies": {
@@ -25,7 +25,7 @@
     "react-dom": "^19.1.0"
   },
   "dependencies": {
-    "@arcgis/core": "^4.34.8",
+    "@arcgis/core": "^5.0.13",
     "@fontsource-variable/public-sans": "^5.2.7",
     "@fontsource-variable/roboto-mono": "^5.2.8",
     "@fontsource/source-sans-pro": "^5.2.5",

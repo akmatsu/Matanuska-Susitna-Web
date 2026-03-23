@@ -47,15 +47,15 @@
   "devDependencies": {
     "@matsugov/tw-config": "workspace:^",
     "@msb/js-sdk": "workspace:^",
-    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "22.19.10",
-    "@types/react": "19.2.13",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "postcss": "^8.5.8",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "tailwindcss": "^4.2.1",
-    "typescript": "^5.9.3"
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2"
   },
   "peerDependencies": {
     "@matsugov/tw-config": "workspace:^",
@@ -64,10 +64,9 @@
     "react-dom": "^19.2.0"
   },
   "optionalDependencies": {
-    "next": "^16.1.7"
+    "next": "^16.2.1"
   },
   "dependencies": {
-    "@arcgis/core": "^4.34.8",
     "@fontsource-variable/public-sans": "^5.2.7",
     "@fontsource-variable/roboto-mono": "^5.2.8",
     "@fontsource/source-sans-pro": "^5.2.5",

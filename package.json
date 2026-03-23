@@ -33,28 +33,25 @@
     "@semantic-release/release-notes-generator": "^14.1.0",
     "eslint": "^9.39.4",
     "eslint-config-flat-gitignore": "^2.2.1",
-    "eslint-config-next": "^16.1.7",
+    "eslint-config-next": "^16.2.1",
     "globals": "^17.4.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "semantic-release": "^25.0.3",
-    "turbo": "^2.8.17",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.1"
+    "turbo": "^2.8.20",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.57.2"
   },
   "packageManager": "pnpm@9.15.0",
   "pnpm": {
     "overrides": {
       "@types/node": "22.19.10",
       "zon": "3.24.1",
-      "@types/react": "19.2.13",
-      "@types/react-dom": "19.2.3",
-      "eslint": "^9.39.2"
+      "next": "^16.2.1",
+      "@types/react": "^19.2.13",
+      "@types/react-dom": "^19.2.3",
+      "eslint": "^9.39.2",
+      "typescript": "^6.0.2"
     }
-  },
-  "dependencies": {
-    "next": "16.1.7",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
   }
 }

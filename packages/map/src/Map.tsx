@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState, useTransition } from 'react';
 import clsx from 'clsx';
 import { filterAndZoom, initializeMap } from './utils';
+import MapView from '@arcgis/core/views/MapView';
 
 export function Map({
   layerId = 'cc6808c179cc4f3ba282814afdc3882c',
@@ -27,7 +28,7 @@ export function Map({
   animate?: boolean;
 }) {
   const root = useRef<HTMLDivElement>(null);
-  const viewRef = useRef<__esri.MapView | null>(null);
+  const viewRef = useRef<MapView | null>(null);
   const [initialized, setInitialized] = useState(false);
   const [isPending, startTransition] = useTransition();
 
@@ -81,13 +82,13 @@ export function Map({
   return (
     <>
       <div
-        className={clsx('w-full h-full', {
+        className={clsx('h-full w-full', {
           hidden: isPending,
         })}
         ref={root}
       ></div>
       {isPending && (
-        <div className="w-full h-full flex items-center justify-center">
+        <div className="flex h-full w-full items-center justify-center">
           <span className="icon-[mdi--loading] animate-spin" />
         </div>
       )}
