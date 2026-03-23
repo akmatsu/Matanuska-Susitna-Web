@@ -43,18 +43,17 @@ export default async function Page({
   if (error) {
     console.error(error);
 
-    return <div className="w-screen h-screen">{error.message}</div>;
+    return <div className="h-screen w-screen">{error.message}</div>;
   }
 
   if (!data) {
-    return <div className="w-screen h-screen">No Data</div>;
+    return <div className="h-screen w-screen">No Data</div>;
   }
 
   return (
-    <div className="w-screen h-screen">
+    <div className="h-screen w-screen">
       {data.documentCollection ? (
         <DocumentCollection
-          linkAs={Link}
           centerLabel={!doNotCenterLabel}
           linkStyle={link_style as 'button' | 'link' | undefined}
           collection={data.documentCollection}

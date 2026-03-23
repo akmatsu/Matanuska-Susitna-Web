@@ -29,7 +29,6 @@ const getCommunityPage = gql(`
   ) {
     community(where: { slug: $slug }) {
       ...BasePageInfo
-      ...PageMap
       boards {
         ...PageList
       }
