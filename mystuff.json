@@ -1,0 +1,84 @@
+{
+  "site information": {
+    "account_number": "123456789",
+    "parcelid": "987654321",
+    "address": "123 Main St, Anytown, USA",
+    "abreviated_description": "Residential property with 3 bedrooms and 2 bathrooms.",
+    "full_description": "This is a beautiful residential property located in the heart of Anytown. It features 3 spacious bedrooms, 2 modern bathrooms, a large living area, and",
+    "TRS": "T1N R1E S1",
+    "subdivision": "Anytown Subdivision",
+    "city": "Anytown"
+  },
+  "ownership": {
+    "owners": "John Doe, Jane Smith",
+    "buyer1": "Alice Johnson, Bob Brown",
+    "buyer1address": "456 Elm St, Othertown, USA",
+    "buyer2": "Charlie Davis",
+    "buyer3": "Eve Wilson",
+    "owner1": "John Doe",
+    "owner1address": "123 Main St, Anytown, USA",
+    "owner2": "Jane Smith",
+    "owner3": "Alice Johnson",
+    "owners_primary_address": "123 Main St, Anytown, USA",
+    "owners_primary_city": "Anytown"
+  },
+  "appraisal_information": [
+    {
+      "year": 2023,
+      "land_appraised": 150000,
+      "bldg_appraised": 250000,
+      "total_appraised": 400000
+    },
+    {
+      "year": 2022,
+      "land_appraised": 145000,
+      "bldg_appraised": 240000,
+      "total_appraised": 385000
+    },
+    {
+      "year": 2021,
+      "land_appraised": 140000,
+      "bldg_appraised": 230000,
+      "total_appraised": 370000
+    }
+  ],
+  "assessment_information": [
+    {
+      "year": 2023,
+      "land_assessed": 120000,
+      "bldg_assessed": 200000,
+      "total_assessed": 320000
+    },
+    {
+      "year": 2022,
+      "land_assessed": 115000,
+      "bldg_assessed": 190000,
+      "total_assessed": 305000
+    },
+    {
+      "year": 2021,
+      "land_assessed": 110000,
+      "bldg_assessed": 180000,
+      "total_assessed": 290000
+    }
+  ],
+
+  "tax_billing_information": [
+    {
+      "year": 2023,
+      "certified": true,
+      "zone": "0026",
+      "mill": 10.022,
+      "tax_billed": 3200.0
+    }
+  ],
+  "tax_account_status": {
+    "status": "current",
+    "tax_balance": 0.0,
+    "farm": 0.0,
+    "disabled_veteran": 0.0,
+    "senior": 0.0,
+    "total": 0.0,
+    "LID_exists": false
+  }
+}

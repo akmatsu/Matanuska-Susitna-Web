@@ -1,24 +1,13 @@
+import { NextConfig } from 'next';
+
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   basePath,
-  transpilePackages: ['mui-color-input', '@msb/js-sdk'],
   reactStrictMode: true,
-
+  cacheComponents: true,
   experimental: {
-    optimizePackageImports: [
-      '@msb/js-sdk',
-      '@matsugov/ui',
-      '@matsugov/ui/client',
-      '@msb/js-sdk/components',
-      '@msb/js-sdk/client',
-      '@msb/js-sdk/graphql',
-      '@msb/js-sdk/types',
-      './components/server',
-      './components/client',
-      './components',
-    ],
+    optimizePackageImports: ['@matsugov/ui', '@matsugov/ui/client'],
   },
 
   images: {
