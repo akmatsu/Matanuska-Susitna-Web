@@ -37,26 +37,10 @@ export default async function RootLayout({
             <SideNavDrawerProvider>{children}</SideNavDrawerProvider>
           </main>
 
-          {/* <Footer
-                navLinkAs={Link}
-                imageAs={Image}
-                contactHref="/departments"
-                navItems={primaryNav}
-                login={!a?.user}
-                logout={!!a?.user}
-                signIn={async () => {
-                  'use server';
-                  await signIn();
-                  }}
-                  signOut={async () => {
-                    'use server';
-                    await signOut();
-                    }}
-                    /> */}
           <CookieBannerProvider>
             <FeedbackButton />
             <SiteFooter />
-            <AnalyticsScript />
+            {process.env.NODE_ENV === 'production' && <AnalyticsScript />}
           </CookieBannerProvider>
         </ApolloWrapper>
       </body>
