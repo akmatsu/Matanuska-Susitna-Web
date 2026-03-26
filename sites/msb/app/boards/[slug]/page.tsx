@@ -10,6 +10,7 @@ import { getClientHandler } from '@/utils/apollo/utils';
 
 import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
 import { ComponentProps } from 'react';
+import { DataTable } from '@matsugov/ui';
 
 const metaQuery = gql(`
   query GetBoardMeta($slug: String!) {
@@ -46,6 +47,7 @@ const getBoardPage = gql(`
       linkToPublicOpinionMessage {
         ...ExternalActionButton
       }
+      directoryExcel 
     }
   }
 `);
@@ -71,6 +73,8 @@ export default async function BoardPage(props: {
   }
 
   const page = data?.board;
+
+  console.log(page?.directoryExcel);
 
   if (!page) {
     console.error('Board not found for slug:', slug);
@@ -108,6 +112,26 @@ export default async function BoardPage(props: {
       }}
     >
       <BoardMeetings />
+
+      <ul>
+        <li>Muffins</li>
+        {/* {page.directoryExcel?.map((entry: any) => {
+          return <li key={entry.BoardPosition}>{entry.Zip}</li>;
+        })} */}
+
+        <DataTable
+          columns={[
+            { key: 'BoardPosition', label: 'Board Position' },
+            { key: 'FirstName', label: 'First Name' },
+            { key: 'LastName', label: 'Last Name' },
+            { key: 'E-mail', label: 'Email' },
+            { key: 'Cell', label: 'Phone' },
+            { key: 'Zip', label: 'Zip' },
+          ]}
+          data={page.directoryExcel || []}
+        />
+      </ul>
+      {/* <p>Directory! {page?.directoryExcel}</p> */}
     </BasePage>
   );
 }

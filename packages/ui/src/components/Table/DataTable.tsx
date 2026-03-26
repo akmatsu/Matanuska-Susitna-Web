@@ -40,7 +40,7 @@ export function DataTable<T extends object>(props: DataTableProps<T>) {
                 <Td key={rowIndex + col.key}>
                   {col.cell
                     ? col.cell(row[col.key], row)
-                    : String(row[col.key])}
+                    : String(row[col.key] || '')}
                 </Td>
               ))}
             </Tr>
