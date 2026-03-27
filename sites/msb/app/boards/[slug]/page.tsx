@@ -4,13 +4,13 @@ import { LinkButton } from '@/components/static/LinkButton';
 import { PageSection } from '@/components/static/Page';
 import { BoardMeetings } from '@/components/static/Page/BoardMeetings';
 import { ExternalActionButton } from '@/components/static/Page/ExternalActionButtont';
+import { BoardDirectoryDisplay } from '@/components/static/Page/BoardDirectoryDisplay';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';
 
 import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
 import { ComponentProps } from 'react';
-import { DataTable } from '@matsugov/ui';
 
 const metaQuery = gql(`
   query GetBoardMeta($slug: String!) {
@@ -113,25 +113,9 @@ export default async function BoardPage(props: {
     >
       <BoardMeetings />
 
-      <ul>
-        <li>Muffins</li>
-        {/* {page.directoryExcel?.map((entry: any) => {
-          return <li key={entry.BoardPosition}>{entry.Zip}</li>;
-        })} */}
-
-        <DataTable
-          columns={[
-            { key: 'BoardPosition', label: 'Board Position' },
-            { key: 'FirstName', label: 'First Name' },
-            { key: 'LastName', label: 'Last Name' },
-            { key: 'E-mail', label: 'Email' },
-            { key: 'Cell', label: 'Phone' },
-            { key: 'Zip', label: 'Zip' },
-          ]}
-          data={page.directoryExcel || []}
-        />
-      </ul>
-      {/* <p>Directory! {page?.directoryExcel}</p> */}
+      <PageSection title="Directory">
+        <BoardDirectoryDisplay data={page.directoryExcel || []} />
+      </PageSection>
     </BasePage>
   );
 }
