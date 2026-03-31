@@ -4,11 +4,13 @@ export function PhoneLink<T extends ElementType = 'a'>({
   phoneNumber,
   as,
   children,
+  notLink,
   ...props
 }: Omit<Omit<ComponentProps<T>, 'href'>, 'children'> & {
   phoneNumber: string;
   as?: T;
   children?: ReactNode;
+  notLink?: boolean;
 }) {
   const LinkAs = as || 'a';
   const matches = phoneNumber.match(/(\d)?.*(\d{3}).*(\d{3}).*(\d{4})/);
@@ -21,7 +23,9 @@ export function PhoneLink<T extends ElementType = 'a'>({
 
   const formattedPhoneNumber = `${formattedCountryCode}${formattedAreaCode}${centralOfficeCode}-${lineNumber}`;
 
-  return (
+  return notLink ? (
+    <span {...props}>{children ? children : formattedPhoneNumber}</span>
+  ) : (
     <LinkAs
       href={`tel:${countryCode}${areaCode}${centralOfficeCode}${lineNumber}`}
       {...props}
