@@ -1,4 +1,10 @@
-import { LinkCard, CardHeader, CardBody, CardTitle } from '@matsugov/ui/Card';
+import {
+  LinkCard,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+} from '@matsugov/ui/Card';
 import Link from 'next/link';
 import { plural } from 'pluralize';
 import v from 'voca';
@@ -20,6 +26,7 @@ export function SearchListItem({
   className?: string;
 }) {
   const formattedListKey = plural(v.slugify(listKey));
+  const isBoard = formattedListKey === 'boards';
 
   const url =
     item.url ||
@@ -30,7 +37,7 @@ export function SearchListItem({
     <LinkCard href={url} as="li" linkAs={Link} className={className}>
       <CardHeader>
         {item.type && (
-          <p className="text-sm text-base-dark font-semibold">
+          <p className="text-base-dark text-sm font-semibold">
             {v.titleCase(item.type).replace('_', ' ')}
           </p>
         )}
@@ -40,6 +47,13 @@ export function SearchListItem({
       <CardBody>
         <p>{item.description}</p>
       </CardBody>
+      {isBoard && (
+        <CardFooter>
+          <Link href={`/boards/${item.slug}/directory`}>
+            View Board Directory
+          </Link>
+        </CardFooter>
+      )}
     </LinkCard>
   );
 }

@@ -81,7 +81,7 @@ export function Button({
 
           // Width group
           'w-fit': !block && !blockOnMobile && !icon && !square,
-          'sm:w-fit': blockOnMobile,
+          '2xl:w-fit': blockOnMobile,
           'w-full': (blockOnMobile || block) && !icon && !square,
 
           // Padding and text size group
