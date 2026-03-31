@@ -17,7 +17,7 @@ export const FeedbackButton = () => {
   }, [pathname, panelRef]);
 
   return (
-    <div className="sticky bottom-2 flex justify-between mx-2 items-end">
+    <div className="pointer-events-none sticky bottom-2 mx-2 flex items-end justify-between bg-none">
       <div className="flex flex-col gap-2">
         <CookieBanner />
         {showButton && (
