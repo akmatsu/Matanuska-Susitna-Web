@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   basePath,
   reactStrictMode: true,
   cacheComponents: true,
+
   experimental: {
     optimizePackageImports: ['@matsugov/ui', '@matsugov/ui/client'],
   },

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import './global.tw.css';
+import Link from 'next/link';
 
 export const metadata = {
   metadataBase:
@@ -14,13 +15,18 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
       <body className="font-sans">
-        <header className="relative mx-auto aspect-340/27 w-full max-w-170">
-          <Image
-            src="/msb_print.gif"
-            alt="The Matanuska-Susitna Borough Logo followed by the text 'Matanuska-Susitna Borough' in large bold text"
-            fill
-            className="object-cover"
-          />
+        <header className="text-center">
+          <Link href="/" aria-label="Home">
+            <div className="relative mx-auto aspect-340/27 w-full max-w-170">
+              <Image
+                src="/msb_print.gif"
+                alt="The Matanuska-Susitna Borough Logo followed by the text 'Matanuska-Susitna Borough' in large bold text"
+                fill
+                className="object-cover"
+                loading="eager"
+              />
+            </div>
+          </Link>
         </header>
         {props.children}
       </body>

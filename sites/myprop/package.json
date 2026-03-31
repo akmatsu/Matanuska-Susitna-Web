@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@faker-js/faker": "^10.4.0",
     "@matsugov/ui": "workspace:^",
     "next": "^16.2.1",
     "react": "19.2.4",

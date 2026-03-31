@@ -1,0 +1,375 @@
+import { faker } from '@faker-js/faker';
+
+export type ParcelAppraisal = {
+  YEAR_ID: number;
+  LAND_APR: number;
+  BLDG_APR: number;
+  TOTAL_APR: number;
+  LAND_ASM: number;
+  BLDG_ASM: number;
+  TOTAL_ASM: number;
+};
+
+export type ParcelTaxBilling = {
+  YEAR_ID: number;
+  CURRENT_YEAR: number;
+  YEAR_CERT: string;
+  ZONE: string;
+  MILL: string;
+  'Tax Amount Billed': string;
+};
+
+export type ParcelRecordedDocument = {
+  DEED_DATE: string;
+  DEED_TYPE: string;
+  DOC_LABEL: string;
+  DOC_URL: string;
+};
+
+export type ParcelStructure = {
+  BLDG_NBR: number;
+  RES_UNITS: number;
+  CONDITION: string;
+  BASEMENT: string;
+  YEAR_BUILT: number;
+  FOUNDATION: string;
+  SEPTIC: string;
+  USE: string;
+  DESIGN: string;
+  CONST_TYPE: string;
+  GRADE: string;
+  WELL: string;
+};
+
+export type ParcelDetails = {
+  PARCEL_ID: string;
+  TAX_ID: string;
+  TRS: string;
+  LEGAL_DESC: string;
+  SUBD_NAME: string;
+  CITY: string;
+  MAP: string;
+  MAP2: string;
+  CITE_ADDRESS: string;
+  CITE_CITY: string;
+  OWNER: string;
+  OWNER_ADDRESS: string;
+  BUYER: string;
+  BUYER_ADDRESS: string;
+  STATUS: string;
+  BALANCE: number;
+  FARM_DEFERMENT: number;
+  DISABLED_VET: number;
+  SENIOR: number;
+  TOTAL: number;
+  LID: string;
+  GROSS_ACRE: number;
+  NET_ACRE: number;
+  DISTRICT: string;
+  PRECINCT: string;
+  FIRE_AREA: string;
+  ROAD_AREA: string;
+  LAST_UPDATED: string;
+  APPRAISALS: ParcelAppraisal[];
+  TAX_BILLING: ParcelTaxBilling[];
+  RECORDED_DOCUMENTS: ParcelRecordedDocument[];
+  STRUCTURES: ParcelStructure[];
+};
+
+export const DEFAULT_PARCEL_COUNT = 50;
+export const DEFAULT_PARCEL_SEED = 19475;
+export const MAX_PARCEL_COUNT = 500;
+const BASE_PARCEL_ID = 19475;
+const CURRENT_YEAR = 2026;
+
+type ParcelGeneratorOptions = {
+  seed?: number;
+  count?: number;
+};
+
+const districts = [
+  'Assembly District 001',
+  'Assembly District 002',
+  'Assembly District 003',
+  'Assembly District 004',
+  'Assembly District 005',
+  'Assembly District 006',
+];
+
+const fireAreas = [
+  '120 Big Lake',
+  '130 Central Mat-Su',
+  '140 Meadow Lakes',
+  '150 Talkeetna',
+  '160 Willow',
+];
+
+const roadAreas = [
+  '017 Knik RSA',
+  '019 Big Lake RSA',
+  '021 Meadow Lakes RSA',
+  '024 Talkeetna RSA',
+  '028 Willow RSA',
+];
+
+const statusValues = ['CURRENT', 'PLEASE CALL', 'DELINQUENT', 'PENDING'];
+
+function pad(value: number, length: number) {
+  return String(value).padStart(length, '0');
+}
+
+function formatDateMMDDYYYY(date: Date) {
+  const month = pad(date.getMonth() + 1, 2);
+  const day = pad(date.getDate(), 2);
+  const year = date.getFullYear();
+  return `${month}/${day}/${year}`;
+}
+
+function formatIsoWithTenths(date: Date) {
+  const isoBase = date.toISOString().replace('Z', '');
+  const dotIndex = isoBase.indexOf('.');
+
+  if (dotIndex === -1) {
+    return `${isoBase}.0`;
+  }
+
+  return `${isoBase.slice(0, dotIndex)}.${isoBase.slice(dotIndex + 1, dotIndex + 2)}`;
+}
+
+function createTaxId(index: number) {
+  return `56540B${pad((index % 98) + 1, 2)}L${pad((index % 899) + 1, 3)}`;
+}
+
+function createTrs(index: number) {
+  const section = pad((index % 36) + 1, 2);
+  const township = pad((index % 20) + 1, 2);
+  const range = pad((index % 15) + 1, 2);
+  return `S${section}N${township}W${range}`;
+}
+
+function createAppraisals(
+  baseLand: number,
+  baseBuilding: number,
+): ParcelAppraisal[] {
+  return [0, 1, 2].map((offset) => {
+    const year = CURRENT_YEAR - offset;
+    const landApr = Math.max(
+      1000,
+      baseLand - offset * faker.number.int({ min: 800, max: 1600 }),
+    );
+    const bldgApr = Math.max(
+      1000,
+      baseBuilding - offset * faker.number.int({ min: 1800, max: 4000 }),
+    );
+    return {
+      YEAR_ID: year,
+      LAND_APR: landApr,
+      BLDG_APR: bldgApr,
+      TOTAL_APR: landApr + bldgApr,
+      LAND_ASM: landApr,
+      BLDG_ASM: bldgApr,
+      TOTAL_ASM: landApr + bldgApr,
+    };
+  });
+}
+
+function createTaxBilling(appraisals: ParcelAppraisal[]): ParcelTaxBilling[] {
+  return appraisals.map((apr, index) => {
+    const mill =
+      index === 0
+        ? '--'
+        : faker.finance.amount({ min: 10.8, max: 14.9, dec: 3 });
+    const billed =
+      index === 0
+        ? '--'
+        : `$${faker.finance.amount({ min: 550, max: 1650, dec: 2 })}`;
+    return {
+      YEAR_ID: apr.YEAR_ID,
+      CURRENT_YEAR: CURRENT_YEAR,
+      YEAR_CERT: index === 0 ? 'No' : 'Yes',
+      ZONE: pad(faker.number.int({ min: 1, max: 9999 }), 4),
+      MILL: mill,
+      'Tax Amount Billed': billed,
+    };
+  });
+}
+
+function createRecordedDocuments(): ParcelRecordedDocument[] {
+  return Array.from({ length: 3 }, (_, index) => {
+    const deedDate = faker.date.between({
+      from: '1988-01-01',
+      to: '2025-12-31',
+    });
+    const serialYear = deedDate.getFullYear();
+    const serial = `${serialYear}-${pad(faker.number.int({ min: 1, max: 999999 }), 6)}-0`;
+    const deedType = faker.helpers.arrayElement([
+      'CLERKS DEED',
+      'WARRANTY DEED (ALL TYPES)',
+      'QUITCLAIM DEED (ALL TYPE)',
+      'TRUSTEES DEED',
+    ]);
+
+    if (index === 1) {
+      const book = faker.number.int({ min: 100, max: 999 });
+      const page = faker.number.int({ min: 1, max: 999 });
+      return {
+        DEED_DATE: formatDateMMDDYYYY(deedDate),
+        DEED_TYPE: deedType,
+        DOC_LABEL: `Palmer  Bk: ${book} Pg: ${page}`,
+        DOC_URL: `&SearchType=book&Book=${book}&Page=${page}`,
+      };
+    }
+
+    return {
+      DEED_DATE: formatDateMMDDYYYY(deedDate),
+      DEED_TYPE: deedType,
+      DOC_LABEL: `Palmer ${serial}`,
+      DOC_URL: `&SearchType=doc&SerialNumber=${serial}`,
+    };
+  });
+}
+
+function createStructures(): ParcelStructure[] {
+  const maybeSeptic = faker.helpers.arrayElement([
+    '',
+    'Septic - 1 - Septic Tank',
+  ]);
+  const maybeWell = faker.helpers.arrayElement(['', 'Well 1 - Drilled Well']);
+
+  return [
+    {
+      BLDG_NBR: 1,
+      RES_UNITS: 1,
+      CONDITION: faker.helpers.arrayElement(['Standard', 'Good', 'Average']),
+      BASEMENT: faker.helpers.arrayElement(['None', 'Partial', 'Finished']),
+      YEAR_BUILT: faker.number.int({ min: 1970, max: 2023 }),
+      FOUNDATION: faker.helpers.arrayElement([
+        'None',
+        'Concrete Slab',
+        'Crawl Space',
+      ]),
+      SEPTIC: maybeSeptic,
+      USE: faker.helpers.arrayElement([
+        'Single Family',
+        'Residential Garage',
+        'Mobile Home',
+      ]),
+      DESIGN: faker.helpers.arrayElement(['Ranch', 'Garage', 'Trailer']),
+      CONST_TYPE: faker.helpers.arrayElement(['Frame', 'None']),
+      GRADE: faker.helpers.arrayElement([
+        'None',
+        faker.number.float({ min: 16, max: 22, fractionDigits: 1 }).toString(),
+      ]),
+      WELL: maybeWell,
+    },
+  ];
+}
+
+function createParcel(index: number): ParcelDetails {
+  const parcelId = String(BASE_PARCEL_ID + index);
+  const owner = faker.person.fullName().toUpperCase();
+  const buyer = faker.datatype.boolean({ probability: 0.7 })
+    ? owner
+    : faker.person.fullName().toUpperCase();
+  const citeAddress = `${faker.number.int({ min: 1000, max: 99999 })} ${faker.location.street()} Ln`;
+  const ownerAddress = `${citeAddress.toUpperCase()}  WASILLA AK 99623-${pad(faker.number.int({ min: 1, max: 9999 }), 4)}`;
+
+  const landBase = faker.number.int({ min: 12000, max: 65000 });
+  const bldgBase = faker.number.int({ min: 25000, max: 250000 });
+  const appraisals = createAppraisals(landBase, bldgBase);
+  const taxBilling = createTaxBilling(appraisals);
+
+  return {
+    PARCEL_ID: parcelId,
+    TAX_ID: createTaxId(index),
+    TRS: createTrs(index),
+    LEGAL_DESC: `${faker.helpers.arrayElement(['SKYLINE HTS', 'CREEKSIDE', 'MOUNTAIN VIEW', 'RIVER BEND'])} BLOCK ${faker.number.int({ min: 1, max: 12 })} LOT ${faker.number.int({ min: 1, max: 32 })}`,
+    SUBD_NAME: faker.helpers.arrayElement([
+      'SKYLINE HTS',
+      'CREEKSIDE',
+      'MOUNTAIN VIEW',
+      'RIVER BEND',
+    ]),
+    CITY: 'None',
+    MAP: `GB${pad(faker.number.int({ min: 1, max: 9 }), 2)}`,
+    MAP2: `GB${pad(faker.number.int({ min: 0, max: 9 }), 2)}`,
+    CITE_ADDRESS: citeAddress,
+    CITE_CITY: '',
+    OWNER: owner,
+    OWNER_ADDRESS: ownerAddress,
+    BUYER: buyer,
+    BUYER_ADDRESS: ownerAddress,
+    STATUS: faker.helpers.arrayElement(statusValues),
+    BALANCE: faker.number.float({ min: 0, max: 4000, fractionDigits: 2 }),
+    FARM_DEFERMENT: 0,
+    DISABLED_VET: faker.helpers.arrayElement([0, 0, 0, 1]),
+    SENIOR: faker.helpers.arrayElement([0, 0, 0, 1]),
+    TOTAL: 0,
+    LID: faker.helpers.arrayElement(['No', 'Yes']),
+    GROSS_ACRE: faker.number.float({ min: 0.2, max: 4.8, fractionDigits: 2 }),
+    NET_ACRE: faker.number.float({ min: 0.2, max: 4.8, fractionDigits: 2 }),
+    DISTRICT: faker.helpers.arrayElement(districts),
+    PRECINCT: `${pad(faker.number.int({ min: 1, max: 99 }), 2)}-${pad(faker.number.int({ min: 1, max: 999 }), 3)}`,
+    FIRE_AREA: faker.helpers.arrayElement(fireAreas),
+    ROAD_AREA: faker.helpers.arrayElement(roadAreas),
+    LAST_UPDATED: formatIsoWithTenths(
+      faker.date.between({
+        from: '2025-01-01T00:00:00.000Z',
+        to: '2026-03-31T23:59:59.999Z',
+      }),
+    ),
+    APPRAISALS: appraisals,
+    TAX_BILLING: taxBilling,
+    RECORDED_DOCUMENTS: createRecordedDocuments(),
+    STRUCTURES: createStructures(),
+  };
+}
+
+function normalizeCount(count?: number) {
+  if (typeof count !== 'number' || Number.isNaN(count)) {
+    return DEFAULT_PARCEL_COUNT;
+  }
+
+  return Math.max(1, Math.min(MAX_PARCEL_COUNT, Math.floor(count)));
+}
+
+function normalizeSeed(seed?: number) {
+  if (typeof seed !== 'number' || Number.isNaN(seed)) {
+    return DEFAULT_PARCEL_SEED;
+  }
+
+  return Math.floor(seed);
+}
+
+const parcelsCache = new Map<string, ParcelDetails[]>();
+
+export function getMockParcels(options: ParcelGeneratorOptions = {}) {
+  const count = normalizeCount(options.count);
+  const seed = normalizeSeed(options.seed);
+  const cacheKey = `${seed}:${count}`;
+
+  const cached = parcelsCache.get(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
+  faker.seed(seed);
+
+  const generated = Array.from({ length: count }, (_, index) =>
+    createParcel(index),
+  );
+
+  parcelsCache.set(cacheKey, generated);
+  return generated;
+}
+
+export const mockParcels: ParcelDetails[] = getMockParcels();
+
+export function getParcelById(
+  parcelId: string,
+  options: ParcelGeneratorOptions = {},
+) {
+  return getMockParcels(options).find(
+    (parcel) => parcel.PARCEL_ID === parcelId,
+  );
+}
