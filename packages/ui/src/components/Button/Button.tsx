@@ -69,7 +69,7 @@ export function Button({
       title={title || props.children?.toString()}
       aria-label={title || props.children?.toString()}
       className={clsx(
-        'focus-ring flex min-w-fit items-center justify-center text-center leading-none no-underline transition-colors active:transition-none',
+        'focus-ring pointer-events-auto flex min-w-fit items-center justify-center text-center leading-none no-underline transition-colors active:transition-none',
         {
           shadow: shadow && !outlined,
           // Rounded corners group
