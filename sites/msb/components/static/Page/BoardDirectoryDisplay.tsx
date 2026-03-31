@@ -103,7 +103,7 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
     return (
       <Card as="li" className="bg-yellow-5! border-warning! h-full">
         <CardHeader>
-          <CardTitle as="h3">
+          <CardTitle as="h2">
             Vacant Position{' '}
             {member.MemberTitle ? `- ${member.MemberTitle}` : ''}
           </CardTitle>
@@ -130,7 +130,7 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
   return (
     <Card as="li" className="h-full">
       <CardHeader>
-        <CardTitle as="h3">
+        <CardTitle as="h2">
           {fullName || 'Board Member'}{' '}
           {member.MemberTitle ? `- ${member.MemberTitle}` : ''}
         </CardTitle>

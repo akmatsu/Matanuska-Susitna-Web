@@ -183,7 +183,7 @@ export function BasePage(props: {
           page={page}
           {...props.pageBodyProps}
           actionSlot={
-            <>
+            <div className="flex flex-col gap-2">
               {props.pageBodyProps?.actionSlot}
               <HideOnDesktop className="not-prose flex flex-col gap-2">
                 {props.mapSlot}
@@ -194,7 +194,7 @@ export function BasePage(props: {
                 />
                 <PageDocuments documents={page.documents} />
               </HideOnDesktop>
-            </>
+            </div>
           }
         />
         <PageListItems title="Services" items={services} />

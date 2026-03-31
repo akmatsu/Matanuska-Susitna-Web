@@ -27,7 +27,8 @@
     "middleware.ts",
     "app/[slug]/route.ts",
     "middleware/handlers/cmsRedirects.ts",
-    "app/assembly-districts/[[...slug]]"
+    "app/assembly-districts/[[...slug]]",
+    "app/boards/[slug]/directory/page.tsx"
   ],
   "exclude": ["node_modules"]
 }
