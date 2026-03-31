@@ -13,6 +13,15 @@ import { DateTime } from '@/components/client/DateTime';
 import { gql } from '@msb/js-sdk/gql';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { LinkButton } from '../LinkButton';
+// import {
+//   Popover,
+//   PopoverContent,
+//   PopoverDescription,
+//   PopoverHeader,
+//   PopoverTitle,
+//   PopoverTrigger,
+// } from '@matsugov/ui/Popover';
+// import { Button } from '@matsugov/ui';
 
 const query = gql(`
   query GetBoardApplication {
@@ -30,6 +39,8 @@ const query = gql(`
 
 interface DirectoryMember {
   BoardPosition: string;
+  MemberTitle?: string;
+  Fax?: string;
   FirstName?: string;
   LastName?: string;
   'E-mail'?: string;
@@ -124,16 +135,16 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
     <Card as="li" className="h-full">
       <CardHeader>
         <CardTitle as="h3">{fullName || 'Board Member'} </CardTitle>
-        <Text type="subtitle">{member.BoardPosition}</Text>
+        <Text type="subtitle">{member.MemberTitle}</Text>
         {(member.TypeOfTerm ||
           member.NumberOfTerms ||
           termBegins ||
           termEnds) && (
           <div className="flex items-start gap-1">
             <span className="text-sm">
-              {member.NumberOfTerms && `Terms: ${member.NumberOfTerms}`}
-              {member.TypeOfTerm && member.NumberOfTerms ? ' · ' : ''}
               {member.TypeOfTerm && `Type: ${member.TypeOfTerm}`}
+              {member.TypeOfTerm && member.NumberOfTerms ? ' · ' : ''}
+              {member.NumberOfTerms && `Terms: ${member.NumberOfTerms}`}
               {(member.TypeOfTerm || member.NumberOfTerms) && (
                 <DateTime
                   date={termBegins || termEnds}
@@ -172,44 +183,98 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
         <ul className="grid grid-cols-2 gap-2">
           {member['E-mail'] && (
             <li className="flex items-center gap-1">
-              <div className="bg-primary inline-flex items-center justify-center rounded-full p-1">
+              <div
+                className="bg-primary inline-flex items-center justify-center rounded-full p-1"
+                aria-hidden
+              >
                 <span className="icon-[mdi--email] size-4 text-white" />
               </div>
-              <Link href={`mailto:${member['E-mail']}`} className="truncate">
-                {member['E-mail']}
-              </Link>
+              <span>
+                <span className="sr-only">Email: </span>
+                <Link href={`mailto:${member['E-mail']}`} className="truncate">
+                  {member['E-mail']}
+                </Link>
+              </span>
             </li>
           )}
           {member.Cell && (
             <li className="flex items-center gap-1">
-              <div className="bg-primary inline-flex items-center justify-center rounded-full p-1">
+              <div
+                className="bg-primary inline-flex items-center justify-center rounded-full p-1"
+                aria-hidden
+              >
                 <span className="icon-[mdi--cellphone] size-4 text-white" />
               </div>
-              <PhoneLink phoneNumber={member.Cell} className="truncate" />
+              <span>
+                <span className="sr-only">Cell Phone: </span>
+                <PhoneLink phoneNumber={member.Cell} className="truncate" />
+              </span>
             </li>
           )}
           {member.HomePhone && (
             <li className="flex items-center gap-1">
-              <div className="bg-primary inline-flex items-center justify-center rounded-full p-1">
+              <div
+                className="bg-primary inline-flex items-center justify-center rounded-full p-1"
+                aria-hidden
+              >
                 <span className="icon-[mdi--phone] size-4 text-white" />
               </div>
-              <PhoneLink phoneNumber={member.HomePhone} className="truncate" />
+              <span>
+                <span className="sr-only">Home Phone: </span>
+                <PhoneLink
+                  phoneNumber={member.HomePhone}
+                  className="truncate"
+                />
+              </span>
             </li>
           )}
           {member.WorkPhone && (
             <li className="flex items-center gap-1">
-              <div className="bg-primary inline-flex items-center justify-center rounded-full p-1">
+              <div
+                className="bg-primary inline-flex items-center justify-center rounded-full p-1"
+                aria-hidden
+              >
                 <span className="icon-[mdi--briefcase] size-4 text-white" />
               </div>
-              <PhoneLink phoneNumber={member.WorkPhone} className="truncate" />
+              <span>
+                <span className="sr-only">Work Phone: </span>
+                <PhoneLink
+                  phoneNumber={member.WorkPhone}
+                  className="truncate"
+                />
+              </span>
+            </li>
+          )}
+          {member.Fax && (
+            <li className="flex items-center gap-1">
+              <div
+                className="bg-primary inline-flex items-center justify-center rounded-full p-1"
+                aria-hidden
+              >
+                <span className="icon-[mdi--fax] size-4 text-white" />
+              </div>
+              <span>
+                <span className="sr-only">Fax: </span>
+                <PhoneLink
+                  phoneNumber={member.Fax}
+                  className="truncate"
+                  notLink
+                />
+              </span>
             </li>
           )}
           {address && (
             <li className="flex items-start gap-1">
-              <div className="bg-primary mt-0.5 inline-flex items-center justify-center rounded-full p-1">
+              <div
+                className="bg-primary mt-0.5 inline-flex items-center justify-center rounded-full p-1"
+                aria-hidden
+              >
                 <span className="icon-[mdi--map-marker] size-4 text-white" />
               </div>
-              <span className="text-sm">{address}</span>
+              <span>
+                <span className="sr-only">Address: </span>
+                <span className="text-sm">{address}</span>
+              </span>
             </li>
           )}
         </ul>
