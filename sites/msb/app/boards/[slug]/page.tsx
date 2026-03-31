@@ -84,14 +84,7 @@ export default async function BoardPage(props: {
       data={page}
       mapSlot={
         <>
-          {page.directory && (
-            <PageSection title="Directory">
-              <DocumentLinkButton data={page.directory} block color="primary">
-                View Directory
-              </DocumentLinkButton>
-            </PageSection>
-          )}
-          {page.directoryExcel && (
+          {page.directoryExcel ? (
             <LinkButton
               href={`/boards/${slug}/directory`}
               block
@@ -99,6 +92,14 @@ export default async function BoardPage(props: {
             >
               View Directory
             </LinkButton>
+          ) : (
+            page.directory && (
+              <PageSection title="Directory">
+                <DocumentLinkButton data={page.directory} block color="primary">
+                  View Directory
+                </DocumentLinkButton>
+              </PageSection>
+            )
           )}
         </>
       }
