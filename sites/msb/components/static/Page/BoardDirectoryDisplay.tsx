@@ -13,15 +13,6 @@ import { DateTime } from '@/components/client/DateTime';
 import { gql } from '@msb/js-sdk/gql';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { LinkButton } from '../LinkButton';
-// import {
-//   Popover,
-//   PopoverContent,
-//   PopoverDescription,
-//   PopoverHeader,
-//   PopoverTitle,
-//   PopoverTrigger,
-// } from '@matsugov/ui/Popover';
-// import { Button } from '@matsugov/ui';
 
 const query = gql(`
   query GetBoardApplication {
@@ -112,8 +103,13 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
     return (
       <Card as="li" className="bg-yellow-5! border-warning! h-full">
         <CardHeader>
-          <CardTitle as="h3">Vacant Position</CardTitle>
-          <Text type="subtitle">{member.BoardPosition}</Text>
+          <CardTitle as="h3">
+            Vacant Position{' '}
+            {member.MemberTitle ? `- ${member.MemberTitle}` : ''}
+          </CardTitle>
+          {member.BoardPosition && (
+            <Text type="subtitle">{member.BoardPosition}</Text>
+          )}
         </CardHeader>
         <CardBody>
           <p className="text-muted-foreground text-sm">
@@ -134,8 +130,13 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
   return (
     <Card as="li" className="h-full">
       <CardHeader>
-        <CardTitle as="h3">{fullName || 'Board Member'} </CardTitle>
-        <Text type="subtitle">{member.MemberTitle}</Text>
+        <CardTitle as="h3">
+          {fullName || 'Board Member'}{' '}
+          {member.MemberTitle ? `- ${member.MemberTitle}` : ''}
+        </CardTitle>
+        {member.BoardPosition && (
+          <Text type="subtitle">{member.BoardPosition}</Text>
+        )}
         {(member.TypeOfTerm ||
           member.NumberOfTerms ||
           termBegins ||
