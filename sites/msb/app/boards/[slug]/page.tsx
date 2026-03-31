@@ -74,8 +74,6 @@ export default async function BoardPage(props: {
 
   const page = data?.board;
 
-  console.log(page?.directoryExcel);
-
   if (!page) {
     console.error('Board not found for slug:', slug);
     return notFound();
@@ -88,15 +86,19 @@ export default async function BoardPage(props: {
         <>
           {page.directory && (
             <PageSection title="Directory">
-              <DocumentLinkButton
-                data={page.directory}
-                block
-                size="lg"
-                color="primary"
-              >
+              <DocumentLinkButton data={page.directory} block color="primary">
                 View Directory
               </DocumentLinkButton>
             </PageSection>
+          )}
+          {page.directoryExcel && (
+            <LinkButton
+              href={`/boards/${slug}/directory`}
+              block
+              color="primary"
+            >
+              View Directory
+            </LinkButton>
           )}
         </>
       }
@@ -112,10 +114,6 @@ export default async function BoardPage(props: {
       }}
     >
       <BoardMeetings />
-
-      <PageSection title="Directory">
-        <BoardDirectoryDisplay data={page.directoryExcel || []} />
-      </PageSection>
     </BasePage>
   );
 }
