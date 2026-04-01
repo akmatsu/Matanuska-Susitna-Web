@@ -1,4 +1,6 @@
 import { getSearchParams } from '@/utils/serverHelpers';
+import { cacheLife, cacheTag } from 'next/cache';
+import Link from 'next/link';
 
 interface ApiResponseBody {
   type: string;
@@ -26,16 +28,36 @@ export async function SearchResults() {
     query: string;
   }>();
 
-  const data: ApiResponseBody = await fetch(
-    'http://localhost:3002/api/v1/parcels?type=' + type + '&query=' + query,
-  ).then((res) => res.json());
+  async function getData() {
+    'use cache';
+    cacheTag('parcels', type, query);
+    cacheLife('days');
 
-  console.log(data);
+    const url = new URL('http://localhost:3002/api/v1/parcels');
+    url.searchParams.set('type', type);
+    url.searchParams.set('query', query);
+
+    const res = await fetch(url.toString());
+    if (!res.ok) throw new Error('Parcel search failed: ' + res.status);
+
+    return res.json();
+  }
+
+  const data: ApiResponseBody = await getData();
+
+  if (!data.results.length) {
+    return <p className="mt-4 text-center text-gray-600">No results found.</p>;
+  }
 
   return (
-    <div>
-      <h2>Search Type: {type}</h2>
-      <h3>Query: {query}</h3>
-    </div>
+    <ul>
+      {data.results.map((result) => (
+        <li key={result.PARCEL_ID}>
+          <strong>{result.OWNER}</strong> - {result.CITE_ADDRESS} (Status:{' '}
+          {result.STATUS}, Balance: ${result.BALANCE})
+          <Link href={`/parcels/${result.PARCEL_ID}`}>View</Link>
+        </li>
+      ))}
+    </ul>
   );
 }
