@@ -46,6 +46,7 @@ interface DirectoryMember {
   TermBegins?: number | string;
   TypeOfTerm?: string;
   NumberOfTerms?: string;
+  Company?: string;
   'Middle Initial'?: string;
 }
 
@@ -110,6 +111,48 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
           {member.BoardPosition && (
             <Text type="subtitle">{member.BoardPosition}</Text>
           )}
+          {(member.TypeOfTerm ||
+            member.NumberOfTerms ||
+            termBegins ||
+            termEnds) && (
+            <div className="flex items-start gap-1">
+              <span className="text-sm">
+                {member.TypeOfTerm && `Type: ${member.TypeOfTerm}`}
+                {member.TypeOfTerm && member.NumberOfTerms ? ' · ' : ''}
+                {member.NumberOfTerms && `Terms: ${member.NumberOfTerms}`}
+                {(member.TypeOfTerm || member.NumberOfTerms) && (
+                  <DateTime
+                    date={termBegins || termEnds}
+                    formatStr={dateFormat}
+                    className="font-semibold"
+                  />
+                )
+                  ? ' · '
+                  : ''}
+                {termBegins && (
+                  <>
+                    Begins:{' '}
+                    <DateTime
+                      date={termBegins}
+                      formatStr={dateFormat}
+                      className="font-semibold"
+                    />
+                  </>
+                )}
+                {termBegins && termEnds ? ' · ' : ''}
+                {termEnds && (
+                  <>
+                    Term Ends:{' '}
+                    <DateTime
+                      date={termEnds}
+                      formatStr={dateFormat}
+                      className="font-semibold"
+                    />
+                  </>
+                )}
+              </span>
+            </div>
+          )}
         </CardHeader>
         <CardBody>
           <p className="text-muted-foreground text-sm">
@@ -130,12 +173,21 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
   return (
     <Card as="li" className="h-full">
       <CardHeader>
-        <CardTitle as="h2">
-          {fullName || 'Board Member'}{' '}
-          {member.MemberTitle ? `- ${member.MemberTitle}` : ''}
-        </CardTitle>
-        {member.BoardPosition && (
-          <Text type="subtitle">{member.BoardPosition}</Text>
+        <div className="mb-2">
+          <CardTitle as="h2">
+            {fullName || 'Board Member'}{' '}
+            {member.MemberTitle ? `- ${member.MemberTitle}` : ''}
+          </CardTitle>
+          {member.Company ? (
+            <Text type="subtitle">{member.Company}</Text>
+          ) : (
+            member.BoardPosition && (
+              <Text type="subtitle">{member.BoardPosition}</Text>
+            )
+          )}
+        </div>
+        {member.BoardPosition && member.Company && (
+          <Text type="body-sm">{member.BoardPosition}</Text>
         )}
         {(member.TypeOfTerm ||
           member.NumberOfTerms ||
@@ -181,7 +233,7 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
         )}
       </CardHeader>
       <CardBody>
-        <ul className="grid grid-cols-2 gap-2">
+        <ul className="grid gap-2 sm:grid-cols-2">
           {member['E-mail'] && (
             <li className="flex items-center gap-1">
               <div
