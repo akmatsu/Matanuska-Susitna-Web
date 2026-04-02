@@ -60,14 +60,15 @@ export function Button({
 }: ButtonProps) {
   const Component = asChild ? Slot.Root : 'button';
 
+  console.log(props.children);
+
   return (
     <Component
       {...props}
       type={Component === 'button' ? type : undefined}
       disabled={disabled}
       aria-disabled={disabled}
-      title={title || props.children?.toString()}
-      aria-label={title || props.children?.toString()}
+      title={title}
       className={clsx(
         'focus-ring pointer-events-auto flex min-w-fit items-center justify-center text-center leading-none no-underline transition-colors active:transition-none',
         {
