@@ -29,35 +29,57 @@ export function SiteFooter() {
           ))}
         </FooterSection>
         <FooterSection title="Engage">
-          <SiteFooterLink href="/departments">Contact Us</SiteFooterLink>
-          <FooterCookieButton />
-          <SiteFooterLink href="https://public.govdelivery.com/accounts/AKMATSUGOV/subscriber/new">
-            Email & SMS Updates
-          </SiteFooterLink>
-          <SiteFooterLink href="https://www.governmentjobs.com/careers/matsugov">
-            Job Opportunities
-          </SiteFooterLink>
-          <SiteFooterLink href="https://www.governmentjobs.com/careers/matsugov/transferjobs">
-            Volunteer Opportunities
-          </SiteFooterLink>
-          <SiteFooterLink href="https://matsu.gov/boards">
-            Serve on a Borough Board
-          </SiteFooterLink>
+          <li>
+            <SiteFooterLink href="/departments">Contact Us</SiteFooterLink>
+          </li>
+          <li>
+            <FooterCookieButton />
+          </li>
+          <li>
+            <SiteFooterLink href="https://public.govdelivery.com/accounts/AKMATSUGOV/subscriber/new">
+              Email & SMS Updates
+            </SiteFooterLink>
+          </li>
+          <li>
+            <SiteFooterLink href="https://www.governmentjobs.com/careers/matsugov">
+              Job Opportunities
+            </SiteFooterLink>
+          </li>
+          <li>
+            <SiteFooterLink href="https://www.governmentjobs.com/careers/matsugov/transferjobs">
+              Volunteer Opportunities
+            </SiteFooterLink>
+          </li>
+          <li>
+            <SiteFooterLink href="https://matsu.gov/boards">
+              Serve on a Borough Board
+            </SiteFooterLink>
+          </li>
         </FooterSection>
         <FooterSection title="Employees">
-          <SiteFooterLink href="https://benefits.matsugov.us/">
-            Benefits
-          </SiteFooterLink>
-          <SiteFooterLink href="https://matsugov.us/join-us/employeeservices">
-            Employee Mail & Services
-          </SiteFooterLink>
-          <SiteFooterLink href="https://matsugovus.sharepoint.com/sites/EmergencyServices">
-            First Responder Links
-          </SiteFooterLink>
-          <SiteFooterLink href="https://matsugovus.sharepoint.com/">
-            Intranet
-          </SiteFooterLink>
-          <FooterAuthButtonController />
+          <li>
+            <SiteFooterLink href="https://benefits.matsugov.us/">
+              Benefits
+            </SiteFooterLink>
+          </li>
+          <li>
+            <SiteFooterLink href="https://matsugov.us/join-us/employeeservices">
+              Employee Mail & Services
+            </SiteFooterLink>
+          </li>
+          <li>
+            <SiteFooterLink href="https://matsugovus.sharepoint.com/sites/EmergencyServices">
+              First Responder Links
+            </SiteFooterLink>
+          </li>
+          <li>
+            <SiteFooterLink href="https://matsugovus.sharepoint.com/">
+              Intranet
+            </SiteFooterLink>
+          </li>
+          <li>
+            <FooterAuthButtonController />
+          </li>
         </FooterSection>
         <FooterSection title="Follow Us">
           {appConfig.orgSocialLinks.map(({ label, href }) => (
