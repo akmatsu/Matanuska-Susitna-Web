@@ -13,6 +13,7 @@ import { DateTime } from '@/components/client/DateTime';
 import { gql } from '@msb/js-sdk/gql';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { LinkButton } from '../LinkButton';
+import { add, sub } from 'date-fns';
 
 const query = gql(`
   query GetBoardApplication {
@@ -86,11 +87,11 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
 
   const termBegins =
     typeof member.TermBegins === 'number'
-      ? new Date((member.TermBegins - 25569) * 86400 * 1000)
+      ? add(new Date((member.TermBegins - 25569) * 86400 * 1000), { hours: 9 })
       : member.TermBegins;
   const termEnds =
     typeof member.TermEnds === 'number'
-      ? new Date((member.TermEnds - 25569) * 86400 * 1000)
+      ? add(new Date((member.TermEnds - 25569) * 86400 * 1000), { hours: 9 })
       : member.TermEnds;
 
   if (isVacancy) {

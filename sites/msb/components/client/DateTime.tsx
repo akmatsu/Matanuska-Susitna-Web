@@ -15,7 +15,7 @@ export function DateTime({
   if (!date) return <span className={className}>{fallback}</span>;
 
   const parsedDate = new Date(date);
-  console.log('Parsed date:', parsedDate);
+
   if (isNaN(parsedDate.getTime())) {
     return <span className={className}>{fallback}</span>;
   }

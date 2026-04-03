@@ -60,8 +60,6 @@ export function Button({
 }: ButtonProps) {
   const Component = asChild ? Slot.Root : 'button';
 
-  console.log(props.children);
-
   return (
     <Component
       {...props}
