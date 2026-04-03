@@ -13,7 +13,7 @@ import { DateTime } from '@/components/client/DateTime';
 import { gql } from '@msb/js-sdk/gql';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { LinkButton } from '../LinkButton';
-import { add, sub } from 'date-fns';
+import { add } from 'date-fns';
 
 const query = gql(`
   query GetBoardApplication {
