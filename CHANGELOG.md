@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.4.0...v1.4.1) (2026-04-03)
+
+
+### Bug Fixes
+
+* fixed directory button text ([140090a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/140090a28160d822690e9d80a78e2953a855dc40))
+
 # [1.4.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.3.0...v1.4.0) (2026-04-03)
 
 
