@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.3.0...v1.4.0) (2026-04-03)
+
+
+### Features
+
+* fixed assembly directory ([1535ef6](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1535ef65322337cf023ebde167c8eda1c092e6fd))
+
 # [1.3.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.2.1...v1.3.0) (2026-04-03)
 
 
