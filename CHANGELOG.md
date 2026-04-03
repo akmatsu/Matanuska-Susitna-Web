@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.2.1...v1.3.0) (2026-04-03)
+
+
+### Features
+
+* updated language ([0968008](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/0968008c9935dd439e863e837c6d451faaa1c133))
+
 ## [1.2.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.2.0...v1.2.1) (2026-04-03)
 
 
