@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.2.0...v1.2.1) (2026-04-03)
+
+
+### Bug Fixes
+
+* fixed board member term dates ([76a7d4c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/76a7d4c8096094507a781de23a40d3c1a45cfd0c))
+
 # [1.2.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.1.0...v1.2.0) (2026-04-03)
 
 
