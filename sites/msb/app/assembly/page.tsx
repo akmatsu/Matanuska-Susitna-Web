@@ -88,7 +88,9 @@ export default async function AssemblyPage() {
             href={`/boards/${page.slug}/directory`}
             block
             color="primary"
-          />
+          >
+            View Directory
+          </LinkButton>
         ) : (
           page.directory && (
             <DocumentLinkButton data={page.directory} block color="primary" />
