@@ -1,3 +1,25 @@
+# [1.2.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.1.0...v1.2.0) (2026-04-03)
+
+
+### Bug Fixes
+
+* fixed small UI issues in board directory display ([2893d3b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/2893d3bfc6ce2b3e832c861dd6a8795e9e6ccf2a))
+
+
+### Features
+
+* added a quick link to board directory in search page ([818b5a9](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/818b5a95300b52121347d0304d97c387d84d1dc9))
+* board list table directory link now points to board directory page if available ([df5ce79](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/df5ce79ecee9f2275055820560fdbaed531306a9))
+* created board directory page ([994cfe7](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/994cfe77f97e0b1dd72962bf23240056da0c3134))
+* only display old directory if directory excel does not exist ([f1e5045](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f1e504549b8bc4d52df870eecf83c8dc74999d7d))
+* only enabling page view tracker in production ([cd681f9](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/cd681f988598aebc075d82254e57e54c6671a32f))
+* only loading analytics script in production ([9090846](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9090846db6c5ee9063f0cfce50082306068c6fec))
+* styling board directory; ([0929ccb](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/0929ccb8cd1f5e5f6c444cb17d262045616b3416))
+* updated board directory display ([8785c7b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8785c7b5051921a6382be3d8c259970cd0d4eeba))
+* updated deps and removed maps widget ([b571fe6](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/b571fe6a38f8c325c65db44c8cb79ced9c7bba95))
+* updated directory cards ([ad03340](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ad03340f041f0d71c6d0766fd9d28b597d0011c9))
+* updated directory cards ([30b4a08](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/30b4a0870b5cde751395bf316d61f04d7de03070))
+
 # [1.1.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.0.0...v1.1.0) (2026-03-20)
 
 
