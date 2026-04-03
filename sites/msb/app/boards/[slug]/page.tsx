@@ -4,7 +4,6 @@ import { LinkButton } from '@/components/static/LinkButton';
 import { PageSection } from '@/components/static/Page';
 import { BoardMeetings } from '@/components/static/Page/BoardMeetings';
 import { ExternalActionButton } from '@/components/static/Page/ExternalActionButtont';
-import { BoardDirectoryDisplay } from '@/components/static/Page/BoardDirectoryDisplay';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
 import { getClientHandler } from '@/utils/apollo/utils';
