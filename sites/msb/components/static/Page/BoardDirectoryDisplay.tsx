@@ -210,7 +210,7 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
                 : ''}
               {termBegins && (
                 <>
-                  Begins:{' '}
+                  Started:{' '}
                   <DateTime
                     date={termBegins}
                     formatStr={dateFormat}
