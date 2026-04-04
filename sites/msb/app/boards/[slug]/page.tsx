@@ -46,6 +46,7 @@ const getBoardPage = gql(`
       linkToPublicOpinionMessage {
         ...ExternalActionButton
       }
+      directoryExcel 
     }
   }
 `);
@@ -82,17 +83,22 @@ export default async function BoardPage(props: {
       data={page}
       mapSlot={
         <>
-          {page.directory && (
-            <PageSection title="Directory">
-              <DocumentLinkButton
-                data={page.directory}
-                block
-                size="lg"
-                color="primary"
-              >
-                View Directory
-              </DocumentLinkButton>
-            </PageSection>
+          {page.directoryExcel ? (
+            <LinkButton
+              href={`/boards/${slug}/directory`}
+              block
+              color="primary"
+            >
+              View Directory
+            </LinkButton>
+          ) : (
+            page.directory && (
+              <PageSection title="Directory">
+                <DocumentLinkButton data={page.directory} block color="primary">
+                  View Directory
+                </DocumentLinkButton>
+              </PageSection>
+            )
           )}
         </>
       }

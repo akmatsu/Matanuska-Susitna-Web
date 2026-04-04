@@ -66,10 +66,9 @@ export function Button({
       type={Component === 'button' ? type : undefined}
       disabled={disabled}
       aria-disabled={disabled}
-      title={title || props.children?.toString()}
-      aria-label={title || props.children?.toString()}
+      title={title}
       className={clsx(
-        'focus-ring flex min-w-fit items-center justify-center text-center leading-none no-underline transition-colors active:transition-none',
+        'focus-ring pointer-events-auto flex min-w-fit items-center justify-center text-center leading-none no-underline transition-colors active:transition-none',
         {
           shadow: shadow && !outlined,
           // Rounded corners group
@@ -81,7 +80,7 @@ export function Button({
 
           // Width group
           'w-fit': !block && !blockOnMobile && !icon && !square,
-          'sm:w-fit': blockOnMobile,
+          '2xl:w-fit': blockOnMobile,
           'w-full': (blockOnMobile || block) && !icon && !square,
 
           // Padding and text size group

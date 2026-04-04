@@ -33,6 +33,7 @@ const getBoards = gql(`
       directory {
         ...DocumentLink
       }
+      directoryExcel
     }
   }
 `);
@@ -74,9 +75,14 @@ export function BoardListTable({
         {
           key: 'directory',
           label: 'Directory',
-          cell: (value, row) => (
-            <DocumentLink data={row.directory}>View</DocumentLink>
-          ),
+          cell: (value, row) =>
+            row.directoryExcel ? (
+              <Link href={`/boards/${row.slug}/directory`}>View</Link>
+            ) : row.directory ? (
+              <DocumentLink data={row.directory}>View</DocumentLink>
+            ) : (
+              'N/A'
+            ),
         },
       ]}
       data={boards}

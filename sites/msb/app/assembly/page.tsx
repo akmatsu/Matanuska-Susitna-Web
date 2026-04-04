@@ -1,6 +1,7 @@
 import { BasePage } from '@/components/static/BasePage';
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { Link } from '@/components/static/Link';
+import { LinkButton } from '@/components/static/LinkButton';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
 import Image from 'next/image';
@@ -58,10 +59,11 @@ const GetAssemblyDistricts = gql(`
       where: { title: "Assembly" }
     ) {
       ...BasePageInfo
+      slug
       directory {
         ...DocumentLink
       }
-      
+      directoryExcel 
     }
   }
 `);
@@ -81,18 +83,28 @@ export default async function AssemblyPage() {
     <BasePage
       data={page}
       mapSlot={
-        page?.directory && (
-          <DocumentLinkButton data={page.directory} block color="primary" />
+        page.directoryExcel ? (
+          <LinkButton
+            href={`/boards/${page.slug}/directory`}
+            block
+            color="primary"
+          >
+            View Directory
+          </LinkButton>
+        ) : (
+          page.directory && (
+            <DocumentLinkButton data={page.directory} block color="primary" />
+          )
         )
       }
       pageBodyProps={{
         actionSlot: (
           <div className="flex flex-col gap-4">
-            <div className="flex flex-wrap gap-4 md:gap-8 justify-center">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8">
               {districts?.map((district) => (
                 <Link
                   href={`/assembly-districts/${district.slug}`}
-                  className="not-prose flex flex-col items-center text-ink no-underline hover:bg-base-lightest rounded p-2 transition-colors group"
+                  className="not-prose text-ink hover:bg-base-lightest group flex flex-col items-center rounded p-2 no-underline transition-colors"
                   key={district.slug}
                 >
                   <Image
@@ -102,7 +114,7 @@ export default async function AssemblyPage() {
                     width={100}
                     height={100}
                   />
-                  <p className="text-lg font-semibold text-primary group-hover:text-primary-dark transitions-colors">
+                  <p className="text-primary group-hover:text-primary-dark transitions-colors text-lg font-semibold">
                     {district.memberName}
                   </p>
                   <p>{district.title}</p>

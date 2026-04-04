@@ -15,8 +15,10 @@ export function FooterSocialIcon({
       target="_blank"
       className="bg-primary hover:bg-primary-dark flex aspect-square size-14 items-center justify-center rounded-full transition-colors"
       as={as}
+      aria-label={props.label}
     >
       <span
+        aria-hidden
         className={clsx('iconify size-8 text-white', {
           'icon-[mdi--facebook]': props.label === 'Facebook',
           'icon-[mdi--twitter]': props.label === 'Twitter',

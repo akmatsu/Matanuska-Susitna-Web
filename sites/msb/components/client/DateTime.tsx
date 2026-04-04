@@ -5,16 +5,19 @@ export function DateTime({
   date,
   formatStr = 'PPp',
   fallback = 'TBD',
+  className,
 }: {
   date?: Date | number | string;
   formatStr?: string;
   fallback?: string;
+  className?: string;
 }) {
-  if (!date) return <>{fallback}</>;
+  if (!date) return <span className={className}>{fallback}</span>;
 
   const parsedDate = new Date(date);
+
   if (isNaN(parsedDate.getTime())) {
-    return <>{fallback}</>;
+    return <span className={className}>{fallback}</span>;
   }
 
   let formattedDate: string | null;
@@ -28,8 +31,8 @@ export function DateTime({
   }
 
   if (!formattedDate) {
-    return <>{fallback}</>;
+    return <span className={className}>{fallback}</span>;
   }
 
-  return <>{formattedDate}</>;
+  return <span className={className}>{formattedDate}</span>;
 }
