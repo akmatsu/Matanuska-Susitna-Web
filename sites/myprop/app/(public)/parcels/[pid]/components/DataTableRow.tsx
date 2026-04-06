@@ -15,7 +15,6 @@ export const DataTableRow = ({
       const className = [
         isLastCell ? 'px-1' : 'border-r border-table-border px-1',
         cell.right && (isLastCell ? 'text-right' : 'text-right'),
-        cell.bold && 'font-bold',
       ]
         .filter(Boolean)
         .join(' ');

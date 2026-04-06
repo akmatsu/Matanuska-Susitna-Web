@@ -5,6 +5,10 @@ export type ParcelAppraisal = {
   LAND_APR: number;
   BLDG_APR: number;
   TOTAL_APR: number;
+};
+
+export type ParcelAssessment = {
+  YEAR_ID: number;
   LAND_ASM: number;
   BLDG_ASM: number;
   TOTAL_ASM: number;
@@ -41,6 +45,13 @@ export type ParcelStructure = {
   WELL: string;
 };
 
+export type ParcelBuildingDetail = {
+  ITM_BLDGID: string;
+  ITM_DESC: string;
+  ITM_AREA: string;
+  ITM_DONE: string;
+};
+
 export type ParcelDetails = {
   PARCEL_ID: string;
   TAX_ID: string;
@@ -54,8 +65,8 @@ export type ParcelDetails = {
   CITE_CITY: string;
   OWNER: string;
   OWNER_ADDRESS: string;
-  BUYER: string;
-  BUYER_ADDRESS: string;
+  BUYER: string | null;
+  BUYER_ADDRESS: string | null;
   STATUS: string;
   BALANCE: number;
   FARM_DEFERMENT: number;
@@ -71,9 +82,11 @@ export type ParcelDetails = {
   ROAD_AREA: string;
   LAST_UPDATED: string;
   APPRAISALS: ParcelAppraisal[];
+  ASSESSMENTS: ParcelAssessment[];
   TAX_BILLING: ParcelTaxBilling[];
   RECORDED_DOCUMENTS: ParcelRecordedDocument[];
   STRUCTURES: ParcelStructure[];
+  BUILDING_DETAILS: ParcelBuildingDetail[];
 };
 
 export const DEFAULT_PARCEL_COUNT = 50;
@@ -110,9 +123,10 @@ const roadAreas = [
   '021 Meadow Lakes RSA',
   '024 Talkeetna RSA',
   '028 Willow RSA',
+  'No Borough Road Service see the <a href=https://www.cityofwasilla.gov/298/Winter-Road-Maintenance>City of Wasilla Website</a>',
 ];
 
-const statusValues = ['CURRENT', 'PLEASE CALL', 'DELINQUENT', 'PENDING'];
+const statusValues = ['Current    ', 'Please Call', 'Delinquent', 'Pending'];
 
 function pad(value: number, length: number) {
   return String(value).padStart(length, '0');
@@ -166,11 +180,17 @@ function createAppraisals(
       LAND_APR: landApr,
       BLDG_APR: bldgApr,
       TOTAL_APR: landApr + bldgApr,
-      LAND_ASM: landApr,
-      BLDG_ASM: bldgApr,
-      TOTAL_ASM: landApr + bldgApr,
     };
   });
+}
+
+function createAssessments(appraisals: ParcelAppraisal[]): ParcelAssessment[] {
+  return appraisals.map((appraisal) => ({
+    YEAR_ID: appraisal.YEAR_ID,
+    LAND_ASM: appraisal.LAND_APR,
+    BLDG_ASM: appraisal.BLDG_APR,
+    TOTAL_ASM: appraisal.TOTAL_APR,
+  }));
 }
 
 function createTaxBilling(appraisals: ParcelAppraisal[]): ParcelTaxBilling[] {
@@ -230,37 +250,48 @@ function createRecordedDocuments(): ParcelRecordedDocument[] {
 }
 
 function createStructures(): ParcelStructure[] {
-  const maybeSeptic = faker.helpers.arrayElement([
-    '',
-    'Septic - 1 - Septic Tank',
-  ]);
-  const maybeWell = faker.helpers.arrayElement(['', 'Well 1 - Drilled Well']);
-
   return [
     {
       BLDG_NBR: 1,
-      RES_UNITS: 1,
-      CONDITION: faker.helpers.arrayElement(['Standard', 'Good', 'Average']),
-      BASEMENT: faker.helpers.arrayElement(['None', 'Partial', 'Finished']),
-      YEAR_BUILT: faker.number.int({ min: 1970, max: 2023 }),
-      FOUNDATION: faker.helpers.arrayElement([
-        'None',
-        'Concrete Slab',
-        'Crawl Space',
+      RES_UNITS: 0,
+      CONDITION: 'Standard',
+      BASEMENT: 'None',
+      YEAR_BUILT: faker.number.int({ min: 1978, max: 2022 }),
+      FOUNDATION: 'Concrete Block',
+      SEPTIC: '',
+      USE: 'Residential Garage',
+      DESIGN: 'Garage',
+      CONST_TYPE: 'Frame',
+      GRADE: 'None',
+      WELL: '',
+    },
+    {
+      BLDG_NBR: 2,
+      RES_UNITS: faker.helpers.arrayElement([1, 2, 4]),
+      CONDITION: 'Standard',
+      BASEMENT: 'None',
+      YEAR_BUILT: faker.number.int({ min: 1978, max: 2022 }),
+      FOUNDATION: 'Concrete Block',
+      SEPTIC: faker.helpers.arrayElement(['', 'Septic C - Community Sept']),
+      USE: faker.helpers.arrayElement(['Multi Family', 'Single Family']),
+      DESIGN: faker.helpers.arrayElement(['Two Story', 'Ranch']),
+      CONST_TYPE: 'Frame',
+      GRADE: faker.helpers.arrayElement(['14.1', 'None']),
+      WELL: faker.helpers.arrayElement(['', 'Well C - Community Water']),
+    },
+  ];
+}
+
+function createBuildingDetails(): ParcelBuildingDetail[] {
+  return [
+    {
+      ITM_BLDGID: '0',
+      ITM_DESC: faker.helpers.arrayElement([
+        'Garage (10.3) Area - 11M',
+        'Main Living Area - 2ST',
       ]),
-      SEPTIC: maybeSeptic,
-      USE: faker.helpers.arrayElement([
-        'Single Family',
-        'Residential Garage',
-        'Mobile Home',
-      ]),
-      DESIGN: faker.helpers.arrayElement(['Ranch', 'Garage', 'Trailer']),
-      CONST_TYPE: faker.helpers.arrayElement(['Frame', 'None']),
-      GRADE: faker.helpers.arrayElement([
-        'None',
-        faker.number.float({ min: 16, max: 22, fractionDigits: 1 }).toString(),
-      ]),
-      WELL: maybeWell,
+      ITM_AREA: String(faker.number.int({ min: 600, max: 4000 })),
+      ITM_DONE: '100',
     },
   ];
 }
@@ -268,15 +299,16 @@ function createStructures(): ParcelStructure[] {
 function createParcel(index: number): ParcelDetails {
   const parcelId = String(BASE_PARCEL_ID + index);
   const owner = faker.person.fullName().toUpperCase();
-  const buyer = faker.datatype.boolean({ probability: 0.7 })
-    ? owner
+  const buyer = faker.datatype.boolean({ probability: 0.6 })
+    ? null
     : faker.person.fullName().toUpperCase();
-  const citeAddress = `${faker.number.int({ min: 1000, max: 99999 })} ${faker.location.street()} Ln`;
+  const citeAddress = `${faker.number.int({ min: 1000, max: 99999 })} ${faker.location.streetAddress({ useFullAddress: false })}`;
   const ownerAddress = `${citeAddress.toUpperCase()}  WASILLA AK 99623-${pad(faker.number.int({ min: 1, max: 9999 }), 4)}`;
 
   const landBase = faker.number.int({ min: 12000, max: 65000 });
-  const bldgBase = faker.number.int({ min: 25000, max: 250000 });
+  const bldgBase = faker.number.int({ min: 90000, max: 620000 });
   const appraisals = createAppraisals(landBase, bldgBase);
+  const assessments = createAssessments(appraisals);
   const taxBilling = createTaxBilling(appraisals);
 
   return {
@@ -289,21 +321,22 @@ function createParcel(index: number): ParcelDetails {
       'CREEKSIDE',
       'MOUNTAIN VIEW',
       'RIVER BEND',
+      'SOUTHVIEW EXT',
     ]),
-    CITY: 'None',
-    MAP: `GB${pad(faker.number.int({ min: 1, max: 9 }), 2)}`,
-    MAP2: `GB${pad(faker.number.int({ min: 0, max: 9 }), 2)}`,
+    CITY: faker.helpers.arrayElement(['Wasilla', 'Palmer', 'Houston']),
+    MAP: `WA${pad(faker.number.int({ min: 1, max: 20 }), 2)}`,
+    MAP2: `WA${pad(faker.number.int({ min: 0, max: 20 }), 2)}`,
     CITE_ADDRESS: citeAddress,
     CITE_CITY: '',
     OWNER: owner,
     OWNER_ADDRESS: ownerAddress,
     BUYER: buyer,
-    BUYER_ADDRESS: ownerAddress,
+    BUYER_ADDRESS: buyer ? ownerAddress : null,
     STATUS: faker.helpers.arrayElement(statusValues),
     BALANCE: faker.number.float({ min: 0, max: 4000, fractionDigits: 2 }),
     FARM_DEFERMENT: 0,
-    DISABLED_VET: faker.helpers.arrayElement([0, 0, 0, 1]),
-    SENIOR: faker.helpers.arrayElement([0, 0, 0, 1]),
+    DISABLED_VET: faker.helpers.arrayElement([0, 0, 0, 0, 1]),
+    SENIOR: faker.helpers.arrayElement([0, 0, 0, 0, 1]),
     TOTAL: 0,
     LID: faker.helpers.arrayElement(['No', 'Yes']),
     GROSS_ACRE: faker.number.float({ min: 0.2, max: 4.8, fractionDigits: 2 }),
@@ -319,9 +352,11 @@ function createParcel(index: number): ParcelDetails {
       }),
     ),
     APPRAISALS: appraisals,
+    ASSESSMENTS: assessments,
     TAX_BILLING: taxBilling,
     RECORDED_DOCUMENTS: createRecordedDocuments(),
     STRUCTURES: createStructures(),
+    BUILDING_DETAILS: createBuildingDetails(),
   };
 }
 

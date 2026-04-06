@@ -24,7 +24,7 @@ export async function ParcelDetail(props: {
   const data = await fetchParcelDetails(pid);
 
   const formatCurrency = (value: number | null) => {
-    if (!value) return '--';
+    if (value == null) return '--';
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -64,7 +64,18 @@ export async function ParcelDetail(props: {
                 label="Owner Address"
                 value={<span className="text-xs">{data.OWNER_ADDRESS}</span>}
               />
-              <PropertyRow label="Status" value={data.STATUS} />
+              <PropertyRow label="Buyer" value={data.BUYER ?? '--'} />
+              <PropertyRow
+                label="Buyer Address"
+                value={
+                  data.BUYER_ADDRESS ? (
+                    <span className="text-xs">{data.BUYER_ADDRESS}</span>
+                  ) : (
+                    '--'
+                  )
+                }
+              />
+              <PropertyRow label="Status" value={data.STATUS.trim()} />
               <PropertyRow
                 label="Last Updated"
                 value={formatDate(data.LAST_UPDATED)}
@@ -127,7 +138,15 @@ export async function ParcelDetail(props: {
                   label1="Fire Area"
                   data1={data.FIRE_AREA}
                   label2="Road Area"
-                  data2={data.ROAD_AREA}
+                  data2={
+                    data.ROAD_AREA.includes('<a ') ? (
+                      <span
+                        dangerouslySetInnerHTML={{ __html: data.ROAD_AREA }}
+                      />
+                    ) : (
+                      data.ROAD_AREA
+                    )
+                  }
                   isLast
                   nowrap1
                 />
@@ -163,8 +182,8 @@ export async function ParcelDetail(props: {
           </div>
         )}
 
-        {/* Row 2: Appraisals + Tax Billing */}
-        <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
+        {/* Row 2: Appraisals + Assessments + Tax Billing */}
+        <div className="grid grid-cols-1 gap-1 md:grid-cols-2 xl:grid-cols-3">
           {/* Appraisals Section */}
           {data.APPRAISALS && data.APPRAISALS.length > 0 && (
             <div>
@@ -193,10 +212,46 @@ export async function ParcelDetail(props: {
                       {
                         value: formatCurrency(appraisal.TOTAL_APR),
                         right: true,
-                        bold: true,
                       },
                     ]}
                     isLast={idx === data.APPRAISALS.length - 1}
+                  />
+                ))}
+              </DataTable>
+            </div>
+          )}
+
+          {/* Assessments Section */}
+          {data.ASSESSMENTS && data.ASSESSMENTS.length > 0 && (
+            <div>
+              <SectionHeader title="Assessments" />
+              <DataTable
+                headers={[
+                  { label: 'Year' },
+                  { label: 'Land Value', right: true },
+                  { label: 'Building Value', right: true },
+                  { label: 'Total Assessment', right: true },
+                ]}
+              >
+                {data.ASSESSMENTS.map((assessment, idx) => (
+                  <DataTableRow
+                    key={idx}
+                    cells={[
+                      { value: assessment.YEAR_ID },
+                      {
+                        value: formatCurrency(assessment.LAND_ASM),
+                        right: true,
+                      },
+                      {
+                        value: formatCurrency(assessment.BLDG_ASM),
+                        right: true,
+                      },
+                      {
+                        value: formatCurrency(assessment.TOTAL_ASM),
+                        right: true,
+                      },
+                    ]}
+                    isLast={idx === data.ASSESSMENTS.length - 1}
                   />
                 ))}
               </DataTable>
@@ -233,6 +288,34 @@ export async function ParcelDetail(props: {
             </div>
           )}
         </div>
+
+        {/* Building Details Section */}
+        {data.BUILDING_DETAILS && data.BUILDING_DETAILS.length > 0 && (
+          <div>
+            <SectionHeader title="Building Details" />
+            <DataTable
+              headers={[
+                { label: 'Building ID' },
+                { label: 'Description' },
+                { label: 'Area', right: true },
+                { label: 'Complete %', right: true },
+              ]}
+            >
+              {data.BUILDING_DETAILS.map((detail, idx) => (
+                <DataTableRow
+                  key={idx}
+                  cells={[
+                    { value: detail.ITM_BLDGID },
+                    { value: detail.ITM_DESC },
+                    { value: detail.ITM_AREA, right: true },
+                    { value: detail.ITM_DONE, right: true },
+                  ]}
+                  isLast={idx === data.BUILDING_DETAILS.length - 1}
+                />
+              ))}
+            </DataTable>
+          </div>
+        )}
 
         {/* Recorded Documents Section */}
         {data.RECORDED_DOCUMENTS && data.RECORDED_DOCUMENTS.length > 0 && (

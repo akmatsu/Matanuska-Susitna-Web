@@ -76,7 +76,11 @@ export async function GET(request: NextRequest) {
   const fields = getSearchFields(type);
   const filtered = query
     ? parcels.filter((parcel) =>
-        fields.some((field) => parcel[field].toLowerCase().includes(query)),
+        fields.some((field) =>
+          String(parcel[field] ?? '')
+            .toLowerCase()
+            .includes(query),
+        ),
       )
     : parcels;
 

@@ -27,7 +27,7 @@
   --color-foreground-secondary: var(--color-gray-700);
   --color-foreground-disabled: var(--color-gray-400);
   --color-foreground-inverted: var(--color-white);
-  --color-surface: var(--color-base);
+  --color-surface: var(--color-base-light);
   --color-surface-dark: var(--color-primary);
   --color-border: var(--color-base-darkest);
   --color-table-border: var(--color-background);
@@ -54,12 +54,12 @@
   }
 
   /* Anchor tags */
-  a {
-    @apply text-primary underline;
+  /* a {
+    @apply text-primary-dark underline;
   }
 
   a:hover {
-    @apply text-primary-dark;
+    @apply text-primary-darker;
   }
 
   a:focus {
@@ -67,7 +67,7 @@
   }
   a:visited {
     color: var(--color-purple-900);
-  }
+  } */
 
   /* Body element */
   body {
