@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { ParcelDetail } from './ParcelDetail';
+import { ParcelDetailSkeleton } from './components/ParcelDetailFallback';
 
 export default function MyParcelDetailPage(props: PageProps<'/parcels/[pid]'>) {
   return (
@@ -7,7 +8,9 @@ export default function MyParcelDetailPage(props: PageProps<'/parcels/[pid]'>) {
       <div className="pt-6">
         <Suspense
           fallback={
-            <div className="pt-6 text-center">Loading parcel details...</div>
+            <div className="pt-6">
+              <ParcelDetailSkeleton />
+            </div>
           }
         >
           <ParcelDetail params={props.params} />

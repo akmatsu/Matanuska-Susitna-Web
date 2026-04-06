@@ -5,7 +5,7 @@ import {
   PropertyTable,
   DataTable,
   DataTableRow,
-  LabelDataRow,
+  // LabelDataRow,
 } from './components';
 
 export async function ParcelDetail(props: {
@@ -13,15 +13,27 @@ export async function ParcelDetail(props: {
 }) {
   const { pid } = await props.params;
 
-  async function fetchParcelDetails(parcelId: string): Promise<ParcelDetails> {
-    const res = await fetch(`http://localhost:3002/api/v1/parcels/${parcelId}`);
+  async function fetchParcelDetails(
+    parcelId: string,
+  ): Promise<ParcelDetails | ParcelDetails[]> {
+    const res = await fetch(
+      `${process.env.API_URL}/property/detail/${parcelId}`,
+      {
+        headers: {
+          ApiKey: process.env.API_KEY || '',
+        },
+      },
+    );
     if (!res.ok)
       throw new Error('Failed to fetch parcel details: ' + res.status);
 
     return res.json();
   }
 
-  const data = await fetchParcelDetails(pid);
+  let data = await fetchParcelDetails(pid);
+  data = Array.isArray(data) ? data[0] : data; // Handle case where API returns an array
+
+  console.log(data.TAX_BILLING);
 
   const formatCurrency = (value: number | null) => {
     if (value == null) return '--';
@@ -32,7 +44,8 @@ export async function ParcelDetail(props: {
     }).format(value);
   };
 
-  const formatDate = (dateStr: string) => {
+  const formatDate = (dateStr: string | null) => {
+    if (!dateStr) return '--';
     const date = new Date(dateStr);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -43,83 +56,156 @@ export async function ParcelDetail(props: {
 
   return (
     <>
+      {/* <style>{`
+        li[id^="footnote-"]:target {
+          background-color: rgb(253, 224, 71);
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.25rem;
+          transition: background-color 0.2s ease-out;
+        }
+      `}</style> */}
       <div className="space-y-1 bg-white font-sans text-sm">
-        {/* Header */}
-
         <h1 className="text-xl font-bold">
           Real Property Detail for Account: {data.TAX_ID}
         </h1>
-
-        {/* Row 1: Overview + Exemptions */}
-        <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
-          {/* Overview Section */}
-          <div>
-            <SectionHeader title="Site Information" />
+        <p>Last Updated: {formatDate(data.LAST_UPDATED)}</p>
+        <section>
+          <SectionHeader title="Site Information" />
+          <TwoColumnWrapper>
             <PropertyTable>
               <PropertyRow label="Account Number" value={data.TAX_ID} />
               <PropertyRow label="Parcel ID" value={data.PARCEL_ID} />
-              <PropertyRow label="Address" value={data.CITE_ADDRESS} />
-              <PropertyRow label="Owner" value={data.OWNER} />
+              <PropertyRow label="TRS" value={data.TRS} />
               <PropertyRow
-                label="Owner Address"
-                value={<span className="text-xs">{data.OWNER_ADDRESS}</span>}
-              />
-              <PropertyRow label="Buyer" value={data.BUYER ?? '--'} />
-              <PropertyRow
-                label="Buyer Address"
-                value={
-                  data.BUYER_ADDRESS ? (
-                    <span className="text-xs">{data.BUYER_ADDRESS}</span>
-                  ) : (
-                    '--'
-                  )
-                }
-              />
-              <PropertyRow label="Status" value={data.STATUS.trim()} />
-              <PropertyRow
-                label="Last Updated"
-                value={formatDate(data.LAST_UPDATED)}
-                isLast
+                label="Abbreviated Description (Not for Convenience)"
+                value={data.LEGAL_DESC}
               />
             </PropertyTable>
-          </div>
 
-          {/* Exemptions Section */}
-          <div>
-            <SectionHeader title="Exemptions & Tax Info" />
             <PropertyTable>
-              <PropertyRow
-                label="Farm Deferment"
-                value={data.FARM_DEFERMENT ? 'Yes' : 'No'}
-              />
-              <PropertyRow
-                label="Disabled Veteran"
-                value={data.DISABLED_VET ? 'Yes' : 'No'}
-              />
-              <PropertyRow
-                label="Senior Exemption"
-                value={data.SENIOR ? 'Yes' : 'No'}
-              />
-              <PropertyRow label="LID" value={data.LID} />
-              <PropertyRow label="Precinct" value={data.PRECINCT} />
-              <PropertyRow label="District" value={data.DISTRICT} isLast />
+              <PropertyRow label="Subdivision" value={data.SUBD_NAME} />
+              <PropertyRow label="City" value={data.CITY} />
+              {/* TODO: Convert these into map buttons. Make a modal that shows all the different maps available */}
+              <PropertyRow label="Map" value={data.MAP} />
             </PropertyTable>
-          </div>
-        </div>
+          </TwoColumnWrapper>
+          <PropertyTable>
+            <PropertyRow label="Site Address" value={data.CITE_ADDRESS} />
+          </PropertyTable>
+        </section>
+        <section>
+          <SectionHeader title="Ownership" />
+          <TwoColumnWrapper>
+            <PropertyTable>
+              <PropertyRow label="Owners" value={data.OWNER} />
+              <PropertyRow
+                label="Owner's Primary Address"
+                value={data.OWNER_ADDRESS}
+              />
+            </PropertyTable>
+            <PropertyTable>
+              <PropertyRow label="Buyers" value={data.BUYER} />
+              <PropertyRow
+                label="Buyer's Primary Address"
+                value={data.BUYER_ADDRESS}
+              />
+            </PropertyTable>
+          </TwoColumnWrapper>
+        </section>
+        <TwoColumnWrapper>
+          {data.APPRAISALS && data.APPRAISALS.length > 0 && (
+            <section>
+              <SectionHeader title="Appraisal Information" />
 
-        {/* Property Details - Full Width 2-column table */}
-        <div>
+              <DataTable
+                headers={[
+                  { label: 'Year' },
+                  { label: 'Land Value', right: true },
+                  { label: 'Building Value', right: true },
+                  { label: 'Total Appraisal', right: true },
+                ]}
+              >
+                {data.APPRAISALS.map((appraisal, idx) => (
+                  <DataTableRow
+                    key={idx}
+                    cells={[
+                      { value: appraisal.YEAR_ID },
+                      {
+                        value: formatCurrency(appraisal.LAND_APR),
+                        right: true,
+                      },
+                      {
+                        value: formatCurrency(appraisal.BLDG_APR),
+                        right: true,
+                      },
+                      {
+                        value: formatCurrency(appraisal.TOTAL_APR),
+                        right: true,
+                      },
+                    ]}
+                    isLast={idx === data.APPRAISALS.length - 1}
+                  />
+                ))}
+              </DataTable>
+            </section>
+          )}
+
+          {data.ASSESSMENTS && data.ASSESSMENTS.length > 0 && (
+            <section>
+              <SectionHeader title="Assessments" />
+              <DataTable
+                headers={[
+                  { label: 'Year' },
+                  { label: 'Land Assessed', right: true },
+                  { label: 'Building Assessed', right: true },
+                  {
+                    label: (
+                      <>
+                        Total Assessed
+                        <a
+                          href="#footnote-1"
+                          id="footnote-ref-1"
+                          aria-label="see footnote 1"
+                          className="ml-1 text-white group-target:text-black"
+                        >
+                          <sup>1</sup>
+                        </a>
+                      </>
+                    ),
+                    right: true,
+                  },
+                ]}
+              >
+                {data.ASSESSMENTS.map((assessment, idx) => (
+                  <DataTableRow
+                    key={idx}
+                    cells={[
+                      { value: assessment.YEAR_ID },
+                      {
+                        value: formatCurrency(assessment.LAND_ASM),
+                        right: true,
+                      },
+                      {
+                        value: formatCurrency(assessment.BLDG_ASM),
+                        right: true,
+                      },
+                      {
+                        value: formatCurrency(assessment.TOTAL_ASM),
+                        right: true,
+                      },
+                    ]}
+                    isLast={idx === data.ASSESSMENTS.length - 1}
+                  />
+                ))}
+              </DataTable>
+            </section>
+          )}
+        </TwoColumnWrapper>
+        {/* <section>
           <SectionHeader title="Property Information" />
           <div className="overflow-x-auto">
             <table className="border-table-border w-full border">
               <tbody>
-                <LabelDataRow
-                  label1="TRS"
-                  data1={data.TRS}
-                  label2="Legal Description"
-                  data2={data.LEGAL_DESC}
-                  nowrap1
-                />
                 <LabelDataRow
                   label1="Subdivision"
                   data1={data.SUBD_NAME}
@@ -153,11 +239,10 @@ export async function ParcelDetail(props: {
               </tbody>
             </table>
           </div>
-        </div>
-
-        {/* Structures Section */}
+        </section> */}
+        {/* Structures Section
         {data.STRUCTURES && data.STRUCTURES.length > 0 && (
-          <div>
+          <section>
             <SectionHeader title="Structures" />
             {data.STRUCTURES.map((structure, idx) => (
               <PropertyTable key={idx}>
@@ -179,96 +264,19 @@ export async function ParcelDetail(props: {
                 />
               </PropertyTable>
             ))}
-          </div>
-        )}
-
-        {/* Row 2: Appraisals + Assessments + Tax Billing */}
-        <div className="grid grid-cols-1 gap-1 md:grid-cols-2 xl:grid-cols-3">
-          {/* Appraisals Section */}
-          {data.APPRAISALS && data.APPRAISALS.length > 0 && (
-            <div>
-              <SectionHeader title="Appraisals" />
-              <DataTable
-                headers={[
-                  { label: 'Year' },
-                  { label: 'Land Value', right: true },
-                  { label: 'Building Value', right: true },
-                  { label: 'Total Appraisal', right: true },
-                ]}
-              >
-                {data.APPRAISALS.map((appraisal, idx) => (
-                  <DataTableRow
-                    key={idx}
-                    cells={[
-                      { value: appraisal.YEAR_ID },
-                      {
-                        value: formatCurrency(appraisal.LAND_APR),
-                        right: true,
-                      },
-                      {
-                        value: formatCurrency(appraisal.BLDG_APR),
-                        right: true,
-                      },
-                      {
-                        value: formatCurrency(appraisal.TOTAL_APR),
-                        right: true,
-                      },
-                    ]}
-                    isLast={idx === data.APPRAISALS.length - 1}
-                  />
-                ))}
-              </DataTable>
-            </div>
-          )}
-
-          {/* Assessments Section */}
-          {data.ASSESSMENTS && data.ASSESSMENTS.length > 0 && (
-            <div>
-              <SectionHeader title="Assessments" />
-              <DataTable
-                headers={[
-                  { label: 'Year' },
-                  { label: 'Land Value', right: true },
-                  { label: 'Building Value', right: true },
-                  { label: 'Total Assessment', right: true },
-                ]}
-              >
-                {data.ASSESSMENTS.map((assessment, idx) => (
-                  <DataTableRow
-                    key={idx}
-                    cells={[
-                      { value: assessment.YEAR_ID },
-                      {
-                        value: formatCurrency(assessment.LAND_ASM),
-                        right: true,
-                      },
-                      {
-                        value: formatCurrency(assessment.BLDG_ASM),
-                        right: true,
-                      },
-                      {
-                        value: formatCurrency(assessment.TOTAL_ASM),
-                        right: true,
-                      },
-                    ]}
-                    isLast={idx === data.ASSESSMENTS.length - 1}
-                  />
-                ))}
-              </DataTable>
-            </div>
-          )}
-
-          {/* Tax Billing Section */}
+          </section>
+        )} */}
+        <div className="grid grid-cols-1 gap-1 md:grid-cols-12">
           {data.TAX_BILLING && data.TAX_BILLING.length > 0 && (
-            <div>
-              <SectionHeader title="Tax Billing" />
+            <section className="col-span-4">
+              <SectionHeader title="Tax/Billing Information" />
               <DataTable
                 headers={[
                   { label: 'Year' },
                   { label: 'Certified' },
                   { label: 'Zone' },
-                  { label: 'Mill Rate', right: true },
-                  { label: 'Amount Billed', right: true },
+                  { label: 'Mill', right: true },
+                  { label: 'Tax Billed', right: true },
                 ]}
               >
                 {data.TAX_BILLING.map((billing, idx) => (
@@ -285,13 +293,194 @@ export async function ParcelDetail(props: {
                   />
                 ))}
               </DataTable>
-            </div>
+            </section>
+          )}
+
+          {data.RECORDED_DOCUMENTS && data.RECORDED_DOCUMENTS.length > 0 && (
+            <section className="col-span-8">
+              <SectionHeader title="Recorded Documents" />
+              <DataTable
+                headers={[
+                  { label: 'Date' },
+                  { label: 'Type' },
+                  { label: 'Recording Info (offsite link to DNR)' },
+                ]}
+              >
+                {data.RECORDED_DOCUMENTS.map((doc, idx) => (
+                  <DataTableRow
+                    key={idx}
+                    cells={[
+                      { value: formatDate(doc.DEED_DATE || null) },
+                      { value: doc.DEED_TYPE },
+                      {
+                        value: <a href={`#${doc.DOC_URL}`}>{doc.DOC_LABEL}</a>,
+                      },
+                    ]}
+                    isLast={idx === data.RECORDED_DOCUMENTS.length - 1}
+                  />
+                ))}
+              </DataTable>
+            </section>
           )}
         </div>
-
+        <section>
+          <SectionHeader
+            title={
+              <>
+                Tax Account Status{' '}
+                <a
+                  href="#footnote-2"
+                  id="footnote-ref-2"
+                  aria-label="see footnote 2"
+                >
+                  <sup>2</sup>
+                </a>
+              </>
+            }
+          />
+          <DataTable
+            headers={[
+              { label: 'Status' },
+              { label: 'Tax Balance' },
+              { label: 'Farm' },
+              { label: 'Disabled Veteran' },
+              { label: 'Senior' },
+              {
+                label: (
+                  <>
+                    Total{' '}
+                    <a
+                      href="#footnote-3"
+                      id="footnote-ref-3"
+                      aria-label="See footnote 3"
+                      className="text-white"
+                    >
+                      <sup>3</sup>
+                    </a>
+                  </>
+                ),
+              },
+              { label: 'LID Exists' },
+            ]}
+          >
+            <DataTableRow
+              cells={[
+                { value: data.STATUS },
+                { value: data.BALANCE },
+                { value: data.FARM_DEFERMENT },
+                { value: data.DISABLED_VET },
+                { value: data.SENIOR },
+                { value: data.TOTAL },
+                { value: data.LID },
+              ]}
+              isLast
+            />
+          </DataTable>
+        </section>
+        <section>
+          <SectionHeader title="Land and Miscellaneous" />
+          <DataTable
+            headers={[
+              {
+                label: 'Gross Acreage',
+              },
+              {
+                label: 'Taxable Acreage',
+              },
+              {
+                label: 'Assembly District',
+              },
+              {
+                label: 'Precinct',
+              },
+              {
+                label: 'Fire Service Area',
+              },
+              {
+                label: 'Road Service Area',
+              },
+            ]}
+          >
+            <DataTableRow
+              cells={[
+                { value: data.GROSS_ACRE },
+                {
+                  value: data.NET_ACRE,
+                },
+                {
+                  value: data.DISTRICT,
+                },
+                {
+                  value: (
+                    <a href="https://www.matsugov.us/maps/polling-places-and-precincts">
+                      {data.PRECINCT}
+                    </a>
+                  ),
+                },
+                {
+                  value: data.FIRE_AREA,
+                },
+                {
+                  value:
+                    data.ROAD_AREA && data.ROAD_AREA.includes('<a ') ? (
+                      <span
+                        dangerouslySetInnerHTML={{ __html: data.ROAD_AREA }}
+                      />
+                    ) : (
+                      data.ROAD_AREA
+                    ),
+                },
+              ]}
+            />
+          </DataTable>
+        </section>
+        <ol className="mt-4 space-y-1 text-sm">
+          <li
+            id="footnote-1"
+            className="transition-colors target:bg-yellow-200"
+          >
+            <a
+              href="#footnote-ref-1"
+              aria-label="back to reference"
+              className="mr-2"
+            >
+              <sup>1</sup>
+            </a>
+            Total Assessed is net of exemptions and deferments.rest, penalties,
+            and other charges posted after Last Update Date are not reflected in
+            balances.
+          </li>
+          <li
+            id="footnote-2"
+            className="focus-ring transition-colors target:bg-yellow-200"
+          >
+            <a
+              href="#footnote-ref-2"
+              aria-label="back to reference"
+              className="mr-2"
+            >
+              <sup>2</sup>
+            </a>
+            If account is in foreclosure, payment must be in certified funds.
+          </li>
+          <li
+            id="footnote-3"
+            className="focus-ring transition-colors target:bg-yellow-200"
+          >
+            <a
+              href="#footnote-ref-3"
+              aria-label="back to reference"
+              className="mr-2"
+            >
+              <sup>3</sup>
+            </a>
+            If you reside within the city limits of Palmer or Houston, your
+            exemption amount may be different.
+          </li>
+        </ol>
         {/* Building Details Section */}
-        {data.BUILDING_DETAILS && data.BUILDING_DETAILS.length > 0 && (
-          <div>
+        {/* {data.BUILDING_DETAILS && data.BUILDING_DETAILS.length > 0 && (
+          <section>
             <SectionHeader title="Building Details" />
             <DataTable
               headers={[
@@ -314,46 +503,17 @@ export async function ParcelDetail(props: {
                 />
               ))}
             </DataTable>
-          </div>
-        )}
-
-        {/* Recorded Documents Section */}
-        {data.RECORDED_DOCUMENTS && data.RECORDED_DOCUMENTS.length > 0 && (
-          <div>
-            <SectionHeader title="Recorded Documents" />
-            <DataTable
-              headers={[
-                { label: 'Date' },
-                { label: 'Type' },
-                { label: 'Label' },
-                { label: 'Link' },
-              ]}
-            >
-              {data.RECORDED_DOCUMENTS.map((doc, idx) => (
-                <DataTableRow
-                  key={idx}
-                  cells={[
-                    { value: formatDate(doc.DEED_DATE) },
-                    { value: doc.DEED_TYPE },
-                    { value: doc.DOC_LABEL },
-                    {
-                      value: (
-                        <a
-                          href={`#${doc.DOC_URL}`}
-                          className="text-blue-600 underline hover:text-blue-800"
-                        >
-                          View
-                        </a>
-                      ),
-                    },
-                  ]}
-                  isLast={idx === data.RECORDED_DOCUMENTS.length - 1}
-                />
-              ))}
-            </DataTable>
-          </div>
-        )}
+          </section>
+        )} */}
       </div>
     </>
+  );
+}
+
+function TwoColumnWrapper(props: { children: React.ReactNode }) {
+  return (
+    <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
+      {props.children}
+    </div>
   );
 }

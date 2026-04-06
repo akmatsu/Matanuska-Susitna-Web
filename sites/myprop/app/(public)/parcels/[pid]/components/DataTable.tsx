@@ -4,7 +4,7 @@ export const DataTable = ({
   headers,
   children,
 }: {
-  headers: Array<{ label: string; right?: boolean }>;
+  headers: Array<{ label: React.ReactNode; right?: boolean }>;
   children: React.ReactNode;
 }) => (
   <div className="overflow-x-auto">

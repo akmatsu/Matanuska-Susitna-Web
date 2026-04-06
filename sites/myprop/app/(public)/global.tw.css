@@ -27,7 +27,7 @@
   --color-foreground-secondary: var(--color-gray-700);
   --color-foreground-disabled: var(--color-gray-400);
   --color-foreground-inverted: var(--color-white);
-  --color-surface: var(--color-base-light);
+  --color-surface: var(--color-base);
   --color-surface-dark: var(--color-primary);
   --color-border: var(--color-base-darkest);
   --color-table-border: var(--color-background);
@@ -54,7 +54,7 @@
   }
 
   /* Anchor tags */
-  /* a {
+  a {
     @apply text-primary-dark underline;
   }
 
@@ -65,15 +65,9 @@
   a:focus {
     @apply focus:ring-primary focus:ring-4 focus:ring-offset-2 focus:outline-none;
   }
-  a:visited {
+  /* a:visited {
     color: var(--color-purple-900);
   } */
-
-  /* Body element */
-  body {
-    color: var(--color-base-darkest);
-    background: var(--color-white);
-  }
 
   /* Button focus state */
   button,

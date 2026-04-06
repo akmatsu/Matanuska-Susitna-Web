@@ -1,7 +1,9 @@
+import React from 'react';
+
 export const DataTableHeader = ({
   headers,
 }: {
-  headers: Array<{ label: string; right?: boolean }>;
+  headers: Array<{ label: React.ReactNode; right?: boolean }>;
 }) => (
   <thead>
     <tr className="bg-surface-dark border-table-border border-b font-normal text-white">

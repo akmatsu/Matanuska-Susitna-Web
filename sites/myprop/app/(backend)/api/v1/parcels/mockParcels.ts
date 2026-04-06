@@ -1,92 +1,92 @@
 import { faker } from '@faker-js/faker';
 
 export type ParcelAppraisal = {
-  YEAR_ID: number;
-  LAND_APR: number;
-  BLDG_APR: number;
-  TOTAL_APR: number;
+  YEAR_ID: number | null;
+  LAND_APR: number | null;
+  BLDG_APR: number | null;
+  TOTAL_APR: number | null;
 };
 
 export type ParcelAssessment = {
-  YEAR_ID: number;
-  LAND_ASM: number;
-  BLDG_ASM: number;
-  TOTAL_ASM: number;
+  YEAR_ID: number | null;
+  LAND_ASM: number | null;
+  BLDG_ASM: number | null;
+  TOTAL_ASM: number | null;
 };
 
 export type ParcelTaxBilling = {
-  YEAR_ID: number;
-  CURRENT_YEAR: number;
-  YEAR_CERT: string;
-  ZONE: string;
-  MILL: string;
-  'Tax Amount Billed': string;
+  YEAR_ID: number | null;
+  CURRENT_YEAR: number | null;
+  YEAR_CERT: string | null;
+  ZONE: string | null;
+  MILL: string | null;
+  'Tax Amount Billed': string | null;
 };
 
 export type ParcelRecordedDocument = {
-  DEED_DATE: string;
-  DEED_TYPE: string;
-  DOC_LABEL: string;
-  DOC_URL: string;
+  DEED_DATE: string | null;
+  DEED_TYPE: string | null;
+  DOC_LABEL: string | null;
+  DOC_URL: string | null;
 };
 
 export type ParcelStructure = {
-  BLDG_NBR: number;
-  RES_UNITS: number;
-  CONDITION: string;
-  BASEMENT: string;
-  YEAR_BUILT: number;
-  FOUNDATION: string;
-  SEPTIC: string;
-  USE: string;
-  DESIGN: string;
-  CONST_TYPE: string;
-  GRADE: string;
-  WELL: string;
+  BLDG_NBR: number | null;
+  RES_UNITS: number | null;
+  CONDITION: string | null;
+  BASEMENT: string | null;
+  YEAR_BUILT: number | null;
+  FOUNDATION: string | null;
+  SEPTIC: string | null;
+  USE: string | null;
+  DESIGN: string | null;
+  CONST_TYPE: string | null;
+  GRADE: string | null;
+  WELL: string | null;
 };
 
 export type ParcelBuildingDetail = {
-  ITM_BLDGID: string;
-  ITM_DESC: string;
-  ITM_AREA: string;
-  ITM_DONE: string;
+  ITM_BLDGID: string | null;
+  ITM_DESC: string | null;
+  ITM_AREA: string | null;
+  ITM_DONE: string | null;
 };
 
 export type ParcelDetails = {
   PARCEL_ID: string;
-  TAX_ID: string;
-  TRS: string;
-  LEGAL_DESC: string;
-  SUBD_NAME: string;
-  CITY: string;
-  MAP: string;
-  MAP2: string;
-  CITE_ADDRESS: string;
-  CITE_CITY: string;
-  OWNER: string;
-  OWNER_ADDRESS: string;
+  TAX_ID: string | null;
+  TRS: string | null;
+  LEGAL_DESC: string | null;
+  SUBD_NAME: string | null;
+  CITY: string | null;
+  MAP: string | null;
+  MAP2: string | null;
+  CITE_ADDRESS: string | null;
+  CITE_CITY: string | null;
+  OWNER: string | null;
+  OWNER_ADDRESS: string | null;
   BUYER: string | null;
   BUYER_ADDRESS: string | null;
-  STATUS: string;
-  BALANCE: number;
-  FARM_DEFERMENT: number;
-  DISABLED_VET: number;
-  SENIOR: number;
-  TOTAL: number;
-  LID: string;
-  GROSS_ACRE: number;
-  NET_ACRE: number;
-  DISTRICT: string;
-  PRECINCT: string;
-  FIRE_AREA: string;
-  ROAD_AREA: string;
-  LAST_UPDATED: string;
-  APPRAISALS: ParcelAppraisal[];
-  ASSESSMENTS: ParcelAssessment[];
-  TAX_BILLING: ParcelTaxBilling[];
-  RECORDED_DOCUMENTS: ParcelRecordedDocument[];
-  STRUCTURES: ParcelStructure[];
-  BUILDING_DETAILS: ParcelBuildingDetail[];
+  STATUS: string | null;
+  BALANCE: number | null;
+  FARM_DEFERMENT: number | null;
+  DISABLED_VET: number | null;
+  SENIOR: number | null;
+  TOTAL: number | null;
+  LID: string | null;
+  GROSS_ACRE: number | null;
+  NET_ACRE: number | null;
+  DISTRICT: string | null;
+  PRECINCT: string | null;
+  FIRE_AREA: string | null;
+  ROAD_AREA: string | null;
+  LAST_UPDATED: string | null;
+  APPRAISALS?: ParcelAppraisal[] | null;
+  ASSESSMENTS?: ParcelAssessment[] | null;
+  TAX_BILLING?: ParcelTaxBilling[] | null;
+  RECORDED_DOCUMENTS?: ParcelRecordedDocument[] | null;
+  STRUCTURES?: ParcelStructure[] | null;
+  BUILDING_DETAILS?: ParcelBuildingDetail[] | null;
 };
 
 export const DEFAULT_PARCEL_COUNT = 50;
