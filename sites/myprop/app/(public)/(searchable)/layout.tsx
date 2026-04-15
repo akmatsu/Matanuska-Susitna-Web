@@ -15,7 +15,7 @@ export default function SearchableLayout({
       >
         <SearchField />
       </Suspense>
-      <div className="mx-auto max-w-4xl p-6">{children}</div>
+      {children}
     </main>
   );
 }

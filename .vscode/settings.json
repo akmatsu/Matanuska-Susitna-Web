@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "arcgis",
+    "basemap",
     "calloutblock",
     "Codegen",
     "commonmark",
@@ -21,6 +22,7 @@
     "Prosemirror",
     "Rehype",
     "startdt",
+    "SUBD",
     "Subnav",
     "swiper",
     "textalign",

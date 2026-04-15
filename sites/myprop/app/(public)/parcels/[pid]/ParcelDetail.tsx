@@ -7,6 +7,7 @@ import {
   DataTableRow,
   // LabelDataRow,
 } from './components';
+import { format } from 'date-fns';
 
 export async function ParcelDetail(props: {
   params: PageProps<'/parcels/[pid]'>['params'];
@@ -15,7 +16,7 @@ export async function ParcelDetail(props: {
 
   async function fetchParcelDetails(
     parcelId: string,
-  ): Promise<ParcelDetails | ParcelDetails[]> {
+  ): Promise<{ data: ParcelDetails }> {
     const res = await fetch(
       `${process.env.API_URL}/property/detail/${parcelId}`,
       {
@@ -30,10 +31,7 @@ export async function ParcelDetail(props: {
     return res.json();
   }
 
-  let data = await fetchParcelDetails(pid);
-  data = Array.isArray(data) ? data[0] : data; // Handle case where API returns an array
-
-  console.log(data.TAX_BILLING);
+  const data = (await fetchParcelDetails(pid)).data;
 
   const formatCurrency = (value: number | null) => {
     if (value == null) return '--';
@@ -56,19 +54,14 @@ export async function ParcelDetail(props: {
 
   return (
     <>
-      {/* <style>{`
-        li[id^="footnote-"]:target {
-          background-color: rgb(253, 224, 71);
-          padding: 0.25rem 0.5rem;
-          border-radius: 0.25rem;
-          transition: background-color 0.2s ease-out;
-        }
-      `}</style> */}
       <div className="space-y-1 bg-white font-sans text-sm">
         <h1 className="text-xl font-bold">
           Real Property Detail for Account: {data.TAX_ID}
         </h1>
-        <p>Last Updated: {formatDate(data.LAST_UPDATED)}</p>
+        <p>
+          Last Updated:{' '}
+          {format(new Date(data.LAST_UPDATED), 'M/d/yyyy h:mm aa')}
+        </p>
         <section>
           <SectionHeader title="Site Information" />
           <TwoColumnWrapper>
@@ -201,6 +194,94 @@ export async function ParcelDetail(props: {
             </section>
           )}
         </TwoColumnWrapper>
+        {data.STRUCTURES && data.STRUCTURES.length > 0 && (
+          <section>
+            <details>
+              <summary>View Building Details</summary>
+              {data.STRUCTURES.map((structure, idx) => (
+                <section key={idx}>
+                  <SectionHeader
+                    title={`Structure #${idx + 1} of ${data.STRUCTURES.length}`}
+                  />
+                  <TwoColumnWrapper>
+                    {/* 
+                      Column 1: residential units, condition, basement, year built, foundation, septic.
+                      Column 2: Use, design, construction type, grade, well
+                    */}
+                    <PropertyTable>
+                      <PropertyRow
+                        label="Residential Units"
+                        value={structure.RES_UNITS}
+                      />
+                      <PropertyRow
+                        label="Condition"
+                        value={structure.CONDITION}
+                      />
+                      <PropertyRow
+                        label="Basement"
+                        value={structure.BASEMENT}
+                      />
+                      <PropertyRow
+                        label="Year Built"
+                        value={structure.YEAR_BUILT}
+                      />
+                      <PropertyRow
+                        label="Foundation"
+                        value={structure.FOUNDATION}
+                      />
+                      <PropertyRow
+                        label="Septic"
+                        value={structure.SEPTIC}
+                        isLast
+                      />
+                    </PropertyTable>
+                    <PropertyTable>
+                      <PropertyRow label="Use" value={structure.USE} />
+                      <PropertyRow label="Design" value={structure.DESIGN} />
+                      <PropertyRow
+                        label="Construction Type"
+                        value={structure.CONST_TYPE}
+                      />
+                      <PropertyRow label="Grade" value={structure.GRADE} />
+                      <PropertyRow label="Well" value={structure.WELL} />
+                    </PropertyTable>
+                  </TwoColumnWrapper>
+                  {/* <PropertyTable>
+                    <PropertyRow
+                      label="Building #"
+                      value={structure.BLDG_NBR}
+                    />
+                    <PropertyRow label="Use" value={structure.USE} />
+                    <PropertyRow label="Design" value={structure.DESIGN} />
+                    <PropertyRow
+                      label="Condition"
+                      value={structure.CONDITION}
+                    />
+                    <PropertyRow
+                      label="Year Built"
+                      value={structure.YEAR_BUILT}
+                    />
+                    <PropertyRow
+                      label="Construction Type"
+                      value={structure.CONST_TYPE}
+                    />
+                    <PropertyRow
+                      label="Foundation"
+                      value={structure.FOUNDATION}
+                    />
+                    <PropertyRow label="Grade" value={structure.GRADE} />
+                    <PropertyRow
+                      label="Basement"
+                      value={structure.BASEMENT}
+                      isLast
+                    />
+                  </PropertyTable> */}
+                </section>
+              ))}
+            </details>
+          </section>
+        )}
+
         {/* <section>
           <SectionHeader title="Property Information" />
           <div className="overflow-x-auto">
