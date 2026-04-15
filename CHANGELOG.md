@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.4.1...v1.5.0) (2026-04-15)
+
+
+### Features
+
+* removed manual redirect page ([13cf2fd](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/13cf2fdb6a55b5917404368e114a8a95a279def9))
+
 ## [1.4.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.4.0...v1.4.1) (2026-04-03)
 
 
