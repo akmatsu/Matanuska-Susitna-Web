@@ -12,7 +12,6 @@ export const config = {
     '/parks',
     '/public-notices',
     '/services',
-    '/trails',
     '/topics',
     '/plans',
     '/((?!api|_next/static|_next/image|.*\\.png$).*)',
