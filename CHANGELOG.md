@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.5.0...v1.6.0) (2026-04-15)
+
+
+### Features
+
+* removed trails matcher ([53a26b0](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/53a26b0436c9a642a7a213d6ed9d83330e1a28cc))
+
 # [1.5.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.4.1...v1.5.0) (2026-04-15)
 
 
