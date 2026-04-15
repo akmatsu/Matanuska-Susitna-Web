@@ -8,7 +8,6 @@ export const SEARCH_MATCHERS = [
   '/parks',
   '/public-notices',
   '/services',
-  '/trails',
   '/topics',
   '/plans',
 ];
