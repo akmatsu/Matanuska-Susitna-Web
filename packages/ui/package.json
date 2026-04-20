@@ -37,7 +37,8 @@
     "./Carousel": "./src/components/Carousel/index.tsx",
     "./MobileMenu": "./src/components/MobileMenu.tsx",
     "./Img": "./src/components/Img.tsx",
-    "./Popover": "./src/components/Popover.tsx"
+    "./Popover": "./src/components/Popover.tsx",
+    "./lib": "./src/lib/utils.ts"
   },
   "scripts": {
     "test": "vitest"

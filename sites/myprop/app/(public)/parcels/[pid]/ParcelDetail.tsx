@@ -5,8 +5,7 @@ import {
   PropertyTable,
   DataTable,
   DataTableRow,
-  // LabelDataRow,
-} from './components';
+} from '@/components/Tables';
 import { format } from 'date-fns';
 
 export async function ParcelDetail(props: {
@@ -246,107 +245,12 @@ export async function ParcelDetail(props: {
                       <PropertyRow label="Well" value={structure.WELL} />
                     </PropertyTable>
                   </TwoColumnWrapper>
-                  {/* <PropertyTable>
-                    <PropertyRow
-                      label="Building #"
-                      value={structure.BLDG_NBR}
-                    />
-                    <PropertyRow label="Use" value={structure.USE} />
-                    <PropertyRow label="Design" value={structure.DESIGN} />
-                    <PropertyRow
-                      label="Condition"
-                      value={structure.CONDITION}
-                    />
-                    <PropertyRow
-                      label="Year Built"
-                      value={structure.YEAR_BUILT}
-                    />
-                    <PropertyRow
-                      label="Construction Type"
-                      value={structure.CONST_TYPE}
-                    />
-                    <PropertyRow
-                      label="Foundation"
-                      value={structure.FOUNDATION}
-                    />
-                    <PropertyRow label="Grade" value={structure.GRADE} />
-                    <PropertyRow
-                      label="Basement"
-                      value={structure.BASEMENT}
-                      isLast
-                    />
-                  </PropertyTable> */}
                 </section>
               ))}
             </details>
           </section>
         )}
 
-        {/* <section>
-          <SectionHeader title="Property Information" />
-          <div className="overflow-x-auto">
-            <table className="border-table-border w-full border">
-              <tbody>
-                <LabelDataRow
-                  label1="Subdivision"
-                  data1={data.SUBD_NAME}
-                  label2="Map References"
-                  data2={`${data.MAP}, ${data.MAP2}`}
-                  nowrap1
-                />
-                <LabelDataRow
-                  label1="Gross Acres"
-                  data1={data.GROSS_ACRE}
-                  label2="Net Acres"
-                  data2={data.NET_ACRE}
-                  nowrap1
-                />
-                <LabelDataRow
-                  label1="Fire Area"
-                  data1={data.FIRE_AREA}
-                  label2="Road Area"
-                  data2={
-                    data.ROAD_AREA.includes('<a ') ? (
-                      <span
-                        dangerouslySetInnerHTML={{ __html: data.ROAD_AREA }}
-                      />
-                    ) : (
-                      data.ROAD_AREA
-                    )
-                  }
-                  isLast
-                  nowrap1
-                />
-              </tbody>
-            </table>
-          </div>
-        </section> */}
-        {/* Structures Section
-        {data.STRUCTURES && data.STRUCTURES.length > 0 && (
-          <section>
-            <SectionHeader title="Structures" />
-            {data.STRUCTURES.map((structure, idx) => (
-              <PropertyTable key={idx}>
-                <PropertyRow label="Building #" value={structure.BLDG_NBR} />
-                <PropertyRow label="Use" value={structure.USE} />
-                <PropertyRow label="Design" value={structure.DESIGN} />
-                <PropertyRow label="Condition" value={structure.CONDITION} />
-                <PropertyRow label="Year Built" value={structure.YEAR_BUILT} />
-                <PropertyRow
-                  label="Construction Type"
-                  value={structure.CONST_TYPE}
-                />
-                <PropertyRow label="Foundation" value={structure.FOUNDATION} />
-                <PropertyRow label="Grade" value={structure.GRADE} />
-                <PropertyRow
-                  label="Basement"
-                  value={structure.BASEMENT}
-                  isLast
-                />
-              </PropertyTable>
-            ))}
-          </section>
-        )} */}
         <div className="grid grid-cols-1 gap-1 md:grid-cols-12">
           {data.TAX_BILLING && data.TAX_BILLING.length > 0 && (
             <section className="col-span-4">

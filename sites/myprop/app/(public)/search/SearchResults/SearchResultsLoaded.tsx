@@ -1,7 +1,6 @@
 import { getSearchParams } from '@/utils/serverHelpers';
-import { cacheLife, cacheTag } from 'next/cache';
 import Link from 'next/link';
-import { DataTable, DataTableRow } from '../../parcels/[pid]/components';
+import { DataTable, DataTableRow } from '@/components/Tables/';
 
 type ApiResponseBody = {
   metaData: {
@@ -22,16 +21,13 @@ type ApiResponseBody = {
   }>;
 };
 
-export async function SearchResults() {
-  const { type, query } = await getSearchParams<{
-    type: string;
+export async function SearchResultsLoaded() {
+  const { query } = await getSearchParams<{
     query: string;
   }>();
 
   async function getData() {
     'use cache';
-    cacheTag('parcels', type, query);
-    cacheLife('days');
 
     const url = new URL(`${process.env.API_URL}/property/search`);
     url.searchParams.set('query', query);

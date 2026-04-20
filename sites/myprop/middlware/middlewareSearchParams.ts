@@ -15,8 +15,10 @@ export async function middlewareSearchParams(req: NextRequest) {
   const url = new URL(req.url);
   const searchParamsObj = Object.fromEntries(url.searchParams.entries());
   const searchParamsStr = JSON.stringify(searchParamsObj);
-  if (searchParamsStr) {
+  if (searchParamsStr && searchParamsStr !== '{}') {
     res.headers.set(HEADER_SEARCH_PARAM, searchParamsStr);
+  } else {
+    res.headers.delete(HEADER_SEARCH_PARAM);
   }
 
   return res;
