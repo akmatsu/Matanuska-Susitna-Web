@@ -299,21 +299,19 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
               </span>
             </li>
           )}
+
+          {/* The underlying system erroneously labels cell number as fax, so we just treat them as Cell phone numbers */}
           {member.Fax && (
             <li className="flex items-center gap-1">
               <div
                 className="bg-primary inline-flex items-center justify-center rounded-full p-1"
                 aria-hidden
               >
-                <span className="icon-[mdi--fax] size-4 text-white" />
+                <span className="icon-[mdi--cellphone] size-4 text-white" />
               </div>
               <span>
-                <span className="sr-only">Fax: </span>
-                <PhoneLink
-                  phoneNumber={member.Fax}
-                  className="truncate"
-                  notLink
-                />
+                <span className="sr-only">Cell: </span>
+                <PhoneLink phoneNumber={member.Fax} className="truncate" />
               </span>
             </li>
           )}
