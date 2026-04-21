@@ -62,6 +62,7 @@ const getElections = gql(`
       ...ElectionPollingPlaces
       ...ElectionContact
       ...ElectionOfficialContact
+      ...ElectionOfficialApp
     }
     elections(take: 1, orderBy:  {
       electionDate: desc
@@ -92,12 +93,20 @@ export default async function ElectionsPage() {
     <>
       {page.heroImage && <Hero image={page.heroImage} />}
       <PageColumnController
-        right={<ElectionPageQuickLinks data={currentElection} />}
+        right={
+          <ElectionPageQuickLinks
+            data={currentElection}
+            electionOfficialData={page}
+          />
+        }
       >
         <SideNavDrawer />
         <ElectionPageHeader data={page} />
         <div className="lg:hidden">
-          <ElectionPageQuickLinks data={currentElection} />
+          <ElectionPageQuickLinks
+            data={currentElection}
+            electionOfficialData={page}
+          />
         </div>
         <UpcomingElectionDetails data={currentElection} />
         <ElectionVoterInformation data={currentElection} />

@@ -1,5 +1,6 @@
 import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { LinkButton } from '@/components/static/LinkButton';
+import { ExternalActionButton } from '@/components/static/Page/ExternalActionButtont';
 import { PageSection } from '@/components/static/Page/PageSection';
 import { DropdownButton } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
@@ -15,9 +16,6 @@ const ElectionPageQuickLinksFragment = gql(`
       file {
         url
       }
-      ...DocumentLink
-    }
-    electionOfficialApplication {
       ...DocumentLink
     }
 
@@ -53,10 +51,25 @@ const ElectionPageQuickLinksFragment = gql(`
   }
 `);
 
+const ElectionsPageQuickLinksOfficalFragment = gql(`
+  fragment ElectionOfficialApp on ElectionsPage {
+    electionOfficialApplicationUrl {
+      ...ExternalActionButton
+    }
+  }
+`);
+
 export function ElectionPageQuickLinks(props: {
   data?: FragmentType<typeof ElectionPageQuickLinksFragment> | null;
+  electionOfficialData?: FragmentType<
+    typeof ElectionsPageQuickLinksOfficalFragment
+  > | null;
 }) {
   const data = getFragmentData(ElectionPageQuickLinksFragment, props.data);
+  const electionOfficialData = getFragmentData(
+    ElectionsPageQuickLinksOfficalFragment,
+    props.electionOfficialData,
+  );
   if (!data) return null;
 
   const documents = [
@@ -78,8 +91,9 @@ export function ElectionPageQuickLinks(props: {
             <DocumentLinkButton data={doc} key={doc.id} color="primary" block />
           ))}
         <DocumentLinkButton data={data.candidates} color="primary" block />
-        <DocumentLinkButton
-          data={data.electionOfficialApplication}
+
+        <ExternalActionButton
+          action={electionOfficialData?.electionOfficialApplicationUrl}
           color="primary"
           block
         />
