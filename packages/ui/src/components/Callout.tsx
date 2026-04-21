@@ -6,11 +6,11 @@ export function Callout(props: {
   color?: 'info' | 'secondary' | 'base' | 'success' | 'warning' | 'error';
   as?: React.ElementType;
 }) {
-  const Tag = props.as || 'div';
+  const Tag = props.as || 'span';
   return (
     <Tag
       className={clsx(
-        'border-l-4 p-4 rounded-r *:first:mt-0 *:last:mb-0',
+        'block rounded-r border-l-4 p-4 *:first:mt-0 *:last:mb-0',
         (!props.color || props.color === 'base') &&
           'border-gray-500 bg-gray-200',
         props.color === 'info' && 'border-primary bg-blue-100',
