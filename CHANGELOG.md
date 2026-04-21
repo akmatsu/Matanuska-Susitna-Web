@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.6.0...v1.7.0) (2026-04-21)
+
+
+### Features
+
+* now treating fax as cell number in board directories ([870a060](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/870a0601e3e8b09d21c0a3bf8e3789fe57b48469))
+
 # [1.6.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.5.0...v1.6.0) (2026-04-15)
 
 
