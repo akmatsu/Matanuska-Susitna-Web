@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.7.0...v1.8.0) (2026-04-22)
+
+
+### Features
+
+* now using election official application url on elections page ([e8d3bae](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e8d3bae8258d08f22993d0a42dbae96d673a1231))
+
 # [1.7.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.6.0...v1.7.0) (2026-04-21)
 
 
