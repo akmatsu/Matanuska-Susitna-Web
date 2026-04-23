@@ -1,6 +1,4 @@
-import { Suspense } from 'react';
-// import { TaxMapImageMap } from './TaxMapImageMap';
-import { TaxMapMap } from './TaxmapMap';
+import { TaxMapMap } from './Taxmap/TaxmapMap';
 import { TaxMapTable } from './TaxMapTable';
 
 export default function TaxMapsPage() {
@@ -10,13 +8,7 @@ export default function TaxMapsPage() {
         <h1 className="text-center text-xl font-bold">
           MSB Tax Map Viewer / DXF Downloads
         </h1>
-        <Suspense>
-          <TaxMapMap />
-        </Suspense>
-        {/* <Suspense>
-          <TaxMapImageMap />
-        </Suspense> */}
-
+        <TaxMapMap />
         <TaxMapTable />
       </div>
     </main>
