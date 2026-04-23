@@ -1,3 +1,11 @@
+# [1.9.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.8.0...v1.9.0) (2026-04-23)
+
+
+### Features
+
+* changed google calendar default view to agenda ([ebef072](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ebef072f5584d009b1d83bf69e06d0bd7f83b743))
+* fixed colors of assembly and main calendars ([baeb648](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/baeb648ad3c987bd851790773e34170b2ef33f93))
+
 # [1.8.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.7.0...v1.8.0) (2026-04-22)
 
 
