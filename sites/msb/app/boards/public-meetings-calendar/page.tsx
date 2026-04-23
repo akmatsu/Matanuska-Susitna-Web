@@ -7,11 +7,11 @@ export default function PublicMeetingsCalendar() {
   const calendarSrcs = [
     {
       src: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_MAIN_ID,
-      color: '8D6F47', // default color for main calendar
+      color: '990000', // default color for main calendar
     },
     {
       src: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ASSEMBLY_ID,
-      color: '23333333', // default color for assembly calendar
+      color: 'ff3300', // default color for assembly calendar
     },
     {
       src: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_PLANNING_ID,
@@ -31,7 +31,6 @@ export default function PublicMeetingsCalendar() {
     ['height', '650'],
     ['wkst', '1'],
     ['bgcolor', '#FFFFFF'],
-    ['color', '#8D6F47'],
     ['ctz', 'America/Anchorage'],
     ['showTabs', '0'],
     ['showPrint', '0'],
