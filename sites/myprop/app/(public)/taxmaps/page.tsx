@@ -1,5 +1,5 @@
-import { TaxMapMap } from './Taxmap/TaxmapMap';
-import { TaxMapTable } from './TaxMapTable';
+import { TaxMapMap } from './components/Taxmap/TaxmapMap';
+import { TaxMapTable } from './components/TaxMapTable';
 
 export default function TaxMapsPage() {
   return (

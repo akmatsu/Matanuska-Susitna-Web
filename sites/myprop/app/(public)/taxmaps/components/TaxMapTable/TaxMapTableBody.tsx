@@ -1,3 +1,4 @@
+import { propertyApiCall } from '@/utils/apiHelpers';
 import { cn } from '@matsugov/ui/lib';
 import Link from 'next/link';
 
@@ -8,21 +9,8 @@ type TaxMap = {
   mapped_area: 0 | 1;
 };
 
-async function getData(): Promise<TaxMap[]> {
-  const url = new URL(`${process.env.API_URL}/property/taxmapbase`);
-  const res = await fetch(url.toString(), {
-    headers: {
-      ApiKey: process.env.API_KEY || '',
-    },
-  });
-
-  if (!res.ok) throw new Error('Failed to fetch tax maps: ' + res.status);
-
-  return res.json();
-}
-
 export async function TaxMapTableBody() {
-  const data = await getData();
+  const data = await propertyApiCall<TaxMap[]>(`/taxmapbase`);
 
   return (
     <section>
@@ -41,7 +29,7 @@ export async function TaxMapTableBody() {
               map.mapped_area ? 'bg-neutral-50' : 'bg-neutral-200',
             )}
           >
-            <Link href={`/taxmaps/${map.basemap_abbr}`}>
+            <Link href={`/taxmaps/${map.basemap_prefix}`}>
               {map.basemap_abbr} - {map.basemap_name}{' '}
               {map.mapped_area ? '' : '*'}
             </Link>

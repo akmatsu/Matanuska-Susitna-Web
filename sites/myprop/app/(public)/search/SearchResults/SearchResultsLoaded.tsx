@@ -1,6 +1,7 @@
 import { getSearchParams } from '@/utils/serverHelpers';
 import Link from 'next/link';
 import { DataTable, DataTableRow } from '@/components/Tables/';
+import { propertyApiCall } from '@/utils/apiHelpers';
 
 type ApiResponseBody = {
   metaData: {
@@ -26,24 +27,9 @@ export async function SearchResultsLoaded() {
     query: string;
   }>();
 
-  async function getData() {
-    'use cache';
-
-    const url = new URL(`${process.env.API_URL}/property/search`);
-    url.searchParams.set('query', query);
-
-    const res = await fetch(url.toString(), {
-      headers: {
-        ApiKey: process.env.API_KEY || '',
-      },
-    });
-
-    if (!res.ok) throw new Error('Parcel search failed: ' + res.status);
-
-    return res.json();
-  }
-
-  const data: ApiResponseBody = await getData();
+  const data = await propertyApiCall<ApiResponseBody>(
+    `/search?query=${encodeURIComponent(query)}`,
+  );
 
   if (!data.data.length) {
     return <p className="mt-4 text-center text-gray-600">No results found.</p>;

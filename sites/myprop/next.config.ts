@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
       new URL('https://picsum.photos/**'),
       new URL('https://services.arcgis.com/**'),
       new URL('https://loremflickr.com/**'),
+      new URL('https://myproperty.matsugov.us/**'),
       ...(process.env.NODE_ENV === 'development'
         ? [new URL('http://localhost:3333/**')]
         : []),

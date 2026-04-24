@@ -6,6 +6,7 @@ import {
   DataTable,
   DataTableRow,
 } from '@/components/Tables';
+import { propertyApiCall } from '@/utils/apiHelpers';
 import { format } from 'date-fns';
 
 export async function ParcelDetail(props: {
@@ -13,24 +14,9 @@ export async function ParcelDetail(props: {
 }) {
   const { pid } = await props.params;
 
-  async function fetchParcelDetails(
-    parcelId: string,
-  ): Promise<{ data: ParcelDetails }> {
-    const res = await fetch(
-      `${process.env.API_URL}/property/detail/${parcelId}`,
-      {
-        headers: {
-          ApiKey: process.env.API_KEY || '',
-        },
-      },
-    );
-    if (!res.ok)
-      throw new Error('Failed to fetch parcel details: ' + res.status);
-
-    return res.json();
-  }
-
-  const data = (await fetchParcelDetails(pid)).data;
+  const data = (
+    await propertyApiCall<{ data: ParcelDetails }>(`/detail/${pid}`)
+  ).data;
 
   const formatCurrency = (value: number | null) => {
     if (value == null) return '--';
