@@ -12,7 +12,10 @@ export function SearchFieldBody({
   return (
     <fieldset className="border-border bg-surface mx-auto mb-16 max-w-185 border p-2 pt-0">
       <legend className="text-xs font-semibold">Search</legend>
-      <form className="mb-2 flex items-end gap-1" action={handleSubmit}>
+      <form
+        className="mb-2 flex flex-col gap-1 sm:flex-row"
+        action={handleSubmit}
+      >
         <label htmlFor="search-type" className="sr-only">
           Search Type
         </label>
@@ -33,7 +36,9 @@ export function SearchFieldBody({
           className="w-full"
           defaultValue={searchParams?.query || ''}
           aria-describedby="search-help-text"
+          autoFocus
         />
+        <button type="submit">Search</button>
       </form>
       <div className="flex items-start gap-1" id="search-help-text">
         <span

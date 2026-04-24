@@ -1,5 +1,7 @@
+'use cache';
 import { propertyApiCall } from '@/utils/apiHelpers';
 import { cn } from '@matsugov/ui/lib';
+import { cacheLife } from 'next/cache';
 import Link from 'next/link';
 
 type TaxMap = {
@@ -10,6 +12,7 @@ type TaxMap = {
 };
 
 export async function TaxMapTableBody() {
+  cacheLife('weeks');
   const data = await propertyApiCall<TaxMap[]>(`/taxmapbase`);
 
   return (

@@ -1,10 +1,14 @@
+'use cache';
+
 import { propertyApiCall } from '@/utils/apiHelpers';
+import { cacheLife } from 'next/cache';
 import Image from 'next/image';
 import Link from 'next/link';
 
 type SubMap = { map: string };
 
 export async function TaxMapDetails(props: PageProps<'/taxmaps/[abbr]'>) {
+  cacheLife('weeks');
   const { abbr } = await props.params;
   const data = await propertyApiCall<SubMap[]>(`/taxmapinset`, { abbr });
 
@@ -32,7 +36,7 @@ export async function TaxMapDetails(props: PageProps<'/taxmaps/[abbr]'>) {
               Download PDF
             </Link>
             <Link
-              href={`https://matsugov.us/taxmaps/dxf/${subMap.map.toUpperCase()}.dxf`}
+              href={`https://matsugov.us/taxmaps/dxf/${data[0].map.toUpperCase()}.dxf`}
               className="bg-primary flex items-center justify-center gap-2 px-2 py-1 text-center text-white no-underline"
             >
               <span className="icon-[mdi--download]"></span>

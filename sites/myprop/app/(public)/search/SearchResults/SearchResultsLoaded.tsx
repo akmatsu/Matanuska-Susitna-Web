@@ -36,7 +36,7 @@ export async function SearchResultsLoaded() {
   }
 
   return (
-    <ul>
+    <ul className="text-sm">
       <DataTable
         headers={[
           { label: 'Details' },
@@ -46,6 +46,7 @@ export async function SearchResultsLoaded() {
           { label: 'Address' },
           { label: 'Subdivision' },
           { label: 'Address' },
+          { label: 'Maps' },
         ]}
       >
         {data.data.map((result) => (
@@ -72,6 +73,36 @@ export async function SearchResultsLoaded() {
               },
               {
                 value: result.Address,
+              },
+              {
+                value: (
+                  <>
+                    {result.MAP && (
+                      <div className="flex items-center gap-2 p-1">
+                        <Link
+                          href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
+                          className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                        >
+                          <span className="sr-only">View PDF Map</span>
+                          <span
+                            aria-hidden="true"
+                            className="icon-[gravity-ui--logo-acrobat] size-full"
+                          ></span>
+                        </Link>
+                        <Link
+                          href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr?.toUpperCase()}00.dxf`}
+                          className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                        >
+                          <span className="sr-only">View DXF Map</span>
+                          <span
+                            aria-hidden="true"
+                            className="icon-[mdi--download] size-full"
+                          ></span>
+                        </Link>
+                      </div>
+                    )}
+                  </>
+                ),
               },
             ]}
           />

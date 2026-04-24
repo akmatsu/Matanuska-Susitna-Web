@@ -3,13 +3,8 @@ import { redirect } from 'next/navigation';
 import { SearchFieldBody } from './SearchFieldBody';
 
 const searchOptions = [
-  { value: 'owner', label: 'Owner Search' },
-  { value: 'buyer', label: 'Buyer Search' },
-  { value: 'address', label: 'Address Search' },
+  { value: 'property', label: 'Property Search' },
   { value: 'subdivision', label: 'Subdivision Search' },
-  { value: 'subdivision2', label: 'Subdivision ID Search' },
-  { value: 'taxid', label: 'Tax ID Search' },
-  { value: 'parcel', label: 'Parcel Search' },
 ];
 
 export async function SearchFieldLoaded() {
