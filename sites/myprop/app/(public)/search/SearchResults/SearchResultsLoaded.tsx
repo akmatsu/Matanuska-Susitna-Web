@@ -48,7 +48,6 @@ export async function SearchResultsLoaded() {
   }
 
   if (mode === 'sub') {
-    // return <p>stuff</p>;
     return (
       <DataTable
         headers={[
