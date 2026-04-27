@@ -46,8 +46,8 @@ export function DocCollection({ id }: { id: string }) {
   );
 
   return (
-    <div className="border border-black not-prose">
-      <div className="border-b border-black p-2 bg-base-lightest flex justify-between">
+    <span className="not-prose block border border-black">
+      <span className="bg-base-lightest block flex justify-between border-b border-black p-2">
         <span className="font-semibold">{data?.documentCollection?.title}</span>
         <Button
           icon
@@ -67,30 +67,30 @@ export function DocCollection({ id }: { id: string }) {
             <span className="icon-[mdi--sort-alphabetical-descending] size-6" />
           )}
         </Button>
-      </div>
-      <div>
+      </span>
+      <span className="block">
         <ul>
           {data?.documentCollection?.documents?.map((doc) => (
             <li
               key={doc.id}
-              className="p-2 border-b last:border-0 border-black"
+              className="border-b border-black p-2 last:border-0"
             >
               <DocumentLink data={doc} />
             </li>
           ))}
         </ul>
-      </div>
+      </span>
       {totalPages > 1 && (
-        <div className="footer p-2 flex justify-center border-t border-black">
+        <span className="footer flex justify-center border-t border-black p-2">
           <Pagination
             currentPage={page}
             totalPages={totalPages}
             onLinkClick={(p) => setPage(Number(p))}
             size="xs"
           />
-        </div>
+        </span>
       )}
-    </div>
+    </span>
   );
 }
 

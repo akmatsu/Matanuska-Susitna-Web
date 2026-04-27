@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkDirective from 'remark-directive';
@@ -64,29 +63,13 @@ export function MarkdownRenderer(props: { children?: string | null }) {
       ]}
       components={{
         a: (props: AnchorHTMLAttributes<HTMLAnchorElement>) => {
-          const isExternal = props.href?.startsWith('http');
-          const isEmail = props.href?.startsWith('mailto:');
-
-          if (!isEmail)
-            return (
-              <Link
-                href={props.href as string}
-                className={`usa-link ${isExternal ? 'usa-link--external' : ''}`}
-                target={isExternal ? '_blank' : '_self'}
-                referrerPolicy={
-                  isExternal ? 'no-referrer' : 'strict-origin-when-cross-origin'
-                }
-              >
-                {props.children}
-              </Link>
-            );
-          else return props.children;
+          return <span>{props.children}</span>;
         },
         process: Process,
         step: Step,
         img: (props: ImgHTMLAttributes<HTMLImageElement>) => {
           return (
-            <div className="my-8 w-full">
+            <span className="my-8 block w-full">
               {/* TODO: change this to a Next <Image /> component */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -94,10 +77,10 @@ export function MarkdownRenderer(props: { children?: string | null }) {
                 className="mt-0 mb-0 w-full"
                 alt={props.alt || props.title || 'Image'}
               ></img>
-              <div className="flex justify-center">
+              <span className="flex justify-center">
                 <span className="text-center text-base">{props.title}</span>
-              </div>
-            </div>
+              </span>
+            </span>
           );
         },
         'doc-collection': DocCollectionWrapper,
@@ -107,30 +90,30 @@ export function MarkdownRenderer(props: { children?: string | null }) {
         calloutblock: MdCallout,
         columns: (props) => {
           return (
-            <div
-              className={clsx('md:grid md:gap-6', {
+            <span
+              className={clsx('block md:grid md:gap-6', {
                 'md:grid-cols-2': props.count === '2',
                 'md:grid-cols-3': props.count === '3',
               })}
             >
               {props.children}
-            </div>
+            </span>
           );
         },
         column: (props) => {
-          return <div className="md:col-span-1">{props.children}</div>;
+          return <span className="block md:col-span-1">{props.children}</span>;
         },
         textalign: (props) => {
           return (
-            <div
-              className={clsx({
+            <span
+              className={clsx('block', {
                 'text-left': props.align === 'left',
                 'text-center': props.align === 'center',
                 'text-right': props.align === 'right',
               })}
             >
               {props.children}
-            </div>
+            </span>
           );
         },
       }}

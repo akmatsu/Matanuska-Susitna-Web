@@ -59,13 +59,15 @@ export async function InternalLink(props: {
 
     const url = getRedirectUrl(data?.getInternalLink, props.list);
 
+    console.log(error);
+
     if (url && !error)
       return (
         <Tag
           href={url}
           color={props.node?.properties.color as any}
           className={clsx({
-            'line-through text-error!': url === '/not-found',
+            'text-error! line-through': url === '/not-found',
             'not-prose inline-block': isButton,
           })}
         >
@@ -79,7 +81,7 @@ export async function InternalLink(props: {
       content="Oops! Looks like this link is broken. We are working on it!"
       className="text-center"
     >
-      <span className="text-error! line-through! cursor-not-allowed!">
+      <span className="text-error! cursor-not-allowed! line-through!">
         {props.children} <span className="icon-[mdi--error] -mb-0.5" />
       </span>
     </Tooltip>

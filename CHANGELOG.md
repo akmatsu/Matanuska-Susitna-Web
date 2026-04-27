@@ -1,3 +1,32 @@
+# [1.9.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.8.0...v1.9.0) (2026-04-23)
+
+
+### Features
+
+* changed google calendar default view to agenda ([ebef072](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ebef072f5584d009b1d83bf69e06d0bd7f83b743))
+* fixed colors of assembly and main calendars ([baeb648](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/baeb648ad3c987bd851790773e34170b2ef33f93))
+
+# [1.8.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.7.0...v1.8.0) (2026-04-22)
+
+
+### Features
+
+* now using election official application url on elections page ([e8d3bae](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e8d3bae8258d08f22993d0a42dbae96d673a1231))
+
+# [1.7.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.6.0...v1.7.0) (2026-04-21)
+
+
+### Features
+
+* now treating fax as cell number in board directories ([870a060](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/870a0601e3e8b09d21c0a3bf8e3789fe57b48469))
+
+# [1.6.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.5.0...v1.6.0) (2026-04-15)
+
+
+### Features
+
+* removed trails matcher ([53a26b0](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/53a26b0436c9a642a7a213d6ed9d83330e1a28cc))
+
 # [1.5.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.4.1...v1.5.0) (2026-04-15)
 
 

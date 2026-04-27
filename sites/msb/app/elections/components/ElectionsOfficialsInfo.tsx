@@ -1,6 +1,7 @@
 import { MarkdownRenderer } from '@/components/server/MarkdownRenderer';
-import { DocumentLinkButton } from '@/components/static/DocumentLink';
+// import { DocumentLinkButton } from '@/components/static/DocumentLink';
 import { PageSection } from '@/components/static/Page';
+import { ExternalActionButton } from '@/components/static/Page/ExternalActionButtont';
 import { PhoneLink } from '@/components/static/PhoneLink';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
@@ -9,9 +10,6 @@ const ElectionOfficialsInfoFragment = gql(`
   fragment ElectionsOfficialsInfo on Election {
     electionOfficialApplicationDeadline
     electionOfficialBody
-    electionOfficialApplication {
-      ...DocumentLink
-    }
   }
 `);
 
@@ -21,6 +19,9 @@ const ElectionOfficialContactFragment = gql(`
       name
       email
       phone
+    }
+    electionOfficialApplicationUrl {
+      ...ExternalActionButton
     }
   }
 `);
@@ -71,8 +72,8 @@ export function ElectionOfficialsInfo(props: {
               . In order to serve, you must be a registered voter of the
               Borough. Training and compensation are provided.
             </p>
-            <DocumentLinkButton
-              data={data?.electionOfficialApplication}
+            <ExternalActionButton
+              action={contactData?.electionOfficialApplicationUrl}
               color="primary"
               className="not-prose"
             />
