@@ -4,7 +4,8 @@ import { SearchFieldBody } from './SearchFieldBody';
 
 const searchOptions = [
   { value: 'property', label: 'Property Search' },
-  { value: 'subdivision', label: 'Subdivision Search' },
+  { value: 'sub', label: 'Subdivision Search' },
+  { value: 'subid', label: 'Subdivision ID Search' },
 ];
 
 export async function SearchFieldLoaded() {
@@ -17,7 +18,7 @@ export async function SearchFieldLoaded() {
 
     if (typeof searchType === 'string' && typeof query === 'string') {
       const params = new URLSearchParams();
-      if (searchType?.length) params.set('type', searchType);
+      if (searchType?.length) params.set('mode', searchType);
       if (query?.length) params.set('query', query);
 
       const searchUrl = `/search?${params.toString()}`;
