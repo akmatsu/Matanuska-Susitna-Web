@@ -10,14 +10,17 @@ export async function propertyApiCall<T = unknown>(
 ): Promise<T> {
   'use server';
 
+  const normalizedPath = normalizePropertyPath(path);
+
   // Construct the full URL with query parameters if provided
-  const url = new URL(`/property${path}`, baseUrl);
+  const url = new URL(`/property${normalizedPath}`, baseUrl);
   if (params) {
     const searchParams = new URLSearchParams(params);
     url.search = searchParams.toString();
   }
 
   // Make the API call with the appropriate headers and options
+  console.log(url.toString());
   const data = await fetch(url.toString(), {
     ...options,
     headers: {
@@ -34,4 +37,30 @@ export async function propertyApiCall<T = unknown>(
   // Parse and return the JSON response
   const json = await data.json();
   return json;
+}
+
+function normalizePropertyPath(path: string): string {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+
+  // Disallow URL/authority and query/fragment control in path input.
+  if (
+    normalizedPath.includes('..') ||
+    normalizedPath.includes('://') ||
+    normalizedPath.includes('\\') ||
+    normalizedPath.includes('?') ||
+    normalizedPath.includes('#')
+  ) {
+    throw new Error('Invalid property API path');
+  }
+
+  // Disallow dot segments to prevent directory traversal
+  const segments = normalizedPath.split('/').filter(Boolean);
+  for (const segment of segments) {
+    const decoded = decodeURIComponent(segment);
+    if (decoded === '.' || decoded === '..') {
+      throw new Error('Invalid property API path');
+    }
+  }
+
+  return normalizedPath;
 }

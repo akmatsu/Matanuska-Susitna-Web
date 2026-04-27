@@ -35,13 +35,10 @@ export async function SearchResultsLoaded() {
     mode: string;
   }>();
 
-  const data = await propertyApiCall<ApiResponseBody>(
-    `/search?query=${encodeURIComponent(query)}`,
-    {
-      query,
-      mode,
-    },
-  );
+  const data = await propertyApiCall<ApiResponseBody>('/search', {
+    query,
+    mode,
+  });
 
   if (!data.data.length) {
     return <p className="mt-4 text-center text-gray-600">No results found.</p>;

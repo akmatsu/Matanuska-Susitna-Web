@@ -16,7 +16,7 @@ export async function ParcelDetail(props: {
   const { pid } = await props.params;
 
   const { data } = await propertyApiCall<{ data: ParcelDetails }>(
-    `/detail/${pid}`,
+    `/detail/${encodeURIComponent(pid)}`,
   );
 
   const formatCurrency = (value: number | null) => {
