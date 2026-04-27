@@ -8,15 +8,16 @@ import {
 } from '@/components/Tables';
 import { propertyApiCall } from '@/utils/apiHelpers';
 import { format } from 'date-fns';
+import { MapModal } from './MapModal';
 
 export async function ParcelDetail(props: {
   params: PageProps<'/parcels/[pid]'>['params'];
 }) {
   const { pid } = await props.params;
 
-  const data = (
-    await propertyApiCall<{ data: ParcelDetails }>(`/detail/${pid}`)
-  ).data;
+  const { data } = await propertyApiCall<{ data: ParcelDetails }>(
+    `/detail/${pid}`,
+  );
 
   const formatCurrency = (value: number | null) => {
     if (value == null) return '--';
@@ -64,7 +65,10 @@ export async function ParcelDetail(props: {
               <PropertyRow label="Subdivision" value={data.SUBD_NAME} />
               <PropertyRow label="City" value={data.CITY} />
               {/* TODO: Convert these into map buttons. Make a modal that shows all the different maps available */}
-              <PropertyRow label="Map" value={data.MAP} />
+              <PropertyRow
+                label="Map"
+                value={<MapModal pid={data.PARCEL_ID} map={data.MAP} />}
+              />
             </PropertyTable>
           </TwoColumnWrapper>
           <PropertyTable>
