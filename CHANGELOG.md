@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.9.0...v1.10.0) (2026-04-28)
+
+
+### Features
+
+* fixed the things ([4f11c4a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/4f11c4af3c63b99b3fccf5074eb88aa1b1d5345d))
+
 # [1.9.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.8.0...v1.9.0) (2026-04-23)
 
 
