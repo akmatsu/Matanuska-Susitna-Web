@@ -1,6 +1,8 @@
 {
   "cSpell.words": [
     "arcgis",
+    "basemap",
+    "Basemaps",
     "calloutblock",
     "Codegen",
     "commonmark",
@@ -14,6 +16,7 @@
     "matsugov",
     "middlware",
     "Milkdown",
+    "MULT",
     "nextjs",
     "nord",
     "OIDC",
@@ -21,8 +24,10 @@
     "Prosemirror",
     "Rehype",
     "startdt",
+    "SUBD",
     "Subnav",
     "swiper",
+    "taxmaps",
     "textalign",
     "toastui",
     "Toolbelt",

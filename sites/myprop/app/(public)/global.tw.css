@@ -1,0 +1,111 @@
+@import 'tailwindcss';
+@import '@matsugov/tw-config/msb.css';
+
+@source '../app/**/*.{js,ts,jsx,tsx,mdx}';
+@source '../components/**/*.{js,ts,jsx,tsx,mdx}';
+@source './pages/**/*.{js,ts,jsx,tsx,mdx}';
+@source '../node_modules/@matsugov/ui/src/**/*.{js,ts,jsx,tsx,mdx}';
+
+:root {
+  --tw-prose-body: var(--color-ink);
+}
+
+@theme {
+  --color-foreground-light: #ffffff;
+  --color-base-light: #e9e9ed;
+  --color-base: #e8e8e8;
+  --color-base-dark: #d0d0d7;
+  --color-base-darker: #d4d5d5;
+  --color-base-darker-2: #b1b1b9;
+  --color-base-darkest: #9b9b9e;
+
+  --color-primary-light: #2b6db4;
+  --color-primary: #173b61;
+
+  --color-foreground: var(--color-black);
+  --color-background: var(--color-white);
+  --color-foreground-secondary: var(--color-gray-700);
+  --color-foreground-disabled: var(--color-gray-400);
+  --color-foreground-inverted: var(--color-white);
+  --color-surface: var(--color-base);
+  --color-surface-dark: var(--color-primary);
+  --color-border: var(--color-base-darkest);
+  --color-table-border: var(--color-background);
+  --color-input: var(--color-base-light);
+  --color-input-hover: var(--color-base-dark);
+  --color-input-active: var(--color-base-darker-2);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  /* Anchor tags */
+  a {
+    @apply text-primary-dark underline;
+  }
+
+  a:hover {
+    @apply text-primary-darker;
+  }
+
+  a:focus {
+    @apply focus:ring-primary focus:ring-4 focus:ring-offset-2 focus:outline-none;
+  }
+  /* a:visited {
+    color: var(--color-purple-900);
+  } */
+
+  /* Button focus state */
+  button,
+  select,
+  input,
+  textarea {
+    @apply focus:ring-primary focus:ring-4 focus:ring-offset-2 focus:outline-none;
+  }
+
+  button,
+  select {
+    @apply border-border cursor-pointer! rounded-sm border bg-gray-100 px-1 hover:bg-gray-200!;
+  }
+
+  input {
+    @apply border-border cursor-text rounded-sm border bg-white px-1;
+  }
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-padding-top: 144px;
+}
+p .msb-md-body {
+  table {
+    width: 100%;
+  }
+}
+
+@layer components {
+  .focus-ring {
+    @apply focus:ring-primary focus:ring-4 focus:ring-offset-2 focus:outline-none;
+  }
+
+  /* .old-btn {
+    @apply rounded-sm border border-border bg-gray-100 px-1;
+  } */
+}
