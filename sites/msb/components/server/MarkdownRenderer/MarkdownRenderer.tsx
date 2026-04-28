@@ -62,9 +62,9 @@ export function MarkdownRenderer(props: { children?: string | null }) {
         remarkDirectiveRehype,
       ]}
       components={{
-        a: (props: AnchorHTMLAttributes<HTMLAnchorElement>) => {
-          return <span>{props.children}</span>;
-        },
+        // a: (props: AnchorHTMLAttributes<HTMLAnchorElement>) => {
+        //   return <span>{props.children}</span>;
+        // },
         process: Process,
         step: Step,
         img: (props: ImgHTMLAttributes<HTMLImageElement>) => {
