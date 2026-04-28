@@ -31,6 +31,7 @@ export async function propertyApiCall<T = unknown>(
 
   // Check if the response is OK (status in the range 200-299)
   if (!data.ok) {
+    console.log(data);
     throw new Error(`API call failed with status ${data.status}`);
   }
 

@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { SearchFieldBody } from './SearchFieldBody';
 
 const searchOptions = [
-  { value: 'property', label: 'Property Search' },
+  { value: 'wild', label: 'Property Search' },
   { value: 'sub', label: 'Subdivision Search' },
   { value: 'subid', label: 'Subdivision ID Search' },
 ];
