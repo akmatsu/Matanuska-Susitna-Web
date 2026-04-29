@@ -1,3 +1,11 @@
+## [1.11.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.11.0...v1.11.1) (2026-04-29)
+
+
+### Bug Fixes
+
+* fixed delayed page fetching due to async page component ([387bc14](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/387bc148a88497045f00796309b0a5da949e369f))
+* fixed duplicate keys in search results ([72a8251](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/72a8251ab8885fa53e85786d0091bbd01b16fba2))
+
 # [1.11.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.10.0...v1.11.0) (2026-04-29)
 
 
