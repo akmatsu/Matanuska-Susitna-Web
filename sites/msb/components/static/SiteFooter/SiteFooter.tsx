@@ -33,6 +33,9 @@ export function SiteFooter() {
             <SiteFooterLink href="/departments">Contact Us</SiteFooterLink>
           </li>
           <li>
+            <SiteFooterLink href="/news">News & Press Releases</SiteFooterLink>
+          </li>
+          <li>
             <FooterCookieButton />
           </li>
           <li>
