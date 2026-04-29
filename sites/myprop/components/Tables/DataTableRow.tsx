@@ -20,7 +20,7 @@ export const DataTableRow = ({
         .join(' ');
 
       return (
-        <td key={idx} className={className}>
+        <td key={`${idx}-${cell.value}`} className={className}>
           {cell.value}
         </td>
       );

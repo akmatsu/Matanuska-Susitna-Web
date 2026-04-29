@@ -3,30 +3,32 @@ import Link from 'next/link';
 import { DataTable, DataTableRow } from '@/components/Tables/';
 import { propertyApiCall } from '@/utils/apiHelpers';
 
+type ParcelSearchResult = {
+  TAX_ID: string;
+  OWNER: string | null;
+  BUYER: string | null;
+  SUBD_NAME: string | null;
+  SITE_MULT: 'Y' | 'N';
+  Address: string | null;
+  PARCEL_ID: string;
+  MAP: string | null;
+  basemap_abbr: string | null;
+};
+
+type SubdivisionSearchResult = {
+  SUBD_NAME: string;
+  SUBD_NUM: string;
+  MAP: string;
+  basemap_abbr: string | null;
+};
+
 type ApiResponseBody = {
   metaData: {
     page: number;
     pageSize: number;
     MaxRecords?: number;
   };
-  data:
-    | Array<{
-        TAX_ID: string;
-        OWNER: string | null;
-        BUYER: string | null;
-        SUBD_NAME: string | null;
-        SITE_MULT: 'Y' | 'N';
-        Address: string | null;
-        PARCEL_ID: string;
-        MAP: string | null;
-        basemap_abbr: string | null;
-      }>
-    | Array<{
-        SUBD_NAME: string;
-        SUBD_NUM: string;
-        MAP: string;
-        basemap_abbr: string | null;
-      }>;
+  data: Array<ParcelSearchResult | SubdivisionSearchResult>;
 };
 
 export async function SearchResultsLoaded() {
@@ -41,7 +43,11 @@ export async function SearchResultsLoaded() {
   });
 
   if (!data.data.length) {
-    return <p className="mt-4 text-center text-gray-600">No results found.</p>;
+    return (
+      <p className="mt-4 text-center text-gray-600">
+        No results found for query &quot;{query}&quot;.
+      </p>
+    );
   }
 
   if (mode === 'sub') {
@@ -54,9 +60,9 @@ export async function SearchResultsLoaded() {
           { label: 'Maps' },
         ]}
       >
-        {data.data.map((result) => (
+        {data.data.map((result: SubdivisionSearchResult) => (
           <DataTableRow
-            key={result.SUBD_NUM}
+            key={`${result.SUBD_NUM}`}
             cells={[
               {
                 value: (
@@ -107,7 +113,6 @@ export async function SearchResultsLoaded() {
   }
 
   return (
-    // <ul className="text-sm">
     <DataTable
       headers={[
         { label: 'Details' },
@@ -120,9 +125,9 @@ export async function SearchResultsLoaded() {
         { label: 'Maps' },
       ]}
     >
-      {data.data.map((result) => (
+      {data.data.map((result: ParcelSearchResult) => (
         <DataTableRow
-          key={result.PARCEL_ID}
+          key={`${result.PARCEL_ID.trim()}-${result.Address?.trim()}`}
           cells={[
             {
               value: <Link href={`/parcels/${result.PARCEL_ID}`}>View</Link>,
@@ -179,6 +184,5 @@ export async function SearchResultsLoaded() {
         />
       ))}
     </DataTable>
-    // </ul>
   );
 }
