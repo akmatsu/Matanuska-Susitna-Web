@@ -1,0 +1,39 @@
+name: Trigger Amplify Build for myprop
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - sites/myprop/**
+      - packages/ui/**
+      - packages/tw-config/**
+      - .github/workflows/deploy-myprop.yml
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    env:
+      NEXT_PUBLIC_API_URL: https://cms-internal.matsu.gov
+      NEXT_PUBLIC_TYPESENSE_API_KEY: ${{ secrets.NEXT_PUBLIC_TYPESENSE_API_KEY }}
+      NEXT_PUBLIC_TYPESENSE_HOST: search.matsu.gov
+      NEXT_PUBLIC_TYPESENSE_PORT: 443
+      NEXT_PUBLIC_TYPESENSE_PROTOCOL: https
+    concurrency:
+      group: ci-myprop-${{github.ref}}
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AMPLIFY_DEPLOYER_ROLE }}
+          role-session-name: github-actions-deploy-myprop-session
+          aws-region: us-east-2
+
+      - name: Trigger AWS Amplify Build
+        run: |
+          aws amplify start-job --app-id d33k8nn71c973y --branch-name main --job-type RELEASE --region us-west-2

@@ -9,6 +9,7 @@ on:
     workflows:
       - 'Trigger Amplify Build for msb'
       - 'Trigger Amplify Build for widgets'
+      - 'Trigger Amplify Build for myprop'
 
 concurrency:
   group: release-${{github.event.workflow_run.head_sha}}
