@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.10.0...v1.11.0) (2026-04-29)
+
+
+### Features
+
+* added a news and press release button to the footer ([d894c7a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/d894c7a68a14f98f4093acd6a423b9d05daf9d5c))
+
 # [1.10.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.9.0...v1.10.0) (2026-04-28)
 
 
