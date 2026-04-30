@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.12.1...v1.13.0) (2026-04-30)
+
+
+### Features
+
+* improved search input behavior; ([859b2b4](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/859b2b43aa3dd24fb4d9d3c351c1590bdac5086b))
+
 ## [1.12.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.12.0...v1.12.1) (2026-04-30)
 
 
