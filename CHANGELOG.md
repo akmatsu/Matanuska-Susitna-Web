@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.12.0...v1.12.1) (2026-04-30)
+
+
+### Bug Fixes
+
+* fixed full client reload on search ([f6d498f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f6d498f597715d94a9c7532a52366af94b52dfa2))
+
 # [1.12.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.11.1...v1.12.0) (2026-04-29)
 
 
