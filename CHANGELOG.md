@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.13.0...v1.13.1) (2026-04-30)
+
+
+### Bug Fixes
+
+* fixed incorrect query param ([5e4b55d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/5e4b55dd6ef62b9cec361e2861fa8506c93a4ce4))
+
 # [1.13.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.12.1...v1.13.0) (2026-04-30)
 
 
