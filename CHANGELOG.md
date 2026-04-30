@@ -1,3 +1,10 @@
+## [1.13.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.13.2...v1.13.3) (2026-04-30)
+
+
+### Bug Fixes
+
+* removed proxy ([8ae433d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8ae433d26e4948de2b47c6e07d465c3becd64b84))
+
 ## [1.13.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.13.1...v1.13.2) (2026-04-30)
 
 
