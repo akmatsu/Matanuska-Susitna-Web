@@ -1,7 +1,8 @@
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { SearchFieldBody } from './SearchFieldBody';
+import { useState } from 'react';
+import { Select } from '../Select';
 
 const searchOptions = [
   { value: 'wild', label: 'Property Search' },
@@ -17,25 +18,61 @@ export function SearchFieldLoaded() {
     query: searchParams.get('query') || undefined,
   };
 
-  return (
-    <SearchFieldBody
-      searchParams={searchParamsObj}
-      searchOptions={searchOptions}
-      handleSubmit={async (formData: FormData) => {
-        const searchType = formData.get('search-type');
-        const query = formData.get('query');
+  const [searchType, setSearchType] = useState(searchParamsObj.type || 'wild');
+  const [searchQuery, setSearchQuery] = useState(searchParamsObj.query || '');
 
-        if (typeof searchType === 'string' && typeof query === 'string') {
+  return (
+    <fieldset className="border-border bg-surface mx-auto mb-16 max-w-185 border p-2 pt-0">
+      <legend className="text-xs font-semibold">Search</legend>
+      <form
+        className="mb-2 flex flex-col gap-1 sm:flex-row"
+        onSubmit={(e) => {
+          e.preventDefault();
           const params = new URLSearchParams();
-          if (searchType?.length) params.set('mode', searchType);
-          if (query?.length) params.set('query', query);
+          if (searchType?.length) params.set('type', searchType);
+          if (searchQuery?.length) params.set('query', searchQuery);
 
           const searchUrl = `/search?${params.toString()}`;
           router.push(searchUrl);
-        } else {
-          console.error('Invalid form data:', { searchType, query });
-        }
-      }}
-    />
+        }}
+      >
+        <label htmlFor="search-type" className="sr-only">
+          Search Type
+        </label>
+        <Select
+          options={searchOptions}
+          name="search-type"
+          value={searchType}
+          onChange={(e) => setSearchType(e.target.value)}
+          id="search-type"
+        />
+        <label htmlFor="search-query" className="sr-only">
+          Search Query
+        </label>
+        <input
+          type="text"
+          placeholder="Search for by name, address, or parcel ID..."
+          name="query"
+          id="search-query"
+          className="w-full"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          aria-describedby="search-help-text"
+          autoFocus
+        />
+        <button type="submit">Search</button>
+      </form>
+      <div className="flex items-start gap-1" id="search-help-text">
+        <span
+          className="icon icon-[mdi--info] size-4 text-blue-600"
+          aria-hidden="true"
+        />
+        <p className="text-xs italic">
+          If searching by owner/buyer name, search by last name first. For
+          example, to search for &quot;Bill Jones&quot;, enter &quot;Jones
+          Bill&quot; or just &quot;Jones&quot;.
+        </p>
+      </div>
+    </fieldset>
   );
 }
