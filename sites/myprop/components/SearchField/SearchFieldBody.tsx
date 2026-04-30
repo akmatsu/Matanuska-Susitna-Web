@@ -6,7 +6,7 @@ export function SearchFieldBody({
   searchOptions,
 }: {
   handleSubmit?: (formData: FormData) => Promise<void>;
-  searchParams?: { [key: string]: string | string[] };
+  searchParams?: Record<string, string | string[]>;
   searchOptions?: { value: string; label: string }[];
 }) {
   return (
