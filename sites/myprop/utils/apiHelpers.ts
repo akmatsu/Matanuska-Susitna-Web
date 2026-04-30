@@ -5,7 +5,7 @@ const baseUrl = process.env.API_URL || 'http://localhost:3000/api';
  */
 export async function propertyApiCall<T = unknown>(
   path: string,
-  params?: Record<string, string> | URLSearchParams,
+  params?: Record<string, string | string[]>,
   options?: RequestInit,
 ): Promise<T> {
   'use server';
@@ -15,7 +15,14 @@ export async function propertyApiCall<T = unknown>(
   // Construct the full URL with query parameters if provided
   const url = new URL(`/property${normalizedPath}`, baseUrl);
   if (params) {
-    const searchParams = new URLSearchParams(params);
+    const searchParams = new URLSearchParams();
+    for (const [key, value] of Object.entries(params)) {
+      if (Array.isArray(value)) {
+        value.forEach((v) => searchParams.append(key, v));
+      } else {
+        searchParams.append(key, value);
+      }
+    }
     url.search = searchParams.toString();
   }
 
