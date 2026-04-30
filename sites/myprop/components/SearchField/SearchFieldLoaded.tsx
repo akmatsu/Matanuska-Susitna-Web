@@ -29,7 +29,7 @@ export function SearchFieldLoaded() {
         onSubmit={(e) => {
           e.preventDefault();
           const params = new URLSearchParams();
-          if (searchType?.length) params.set('type', searchType);
+          if (searchType?.length) params.set('mode', searchType);
           if (searchQuery?.length) params.set('query', searchQuery);
 
           const searchUrl = `/search?${params.toString()}`;
