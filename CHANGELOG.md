@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.13.1...v1.13.2) (2026-04-30)
+
+
+### Bug Fixes
+
+* experimental fix delayed search feedback ([7dc2710](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/7dc271093aa290ada67ade0abc9eefa3976371e1))
+
 ## [1.13.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.13.0...v1.13.1) (2026-04-30)
 
 
