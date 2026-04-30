@@ -10,6 +10,7 @@
     "mde:build": "pnpm turbo run build --filter=@msb/md-editor",
     "myp:dev": "pnpm turbo run dev --filter=myprop",
     "myp:build": "pnpm turbo run build --filter=myprop",
+    "myp:start": "pnpm turbo run start --filter=myprop",
     "ui:dev": "pnpm turbo run storybook --filter=@matsugov/ui",
     "ui:start": "pnpm turbo run build -- -w --filter=@matsugov/ui",
     "ui:build": "pnpm turbo run build --filter=@matsugov/ui",
