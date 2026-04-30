@@ -37,6 +37,10 @@ export async function SearchResultsLoaded() {
     mode: string;
   }>();
 
+  if (!query) {
+    return null;
+  }
+
   const data = await propertyApiCall<ApiResponseBody>('/search', {
     query,
     mode,
