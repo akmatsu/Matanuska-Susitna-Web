@@ -1,3 +1,10 @@
+## [1.13.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.13.3...v1.13.4) (2026-04-30)
+
+
+### Bug Fixes
+
+* fixed search loading feedback; ([6700ed0](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6700ed0027ef8057ca9df31e449de202439bfa9a))
+
 ## [1.13.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.13.2...v1.13.3) (2026-04-30)
 
 
