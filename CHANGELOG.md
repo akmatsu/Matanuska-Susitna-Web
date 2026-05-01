@@ -1,3 +1,15 @@
+# [1.14.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.13.4...v1.14.0) (2026-05-01)
+
+
+### Bug Fixes
+
+* fixed build errors ([a3e907c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a3e907cd33b7ff23f4963d1b67dbf249d1da2fdb))
+
+
+### Features
+
+* added a nav progress indicator ([07e47b4](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/07e47b4472cf75c4e25b9d8ad88bceaef9adb7f0))
+
 ## [1.13.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.13.3...v1.13.4) (2026-04-30)
 
 
