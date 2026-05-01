@@ -289,7 +289,13 @@ export default async function MyParcelDetailPage(
                         { value: doc.DEED_TYPE },
                         {
                           value: (
-                            <a href={`#${doc.DOC_URL}`}>{doc.DOC_LABEL}</a>
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={`https://dnr.alaska.gov/ssd/recoff/search/cad_search?${doc.DOC_URL}`}
+                            >
+                              {doc.DOC_LABEL}
+                            </a>
                           ),
                         },
                       ]}
