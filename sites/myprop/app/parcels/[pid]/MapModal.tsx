@@ -17,6 +17,11 @@ export function MapModal(props: { pid: string; map: string }) {
   // Convert each url string to an object with a label, url, and icon field
   const mapUrls = [
     {
+      name: 'Parcel Viewer',
+      url: `https://parcelviewer.matsu.gov/vertigisstudio/web/?app=05240199d948427e88bf8ea2ebea9513&workflow=b3ee4694-fbe2-4683-b4e9-114fe8d4cca0&workflowParams=${props.pid}`,
+      icon: 'icon-[mdi--map-search-outline]',
+    },
+    {
       name: 'Tax Map PDF',
       url: `https://matsugov.us/taxmaps/pdf/${props.map.toUpperCase()}.pdf`,
       icon: 'icon-[mdi--pdf-box]',
