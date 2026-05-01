@@ -16,7 +16,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
       <body className="bg-background text-foreground p-2 font-sans antialiased">
-        <NextTopLoader />
+        <NextTopLoader height={5} color="#2b6db4" />
         <div className="mx-auto max-w-240">
           <header className="text-center">
             <Link href="/" aria-label="Home">
