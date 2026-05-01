@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.14.0...v1.15.0) (2026-05-01)
+
+
+### Features
+
+* changed the color of the topnav indicator ([a471e0a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a471e0aa1a8e607cb3952b5f9f65ee43591c88f8))
+
 # [1.14.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.13.4...v1.14.0) (2026-05-01)
 
 
