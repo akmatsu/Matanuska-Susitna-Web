@@ -1,3 +1,11 @@
+## [1.15.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.15.0...v1.15.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* added parcel viewer ([710253f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/710253f2c3ce7bda6b80d91571e6671a1a2effa3))
+* fixed DNR links ([fd12a3f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fd12a3f25a6e66eb23e1b01072974722030e0426))
+
 # [1.15.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.14.0...v1.15.0) (2026-05-01)
 
 
