@@ -8,7 +8,7 @@ export default async function SearchPage(props: PageProps<'/search'>) {
 
   return (
     <>
-      <SearchField searchParams={props.searchParams} />
+      <SearchField />
       <Suspense
         fallback={<ResultsLoading />}
         key={`results-${searchParams.query}-${searchParams.mode}`}
