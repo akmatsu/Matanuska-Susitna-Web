@@ -1,3 +1,10 @@
+## [1.15.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.15.1...v1.15.2) (2026-05-02)
+
+
+### Bug Fixes
+
+* no longer submitting if query is empty ([e48b28c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e48b28c45d1cc7d2509ef68b80fed367c98f0efa))
+
 ## [1.15.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.15.0...v1.15.1) (2026-05-01)
 
 
