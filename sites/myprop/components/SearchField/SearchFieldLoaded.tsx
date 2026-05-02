@@ -20,9 +20,11 @@ export function SearchFieldLoaded() {
         className="mb-2 flex flex-col gap-1 sm:flex-row"
         onSubmit={(e) => {
           e.preventDefault();
+
           const formData = new FormData(e.currentTarget);
           const type = formData.get('search-type');
           const query = formData.get('query');
+          if (!query || String(query).length === 0) return;
           const newSearchParams = new URLSearchParams(searchParams.toString());
           newSearchParams.set('mode', String(type));
           newSearchParams.set('query', String(query));
