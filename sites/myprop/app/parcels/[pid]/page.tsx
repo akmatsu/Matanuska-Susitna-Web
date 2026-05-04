@@ -186,7 +186,9 @@ export default async function MyParcelDetailPage(
           {data.STRUCTURES && data.STRUCTURES.length > 0 && (
             <section>
               <details>
-                <summary>View Building Details</summary>
+                <summary className="cursor-pointer">
+                  View Building Details
+                </summary>
                 {data.STRUCTURES.map((structure, idx) => (
                   <section key={idx}>
                     <SectionHeader

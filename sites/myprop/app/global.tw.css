@@ -54,20 +54,10 @@
   }
 
   /* Anchor tags */
-  a {
-    @apply text-primary-dark underline;
+  a,
+  summary {
+    @apply text-primary-dark hover:text-primary-darker focus:ring-primary cursor-pointer underline focus:ring-4 focus:ring-offset-2 focus:outline-none;
   }
-
-  a:hover {
-    @apply text-primary-darker;
-  }
-
-  a:focus {
-    @apply focus:ring-primary focus:ring-4 focus:ring-offset-2 focus:outline-none;
-  }
-  /* a:visited {
-    color: var(--color-purple-900);
-  } */
 
   /* Button focus state */
   button,
