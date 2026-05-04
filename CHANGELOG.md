@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.17.0...v1.17.1) (2026-05-04)
+
+
+### Bug Fixes
+
+* fixed uncached data access outside of suspense ([cdecc7d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/cdecc7dfc3d469990721bf98d2899c92d717209b))
+
 # [1.17.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.16.2...v1.17.0) (2026-05-04)
 
 
