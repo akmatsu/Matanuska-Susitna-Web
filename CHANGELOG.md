@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.17.1...v1.18.0) (2026-05-04)
+
+
+### Features
+
+* made a mobile friendly results view in search ([10c5f40](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/10c5f40c7610bbe33b3aaab041ce6ca663286ece))
+
 ## [1.17.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.17.0...v1.17.1) (2026-05-04)
 
 
