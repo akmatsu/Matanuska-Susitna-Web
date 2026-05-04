@@ -35,6 +35,7 @@ export function SearchFieldLoaded() {
           Search Type
         </label>
         <Select
+          key={searchParams.get('mode') || 'owner'}
           options={searchOptions}
           name="search-type"
           defaultValue={searchParams.get('mode') || 'owner'}
@@ -44,6 +45,7 @@ export function SearchFieldLoaded() {
           Search Query
         </label>
         <input
+          key={searchParams.get('query') || ''}
           type="text"
           placeholder="Search for by name, address, or parcel ID..."
           name="query"
