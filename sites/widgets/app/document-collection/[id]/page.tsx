@@ -1,7 +1,6 @@
 import { getClient } from '@/utils';
 import { DocumentCollection } from '@matsugov/ui/DocumentCollection';
 import { gql } from '@msb/js-sdk/gql';
-import Link from 'next/link';
 
 const getDocCollection = gql(`
   query GetDocumentCollectionWidget($where: DocumentCollectionWhereUniqueInput!) {
