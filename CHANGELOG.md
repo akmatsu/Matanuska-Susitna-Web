@@ -1,3 +1,11 @@
+## [1.16.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.16.0...v1.16.1) (2026-05-04)
+
+
+### Bug Fixes
+
+* increased padding beneath searchfield message ([e5339f2](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e5339f224dd210d9058e686d7f84f3452890e05b))
+* now showing tax billed amount ([c212ae3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/c212ae38a4cc2c9a2d26ff1acba17b56d0596810))
+
 # [1.16.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.15.2...v1.16.0) (2026-05-04)
 
 
