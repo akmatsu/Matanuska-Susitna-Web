@@ -1,3 +1,17 @@
+# [1.16.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.15.2...v1.16.0) (2026-05-04)
+
+
+### Bug Fixes
+
+* added visual indications that summary is clickable ([a9f16e8](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a9f16e8321b8f3d910df12497c5ab29566dba1dc))
+* fixed linting errors ([66839fe](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/66839fef3c215b82b10f8839e9ac514264551ec1))
+* improved search field state behavior ([ae5f86a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ae5f86acbf3c3094e7c9d111d9fbe8bfc883a5d1))
+
+
+### Features
+
+* added back buttons to parcel detail and taxmap pages ([63430bf](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/63430bf420ca0fbaedd0e8a768514e2ca8d56a15))
+
 ## [1.15.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.15.1...v1.15.2) (2026-05-02)
 
 
