@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.16.2...v1.17.0) (2026-05-04)
+
+
+### Features
+
+* added a feedback button ([08b4799](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/08b479907aaf81fd5ff109e2478e875fec5f10bc))
+
 ## [1.16.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.16.1...v1.16.2) (2026-05-04)
 
 
