@@ -3,6 +3,7 @@ import './global.tw.css';
 import Link from 'next/link';
 import NextTopLoader from 'nextjs-toploader';
 import { FeedbackButton } from '@/components/FeedbackButton';
+import { Suspense } from 'react';
 
 export const metadata = {
   metadataBase:
@@ -31,7 +32,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
                 />
               </div>
             </Link>
-            <FeedbackButton />
+            <Suspense>
+              <FeedbackButton />
+            </Suspense>
           </header>
           {props.children}
         </div>
