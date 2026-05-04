@@ -20,7 +20,7 @@ export type ParcelTaxBilling = {
   YEAR_CERT: string | null;
   ZONE: string | null;
   MILL: string | null;
-  'Tax Amount Billed': string | null;
+  TAX_BILLED: string | null;
 };
 
 export type ParcelRecordedDocument = {
@@ -209,7 +209,7 @@ function createTaxBilling(appraisals: ParcelAppraisal[]): ParcelTaxBilling[] {
       YEAR_CERT: index === 0 ? 'No' : 'Yes',
       ZONE: pad(faker.number.int({ min: 1, max: 9999 }), 4),
       MILL: mill,
-      'Tax Amount Billed': billed,
+      TAX_BILLED: billed,
     };
   });
 }

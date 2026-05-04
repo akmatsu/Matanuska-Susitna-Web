@@ -264,7 +264,7 @@ export default async function MyParcelDetailPage(
                         { value: billing.YEAR_CERT },
                         { value: billing.ZONE },
                         { value: billing.MILL, right: true },
-                        { value: billing['Tax Amount Billed'], right: true },
+                        { value: billing.TAX_BILLED, right: true },
                       ]}
                       isLast={idx === data.TAX_BILLING.length - 1}
                     />
