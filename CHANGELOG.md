@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.0...v1.18.1) (2026-05-04)
+
+
+### Bug Fixes
+
+* increased size of links and inputs in mobile view ([59fd3e3](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/59fd3e312f681539872d64f2099129ad76562de0))
+
 # [1.18.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.17.1...v1.18.0) (2026-05-04)
 
 
