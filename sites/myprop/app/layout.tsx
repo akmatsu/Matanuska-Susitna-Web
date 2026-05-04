@@ -2,6 +2,7 @@ import Image from 'next/image';
 import './global.tw.css';
 import Link from 'next/link';
 import NextTopLoader from 'nextjs-toploader';
+import { FeedbackButton } from '@/components/FeedbackButton';
 
 export const metadata = {
   metadataBase:
@@ -30,6 +31,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
                 />
               </div>
             </Link>
+            <FeedbackButton />
           </header>
           {props.children}
         </div>
