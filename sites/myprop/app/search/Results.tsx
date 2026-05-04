@@ -50,27 +50,159 @@ export async function Results({
 
   if (mode === 'sub') {
     return (
+      <>
+        <DataTable
+          className="hidden sm:block"
+          headers={[
+            { label: 'Details' },
+            { label: 'Subdivision Name' },
+            { label: 'Subdivision Number' },
+            { label: 'Maps' },
+          ]}
+        >
+          {data.data.map((result: SubdivisionSearchResult) => (
+            <DataTableRow
+              key={`${result.SUBD_NUM}`}
+              cells={[
+                {
+                  value: (
+                    <Link href={`/search?mode=subid&query=${result.SUBD_NUM}`}>
+                      View
+                    </Link>
+                  ),
+                },
+                { value: result.SUBD_NAME },
+                { value: result.SUBD_NUM },
+                {
+                  value: (
+                    <>
+                      {result.MAP && (
+                        <div className="flex items-center gap-2 p-1">
+                          <Link
+                            href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
+                            className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                          >
+                            <span className="sr-only">View PDF Map</span>
+                            <span
+                              aria-hidden="true"
+                              className="icon-[gravity-ui--logo-acrobat] size-full"
+                            ></span>
+                          </Link>
+                          {result.basemap_abbr && (
+                            <Link
+                              href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
+                              className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                            >
+                              <span className="sr-only">View DXF Map</span>
+                              <span
+                                aria-hidden="true"
+                                className="icon-[mdi--download] size-full"
+                              ></span>
+                            </Link>
+                          )}
+                        </div>
+                      )}
+                    </>
+                  ),
+                },
+              ]}
+            />
+          ))}
+        </DataTable>
+        {/* Mobile view */}
+        <ul className="space-y-2 sm:hidden">
+          {data.data.map((result: SubdivisionSearchResult) => (
+            <li
+              key={`${result.SUBD_NUM}`}
+              className="border-table-border bg-surface border-b p-4"
+            >
+              <p>
+                <strong>Subdivision Name:</strong> {result.SUBD_NAME}
+              </p>
+              <p>
+                <strong>Subdivision Number:</strong> {result.SUBD_NUM}
+              </p>
+              <div className="mt-2 flex items-center gap-4">
+                <Link
+                  href={`/search?mode=subid&query=${result.SUBD_NUM}`}
+                  className="text-primary"
+                >
+                  View Details
+                </Link>
+                {result.MAP && (
+                  <Link
+                    href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
+                    className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                  >
+                    <span className="sr-only">View PDF Map</span>
+                    <span
+                      aria-hidden="true"
+                      className="icon-[gravity-ui--logo-acrobat] size-full"
+                    ></span>
+                  </Link>
+                )}
+                {result.basemap_abbr && (
+                  <Link
+                    href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
+                    className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                  >
+                    <span className="sr-only">View DXF Map</span>
+                    <span
+                      aria-hidden="true"
+                      className="icon-[mdi--download] size-full"
+                    ></span>
+                  </Link>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </>
+    );
+  }
+
+  return (
+    <>
       <DataTable
+        className="hidden sm:block"
         headers={[
           { label: 'Details' },
-          { label: 'Subdivision Name' },
-          { label: 'Subdivision Number' },
+          { label: 'Account ID' },
+          { label: 'Parcel ID' },
+          { label: 'Owner' },
+          { label: 'Address' },
+          { label: 'Subdivision' },
           { label: 'Maps' },
         ]}
       >
-        {data.data.map((result: SubdivisionSearchResult) => (
+        {data.data.map((result: ParcelSearchResult) => (
           <DataTableRow
-            key={`${result.SUBD_NUM}`}
+            key={`${result.PARCEL_ID.trim()}-${result.Address?.trim()}`}
             cells={[
               {
                 value: (
-                  <Link href={`/search?mode=subid&query=${result.SUBD_NUM}`}>
+                  <Link
+                    href={`/parcels/${result.PARCEL_ID.trim()}?returnTo=${encodeURIComponent(`/search?query=${query}&mode=${mode}`)}`}
+                  >
                     View
                   </Link>
                 ),
               },
-              { value: result.SUBD_NAME },
-              { value: result.SUBD_NUM },
+              {
+                value: result.TAX_ID,
+              },
+              {
+                value: result.PARCEL_ID,
+              },
+              {
+                value: result.OWNER,
+              },
+              {
+                value: result.Address,
+              },
+              {
+                value: result.SUBD_NAME,
+              },
               {
                 value: (
                   <>
@@ -86,18 +218,16 @@ export async function Results({
                             className="icon-[gravity-ui--logo-acrobat] size-full"
                           ></span>
                         </Link>
-                        {result.basemap_abbr && (
-                          <Link
-                            href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
-                            className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
-                          >
-                            <span className="sr-only">View DXF Map</span>
-                            <span
-                              aria-hidden="true"
-                              className="icon-[mdi--download] size-full"
-                            ></span>
-                          </Link>
-                        )}
+                        <Link
+                          href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr?.toUpperCase()}00.dxf`}
+                          className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                        >
+                          <span className="sr-only">View DXF Map</span>
+                          <span
+                            aria-hidden="true"
+                            className="icon-[mdi--download] size-full"
+                          ></span>
+                        </Link>
                       </div>
                     )}
                   </>
@@ -107,86 +237,64 @@ export async function Results({
           />
         ))}
       </DataTable>
-    );
-  }
+      {/* Mobile view */}
 
-  return (
-    <DataTable
-      headers={[
-        { label: 'Details' },
-        { label: 'Account ID' },
-        { label: 'Parcel ID' },
-        { label: 'Owner' },
-        { label: 'Address' },
-        { label: 'Subdivision' },
-        { label: 'Address' },
-        { label: 'Maps' },
-      ]}
-    >
-      {data.data.map((result: ParcelSearchResult) => (
-        <DataTableRow
-          key={`${result.PARCEL_ID.trim()}-${result.Address?.trim()}`}
-          cells={[
-            {
-              value: (
+      <ul className="space-y-2 sm:hidden">
+        {data.data.map((result: ParcelSearchResult) => (
+          <li
+            key={`${result.PARCEL_ID.trim()}-${result.Address?.trim()}`}
+            className="border-table-border bg-surface border-b p-4"
+          >
+            <p>
+              <strong>Account ID:</strong> {result.TAX_ID}
+            </p>
+            <p>
+              <strong>Parcel ID:</strong> {result.PARCEL_ID}
+            </p>
+            <p>
+              <strong>Owner:</strong> {result.OWNER}
+            </p>
+            <p>
+              <strong>Address:</strong> {result.Address}
+            </p>
+            <p>
+              <strong>Subdivision:</strong> {result.SUBD_NAME}
+            </p>
+            <div className="mt-2 flex items-center gap-4">
+              <Link
+                href={`/parcels/${result.PARCEL_ID.trim()}?returnTo=${encodeURIComponent(`/search?query=${query}&mode=${mode}`)}`}
+                className="text-primary"
+              >
+                View Details
+              </Link>
+              {result.MAP && (
                 <Link
-                  href={`/parcels/${result.PARCEL_ID.trim()}?returnTo=${encodeURIComponent(`/search?query=${query}&mode=${mode}`)}`}
+                  href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
+                  className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
                 >
-                  View
+                  <span className="sr-only">View PDF Map</span>
+                  <span
+                    aria-hidden="true"
+                    className="icon-[gravity-ui--logo-acrobat] size-full"
+                  ></span>
                 </Link>
-              ),
-            },
-            {
-              value: result.TAX_ID,
-            },
-            {
-              value: result.PARCEL_ID,
-            },
-            {
-              value: result.OWNER,
-            },
-            {
-              value: result.Address,
-            },
-            {
-              value: result.SUBD_NAME,
-            },
-            {
-              value: result.Address,
-            },
-            {
-              value: (
-                <>
-                  {result.MAP && (
-                    <div className="flex items-center gap-2 p-1">
-                      <Link
-                        href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
-                        className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
-                      >
-                        <span className="sr-only">View PDF Map</span>
-                        <span
-                          aria-hidden="true"
-                          className="icon-[gravity-ui--logo-acrobat] size-full"
-                        ></span>
-                      </Link>
-                      <Link
-                        href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr?.toUpperCase()}00.dxf`}
-                        className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
-                      >
-                        <span className="sr-only">View DXF Map</span>
-                        <span
-                          aria-hidden="true"
-                          className="icon-[mdi--download] size-full"
-                        ></span>
-                      </Link>
-                    </div>
-                  )}
-                </>
-              ),
-            },
-          ]}
-        />
-      ))}
-    </DataTable>
+              )}
+              {result.basemap_abbr && (
+                <Link
+                  href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
+                  className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                >
+                  <span className="sr-only">View DXF Map</span>
+                  <span
+                    aria-hidden="true"
+                    className="icon-[mdi--download] size-full"
+                  ></span>
+                </Link>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
