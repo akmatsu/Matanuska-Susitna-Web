@@ -128,7 +128,13 @@ export async function Results({
           key={`${result.PARCEL_ID.trim()}-${result.Address?.trim()}`}
           cells={[
             {
-              value: <Link href={`/parcels/${result.PARCEL_ID}`}>View</Link>,
+              value: (
+                <Link
+                  href={`/parcels/${result.PARCEL_ID.trim()}?returnTo=${encodeURIComponent(`/search?query=${query}&mode=${mode}`)}`}
+                >
+                  View
+                </Link>
+              ),
             },
             {
               value: result.TAX_ID,
