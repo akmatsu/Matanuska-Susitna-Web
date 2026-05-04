@@ -1,10 +1,11 @@
 // import { MapWrapper } from '@/components/MapWrapper';
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
+export default async function Page() {
+//   {
+//   searchParams,
+// }: {
+//   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+// }
   // const {
   //   item_id: itemId,
   //   item_key: itemKey,

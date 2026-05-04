@@ -5,7 +5,7 @@ import { Process, Step, DocCollectionWrapper } from './components';
 import remarkDirectiveRehype from 'remark-directive-rehype';
 import { ActionButtonWrapper } from './components/PrimaryActionButton';
 import { InternalLink } from './components/InternalLink';
-import { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react';
+import { ImgHTMLAttributes } from 'react';
 import { visit } from 'unist-util-visit';
 import { MDIframe } from './components/MdIframe';
 import { MdCallout } from './components/Callout';

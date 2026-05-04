@@ -39,6 +39,7 @@ export default defineConfig(
         'warn',
         ['sites/msb/app', 'sites/widgets/app'],
       ],
+      'react-hooks/set-state-in-effect': 'warn', // Warn about setting state in useEffect without proper dependencies
     },
   },
 );
