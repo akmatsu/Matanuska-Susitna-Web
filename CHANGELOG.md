@@ -1,3 +1,10 @@
+## [1.16.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.16.1...v1.16.2) (2026-05-04)
+
+
+### Bug Fixes
+
+* added a not-found page for public notices ([29130b4](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/29130b4902ffcdff3731298995ca05535ff4699c))
+
 ## [1.16.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.16.0...v1.16.1) (2026-05-04)
 
 
