@@ -1,3 +1,5 @@
+import { cn } from '@matsugov/ui/lib';
+
 export function Select({
   options,
   ...props
@@ -9,7 +11,7 @@ export function Select({
       name={props.name}
       id={props.id || props.name}
       {...props}
-      className="group-data-error/field:border-red-500"
+      className={cn('group-data-error/field:border-red-500', props.className)}
     >
       {options?.map((option) => (
         <option key={option.value} value={option.value}>

@@ -40,6 +40,7 @@ export function SearchFieldLoaded() {
           name="search-type"
           defaultValue={searchParams.get('mode') || 'owner'}
           id="search-type"
+          className="p-2 sm:px-1 sm:py-0"
         />
         <label htmlFor="search-query" className="sr-only">
           Search Query
@@ -50,12 +51,14 @@ export function SearchFieldLoaded() {
           placeholder="Search for by name, address, or parcel ID..."
           name="query"
           id="search-query"
-          className="w-full"
+          className="w-full p-2 sm:px-1 sm:py-0"
           defaultValue={searchParams.get('query') || ''}
           aria-describedby="search-help-text"
           autoFocus
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="px-2 py-1 sm:px-1 sm:py-0">
+          Search
+        </button>
       </form>
       <div className="flex items-start gap-1" id="search-help-text">
         <span
