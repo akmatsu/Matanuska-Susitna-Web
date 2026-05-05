@@ -81,22 +81,26 @@ export async function Results({
                           <Link
                             href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
                             className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                            title="View PDF Map"
+                            aria-label="View PDF Map"
                           >
                             <span className="sr-only">View PDF Map</span>
                             <span
                               aria-hidden="true"
-                              className="icon-[gravity-ui--logo-acrobat] size-full"
+                              className="icon-[carbon--pdf] size-full"
                             ></span>
                           </Link>
                           {result.basemap_abbr && (
                             <Link
                               href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
                               className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                              title="Download DXF Map"
+                              aria-label="Download DXF Map"
                             >
-                              <span className="sr-only">View DXF Map</span>
+                              <span className="sr-only">Download DXF Map</span>
                               <span
                                 aria-hidden="true"
-                                className="icon-[mdi--download] size-full"
+                                className="icon-[carbon--cad] size-full"
                               ></span>
                             </Link>
                           )}
@@ -133,11 +137,12 @@ export async function Results({
                   <Link
                     href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
                     className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                    title="View PDF Map"
                   >
                     <span className="sr-only">View PDF Map</span>
                     <span
                       aria-hidden="true"
-                      className="icon-[gravity-ui--logo-acrobat] size-full"
+                      className="icon-[carbon--pdf] size-full"
                     ></span>
                   </Link>
                 )}
@@ -145,11 +150,12 @@ export async function Results({
                   <Link
                     href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
                     className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                    title="Download DXF Map"
                   >
-                    <span className="sr-only">View DXF Map</span>
+                    <span className="sr-only">Download DXF Map</span>
                     <span
                       aria-hidden="true"
-                      className="icon-[mdi--download] size-full"
+                      className="icon-[carbon--cad] size-full"
                     ></span>
                   </Link>
                 )}
@@ -211,21 +217,23 @@ export async function Results({
                         <Link
                           href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
                           className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                          title="View PDF Map"
                         >
                           <span className="sr-only">View PDF Map</span>
                           <span
                             aria-hidden="true"
-                            className="icon-[gravity-ui--logo-acrobat] size-full"
+                            className="icon-[carbon--pdf] size-full"
                           ></span>
                         </Link>
                         <Link
                           href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr?.toUpperCase()}00.dxf`}
                           className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                          title="Download DXF Map"
                         >
-                          <span className="sr-only">View DXF Map</span>
+                          <span className="sr-only">Download DXF Map</span>
                           <span
                             aria-hidden="true"
-                            className="icon-[mdi--download] size-full"
+                            className="icon-[carbon--cad] size-full"
                           ></span>
                         </Link>
                       </div>
@@ -271,11 +279,12 @@ export async function Results({
                 <Link
                   href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
                   className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                  title="View PDF Map"
                 >
                   <span className="sr-only">View PDF Map</span>
                   <span
                     aria-hidden="true"
-                    className="icon-[gravity-ui--logo-acrobat] size-full"
+                    className="icon-[carbon--pdf] size-full"
                   ></span>
                 </Link>
               )}
@@ -283,11 +292,12 @@ export async function Results({
                 <Link
                   href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
                   className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                  title="Download DXF Map"
                 >
-                  <span className="sr-only">View DXF Map</span>
+                  <span className="sr-only">Download DXF Map</span>
                   <span
                     aria-hidden="true"
-                    className="icon-[mdi--download] size-full"
+                    className="icon-[carbon--cad] size-full"
                   ></span>
                 </Link>
               )}
