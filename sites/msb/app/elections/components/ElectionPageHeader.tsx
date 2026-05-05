@@ -20,7 +20,10 @@ export function ElectionPageHeader(props: {
     <PageSection>
       <ProseWrapper>
         <h1>{data.title}</h1>
-        <p className="italic mb-0">{data.description}</p>
+        <p className="mb-0 italic">
+          Ensuring fair, transparent, and accessible elections for all Borough
+          residents
+        </p>
 
         <MarkdownRenderer>{data.howElectionsWork}</MarkdownRenderer>
       </ProseWrapper>

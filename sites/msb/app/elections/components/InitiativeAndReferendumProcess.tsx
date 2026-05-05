@@ -22,14 +22,14 @@ export function InitiativeAndReferendumProcess(props: {
   return (
     <PageSection title="Initiative/Referendum Process" headerSize="lg">
       <ProseWrapper>
-        <div className="flex flex-col-reverse md:grid grid-cols-5 md:gap-6">
+        <div className="flex grid-cols-5 flex-col-reverse md:grid md:gap-6">
           <div className="col-span-5 md:col-span-3">
             <p>
-              Are you interested in understanding how the initiative/referendum
-              process works? See our fact sheet for more information.
+              Are you interested in understanding how the initiative &
+              referendum process works? See our fact sheet for more information.
             </p>
           </div>
-          <div className="md:block md:col-span-2">
+          <div className="md:col-span-2 md:block">
             <DocumentLinkButton
               data={data.electionsPage.referendumProcessDocument}
               className="not-prose md:w-full"
