@@ -1,3 +1,10 @@
+## [1.18.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.2...v1.18.3) (2026-05-05)
+
+
+### Bug Fixes
+
+* fixed image sizing in markdown renderer ([b24641d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/b24641d06b7d6e61e34b62bf96a0a58ee6ecf047))
+
 ## [1.18.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.1...v1.18.2) (2026-05-05)
 
 
