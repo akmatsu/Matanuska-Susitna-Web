@@ -1,3 +1,10 @@
+## [1.18.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.3...v1.18.4) (2026-05-05)
+
+
+### Bug Fixes
+
+* now removing special characters from URLs; ([fef557a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fef557aecbcf53625660768b3dc29074e84a7bba))
+
 ## [1.18.3](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.2...v1.18.3) (2026-05-05)
 
 
