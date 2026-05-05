@@ -1,3 +1,10 @@
+## [1.18.2](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.1...v1.18.2) (2026-05-05)
+
+
+### Bug Fixes
+
+* changed map download icons and added titles ([6f29d27](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6f29d279e09217caa97a631816232644bdf39bc4))
+
 ## [1.18.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.0...v1.18.1) (2026-05-04)
 
 
