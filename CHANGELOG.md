@@ -1,3 +1,10 @@
+## [1.18.5](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.4...v1.18.5) (2026-05-05)
+
+
+### Bug Fixes
+
+* no longer pulling text from description ([22036f1](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/22036f10716c93f70c03dcb673999c47b412a80f))
+
 ## [1.18.4](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.3...v1.18.4) (2026-05-05)
 
 
