@@ -5,10 +5,10 @@ import { Process, Step, DocCollectionWrapper } from './components';
 import remarkDirectiveRehype from 'remark-directive-rehype';
 import { ActionButtonWrapper } from './components/PrimaryActionButton';
 import { InternalLink } from './components/InternalLink';
-import { ImgHTMLAttributes } from 'react';
 import { visit } from 'unist-util-visit';
 import { MDIframe } from './components/MdIframe';
 import { MdCallout } from './components/Callout';
+import { MdImage } from './components/MdImage';
 import clsx from 'clsx';
 
 /**
@@ -67,17 +67,22 @@ export function MarkdownRenderer(props: { children?: string | null }) {
         // },
         process: Process,
         step: Step,
-        img: (props: ImgHTMLAttributes<HTMLImageElement>) => {
+        img: (props) => {
+          if (!props.node) return null;
+
+          const imgSize =
+            parseFloat(
+              (props.node.properties?.alt as string | undefined) || '1',
+            ) * 100;
+
           return (
             <span className="my-8 block w-full">
-              {/* TODO: change this to a Next <Image /> component */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <MdImage
                 {...props}
-                className="mt-0 mb-0 w-full"
-                alt={props.alt || props.title || 'Image'}
-              ></img>
-              <span className="flex justify-center">
+                imgSize={imgSize}
+                alt={props.title || 'Image'}
+              />
+              <span className="mx-auto flex max-w-lg justify-center text-sm">
                 <span className="text-center text-base">{props.title}</span>
               </span>
             </span>

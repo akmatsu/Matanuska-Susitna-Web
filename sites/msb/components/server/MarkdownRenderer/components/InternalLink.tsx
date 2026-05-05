@@ -59,8 +59,6 @@ export async function InternalLink(props: {
 
     const url = getRedirectUrl(data?.getInternalLink, props.list);
 
-    console.log(error);
-
     if (url && !error)
       return (
         <Tag
