@@ -26,10 +26,16 @@ const query = gql(`
 export async function handleCmsRedirects(req: NextAuthRequest) {
   // If user is not an admin they will be redirected.
   if (!req.auth) {
+    // Strip trailing special characters that may have been accidentally appended.
+    const cleanPath = decodeURIComponent(req.nextUrl.pathname).replace(
+      /[^\w/]+$/i,
+      '',
+    );
+
     const { data } = await getClientHandler({
       query,
       variables: {
-        path: req.nextUrl.pathname,
+        path: cleanPath,
       },
     });
 
