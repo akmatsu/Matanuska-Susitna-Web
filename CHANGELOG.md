@@ -1,3 +1,10 @@
+## [1.18.6](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.5...v1.18.6) (2026-05-08)
+
+
+### Bug Fixes
+
+* fixed incorrect URL on orgUnits ([2188ae7](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/2188ae72b82eee10547c1886dfac19d86e1cde5b))
+
 ## [1.18.5](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.4...v1.18.5) (2026-05-05)
 
 
