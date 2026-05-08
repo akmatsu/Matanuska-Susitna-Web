@@ -8,7 +8,7 @@ export function CoreSearchHits(props: ComponentProps<typeof Hits>) {
   const { status } = useInstantSearch();
 
   return (
-    <ul role="list" className="flex flex-col gap-4 mb-4">
+    <ul role="list" className="mb-4 flex flex-col gap-4">
       {items.map((item: any) => (
         <SearchListItem
           key={item.id}
@@ -19,7 +19,8 @@ export function CoreSearchHits(props: ComponentProps<typeof Hits>) {
               item.type === 'office' ||
               item.type === 'division' ||
               item.type === 'department' ||
-              item.type === 'Departments & Divisions'
+              item.type === 'Departments & Divisions' ||
+              item.type === 'OrgUnit'
               ? 'department'
               : item.type === 'community_council' ||
                   item.type === 'ssa_board' ||
