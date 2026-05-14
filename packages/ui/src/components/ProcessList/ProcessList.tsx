@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 export function ProcessList({ children }: { children?: React.ReactNode }) {
   return (
-    <ol className="list-none pr-0 m-0 pl-4 pt-5 [counter-reset:process-list] relative">
+    <ol className="relative m-0 list-none pt-5 pr-0 pl-4 [counter-reset:process-list]">
       {children}
     </ol>
   );
@@ -40,14 +40,14 @@ export function ProcessListItem({
 
         // list-item styles
         'border-l-[0.5rem]',
-        'border-blue-10v',
+        'border-us-blue-10v',
         'last:border-transparent',
         'pl-[calc(calc(2.5rem/2-.25rem)*2)]',
         'pb-8',
         'prose',
       )}
     >
-      <h4 className="text-xl font-bold m-0">{title}</h4>
+      <h4 className="m-0 text-xl font-bold">{title}</h4>
       {children}
     </li>
   );
