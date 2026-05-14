@@ -1,6 +1,7 @@
 import { NumberInput } from './NumberInput';
 import { CheckboxInput } from './CheckboxInput';
 import { RadioInput } from './RadioInput';
+import { Button } from './Button';
 
 interface TaxCalculatorFormProps {
   propertyValue: number;
@@ -136,12 +137,9 @@ export function TaxCalculatorForm({
       </div>
 
       {onSubmit && (
-        <button
-          onClick={onSubmit}
-          className="mt-4 w-full rounded-lg bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-blue-700 sm:mt-6 sm:px-4 sm:py-3"
-        >
+        <Button onClick={onSubmit} variant="primary" className="mt-4 sm:mt-6">
           Calculate Tax Impact
-        </button>
+        </Button>
       )}
     </>
   );

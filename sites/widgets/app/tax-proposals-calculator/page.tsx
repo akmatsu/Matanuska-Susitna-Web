@@ -1,8 +1,8 @@
 'use client';
 
-import { TaxCalculatorForm } from './TaxCalculatorForm';
-import { TaxCalculatorResults } from './TaxCalculatorResults';
-import { useTaxCalculator } from './useTaxCalculator';
+import { TaxCalculatorForm } from './components/TaxCalculatorForm';
+import { TaxCalculatorResults } from './components/TaxCalculatorResults';
+import { useTaxCalculator } from './hooks/useTaxCalculator';
 
 export default function TaxProposalsCalculatorPage() {
   const {
