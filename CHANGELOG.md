@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.6...v1.19.0) (2026-05-14)
+
+
+### Features
+
+* created the tax-proposals calculator ([310ba60](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/310ba604247092d103b2593776a327534ad0ccce))
+
 ## [1.18.6](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.5...v1.18.6) (2026-05-08)
 
 
