@@ -77,7 +77,8 @@ export function TaxCalculatorResults({
   if (includeMarijuanaTax) {
     totalRevenueImpact += REVENUE_RATES.marijuana;
   }
-  const alcoholRevenueAvg = (REVENUE_RATES.alcoholMin + REVENUE_RATES.alcoholMax) / 2;
+  const alcoholRevenueAvg =
+    (REVENUE_RATES.alcoholMin + REVENUE_RATES.alcoholMax) / 2;
   if (includeAlcoholTax) {
     totalRevenueImpact += alcoholRevenueAvg;
   }
@@ -189,7 +190,10 @@ export function TaxCalculatorResults({
           Borough Revenue Implications
         </h3>
         <p className="mb-4 text-xs text-gray-600">
-          <span className="font-semibold">Note:</span> These are estimated revenue figures. The borough budget is used to fund core operations, capital projects such as roads and infrastructure, and allocations to the school district.
+          <span className="font-semibold">Note:</span> These are estimated
+          revenue figures. The borough budget is used to fund core operations,
+          capital projects such as roads and infrastructure, and allocations to
+          the school district.
         </p>
         <div className="space-y-3">
           {/* Sales Tax Revenue */}
@@ -245,16 +249,25 @@ export function TaxCalculatorResults({
                 OR 26-062: Alcohol Tax
               </span>
               <span className="text-sm font-semibold text-green-600">
-                +${alcoholRevenueAvg.toFixed(1)}M <span className="text-xs text-gray-500">(est. ${REVENUE_RATES.alcoholMin}-${REVENUE_RATES.alcoholMax}M)</span>
+                +${alcoholRevenueAvg.toFixed(1)}M{' '}
+                <span className="text-xs text-gray-500">
+                  (est. ${REVENUE_RATES.alcoholMin}-${REVENUE_RATES.alcoholMax}
+                  M)
+                </span>
               </span>
             </div>
           )}
 
           {/* Total Revenue Impact */}
           <div className="flex items-center justify-between pt-3">
-            <span className="font-semibold text-gray-900">Total Revenue Impact</span>
-            <span className={`text-lg font-bold ${totalRevenueImpact >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-              {totalRevenueImpact >= 0 ? '+' : ''}{totalRevenueImpact.toFixed(1)}M
+            <span className="font-semibold text-gray-900">
+              Total Revenue Impact
+            </span>
+            <span
+              className={`text-lg font-bold ${totalRevenueImpact >= 0 ? 'text-green-600' : 'text-red-600'}`}
+            >
+              {totalRevenueImpact >= 0 ? '+' : ''}
+              {totalRevenueImpact.toFixed(1)}M
             </span>
           </div>
         </div>
