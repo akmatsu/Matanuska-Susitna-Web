@@ -10,7 +10,7 @@ export function CheckboxInput({
   onChange,
 }: CheckboxInputProps) {
   return (
-    <label className="flex items-center">
+    <label className="flex cursor-pointer items-center">
       <input
         type="checkbox"
         checked={checked}

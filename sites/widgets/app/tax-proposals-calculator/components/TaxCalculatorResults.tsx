@@ -55,7 +55,7 @@ export function TaxCalculatorResults({
       {/* Disclaimer Toggle */}
       <button
         onClick={() => setShowDisclaimer(!showDisclaimer)}
-        className="flex w-full items-center gap-2 rounded-lg bg-yellow-200 p-2 text-left hover:bg-yellow-300"
+        className="flex w-full cursor-pointer items-center gap-2 rounded-lg bg-yellow-200 p-2 text-left hover:bg-yellow-300"
       >
         <span
           className={`text-lg transition-transform ${showDisclaimer ? 'icon-[mdi--chevron-down]' : 'icon-[mdi--chevron-right]'}`}

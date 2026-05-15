@@ -13,7 +13,7 @@ export function Button({
   variant = 'toggle',
   className = '',
 }: ButtonProps) {
-  const baseClasses = 'rounded font-semibold transition';
+  const baseClasses = 'rounded font-semibold transition cursor-pointer';
 
   const variantClasses = {
     toggle: isActive

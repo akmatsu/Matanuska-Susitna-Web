@@ -27,7 +27,10 @@ export function RadioInput({
       </legend>
       <div className="space-y-2">
         {options.map((option) => (
-          <label key={option.value} className="flex items-center">
+          <label
+            key={option.value}
+            className="flex cursor-pointer items-center"
+          >
             <input
               type="radio"
               name={name}
