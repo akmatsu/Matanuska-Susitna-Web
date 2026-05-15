@@ -82,6 +82,9 @@ export default function TaxProposalsCalculatorPage() {
     totalCost,
     originalAnnualSpending,
     totalCostDifference,
+    includeGravelTax,
+    includeMarijuanaTax,
+    includeAlcoholTax,
   };
 
   return (
