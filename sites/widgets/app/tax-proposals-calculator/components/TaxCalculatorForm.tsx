@@ -50,7 +50,20 @@ export function TaxCalculatorForm({
           label="Assessed Property Value ($)"
           value={propertyValue}
           onChange={setPropertyValue}
-          helpText="Leave blank if you don't own property"
+          helpText={
+            <>
+              Leave blank if you don&apos;t own property. Find your assessed value on{' '}
+              <a
+                href="https://myproperty.matsugov.us/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-blue-700"
+              >
+                MyProperty
+              </a>
+              .
+            </>
+          }
           placeholder="0"
         />
 

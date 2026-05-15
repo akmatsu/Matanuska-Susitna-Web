@@ -1,8 +1,10 @@
+import { ReactNode } from 'react';
+
 interface NumberInputProps {
   label: string;
   value: number;
   onChange: (value: number) => void;
-  helpText?: string;
+  helpText?: ReactNode;
   placeholder?: string;
 }
 

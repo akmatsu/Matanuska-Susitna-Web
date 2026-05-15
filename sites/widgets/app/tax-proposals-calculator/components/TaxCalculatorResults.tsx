@@ -109,7 +109,7 @@ export function TaxCalculatorResults({
             based on location, individual circumstances, and other factors. For
             current property tax information, visit{' '}
             <a
-              href="https://myproperty.matsugov.us/mydetail.aspx?pID=88571"
+              href="https://myproperty.matsugov.us"
               target="_blank"
               rel="noopener noreferrer"
               className="underline"
