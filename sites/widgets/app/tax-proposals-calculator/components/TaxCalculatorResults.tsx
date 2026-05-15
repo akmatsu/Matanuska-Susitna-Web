@@ -193,7 +193,16 @@ export function TaxCalculatorResults({
           <span className="font-semibold">Note:</span> These are estimated
           revenue figures. The borough budget is used to fund core operations,
           capital projects such as roads and infrastructure, and allocations to
-          the school district.
+          the school district. For more information view our{' '}
+          <a
+            href="https://transparency.matsugov.us/pages/financial-information"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-blue-700"
+          >
+            Financial Information Page
+          </a>
+          .
         </p>
         <div className="space-y-3">
           {/* Sales Tax Revenue */}
