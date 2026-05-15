@@ -12,7 +12,7 @@ export function TogglePeriod({
   label = 'View as:',
 }: TogglePeriodProps) {
   return (
-    <div className="flex items-center gap-3 rounded-lg bg-gray-100 p-3">
+    <div className="flex items-center gap-3">
       <span className="text-xs font-medium text-gray-700 sm:text-sm">
         {label}
       </span>

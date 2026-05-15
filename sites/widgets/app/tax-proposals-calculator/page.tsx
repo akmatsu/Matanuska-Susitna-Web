@@ -43,6 +43,7 @@ export default function TaxProposalsCalculatorPage() {
     alcoholDifference,
     totalCost,
     originalAnnualSpending,
+    propertyTaxDifference,
     totalCostDifference,
   } = useTaxCalculator();
 
@@ -67,6 +68,7 @@ export default function TaxProposalsCalculatorPage() {
 
   const resultsProps = {
     propertyTax,
+    propertyTaxDifference,
     taxablePropertyValue,
     effectiveMillRate,
     salesTaxType,
@@ -115,7 +117,7 @@ export default function TaxProposalsCalculatorPage() {
             </div>
           ) : (
             // RESULTS VIEW
-            <div className="space-y-3 rounded-lg bg-white p-3 shadow sm:space-y-4 sm:p-6">
+            <div className="space-y-3 rounded-lg border bg-white p-3 shadow sm:space-y-4 sm:p-6">
               <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">
                 Estimated Tax Impact
               </h2>
@@ -130,7 +132,7 @@ export default function TaxProposalsCalculatorPage() {
         {/* Desktop Two-Column View */}
         <div className="hidden md:grid md:grid-cols-2 md:gap-6">
           {/* Left Column - Form */}
-          <div className="rounded-lg bg-white p-6 shadow">
+          <div className="rounded-lg border bg-white p-6">
             <h2 className="mb-4 text-lg font-semibold text-gray-900 sm:text-xl">
               Your Information
             </h2>
@@ -138,7 +140,7 @@ export default function TaxProposalsCalculatorPage() {
           </div>
 
           {/* Right Column - Results */}
-          <div className="space-y-4 rounded-lg bg-white p-6 shadow">
+          <div className="space-y-4 rounded-lg border bg-white p-6">
             <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">
               Estimated Tax Impact
             </h2>

@@ -57,6 +57,7 @@ export interface TaxCalculatorState {
   originalPropertyTax: number;
   originalAnnualSpending: number;
   totalCostDifference: number;
+  propertyTaxDifference: number;
 }
 
 export function useTaxCalculator(): TaxCalculatorState {
@@ -139,6 +140,8 @@ export function useTaxCalculator(): TaxCalculatorState {
     annualAlcoholSpending;
   const totalCostDifference = totalCost - originalAnnualSpending;
 
+  const propertyTaxDifference = propertyTax - originalPropertyTax;
+
   return {
     // Input values
     propertyValue,
@@ -185,5 +188,6 @@ export function useTaxCalculator(): TaxCalculatorState {
     originalPropertyTax,
     originalAnnualSpending,
     totalCostDifference,
+    propertyTaxDifference,
   };
 }

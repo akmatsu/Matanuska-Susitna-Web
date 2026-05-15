@@ -22,6 +22,7 @@ export interface TaxCalculatorResultsProps {
   alcoholDifference: number;
   totalCost: number;
   originalAnnualSpending: number;
+  propertyTaxDifference: number;
   totalCostDifference: number;
   includeGravelTax: boolean;
   includeMarijuanaTax: boolean;
@@ -45,6 +46,7 @@ export function TaxCalculatorResults({
   alcoholDifference,
   totalCost,
   originalAnnualSpending,
+  propertyTaxDifference,
   totalCostDifference,
   includeGravelTax,
   includeMarijuanaTax,
@@ -90,7 +92,7 @@ export function TaxCalculatorResults({
       {/* Disclaimer Toggle */}
       <button
         onClick={() => setShowDisclaimer(!showDisclaimer)}
-        className="flex w-full cursor-pointer items-center gap-2 rounded-lg bg-yellow-200 p-2 text-left hover:bg-yellow-300"
+        className="flex w-full cursor-pointer items-center gap-2 rounded-lg border border-yellow-400 bg-yellow-200 p-2 text-left hover:bg-yellow-300"
       >
         <span
           className={`text-lg transition-transform ${showDisclaimer ? 'icon-[mdi--chevron-down]' : 'icon-[mdi--chevron-right]'}`}
@@ -101,7 +103,7 @@ export function TaxCalculatorResults({
 
       {/* Disclaimer Content */}
       {showDisclaimer && (
-        <div className="rounded-lg bg-yellow-100 p-3 sm:p-4">
+        <div className="rounded-lg border border-yellow-400 bg-yellow-200 p-3 sm:p-4">
           <p className="text-xs sm:text-sm">
             These calculations are speculative and may be incorrect. They are
             intended for informational purposes only and do not represent actual
@@ -121,71 +123,119 @@ export function TaxCalculatorResults({
         </div>
       )}
 
-      <TogglePeriod isAnnual={isAnnual} onChange={setIsAnnual} />
-
-      {/* Property Tax */}
-      <ResultCard
-        title="Property Tax"
-        bgColor="bg-sky-50"
-        displayValue={propertyTax * scale}
-        displayValueColor="text-blue-900"
-        subtitle={
-          <>
-            Based on {formatCurrency(taxablePropertyValue)} taxable property
-            value at {effectiveMillRate} mill rate
-            {salesTaxType === 'areawide' && (
-              <span className="mt-1 block">
-                (0 mill rate with OR 26-032 Areawide Sales Tax)
+      {/* Personal Tax Impacts */}
+      <div className="rounded-lg border bg-gray-50 p-4">
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h3 className="text-lg font-semibold text-gray-900">
+            Personal Tax Impacts
+          </h3>
+          <TogglePeriod isAnnual={isAnnual} onChange={setIsAnnual} />
+        </div>
+        <div className="space-y-3">
+          {/* Property Tax */}
+          <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+            <div className="flex-1">
+              <span className="text-sm font-medium text-gray-700">
+                Property Tax
               </span>
-            )}
-            {salesTaxType === 'non-areawide' && (
-              <span className="mt-1 block">
-                ($75,000 property value exemption applied with OR 26-065)
+              <span className="block text-xs text-gray-500">
+                {formatCurrency(propertyTax * scale)} Based on{' '}
+                {formatCurrency(taxablePropertyValue)} at {effectiveMillRate}{' '}
+                mill rate
+                {salesTaxType === 'areawide' && (
+                  <span className="mt-1 block">
+                    (0 mill rate with OR 26-032)
+                  </span>
+                )}
+                {salesTaxType === 'non-areawide' && (
+                  <span className="mt-1 block">
+                    ($75,000 exemption with OR 26-065)
+                  </span>
+                )}
               </span>
-            )}
-          </>
-        }
-      />
+            </div>
+            <span className="text-sm font-semibold text-gray-900">
+              {propertyTaxDifference * scale <= 0 ? '+' : ''}
+              {formatCurrency(propertyTaxDifference * scale)}
+            </span>
+          </div>
 
-      {/* Goods/Services Results */}
-      <ResultCard
-        title="Goods/Services"
-        bgColor="bg-gray-50"
-        beforeAmount={annualGrocerySpending * scale}
-        afterAmount={totalGroceryCost * scale}
-        difference={groceryDifference * scale}
-      />
+          {/* Goods/Services */}
+          <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+            <div className="flex-1">
+              <span className="text-sm font-medium text-gray-700">
+                Goods/Services
+              </span>
+              <span className="block text-xs text-gray-500">
+                {formatCurrency(annualGrocerySpending * scale)} →{' '}
+                {formatCurrency(totalGroceryCost * scale)}
+              </span>
+            </div>
+            <span className="text-sm font-semibold text-gray-900">
+              {groceryDifference * scale >= 0 ? '+' : ''}
+              {formatCurrency(groceryDifference * scale)}
+            </span>
+          </div>
 
-      {/* Marijuana Results */}
-      <ResultCard
-        title="Marijuana"
-        bgColor="bg-gray-50"
-        beforeAmount={annualMarijuanaSpending * scale}
-        afterAmount={totalMarijuanaCost * scale}
-        difference={marijuanaDifference * scale}
-      />
+          {/* Marijuana */}
+          {!!annualMarijuanaSpending && (
+            <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+              <div className="flex-1">
+                <span className="text-sm font-medium text-gray-700">
+                  Marijuana
+                </span>
+                <span className="block text-xs text-gray-500">
+                  {formatCurrency(annualMarijuanaSpending * scale)} →{' '}
+                  {formatCurrency(totalMarijuanaCost * scale)}
+                </span>
+              </div>
+              <span className="text-sm font-semibold text-gray-900">
+                {marijuanaDifference * scale >= 0 ? '+' : ''}
+                {formatCurrency(marijuanaDifference * scale)}
+              </span>
+            </div>
+          )}
 
-      {/* Alcohol Results */}
-      <ResultCard
-        title="Alcohol"
-        bgColor="bg-gray-50"
-        beforeAmount={annualAlcoholSpending * scale}
-        afterAmount={totalAlcoholCost * scale}
-        difference={alcoholDifference * scale}
-      />
+          {/* Alcohol */}
+          {!!annualAlcoholSpending && (
+            <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+              <div className="flex-1">
+                <span className="text-sm font-medium text-gray-700">
+                  Alcohol
+                </span>
+                <span className="block text-xs text-gray-500">
+                  {formatCurrency(annualAlcoholSpending * scale)} →{' '}
+                  {formatCurrency(totalAlcoholCost * scale)}
+                </span>
+              </div>
+              <span className="text-sm font-semibold text-gray-900">
+                {alcoholDifference * scale >= 0 ? '+' : ''}
+                {formatCurrency(alcoholDifference * scale)}
+              </span>
+            </div>
+          )}
 
-      {/* Total Cost */}
-      <ResultCard
-        title={`Total ${isAnnual ? 'Annual' : 'Monthly'} Costs`}
-        bgColor="bg-green-50"
-        beforeAmount={originalAnnualSpending * scale}
-        afterAmount={totalCost * scale}
-        difference={totalCostDifference * scale}
-        differenceLabel="Total Difference"
-      />
+          {/* Total Cost */}
+          <div className="flex items-center justify-between pt-3">
+            <div className="flex-1">
+              <span className="font-semibold text-gray-900">
+                Total {isAnnual ? 'Annual' : 'Monthly'} Tax Impact
+              </span>
+              <span className="block text-xs text-gray-500">
+                {formatCurrency(originalAnnualSpending * scale)} →{' '}
+                {formatCurrency(totalCost * scale)}
+              </span>
+            </div>
+            <span className="text-lg font-bold text-gray-900">
+              {totalCostDifference * scale >= 0 ? '+' : ''}
+              {formatCurrency(totalCostDifference * scale)}
+            </span>
+          </div>
+        </div>
+      </div>
 
       {/* Borough Revenue Implications */}
-      <div className="rounded-lg bg-purple-50 p-4">
+      <div className="rounded-lg border bg-gray-50 p-4">
         <h3 className="mb-4 text-lg font-semibold text-gray-900">
           Borough Revenue Implications
         </h3>
@@ -198,7 +248,7 @@ export function TaxCalculatorResults({
             href="https://transparency.matsugov.us/pages/financial-information"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline hover:text-blue-700"
+            className="underline hover:text-gray-700"
           >
             Financial Information Page
           </a>
@@ -207,21 +257,21 @@ export function TaxCalculatorResults({
         <div className="space-y-3">
           {/* Sales Tax Revenue */}
           {salesTaxType === 'areawide' && (
-            <div className="flex items-center justify-between border-b border-purple-200 pb-3">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-3">
               <span className="text-sm text-gray-700">
                 OR 26-032: Areawide Sales Tax
               </span>
-              <span className="text-sm font-semibold text-red-600">
+              <span className="text-sm font-semibold text-gray-900">
                 -${Math.abs(REVENUE_RATES.areawide).toFixed(1)}M
               </span>
             </div>
           )}
           {salesTaxType === 'non-areawide' && (
-            <div className="flex items-center justify-between border-b border-purple-200 pb-3">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-3">
               <span className="text-sm text-gray-700">
                 OR 26-065: Non-Areawide Sales Tax
               </span>
-              <span className="text-sm font-semibold text-green-600">
+              <span className="text-sm font-semibold text-gray-900">
                 +${REVENUE_RATES.nonAreawide.toFixed(1)}M
               </span>
             </div>
@@ -229,11 +279,11 @@ export function TaxCalculatorResults({
 
           {/* Gravel Tax Revenue */}
           {includeGravelTax && (
-            <div className="flex items-center justify-between border-b border-purple-200 pb-3">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-3">
               <span className="text-sm text-gray-700">
                 OR 26-058: Severance (Gravel) Tax
               </span>
-              <span className="text-sm font-semibold text-green-600">
+              <span className="text-sm font-semibold text-gray-900">
                 +${REVENUE_RATES.gravel.toFixed(3)}M
               </span>
             </div>
@@ -241,11 +291,11 @@ export function TaxCalculatorResults({
 
           {/* Marijuana Tax Revenue */}
           {includeMarijuanaTax && (
-            <div className="flex items-center justify-between border-b border-purple-200 pb-3">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-3">
               <span className="text-sm text-gray-700">
                 OR 26-061: Marijuana Tax
               </span>
-              <span className="text-sm font-semibold text-green-600">
+              <span className="text-sm font-semibold text-gray-900">
                 +${REVENUE_RATES.marijuana.toFixed(3)}M
               </span>
             </div>
@@ -253,11 +303,11 @@ export function TaxCalculatorResults({
 
           {/* Alcohol Tax Revenue */}
           {includeAlcoholTax && (
-            <div className="flex items-center justify-between border-b border-purple-200 pb-3">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-3">
               <span className="text-sm text-gray-700">
                 OR 26-062: Alcohol Tax
               </span>
-              <span className="text-sm font-semibold text-green-600">
+              <span className="text-sm font-semibold text-gray-900">
                 +${alcoholRevenueAvg.toFixed(1)}M{' '}
                 <span className="text-xs text-gray-500">
                   (est. ${REVENUE_RATES.alcoholMin}-${REVENUE_RATES.alcoholMax}
@@ -272,9 +322,7 @@ export function TaxCalculatorResults({
             <span className="font-semibold text-gray-900">
               Total Revenue Impact
             </span>
-            <span
-              className={`text-lg font-bold ${totalRevenueImpact >= 0 ? 'text-green-600' : 'text-red-600'}`}
-            >
+            <span className="text-lg font-bold text-gray-900">
               {totalRevenueImpact >= 0 ? '+' : ''}
               {totalRevenueImpact.toFixed(1)}M
             </span>
