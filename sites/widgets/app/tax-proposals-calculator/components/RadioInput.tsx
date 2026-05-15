@@ -1,3 +1,5 @@
+'use client';
+
 interface RadioOption {
   value: string;
   label: string;
@@ -30,8 +32,12 @@ export function RadioInput({
               type="radio"
               name={name}
               value={option.value}
-              checked={value === option.value}
-              onChange={() => onChange(option.value)}
+              defaultChecked={value === option.value}
+              onChange={(e) => {
+                if (e.currentTarget.checked) {
+                  onChange(option.value);
+                }
+              }}
               className="h-4 w-4 cursor-pointer border-gray-300 accent-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-0"
             />
             <span className="ml-2 text-sm text-gray-700">{option.label}</span>
