@@ -12,17 +12,17 @@ export function LinkIconCard(props: {
     <Link
       href={props.href}
       className={clsx(
-        'flex flex-col md:flex-row gap-3 col-span-1 w-full text-black no-underline group rounded transition-colors overflow-hidden border border-base-lighter hover:border-base-light',
+        'group border-msb-base-lighter hover:border-msb-base-light col-span-1 flex w-full flex-col gap-3 overflow-hidden rounded border text-black no-underline transition-colors md:flex-row',
         props.className,
       )}
     >
-      <div className="h-fit md:h-full bg-base-lightest p-4 w-full md:w-fit flex justify-center items-center">
-        <div className="aspect-square size-20 p-4 rounded-full bg-primary group-hover:bg-primary-dark justify-center items-center flex transition-colors">
+      <div className="bg-msb-base-lightest flex h-fit w-full items-center justify-center p-4 md:h-full md:w-fit">
+        <div className="bg-primary group-hover:bg-primary-dark flex aspect-square size-20 items-center justify-center rounded-full p-4 transition-colors">
           <span className={clsx('size-full text-white', props.icon)} />
         </div>
       </div>
       <div className="p-4">
-        <h3 className="text-xl font-semibold text-primary group-hover:text-primary-dark transitions-colors">
+        <h3 className="text-primary group-hover:text-primary-dark transitions-colors text-xl font-semibold">
           {props.title}
         </h3>
         <p>{props.description}</p>

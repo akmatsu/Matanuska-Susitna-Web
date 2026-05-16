@@ -74,7 +74,7 @@ export function UpcomingElectionDetails(props: {
           <tbody>
             {tableValues.map((item, index) => (
               <tr key={index}>
-                <td className="bg-base-lightest font-bold">{item.label}</td>
+                <td className="bg-msb-base-lightest font-bold">{item.label}</td>
                 <td>{item.value ? item.value : 'N/A'}</td>
               </tr>
             ))}

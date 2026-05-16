@@ -39,14 +39,14 @@ export function EventCard({
       className="h-full"
       containerClassName={clsx('h-full w-full', containerClassName)}
     >
-      <div className="flex flex-col sm:flex-row h-full w-full">
+      <div className="flex h-full w-full flex-col sm:flex-row">
         {date && (
-          <div className="bg-base-lightest p-2 flex justify-center items-center h-auto min-h-full">
-            <div className="bg-surface-primary aspect-square h-24 w-24 md:h-32 md:w-32 flex flex-col justify-center items-center text-white gap-2 rounded-full">
-              <p className="md:text-xl font-bold text-center">
+          <div className="bg-msb-base-lightest flex h-auto min-h-full items-center justify-center p-2">
+            <div className="bg-surface-primary flex aspect-square h-24 w-24 flex-col items-center justify-center gap-2 rounded-full text-white md:h-32 md:w-32">
+              <p className="text-center font-bold md:text-xl">
                 <DateTime date={date} formatStr="MMM do" />
                 <br />
-                <span className="md:text-xl font-normal">
+                <span className="font-normal md:text-xl">
                   <DateTime date={date} formatStr="yyyy" />
                 </span>
                 <br />
@@ -57,13 +57,13 @@ export function EventCard({
             </div>
           </div>
         )}
-        <div className="flex flex-col justify-between gap-4 w-full text-center sm:text-left h-full">
+        <div className="flex h-full w-full flex-col justify-between gap-4 text-center sm:text-left">
           <CardHeader>
             <CardTitle className="text-center sm:text-left">
               {eventTitle}
             </CardTitle>
             {subtitle && (
-              <span className="text-sm text-base-dark">{subtitle}</span>
+              <span className="text-msb-base-dark text-sm">{subtitle}</span>
             )}
           </CardHeader>
           <CardBody>

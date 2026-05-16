@@ -85,12 +85,12 @@ export function Drawer({
                 : '-translate-x-full',
           )}
         >
-          <div className="flex items-center justify-between border-b border-base-light px-4 py-3">
-            <p className="font-semibold text-base-darker">{title}</p>
+          <div className="border-msb-base-light flex items-center justify-between border-b px-4 py-3">
+            <p className="text-msb-base-darker font-semibold">{title}</p>
             <button
               type="button"
               onClick={close}
-              className="size-8 rounded-xs bg-primary text-white hover:bg-primary-dark active:bg-primary-darker flex items-center justify-center focus-ring"
+              className="bg-primary hover:bg-primary-dark active:bg-primary-darker focus-ring flex size-8 items-center justify-center rounded-xs text-white"
               aria-label={closeLabel}
             >
               <span

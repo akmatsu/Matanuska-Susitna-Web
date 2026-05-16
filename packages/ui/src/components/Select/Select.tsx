@@ -23,13 +23,13 @@ export function Select({
 } & SelectProps) {
   return (
     <Field className={clsx('relative')}>
-      {label && <Label className="font-semibold block">{label}</Label>}
+      {label && <Label className="block font-semibold">{label}</Label>}
       <HSelect
         {...props}
         name={name || label}
         aria-label={ariaLabel || name || label}
         className={clsx(
-          'focus-ring border border-base-lighter h-10 px-2 rounded shadow-md bg-white cursor-pointer',
+          'focus-ring border-msb-base-lighter h-10 cursor-pointer rounded border bg-white px-2 shadow-md',
           className,
         )}
       >

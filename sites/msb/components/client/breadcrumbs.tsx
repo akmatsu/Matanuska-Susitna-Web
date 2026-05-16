@@ -27,7 +27,7 @@ export function Breadcrumbs() {
                 <span className="mx-2">/</span>
               </>
             ) : (
-              <span className="text-base-dark">{item.label}</span>
+              <span className="text-msb-base-dark">{item.label}</span>
             )}
           </li>
         ))}

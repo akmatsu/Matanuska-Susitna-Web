@@ -29,18 +29,18 @@ export function Hero({ image }: { image?: string | null }) {
 
   return (
     <>
-      <UIHero className="flex justify-center items-center" image={image}>
-        <div className="max-w-[500px] w-full">
+      <UIHero className="flex items-center justify-center" image={image}>
+        <div className="w-full max-w-[500px]">
           <InstantSearchAutoComplete />
         </div>
       </UIHero>
-      <section className="flex justify-center items-center bg-base-lightest py-4 px-2">
-        <div className=" max-w-[900px] w-full">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 w-full">
+      <section className="bg-msb-base-lightest flex items-center justify-center px-2 py-4">
+        <div className="w-full max-w-[900px]">
+          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             {links.map((link) => (
               <Link
                 href={link.url}
-                className="rounded-sm px-5 py-3 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold w-full no-underline"
+                className="text-msb-base-darkest w-full rounded-sm bg-white px-5 py-3 font-bold no-underline shadow-lg hover:bg-gray-100"
                 key={link.text}
               >
                 <div className="flex flex-col items-center">

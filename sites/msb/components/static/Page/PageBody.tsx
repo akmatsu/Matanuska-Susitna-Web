@@ -26,7 +26,7 @@ export function PageBody(props: {
   return (
     <ProseWrapper noProse={props.noProse}>
       {!props.hideType && (
-        <p className="text-bold capitalize text-base-dark! font-bold text-2xl not-prose">
+        <p className="text-bold text-msb-base-dark! not-prose text-2xl font-bold capitalize">
           {page.__typename?.split(/(?=[A-Z])/).join(' ')}
         </p>
       )}

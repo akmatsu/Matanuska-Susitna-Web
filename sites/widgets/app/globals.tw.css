@@ -41,3 +41,38 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 }
+
+/* TODO apply these classes in the Calculator components */
+@layer components {
+  .text-muted {
+    @apply text-xs text-gray-500;
+  }
+
+  .text-label {
+    @apply font-medium;
+  }
+
+  .text-value {
+    @apply font-semibold text-gray-900 tabular-nums;
+  }
+
+  .text-value-total {
+    @apply text-lg font-bold text-gray-900 tabular-nums;
+  }
+
+  .text-label-total {
+    @apply text-base font-semibold text-gray-900;
+  }
+
+  .text-strong {
+    @apply text-gray-900;
+  }
+
+  .text-emphasized {
+    @apply text-base;
+  }
+
+  .text-large {
+    @apply text-lg;
+  }
+}

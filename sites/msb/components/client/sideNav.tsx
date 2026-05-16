@@ -236,14 +236,14 @@ export function SideNav({
               key={heading.id}
               className={clsx('border-t border-r-4 p-1', {
                 'border-r-primary': activeHeadingId === heading.id,
-                'bg-base-lightest': activeHeadingId === heading.id,
+                'bg-msb-base-lightest': activeHeadingId === heading.id,
               })}
             >
               <Link
                 href={`#${heading.id}`}
                 onClick={(event) => handleClick(event, heading.id)}
                 className={clsx(
-                  'text-base-darkest hover:text-primary active:text-primary-dark inline-block no-underline hover:underline',
+                  'text-msb-base-darkest hover:text-primary active:text-primary-dark inline-block no-underline hover:underline',
                   {
                     'ml-0': heading.level === 1,
                     'ml-3': heading.level === 2,

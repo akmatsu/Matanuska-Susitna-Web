@@ -47,7 +47,7 @@ export function DocCollection({ id }: { id: string }) {
 
   return (
     <span className="not-prose block border border-black">
-      <span className="bg-base-lightest block flex justify-between border-b border-black p-2">
+      <span className="bg-msb-base-lightest block flex justify-between border-b border-black p-2">
         <span className="font-semibold">{data?.documentCollection?.title}</span>
         <Button
           icon

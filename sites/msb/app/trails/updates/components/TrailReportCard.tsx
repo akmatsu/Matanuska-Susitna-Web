@@ -39,7 +39,7 @@ export function TrailReportCard({ data: a }: { data: FeatureAttributes }) {
                 .join(',')
                 .replace(/,(\w)/gi, ', $1')}
             </CardTitle>
-            <Text type="body-sm" className="text-base-dark italic">
+            <Text type="body-sm" className="text-msb-base-dark italic">
               <DateTime date={a._date} formatStr="MMMM dd, yyyy" />
             </Text>
           </div>

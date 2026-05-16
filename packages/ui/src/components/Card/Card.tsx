@@ -23,10 +23,11 @@ export function Card<T extends React.ElementType = 'div'>({
     <Component {...props} className={containerClassName}>
       <div
         className={clsx(
-          'rounded flex flex-col gap-4 shadow-md',
+          'flex flex-col gap-4 rounded shadow-md',
           {
-            'bg-white border border-base-lighter': !dark,
-            'bg-surface-primary text-white border border-base-darkest': dark,
+            'border-msb-base-lighter border bg-white': !dark,
+            'bg-surface-primary border-msb-base-darkest border text-white':
+              dark,
           },
           className,
         )}
@@ -59,7 +60,7 @@ export function LinkCard<T extends React.ElementType = 'div'>({
       <LinkComponent
         href={href}
         className={clsx(
-          'text-black overflow-hidden no-underline rounded-t bg-base-lightest border-b-primary border-b-4 hover:bg-base-lighter hover:border-b-primary-dark cursor-pointer transition-colors active:bg-base-light active:transition-none flex flex-col gap-4 shadow-md border border-base-lighter',
+          'bg-msb-base-lightest border-b-primary hover:bg-msb-base-lighter hover:border-b-primary-dark active:bg-msb-base-light border-msb-base-lighter flex cursor-pointer flex-col gap-4 overflow-hidden rounded-t border border-b-4 text-black no-underline shadow-md transition-colors active:transition-none',
           className,
         )}
       >
@@ -100,7 +101,7 @@ export function CardTitle<T extends React.ElementType = 'h4'>({
     <Component
       id={id}
       className={clsx(
-        'font-bold leading-none',
+        'leading-none font-bold',
         {
           'text-sm': titleSize === 'sm',
           'text-lg': titleSize === 'md',
@@ -150,7 +151,7 @@ export function CardFooter({
   className?: string;
 }) {
   return (
-    <div className={clsx('px-6 last:pb-6 flex gap-2 first:pt-6', className)}>
+    <div className={clsx('flex gap-2 px-6 first:pt-6 last:pb-6', className)}>
       {children}
     </div>
   );
