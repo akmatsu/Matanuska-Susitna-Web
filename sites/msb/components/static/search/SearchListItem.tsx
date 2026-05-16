@@ -37,7 +37,7 @@ export function SearchListItem({
     <LinkCard href={url} as="li" linkAs={Link} className={className}>
       <CardHeader>
         {item.type && (
-          <p className="text-base-dark text-sm font-semibold">
+          <p className="text-msb-base-dark text-sm font-semibold">
             {v.titleCase(item.type).replace('_', ' ')}
           </p>
         )}

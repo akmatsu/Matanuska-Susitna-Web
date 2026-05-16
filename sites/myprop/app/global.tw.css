@@ -12,12 +12,12 @@
 
 @theme {
   --color-foreground-light: #ffffff;
-  --color-base-light: #e9e9ed;
-  --color-base: #e8e8e8;
-  --color-base-dark: #d0d0d7;
-  --color-base-darker: #d4d5d5;
-  --color-base-darker-2: #b1b1b9;
-  --color-base-darkest: #9b9b9e;
+  --color-msb-base-light: #e9e9ed;
+  --color-msb-base: #e8e8e8;
+  --color-msb-base-dark: #d0d0d7;
+  --color-msb-base-darker: #d4d5d5;
+  --color-msb-base-darker-2: #b1b1b9;
+  --color-msb-base-darkest: #9b9b9e;
 
   --color-primary-light: #2b6db4;
   --color-primary: #173b61;
@@ -27,13 +27,13 @@
   --color-foreground-secondary: var(--color-gray-700);
   --color-foreground-disabled: var(--color-gray-400);
   --color-foreground-inverted: var(--color-white);
-  --color-surface: var(--color-base);
+  --color-surface: var(--color-msb-base);
   --color-surface-dark: var(--color-primary);
-  --color-border: var(--color-base-darkest);
+  --color-border: var(--color-msb-base-darkest);
   --color-table-border: var(--color-background);
-  --color-input: var(--color-base-light);
-  --color-input-hover: var(--color-base-dark);
-  --color-input-active: var(--color-base-darker-2);
+  --color-input: var(--color-msb-base-light);
+  --color-input-hover: var(--color-msb-base-dark);
+  --color-input-active: var(--color-msb-base-darker-2);
 }
 
 /*

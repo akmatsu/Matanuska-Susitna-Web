@@ -63,7 +63,7 @@ export function MeetingsSearch() {
   return (
     <>
       <form
-        className="grid grid-cols-4 gap-4 mb-4"
+        className="mb-4 grid grid-cols-4 gap-4"
         onSubmit={(e) => e.preventDefault()}
       >
         <div className="col-span-4 md:col-span-2">
@@ -92,25 +92,25 @@ export function MeetingsSearch() {
           />
         </div>
       </form>
-      <ul className="list-none pl-0 flex flex-col gap-4">
+      <ul className="flex list-none flex-col gap-4 pl-0">
         {loading ? (
           Array.from({ length: limit }).map((_, index) => (
-            <Card className="animate-pulse h-full w-full" key={index}>
-              <div className="flex flex-col sm:flex-row h-full">
-                <div className="bg-base-lightest p-2 flex justify-center items-center h-auto min-h-full">
-                  <div className="bg-base-light aspect-square h-full max-h-24 max-w-24 md:max-h-32 md:max-w-32 flex flex-col justify-center items-center text-white gap-2 rounded-full"></div>
+            <Card className="h-full w-full animate-pulse" key={index}>
+              <div className="flex h-full flex-col sm:flex-row">
+                <div className="bg-msb-base-lightest flex h-auto min-h-full items-center justify-center p-2">
+                  <div className="bg-msb-base-light flex aspect-square h-full max-h-24 max-w-24 flex-col items-center justify-center gap-2 rounded-full text-white md:max-h-32 md:max-w-32"></div>
                 </div>
-                <div className="flex flex-col justify-between gap-4 w-full text-center sm:text-left h-full">
+                <div className="flex h-full w-full flex-col justify-between gap-4 text-center sm:text-left">
                   <CardHeader>
                     <CardTitle className="text-center sm:text-left">
-                      <span className="inline-block w-full bg-base-light h-6 rounded-full"></span>
+                      <span className="bg-msb-base-light inline-block h-6 w-full rounded-full"></span>
                     </CardTitle>
                   </CardHeader>
                   <CardBody>
-                    <span className="inline-block w-full bg-base-light h-4 rounded-full mb-2"></span>
+                    <span className="bg-msb-base-light mb-2 inline-block h-4 w-full rounded-full"></span>
                   </CardBody>
                   <CardFooter className="justify-end">
-                    <div className="bg-base-light rounded px-5 py-3 w-24">
+                    <div className="bg-msb-base-light w-24 rounded px-5 py-3">
                       <div className="h-2.5"></div>
                     </div>
                   </CardFooter>
@@ -123,8 +123,8 @@ export function MeetingsSearch() {
             <MeetingCard key={meeting.id} meeting={meeting} />
           ))
         ) : (
-          <li className="w-full flex justify-center items-center">
-            <span className="text-base-dark">
+          <li className="flex w-full items-center justify-center">
+            <span className="text-msb-base-dark">
               No meetings found that match your search criteria. Please try
               modifying your search terms.
             </span>

@@ -4,13 +4,13 @@
 
 @theme {
   /* start theme aliases */
-  --color-base-lightest: var(--color-us-gray-5);
-  --color-base-lighter: var(--color-us-gray-cool-10);
-  --color-base-light: var(--color-us-gray-cool-30);
-  --color-base: var(--color-us-gray-cool-50);
-  --color-base-dark: var(--color-us-gray-cool-60);
-  --color-base-darker: var(--color-us-gray-cool-70);
-  --color-base-darkest: var(--color-us-gray-90);
+  --color-msb-base-lightest: var(--color-us-gray-5);
+  --color-msb-base-lighter: var(--color-us-gray-cool-10);
+  --color-msb-base-light: var(--color-us-gray-cool-30);
+  --color-msb-base: var(--color-us-gray-cool-50);
+  --color-msb-base-dark: var(--color-us-gray-cool-60);
+  --color-msb-base-darker: var(--color-us-gray-cool-70);
+  --color-msb-base-darkest: var(--color-us-gray-90);
   --color-ink: #2a2a2a;
 
   --color-surface-primary: #162e50;

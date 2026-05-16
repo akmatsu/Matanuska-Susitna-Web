@@ -105,9 +105,9 @@ export function Button({
           'bg-disabled-lighter text-disabled-dark cursor-not-allowed': disabled,
 
           // Color variants group
-          'border-base-lighter hover:border-base-light border bg-transparent text-base':
+          'border-msb-base-lighter hover:border-msb-base-light text-msb-base border bg-transparent':
             color === 'transparent' && !disabled && !active && !outlined,
-          'bg-primary hover:bg-primary-dark active:bg-primary-darker text-base-lightest':
+          'bg-primary hover:bg-primary-dark active:bg-primary-darker text-msb-base-lightest':
             color === 'primary' && !disabled && !active && !outlined,
           'bg-secondary hover:bg-secondary-dark active:bg-secondary-darker text-black':
             color === 'secondary' && !disabled && !active && !outlined,
@@ -115,9 +115,9 @@ export function Button({
             color === 'accent-cool' && !disabled && !active && !outlined,
           'bg-accent-warm hover:bg-accent-warm-dark active:bg-accent-warm-darker text-black hover:text-white active:text-white':
             color === 'accent-warm' && !disabled && !active && !outlined,
-          'bg-base-dark hover:bg-base-darker active:bg-base-darkest text-white':
+          'bg-msb-base-dark hover:bg-msb-base-darker active:bg-msb-base-darkest text-white':
             color === 'base' && !disabled && !active && !outlined,
-          'bg-base-lightest hover:bg-base-lighter hover:border-base-light hover:text-base-dark active:bg-base-light active:border-base border-base-lighter border text-base':
+          'bg-msb-base-lightest hover:bg-msb-base-lighter hover:border-msb-base-light hover:text-msb-base-dark active:bg-msb-base-light active:border-msb-base border-msb-base-lighter text-msb-base border':
             color === 'base-light' && !disabled && !active && !outlined,
           'bg-error hover:bg-error-dark active:bg-error-darker text-white':
             color === 'error' && !disabled && !active && !outlined,
@@ -125,10 +125,10 @@ export function Button({
             color === 'warning' && !disabled && !active && !outlined,
           'bg-success hover:bg-success-dark active:bg-success-darker text-white':
             color === 'success' && !disabled && !active && !outlined,
-          'bg-base-darkest hover:bg-base-darker active:bg-base-dark text-white':
+          'bg-msb-base-darkest hover:bg-msb-base-darker active:bg-msb-base-dark text-white':
             color === 'black' && !disabled && !active && !outlined,
 
-          'bg-primary active:bg-primary-darker text-base-lightest':
+          'bg-primary active:bg-primary-darker text-msb-base-lightest':
             color === 'primary' && !disabled && active,
           'bg-primary text-white': color === 'secondary' && !disabled && active,
 

@@ -31,7 +31,7 @@ export function ProcessListItem({
         'before:items-center',
         'before:w-[2.5rem]',
         'before:h-[2.5rem]',
-        'before:border-base-darkest',
+        'before:border-msb-base-darkest',
         'before:size-10',
         'before:absolute',
         'before:left-0',

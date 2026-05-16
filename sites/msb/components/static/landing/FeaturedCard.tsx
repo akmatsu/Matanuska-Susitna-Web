@@ -14,20 +14,20 @@ export function FeaturedCard(props: FeaturedCardProps) {
   return (
     <LinkCard href={props.linkUrl}>
       {props.imageUrl && (
-        <CardMedia className="aspect-[2] overflow-hidden relative">
+        <CardMedia className="relative aspect-[2] overflow-hidden">
           <Image
             src={props.imageUrl.split('?')[0]} // Remove query params
             alt={props.imageAlt || 'Featured Image of ' + props.title}
             loading="lazy"
-            className="aspect-[2] object-cover h-full w-full"
+            className="aspect-[2] h-full w-full object-cover"
             fill
           />
         </CardMedia>
       )}
 
       <CardHeader>
-        <div className="flex items-center w-full gap-2">
-          <div className="bg-secondary text-base-darkest rounded-full p-2 flex items-center justify-center">
+        <div className="flex w-full items-center gap-2">
+          <div className="bg-secondary text-msb-base-darkest flex items-center justify-center rounded-full p-2">
             <span className={`iconify size-6 ${props.icon}`}></span>
           </div>
           <CardTitle>{props.title}</CardTitle>

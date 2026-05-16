@@ -138,11 +138,11 @@ export default async function Communities() {
                   <p>{page.description}</p>
                 )}
               </section>
-              <section className="border-y pb-4 pt-1 border-base-light">
+              <section className="border-msb-base-light border-y pt-1 pb-4">
                 <h2 className="mt-0">Borough Communities</h2>
                 <section>
                   <h3 className="mt-0 text-lg">Cities</h3>
-                  <ul className="not-prose flex flex-col sm:flex-row gap-4 items-stretch justify-center">
+                  <ul className="not-prose flex flex-col items-stretch justify-center gap-4 sm:flex-row">
                     {cities?.map((city) => (
                       <li key={city.id} className="w-full">
                         <LinkButton
@@ -170,7 +170,7 @@ export default async function Communities() {
                   </ul>
                 </section>
               </section>
-              <section className="border-b pb-4 pt-1 border-base-light grid grid-cols-2">
+              <section className="border-msb-base-light grid grid-cols-2 border-b pt-1 pb-4">
                 <div>
                   <h3>All Borough Services</h3>
                   <ul className="not-prose">

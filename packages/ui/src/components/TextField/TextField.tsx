@@ -38,7 +38,7 @@ export function TextField({
       </Label>
       <Input
         className={clsx(
-          'border border-base-lighter h-10 px-2 focus-ring w-full bg-white',
+          'border-msb-base-lighter focus-ring h-10 w-full border bg-white px-2',
           {
             'rounded-none': !rounded || rounded === 'none',
             rounded: rounded === true,
@@ -56,8 +56,8 @@ export function TextField({
         {...fieldProps}
       />
       {loading && (
-        <div className="h-full aspect-square absolute right-0 bottom-0">
-          <span className="icon-[mdi--loading] animate-spin size-full text-primary"></span>
+        <div className="absolute right-0 bottom-0 aspect-square h-full">
+          <span className="icon-[mdi--loading] text-primary size-full animate-spin"></span>
         </div>
       )}
     </Field>

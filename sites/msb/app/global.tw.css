@@ -6,7 +6,9 @@
 @source './pages/**/*.{js,ts,jsx,tsx,mdx}';
 @source '../node_modules/@matsugov/ui/src/**/*.{js,ts,jsx,tsx,mdx}';
 @source '../node_modules/@msb/map/src/**/*.{js,ts,jsx,tsx,mdx}';
-@source inline('icon-[mdi--{pets,message-alert,home,briefcase,legal,excavator,cart,road-variant,microphone,pier-crane,server,money,fire-truck,house-group,file-document,user-tie,account-group,cart-variant,contract-outline}]');
+@source inline(
+  'icon-[mdi--{pets,message-alert,home,briefcase,legal,excavator,cart,road-variant,microphone,pier-crane,server,money,fire-truck,house-group,file-document,user-tie,account-group,cart-variant,contract-outline}]'
+);
 @source inline('icon-[fa7-solid--magnifying-glass-dollar]');
 
 /* @config '../tailwind.config.js'; */
@@ -42,7 +44,7 @@
   }
 
   a:focus {
-    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-primary;
+    @apply focus:ring-primary focus:ring-4 focus:ring-offset-2 focus:outline-none;
   }
   a:visited {
     color: var(--color-purple-900);
@@ -50,13 +52,13 @@
 
   /* Body element */
   body {
-    color: var(--color-base-darkest);
+    color: var(--color-msb-base-darkest);
     background: var(--color-white);
   }
 
   /* Button focus state */
   button {
-    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-primary;
+    @apply focus:ring-primary focus:ring-4 focus:ring-offset-2 focus:outline-none;
   }
 }
 
@@ -75,6 +77,6 @@ p .msb-md-body {
 
 @layer components {
   .focus-ring {
-    @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-primary;
+    @apply focus:ring-primary focus:ring-4 focus:ring-offset-2 focus:outline-none;
   }
 }

@@ -14,18 +14,13 @@ export function Checkbox({
   className?: string;
 }) {
   return (
-    <Field
-      className={clsx(
-        'flex items-center gap-2',
-        className,
-      )}
-    >
+    <Field className={clsx('flex items-center gap-2', className)}>
       <HeadlessCheckbox
         checked={checked}
         onChange={onChange}
-        className="group size-5 rounded-xs bg-transparent border-2 border-base-darkest data-checked:bg-primary flex items-center justify-center  hover:cursor-pointer focus-ring"
+        className="group border-msb-base-darkest data-checked:bg-primary focus-ring flex size-5 items-center justify-center rounded-xs border-2 bg-transparent hover:cursor-pointer"
       >
-        <span className="hidden size-4 bg-base-lightest icon-[mdi--check] group-data-checked:inline-block" />
+        <span className="bg-msb-base-lightest icon-[mdi--check] hidden size-4 group-data-checked:inline-block" />
       </HeadlessCheckbox>
       <Label className="hover:cursor-pointer">{label}</Label>
     </Field>

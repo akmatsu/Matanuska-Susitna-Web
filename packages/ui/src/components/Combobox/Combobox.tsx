@@ -40,19 +40,19 @@ export function Combobox<T = any>(props: {
         displayValue={(item: any) => item?.[props.displayValueKey]}
         onChange={onChangeQuery}
         placeholder={props.placeholder}
-        className="border border-base-lighter h-10 px-2 focus:outline-hidden focus:ring-4 focus:ring-primary w-full rounded-xs shadow-md bg-white"
+        className="border-msb-base-lighter focus:ring-primary h-10 w-full rounded-xs border bg-white px-2 shadow-md focus:ring-4 focus:outline-hidden"
         autoFocus={props.autoFocus}
       ></ComboboxInput>
       <ComboboxOptions
         anchor="bottom"
         transition
-        className="border border-base-lightest empty:invisible rounded-xs bg-white transition duration-100 data-leave:data-closed:opacity-0 w-[var(--input-width)] shadow-md z-50"
+        className="border-msb-base-lightest z-50 w-[var(--input-width)] rounded-xs border bg-white shadow-md transition duration-100 empty:invisible data-leave:data-closed:opacity-0"
       >
         <ComboboxOption
           value={{ [props.displayValueKey]: query }}
-          className="px-4 py-2 border-b border-b-base-lightest last:border-none group cursor-default select-none data-focus:bg-primary-light/10 data-[selected]:bg-light-/20"
+          className="border-b-base-lightest group data-focus:bg-primary-light/10 data-[selected]:bg-light-/20 cursor-default border-b px-4 py-2 select-none last:border-none"
         >
-          <p className="text-sm text-base-darker">
+          <p className="text-msb-base-darker text-sm">
             Search for {query}{' '}
             <span className="icon-[mdi--arrow-right] size-2"></span>
           </p>
@@ -61,10 +61,10 @@ export function Combobox<T = any>(props: {
           <ComboboxOption
             key={(item?.[props.idKey as keyof typeof item] as Key) || index}
             value={item}
-            className="px-4 py-2 border-b border-b-base-lightest last:border-none group cursor-default select-none data-focus:bg-primary-light/10 data-[selected]:bg-light-/20"
+            className="border-b-base-lightest group data-focus:bg-primary-light/10 data-[selected]:bg-light-/20 cursor-default border-b px-4 py-2 select-none last:border-none"
           >
             {props.displayTypeKey && (
-              <p className="text-xs text-base font-semibold">
+              <p className="text-msb-base text-xs font-semibold">
                 {v
                   .titleCase(item?.[props.displayTypeKey] as string)
                   .replace('_', ' ')}
@@ -74,7 +74,7 @@ export function Combobox<T = any>(props: {
               {item?.[props.displayValueKey] as React.ReactNode}
             </h6>
             {props.descriptionKey && (
-              <p className="text-sm text-base-darker">
+              <p className="text-msb-base-darker text-sm">
                 {item?.[props.descriptionKey] as React.ReactNode}
               </p>
             )}

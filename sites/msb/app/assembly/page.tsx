@@ -104,7 +104,7 @@ export default async function AssemblyPage() {
               {districts?.map((district) => (
                 <Link
                   href={`/assembly-districts/${district.slug}`}
-                  className="not-prose text-ink hover:bg-base-lightest group flex flex-col items-center rounded p-2 no-underline transition-colors"
+                  className="not-prose text-ink hover:bg-msb-base-lightest group flex flex-col items-center rounded p-2 no-underline transition-colors"
                   key={district.slug}
                 >
                   <Image

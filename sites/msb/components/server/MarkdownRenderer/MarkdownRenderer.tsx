@@ -83,7 +83,7 @@ export function MarkdownRenderer(props: { children?: string | null }) {
                 alt={props.title || 'Image'}
               />
               <span className="mx-auto flex max-w-lg justify-center text-sm">
-                <span className="text-center text-base">{props.title}</span>
+                <span className="text-msb-base text-center">{props.title}</span>
               </span>
             </span>
           );

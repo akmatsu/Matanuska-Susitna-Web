@@ -42,9 +42,9 @@ export function ToolbeltHighlight(props: {
   return (
     <Link
       href={url}
-      className="group w-28 rounded p-2 shadow-lg bg-white hover:bg-gray-100 text-base-darkest font-bold no-underline flex flex-col items-center gap-2 text-center border border-base-lighter hover:border-base-light  border-b-4 border-b-primary hover:border-b-primary-dark"
+      className="group text-msb-base-darkest border-msb-base-lighter hover:border-msb-base-light border-b-primary hover:border-b-primary-dark flex w-28 flex-col items-center gap-2 rounded border border-b-4 bg-white p-2 text-center font-bold no-underline shadow-lg hover:bg-gray-100"
     >
-      <div className="size-14 bg-primary rounded-full aspect-square flex justify-center items-center group-hover:bg-primary-dark transition-colors">
+      <div className="bg-primary group-hover:bg-primary-dark flex aspect-square size-14 items-center justify-center rounded-full transition-colors">
         <span className={`iconify size-8 ${item.icon} text-white`}></span>
       </div>
       <span className="text-sm">{item.linkedItem?.label}</span>

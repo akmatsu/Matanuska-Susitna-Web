@@ -6,7 +6,7 @@ export function SiteLogo() {
   return (
     <NextLink
       href="/"
-      className="text-base-darkest no-underline"
+      className="text-msb-base-darkest no-underline"
       aria-label="Go to MSB home page"
       title="MSB Home"
     >

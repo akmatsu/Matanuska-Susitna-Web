@@ -148,11 +148,11 @@ export default async function GovernmentPage() {
           </PageContainer>
         </section>
         <div>
-          <div className="bg-surface-primary text-white pb-8">
+          <div className="bg-surface-primary pb-8 text-white">
             <PageContainer size="lg">
               <section>
                 <Text type="heading2">Elected</Text>
-                <div className="flex gap-4 flex-wrap items-stretch justify-center">
+                <div className="flex flex-wrap items-stretch justify-center gap-4">
                   {elected.map((e) => (
                     <DarkFlatCard
                       key={e.title}
@@ -169,7 +169,7 @@ export default async function GovernmentPage() {
               <section>
                 <Text type="heading2">Officers</Text>
                 {offices?.length && (
-                  <div className="flex gap-4 flex-wrap items-stretch justify-center lg:justify-between">
+                  <div className="flex flex-wrap items-stretch justify-center gap-4 lg:justify-between">
                     {offices?.map((o) => (
                       <DarkFlatCard
                         key={o.id}
@@ -185,16 +185,16 @@ export default async function GovernmentPage() {
               </section>
             </PageContainer>
           </div>
-          <div className="bg-base-lightest">
+          <div className="bg-msb-base-lightest">
             <PageContainer size="lg">
               <section>
                 <Text type="heading2">Boards & Commissions</Text>
-                <div className="flex gap-8 justify-center sm:justify-between items-stretch flex-wrap">
+                <div className="flex flex-wrap items-stretch justify-center gap-8 sm:justify-between">
                   <DarkFlatCard
                     title="Boards"
                     icon="icon-[mdi--account-group]"
                     href="/boards#boards-and-commissions"
-                    className="w-24 text-center h-full"
+                    className="h-full w-24 text-center"
                     light
                     vertical
                   />
@@ -202,7 +202,7 @@ export default async function GovernmentPage() {
                     title="Community Councils"
                     icon="icon-[mdi--home-group]"
                     href="/boards?type=community_council#boards-and-commissions"
-                    className="w-24 text-center h-full"
+                    className="h-full w-24 text-center"
                     light
                     vertical
                   />
@@ -210,7 +210,7 @@ export default async function GovernmentPage() {
                     title="FSA Boards"
                     icon="icon-[mdi--fire-truck]"
                     href="/boards?type=fsa_board#boards-and-commissions"
-                    className="w-24 text-center h-full"
+                    className="h-full w-24 text-center"
                     light
                     vertical
                   />
@@ -219,14 +219,14 @@ export default async function GovernmentPage() {
                     icon="icon-[mdi--road-variant]"
                     href="/boards?type=rsa_board#boards-and-commissions"
                     light
-                    className="w-24 text-center h-full"
+                    className="h-full w-24 text-center"
                     vertical
                   />
                   <DarkFlatCard
                     title="SSA Boards"
                     icon="icon-[mdi--water-pump]"
                     href="/boards?type=ssa_board#boards-and-commissions"
-                    className="w-24 text-center h-full"
+                    className="h-full w-24 text-center"
                     light
                     vertical
                   />
@@ -243,7 +243,7 @@ export default async function GovernmentPage() {
           >
             <div className="col-span-5 sm:col-span-3">
               <ProseWrapper>
-                <section className="border-b pb-4 pt-1 border-base-light">
+                <section className="border-msb-base-light border-b pt-1 pb-4">
                   <h2 className="mt-1">Resources</h2>
                   <div className="grid grid-cols-2 gap-4">
                     <section>
