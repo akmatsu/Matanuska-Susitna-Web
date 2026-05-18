@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.20.0...v1.20.1) (2026-05-18)
+
+
+### Bug Fixes
+
+* fixed some cell phones not appear ([f0252c7](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f0252c78369bda7ce03dc3deb09c850314d4f1fe))
+
 # [1.20.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.19.0...v1.20.0) (2026-05-18)
 
 
