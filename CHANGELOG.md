@@ -1,3 +1,24 @@
+# [1.20.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.19.0...v1.20.0) (2026-05-18)
+
+
+### Bug Fixes
+
+* added a summary at the top of the page and reduced the amount of information display in personal tax impacts ([6cc8af6](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6cc8af6dd6e99a16811a67a9559a50c3db8dbada))
+* added link to transparency site to budget implications section ([194e510](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/194e5109981afb6ba405d977045ffb07bf44d19c))
+* added placeholder for advanced calculator ([fdf5e5a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/fdf5e5adaf0f82577dcd3e91c35ba3b1e91b8eb1))
+* added title and description to calculator page metadata ([06c9910](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/06c99104ab7bfca12fd7b34149ecfb44acf14a42))
+* improved print view of parcel pages ([66b6775](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/66b6775cb10948c39385db2376d331cd06c0426a))
+* radio inputs should show selection correctly now ([8b80c24](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8b80c247298bb62a039ba0317671492eaa8ccfcc))
+* set cursor pointer on clickable elements ([13eb34f](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/13eb34fc2c2a2f8950bfab63d6c18e8b817e3142))
+* ui/layout adjustments ([7719a2b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/7719a2b75646c8c1b9cf176002be8e1c278cf0da))
+* updated budget statement ([c5ebef4](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/c5ebef454da0f0c74371da2f2a8a369b39299117))
+* updated links to myproperty ([e00e0ec](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/e00e0ecc73508cf5c686f6baa909678104255edd))
+
+
+### Features
+
+* added a borough budget implecations section to tax proposal calculator ([398734e](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/398734ef489804125de63227a2881f9b9b70692b))
+
 # [1.19.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.18.6...v1.19.0) (2026-05-14)
 
 
