@@ -9,7 +9,7 @@ export default function TaxMapsPage() {
         <h1 className="text-center text-xl font-bold">
           MSB Tax Map Viewer / DXF Downloads
         </h1>
-        <div className="flex flex-col items-start md:flex-row">
+        <div className="flex flex-col items-start md:flex-row print:flex-row">
           <TaxMapMap />
           <SearchField />
         </div>

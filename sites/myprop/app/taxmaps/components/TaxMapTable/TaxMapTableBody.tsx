@@ -19,11 +19,11 @@ export async function TaxMapTableBody() {
     <section>
       <div className="bg-surface-primary mb-1 pb-1 text-center text-white">
         <h2 className="font-bold">Available Basemaps</h2>
-        <p className="mb-1 text-sm italic">
+        <p className="mb-1 italic">
           Items with a * denote areas outside the mapped area.
         </p>
       </div>
-      <ul className="grid grid-cols-1 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <ul className="grid grid-cols-1 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 print:grid-cols-4 print:lg:grid-cols-6">
         {data.map((map: TaxMap) => (
           <li
             key={map.basemap_abbr}
