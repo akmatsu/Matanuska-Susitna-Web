@@ -37,6 +37,7 @@ interface DirectoryMember {
   LastName?: string;
   'E-mail'?: string;
   Cell?: string;
+  CellPhone?: string;
   HomePhone?: string;
   WorkPhone?: string;
   Address?: string;
@@ -251,20 +252,24 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
               </span>
             </li>
           )}
-          {member.Cell && (
-            <li className="flex items-center gap-1">
-              <div
-                className="bg-primary inline-flex items-center justify-center rounded-full p-1"
-                aria-hidden
-              >
-                <span className="icon-[mdi--cellphone] size-4 text-white" />
-              </div>
-              <span>
-                <span className="sr-only">Cell Phone: </span>
-                <PhoneLink phoneNumber={member.Cell} className="truncate" />
-              </span>
-            </li>
-          )}
+          {member.Cell ||
+            (member.CellPhone && (
+              <li className="flex items-center gap-1">
+                <div
+                  className="bg-primary inline-flex items-center justify-center rounded-full p-1"
+                  aria-hidden
+                >
+                  <span className="icon-[mdi--cellphone] size-4 text-white" />
+                </div>
+                <span>
+                  <span className="sr-only">Cell Phone: </span>
+                  <PhoneLink
+                    phoneNumber={member.Cell || member.CellPhone}
+                    className="truncate"
+                  />
+                </span>
+              </li>
+            ))}
           {member.HomePhone && (
             <li className="flex items-center gap-1">
               <div
