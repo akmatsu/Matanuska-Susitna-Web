@@ -39,10 +39,7 @@ export function FieldLabel({
   children: React.ReactNode;
 } & React.LabelHTMLAttributes<HTMLLabelElement>) {
   return (
-    <label
-      {...props}
-      className={cn('group block text-sm font-semibold', className)}
-    >
+    <label {...props} className={cn('group block font-semibold', className)}>
       {children}
     </label>
   );

@@ -15,7 +15,7 @@ export default async function TaxMapDetails(
   const data = await propertyApiCall<SubMap[]>(`/taxmapinset`, { abbr });
 
   return (
-    <div className="flex flex-col items-center gap-1 md:grid md:grid-cols-2 md:items-start">
+    <div className="flex flex-col items-center gap-1 md:grid md:grid-cols-2 md:items-start print:grid print:grid-cols-2 print:items-start">
       <div className="relative aspect-469/431 w-full max-w-100">
         <Image
           src={`https://myproperty.matsugov.us/taxmaps/images/${abbr}index.jpg`}
@@ -27,7 +27,7 @@ export default async function TaxMapDetails(
         {data.map((subMap) => (
           <li
             key={subMap.map}
-            className="bg-surface grid gap-0.5 md:grid-cols-3"
+            className="bg-surface grid gap-0.5 md:grid-cols-3 print:grid-cols-3"
           >
             <p className="text-center">Map #{subMap.map}</p>
             <Link

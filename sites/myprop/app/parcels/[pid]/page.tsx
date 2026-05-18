@@ -40,7 +40,7 @@ export default async function MyParcelDetailPage(
   return (
     <main>
       <div className="pt-6">
-        <div className="space-y-1 bg-white font-sans text-sm">
+        <div className="space-y-1 bg-white font-sans">
           <h1 className="text-xl font-bold">
             Real Property Detail for Account: {data.TAX_ID}
           </h1>
@@ -64,9 +64,9 @@ export default async function MyParcelDetailPage(
               <PropertyTable>
                 <PropertyRow label="Subdivision" value={data.SUBD_NAME} />
                 <PropertyRow label="City" value={data.CITY} />
-                {/* TODO: Convert these into map buttons. Make a modal that shows all the different maps available */}
                 <PropertyRow
                   label="Map"
+                  className="print:hidden"
                   value={<MapModal pid={data.PARCEL_ID} map={data.MAP} />}
                 />
               </PropertyTable>
@@ -243,7 +243,7 @@ export default async function MyParcelDetailPage(
             </section>
           )}
 
-          <div className="grid grid-cols-1 gap-1 md:grid-cols-12">
+          <div className="grid grid-cols-1 gap-1 md:grid-cols-12 print:grid-cols-12">
             {data.TAX_BILLING && data.TAX_BILLING.length > 0 && (
               <section className="col-span-4">
                 <SectionHeader title="Tax/Billing Information" />
@@ -419,7 +419,7 @@ export default async function MyParcelDetailPage(
               />
             </DataTable>
           </section>
-          <ol className="mt-4 space-y-1 text-sm">
+          <ol className="mt-4 space-y-1 text-xs print:text-[10px]">
             <li
               id="footnote-1"
               className="transition-colors target:bg-yellow-200"
@@ -463,37 +463,7 @@ export default async function MyParcelDetailPage(
               exemption amount may be different.
             </li>
           </ol>
-          {/* Building Details Section */}
-          {/* {data.BUILDING_DETAILS && data.BUILDING_DETAILS.length > 0 && (
-                  <section>
-                    <SectionHeader title="Building Details" />
-                    <DataTable
-                      headers={[
-                        { label: 'Building ID' },
-                        { label: 'Description' },
-                        { label: 'Area', right: true },
-                        { label: 'Complete %', right: true },
-                      ]}
-                    >
-                      {data.BUILDING_DETAILS.map((detail, idx) => (
-                        <DataTableRow
-                          key={idx}
-                          cells={[
-                            { value: detail.ITM_BLDGID },
-                            { value: detail.ITM_DESC },
-                            { value: detail.ITM_AREA, right: true },
-                            { value: detail.ITM_DONE, right: true },
-                          ]}
-                          isLast={idx === data.BUILDING_DETAILS.length - 1}
-                        />
-                      ))}
-                    </DataTable>
-                  </section>
-                )} */}
         </div>
-        {/* <Suspense fallback={<ParcelDetailSkeleton />}>
-          <ParcelDetail params={props.params} />
-        </Suspense> */}
       </div>
     </main>
   );
@@ -501,7 +471,7 @@ export default async function MyParcelDetailPage(
 
 function TwoColumnWrapper(props: { children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-1 md:grid-cols-2 print:grid-cols-2">
       {props.children}
     </div>
   );

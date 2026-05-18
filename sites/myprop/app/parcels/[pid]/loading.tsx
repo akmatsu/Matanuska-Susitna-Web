@@ -20,14 +20,14 @@ export default function ParcelDetailSkeleton() {
   return (
     <main>
       <div className="pt-6">
-        <div className="animate-pulse space-y-4 bg-white font-sans text-sm">
+        <div className="animate-pulse space-y-4 bg-white font-sans">
           {/* Title */}
           <div className="h-8 w-2/5 rounded bg-gray-300" />
 
           {/* Site Information */}
           <div>
             <div className="mb-2 h-6 w-1/4 rounded bg-gray-300" />
-            <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-1 md:grid-cols-2 print:grid-cols-2">
               <table className="w-full border border-gray-300">
                 <tbody>
                   {[...Array(4)].map((_, i) => (
@@ -53,7 +53,7 @@ export default function ParcelDetailSkeleton() {
           {/* Ownership */}
           <div>
             <div className="mb-2 h-6 w-1/4 rounded bg-gray-300" />
-            <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-1 md:grid-cols-2 print:grid-cols-2">
               <table className="w-full border border-gray-300">
                 <tbody>
                   {[...Array(2)].map((_, i) => (
@@ -72,7 +72,7 @@ export default function ParcelDetailSkeleton() {
           </div>
 
           {/* Appraisals & Assessments */}
-          <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-1 md:grid-cols-2 print:grid-cols-2">
             <div>
               <div className="mb-2 h-6 w-1/3 rounded bg-gray-300" />
               <table className="w-full border border-gray-300">
@@ -112,7 +112,7 @@ export default function ParcelDetailSkeleton() {
           </div>
 
           {/* Tax/Billing & Recorded Documents */}
-          <div className="grid grid-cols-1 gap-1 md:grid-cols-12">
+          <div className="grid grid-cols-1 gap-1 md:grid-cols-12 print:grid-cols-12">
             <div className="col-span-4">
               <div className="mb-2 h-6 w-1/2 rounded bg-gray-300" />
               <table className="w-full border border-gray-300">

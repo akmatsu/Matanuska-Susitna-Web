@@ -7,7 +7,9 @@ export const DataTableRow = ({
 }) => (
   <tr
     className={
-      !isLast ? 'border-table-border bg-surface border-b' : 'bg-surface'
+      !isLast
+        ? 'border-table-border bg-surface border-b print:border print:border-black'
+        : 'bg-surface print:border print:border-black'
     }
   >
     {cells.map((cell, idx) => {
@@ -15,6 +17,7 @@ export const DataTableRow = ({
       const className = [
         isLastCell ? 'px-1' : 'border-r border-table-border px-1',
         cell.right && (isLastCell ? 'text-right' : 'text-right'),
+        'print:border print:border-black',
       ]
         .filter(Boolean)
         .join(' ');
