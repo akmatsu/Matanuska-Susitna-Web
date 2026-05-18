@@ -87,7 +87,7 @@ export async function Results({
                             <span className="sr-only">View PDF Map</span>
                             <span
                               aria-hidden="true"
-                              className="icon-[carbon--pdf] size-full"
+                              className="icon-msb--download-pdf size-full"
                             ></span>
                           </Link>
                           {result.basemap_abbr && (
@@ -100,7 +100,7 @@ export async function Results({
                               <span className="sr-only">Download DXF Map</span>
                               <span
                                 aria-hidden="true"
-                                className="icon-[carbon--cad] size-full"
+                                className="icon-msb--download-dxf size-full"
                               ></span>
                             </Link>
                           )}
@@ -142,7 +142,7 @@ export async function Results({
                     <span className="sr-only">View PDF Map</span>
                     <span
                       aria-hidden="true"
-                      className="icon-[carbon--pdf] size-full"
+                      className="icon-msb--download-pdf size-full"
                     ></span>
                   </Link>
                 )}
@@ -155,7 +155,7 @@ export async function Results({
                     <span className="sr-only">Download DXF Map</span>
                     <span
                       aria-hidden="true"
-                      className="icon-[carbon--cad] size-full"
+                      className="icon-msb--download-dxf size-full"
                     ></span>
                   </Link>
                 )}
@@ -222,7 +222,7 @@ export async function Results({
                           <span className="sr-only">View PDF Map</span>
                           <span
                             aria-hidden="true"
-                            className="icon-[carbon--pdf] size-full"
+                            className="icon-msb--download-pdf size-full"
                           ></span>
                         </Link>
                         <Link
@@ -233,7 +233,7 @@ export async function Results({
                           <span className="sr-only">Download DXF Map</span>
                           <span
                             aria-hidden="true"
-                            className="icon-[carbon--cad] size-full"
+                            className="icon-msb--download-dxf size-full"
                           ></span>
                         </Link>
                       </div>
@@ -284,7 +284,7 @@ export async function Results({
                   <span className="sr-only">View PDF Map</span>
                   <span
                     aria-hidden="true"
-                    className="icon-[carbon--pdf] size-full"
+                    className="icon-msb--download-pdf size-full"
                   ></span>
                 </Link>
               )}
@@ -297,7 +297,7 @@ export async function Results({
                   <span className="sr-only">Download DXF Map</span>
                   <span
                     aria-hidden="true"
-                    className="icon-[carbon--cad] size-full"
+                    className="icon-msb--download-dxf size-full"
                   ></span>
                 </Link>
               )}

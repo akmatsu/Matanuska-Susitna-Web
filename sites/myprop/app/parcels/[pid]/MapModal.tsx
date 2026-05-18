@@ -24,12 +24,12 @@ export function MapModal(props: { pid: string; map: string }) {
     {
       name: 'Tax Map PDF',
       url: `https://matsugov.us/taxmaps/pdf/${props.map.toUpperCase()}.pdf`,
-      icon: 'icon-[mdi--pdf-box]',
+      icon: 'icon-msb--download-pdf',
     },
     {
       name: 'Tax Map DXF',
       url: `https://matsugov.us/taxmaps/dxf/${props.map.toUpperCase().replace(/\d/g, '0')}.dxf`,
-      icon: 'icon-[mdi--vector-square]',
+      icon: 'icon-msb--download-dxf',
     },
     {
       name: 'Land Use Regulations',
