@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.20.1...v1.21.0) (2026-05-20)
+
+
+### Features
+
+* now allowing users to actually find their property from the myprop api and run calculations based off of that ([9f13740](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9f13740b2143e5f05e9b7ebf7efce03578f1df39))
+
 ## [1.20.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.20.0...v1.20.1) (2026-05-18)
 
 
