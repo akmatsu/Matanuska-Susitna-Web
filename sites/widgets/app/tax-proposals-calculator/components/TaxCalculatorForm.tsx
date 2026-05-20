@@ -2,10 +2,12 @@ import { NumberInput } from './NumberInput';
 import { CheckboxInput } from './CheckboxInput';
 import { RadioInput } from './RadioInput';
 import { Button } from './Button';
+import { PropertySearch } from './PropertySearch';
+import type { SelectedProperty } from '../hooks/useTaxCalculator';
 
 interface TaxCalculatorFormProps {
-  propertyValue: number;
-  setPropertyValue: (v: number) => void;
+  selectedProperties: SelectedProperty[];
+  onPropertiesChange: (properties: SelectedProperty[]) => void;
   grocerySpending: number;
   setGrocerySpending: (v: number) => void;
   marijuanaSpending: number;
@@ -24,8 +26,8 @@ interface TaxCalculatorFormProps {
 }
 
 export function TaxCalculatorForm({
-  propertyValue,
-  setPropertyValue,
+  selectedProperties,
+  onPropertiesChange,
   grocerySpending,
   setGrocerySpending,
   marijuanaSpending,
@@ -45,26 +47,10 @@ export function TaxCalculatorForm({
   return (
     <>
       <div className="space-y-4">
-        {/* Assessed Property Value */}
-        <NumberInput
-          label="Assessed Property Value ($)"
-          value={propertyValue}
-          onChange={setPropertyValue}
-          helpText={
-            <>
-              Leave blank if you don&apos;t own property. Find your assessed value on{' '}
-              <a
-                href="https://myproperty.matsugov.us/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-blue-700"
-              >
-                MyProperty
-              </a>
-              .
-            </>
-          }
-          placeholder="0"
+        {/* Appraised Property Value */}
+        <PropertySearch
+          selectedProperties={selectedProperties}
+          onPropertiesChange={onPropertiesChange}
         />
 
         {/* Goods/Services Spending */}
@@ -112,12 +98,15 @@ export function TaxCalculatorForm({
               },
               {
                 value: 'areawide',
-                label: 'OR 26-032: Areawide Sales Tax (6.5%, Mill rate: 0)',
+                label: 'OR 26-032: Areawide Sales Tax (6.5%)',
+                description:
+                  'Applied on top of any existing sales taxes (e.g. city sales tax). Removes the areawide mill rate. RSA, FSA, SSA, non-areawide, and city mill rates still apply.',
               },
               {
                 value: 'non-areawide',
-                label:
-                  'OR 26-065: Non-Areawide Sales Tax (1.5%, $75,000 property value exemption)',
+                label: 'OR 26-065: Non-Areawide Sales Tax (1.5%)',
+                description:
+                  'Applies outside of cities only. Includes a $75,000 property value exemption.',
               },
             ]}
           />

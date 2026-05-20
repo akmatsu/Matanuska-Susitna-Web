@@ -72,6 +72,7 @@ export type ParcelDetails = {
   FARM_DEFERMENT: number | null;
   DISABLED_VET: number | null;
   SENIOR: number | null;
+  /** Total exemptions */
   TOTAL: number | null;
   LID: string | null;
   GROSS_ACRE: number | null;

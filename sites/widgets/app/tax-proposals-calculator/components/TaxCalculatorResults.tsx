@@ -12,6 +12,8 @@ export interface TaxCalculatorResultsProps {
   marijuanaDifference: number;
   annualAlcoholSpending: number;
   alcoholDifference: number;
+  propertyTax: number;
+  originalPropertyTax: number;
   propertyTaxDifference: number;
   totalCostDifference: number;
   includeGravelTax: boolean;
@@ -27,6 +29,8 @@ export function TaxCalculatorResults({
   marijuanaDifference,
   annualAlcoholSpending,
   alcoholDifference,
+  propertyTax,
+  originalPropertyTax,
   propertyTaxDifference,
   totalCostDifference,
   includeGravelTax,
@@ -165,6 +169,13 @@ export function TaxCalculatorResults({
               <span className="text-sm font-medium text-gray-700">
                 Property Tax Change
               </span>
+              <div className="mt-1 flex gap-3 text-xs text-gray-500">
+                <span>
+                  Before: {formatCurrency(originalPropertyTax * scale)}
+                </span>
+                <span aria-hidden="true">&rarr;</span>
+                <span>After: {formatCurrency(propertyTax * scale)}</span>
+              </div>
             </div>
             <span className="text-sm font-semibold text-gray-900">
               {propertyTaxDifference * scale > 0 ? '+' : ''}

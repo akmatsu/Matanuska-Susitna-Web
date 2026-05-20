@@ -3,6 +3,7 @@
 interface RadioOption {
   value: string;
   label: string;
+  description?: string;
 }
 
 interface RadioInputProps {
@@ -27,10 +28,7 @@ export function RadioInput({
       </legend>
       <div className="space-y-2">
         {options.map((option) => (
-          <label
-            key={option.value}
-            className="flex cursor-pointer items-center"
-          >
+          <label key={option.value} className="flex cursor-pointer items-start">
             <input
               type="radio"
               name={name}
@@ -41,9 +39,16 @@ export function RadioInput({
                   onChange(option.value);
                 }
               }}
-              className="h-4 w-4 cursor-pointer border-gray-300 accent-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-0"
+              className="mt-0.5 h-4 w-4 cursor-pointer border-gray-300 accent-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-0"
             />
-            <span className="ml-2 text-sm text-gray-700">{option.label}</span>
+            <span className="ml-2">
+              <span className="text-sm text-gray-700">{option.label}</span>
+              {option.description && (
+                <span className="text-muted mt-0.5 block">
+                  {option.description}
+                </span>
+              )}
+            </span>
           </label>
         ))}
       </div>

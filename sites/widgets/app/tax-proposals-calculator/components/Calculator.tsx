@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { TaxCalculatorForm } from './TaxCalculatorForm';
 import { TaxCalculatorResults } from './TaxCalculatorResults';
 import { useTaxCalculator } from '../hooks/useTaxCalculator';
+import type { SelectedProperty } from '../hooks/useTaxCalculator';
 import { Card } from './Card/Card';
 import { CardHeading } from './Card/CardHeading';
 
@@ -13,6 +15,10 @@ export const metadata = {
 };
 
 export function Calculator() {
+  const [selectedProperties, setSelectedProperties] = useState<
+    SelectedProperty[]
+  >([]);
+
   const {
     // Input values
     propertyValue,
@@ -26,7 +32,6 @@ export function Calculator() {
     showResults,
 
     // Setters
-    setPropertyValue,
     setGrocerySpending,
     setMarijuanaSpending,
     setAlcoholSpending,
@@ -42,13 +47,15 @@ export function Calculator() {
     marijuanaDifference,
     annualAlcoholSpending,
     alcoholDifference,
+    propertyTax,
+    originalPropertyTax,
     propertyTaxDifference,
     totalCostDifference,
-  } = useTaxCalculator();
+  } = useTaxCalculator(selectedProperties);
 
   const formProps = {
-    propertyValue,
-    setPropertyValue,
+    selectedProperties,
+    onPropertiesChange: setSelectedProperties,
     grocerySpending,
     setGrocerySpending,
     marijuanaSpending,
@@ -72,6 +79,8 @@ export function Calculator() {
     marijuanaDifference,
     annualAlcoholSpending,
     alcoholDifference,
+    propertyTax,
+    originalPropertyTax,
     propertyTaxDifference,
     totalCostDifference,
     includeGravelTax,
