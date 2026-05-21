@@ -1,5 +1,6 @@
 User-Agent: *
 Allow: /
 Disallow: /private/
+Disallow: */drafts/*
 
 Sitemap: https://matsu.gov/sitemap.xml
