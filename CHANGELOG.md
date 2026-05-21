@@ -1,3 +1,11 @@
+# [1.22.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.21.0...v1.22.0) (2026-05-21)
+
+
+### Features
+
+* added draftsc ([bf7158a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/bf7158a19f2789e937064a56d97b378748d5ffe4))
+* fixed build ([dcce984](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/dcce9842052dcaf7b3ce8247767e0dee0309538c))
+
 # [1.21.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.20.1...v1.21.0) (2026-05-20)
 
 
