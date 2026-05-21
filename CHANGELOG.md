@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.22.0...v1.23.0) (2026-05-21)
+
+
+### Features
+
+* added topic draft page ([f71a2ad](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/f71a2ad7f98dd1a9e58d932efc097066eece5bff))
+
 # [1.22.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.21.0...v1.22.0) (2026-05-21)
 
 
