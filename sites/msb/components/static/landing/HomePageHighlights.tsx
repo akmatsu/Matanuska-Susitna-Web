@@ -14,6 +14,17 @@ const homePageHighlightsFragment = gql(`
   }
 `);
 
+function normalizeDate(value: unknown): string | number | Date {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  ) {
+    return value;
+  }
+  return new Date();
+}
+
 export function HomePageHighlights(props: {
   data: FragmentType<typeof homePageHighlightsFragment> | undefined | null;
 }) {
@@ -28,7 +39,8 @@ export function HomePageHighlights(props: {
       const bPriority = b.priority ?? Infinity;
       if (aPriority === bPriority) {
         return (
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          new Date(normalizeDate(b.createdAt)).getTime() -
+          new Date(normalizeDate(a.createdAt)).getTime()
         );
       }
 
@@ -37,8 +49,8 @@ export function HomePageHighlights(props: {
     .slice(0, 3);
 
   return (
-    <section className="max-w-6xl mx-auto relative px-4 py-16">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    <section className="relative mx-auto max-w-6xl px-4 py-16">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
         {sorted.map((item) => (
           <HomePageHighlightCard data={item} key={item.id} />
         ))}

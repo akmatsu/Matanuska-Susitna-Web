@@ -209,8 +209,8 @@ export function BasePage(props: {
         </HideOnDesktop>
 
         <PageListItems title="Communities" items={communities} />
-        <PageEvents data={page} />
-        <PagePublicNotices data={page} />
+        <PageEvents data={page as any} />
+        <PagePublicNotices data={page as any} />
 
         <HideOnDesktop>
           <PageContacts

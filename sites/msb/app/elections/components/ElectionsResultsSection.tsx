@@ -37,6 +37,17 @@ const getResults = gql(`
   }
 `);
 
+function normalizeDate(value: unknown): string | number | Date | undefined {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  ) {
+    return value;
+  }
+  return undefined;
+}
+
 export async function ElectionResultsSection(props: {
   data?: FragmentType<typeof ElectionResultFragment> | null;
 }) {
@@ -70,14 +81,17 @@ export async function ElectionResultsSection(props: {
             The results of {data.title} will be posted after the elections takes
             place on{' '}
             <span className="font-semibold">
-              <DateTime date={data.electionDate} formatStr="PPP" />
+              <DateTime
+                date={normalizeDate(data.electionDate)}
+                formatStr="PPP"
+              />
             </span>
             .
           </p>
         )}
       </ProseWrapper>
       <ElectionResultsList data={results.data?.elections} />
-      <div className="flex justify-center mt-4">
+      <div className="mt-4 flex justify-center">
         <LinkButton href="/elections/results" color="primary">
           View All Results
         </LinkButton>

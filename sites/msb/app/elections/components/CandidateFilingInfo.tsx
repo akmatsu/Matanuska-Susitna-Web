@@ -25,6 +25,17 @@ const CandidateFilingInfoFragment = gql(`
   }
 `);
 
+function normalizeDate(value: unknown): string | number | Date | undefined {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  ) {
+    return value;
+  }
+  return undefined;
+}
+
 export function CandidateFilingInfo(props: {
   data?: FragmentType<typeof CandidateFilingInfoFragment> | null;
 }) {
@@ -34,8 +45,13 @@ export function CandidateFilingInfo(props: {
   function checkIsWithinFilingPeriod() {
     if (!data) return false;
 
+    const deadline = data.candidateFilingDeadline;
+    if (typeof deadline !== 'string' && typeof deadline !== 'number') {
+      return false;
+    }
+
     const now = new Date();
-    const end = new Date(data.candidateFilingDeadline);
+    const end = new Date(deadline);
 
     return now <= end;
   }
@@ -55,14 +71,14 @@ export function CandidateFilingInfo(props: {
               The candidate filing period for {data?.title} starts on{' '}
               <span className="font-semibold">
                 <DateTime
-                  date={data?.candidateFilingStartDate}
+                  date={normalizeDate(data?.candidateFilingStartDate)}
                   formatStr="PPPp"
                 />
               </span>{' '}
               and ends on{' '}
               <span className="font-semibold">
                 <DateTime
-                  date={data?.candidateFilingDeadline}
+                  date={normalizeDate(data?.candidateFilingDeadline)}
                   formatStr="PPPp"
                 />
               </span>
@@ -77,7 +93,7 @@ export function CandidateFilingInfo(props: {
                 );
               })}
             </ul>
-            <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">
+            <blockquote className="rounded border-l-green-500 bg-green-100 not-italic">
               <h3 className="mt-0">Candidate Qualifications</h3>
               <ul>
                 <li>
@@ -109,7 +125,10 @@ export function CandidateFilingInfo(props: {
             <p>
               The Matanuska-Susitna Borough will hold a regular election on{' '}
               <span className="font-semibold">
-                <DateTime date={data.electionDate} formatStr="PPPP" />
+                <DateTime
+                  date={normalizeDate(data.electionDate)}
+                  formatStr="PPPP"
+                />
               </span>
               .
             </p>

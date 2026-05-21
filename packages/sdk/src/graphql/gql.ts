@@ -103,14 +103,14 @@ type Documents = {
     "\n  fragment ContactList on Contact {\n    id,\n    ...ContactFields\n  }\n": typeof types.ContactListFragmentDoc,
     "\n  fragment DistrictList on AssemblyDistrict {\n    id\n    ...DistrictDetailFields\n  }\n": typeof types.DistrictListFragmentDoc,
     "\n  fragment DocumentList on Document {\n    id\n    title\n    file {\n      url\n    }\n    ...DocumentLink\n  }\n": typeof types.DocumentListFragmentDoc,
-    "\n    fragment PageEvents on BasePageWithSlug {\n      ... on BasePageWithDefaultRelationships {\n        events(take: 4, orderBy:  {\n          startDate: desc\n        }, where:  {\n          startDate:  {\n              gte: $now\n          }\n        }) {\n          id\n          ...EventInfo\n        }\n      }\n    }\n": typeof types.PageEventsFragmentDoc,
+    "\n    fragment PageEvents on BasePageWithDefaultRelationships {\n      events(take: 4, orderBy:  {\n        startDate: desc\n      }, where:  {\n        startDate:  {\n            gte: $now\n        }\n      }) {\n        id\n        ...EventInfo\n      }      \n    }\n": typeof types.PageEventsFragmentDoc,
     "\n  fragment FacilitiesList on Facility {\n    id\n    ...FacilityCard\n  }\n": typeof types.FacilitiesListFragmentDoc,
     "\n  fragment FacilityCard on Facility {\n    title\n    slug\n    description\n  }\n": typeof types.FacilityCardFragmentDoc,
     "\n  fragment HeroImage on BasePage {\n    heroImage\n  }\n": typeof types.HeroImageFragmentDoc,
     "\n  fragment HourList on OperatingHour {\n    id\n    ...HourFields\n  }\n": typeof types.HourListFragmentDoc,
     "\n  fragment PageItem on BasePageWithSlug {\n    __typename\n    title\n    slug\n    description\n  }\n": typeof types.PageItemFragmentDoc,
     "\n  fragment PageList on BasePageWithSlug {\n    id\n    ...PageItem\n  }\n": typeof types.PageListFragmentDoc,
-    "\n  fragment PagePublicNotices on BasePageWithSlug {\n    ... on BasePageWithDefaultRelationships {\n      publicNotices(take: 5 orderBy: { urgency: desc }) {\n        id\n        urgency\n        publishAt\n        ...PublicNoticeFields\n      }\n    }\n  }\n": typeof types.PagePublicNoticesFragmentDoc,
+    "\n  fragment PagePublicNotices on BasePageWithDefaultRelationships {\n    publicNotices(take: 5, orderBy: { urgency: desc }) {\n      id\n      urgency\n      publishAt\n      ...PublicNoticeFields\n    }\n  }\n": typeof types.PagePublicNoticesFragmentDoc,
     "\n  fragment ServiceList on Service {\n    id\n    ...ServiceFields\n  }\n": typeof types.ServiceListFragmentDoc,
     "\n  fragment ToolbeltItems on HomePage {\n    featuredItems(take: 9, orderBy: {order: asc}) {\n      id\n      ...ToolbeltHighlight\n    }\n  }\n": typeof types.ToolbeltItemsFragmentDoc,
     "\n  fragment TopicList on Topic {\n    id\n    ...TopicFields\n  }\n": typeof types.TopicListFragmentDoc,
@@ -217,14 +217,14 @@ const documents: Documents = {
     "\n  fragment ContactList on Contact {\n    id,\n    ...ContactFields\n  }\n": types.ContactListFragmentDoc,
     "\n  fragment DistrictList on AssemblyDistrict {\n    id\n    ...DistrictDetailFields\n  }\n": types.DistrictListFragmentDoc,
     "\n  fragment DocumentList on Document {\n    id\n    title\n    file {\n      url\n    }\n    ...DocumentLink\n  }\n": types.DocumentListFragmentDoc,
-    "\n    fragment PageEvents on BasePageWithSlug {\n      ... on BasePageWithDefaultRelationships {\n        events(take: 4, orderBy:  {\n          startDate: desc\n        }, where:  {\n          startDate:  {\n              gte: $now\n          }\n        }) {\n          id\n          ...EventInfo\n        }\n      }\n    }\n": types.PageEventsFragmentDoc,
+    "\n    fragment PageEvents on BasePageWithDefaultRelationships {\n      events(take: 4, orderBy:  {\n        startDate: desc\n      }, where:  {\n        startDate:  {\n            gte: $now\n        }\n      }) {\n        id\n        ...EventInfo\n      }      \n    }\n": types.PageEventsFragmentDoc,
     "\n  fragment FacilitiesList on Facility {\n    id\n    ...FacilityCard\n  }\n": types.FacilitiesListFragmentDoc,
     "\n  fragment FacilityCard on Facility {\n    title\n    slug\n    description\n  }\n": types.FacilityCardFragmentDoc,
     "\n  fragment HeroImage on BasePage {\n    heroImage\n  }\n": types.HeroImageFragmentDoc,
     "\n  fragment HourList on OperatingHour {\n    id\n    ...HourFields\n  }\n": types.HourListFragmentDoc,
     "\n  fragment PageItem on BasePageWithSlug {\n    __typename\n    title\n    slug\n    description\n  }\n": types.PageItemFragmentDoc,
     "\n  fragment PageList on BasePageWithSlug {\n    id\n    ...PageItem\n  }\n": types.PageListFragmentDoc,
-    "\n  fragment PagePublicNotices on BasePageWithSlug {\n    ... on BasePageWithDefaultRelationships {\n      publicNotices(take: 5 orderBy: { urgency: desc }) {\n        id\n        urgency\n        publishAt\n        ...PublicNoticeFields\n      }\n    }\n  }\n": types.PagePublicNoticesFragmentDoc,
+    "\n  fragment PagePublicNotices on BasePageWithDefaultRelationships {\n    publicNotices(take: 5, orderBy: { urgency: desc }) {\n      id\n      urgency\n      publishAt\n      ...PublicNoticeFields\n    }\n  }\n": types.PagePublicNoticesFragmentDoc,
     "\n  fragment ServiceList on Service {\n    id\n    ...ServiceFields\n  }\n": types.ServiceListFragmentDoc,
     "\n  fragment ToolbeltItems on HomePage {\n    featuredItems(take: 9, orderBy: {order: asc}) {\n      id\n      ...ToolbeltHighlight\n    }\n  }\n": types.ToolbeltItemsFragmentDoc,
     "\n  fragment TopicList on Topic {\n    id\n    ...TopicFields\n  }\n": types.TopicListFragmentDoc,
@@ -615,7 +615,7 @@ export function gql(source: "\n  fragment DocumentList on Document {\n    id\n  
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    fragment PageEvents on BasePageWithSlug {\n      ... on BasePageWithDefaultRelationships {\n        events(take: 4, orderBy:  {\n          startDate: desc\n        }, where:  {\n          startDate:  {\n              gte: $now\n          }\n        }) {\n          id\n          ...EventInfo\n        }\n      }\n    }\n"): (typeof documents)["\n    fragment PageEvents on BasePageWithSlug {\n      ... on BasePageWithDefaultRelationships {\n        events(take: 4, orderBy:  {\n          startDate: desc\n        }, where:  {\n          startDate:  {\n              gte: $now\n          }\n        }) {\n          id\n          ...EventInfo\n        }\n      }\n    }\n"];
+export function gql(source: "\n    fragment PageEvents on BasePageWithDefaultRelationships {\n      events(take: 4, orderBy:  {\n        startDate: desc\n      }, where:  {\n        startDate:  {\n            gte: $now\n        }\n      }) {\n        id\n        ...EventInfo\n      }      \n    }\n"): (typeof documents)["\n    fragment PageEvents on BasePageWithDefaultRelationships {\n      events(take: 4, orderBy:  {\n        startDate: desc\n      }, where:  {\n        startDate:  {\n            gte: $now\n        }\n      }) {\n        id\n        ...EventInfo\n      }      \n    }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -643,7 +643,7 @@ export function gql(source: "\n  fragment PageList on BasePageWithSlug {\n    id
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment PagePublicNotices on BasePageWithSlug {\n    ... on BasePageWithDefaultRelationships {\n      publicNotices(take: 5 orderBy: { urgency: desc }) {\n        id\n        urgency\n        publishAt\n        ...PublicNoticeFields\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment PagePublicNotices on BasePageWithSlug {\n    ... on BasePageWithDefaultRelationships {\n      publicNotices(take: 5 orderBy: { urgency: desc }) {\n        id\n        urgency\n        publishAt\n        ...PublicNoticeFields\n      }\n    }\n  }\n"];
+export function gql(source: "\n  fragment PagePublicNotices on BasePageWithDefaultRelationships {\n    publicNotices(take: 5, orderBy: { urgency: desc }) {\n      id\n      urgency\n      publishAt\n      ...PublicNoticeFields\n    }\n  }\n"): (typeof documents)["\n  fragment PagePublicNotices on BasePageWithDefaultRelationships {\n    publicNotices(take: 5, orderBy: { urgency: desc }) {\n      id\n      urgency\n      publishAt\n      ...PublicNoticeFields\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

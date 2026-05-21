@@ -23,6 +23,17 @@ const AssemblyMemberInfoFragment = gql(`
   }
 `);
 
+function normalizeDate(value: unknown): string | number | Date | undefined {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  ) {
+    return value;
+  }
+  return undefined;
+}
+
 export function AssemblyMemberInfo(props: {
   page: FragmentType<typeof AssemblyMemberInfoFragment>;
 }) {
@@ -50,8 +61,12 @@ export function AssemblyMemberInfo(props: {
           <Link href={`mailto:${page.email}`}>{page.email}</Link>
           <p>
             <span className="font-semibold">Term</span>:{' '}
-            <DateTime date={page.termStart} formatStr="MMM yyyy" /> -{' '}
-            <DateTime date={page.termEnd} formatStr="MMM yyyy" />
+            <DateTime
+              date={normalizeDate(page.termStart)}
+              formatStr="MMM yyyy"
+            />{' '}
+            -{' '}
+            <DateTime date={normalizeDate(page.termEnd)} formatStr="MMM yyyy" />
           </p>
         </CardBody>
       </Card>

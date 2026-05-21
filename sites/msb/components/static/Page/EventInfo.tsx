@@ -10,6 +10,13 @@ const EventInfoFragment = gql(`
   }
 `);
 
+function normalizeString(value: unknown): string | null {
+  if (typeof value === 'string') {
+    return value;
+  }
+  return null;
+}
+
 export function EventInfo({
   data,
   ...props
@@ -23,7 +30,7 @@ export function EventInfo({
     <EventCard
       eventTitle={event.title}
       location={event.description}
-      date={event.startDate}
+      date={normalizeString(event.startDate)}
       {...props}
     />
   );

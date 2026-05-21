@@ -3,17 +3,26 @@ import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import { PublicNoticeCard } from './PublicNoticeCard';
 
 const PagePublicNoticesFragment = gql(`
-  fragment PagePublicNotices on BasePageWithSlug {
-    ... on BasePageWithDefaultRelationships {
-      publicNotices(take: 5 orderBy: { urgency: desc }) {
-        id
-        urgency
-        publishAt
-        ...PublicNoticeFields
-      }
+  fragment PagePublicNotices on BasePageWithDefaultRelationships {
+    publicNotices(take: 5, orderBy: { urgency: desc }) {
+      id
+      urgency
+      publishAt
+      ...PublicNoticeFields
     }
   }
 `);
+
+function normalizeDate(value: unknown): string | number | Date {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  ) {
+    return value;
+  }
+  return new Date();
+}
 
 export function PagePublicNotices(props: {
   data?: FragmentType<typeof PagePublicNoticesFragment>;
@@ -28,7 +37,10 @@ export function PagePublicNotices(props: {
     const aPriority = a.urgency ?? Infinity;
     const bPriority = b.urgency ?? Infinity;
     if (aPriority === bPriority) {
-      return new Date(b.publishAt).getTime() - new Date(a.publishAt).getTime();
+      return (
+        new Date(normalizeDate(b.publishAt)).getTime() -
+        new Date(normalizeDate(a.publishAt)).getTime()
+      );
     }
 
     return aPriority - bPriority;
@@ -36,7 +48,7 @@ export function PagePublicNotices(props: {
 
   return (
     <PageSection title="Public Notices & Announcements">
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+      <ul className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
         {sorted.map((notice, i) => (
           <PublicNoticeCard
             key={notice.id}

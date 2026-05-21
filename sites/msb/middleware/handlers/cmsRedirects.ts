@@ -1,7 +1,6 @@
 import { gql } from '@msb/js-sdk/gql';
 import { NextResponse } from 'next/server';
 import { NextAuthRequest } from 'next-auth';
-import { LinkedItemUnion } from '@msb/js-sdk/graphql';
 import { getRedirectUrl } from '@/utils/stringHelpers';
 import { getClientHandler } from '@/utils/apollo/utils';
 
@@ -42,9 +41,7 @@ export async function handleCmsRedirects(req: NextAuthRequest) {
     const redirectInfo = data?.redirect;
 
     if (redirectInfo) {
-      const redirectUrl = getRedirectUrl(
-        redirectInfo.to?.item as LinkedItemUnion,
-      );
+      const redirectUrl = getRedirectUrl(redirectInfo.to?.item as any);
 
       if (redirectUrl?.startsWith('/')) {
         // Handle relative redirects within the site.

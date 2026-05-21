@@ -57,7 +57,20 @@ export async function InternalLink(props: {
     const isButton = props.node?.properties.style === 'button';
     const Tag = isButton ? LinkButton : Link;
 
-    const url = getRedirectUrl(data?.getInternalLink, props.list);
+    // Filter the union type to only include types that getRedirectUrl can handle
+    const internalLink = data?.getInternalLink;
+    const supportedLink =
+      internalLink &&
+      ('url' in internalLink ||
+        'slug' in internalLink ||
+        'file' in internalLink ||
+        (internalLink as any).__typename === 'HomePage' ||
+        (internalLink as any).__typename === 'BoardPage' ||
+        (internalLink as any).__typename === 'ElectionsPage')
+        ? internalLink
+        : null;
+
+    const url = getRedirectUrl(supportedLink as any, props.list);
 
     if (url && !error)
       return (

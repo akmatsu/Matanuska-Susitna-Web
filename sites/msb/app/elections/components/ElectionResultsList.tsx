@@ -26,7 +26,7 @@ export function ElectionResultsList(props: {
   }
 
   return (
-    <div className="mt-4 not-prose">
+    <div className="not-prose mt-4">
       <DataTable
         data={data}
         columns={[
@@ -34,9 +34,14 @@ export function ElectionResultsList(props: {
             key: 'title',
             label: 'Election',
             cell: (value, row) => {
-              return (
-                row.title || row.electionDate || row.result?.document?.title
-              );
+              const title = row.title ? String(row.title) : '';
+              const electionDate = row.electionDate
+                ? String(row.electionDate)
+                : '';
+              const docTitle = row.result?.document?.title
+                ? String(row.result.document.title)
+                : '';
+              return title || electionDate || docTitle || '';
             },
           },
           {

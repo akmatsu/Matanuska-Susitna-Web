@@ -11,6 +11,17 @@ const publicNoticeListFragment = gql(`
   }
 `);
 
+function normalizeDate(value: unknown): string | number | Date {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  ) {
+    return value;
+  }
+  return new Date();
+}
+
 export function PublicNotices(props: {
   items: FragmentType<typeof publicNoticeListFragment>[];
 }) {
@@ -22,7 +33,10 @@ export function PublicNotices(props: {
     const aPriority = a.urgency ?? Infinity;
     const bPriority = b.urgency ?? Infinity;
     if (aPriority === bPriority) {
-      return new Date(b.publishAt).getTime() - new Date(a.publishAt).getTime();
+      return (
+        new Date(normalizeDate(b.publishAt)).getTime() -
+        new Date(normalizeDate(a.publishAt)).getTime()
+      );
     }
 
     return aPriority - bPriority;
@@ -30,7 +44,7 @@ export function PublicNotices(props: {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+      <ul className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
         {sorted.map((item, index) => (
           <PublicNoticeCard
             publicNotice={item}

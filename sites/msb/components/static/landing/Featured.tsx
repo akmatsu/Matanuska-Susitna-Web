@@ -1,10 +1,9 @@
 import { FeaturedCard } from './FeaturedCard';
-import { Highlight, LinkedItemUnion, Maybe } from '@msb/js-sdk/graphql';
 
 export function Featured({
   featuredItems,
 }: {
-  featuredItems: (Highlight & { icon: string })[];
+  featuredItems: (any & { icon: string })[];
 }) {
   function getUrlSection(str?: string) {
     if (!str) {
@@ -16,7 +15,7 @@ export function Featured({
     return `/${str.toLocaleLowerCase()}s/`;
   }
 
-  function getUrl(item?: Maybe<LinkedItemUnion>) {
+  function getUrl(item?: any) {
     if (!item) {
       return '';
     }
@@ -29,8 +28,8 @@ export function Featured({
   }
 
   return (
-    <section className="max-w-6xl mx-auto relative px-4 py-16">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    <section className="relative mx-auto max-w-6xl px-4 py-16">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
         {featuredItems.map((item) => (
           <FeaturedCard
             title={item.title || ''}

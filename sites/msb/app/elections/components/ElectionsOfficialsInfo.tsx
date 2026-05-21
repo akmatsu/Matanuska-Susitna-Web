@@ -26,6 +26,17 @@ const ElectionOfficialContactFragment = gql(`
   }
 `);
 
+function normalizeDate(value: unknown): string | number | Date | undefined {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  ) {
+    return value;
+  }
+  return undefined;
+}
+
 export function ElectionOfficialsInfo(props: {
   data?: FragmentType<typeof ElectionOfficialsInfoFragment> | null;
   contactData?: FragmentType<typeof ElectionOfficialContactFragment> | null;
@@ -37,7 +48,12 @@ export function ElectionOfficialsInfo(props: {
   );
 
   const isAfterDeadline = data?.electionOfficialApplicationDeadline
-    ? new Date() > new Date(data.electionOfficialApplicationDeadline)
+    ? (() => {
+        const normalized = normalizeDate(
+          data.electionOfficialApplicationDeadline,
+        );
+        return normalized ? new Date() > new Date(normalized) : false;
+      })()
     : false;
 
   if (isAfterDeadline) {

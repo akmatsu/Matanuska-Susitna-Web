@@ -15,6 +15,17 @@ const ElectionVoterInformationFragment = gql(`
   }
 `);
 
+function normalizeDate(value: unknown): string | number | Date | undefined {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  ) {
+    return value;
+  }
+  return undefined;
+}
+
 export function ElectionVoterInformation(props: {
   data?: FragmentType<typeof ElectionVoterInformationFragment> | null;
 }) {
@@ -38,10 +49,13 @@ export function ElectionVoterInformation(props: {
             {data?.electionDate && data?.voterRegistrationDeadline && (
               <p className="font-bold">
                 The deadline to qualify to vote in the{' '}
-                <DateTime date={data.electionDate} formatStr="yyyy" /> Election
-                is{' '}
                 <DateTime
-                  date={data.voterRegistrationDeadline}
+                  date={normalizeDate(data.electionDate)}
+                  formatStr="yyyy"
+                />{' '}
+                Election is{' '}
+                <DateTime
+                  date={normalizeDate(data.voterRegistrationDeadline)}
                   formatStr="PPP"
                 />
                 .
@@ -59,7 +73,7 @@ export function ElectionVoterInformation(props: {
               applications are also available at the City Clerk&apos;s Offices
               in Houston, Palmer, and Wasilla.
             </p>
-            <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">
+            <blockquote className="rounded border-l-green-500 bg-green-100 not-italic">
               <h3 className="mt-0">Voter Qualifications</h3>
               <p className="before:content-none after:content-none">
                 A person may vote in a Borough election only if the person:

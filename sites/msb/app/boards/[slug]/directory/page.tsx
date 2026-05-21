@@ -5,6 +5,17 @@ import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
 import { notFound } from 'next/navigation';
+import { type ComponentProps } from 'react';
+
+type BoardDirectoryData = ComponentProps<typeof BoardDirectoryDisplay>['data'];
+
+const normalizeBoardDirectoryData = (value: unknown): BoardDirectoryData => {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value as BoardDirectoryData;
+};
 
 const metaQuery = gql(`
   query GetBoardDirectoryMeta($slug: String!) {
@@ -73,6 +84,8 @@ export default async function BoardDirectoryPage(
     return notFound();
   }
 
+  const directoryData = normalizeBoardDirectoryData(page.directoryExcel);
+
   return (
     <PageColumnController
       right={
@@ -92,7 +105,7 @@ export default async function BoardDirectoryPage(
       >
         Back to Board
       </LinkButton>
-      <BoardDirectoryDisplay data={page.directoryExcel} />
+      <BoardDirectoryDisplay data={directoryData} />
     </PageColumnController>
   );
 }

@@ -52,6 +52,13 @@ const query = gql(`
   }
 `);
 
+function getLastModified(value: unknown): string | Date {
+  if (typeof value === 'string' || value instanceof Date) {
+    return value;
+  }
+  return new Date();
+}
+
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://matsu.gov';
   const { data } = await getClientHandler({
@@ -66,19 +73,19 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages = [
     {
       url: baseUrl,
-      lastModified: data?.homePage?.updatedAt || new Date(),
+      lastModified: getLastModified(data?.homePage?.updatedAt),
       changeFrequency: 'daily',
       priority: 1,
     },
     {
       url: `${baseUrl}/boards`,
-      lastModified: data?.boardPage?.updatedAt || new Date(),
+      lastModified: getLastModified(data?.boardPage?.updatedAt),
       changeFrequency: 'monthly',
       priority: 0.5,
     },
     {
       url: `${baseUrl}/elections`,
-      lastModified: data?.electionsPage?.updatedAt || new Date(),
+      lastModified: getLastModified(data?.electionsPage?.updatedAt),
       changeFrequency: 'monthly',
       priority: 0.5,
     },
@@ -88,7 +95,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     data?.communities.forEach((c) => {
       pages.push({
         url: `${baseUrl}/communities/${c.slug}`,
-        lastModified: c.updatedAt || new Date(),
+        lastModified: getLastModified(c.updatedAt),
         changeFrequency: 'monthly',
         priority: 0.5,
       });
@@ -98,7 +105,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     data?.facilities.forEach((f) => {
       pages.push({
         url: `${baseUrl}/facilities/${f.slug}`,
-        lastModified: f.updatedAt || new Date(),
+        lastModified: getLastModified(f.updatedAt),
         changeFrequency: 'monthly',
         priority: 0.5,
       });
@@ -108,7 +115,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     data?.orgUnits.forEach((o) => {
       pages.push({
         url: `${baseUrl}/departments/${o.slug}`,
-        lastModified: o.updatedAt || new Date(),
+        lastModified: getLastModified(o.updatedAt),
         changeFrequency: 'monthly',
         priority: 0.5,
       });
@@ -118,7 +125,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     data?.parks.forEach((p) => {
       pages.push({
         url: `${baseUrl}/parks/${p.slug}`,
-        lastModified: p.updatedAt || new Date(),
+        lastModified: getLastModified(p.updatedAt),
         changeFrequency: 'monthly',
         priority: 0.5,
       });
@@ -128,7 +135,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     data?.plans.forEach((p) => {
       pages.push({
         url: `${baseUrl}/plans/${p.slug}`,
-        lastModified: p.updatedAt || new Date(),
+        lastModified: getLastModified(p.updatedAt),
         changeFrequency: 'monthly',
         priority: 0.5,
       });
@@ -138,7 +145,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     data?.publicNotices.forEach((pn) => {
       pages.push({
         url: `${baseUrl}/public-notices/${pn.slug}`,
-        lastModified: pn.updatedAt || new Date(),
+        lastModified: getLastModified(pn.updatedAt),
         changeFrequency: 'monthly',
         priority: 0.5,
       });
@@ -148,7 +155,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     data?.services.forEach((s) => {
       pages.push({
         url: `${baseUrl}/services/${s.slug}`,
-        lastModified: s.updatedAt || new Date(),
+        lastModified: getLastModified(s.updatedAt),
         changeFrequency: 'monthly',
         priority: 0.9,
       });
@@ -158,7 +165,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     data?.topics.forEach((t) => {
       pages.push({
         url: `${baseUrl}/${t.slug}`,
-        lastModified: t.updatedAt || new Date(),
+        lastModified: getLastModified(t.updatedAt),
         changeFrequency: 'monthly',
         priority: 0.7,
       });
@@ -168,7 +175,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     data?.trails.forEach((t) => {
       pages.push({
         url: `${baseUrl}/trails/${t.slug}`,
-        lastModified: t.updatedAt || new Date(),
+        lastModified: getLastModified(t.updatedAt),
         changeFrequency: 'monthly',
         priority: 0.5,
       });

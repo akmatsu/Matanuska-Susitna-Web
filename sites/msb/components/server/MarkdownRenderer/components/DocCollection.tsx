@@ -3,7 +3,7 @@ import { DocumentLink } from '@/components/static/DocumentLink';
 import { Button, Pagination } from '@matsugov/ui';
 import { useQuery } from '@msb/js-sdk/apollo';
 import { gql } from '@msb/js-sdk/gql';
-import { OrderDirection } from '@msb/js-sdk/graphql';
+import { type OrderDirection } from '@msb/js-sdk/graphql';
 import { useState } from 'react';
 
 const getDocCollection = gql(`
@@ -24,9 +24,7 @@ const getDocCollection = gql(`
 
 export function DocCollection({ id }: { id: string }) {
   const [page, setPage] = useState(1);
-  const [direction, setDirection] = useState<OrderDirection>(
-    OrderDirection.Asc,
-  );
+  const [direction, setDirection] = useState<OrderDirection>('asc');
   const take = 5;
 
   const { data } = useQuery(getDocCollection, {
@@ -52,16 +50,10 @@ export function DocCollection({ id }: { id: string }) {
         <Button
           icon
           size="sm"
-          onClick={() =>
-            setDirection(
-              direction === OrderDirection.Asc
-                ? OrderDirection.Desc
-                : OrderDirection.Asc,
-            )
-          }
+          onClick={() => setDirection(direction === 'asc' ? 'desc' : 'asc')}
           title="Toggle Sort"
         >
-          {direction === OrderDirection.Asc ? (
+          {direction === 'asc' ? (
             <span className="icon-[mdi--sort-alphabetical-ascending] size-6" />
           ) : (
             <span className="icon-[mdi--sort-alphabetical-descending] size-6" />

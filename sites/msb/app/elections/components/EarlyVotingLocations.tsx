@@ -42,6 +42,17 @@ const GetEarlyVotingLocations = gql(`
   }
 `);
 
+function normalizeDate(value: unknown): string | number | Date | undefined {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  ) {
+    return value;
+  }
+  return undefined;
+}
+
 export function EarlyVotingLocations(props: {
   data?: FragmentType<typeof GetEarlyVotingLocations>;
 }) {
@@ -57,12 +68,23 @@ export function EarlyVotingLocations(props: {
         <p>
           Early/Absentee In-Person voting will begin on{' '}
           <DateTime
-            date={currentElection?.earlyVotingStartDate}
+            date={normalizeDate(currentElection?.earlyVotingStartDate)}
             formatStr="PPP"
           />
           , and continue through{' '}
           <DateTime
-            date={subDays(new Date(currentElection?.electionDate), 1)}
+            date={
+              currentElection?.electionDate
+                ? (() => {
+                    const normalized = normalizeDate(
+                      currentElection.electionDate,
+                    );
+                    return normalized
+                      ? subDays(new Date(normalized), 1)
+                      : undefined;
+                  })()
+                : undefined
+            }
             formatStr="PPP"
           />
           , at the following locations and times:
@@ -145,15 +167,23 @@ export function EarlyVotingLocations(props: {
                 ) : (
                   <>
                     <span className="font-semibold">
-                      {format(
-                        currentElection?.earlyVotingStartDate,
-                        'MMM d, yyyy',
-                      )}{' '}
+                      {(() => {
+                        const startDate = normalizeDate(
+                          currentElection?.earlyVotingStartDate,
+                        );
+                        return startDate
+                          ? format(startDate, 'MMM d, yyyy')
+                          : '';
+                      })()}{' '}
                       -{' '}
-                      {format(
-                        subDays(currentElection?.electionDate, 1),
-                        'MMM d, yyyy',
-                      )}
+                      {(() => {
+                        const endDate = normalizeDate(
+                          currentElection?.electionDate,
+                        );
+                        return endDate
+                          ? format(subDays(new Date(endDate), 1), 'MMM d, yyyy')
+                          : '';
+                      })()}
                     </span>
                     : <span>Normal business hours</span>
                   </>
@@ -162,7 +192,7 @@ export function EarlyVotingLocations(props: {
           ]}
         />
 
-        <blockquote className="bg-green-100 border-l-green-500 rounded not-italic">
+        <blockquote className="rounded border-l-green-500 bg-green-100 not-italic">
           <h3 className="mt-0">Voting Assistance</h3>
           <p className="before:content-none after:content-none">
             A touch screen voting unit will be available during early/absentee

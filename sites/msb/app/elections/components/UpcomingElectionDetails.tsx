@@ -14,6 +14,17 @@ const UpcomingElectionDetailsFragment = gql(`
   }
 `);
 
+function normalizeDate(value: unknown): string | number | Date | undefined {
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    value instanceof Date
+  ) {
+    return value;
+  }
+  return undefined;
+}
+
 export function UpcomingElectionDetails(props: {
   data?: FragmentType<typeof UpcomingElectionDetailsFragment> | null;
 }) {
@@ -24,7 +35,7 @@ export function UpcomingElectionDetails(props: {
     {
       label: 'Election Date',
       value: data.electionDate ? (
-        <DateTime date={data.electionDate} formatStr="PPP" />
+        <DateTime date={normalizeDate(data.electionDate)} formatStr="PPP" />
       ) : (
         'TBD'
       ),
@@ -34,8 +45,15 @@ export function UpcomingElectionDetails(props: {
       value:
         data.candidateFilingStartDate && data.candidateFilingDeadline ? (
           <>
-            <DateTime date={data.candidateFilingStartDate} formatStr="PPPp" /> -{' '}
-            <DateTime date={data.candidateFilingDeadline} formatStr="PPPp" />
+            <DateTime
+              date={normalizeDate(data.candidateFilingStartDate)}
+              formatStr="PPPp"
+            />{' '}
+            -{' '}
+            <DateTime
+              date={normalizeDate(data.candidateFilingDeadline)}
+              formatStr="PPPp"
+            />
           </>
         ) : (
           'TBD'
@@ -44,7 +62,10 @@ export function UpcomingElectionDetails(props: {
     {
       label: 'Early Voting Begins',
       value: data.earlyVotingStartDate ? (
-        <DateTime date={data.earlyVotingStartDate} formatStr="PPP" />
+        <DateTime
+          date={normalizeDate(data.earlyVotingStartDate)}
+          formatStr="PPP"
+        />
       ) : (
         'TBD'
       ),
@@ -52,7 +73,10 @@ export function UpcomingElectionDetails(props: {
     {
       label: 'Absentee Application Deadline',
       value: data.absenteeApplicationDeadline ? (
-        <DateTime date={data.absenteeApplicationDeadline} formatStr="PPP" />
+        <DateTime
+          date={normalizeDate(data.absenteeApplicationDeadline)}
+          formatStr="PPP"
+        />
       ) : (
         'TBD'
       ),
@@ -60,7 +84,10 @@ export function UpcomingElectionDetails(props: {
     {
       label: 'Voter Registration Deadline',
       value: data.voterRegistrationDeadline ? (
-        <DateTime date={data.voterRegistrationDeadline} formatStr="PPP" />
+        <DateTime
+          date={normalizeDate(data.voterRegistrationDeadline)}
+          formatStr="PPP"
+        />
       ) : (
         'TBD'
       ),

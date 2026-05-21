@@ -1,6 +1,6 @@
 import { TypedDocumentNode } from '@msb/js-sdk/apollo';
 import { getClientHandler } from './apollo/utils';
-import { Exact } from '@msb/js-sdk/graphql';
+
 import { Metadata } from 'next';
 
 export type GenerateMetadataFunction = (args: {
@@ -10,7 +10,7 @@ export type GenerateMetadataFunction = (args: {
 export async function getPageMeta<
   TQuery extends TypedDocumentNode<any, any> = TypedDocumentNode<
     any,
-    Exact<{ slug: string }>
+    Record<string, any>
   >,
 >(listName: string, query: TQuery, slug: string): Promise<Metadata> {
   try {

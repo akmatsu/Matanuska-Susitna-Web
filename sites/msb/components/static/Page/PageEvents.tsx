@@ -3,19 +3,17 @@ import { PageSection } from './PageSection';
 import { EventInfo } from './EventInfo';
 
 const PageEventsFragment = gql(`
-    fragment PageEvents on BasePageWithSlug {
-      ... on BasePageWithDefaultRelationships {
-        events(take: 4, orderBy:  {
-          startDate: desc
-        }, where:  {
-          startDate:  {
-              gte: $now
-          }
-        }) {
-          id
-          ...EventInfo
+    fragment PageEvents on BasePageWithDefaultRelationships {
+      events(take: 4, orderBy:  {
+        startDate: desc
+      }, where:  {
+        startDate:  {
+            gte: $now
         }
-      }
+      }) {
+        id
+        ...EventInfo
+      }      
     }
 `);
 

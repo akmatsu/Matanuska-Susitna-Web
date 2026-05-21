@@ -1,6 +1,5 @@
 import { LinkButton } from '@/components/static/LinkButton';
 import { Meetings } from '@/components/static/Meetings';
-import { OrderDirection } from '@msb/js-sdk/graphql';
 import { SearchDynamicWrapper } from '../components/client/search/SearchDynamicWrapper';
 import { PublicNotices } from '@/components/static/landing/PublicNotices';
 import { Hero } from '@matsugov/ui';
@@ -34,7 +33,7 @@ export default async function Home() {
       take: 5,
       orderBy: [
         {
-          urgency: OrderDirection.Desc,
+          urgency: 'desc',
         },
       ],
     },
@@ -51,23 +50,23 @@ export default async function Home() {
   return (
     <div>
       <Hero
-        className="flex justify-center items-center"
+        className="flex items-center justify-center"
         image={page?.heroImage}
       >
-        <div className="max-w-[500px] w-full px-4">
+        <div className="w-full max-w-[500px] px-4">
           <SearchDynamicWrapper />
         </div>
       </Hero>
       <PageToolbelt data={page} />
       <HomePageHighlights data={data} />
 
-      <section className="max-w-6xl mx-auto px-4 py-16">
+      <section className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="mb-4 text-3xl font-bold">Upcoming Meetings</h2>
 
         <Meetings />
       </section>
       {publicNotices.length > 0 && (
-        <section className="max-w-6xl mx-auto px-4 py-16">
+        <section className="mx-auto max-w-6xl px-4 py-16">
           <h2 className="mb-4 text-3xl font-bold">
             Announcement & Public Notices
           </h2>
@@ -76,11 +75,11 @@ export default async function Home() {
         </section>
       )}
 
-      <section className="max-w-6xl mx-auto px-4 py-16">
+      <section className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="mb-4 text-3xl font-bold">
           Can&apos;t find what you need?
         </h2>
-        <p className="text-xl mb-4">
+        <p className="mb-4 text-xl">
           Use the search bar or reach out to us directly — we&apos;re here to
           help.
         </p>
