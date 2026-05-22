@@ -11,7 +11,7 @@ export function SiteLogo() {
       title="MSB Home"
     >
       <div className="flex items-center gap-2">
-        <div className="relative size-10 lg:size-14">
+        <div className="relative size-10 flex-1 lg:size-14">
           <Image src={appConfig.orgLogoUrl} alt={appConfig.orgLogoAlt} fill />
         </div>
         <span className="text-sm font-bold lg:text-2xl">

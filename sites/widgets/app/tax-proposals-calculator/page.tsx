@@ -11,7 +11,7 @@ export default function TaxProposalsCalculatorPage() {
   return (
     <main>
       <PageHeader
-        title="Tax Proposals Calculator"
+        title="MSB Tax Impact Calculator"
         description="Estimate your potential tax burden under proposed tax measures"
       />
       <Calculator />
