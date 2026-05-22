@@ -1,3 +1,15 @@
+# [1.24.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.23.0...v1.24.0) (2026-05-22)
+
+
+### Bug Fixes
+
+* hiding unclean draft information in titles ([716e251](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/716e2519c26da27c8f7c18d028d83c39a09e92f2))
+
+
+### Features
+
+* fixed build issues; ([9c23f4c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/9c23f4c3d88069b55b237e5a8164e7522b2c8a55))
+
 # [1.23.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.22.0...v1.23.0) (2026-05-21)
 
 
