@@ -1,3 +1,10 @@
+## [1.24.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.24.0...v1.24.1) (2026-05-22)
+
+
+### Bug Fixes
+
+* added msb favicon and msb seal ([2f6206c](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/2f6206c7bff0c0f65b83df36230490bf4a5870f7))
+
 # [1.24.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.23.0...v1.24.0) (2026-05-22)
 
 
