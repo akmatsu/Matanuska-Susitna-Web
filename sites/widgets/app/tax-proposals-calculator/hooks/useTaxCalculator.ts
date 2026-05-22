@@ -32,6 +32,7 @@ export interface TaxCalculatorState {
   marijuanaSpending: number;
   alcoholSpending: number;
   salesTaxType: 'areawide' | 'non-areawide' | 'none';
+  nonAreawideTaxableShare: number;
   includeGravelTax: boolean;
   includeMarijuanaTax: boolean;
   includeAlcoholTax: boolean;
@@ -45,6 +46,7 @@ export interface TaxCalculatorState {
   setMarijuanaSpending: (value: number) => void;
   setAlcoholSpending: (value: number) => void;
   setSalesTaxType: (value: 'areawide' | 'non-areawide' | 'none') => void;
+  setNonAreawideTaxableShare: (value: number) => void;
   setIncludeGravelTax: (value: boolean) => void;
   setIncludeMarijuanaTax: (value: boolean) => void;
   setIncludeAlcoholTax: (value: boolean) => void;
@@ -89,6 +91,8 @@ export function useTaxCalculator(
   const [salesTaxType, setSalesTaxType] = useState<
     'areawide' | 'non-areawide' | 'none'
   >('none');
+  const [nonAreawideTaxableShare, setNonAreawideTaxableShare] =
+    useState<number>(100);
   const [includeGravelTax, setIncludeGravelTax] = useState(false);
   const [includeMarijuanaTax, setIncludeMarijuanaTax] = useState(false);
   const [includeAlcoholTax, setIncludeAlcoholTax] = useState(false);
@@ -102,7 +106,7 @@ export function useTaxCalculator(
 
   // Check if any selected property has disabled vet or senior exemption
   const hasPropertyExemption = selectedProperties.some(
-    (p) => p.disabledVet === 1 || p.senior === 1,
+    (p) => p.disabledVet > 0 || p.senior > 0,
   );
 
   // Determine effective sales tax type: if property has exemption, don't apply areawide
@@ -159,7 +163,8 @@ export function useTaxCalculator(
   if (effectiveSalesTaxType === 'areawide') {
     salestaxRate = TAX_RATES.AREAWIDE_SALES_TAX;
   } else if (effectiveSalesTaxType === 'non-areawide') {
-    salestaxRate = TAX_RATES.NON_AREAWIDE_SALES_TAX;
+    const normalizedShare = Math.min(100, Math.max(0, nonAreawideTaxableShare));
+    salestaxRate = TAX_RATES.NON_AREAWIDE_SALES_TAX * (normalizedShare / 100);
   }
 
   // Convert monthly spending to annual
@@ -211,6 +216,7 @@ export function useTaxCalculator(
     marijuanaSpending,
     alcoholSpending,
     salesTaxType,
+    nonAreawideTaxableShare,
     includeGravelTax,
     includeMarijuanaTax,
     includeAlcoholTax,
@@ -224,6 +230,7 @@ export function useTaxCalculator(
     setMarijuanaSpending,
     setAlcoholSpending,
     setSalesTaxType,
+    setNonAreawideTaxableShare,
     setIncludeGravelTax,
     setIncludeMarijuanaTax,
     setIncludeAlcoholTax,

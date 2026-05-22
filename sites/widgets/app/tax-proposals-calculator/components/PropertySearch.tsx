@@ -146,8 +146,14 @@ export function PropertySearch({
                 type="button"
                 onClick={handleSearch}
                 disabled={isSearchPending || !query.trim()}
-                className="shrink-0 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex shrink-0 items-center gap-2 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
               >
+                {isSearchPending && (
+                  <span
+                    className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/50 border-t-white"
+                    aria-hidden="true"
+                  />
+                )}
                 {isSearchPending ? 'Searching…' : 'Search'}
               </button>
             </div>
@@ -186,13 +192,19 @@ export function PropertySearch({
                             type="button"
                             onClick={() => handleAdd(result)}
                             disabled={added || isAdding}
-                            className="shrink-0 rounded px-2 py-1 text-xs font-semibold enabled:cursor-pointer enabled:bg-blue-600 enabled:text-white enabled:hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                            className="inline-flex shrink-0 items-center gap-1.5 rounded px-2 py-1 text-xs font-semibold enabled:cursor-pointer enabled:bg-blue-600 enabled:text-white enabled:hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
                             aria-label={
                               added
                                 ? `${result.PARCEL_ID} already added`
                                 : `Add ${result.PARCEL_ID}`
                             }
                           >
+                            {isAdding && (
+                              <span
+                                className="h-3 w-3 animate-spin rounded-full border-2 border-white/50 border-t-white"
+                                aria-hidden="true"
+                              />
+                            )}
                             {isAdding ? 'Adding…' : added ? 'Added' : 'Add'}
                           </button>
                         </li>

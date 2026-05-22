@@ -26,6 +26,7 @@ export function Calculator() {
     marijuanaSpending,
     alcoholSpending,
     salesTaxType,
+    nonAreawideTaxableShare,
     includeGravelTax,
     includeMarijuanaTax,
     includeAlcoholTax,
@@ -36,6 +37,7 @@ export function Calculator() {
     setMarijuanaSpending,
     setAlcoholSpending,
     setSalesTaxType,
+    setNonAreawideTaxableShare,
     setIncludeGravelTax,
     setIncludeMarijuanaTax,
     setIncludeAlcoholTax,
@@ -43,6 +45,7 @@ export function Calculator() {
 
     // Calculated values
     groceryDifference,
+    annualGrocerySpending,
     annualMarijuanaSpending,
     marijuanaDifference,
     annualAlcoholSpending,
@@ -52,6 +55,19 @@ export function Calculator() {
     propertyTaxDifference,
     totalCostDifference,
   } = useTaxCalculator(selectedProperties);
+
+  const handleReset = () => {
+    setSelectedProperties([]);
+    setGrocerySpending(0);
+    setMarijuanaSpending(0);
+    setAlcoholSpending(0);
+    setSalesTaxType('none');
+    setNonAreawideTaxableShare(100);
+    setIncludeGravelTax(false);
+    setIncludeMarijuanaTax(false);
+    setIncludeAlcoholTax(false);
+    setShowResults(false);
+  };
 
   const formProps = {
     selectedProperties,
@@ -64,6 +80,8 @@ export function Calculator() {
     setAlcoholSpending,
     salesTaxType,
     setSalesTaxType,
+    nonAreawideTaxableShare,
+    setNonAreawideTaxableShare,
     includeGravelTax,
     setIncludeGravelTax,
     includeMarijuanaTax,
@@ -74,6 +92,8 @@ export function Calculator() {
 
   const resultsProps = {
     salesTaxType,
+    nonAreawideTaxableShare,
+    annualGrocerySpending,
     groceryDifference,
     annualMarijuanaSpending,
     marijuanaDifference,
@@ -98,6 +118,7 @@ export function Calculator() {
             <CardHeading className="mb-3 sm:mb-4">Your Information</CardHeading>
             <TaxCalculatorForm
               {...formProps}
+              onReset={handleReset}
               onSubmit={() => setShowResults(true)}
             />
           </Card>
@@ -118,7 +139,7 @@ export function Calculator() {
         {/* Left Column - Form */}
         <Card>
           <CardHeading className="mb-4">Your Information</CardHeading>
-          <TaxCalculatorForm {...formProps} />
+          <TaxCalculatorForm {...formProps} onReset={handleReset} />
         </Card>
 
         {/* Right Column - Results */}

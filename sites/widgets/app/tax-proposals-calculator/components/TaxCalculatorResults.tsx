@@ -7,6 +7,8 @@ import { formatCurrency } from './formatCurrency';
 
 export interface TaxCalculatorResultsProps {
   salesTaxType: 'areawide' | 'non-areawide' | 'none';
+  nonAreawideTaxableShare: number;
+  annualGrocerySpending: number;
   groceryDifference: number;
   annualMarijuanaSpending: number;
   marijuanaDifference: number;
@@ -24,6 +26,8 @@ export interface TaxCalculatorResultsProps {
 
 export function TaxCalculatorResults({
   salesTaxType,
+  nonAreawideTaxableShare,
+  annualGrocerySpending,
   groceryDifference,
   annualMarijuanaSpending,
   marijuanaDifference,
@@ -71,6 +75,13 @@ export function TaxCalculatorResults({
   }
 
   const scale = isAnnual ? 1 : 1 / 12;
+  const totalSalesTaxBase =
+    annualGrocerySpending + annualMarijuanaSpending + annualAlcoholSpending;
+  const nonAreawideTaxableSpending =
+    totalSalesTaxBase *
+    (Math.min(100, Math.max(0, nonAreawideTaxableShare)) / 100);
+  const nonAreawideNontaxableSpending =
+    totalSalesTaxBase - nonAreawideTaxableSpending;
 
   return (
     <>
@@ -150,6 +161,24 @@ export function TaxCalculatorResults({
             )}
             .
           </li>
+          {salesTaxType === 'non-areawide' && (
+            <li className="text-sm text-gray-600">
+              For OR 26-065, we taxed{' '}
+              <span className="font-semibold text-gray-900">
+                {Math.min(100, Math.max(0, nonAreawideTaxableShare)).toFixed(0)}
+                %
+              </span>{' '}
+              of your spending as outside city limits ({' '}
+              <span className="font-semibold text-gray-900">
+                {formatCurrency(nonAreawideTaxableSpending * scale)}
+              </span>{' '}
+              taxed /{' '}
+              <span className="font-semibold text-gray-900">
+                {formatCurrency(nonAreawideNontaxableSpending * scale)}
+              </span>{' '}
+              not taxed).
+            </li>
+          )}
         </ul>
       </div>
 
@@ -189,6 +218,15 @@ export function TaxCalculatorResults({
               <span className="text-sm font-medium text-gray-700">
                 Goods/Services Change
               </span>
+              {salesTaxType === 'non-areawide' && (
+                <div className="mt-1 text-xs text-gray-500">
+                  Uses your outside-city estimate:{' '}
+                  {Math.min(100, Math.max(0, nonAreawideTaxableShare)).toFixed(
+                    0,
+                  )}
+                  %.
+                </div>
+              )}
             </div>
             <span className="text-sm font-semibold text-gray-900">
               {groceryDifference * scale >= 0 ? '+' : ''}

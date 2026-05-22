@@ -16,12 +16,15 @@ interface TaxCalculatorFormProps {
   setAlcoholSpending: (v: number) => void;
   salesTaxType: 'areawide' | 'non-areawide' | 'none';
   setSalesTaxType: (v: 'areawide' | 'non-areawide' | 'none') => void;
+  nonAreawideTaxableShare: number;
+  setNonAreawideTaxableShare: (v: number) => void;
   includeGravelTax: boolean;
   setIncludeGravelTax: (v: boolean) => void;
   includeMarijuanaTax: boolean;
   setIncludeMarijuanaTax: (v: boolean) => void;
   includeAlcoholTax: boolean;
   setIncludeAlcoholTax: (v: boolean) => void;
+  onReset: () => void;
   onSubmit?: () => void;
 }
 
@@ -36,12 +39,15 @@ export function TaxCalculatorForm({
   setAlcoholSpending,
   salesTaxType,
   setSalesTaxType,
+  nonAreawideTaxableShare,
+  setNonAreawideTaxableShare,
   includeGravelTax,
   setIncludeGravelTax,
   includeMarijuanaTax,
   setIncludeMarijuanaTax,
   includeAlcoholTax,
   setIncludeAlcoholTax,
+  onReset,
   onSubmit,
 }: TaxCalculatorFormProps) {
   return (
@@ -111,8 +117,20 @@ export function TaxCalculatorForm({
             ]}
           />
 
+          {salesTaxType === 'non-areawide' && (
+            <NumberInput
+              label="What percentage of your spending occurs outside city limits?"
+              value={nonAreawideTaxableShare}
+              onChange={(value) =>
+                setNonAreawideTaxableShare(Math.min(100, Math.max(0, value)))
+              }
+              helpText="OR 26-065 only taxes spending outside city limits. Enter your best guess."
+              placeholder="100"
+            />
+          )}
+
           {/* Optional Taxes */}
-          <fieldset className="space-y-3">
+          <fieldset className="mt-5 space-y-3">
             <legend className="mb-3 text-sm font-medium text-gray-700">
               Additional Taxes (Select Any)
             </legend>
@@ -138,11 +156,16 @@ export function TaxCalculatorForm({
         </div>
       </div>
 
-      {onSubmit && (
-        <Button onClick={onSubmit} variant="primary" className="mt-4 sm:mt-6">
-          Calculate Tax Impact
+      <div className="mt-4 flex flex-col gap-2 sm:mt-6 sm:flex-row">
+        {onSubmit && (
+          <Button onClick={onSubmit} variant="primary">
+            Calculate Tax Impact
+          </Button>
+        )}
+        <Button onClick={onReset} variant="secondary">
+          Reset
         </Button>
-      )}
+      </div>
     </>
   );
 }
