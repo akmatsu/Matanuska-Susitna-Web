@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.24.1...v1.25.0) (2026-06-03)
+
+
+### Features
+
+* small ui changes, added percentage outside city limits input, no longer apply 6.5% sales tax on exempt individuals ([47c24fb](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/47c24fbf565b15aafd4d95299acf636422d7fa9e))
+
 ## [1.24.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.24.0...v1.24.1) (2026-05-22)
 
 
