@@ -16,7 +16,7 @@ export const FeedbackButton = () => {
     return () => setShowButton(false);
   }, [pathname, panelRef]);
 
-  if (pathname === '/tax-proposals') {
+  if (pathname !== '/tax-proposals') {
     return (
       <div className="pointer-events-none sticky bottom-2 mx-2 flex items-end justify-between bg-none">
         <div className="flex flex-col gap-2">
