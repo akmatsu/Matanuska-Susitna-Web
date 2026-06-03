@@ -1,3 +1,10 @@
+## [1.25.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.25.0...v1.25.1) (2026-06-03)
+
+
+### Bug Fixes
+
+* fixed logic so feedback button doesn't appear on tax proposals page ([73dfd21](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/73dfd2110568c18617cc311c0fadc0e6d9397d48))
+
 # [1.25.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.24.1...v1.25.0) (2026-06-03)
 
 
