@@ -16,42 +16,45 @@ export const FeedbackButton = () => {
     return () => setShowButton(false);
   }, [pathname, panelRef]);
 
-  return (
-    <div className="pointer-events-none sticky bottom-2 mx-2 flex items-end justify-between bg-none">
-      <div className="flex flex-col gap-2">
-        <CookieBanner />
-        {showButton && (
-          <Button
-            className="md:hidden"
-            rounded="pill"
-            icon
+  if (pathname === '/tax-proposals') {
+    return (
+      <div className="pointer-events-none sticky bottom-2 mx-2 flex items-end justify-between bg-none">
+        <div className="flex flex-col gap-2">
+          <CookieBanner />
+          {showButton && (
+            <Button
+              className="md:hidden"
+              rounded="pill"
+              icon
+              color="primary"
+              onClick={open}
+              title="Open side nav drawer"
+            >
+              <span className="icon-[mdi--format-list-bulleted] size-8"></span>
+            </Button>
+          )}
+        </div>
+        <div className="flex flex-col items-end gap-2">
+          <LinkButton
+            href="https://problemreporter.matsugov.us/"
             color="primary"
-            onClick={open}
-            title="Open side nav drawer"
+            className="before:icon-[mdi--report] before:mr-1 before:inline-block before:text-lg"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <span className="icon-[mdi--format-list-bulleted] size-8"></span>
-          </Button>
-        )}
+            MSB Problem Reporter
+          </LinkButton>
+          <LinkButton
+            href={`https://survey123.arcgis.com/share/b36071e746fc4dd490331a207d1678c9?field:url=${pathname}`}
+            target="_blank"
+            className="before:icon-[mdi--message-alert] before:mr-1 before:-mb-1 before:inline-block before:text-lg"
+            color="primary"
+          >
+            Give Website Feedback
+          </LinkButton>
+        </div>
       </div>
-      <div className="flex flex-col items-end gap-2">
-        <LinkButton
-          href="https://problemreporter.matsugov.us/"
-          color="primary"
-          className="before:icon-[mdi--report] before:mr-1 before:inline-block before:text-lg"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          MSB Problem Reporter
-        </LinkButton>
-        <LinkButton
-          href={`https://survey123.arcgis.com/share/b36071e746fc4dd490331a207d1678c9?field:url=${pathname}`}
-          target="_blank"
-          className="before:icon-[mdi--message-alert] before:mr-1 before:-mb-1 before:inline-block before:text-lg"
-          color="primary"
-        >
-          Give Website Feedback
-        </LinkButton>
-      </div>
-    </div>
-  );
+    );
+  }
+  return null;
 };
