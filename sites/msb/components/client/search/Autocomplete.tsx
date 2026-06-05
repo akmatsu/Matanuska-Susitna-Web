@@ -1,75 +1,112 @@
 'use client';
-import { useConnector } from 'react-instantsearch';
-import connectAutocomplete, {
-  type AutocompleteConnectorParams,
-} from 'instantsearch.js/es/connectors/autocomplete/connectAutocomplete';
 import { Combobox } from '@matsugov/ui/Combobox';
-import { Hit } from 'instantsearch.js';
 import { useRouter } from 'next/navigation';
-import pluralize from 'pluralize';
-import slugify from 'voca/slugify';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-type UseAutocompleteProps = AutocompleteConnectorParams;
+type PopularSearchSuggestion = {
+  id: string;
+  title: string;
+  type: string;
+  description: string;
+};
 
-function useAutocomplete(props?: UseAutocompleteProps) {
-  return useConnector(connectAutocomplete, props, { skipSuspense: true });
-}
+type AutocompleteProps = {
+  defaultQuery?: string;
+  autoFocus?: boolean;
+  initialPopularSearches?: Array<{ q: string; count: number }>;
+};
 
-export function Autocomplete() {
-  const { indices, refine } = useAutocomplete();
+export function Autocomplete({
+  defaultQuery = '',
+  autoFocus = false,
+  initialPopularSearches = [],
+}: AutocompleteProps) {
+  const [query, setQuery] = useState(defaultQuery);
+  const [popularSearches, setPopularSearches] = useState(
+    initialPopularSearches.map((item) => item.q),
+  );
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const router = useRouter();
 
-  function onChange(value?: Hit | null) {
-    const hitType = !value
-      ? undefined
-      : value?.type === 'orgUnit' ||
-          value?.type === 'org-unit' ||
-          value?.type === 'office' ||
-          value?.type === 'division' ||
-          value?.type === 'department' ||
-          value?.type === 'Departments & Divisions' ||
-          value?.type === 'OrgUnit'
-        ? 'department'
-        : value?.type === 'community_council' ||
-            value?.type === 'ssa_board' ||
-            value?.type === 'fsa_board' ||
-            value?.type === 'rsa_board'
-          ? 'board'
-          : value?.type === 'city' || value?.type === 'community'
-            ? 'community'
-            : value?.type === 'legislative' || value?.type === 'strategic'
-              ? 'plan'
-              : value?.type === 'AKMATSUGOV_PublicNotice' ||
-                  value?.type === 'MSB_AirQuality' ||
-                  value?.type === 'AKMATSUGOV_CommunityDevelopment' ||
-                  value?.type === 'MSB_RoadConstruction'
-                ? 'public-notice'
-                : value?.type;
+  useEffect(() => {
+    if (initialPopularSearches.length) return;
 
-    if (value?.url) {
-      router.push(value.url);
-    } else if (value?.slug) {
-      const type = slugify(hitType ? pluralize(hitType) : '');
-      router.push(
-        type === 'topics' ? `/${value.slug}` : `/${type}/${value.slug}`,
-      );
-    } else if (value?.title) {
-      router.push(`/search?pages[query]=${value.title}`);
+    const fetchPopularSearches = async () => {
+      try {
+        const response = await fetch('/api/search/popular');
+        if (response.ok) {
+          const data = await response.json();
+          setPopularSearches(data.queries.map((item: any) => item.q));
+        }
+      } catch (error) {
+        console.error('Failed to fetch popular searches:', error);
+      }
+    };
+
+    fetchPopularSearches();
+  }, [initialPopularSearches.length]);
+
+  // Attach keydown handler to the input element
+  useEffect(() => {
+    const input = containerRef.current?.querySelector('input');
+    if (!input) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        submitSearch(query);
+      }
+    };
+
+    input.addEventListener('keydown', handleKeyDown);
+    return () => input.removeEventListener('keydown', handleKeyDown);
+  }, [query]);
+  const suggestions = useMemo(() => {
+    const searchTerm = query.trim().toLowerCase();
+    const filtered = searchTerm.length
+      ? popularSearches.filter((item) =>
+          item.toLowerCase().includes(searchTerm),
+        )
+      : popularSearches;
+
+    return filtered.slice(0, 8).map((item) => ({
+      id: item,
+      title: item,
+      type: 'Popular Search',
+      description: 'Press Enter to search',
+    }));
+  }, [query, popularSearches]);
+
+  function submitSearch(searchQuery: string) {
+    const trimmedQuery = searchQuery.trim();
+    if (!trimmedQuery) {
+      return;
+    }
+    router.push(`/search?query=${encodeURIComponent(trimmedQuery)}`);
+  }
+
+  function onChange(value?: PopularSearchSuggestion | null) {
+    // Only submit if a suggestion was explicitly selected
+    if (value?.title && value.type === 'Popular Search') {
+      submitSearch(value.title);
     }
   }
 
   return (
-    <Combobox<Hit>
-      displayValueKey="title"
-      displayTypeKey="type"
-      idKey="id"
-      descriptionKey="description"
-      items={indices[0].hits}
-      onChangeQuery={(e) => refine(e.target.value)}
-      onChange={onChange}
-      placeholder="Search Website..."
-      autoFocus
-    />
+    <div ref={containerRef}>
+      <Combobox<PopularSearchSuggestion>
+        label="Search website"
+        displayValueKey="title"
+        displayTypeKey="type"
+        idKey="id"
+        descriptionKey="description"
+        items={suggestions}
+        onChangeQuery={(e) => setQuery(e.target.value)}
+        onChange={onChange}
+        placeholder="Search Website..."
+        autoFocus={autoFocus}
+      />
+    </div>
   );
 }

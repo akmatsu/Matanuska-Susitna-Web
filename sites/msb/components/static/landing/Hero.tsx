@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { Hero as UIHero } from '@matsugov/ui/Hero';
-import { InstantSearchAutoComplete } from '@/components/client/search/InstantSearchAutoComplete';
+import { Autocomplete } from '@/components/client/search/Autocomplete';
 
 export function Hero({ image }: { image?: string | null }) {
   const links: { icon: string; text: string; url: string }[] = [
@@ -30,12 +30,12 @@ export function Hero({ image }: { image?: string | null }) {
   return (
     <>
       <UIHero className="flex items-center justify-center" image={image}>
-        <div className="w-full max-w-[500px]">
-          <InstantSearchAutoComplete />
+        <div className="w-full max-w-125">
+          <Autocomplete autoFocus />
         </div>
       </UIHero>
       <section className="bg-msb-base-lightest flex items-center justify-center px-2 py-4">
-        <div className="w-full max-w-[900px]">
+        <div className="w-full max-w-225">
           <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             {links.map((link) => (
               <Link
