@@ -61,23 +61,9 @@ export function Combobox<T = any>(props: {
           <ComboboxOption
             key={(item?.[props.idKey as keyof typeof item] as Key) || index}
             value={item}
-            className="border-b-base-lightest group data-focus:bg-primary-light/10 data-[selected]:bg-light-/20 cursor-default border-b px-4 py-2 select-none last:border-none"
+            className="border-b-base-lightest group data-focus:bg-primary-light/10 data-selected:bg-light-/20 cursor-default border-b px-4 py-2 select-none last:border-none"
           >
-            {props.displayTypeKey && (
-              <p className="text-msb-base text-xs font-semibold">
-                {v
-                  .titleCase(item?.[props.displayTypeKey] as string)
-                  .replace('_', ' ')}
-              </p>
-            )}
-            <h6 className="font-semibold">
-              {item?.[props.displayValueKey] as React.ReactNode}
-            </h6>
-            {props.descriptionKey && (
-              <p className="text-msb-base-darker text-sm">
-                {item?.[props.descriptionKey] as React.ReactNode}
-              </p>
-            )}
+            <p>{item?.[props.displayValueKey] as React.ReactNode} </p>
           </ComboboxOption>
         ))}
       </ComboboxOptions>
