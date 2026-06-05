@@ -6,7 +6,6 @@ import {
   Combobox as HeadlessCombobox,
 } from '@headlessui/react';
 import React, { Key } from 'react';
-import v from 'voca';
 
 export function Combobox<T = any>(props: {
   label?: string;
@@ -46,11 +45,11 @@ export function Combobox<T = any>(props: {
       <ComboboxOptions
         anchor="bottom"
         transition
-        className="border-msb-base-lightest z-50 w-[var(--input-width)] rounded-xs border bg-white shadow-md transition duration-100 empty:invisible data-leave:data-closed:opacity-0"
+        className="border-msb-base-lightest z-50 w-(--input-width) rounded-xs border bg-white shadow-md transition duration-100 empty:invisible data-leave:data-closed:opacity-0"
       >
         <ComboboxOption
           value={{ [props.displayValueKey]: query }}
-          className="border-b-base-lightest group data-focus:bg-primary-light/10 data-[selected]:bg-light-/20 cursor-default border-b px-4 py-2 select-none last:border-none"
+          className="border-b-base-lightest group data-focus:bg-primary-light/10 data-selected:bg-light-/20 cursor-default border-b px-4 py-2 select-none last:border-none"
         >
           <p className="text-msb-base-darker text-sm">
             Search for {query}{' '}
