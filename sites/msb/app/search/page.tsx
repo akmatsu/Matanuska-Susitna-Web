@@ -34,7 +34,7 @@ export default async function SearchPage(props: PageProps<'/search'>) {
       : searchParams['pages[type]']) ||
     '';
 
-  const type = typeParam.trim();
+  const type = typeParam.trim().toLowerCase();
   const page = Number.isInteger(Number(pageParam))
     ? Math.max(1, Number(pageParam))
     : 1;
@@ -44,13 +44,17 @@ export default async function SearchPage(props: PageProps<'/search'>) {
     getPageTypes({ limit: 100 }),
   ]);
 
+  const availableTypes = pageTypes.map((item) => item.value);
+  const defaultType =
+    availableTypes.find((t) => t.toLowerCase() === type) || '';
+
   return (
     <PageContainer size="lg">
       <h1 className="mb-4 text-3xl font-bold">Search</h1>
       <Autocomplete
         defaultQuery={query}
-        defaultType={type}
-        availableTypes={pageTypes.map((item) => item.value)}
+        defaultType={defaultType}
+        availableTypes={availableTypes}
         autoFocus
         initialPopularSearches={popularSearches}
       />
