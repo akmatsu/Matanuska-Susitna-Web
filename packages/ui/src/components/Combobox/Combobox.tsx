@@ -5,6 +5,7 @@ import {
   ComboboxOption,
   Combobox as HeadlessCombobox,
 } from '@headlessui/react';
+import clsx from 'clsx';
 import React, { Key } from 'react';
 
 export function Combobox<T = any>(props: {
@@ -20,8 +21,12 @@ export function Combobox<T = any>(props: {
   onChangeQuery?: React.ChangeEventHandler<HTMLInputElement>;
   onClose?: () => void;
   autoFocus?: boolean;
+  inputClassName?: string;
+  onActiveItemChange?: (value?: T | null) => void;
+  queryOptionValue?: string;
 }) {
   const [query, setQuery] = React.useState('');
+  const queryOptionValue = props.queryOptionValue ?? query;
 
   function onChangeQuery(e: React.ChangeEvent<HTMLInputElement>) {
     setQuery(e.target.value);
@@ -32,14 +37,20 @@ export function Combobox<T = any>(props: {
     <HeadlessCombobox<T>
       value={props.value || undefined}
       onChange={props.onChange}
-      onClose={props.onClose}
+      onClose={() => {
+        props.onActiveItemChange?.(null);
+        props.onClose?.();
+      }}
     >
       <ComboboxInput
         aria-label={props.label}
         displayValue={(item: any) => item?.[props.displayValueKey]}
         onChange={onChangeQuery}
         placeholder={props.placeholder}
-        className="border-msb-base-lighter focus:ring-primary h-10 w-full rounded-xs border bg-white px-2 shadow-md focus:ring-4 focus:outline-hidden"
+        className={clsx(
+          'focus:ring-primary h-10 w-full rounded-l-xs border bg-white px-2 shadow-md focus:ring-4 focus:outline-hidden',
+          props.inputClassName,
+        )}
         autoFocus={props.autoFocus}
       ></ComboboxInput>
       <ComboboxOptions
@@ -48,13 +59,23 @@ export function Combobox<T = any>(props: {
         className="border-msb-base-lightest z-50 w-(--input-width) rounded-xs border bg-white shadow-md transition duration-100 empty:invisible data-leave:data-closed:opacity-0"
       >
         <ComboboxOption
-          value={{ [props.displayValueKey]: query }}
+          value={{ [props.displayValueKey]: queryOptionValue }}
           className="border-b-base-lightest group data-focus:bg-primary-light/10 data-selected:bg-light-/20 cursor-default border-b px-4 py-2 select-none last:border-none"
         >
-          <p className="text-msb-base-darker text-sm">
-            Search for {query}{' '}
-            <span className="icon-[mdi--arrow-right] size-2"></span>
-          </p>
+          {({ focus }) => {
+            if (focus) {
+              props.onActiveItemChange?.({
+                [props.displayValueKey]: queryOptionValue,
+              } as T);
+            }
+
+            return (
+              <p className="text-msb-base-darker text-sm">
+                Search for {queryOptionValue}{' '}
+                <span className="icon-[mdi--arrow-right] size-2"></span>
+              </p>
+            );
+          }}
         </ComboboxOption>
         {props.items?.map((item, index) => (
           <ComboboxOption
@@ -62,7 +83,13 @@ export function Combobox<T = any>(props: {
             value={item}
             className="border-b-base-lightest group data-focus:bg-primary-light/10 data-selected:bg-light-/20 cursor-default border-b px-4 py-2 select-none last:border-none"
           >
-            <p>{item?.[props.displayValueKey] as React.ReactNode} </p>
+            {({ focus }) => {
+              if (focus) {
+                props.onActiveItemChange?.(item);
+              }
+
+              return <p>{item?.[props.displayValueKey] as React.ReactNode} </p>;
+            }}
           </ComboboxOption>
         ))}
       </ComboboxOptions>

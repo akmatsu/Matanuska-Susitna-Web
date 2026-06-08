@@ -1,7 +1,8 @@
 'use client';
+import { Button } from '@matsugov/ui/Button';
 import { Combobox } from '@matsugov/ui/Combobox';
 import { useRouter } from 'next/navigation';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 type PopularSearchSuggestion = {
   id: string;
@@ -12,20 +13,30 @@ type PopularSearchSuggestion = {
 
 type AutocompleteProps = {
   defaultQuery?: string;
+  defaultType?: string;
   autoFocus?: boolean;
   initialPopularSearches?: Array<{ q: string; count: number }>;
+  availableTypes?: string[];
+  variant?: 'default' | 'home';
 };
 
 export function Autocomplete({
   defaultQuery = '',
+  defaultType = '',
   autoFocus = false,
   initialPopularSearches = [],
+  availableTypes = [],
+  variant = 'default',
 }: AutocompleteProps) {
+  const isHomeVariant = variant === 'home';
+
   const [query, setQuery] = useState(defaultQuery);
+  const [typedQuery, setTypedQuery] = useState(defaultQuery);
+  const [selectedType, setSelectedType] = useState(defaultType);
   const [popularSearches, setPopularSearches] = useState(
     initialPopularSearches.map((item) => item.q),
   );
-  const containerRef = useRef<HTMLDivElement>(null);
+  const submittedQueryRef = useRef<string | null>(null);
 
   const router = useRouter();
 
@@ -47,23 +58,34 @@ export function Autocomplete({
     fetchPopularSearches();
   }, [initialPopularSearches.length]);
 
-  // Attach keydown handler to the input element
-  useEffect(() => {
-    const input = containerRef.current?.querySelector('input');
-    if (!input) return;
+  const submitSearch = useCallback(
+    (searchQuery: string, searchType: string) => {
+      const trimmedQuery = searchQuery.trim();
+      const trimmedType = searchType.trim();
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        submitSearch(query);
+      // Allow submission if query is present OR type is selected
+      if (!trimmedQuery && !trimmedType) {
+        if (isHomeVariant) {
+          router.push('/search');
+        }
+        return;
       }
-    };
 
-    input.addEventListener('keydown', handleKeyDown);
-    return () => input.removeEventListener('keydown', handleKeyDown);
-  }, [query]);
+      const params = new URLSearchParams();
+      if (trimmedQuery) {
+        params.set('query', trimmedQuery);
+      }
+      if (trimmedType) {
+        params.set('type', trimmedType);
+      }
+
+      router.push(`/search?${params.toString()}`);
+    },
+    [isHomeVariant, router],
+  );
+
   const suggestions = useMemo(() => {
-    const searchTerm = query.trim().toLowerCase();
+    const searchTerm = typedQuery.trim().toLowerCase();
     const filtered = searchTerm.length
       ? popularSearches.filter((item) =>
           item.toLowerCase().includes(searchTerm),
@@ -74,39 +96,124 @@ export function Autocomplete({
       id: item,
       title: item,
       type: 'Popular Search',
-      description: 'Press Enter to search',
+      description: 'Select to fill query',
     }));
-  }, [query, popularSearches]);
+  }, [typedQuery, popularSearches]);
 
-  function submitSearch(searchQuery: string) {
-    const trimmedQuery = searchQuery.trim();
-    if (!trimmedQuery) {
-      return;
-    }
-    router.push(`/search?query=${encodeURIComponent(trimmedQuery)}`);
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const submittedQuery = query.trim();
+    submittedQueryRef.current = submittedQuery;
+    setQuery(submittedQuery);
+    setTypedQuery(submittedQuery);
+    submitSearch(submittedQuery, selectedType);
   }
 
   function onChange(value?: PopularSearchSuggestion | null) {
-    // Only submit if a suggestion was explicitly selected
-    if (value?.title && value.type === 'Popular Search') {
-      submitSearch(value.title);
+    if (!value?.title) {
+      return;
     }
+
+    submittedQueryRef.current = value.title;
+    setTypedQuery(value.title);
+    setQuery(value.title);
+    submitSearch(value.title, isHomeVariant ? '' : selectedType);
+  }
+
+  function onActiveItemChange(value?: PopularSearchSuggestion | null) {
+    if (!value?.title) {
+      if (submittedQueryRef.current !== null) {
+        setQuery(submittedQueryRef.current);
+        setTypedQuery(submittedQueryRef.current);
+        return;
+      }
+
+      setQuery(typedQuery);
+      return;
+    }
+
+    setQuery(value.title);
   }
 
   return (
-    <div ref={containerRef}>
-      <Combobox<PopularSearchSuggestion>
-        label="Search website"
-        displayValueKey="title"
-        displayTypeKey="type"
-        idKey="id"
-        descriptionKey="description"
-        items={suggestions}
-        onChangeQuery={(e) => setQuery(e.target.value)}
-        onChange={onChange}
-        placeholder="Search Website..."
-        autoFocus={autoFocus}
-      />
-    </div>
+    <form onSubmit={onSubmit} className="space-y-3">
+      <div
+        className={
+          isHomeVariant
+            ? 'flex items-stretch overflow-hidden rounded-xs border border-white/70 bg-white shadow-lg backdrop-blur'
+            : 'grid gap-3 md:grid-cols-[minmax(0,1fr)_220px_auto] md:items-end'
+        }
+      >
+        <div className={isHomeVariant ? 'min-w-0 flex-1' : ''}>
+          <Combobox<PopularSearchSuggestion>
+            label="Search website"
+            displayValueKey="title"
+            displayTypeKey="type"
+            idKey="id"
+            descriptionKey="description"
+            items={suggestions}
+            onChangeQuery={(e) => {
+              submittedQueryRef.current = null;
+              setQuery(e.target.value);
+              setTypedQuery(e.target.value);
+            }}
+            onChange={onChange}
+            onActiveItemChange={onActiveItemChange}
+            placeholder={
+              isHomeVariant
+                ? 'Search services, pages, and departments'
+                : 'Search website'
+            }
+            autoFocus={autoFocus}
+            value={query ? ({ title: query } as PopularSearchSuggestion) : null}
+            queryOptionValue={typedQuery}
+            inputClassName={
+              isHomeVariant
+                ? 'h-12 rounded-none border-none bg-transparent px-4 text-base shadow-none focus:ring-0'
+                : undefined
+            }
+          />
+        </div>
+
+        {!isHomeVariant && (
+          <div>
+            <label htmlFor="search-type" className="mb-1 block font-semibold">
+              Type
+            </label>
+            <select
+              id="search-type"
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+              className="focus-ring border-msb-base-lighter h-10 w-full cursor-pointer rounded border bg-white px-2 shadow-md"
+            >
+              <option value="">All types</option>
+              {availableTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        <Button
+          type="submit"
+          color="primary"
+          className={
+            isHomeVariant
+              ? 'border-primary-dark h-12 rounded-none border-l px-4'
+              : 'h-10 px-4'
+          }
+          size="sm"
+          aria-label="Search"
+        >
+          {isHomeVariant ? (
+            <span aria-hidden="true" className="icon-[mdi--magnify] size-5" />
+          ) : (
+            'Search'
+          )}
+        </Button>
+      </div>
+    </form>
   );
 }
