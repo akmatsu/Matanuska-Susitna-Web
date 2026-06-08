@@ -25,10 +25,7 @@ export async function handleSearchRedirect(req: NextAuthRequest) {
 
   const url = req.nextUrl.clone();
   url.pathname = '/search';
-  url.searchParams.set(
-    'pages[refinementList][type][0]',
-    singular(type).replace('-', '_'),
-  );
+  url.searchParams.set('type', singular(type).replace('-', '_'));
 
   return NextResponse.redirect(url);
 }

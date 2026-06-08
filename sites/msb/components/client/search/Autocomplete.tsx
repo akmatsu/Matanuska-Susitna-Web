@@ -36,6 +36,7 @@ export function Autocomplete({
   const [popularSearches, setPopularSearches] = useState(
     initialPopularSearches.map((item) => item.q),
   );
+  const [error, setError] = useState('');
   const submittedQueryRef = useRef<string | null>(null);
 
   const router = useRouter();
@@ -103,6 +104,14 @@ export function Autocomplete({
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const submittedQuery = query.trim();
+    const trimmedType = selectedType.trim();
+
+    if (!submittedQuery && !trimmedType) {
+      setError('Please enter a search query or select a type to continue.');
+      return;
+    }
+
+    setError('');
     submittedQueryRef.current = submittedQuery;
     setQuery(submittedQuery);
     setTypedQuery(submittedQuery);
@@ -114,6 +123,7 @@ export function Autocomplete({
       return;
     }
 
+    setError('');
     submittedQueryRef.current = value.title;
     setTypedQuery(value.title);
     setQuery(value.title);
@@ -153,6 +163,7 @@ export function Autocomplete({
             descriptionKey="description"
             items={suggestions}
             onChangeQuery={(e) => {
+              setError('');
               submittedQueryRef.current = null;
               setQuery(e.target.value);
               setTypedQuery(e.target.value);
@@ -183,7 +194,10 @@ export function Autocomplete({
             <select
               id="search-type"
               value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
+              onChange={(e) => {
+                setError('');
+                setSelectedType(e.target.value);
+              }}
               className="focus-ring border-msb-base-lighter h-10 w-full cursor-pointer rounded border bg-white px-2 shadow-md"
             >
               <option value="">All types</option>
@@ -214,6 +228,14 @@ export function Autocomplete({
           )}
         </Button>
       </div>
+      {error && (
+        <div
+          role="alert"
+          className="rounded border border-red-500 bg-red-50 px-4 py-3 text-red-700"
+        >
+          {error}
+        </div>
+      )}
     </form>
   );
 }
