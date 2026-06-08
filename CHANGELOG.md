@@ -1,3 +1,18 @@
+# [1.26.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.25.1...v1.26.0) (2026-06-08)
+
+
+### Bug Fixes
+
+* fixed tailwindcss stylings ([8d1769b](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/8d1769b031a922f8eb1284b712557495032334fa))
+* no longer show * as a search suggestion ([a3b335a](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/a3b335a131fdc13cf98999ee9b67844b305044ce))
+
+
+### Features
+
+* improved search UI/UX ([34d4b01](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/34d4b013b1ecb5dffa3d9aeac6ddb2db4290a8f2))
+* improved user feedback on the search page ([c26fcd6](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/c26fcd683cc51239092841f1220f4dd4ba515fcf))
+* proof of concept for polling place address search ([ad9f8c0](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/ad9f8c0fa1e0710f6b777479f48eb6571dd947b4))
+
 ## [1.25.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.25.0...v1.25.1) (2026-06-03)
 
 
