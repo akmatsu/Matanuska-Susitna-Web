@@ -1,6 +1,5 @@
 import { LinkButton } from '@/components/static/LinkButton';
 import { PageSection } from './PageSection';
-import QueryString from 'qs';
 import { ServiceCard } from './ServiceCard';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
@@ -16,6 +15,13 @@ export function PageServices(props: {
   filters?: { [key: string]: (string | undefined | null)[] } | null;
 }) {
   const services = getFragmentData(serviceListFragment, props.services);
+  const query = props.filters?.query?.find((value) => Boolean(value))?.trim();
+  const params = new URLSearchParams();
+  params.set('type', 'service');
+  if (query) {
+    params.set('query', query);
+  }
+
   if (services?.length) {
     return (
       <PageSection title="Services">
@@ -25,9 +31,9 @@ export function PageServices(props: {
           ))}
         </ul>
         {services.length > 4 && (
-          <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center">
             <LinkButton
-              href={`/search?${QueryString.stringify({ pages: { refinementList: { ...props.filters, type: ['service'] } } })}`}
+              href={`/search?${params.toString()}`}
               className="mt-4"
               size="lg"
               color="primary"
