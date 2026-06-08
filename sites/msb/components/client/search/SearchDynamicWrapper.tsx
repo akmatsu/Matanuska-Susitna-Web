@@ -9,5 +9,5 @@ const Autocomplete = dynamic(
 );
 
 export function SearchDynamicWrapper() {
-  return <Autocomplete autoFocus />;
+  return <Autocomplete autoFocus variant="home" />;
 }
