@@ -88,10 +88,10 @@ export function Autocomplete({
   const suggestions = useMemo(() => {
     const searchTerm = typedQuery.trim().toLowerCase();
     const filtered = searchTerm.length
-      ? popularSearches.filter((item) =>
-          item.toLowerCase().includes(searchTerm),
+      ? popularSearches.filter(
+          (item) => item.toLowerCase().includes(searchTerm) && item !== '*',
         )
-      : popularSearches;
+      : popularSearches.filter((item) => item !== '*');
 
     return filtered.slice(0, 8).map((item) => ({
       id: item,
