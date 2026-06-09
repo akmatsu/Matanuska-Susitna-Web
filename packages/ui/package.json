@@ -38,7 +38,8 @@
     "./MobileMenu": "./src/components/MobileMenu.tsx",
     "./Img": "./src/components/Img.tsx",
     "./Popover": "./src/components/Popover.tsx",
-    "./lib": "./src/lib/utils.ts"
+    "./lib": "./src/lib/utils.ts",
+    "./PollingPlaces": "./src/components/PollingPlaces/index.ts"
   },
   "scripts": {
     "test": "vitest"
