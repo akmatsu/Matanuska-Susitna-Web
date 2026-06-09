@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.26.1...v1.27.0) (2026-06-09)
+
+
+### Features
+
+* new precincts and polling places ([b035546](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/b0355461bfe673d3a7935d4ae1b029d0a886398d))
+
 ## [1.26.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.26.0...v1.26.1) (2026-06-08)
 
 
