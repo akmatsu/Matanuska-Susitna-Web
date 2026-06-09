@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.27.0...v1.28.0) (2026-06-09)
+
+
+### Features
+
+* removed find my polling location ([5ba2860](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/5ba2860582299cf08d5f3a3cc4a67b1e128090d6))
+
 # [1.27.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.26.1...v1.27.0) (2026-06-09)
 
 
