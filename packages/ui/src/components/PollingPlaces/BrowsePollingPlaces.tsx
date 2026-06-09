@@ -33,7 +33,7 @@ export function BrowsePollingPlaces({
 
   return (
     <section>
-      <h3>All polling places</h3>
+      <h2>Locations & Maps</h2>
       <div className="not-prose mb-4">
         <label htmlFor="polling-place-search" className="sr-only">
           Filter polling places

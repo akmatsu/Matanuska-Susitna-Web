@@ -1,5 +1,6 @@
 'use client';
 
+import { PhoneLink } from '../PhoneLink';
 import { PollingPlaceCard } from './PollingPlaceCard';
 import { PollingLocationFeature } from './types';
 import { useAddressLookup } from './useAddressLookup';
@@ -13,7 +14,7 @@ export function AddressLookup({
 
   return (
     <section>
-      <h3>Find your polling place</h3>
+      <h2>Find your polling place</h2>
       <p>Enter your home address to locate your polling place.</p>
 
       <div className="not-prose relative">
@@ -55,6 +56,12 @@ export function AddressLookup({
             </button>
           )}
         </div>
+        <p className="text-msb-base-dark mt-3 text-sm">
+          Need help? Contact the Borough Clerk&apos;s Office at or the Alaska
+          State Division of Elections at <PhoneLink phoneNumber="9078618684" />{' '}
+          or the Alaska State Division of Elections at{' '}
+          <PhoneLink phoneNumber="+1 (866) 952-8683" />
+        </p>
 
         {/* Autocomplete dropdown */}
         {lookup.showAddressDropdown && (

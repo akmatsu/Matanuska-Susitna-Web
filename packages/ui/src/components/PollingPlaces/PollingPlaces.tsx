@@ -1,4 +1,4 @@
-import { AddressLookup } from './AddressLookup';
+// import { AddressLookup } from './AddressLookup';
 import { BrowsePollingPlaces } from './BrowsePollingPlaces';
 import type { PollingLocationFeature, PollingLocationResponse } from './types';
 
@@ -30,11 +30,9 @@ export async function PollingPlaces() {
   const places = await fetchPollingPlaces();
 
   return (
-    <section className="space-y-8">
-      <h2>Locations & Maps</h2>
-
-      <AddressLookup places={places} />
+    <>
+      {/* <AddressLookup places={places} /> */}
       <BrowsePollingPlaces places={places} />
-    </section>
+    </>
   );
 }
