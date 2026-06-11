@@ -12,15 +12,15 @@ export function PollingPlaceCard({ place }: { place: PollingLocationFeature }) {
             <span className="icon-[mdi--where-to-vote-outline] size-full"></span>
           </div>
         </div>
-        <div className="p-4">
+        <div className="min-w-0 p-4">
           <p className="text-base font-semibold text-slate-900">
-            {place.attributes.POLLING_PL}
+            {place.attributes.DIST_NAME}
           </p>
           <p className="text-msb-base text-sm font-semibold">
             Assembly District {place.attributes.AssemblyDistrict}
           </p>
 
-          <p className="mt-3 text-sm text-slate-700">
+          <p className="mt-3 truncate text-sm text-slate-700">
             <Link
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                 place.attributes.ADDRESS,
@@ -28,8 +28,9 @@ export function PollingPlaceCard({ place }: { place: PollingLocationFeature }) {
               target="_blank"
               rel="noreferrer"
               className="before:icon-[mdi--map-marker] before:mr-1"
+              title={place.attributes.POLLING_PL}
             >
-              {place.attributes.ADDRESS}
+              {place.attributes.POLLING_PL}
             </Link>
           </p>
 
@@ -40,7 +41,7 @@ export function PollingPlaceCard({ place }: { place: PollingLocationFeature }) {
               rel="noreferrer"
               className="before:icon-[mdi--map] before:mr-1"
             >
-              {place.attributes.DIST_NAME}
+              View Precinct Map
             </Link>
           </p>
         </div>
