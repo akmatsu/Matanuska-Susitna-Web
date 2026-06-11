@@ -1,3 +1,10 @@
+## [1.28.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.28.0...v1.28.1) (2026-06-11)
+
+
+### Bug Fixes
+
+* updated ui of polling places cards ([aeed3db](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/aeed3db7e3cb58c752597b35f97e45511b8893cf))
+
 # [1.28.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.27.0...v1.28.0) (2026-06-09)
 
 
