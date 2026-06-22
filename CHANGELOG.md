@@ -1,3 +1,10 @@
+## [1.29.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.29.0...v1.29.1) (2026-06-22)
+
+
+### Bug Fixes
+
+* fixed type errors ([4642714](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/4642714531d7dc0cd3bb480cb6fc30438ecee557))
+
 # [1.29.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.28.1...v1.29.0) (2026-06-22)
 
 
