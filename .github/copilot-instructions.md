@@ -62,6 +62,7 @@ These are always-on instructions for the Matanuska-Susitna Borough public web mo
 - Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) — `feat:`, `fix:`, `chore:`, etc. Releases are automated via semantic-release ([.releaserc.json](../.releaserc.json)), so the commit subject drives the changelog.
 - Branch naming: `feature/...`, `fix/...`, `hotfix/...`.
 - TypeScript is strict; don't add `any` to silence errors — narrow the type or fix the call site.
+- New tsconfigs extend a preset from [packages/tsconfig](../packages/tsconfig/) (`@matsugov/tsconfig/nextjs.json` for Next.js apps, `@matsugov/tsconfig/library.json` for React/SDK packages, `@matsugov/tsconfig/base.json` for plain TS). Override only paths, includes, and package-specific plugins.
 - Cross-package imports use the workspace alias (`@matsugov/ui`, `@msb/js-sdk`, `@msb/map`); intra-app imports use the `@/` alias defined in each app's `tsconfig.json`.
 
 ## Security

@@ -10,6 +10,7 @@
   },
   "scripts": {},
   "devDependencies": {
+    "@matsugov/tsconfig": "workspace:^",
     "typescript": "^6.0.3"
   }
 }

@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@matsugov/tsconfig": "workspace:^",
     "@matsugov/tw-config": "workspace:^",
     "@tailwindcss/postcss": "^4.2.4",
     "@types/node": "22.19.10",

@@ -41,13 +41,11 @@
     "./lib": "./src/lib/utils.ts",
     "./PollingPlaces": "./src/components/PollingPlaces/index.ts"
   },
-  "scripts": {
-    "test": "vitest"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@matsugov/tsconfig": "workspace:^",
     "@matsugov/tw-config": "workspace:^",
     "@msb/js-sdk": "workspace:^",
     "@tailwindcss/postcss": "^4.2.4",

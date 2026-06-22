@@ -84,6 +84,9 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
     devDependencies:
+      '@matsugov/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@matsugov/tw-config':
         specifier: workspace:^
         version: link:../tw-config
@@ -117,6 +120,9 @@ importers:
 
   packages/property-sdk:
     devDependencies:
+      '@matsugov/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -142,12 +148,12 @@ importers:
       '@graphql-codegen/client-preset':
         specifier: ^6.0.0
         version: 6.0.0(graphql@16.13.2)
+      '@matsugov/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@parcel/watcher':
         specifier: ^2.5.6
         version: 2.5.6
-      '@tsconfig/recommended':
-        specifier: ^1.0.13
-        version: 1.0.13
       '@types/react':
         specifier: ^19.2.14
         version: 19.2.14
@@ -179,9 +185,14 @@ importers:
         specifier: ^3.0.6
         version: 3.0.6(@babel/runtime@7.29.2)
     devDependencies:
+      '@matsugov/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+
+  packages/tsconfig: {}
 
   packages/tw-config:
     devDependencies:
@@ -237,6 +248,9 @@ importers:
         specifier: ^3.5.0
         version: 3.5.0
     devDependencies:
+      '@matsugov/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@matsugov/tw-config':
         specifier: workspace:^
         version: link:../tw-config
@@ -356,6 +370,9 @@ importers:
         specifier: ^1.4.1
         version: 1.4.1
     devDependencies:
+      '@matsugov/tsconfig':
+        specifier: workspace:^
+        version: link:../../packages/tsconfig
       '@matsugov/tw-config':
         specifier: workspace:^
         version: link:../../packages/tw-config
@@ -368,9 +385,6 @@ importers:
       '@testing-library/react':
         specifier: ^16.3.2
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      '@tsconfig/next':
-        specifier: ^2.0.6
-        version: 2.0.6
       '@types/node':
         specifier: 22.19.10
         version: 22.19.10
@@ -423,6 +437,9 @@ importers:
         specifier: 19.2.5
         version: 19.2.5(react@19.2.5)
     devDependencies:
+      '@matsugov/tsconfig':
+        specifier: workspace:^
+        version: link:../../packages/tsconfig
       '@matsugov/tw-config':
         specifier: workspace:^
         version: link:../../packages/tw-config
@@ -469,6 +486,9 @@ importers:
         specifier: 19.2.5
         version: 19.2.5(react@19.2.5)
     devDependencies:
+      '@matsugov/tsconfig':
+        specifier: workspace:^
+        version: link:../../packages/tsconfig
       '@matsugov/tw-config':
         specifier: workspace:^
         version: link:../../packages/tw-config
@@ -2722,12 +2742,6 @@ packages:
         optional: true
       '@types/react-dom':
         optional: true
-
-  '@tsconfig/next@2.0.6':
-    resolution: {integrity: sha512-C6eZoNyAMKv2UvzDZqcp8zXPviu6W4Ev1KUbqfmaMSZuq+tmbtTWaqxTif/yaui8WCEcRlQrHC8q9tNzBclHOw==}
-
-  '@tsconfig/recommended@1.0.13':
-    resolution: {integrity: sha512-sySRuBfMKyKO/j2ZAhR8kSembhjuPEV4Ra3AHtmWLq51+iGaudr45crPSzNC5b7/Ctrh9dfUpBuTlYrH6rM58Q==}
 
   '@turbo/darwin-64@2.9.7':
     resolution: {integrity: sha512-wnvOWuVWJ5EUHNKxExEWiGlTeVpLG1L0PCu5MUozyC1P2SHGiWsmpW6/yAuShH91Fa2TAHOvdCRBzriZh4j4Eg==}
@@ -9274,10 +9288,6 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.14
       '@types/react-dom': 19.2.3(@types/react@19.2.14)
-
-  '@tsconfig/next@2.0.6': {}
-
-  '@tsconfig/recommended@1.0.13': {}
 
   '@turbo/darwin-64@2.9.7':
     optional: true

@@ -38,11 +38,11 @@
     "voca": "^1.4.1"
   },
   "devDependencies": {
+    "@matsugov/tsconfig": "workspace:^",
     "@matsugov/tw-config": "workspace:^",
     "@tailwindcss/postcss": "^4.2.4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
-    "@tsconfig/next": "^2.0.6",
     "@types/node": "22.19.10",
     "@types/pluralize": "^0.0.33",
     "@types/react": "^19.2.14",

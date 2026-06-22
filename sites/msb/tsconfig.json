@@ -1,17 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@tsconfig/next/tsconfig.json",
+  "extends": "@matsugov/tsconfig/nextjs.json",
   "compilerOptions": {
-    "moduleResolution": "bundler",
-    "lib": ["dom", "dom.iterable", "esnext"],
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["./components/*"],
       "@hooks/*": ["./hooks/*"],
       "@lib/*": ["./lib/*"],
       "@app/*": ["./pages/*"]
-    },
-    "target": "es2020"
+    }
   },
   "include": [
     "next-env.d.ts",
