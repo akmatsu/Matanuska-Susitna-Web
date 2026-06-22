@@ -8,6 +8,7 @@ on:
       - sites/myprop/**
       - packages/ui/**
       - packages/tw-config/**
+      - packages/property-sdk/**
       - .github/workflows/deploy-myprop.yml
 
 permissions:

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { DataTable, DataTableRow } from '@/components/Tables/';
-import { propertyApiCall } from '@/utils/apiHelpers';
+import { propertyApiCall } from '@msb/property-sdk';
 
 type ParcelSearchResult = {
   TAX_ID: string;

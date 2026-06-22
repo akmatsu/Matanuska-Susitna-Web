@@ -1,6 +1,6 @@
 'use cache';
 
-import { propertyApiCall } from '@/utils/apiHelpers';
+import { propertyApiCall } from '@msb/property-sdk';
 import { cacheLife } from 'next/cache';
 import Image from 'next/image';
 import Link from 'next/link';

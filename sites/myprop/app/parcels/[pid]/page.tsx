@@ -6,7 +6,7 @@ import {
   PropertyTable,
   SectionHeader,
 } from '@/components/Tables';
-import { propertyApiCall } from '@/utils/apiHelpers';
+import { propertyApiCall } from '@msb/property-sdk';
 import { format } from 'date-fns';
 import { MapModal } from './MapModal';
 

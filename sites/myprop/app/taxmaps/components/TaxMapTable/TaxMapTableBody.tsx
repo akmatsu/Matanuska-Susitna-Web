@@ -1,5 +1,5 @@
 'use cache';
-import { propertyApiCall } from '@/utils/apiHelpers';
+import { propertyApiCall } from '@msb/property-sdk';
 import { cn } from '@matsugov/ui/lib';
 import { cacheLife } from 'next/cache';
 import Link from 'next/link';
