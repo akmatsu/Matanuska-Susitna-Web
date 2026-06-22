@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.29.1...v1.30.0) (2026-06-22)
+
+
+### Features
+
+* introduce shared TypeScript configurations and update package dependencies ([6dba73d](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/6dba73db1ce168b17388db0437bb51ed48b89c1b))
+
 ## [1.29.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.29.0...v1.29.1) (2026-06-22)
 
 
