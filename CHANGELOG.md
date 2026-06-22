@@ -1,3 +1,11 @@
+# [1.29.0](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.28.1...v1.29.0) (2026-06-22)
+
+
+### Features
+
+* add agents documentation and link to copilot instructions ([4021571](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/4021571d162fc98ba52e6fae97f97a1bdce6b304))
+* add property-sdk package for API interactions and update imports ([1372bea](https://github.com/akmatsu/Matanuska-Susitna-Web/commit/1372beaa1271524db8c51d0a60d9ee37c3d60759))
+
 ## [1.28.1](https://github.com/akmatsu/Matanuska-Susitna-Web/compare/v1.28.0...v1.28.1) (2026-06-11)
 
 
