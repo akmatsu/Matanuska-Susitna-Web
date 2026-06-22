@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 const baseUrl = process.env.API_URL || 'http://localhost:3000/api';
 
 /**
