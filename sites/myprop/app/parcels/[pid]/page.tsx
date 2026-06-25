@@ -37,6 +37,8 @@ export default async function MyParcelDetailPage(
       day: '2-digit',
     });
   };
+
+  console.log(data);
   return (
     <main>
       <div className="pt-6">
@@ -351,11 +353,11 @@ export default async function MyParcelDetailPage(
               <DataTableRow
                 cells={[
                   { value: data.STATUS },
-                  { value: data.BALANCE },
-                  { value: data.FARM_DEFERMENT },
-                  { value: data.DISABLED_VET },
-                  { value: data.SENIOR },
-                  { value: data.TOTAL },
+                  { value: formatCurrency(data.BALANCE) },
+                  { value: formatCurrency(data.FARM_DEFERMENT) },
+                  { value: formatCurrency(data.DISABLED_VET) },
+                  { value: formatCurrency(data.SENIOR) },
+                  { value: formatCurrency(data.TOTAL) },
                   { value: data.LID },
                 ]}
                 isLast

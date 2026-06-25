@@ -48,6 +48,8 @@ export async function Results({
     );
   }
 
+  console.log(data);
+
   if (mode === 'sub') {
     return (
       <>
@@ -204,7 +206,8 @@ export async function Results({
                 value: result.OWNER,
               },
               {
-                value: result.Address,
+                // value: result.Address,
+                value: `${result.Address}`,
               },
               {
                 value: result.SUBD_NAME,
