@@ -206,8 +206,16 @@ export async function Results({
                 value: result.OWNER,
               },
               {
-                // value: result.Address,
-                value: `${result.Address}`,
+                value: (
+                  <span>
+                    {result.Address}
+                    {result.SITE_MULT === 'Y' && (
+                      <span className="m-1 ml-1 inline-block rounded border border-blue-400 bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-900">
+                        Multiple addresses
+                      </span>
+                    )}
+                  </span>
+                ),
               },
               {
                 value: result.SUBD_NAME,
