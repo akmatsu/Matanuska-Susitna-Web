@@ -48,7 +48,7 @@ export function SearchFieldLoaded() {
         <input
           key={searchParams.get('query') || ''}
           type="text"
-          placeholder="Search for by name, address, PID, account ID, subdivision, or other property details"
+          placeholder="Search by name, address, PID, account ID, subdivision, or other property details"
           name="query"
           id="search-query"
           className="w-full p-2 sm:px-1 sm:py-0"

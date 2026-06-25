@@ -2,16 +2,16 @@ import { faker } from '@faker-js/faker';
 
 export type ParcelAppraisal = {
   YEAR_ID: number | null;
-  LAND_APR: number | null;
-  BLDG_APR: number | null;
-  TOTAL_APR: number | null;
+  LAND_APR: number | null; // monetary value
+  BLDG_APR: number | null; // monetary value
+  TOTAL_APR: number | null; // monetary value
 };
 
 export type ParcelAssessment = {
   YEAR_ID: number | null;
-  LAND_ASM: number | null;
-  BLDG_ASM: number | null;
-  TOTAL_ASM: number | null;
+  LAND_ASM: number | null; // monetary value
+  BLDG_ASM: number | null; // monetary value
+  TOTAL_ASM: number | null; // monetary value
 };
 
 export type ParcelTaxBilling = {
@@ -20,7 +20,7 @@ export type ParcelTaxBilling = {
   YEAR_CERT: string | null;
   ZONE: string | null;
   MILL: string | null;
-  TAX_BILLED: string | null;
+  TAX_BILLED: string | null; // monetary value
 };
 
 export type ParcelRecordedDocument = {
@@ -69,11 +69,11 @@ export type ParcelDetails = {
   BUYER_ADDRESS: string | null;
   STATUS: string | null;
   BALANCE: number | null;
-  FARM_DEFERMENT: number | null;
-  DISABLED_VET: number | null;
+  FARM_DEFERMENT: number | null; // monetary value
+  DISABLED_VET: number | null; // monetary value
   SENIOR: number | null;
   /** Total exemptions */
-  TOTAL: number | null;
+  TOTAL: number | null; // monetary value
   LID: string | null;
   GROSS_ACRE: number | null;
   NET_ACRE: number | null;

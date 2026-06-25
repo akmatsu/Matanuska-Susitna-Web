@@ -30,7 +30,7 @@ export function SearchFieldBody({
         </label>
         <input
           type="text"
-          placeholder="Search for by name, address, or parcel ID..."
+          placeholder="Search by name, address, PID, account ID, subdivision, or other property details"
           name="query"
           id="search-query"
           className="w-full"
