@@ -38,7 +38,6 @@ export default async function MyParcelDetailPage(
     });
   };
 
-  console.log(data);
   return (
     <main>
       <div className="pt-6">
@@ -67,14 +66,41 @@ export default async function MyParcelDetailPage(
                 <PropertyRow label="Subdivision" value={data.SUBD_NAME} />
                 <PropertyRow label="City" value={data.CITY} />
                 <PropertyRow
-                  label="Map"
+                  label="Maps & Permits"
                   className="print:hidden"
-                  value={<MapModal pid={data.PARCEL_ID} map={data.MAP} />}
+                  value={
+                    <div className="flex gap-2">
+                      <MapModal
+                        pid={data.PARCEL_ID}
+                        map={data.MAP}
+                        accountId={data.TAX_ID}
+                      />
+                      <a
+                        href={`https://matanuskasusitnaboroughak-energovweb.tylerhost.net/apps/selfservice#/search?m=1&fm=3&ps=10&pn=1&em=true&st=${data.TAX_ID.substring(1)}`}
+                      >
+                        View Associated Permits
+                      </a>
+                    </div>
+                  }
                 />
               </PropertyTable>
             </TwoColumnWrapper>
             <PropertyTable>
-              <PropertyRow label="Site Address" value={data.CITE_ADDRESS} />
+              {data.ADDRESSES?.length ? (
+                data.ADDRESSES.map((address, idx) => (
+                  <PropertyRow
+                    key={idx}
+                    label={`Site Address ${idx + 1}`}
+                    value={address.FULL_ADDRESS}
+                  />
+                ))
+              ) : (
+                <PropertyRow
+                  label="Site Address"
+                  value={data.CITE_ADDRESS || '--'}
+                />
+              )}
+              {/* <PropertyRow label="Site Address" value={data.CITE_ADDRESS} /> */}
             </PropertyTable>
           </section>
           <section>

@@ -82,6 +82,7 @@ export type ParcelDetails = {
   FIRE_AREA: string | null;
   ROAD_AREA: string | null;
   LAST_UPDATED: string | null;
+  ADDRESSES?: Array<{ FULL_ADDRESS: string }> | null;
   APPRAISALS?: ParcelAppraisal[] | null;
   ASSESSMENTS?: ParcelAssessment[] | null;
   TAX_BILLING?: ParcelTaxBilling[] | null;

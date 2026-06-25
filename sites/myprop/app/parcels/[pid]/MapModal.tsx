@@ -11,7 +11,11 @@ import Link from 'next/link';
 
 import { useState } from 'react';
 
-export function MapModal(props: { pid: string; map: string }) {
+export function MapModal(props: {
+  pid: string;
+  map: string;
+  accountId: string;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   // Convert each url string to an object with a label, url, and icon field
