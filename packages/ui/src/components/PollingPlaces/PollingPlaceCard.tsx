@@ -1,6 +1,5 @@
+import type { PollingLocationFeature } from '@msb/open-data';
 import Link from 'next/link';
-
-import type { PollingLocationFeature } from './types';
 
 /** Renders a single polling place as a card with address and precinct map links. */
 export function PollingPlaceCard({ place }: { place: PollingLocationFeature }) {

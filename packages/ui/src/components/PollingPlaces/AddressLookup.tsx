@@ -1,8 +1,8 @@
 'use client';
 
+import { PollingLocationFeature } from '@msb/open-data';
 import { PhoneLink } from '../PhoneLink';
 import { PollingPlaceCard } from './PollingPlaceCard';
-import { PollingLocationFeature } from './types';
 import { useAddressLookup } from './useAddressLookup';
 
 export function AddressLookup({

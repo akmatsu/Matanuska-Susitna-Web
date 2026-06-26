@@ -43,7 +43,6 @@ export async function searchAddresses(
       );
     }
 
-    const data: AddressSearchResponse = await response.json();
-    return data;
+    return response.json();
   }, controller.signal);
 }

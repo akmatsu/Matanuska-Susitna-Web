@@ -73,6 +73,7 @@
     "@fontsource/source-sans-pro": "^5.2.5",
     "@headlessui/react": "^2.2.10",
     "@matsugov/app-config": "workspace:^",
+    "@msb/open-data": "workspace:*",
     "@radix-ui/react-slot": "^1.2.4",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
