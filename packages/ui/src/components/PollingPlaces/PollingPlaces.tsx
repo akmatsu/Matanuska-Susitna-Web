@@ -1,4 +1,3 @@
-// import { AddressLookup } from './AddressLookup';
 import { BrowsePollingPlaces } from './BrowsePollingPlaces';
 import type { PollingLocationFeature, PollingLocationResponse } from './types';
 
@@ -31,7 +30,6 @@ export async function PollingPlaces() {
 
   return (
     <>
-      {/* <AddressLookup places={places} /> */}
       <BrowsePollingPlaces places={places} />
     </>
   );
