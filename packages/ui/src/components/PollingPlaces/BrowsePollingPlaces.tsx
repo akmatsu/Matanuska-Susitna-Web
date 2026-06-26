@@ -1,8 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { PollingLocationFeature } from './types';
 import { PollingPlaceCard } from './PollingPlaceCard';
+import { PollingLocationFeature } from '@msb/open-data';
 
 export function BrowsePollingPlaces({
   places,

@@ -1,79 +1,15 @@
+import {
+  AddressFeature,
+  getPrecinctByGeometry,
+  PollingLocationFeature,
+  PrecinctFeature,
+  searchAddresses,
+} from '@msb/open-data';
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 
-import type {
-  AddressFeature,
-  AddressSearchResponse,
-  PollingLocationFeature,
-  PrecinctFeature,
-  PrecinctResponse,
-} from './types';
-
-const ADDRESS_SEARCH_URL =
-  'https://maps.matsugov.us/map/rest/services/OpenData/PublicSafety_Addresses/MapServer/0/query';
-const PRECINCT_URL =
-  'https://maps.matsugov.us/map/rest/services/OpenData/Administrative_VotingPrecincts/FeatureServer/1/query';
-
 /** Milliseconds to wait after the user stops typing before querying address autocomplete. */
 const ADDRESS_DEBOUNCE_MS = 150;
-
-// ---------------------------------------------------------------------------
-// Helper
-// ---------------------------------------------------------------------------
-
-/**
- * Fetches a URL with optional retries on transient failures.
- * Throws immediately on AbortError so callers can handle cancellation cleanly.
- * ArcGIS services sometimes return HTTP 200 with an error body — those are also
- * surfaced as thrown errors.
- */
-async function fetchWithRetry(
-  url: string,
-  signal: AbortSignal,
-  maxRetries = 1,
-): Promise<unknown> {
-  let lastError: Error | null = null;
-
-  for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    try {
-      const response = await fetch(url, { signal, cache: 'no-store' });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      // ArcGIS returns HTTP 200 even for query errors; surface them as exceptions
-      if (data?.error) {
-        throw new Error(
-          data.error.message ?? `ArcGIS query failed (code ${data.error.code})`,
-        );
-      }
-
-      return data;
-    } catch (err) {
-      lastError = err instanceof Error ? err : new Error(String(err));
-
-      // Never retry on abort — the caller intentionally cancelled the request
-      if (err instanceof Error && err.name === 'AbortError') throw err;
-
-      if (attempt < maxRetries) {
-        console.warn(
-          `Request attempt ${attempt + 1} failed, retrying...`,
-          lastError.message,
-        );
-        await new Promise((resolve) => setTimeout(resolve, 200));
-      }
-    }
-  }
-
-  throw lastError;
-}
-
-// ---------------------------------------------------------------------------
-// Hook
-// ---------------------------------------------------------------------------
 
 export type UseAddressLookupResult = {
   /** Current value of the address input. */
@@ -172,25 +108,12 @@ export function useAddressLookup(
       try {
         setIsAddressLoading(true);
 
-        const params = new URLSearchParams({
-          where: `ADDRESS LIKE '%${trimmed}%'`,
-          outFields: 'OBJECTID,ADDRESS,COMMUNITY,stateabbreviation',
-          outSR: '4326',
-          f: 'json',
-          resultRecordCount: '5',
-          // Cache-busting timestamp to prevent stale ArcGIS responses
-          _ts: String(Date.now()),
-        });
-
-        const data = (await fetchWithRetry(
-          `${ADDRESS_SEARCH_URL}?${params.toString()}`,
-          controller.signal,
-        )) as AddressSearchResponse;
+        const data = await searchAddresses(addressQuery);
 
         // Discard results that arrived after a newer request was already issued
         if (requestId !== currentRequestId.current) return;
 
-        setAddressResults(data.features ?? []);
+        setAddressResults(data?.features ?? []);
         setHighlightedIndex(-1);
       } catch (err) {
         if (err instanceof Error && err.name === 'AbortError') return;
@@ -276,30 +199,9 @@ export function useAddressLookup(
     setMyPollingPlace(null);
 
     try {
-      const { x, y } = feature.geometry;
+      const precinctResponse = await getPrecinctByGeometry(feature.geometry);
 
-      // Spatial intersection: find which precinct polygon contains this point
-      const precinctParams = new URLSearchParams({
-        geometry: JSON.stringify({ x, y }),
-        geometryType: 'esriGeometryPoint',
-        inSR: '4326',
-        where: '1=1',
-        outFields: 'DISTRICT,NAME,DIST_NAME',
-        f: 'json',
-      });
-
-      const precinctResponse = await fetch(
-        `${PRECINCT_URL}?${precinctParams.toString()}`,
-      );
-
-      if (!precinctResponse.ok) {
-        throw new Error(
-          `Precinct request failed with status ${precinctResponse.status}`,
-        );
-      }
-
-      const precinctData: PrecinctResponse = await precinctResponse.json();
-      const precinct = precinctData.features?.[0] ?? null;
+      const precinct = precinctResponse.features?.[0] ?? null;
 
       if (!precinct) {
         setLookupError(
