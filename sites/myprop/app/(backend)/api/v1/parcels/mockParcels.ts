@@ -28,6 +28,8 @@ export type ParcelRecordedDocument = {
   DEED_TYPE: string | null;
   DOC_LABEL: string | null;
   DOC_URL: string | null;
+  district: string | null;
+  districtCode: string | null;
 };
 
 export type ParcelStructure = {
@@ -239,6 +241,8 @@ function createRecordedDocuments(): ParcelRecordedDocument[] {
         DEED_TYPE: deedType,
         DOC_LABEL: `Palmer  Bk: ${book} Pg: ${page}`,
         DOC_URL: `&SearchType=book&Book=${book}&Page=${page}`,
+        district: 'Palmer',
+        districtCode: '111',
       };
     }
 
@@ -247,6 +251,8 @@ function createRecordedDocuments(): ParcelRecordedDocument[] {
       DEED_TYPE: deedType,
       DOC_LABEL: `Palmer ${serial}`,
       DOC_URL: `&SearchType=doc&SerialNumber=${serial}`,
+      district: 'Palmer',
+      districtCode: '111',
     };
   });
 }

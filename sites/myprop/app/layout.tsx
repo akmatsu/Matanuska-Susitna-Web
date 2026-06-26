@@ -11,7 +11,8 @@ export const metadata = {
       ? new URL('https://myproperty.matsu.gov')
       : undefined,
   title: 'MyProperty',
-  description: "The Borough's super awesome property application",
+  description:
+    'Search and explore real property information in the Matanuska-Susitna Borough with myProperty. Access parcel data, ownership details, assessments, and maps.',
 };
 
 export default function RootLayout(props: { children: React.ReactNode }) {

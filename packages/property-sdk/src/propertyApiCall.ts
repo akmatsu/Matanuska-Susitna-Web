@@ -40,7 +40,9 @@ export async function propertyApiCall<T = unknown>(
 
   // Check if the response is OK (status in the range 200-299)
   if (!data.ok) {
-    throw new Error(`API call failed with status ${data.status}`);
+    throw new Error(
+      `API call failed with status ${data.status}: ${data.statusText}`,
+    );
   }
 
   // Parse and return the JSON response

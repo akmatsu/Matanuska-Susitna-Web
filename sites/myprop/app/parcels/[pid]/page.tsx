@@ -8,7 +8,16 @@ import {
 } from '@/components/Tables';
 import { propertyApiCall } from '@msb/property-sdk';
 import { format } from 'date-fns';
+import { Metadata } from 'next';
 import { MapModal } from './MapModal';
+
+export const metadata: Metadata = {
+  title: 'MyProperty - Parcel Details',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function MyParcelDetailPage(
   props: PageProps<'/parcels/[pid]'>,
@@ -37,6 +46,8 @@ export default async function MyParcelDetailPage(
       day: '2-digit',
     });
   };
+
+  console.log(data);
 
   return (
     <main>
@@ -223,10 +234,6 @@ export default async function MyParcelDetailPage(
                       title={`Structure #${idx + 1} of ${data.STRUCTURES.length}`}
                     />
                     <TwoColumnWrapper>
-                      {/* 
-                              Column 1: residential units, condition, basement, year built, foundation, septic.
-                              Column 2: Use, design, construction type, grade, well
-                            */}
                       <PropertyTable>
                         <PropertyRow
                           label="Residential Units"
@@ -322,7 +329,7 @@ export default async function MyParcelDetailPage(
                             <a
                               target="_blank"
                               rel="noopener noreferrer"
-                              href={`https://dnr.alaska.gov/ssd/recoff/search/cad_search?${doc.DOC_URL}`}
+                              href={`https://dnr.alaska.gov/ssd/recoff/search/cad_search?District=${doc.districtCode}${doc.DOC_URL}`}
                             >
                               {doc.DOC_LABEL}
                             </a>
