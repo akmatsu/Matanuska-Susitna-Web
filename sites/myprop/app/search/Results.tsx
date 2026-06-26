@@ -48,8 +48,6 @@ export async function Results({
     );
   }
 
-  console.log(data);
-
   if (mode === 'sub') {
     return (
       <>
