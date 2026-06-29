@@ -21,11 +21,6 @@ export function MapModal(props: {
   // Convert each url string to an object with a label, url, and icon field
   const mapUrls = [
     {
-      name: 'Parcel Viewer',
-      url: `https://parcelviewer.matsu.gov/vertigisstudio/web/?app=05240199d948427e88bf8ea2ebea9513&workflow=b3ee4694-fbe2-4683-b4e9-114fe8d4cca0&workflowParams=${props.pid}`,
-      icon: 'icon-[mdi--map-search-outline]',
-    },
-    {
       name: 'Tax Map PDF',
       url: `https://matsugov.us/taxmaps/pdf/${props.map.toUpperCase()}.pdf`,
       icon: 'icon-msb--download-pdf',
@@ -37,7 +32,7 @@ export function MapModal(props: {
     },
     {
       name: 'Land Use Regulations',
-      url: `https://msb.maps.arcgis.com/apps/webappviewer/index.html?id=4cd76b7861f348e68afd5cc934524a5f&find=${props.pid}`,
+      url: `https://msb.maps.arcgis.com/apps/instant/nearby/index.html?appid=66c49e603a6b4cefb83847a3d1f59cab&sliderDistance=1&find==${props.pid}`,
       icon: 'icon-[mdi--map-check-outline]',
     },
     {

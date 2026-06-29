@@ -10,6 +10,7 @@ import { propertyApiCall } from '@msb/property-sdk';
 import { format } from 'date-fns';
 import { Metadata } from 'next';
 import { MapModal } from './MapModal';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'MyProperty - Parcel Details',
@@ -84,11 +85,16 @@ export default async function MyParcelDetailPage(
                         map={data.MAP}
                         accountId={data.TAX_ID}
                       />
-                      <a
+                      <Link
+                        href={`https://parcelviewer.matsu.gov/vertigisstudio/web/?app=05240199d948427e88bf8ea2ebea9513&workflow=b3ee4694-fbe2-4683-b4e9-114fe8d4cca0&workflowParams=${data.PARCEL_ID}`}
+                      >
+                        Parcel Viewer
+                      </Link>
+                      <Link
                         href={`https://matanuskasusitnaboroughak-energovweb.tylerhost.net/apps/selfservice#/search?m=1&fm=3&ps=10&pn=1&em=true&st=${data.TAX_ID.substring(1)}`}
                       >
                         View Associated Permits
-                      </a>
+                      </Link>
                     </div>
                   }
                 />
