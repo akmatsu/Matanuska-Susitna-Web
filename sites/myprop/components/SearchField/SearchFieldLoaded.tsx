@@ -2,9 +2,14 @@
 import { useSearchParams } from 'next/navigation';
 import { Select } from '../Select';
 import { useRouter } from 'nextjs-toploader/app';
+import { useState } from 'react';
 
 const searchOptions = [
-  { value: 'wild', label: 'Property Search' },
+  { value: 'wild', label: 'Search by all fields' },
+  { value: 'owner', label: 'Owner Name Search' },
+  { value: 'address', label: 'Address Search' },
+  { value: 'tax', label: 'Tax ID Search' },
+  { value: 'parcel', label: 'PID Search' },
   { value: 'sub', label: 'Subdivision Search' },
   { value: 'subid', label: 'Subdivision ID Search' },
 ];
@@ -12,6 +17,10 @@ const searchOptions = [
 export function SearchFieldLoaded() {
   const searchParams = useSearchParams();
   const router = useRouter();
+
+  const [currentMode, setCurrentMode] = useState(
+    searchParams.get('mode') || 'owner',
+  );
 
   return (
     <fieldset className="border-border bg-surface mx-auto mb-16 max-w-185 border px-2 pt-0 pb-3">
@@ -37,6 +46,7 @@ export function SearchFieldLoaded() {
         <Select
           key={searchParams.get('mode') || 'owner'}
           options={searchOptions}
+          onChange={(e) => setCurrentMode(e.target.value)}
           name="search-type"
           defaultValue={searchParams.get('mode') || 'owner'}
           id="search-type"
@@ -48,7 +58,24 @@ export function SearchFieldLoaded() {
         <input
           key={searchParams.get('query') || ''}
           type="text"
-          placeholder="Search by name, address, PID, account ID, subdivision, or other property details"
+          placeholder={(() => {
+            switch (currentMode) {
+              case 'owner':
+                return 'Search for property by owner name';
+              case 'address':
+                return 'Search for property by address';
+              case 'parcel':
+                return 'Search for property by PID';
+              case 'tax':
+                return 'Search for property by tax ID';
+              case 'sub':
+                return 'Search for subdivisions by name';
+              case 'subid':
+                return 'Search for property by subdivision ID';
+              default:
+                return 'Search for properties by all fields (owner name, address, PID, tax ID, subdivision name, subdivision ID)';
+            }
+          })()}
           name="query"
           id="search-query"
           className="w-full p-2 sm:px-1 sm:py-0"
