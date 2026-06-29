@@ -60,7 +60,7 @@ export function UpcomingElectionDetails(props: {
         ),
     },
     {
-      label: 'Early Voting Begins',
+      label: 'Early/Absentee Voting Begins',
       value: data.earlyVotingStartDate ? (
         <DateTime
           date={normalizeDate(data.earlyVotingStartDate)}
