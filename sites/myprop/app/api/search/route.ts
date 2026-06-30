@@ -8,19 +8,19 @@ export async function GET(request: NextRequest) {
   const mode = searchParams.get('mode') ?? '';
   const page = searchParams.get('page') ?? '1';
 
+  if (!query || !mode) {
+    return NextResponse.json(
+      { error: 'Missing query or mode parameter' },
+      { status: 400 },
+    );
+  }
+
   if (query.length > 500) {
     return NextResponse.json(
       {
         error: 'Query parameter is too long. Maximum length is 500 characters.',
       },
-      { status: 400 },
-    );
-  }
-
-  if (!query || !mode) {
-    return NextResponse.json(
-      { error: 'Missing query or mode parameter' },
-      { status: 400 },
+      { status: 414 },
     );
   }
 
