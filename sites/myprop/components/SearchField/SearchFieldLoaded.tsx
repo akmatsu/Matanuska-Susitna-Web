@@ -23,7 +23,7 @@ export function SearchFieldLoaded() {
   );
 
   return (
-    <fieldset className="border-border bg-surface mx-auto mb-4 max-w-185 border px-2 pt-0 pb-3">
+    <fieldset className="border-border bg-surface mx-auto mb-8 max-w-185 border px-2 pt-0 pb-3">
       <legend className="text-xs font-semibold">Search</legend>
       <form
         className="mb-2 flex flex-col gap-1 sm:flex-row"
