@@ -19,11 +19,11 @@ export function SearchFieldLoaded() {
   const router = useRouter();
 
   const [currentMode, setCurrentMode] = useState(
-    searchParams.get('mode') || 'owner',
+    searchParams.get('mode') || 'wild',
   );
 
   return (
-    <fieldset className="border-border bg-surface mx-auto mb-16 max-w-185 border px-2 pt-0 pb-3">
+    <fieldset className="border-border bg-surface mx-auto mb-4 max-w-185 border px-2 pt-0 pb-3">
       <legend className="text-xs font-semibold">Search</legend>
       <form
         className="mb-2 flex flex-col gap-1 sm:flex-row"
@@ -44,11 +44,11 @@ export function SearchFieldLoaded() {
           Search Type
         </label>
         <Select
-          key={searchParams.get('mode') || 'owner'}
+          key={searchParams.get('mode') || 'wild'}
           options={searchOptions}
           onChange={(e) => setCurrentMode(e.target.value)}
           name="search-type"
-          defaultValue={searchParams.get('mode') || 'owner'}
+          defaultValue={searchParams.get('mode') || 'wild'}
           id="search-type"
           className="p-2 sm:px-1 sm:py-0"
         />
