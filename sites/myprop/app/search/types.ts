@@ -4,17 +4,17 @@ export type ParcelSearchResult = {
   BUYER: string | null;
   SUBD_NAME: string | null;
   SITE_MULT: 'Y' | 'N';
-  Address: string | null;
+  ADDRESS: string | null;
   PARCEL_ID: string;
   MAP: string | null;
-  basemap_abbr: string | null;
+  BASEMAP_ABBR: string | null;
 };
 
 export type SubdivisionSearchResult = {
   SUBD_NAME: string;
   SUBD_NUM: string;
   MAP: string;
-  basemap_abbr: string | null;
+  BASEMAP_ABBR: string | null;
 };
 
 export type ApiResponseBody = {

@@ -79,6 +79,7 @@ export function SearchFieldLoaded() {
           name="query"
           id="search-query"
           className="w-full p-2 sm:px-1 sm:py-0"
+          maxLength={500}
           defaultValue={searchParams.get('query') || ''}
           aria-describedby="search-help-text"
           autoFocus

@@ -169,9 +169,9 @@ export function ResultsInfinite({
                                 className="icon-msb--download-pdf size-full"
                               ></span>
                             </Link>
-                            {result.basemap_abbr && (
+                            {result.BASEMAP_ABBR && (
                               <Link
-                                href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
+                                href={`https://matsugov.us/taxmaps/dxf/${result.BASEMAP_ABBR.toUpperCase()}00.dxf`}
                                 className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
                                 title="Download DXF Map"
                                 aria-label="Download DXF Map"
@@ -227,9 +227,9 @@ export function ResultsInfinite({
                       ></span>
                     </Link>
                   )}
-                  {result.basemap_abbr && (
+                  {result.BASEMAP_ABBR && (
                     <Link
-                      href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
+                      href={`https://matsugov.us/taxmaps/dxf/${result.BASEMAP_ABBR.toUpperCase()}00.dxf`}
                       className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
                       title="Download DXF Map"
                     >
@@ -261,7 +261,7 @@ export function ResultsInfinite({
           >
             {parcelRows.map((result) => (
               <DataTableRow
-                key={`${result.PARCEL_ID.trim()}-${result.Address?.trim()}`}
+                key={`${result.PARCEL_ID.trim()}-${result.ADDRESS?.trim()}`}
                 cells={[
                   {
                     value: (
@@ -278,7 +278,7 @@ export function ResultsInfinite({
                   {
                     value: (
                       <span>
-                        {result.Address}
+                        {result.ADDRESS}
                         {result.SITE_MULT === 'Y' && (
                           <span className="m-1 ml-1 inline-block rounded border border-blue-400 bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-900">
                             Multiple addresses
@@ -304,9 +304,9 @@ export function ResultsInfinite({
                                 className="icon-msb--download-pdf size-full"
                               ></span>
                             </Link>
-                            {result.basemap_abbr && (
+                            {result.BASEMAP_ABBR && (
                               <Link
-                                href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
+                                href={`https://matsugov.us/taxmaps/dxf/${result.BASEMAP_ABBR.toUpperCase()}00.dxf`}
                                 className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
                                 title="Download DXF Map"
                               >
@@ -332,7 +332,7 @@ export function ResultsInfinite({
           <ul className="space-y-2 sm:hidden">
             {parcelRows.map((result) => (
               <li
-                key={`${result.PARCEL_ID.trim()}-${result.Address?.trim()}`}
+                key={`${result.PARCEL_ID.trim()}-${result.ADDRESS?.trim()}`}
                 className="border-table-border bg-surface border-b p-4"
               >
                 <p>
@@ -345,7 +345,7 @@ export function ResultsInfinite({
                   <strong>Owner:</strong> {result.OWNER}
                 </p>
                 <p>
-                  <strong>Address:</strong> {result.Address}
+                  <strong>Address:</strong> {result.ADDRESS}
                 </p>
                 <p>
                   <strong>Subdivision:</strong> {result.SUBD_NAME}
@@ -370,9 +370,9 @@ export function ResultsInfinite({
                       ></span>
                     </Link>
                   )}
-                  {result.basemap_abbr && (
+                  {result.BASEMAP_ABBR && (
                     <Link
-                      href={`https://matsugov.us/taxmaps/dxf/${result.basemap_abbr.toUpperCase()}00.dxf`}
+                      href={`https://matsugov.us/taxmaps/dxf/${result.BASEMAP_ABBR.toUpperCase()}00.dxf`}
                       className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
                       title="Download DXF Map"
                     >
