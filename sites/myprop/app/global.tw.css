@@ -22,8 +22,8 @@
   --color-primary-light: #2b6db4;
   --color-primary: #173b61;
 
-  --color-foreground: var(--color-black);
   --color-background: var(--color-white);
+  --color-foreground: var(--color-black);
   --color-foreground-secondary: var(--color-gray-700);
   --color-foreground-disabled: var(--color-gray-400);
   --color-foreground-inverted: var(--color-white);
@@ -67,7 +67,6 @@
     @apply focus:ring-primary focus:ring-4 focus:ring-offset-2 focus:outline-none;
   }
 
-  button,
   select {
     @apply border-border cursor-pointer! rounded-sm border bg-gray-100 px-1 hover:bg-gray-200!;
   }
@@ -125,5 +124,29 @@ p .msb-md-body {
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
+  }
+}
+
+@utility msb-btn-* {
+  @apply flex cursor-pointer items-center justify-center rounded px-2 py-1 text-center no-underline shadow transition-colors;
+  background: --value(--color-*);
+  border-width: 1;
+  border-color: color-mix(in oklch, --value(--color-*) 60%, black);
+  color: contrast-color(--value(--color-*));
+
+  @variant hover {
+    background: color-mix(
+      in oklch,
+      --value(--color- *) 95%,
+      contrast-color(--value(--color- *))
+    );
+
+    color: contrast-color(
+      color-mix(
+        in oklch,
+        --value(--color- *) 95%,
+        contrast-color(--value(--color- *))
+      )
+    );
   }
 }

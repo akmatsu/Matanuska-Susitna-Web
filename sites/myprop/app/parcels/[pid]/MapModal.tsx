@@ -84,7 +84,17 @@ export function MapModal(props: {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>View Maps</button>
+      <button
+        onClick={() => setIsOpen(true)}
+        className="msb-btn-primary"
+        title="View more maps"
+      >
+        <span
+          className="icon-[mdi--more-horiz] size-5"
+          aria-hidden="true"
+        ></span>
+        <span className="sr-only">View more maps</span>
+      </button>
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}

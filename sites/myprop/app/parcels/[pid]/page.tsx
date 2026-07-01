@@ -79,22 +79,31 @@ export default async function MyParcelDetailPage(
                   label="Maps & Permits"
                   className="print:hidden"
                   value={
-                    <div className="flex gap-2">
+                    <div className="flex flex-col gap-1 sm:flex-row">
+                      <Link
+                        className="msb-btn-primary"
+                        href={`https://parcelviewer.matsu.gov/vertigisstudio/web/?app=05240199d948427e88bf8ea2ebea9513&workflow=b3ee4694-fbe2-4683-b4e9-114fe8d4cca0&workflowParams=${data.PARCEL_ID}`}
+                        title="View interactive maps in parcel viewer"
+                      >
+                        <span
+                          className="icon-[mdi--location-outline] hover:icon-[] mr-1 size-5"
+                          aria-hidden="true"
+                        ></span>
+                        Parcel Viewer
+                      </Link>
+                      <Link
+                        className="msb-btn-primary"
+                        href={`https://matanuskasusitnaboroughak-energovweb.tylerhost.net/apps/selfservice#/search?m=1&fm=3&ps=10&pn=1&em=true&st=${data.TAX_ID.substring(1)}`}
+                        title="View permits for this property"
+                      >
+                        <span className="icon-[mdi--id-card] mr-1 size-5" />
+                        View Permits
+                      </Link>
                       <MapModal
                         pid={data.PARCEL_ID}
                         map={data.MAP}
                         accountId={data.TAX_ID}
                       />
-                      <Link
-                        href={`https://parcelviewer.matsu.gov/vertigisstudio/web/?app=05240199d948427e88bf8ea2ebea9513&workflow=b3ee4694-fbe2-4683-b4e9-114fe8d4cca0&workflowParams=${data.PARCEL_ID}`}
-                      >
-                        Parcel Viewer
-                      </Link>
-                      <Link
-                        href={`https://matanuskasusitnaboroughak-energovweb.tylerhost.net/apps/selfservice#/search?m=1&fm=3&ps=10&pn=1&em=true&st=${data.TAX_ID.substring(1)}`}
-                      >
-                        View Associated Permits
-                      </Link>
                     </div>
                   }
                 />
