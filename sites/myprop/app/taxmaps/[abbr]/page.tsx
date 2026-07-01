@@ -17,8 +17,8 @@ export default async function TaxMapDetails(
   return (
     <div className="flex flex-col items-center gap-1 md:grid md:grid-cols-2 md:items-start print:grid print:grid-cols-2 print:items-start">
       <div className="relative aspect-469/431 w-full max-w-100">
-        <img
-          src={`https://myproperty.matsugov.us/taxmaps/images/${abbr}index.jpg`}
+        <Image
+          src={`/images/${abbr}index.jpg`}
           alt={`TaxMap index for ${abbr} including insets ${data.map((sub) => sub.map).join(', ')}`}
           fill
         />
