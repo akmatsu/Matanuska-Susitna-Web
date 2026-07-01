@@ -92,8 +92,12 @@ export function SearchFieldLoaded() {
           aria-describedby="search-help-text"
           autoFocus
         />
-        <button type="submit" className="px-2 py-1 sm:px-1 sm:py-0">
-          Search
+        <button type="submit" className="msb-btn-primary">
+          <span
+            className="icon icon-[mdi--magnify] size-5"
+            aria-hidden="true"
+          />
+          <span className="sr-only">Search</span>
         </button>
       </form>
       <div className="flex items-start gap-1" id="search-help-text">

@@ -132,7 +132,12 @@ export function MapModal(props: {
               ))}
             </ul>
             <div className="flex gap-4">
-              <button onClick={() => setIsOpen(false)}>Close</button>
+              <button
+                className="msb-btn-gray-100"
+                onClick={() => setIsOpen(false)}
+              >
+                Close
+              </button>
             </div>
           </DialogPanel>
         </div>

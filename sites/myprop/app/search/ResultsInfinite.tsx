@@ -537,7 +537,7 @@ export function ResultsInfinite({
           <p className="text-sm text-red-700">{error}</p>
           <button
             type="button"
-            className="mt-2 rounded border border-red-700 px-3 py-1 text-sm text-red-700"
+            className="msb-btn-error mt-2"
             onClick={() => {
               void fetchNextPage();
             }}
