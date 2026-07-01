@@ -276,6 +276,35 @@ export default async function MyParcelDetailPage(
                         <PropertyRow label="Well" value={structure.WELL} />
                       </PropertyTable>
                     </TwoColumnWrapper>
+                    {data.BUILDING_DETAILS.filter(
+                      (d) => parseInt(d.ITM_BLDGID) === idx + 1,
+                    ).length > 0 && (
+                      <DataTable
+                        headers={[
+                          { label: 'Building Number' },
+                          { label: 'Building Detail Description' },
+                          { label: 'Area', right: true },
+                          { label: 'Percent Complete', right: true },
+                        ]}
+                      >
+                        {data.BUILDING_DETAILS?.filter(
+                          (detail) => parseInt(detail.ITM_BLDGID) === idx + 1,
+                        ).map((detail, detailIdx) => (
+                          <DataTableRow
+                            key={detailIdx}
+                            cells={[
+                              { value: detail.ITM_BLDGID },
+                              { value: detail.ITM_DESC },
+                              {
+                                value: `${detail.ITM_AREA} Sq. Ft.`,
+                                right: true,
+                              },
+                              { value: `${detail.ITM_DONE}%`, right: true },
+                            ]}
+                          />
+                        ))}
+                      </DataTable>
+                    )}
                   </section>
                 ))}
               </details>
