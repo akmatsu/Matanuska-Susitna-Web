@@ -35,8 +35,16 @@ export function SearchFieldLoaded() {
           const query = formData.get('query');
           if (!query || String(query).length === 0) return;
           const newSearchParams = new URLSearchParams(searchParams.toString());
+          const currentMode = searchParams.get('mode') || 'wild';
           newSearchParams.set('mode', String(type));
           newSearchParams.set('query', String(query));
+          // Reset sorting to defaults when mode changes
+          if (String(type) !== currentMode) {
+            newSearchParams.delete('sortField');
+            newSearchParams.delete('sortDirection');
+            newSearchParams.delete('sortField2');
+            newSearchParams.delete('sortDirection2');
+          }
           router.push(`/search?${newSearchParams.toString()}`);
         }}
       >

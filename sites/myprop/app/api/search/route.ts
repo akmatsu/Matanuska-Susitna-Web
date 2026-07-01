@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { propertyApiCall } from '@msb/property-sdk';
 import type { ApiResponseBody } from '@/app/search/types';
+import { parseSortParams } from '@/app/search/types';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -24,11 +25,34 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  const sort = parseSortParams({
+    sortField: searchParams.get('sortField') ?? undefined,
+    sortDirection: searchParams.get('sortDirection') ?? undefined,
+    sortField2: searchParams.get('sortField2') ?? undefined,
+    sortDirection2: searchParams.get('sortDirection2') ?? undefined,
+  });
+
   try {
+    console.log(
+      'Received search request with query:',
+      query,
+      'mode:',
+      mode,
+      'page:',
+      page,
+      'sort:',
+      sort,
+    );
     const data = await propertyApiCall<ApiResponseBody>('/search', {
       query,
       mode,
       page,
+      ...(mode !== 'sub' && {
+        sortField: sort.sortField,
+        sortDirection: sort.sortDirection,
+        sortField2: sort.sortField2,
+        sortDirection2: sort.sortDirection2,
+      }),
     });
 
     return NextResponse.json(data);

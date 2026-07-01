@@ -10,6 +10,7 @@ export default function ErrorPage({
   reset: () => void;
 }) {
   const url = window.location.href;
+
   return (
     <main className="space-y-4 text-center">
       <PageTitle title="Oops!" />

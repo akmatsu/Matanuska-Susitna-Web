@@ -6,19 +6,90 @@ import { DataTable, DataTableRow } from '@/components/Tables/';
 import type {
   ApiResponseBody,
   ParcelSearchResult,
+  SortDirection,
+  SortField,
+  SortParams,
   SubdivisionSearchResult,
 } from './types';
+import { cn } from '@matsugov/ui/lib';
+
+function sortHref(
+  field: SortField,
+  sort: SortParams,
+  query: string,
+  mode: string,
+): string {
+  const isActive = sort.sortField === field;
+  const direction: SortDirection =
+    isActive && sort.sortDirection === 'ASC' ? 'DESC' : 'ASC';
+  const secondary: SortField = field === 'ADDRESS' ? 'OWNER' : 'ADDRESS';
+
+  const params = new URLSearchParams({
+    query,
+    mode,
+    sortField: field,
+    sortDirection: direction,
+    sortField2: secondary,
+    sortDirection2: 'ASC',
+  });
+
+  return `/search?${params.toString()}`;
+}
+
+function SortableHeaderLabel({
+  label,
+  field,
+  sort,
+  query,
+  mode,
+}: {
+  label: string;
+  field: SortField;
+  sort: SortParams;
+  query: string;
+  mode: string;
+}) {
+  const isActive = sort.sortField === field;
+
+  return (
+    <Link
+      href={sortHref(field, sort, query, mode)}
+      className="flex items-center gap-1 font-semibold whitespace-nowrap text-white hover:underline"
+      aria-label={`Sort by ${label}${
+        isActive
+          ? sort.sortDirection === 'ASC'
+            ? ', currently sorted ascending'
+            : ', currently sorted descending'
+          : ''
+      }`}
+    >
+      {label}
+      <span
+        aria-hidden="true"
+        className={cn(
+          'size-6',
+          isActive ? 'opacity-100' : 'opacity-30',
+          sort.sortDirection === 'DESC'
+            ? 'icon-[mdi--caret-down]'
+            : 'icon-[mdi--caret-up]',
+        )}
+      ></span>
+    </Link>
+  );
+}
 
 type ResultsInfiniteProps = {
   initialData: ApiResponseBody;
   query: string;
   mode: string;
+  sort: SortParams;
 };
 
 export function ResultsInfinite({
   initialData,
   query,
   mode,
+  sort,
 }: ResultsInfiniteProps) {
   const AUTOLOAD_DEBOUNCE_MS = 350;
 
@@ -61,6 +132,10 @@ export function ResultsInfinite({
         query,
         mode,
         page: String(nextPage),
+        sortField: sort.sortField,
+        sortDirection: sort.sortDirection,
+        sortField2: sort.sortField2,
+        sortDirection2: sort.sortDirection2,
       });
 
       const response = await fetch(`/api/search?${params.toString()}`);
@@ -83,7 +158,16 @@ export function ResultsInfinite({
       loadingRef.current = false;
       setIsLoading(false);
     }
-  }, [hasMore, isLoading, mode, page, pageSize, query, AUTOLOAD_DEBOUNCE_MS]);
+  }, [
+    hasMore,
+    isLoading,
+    mode,
+    page,
+    pageSize,
+    query,
+    sort,
+    AUTOLOAD_DEBOUNCE_MS,
+  ]);
 
   useEffect(() => {
     const node = sentinelRef.current;
@@ -251,11 +335,61 @@ export function ResultsInfinite({
             className="hidden sm:block"
             headers={[
               { label: 'Details' },
-              { label: 'Account ID' },
-              { label: 'Parcel ID' },
-              { label: 'Owner' },
-              { label: 'Address' },
-              { label: 'Subdivision' },
+              {
+                label: (
+                  <SortableHeaderLabel
+                    label="Account ID"
+                    field="TAX_ID"
+                    sort={sort}
+                    query={query}
+                    mode={mode}
+                  />
+                ),
+              },
+              {
+                label: (
+                  <SortableHeaderLabel
+                    label="Parcel ID"
+                    field="PARCEL_ID"
+                    sort={sort}
+                    query={query}
+                    mode={mode}
+                  />
+                ),
+              },
+              {
+                label: (
+                  <SortableHeaderLabel
+                    label="Owner"
+                    field="OWNER"
+                    sort={sort}
+                    query={query}
+                    mode={mode}
+                  />
+                ),
+              },
+              {
+                label: (
+                  <SortableHeaderLabel
+                    label="Address"
+                    field="ADDRESS"
+                    sort={sort}
+                    query={query}
+                    mode={mode}
+                  />
+                ),
+              },
+              {
+                label: (
+                  <SortableHeaderLabel
+                    label="Subdivision"
+                    field="SUBD_NAME"
+                    sort={sort}
+                    query={query}
+                    mode={mode}
+                  />
+                ),
+              },
               { label: 'Maps' },
             ]}
           >

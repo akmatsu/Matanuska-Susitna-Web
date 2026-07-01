@@ -12,6 +12,8 @@ export async function propertyApiCall<T = unknown>(
 ): Promise<T> {
   'use server';
 
+  console.log(path, params);
+
   const normalizedPath = normalizePropertyPath(path);
 
   // Construct the full URL with query parameters if provided
@@ -27,6 +29,8 @@ export async function propertyApiCall<T = unknown>(
     }
     url.search = searchParams.toString();
   }
+
+  console.log(url.toString());
 
   // Make the API call with the appropriate headers and options
 
