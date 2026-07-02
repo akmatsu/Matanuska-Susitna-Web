@@ -8,6 +8,19 @@ export default function NotFoundPage() {
   return (
     <main className="space-y-4 text-center">
       <PageTitle title="Page Not Found" />
+      <p>
+        Don&apos;t worry —{' '}
+        <span className="font-bold">you&apos;re still in MyProperty</span>, it
+        just looks like this page doesn&apos;t exist or has moved.
+      </p>
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Link href="/" className="msb-btn-primary">
+          Go back to property search page
+        </Link>
+        <Link className="msb-btn-primary" href="/taxmaps">
+          Go to Tax Maps
+        </Link>
+      </div>
       <figure>
         <pre
           className="mx-auto w-fit max-w-full text-left font-mono text-[clamp(0.5rem,1.6vw,1rem)] leading-none whitespace-pre"
@@ -37,17 +50,12 @@ export default function NotFoundPage() {
           ASCII art of a 404 error code
         </figcaption>
       </figure>
-      <p>This page either doesn&apos;t exist or has moved.</p>
-
-      <p>
-        <Link href="/">Go Home</Link>
-      </p>
 
       <p>
         <Link
           target="_blank"
           referrerPolicy="no-referrer"
-          href={`https://survey123.arcgis.com/share/b36071e746fc4dd490331a207d1678c9?field:url=${pathname}`}
+          href={`https://survey123.arcgis.com/share/b36071e746fc4dd490331a207d1678c9?field:url=https://myproperty.matsu.gov${pathname}`}
         >
           Report an issue to the development team.
         </Link>
