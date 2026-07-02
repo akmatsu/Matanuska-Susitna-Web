@@ -100,16 +100,24 @@ export function SearchFieldLoaded() {
           <span className="sr-only">Search</span>
         </button>
       </form>
-      <div className="flex items-start gap-1" id="search-help-text">
-        <span
-          className="icon icon-[mdi--info] size-4 text-blue-600"
-          aria-hidden="true"
-        />
-        <p className="text-xs italic">
-          If searching by owner/buyer name, search by last name first. For
-          example, to search for &quot;Bill Jones&quot;, enter &quot;Jones
-          Bill&quot; or just &quot;Jones&quot;.
-        </p>
+      <div className="space-y-2">
+        {['owner', 'wild'].includes(currentMode) && (
+          <p className="before:icon-[mdi--info] text-xs italic before:-mt-1 before:mr-1 before:size-4 before:text-blue-600">
+            For best results when searching by owner name, enter the{' '}
+            <span className="font-semibold">last name only</span>. E.g.: to
+            search for &quot;Bill Jones&quot;, just enter &quot;Jones&quot;.
+          </p>
+        )}
+        {['address', 'wild'].includes(currentMode) && (
+          <p
+            className="before:icon-[mdi--info] text-xs italic before:-mt-1 before:mr-1 before:size-4 before:text-blue-600"
+            id="search-help-text"
+          >
+            When searching by address, only use abbreviations for directional
+            indicators (N, S, E, W) and street types (St, Ave, Rd, etc). Do not
+            include any punctuation such as commas or periods.
+          </p>
+        )}
       </div>
     </fieldset>
   );

@@ -15,7 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "\n  fragment DocumentCollectionDisplay on DocumentCollection {\n    title\n    documents(orderBy:  {\n       title: asc\n    }) {\n      id\n      ...DocumentButton\n    }\n  }\n": typeof types.DocumentCollectionDisplayFragmentDoc,
-    "\n  fragment DocumentButton on Document {\n    title\n    file {\n      url \n      filename\n      filesize\n    }\n  }\n": typeof types.DocumentButtonFragmentDoc,
+    "\n  fragment DocumentButton on Document {\n    title\n    file {\n      url \n      filename\n      filesize\n    }\n    tagsCount (where:  {\n      id:  {\n          equals: \"cmj28e98u000ffbssetb09ir8\"\n       }\n    })\n  }\n": typeof types.DocumentButtonFragmentDoc,
     "\n  query GetTopicPageDraft($id: ID!, $now: DateTime!) {\n    topicDraft(where: { id: $id }) {\n      ...BasePageInfo\n      boards {\n        ...PageList\n      }\n      trails {\n        ...PageList\n      }\n      parks {\n        ...PageList\n      }\n      facilities(orderBy:  {\n         title: asc\n      }) {\n        ...FacilitiesList\n      }\n    }\n  }\n": typeof types.GetTopicPageDraftDocument,
     "\n  query GetTopicMeta($slug: String!) {\n    topic(where: { slug: $slug }) {\n      title\n      description\n    }\n  }\n": typeof types.GetTopicMetaDocument,
     "\n  query GetTopicPage($slug: String, $now: DateTime!) {\n    topic(where: { slug: $slug }) {\n      ...BasePageInfo \n      boards {\n        ...PageList\n      }\n      trails {\n        ...PageList\n      }\n      parks {\n        ...PageList\n      }\n      facilities(orderBy:  {\n         title: asc\n      }) {\n        ...FacilitiesList\n      }            \n    }\n  }\n": typeof types.GetTopicPageDocument,
@@ -132,7 +132,7 @@ type Documents = {
 };
 const documents: Documents = {
     "\n  fragment DocumentCollectionDisplay on DocumentCollection {\n    title\n    documents(orderBy:  {\n       title: asc\n    }) {\n      id\n      ...DocumentButton\n    }\n  }\n": types.DocumentCollectionDisplayFragmentDoc,
-    "\n  fragment DocumentButton on Document {\n    title\n    file {\n      url \n      filename\n      filesize\n    }\n  }\n": types.DocumentButtonFragmentDoc,
+    "\n  fragment DocumentButton on Document {\n    title\n    file {\n      url \n      filename\n      filesize\n    }\n    tagsCount (where:  {\n      id:  {\n          equals: \"cmj28e98u000ffbssetb09ir8\"\n       }\n    })\n  }\n": types.DocumentButtonFragmentDoc,
     "\n  query GetTopicPageDraft($id: ID!, $now: DateTime!) {\n    topicDraft(where: { id: $id }) {\n      ...BasePageInfo\n      boards {\n        ...PageList\n      }\n      trails {\n        ...PageList\n      }\n      parks {\n        ...PageList\n      }\n      facilities(orderBy:  {\n         title: asc\n      }) {\n        ...FacilitiesList\n      }\n    }\n  }\n": types.GetTopicPageDraftDocument,
     "\n  query GetTopicMeta($slug: String!) {\n    topic(where: { slug: $slug }) {\n      title\n      description\n    }\n  }\n": types.GetTopicMetaDocument,
     "\n  query GetTopicPage($slug: String, $now: DateTime!) {\n    topic(where: { slug: $slug }) {\n      ...BasePageInfo \n      boards {\n        ...PageList\n      }\n      trails {\n        ...PageList\n      }\n      parks {\n        ...PageList\n      }\n      facilities(orderBy:  {\n         title: asc\n      }) {\n        ...FacilitiesList\n      }            \n    }\n  }\n": types.GetTopicPageDocument,
@@ -269,7 +269,7 @@ export function gql(source: "\n  fragment DocumentCollectionDisplay on DocumentC
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment DocumentButton on Document {\n    title\n    file {\n      url \n      filename\n      filesize\n    }\n  }\n"): (typeof documents)["\n  fragment DocumentButton on Document {\n    title\n    file {\n      url \n      filename\n      filesize\n    }\n  }\n"];
+export function gql(source: "\n  fragment DocumentButton on Document {\n    title\n    file {\n      url \n      filename\n      filesize\n    }\n    tagsCount (where:  {\n      id:  {\n          equals: \"cmj28e98u000ffbssetb09ir8\"\n       }\n    })\n  }\n"): (typeof documents)["\n  fragment DocumentButton on Document {\n    title\n    file {\n      url \n      filename\n      filesize\n    }\n    tagsCount (where:  {\n      id:  {\n          equals: \"cmj28e98u000ffbssetb09ir8\"\n       }\n    })\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

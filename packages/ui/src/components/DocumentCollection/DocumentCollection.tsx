@@ -60,6 +60,11 @@ const documentButtonFragment = gql(`
       filename
       filesize
     }
+    tagsCount (where:  {
+      id:  {
+          equals: "cmj28e98u000ffbssetb09ir8"
+       }
+    })
   }
 `);
 
@@ -84,6 +89,8 @@ function Document({
   const className = clsx('flex items-center gap-1', {
     'justify-between': !centerLabel,
   });
+
+  const isArchive = doc.tagsCount ? doc.tagsCount > 0 : false;
 
   return (
     <li className="my-2">
@@ -110,6 +117,11 @@ function Document({
             'icon-[mdi--eye]': fileType === 'PDF' && isInternal,
           })}
         ></span>
+        {isArchive && (
+          <div className="bg-secondary ml-1 flex items-center justify-center rounded px-1 text-xs text-black">
+            Archive
+          </div>
+        )}
       </Btn>
     </li>
   );

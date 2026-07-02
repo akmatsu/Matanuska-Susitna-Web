@@ -202,9 +202,32 @@ export function ResultsInfinite({
 
   if (!rows.length) {
     return (
-      <p className="mt-4 text-center text-gray-600">
-        No results found for query &quot;{query}&quot;.
-      </p>
+      <div className="mt-4 flex flex-col items-center gap-2 text-center text-gray-600">
+        <p>No results found for query &quot;{query}&quot;.</p>
+        <div className="max-w-2xl space-y-2">
+          {['owner', 'wild'].includes(mode) && (
+            <div className="rounded border-l-4 border-blue-500 bg-blue-100 p-2 text-left">
+              <p>
+                For best results when searching by owner name, enter the{' '}
+                <span className="font-bold">last name only</span>. E.g.: to
+                search for &quot;Bill Jones&quot;, just enter &quot;Jones&quot;.
+              </p>
+            </div>
+          )}
+          {['address', 'wild'].includes(mode) && (
+            <div className="rounded border-l-4 border-blue-500 bg-blue-100 p-2 text-left">
+              <p>
+                When searching by address,{' '}
+                <span className="font-bold">only use abbreviations </span> for
+                directional indicators{' '}
+                <span className="font-bold">(N, S, E, W) </span> and street
+                types <span className="font-bold">(St, Ave, Rd, etc)</span>. Do
+                not include punctuation such as commas or periods. St.&quot;
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
     );
   }
 
