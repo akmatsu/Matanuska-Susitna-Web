@@ -75,6 +75,7 @@ export default async function MyParcelDetailPage(
               <PropertyTable>
                 <PropertyRow label="Subdivision" value={data.SUBD_NAME} />
                 <PropertyRow label="City" value={data.CITY} />
+                <PropertyRow label="Tax Map" value={data.MAP} />
                 <PropertyRow
                   label="Maps & Permits"
                   className="print:hidden"
@@ -350,9 +351,9 @@ export default async function MyParcelDetailPage(
               </section>
             )}
 
-            {data.RECORDED_DOCUMENTS && data.RECORDED_DOCUMENTS.length > 0 && (
-              <section className="col-span-8">
-                <SectionHeader title="Recorded Documents" />
+            <section className="col-span-8">
+              <SectionHeader title="Recorded Documents" />
+              {data.RECORDED_DOCUMENTS && data.RECORDED_DOCUMENTS.length > 0 ? (
                 <DataTable
                   headers={[
                     { label: 'Date' },
@@ -382,8 +383,12 @@ export default async function MyParcelDetailPage(
                     />
                   ))}
                 </DataTable>
-              </section>
-            )}
+              ) : (
+                <p className="p-2">
+                  No recording documents available for this parcel.
+                </p>
+              )}
+            </section>
           </div>
           <section>
             <SectionHeader
