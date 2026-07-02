@@ -11,6 +11,11 @@ const documentLinkFragment = gql(`
       filename
       url
     }
+    tagsCount (where:  {
+       id:  {
+          equals: "cmj28e98u000ffbssetb09ir8"
+       }
+    })
   }
 `);
 
@@ -37,6 +42,7 @@ export function DocumentLink<C extends ElementType = typeof Link>({
 
   const fileType = getFileType(data?.file?.filename);
   const isInternal = checkIsInternal(data?.file?.url);
+  const isArchive = data?.tagsCount ? data.tagsCount > 0 : false;
 
   const Comp = as ?? Link;
 
@@ -49,7 +55,7 @@ export function DocumentLink<C extends ElementType = typeof Link>({
       hideExternalIcon
       className={clsx(
         {
-          'after:ml-1 after:-mb-0.5': !hideIcon,
+          'after:-mb-0.5 after:ml-1': !hideIcon,
           'after:icon-[mdi--download]': fileType !== 'PDF' && !hideIcon,
           'after:icon-[mdi--external-link]':
             fileType === 'PDF' && !isInternal && !hideIcon,
@@ -61,6 +67,11 @@ export function DocumentLink<C extends ElementType = typeof Link>({
     >
       {children ||
         (data?.title || data?.file?.filename)?.replace(/^\d+\s?-?.?\s/g, '')}
+      {isArchive && (
+        <div className="bg-secondary ml-1 flex items-center justify-center rounded px-1 text-xs text-black">
+          Archive
+        </div>
+      )}
     </Comp>
   );
 }
