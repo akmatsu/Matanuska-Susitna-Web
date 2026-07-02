@@ -4,6 +4,7 @@ import Link from 'next/link';
 import NextTopLoader from 'nextjs-toploader';
 import { FeedbackButton } from '@/components/FeedbackButton';
 import { Suspense } from 'react';
+import Script from 'next/script';
 
 export const metadata = {
   metadataBase:
@@ -39,6 +40,11 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           </header>
           {props.children}
         </div>
+        <Script
+          src="//script.crazyegg.com/pages/scripts/0127/8089.js"
+          async
+          type="text/javascript"
+        />
       </body>
     </html>
   );
