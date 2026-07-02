@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 
 export default function NotFoundPage() {
   const pathname = usePathname();
+
   return (
     <main className="space-y-4 text-center">
       <PageTitle title="Page Not Found" />

@@ -14,6 +14,19 @@ export default function ErrorPage({
   return (
     <main className="space-y-4 text-center">
       <PageTitle title="Oops!" />
+      <p>
+        Don&apos;t worry —{' '}
+        <span className="font-bold">you&apos;re still in MyProperty</span>, it
+        just looks like an unexpected error occurred.
+      </p>
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Link href="/" className="msb-btn-primary">
+          Go back to property search page
+        </Link>
+        <Link className="msb-btn-primary" href="/taxmaps">
+          Go to Tax Maps
+        </Link>
+      </div>
       <figure>
         <figure>
           <pre
