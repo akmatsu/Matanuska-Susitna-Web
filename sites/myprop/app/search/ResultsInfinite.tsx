@@ -222,7 +222,7 @@ export function ResultsInfinite({
                 directional indicators{' '}
                 <span className="font-bold">(N, S, E, W) </span> and street
                 types <span className="font-bold">(St, Ave, Rd, etc)</span>. Do
-                not include punctuation such as commas or periods. St.&quot;
+                not include punctuation such as commas or periods.
               </p>
             </div>
           )}
