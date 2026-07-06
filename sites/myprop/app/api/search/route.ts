@@ -33,16 +33,6 @@ export async function GET(request: NextRequest) {
   });
 
   try {
-    console.log(
-      'Received search request with query:',
-      query,
-      'mode:',
-      mode,
-      'page:',
-      page,
-      'sort:',
-      sort,
-    );
     const data = await propertyApiCall<ApiResponseBody>('/search', {
       query,
       mode,

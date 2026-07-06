@@ -5,8 +5,8 @@ import { useRouter } from 'nextjs-toploader/app';
 import { useState } from 'react';
 
 const searchOptions = [
-  { value: 'wild', label: 'Search by all fields' },
   { value: 'owner', label: 'Owner Name Search' },
+  { value: 'wild', label: 'Search by all fields' },
   { value: 'address', label: 'Address Search' },
   { value: 'tax', label: 'Tax ID Search' },
   { value: 'parcel', label: 'PID Search' },
@@ -19,7 +19,7 @@ export function SearchFieldLoaded() {
   const router = useRouter();
 
   const [currentMode, setCurrentMode] = useState(
-    searchParams.get('mode') || 'wild',
+    searchParams.get('mode') || 'owner',
   );
 
   return (
@@ -35,7 +35,7 @@ export function SearchFieldLoaded() {
           const query = formData.get('query');
           if (!query || String(query).length === 0) return;
           const newSearchParams = new URLSearchParams(searchParams.toString());
-          const currentMode = searchParams.get('mode') || 'wild';
+          const currentMode = searchParams.get('mode') || 'owner';
           newSearchParams.set('mode', String(type));
           newSearchParams.set('query', String(query));
           // Reset sorting to defaults when mode changes
@@ -52,11 +52,11 @@ export function SearchFieldLoaded() {
           Search Type
         </label>
         <Select
-          key={searchParams.get('mode') || 'wild'}
+          key={searchParams.get('mode') || 'owner'}
           options={searchOptions}
           onChange={(e) => setCurrentMode(e.target.value)}
           name="search-type"
-          defaultValue={searchParams.get('mode') || 'wild'}
+          defaultValue={searchParams.get('mode') || 'owner'}
           id="search-type"
           className="p-2 sm:px-1 sm:py-0"
         />
@@ -104,7 +104,9 @@ export function SearchFieldLoaded() {
         {['owner', 'wild'].includes(currentMode) && (
           <p className="before:icon-[mdi--info] text-xs italic before:-mt-1 before:mr-1 before:size-4 before:text-blue-600">
             For best results when searching by owner name, enter the{' '}
-            <span className="font-semibold">last name only</span>. E.g.: to
+            <span className="font-semibold">last name only</span>. If last name
+            is common, like &quot;smith&quot;, you may need to include the first
+            name as well, or try searching for an address instead. E.g.: to
             search for &quot;Bill Jones&quot;, just enter &quot;Jones&quot;.
           </p>
         )}
