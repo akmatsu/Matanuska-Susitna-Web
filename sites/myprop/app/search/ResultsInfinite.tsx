@@ -532,6 +532,18 @@ export function ResultsInfinite({
                   >
                     View Details
                   </Link>
+                  <Link
+                    href={`https://parcelviewer.matsu.gov/vertigisstudio/web/?app=05240199d948427e88bf8ea2ebea9513&workflow=b3ee4694-fbe2-4683-b4e9-114fe8d4cca0&workflowParams=${result.PARCEL_ID}`}
+                    className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                    target="_blank"
+                    title="View Interactive Map"
+                  >
+                    <span className="sr-only">View Interactive Map</span>
+                    <span
+                      aria-hidden="true"
+                      className="icon-[mdi--map-outline] size-full"
+                    ></span>
+                  </Link>
                   {result.MAP && (
                     <Link
                       href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
