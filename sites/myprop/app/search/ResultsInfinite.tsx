@@ -231,6 +231,8 @@ export function ResultsInfinite({
     );
   }
 
+  console.log(parcelRows);
+
   return (
     <>
       {modeIsSubdivision ? (
@@ -451,8 +453,23 @@ export function ResultsInfinite({
                         {result.MAP && (
                           <div className="flex items-center gap-2 p-1">
                             <Link
+                              href={`https://parcelviewer.matsu.gov/vertigisstudio/web/?app=05240199d948427e88bf8ea2ebea9513&workflow=b3ee4694-fbe2-4683-b4e9-114fe8d4cca0&workflowParams=${result.PARCEL_ID}`}
+                              className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                              target="_blank"
+                              title="View Interactive Map"
+                            >
+                              <span className="sr-only">
+                                View Interactive Map
+                              </span>
+                              <span
+                                aria-hidden="true"
+                                className="icon-[mdi--map-outline] size-full"
+                              ></span>
+                            </Link>
+                            <Link
                               href={`https://matsugov.us/taxmaps/pdf/${result.MAP.toUpperCase()}.pdf`}
                               className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                              target="_blank"
                               title="View PDF Map"
                             >
                               <span className="sr-only">View PDF Map</span>
@@ -465,6 +482,7 @@ export function ResultsInfinite({
                               <Link
                                 href={`https://matsugov.us/taxmaps/dxf/${result.BASEMAP_ABBR.toUpperCase()}00.dxf`}
                                 className="bg-primary flex size-8 items-center justify-center rounded-full p-1.5 text-white"
+                                target="_blank"
                                 title="Download DXF Map"
                               >
                                 <span className="sr-only">
