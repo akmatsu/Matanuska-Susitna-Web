@@ -1,5 +1,8 @@
 import { redirect } from 'next/navigation';
+import { NextRequest } from 'next/server';
 
-export function GET() {
-  redirect('/?mode=tax');
+export function GET(req: NextRequest) {
+  const searchParams = req.nextUrl.searchParams;
+  const parm = searchParams.get('parm');
+  redirect(`/search?mode=tax&query=${parm}`);
 }

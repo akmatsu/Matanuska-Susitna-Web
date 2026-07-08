@@ -8,11 +8,15 @@ export default function NotFoundPage() {
 
   return (
     <main className="space-y-4 text-center">
-      <PageTitle title="Page Not Found" />
+      <PageTitle title="MyProperty — Page Not Found" />
       <p>
-        Don&apos;t worry —{' '}
-        <span className="font-bold">you&apos;re still in MyProperty</span>, it
-        just looks like this page doesn&apos;t exist or has moved.
+        Looks like this page doesn&apos;t exist or has been moved. MyProperty
+        has recently been updated so some old links may no longer work.
+      </p>
+      <p>
+        Use the links to below to go back to the property search page or tax
+        maps, or report an issue if you still can&apos;t find what you&apos;re
+        looking for.
       </p>
       <div className="flex flex-col items-center justify-center gap-2">
         <Link href="/" className="msb-btn-primary">
@@ -22,7 +26,7 @@ export default function NotFoundPage() {
           Go to Tax Maps
         </Link>
       </div>
-      <figure>
+      {/* <figure>
         <pre
           className="mx-auto w-fit max-w-full text-left font-mono text-[clamp(0.5rem,1.6vw,1rem)] leading-none whitespace-pre"
           role="img"
@@ -50,7 +54,7 @@ export default function NotFoundPage() {
         <figcaption className="sr-only">
           ASCII art of a 404 error code
         </figcaption>
-      </figure>
+      </figure> */}
 
       <p>
         <Link
