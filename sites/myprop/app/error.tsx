@@ -2,6 +2,7 @@
 
 import { PageTitle } from '@/components/PageTitle';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export default function ErrorPage({
   error,
@@ -9,7 +10,9 @@ export default function ErrorPage({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  const url = window.location.href;
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const url = `https://myproperty.matsu.gov${pathname}?${searchParams.toString()}`;
 
   return (
     <main className="space-y-4 text-center">

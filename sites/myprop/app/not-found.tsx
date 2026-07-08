@@ -1,10 +1,11 @@
 'use client';
 import { PageTitle } from '@/components/PageTitle';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export default function NotFoundPage() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   return (
     <main className="space-y-4 text-center">
@@ -60,7 +61,7 @@ export default function NotFoundPage() {
         <Link
           target="_blank"
           referrerPolicy="no-referrer"
-          href={`https://survey123.arcgis.com/share/b36071e746fc4dd490331a207d1678c9?field:url=https://myproperty.matsu.gov${pathname}`}
+          href={`https://survey123.arcgis.com/share/b36071e746fc4dd490331a207d1678c9?field:url=https://myproperty.matsu.gov${pathname}?${searchParams.toString()}`}
         >
           Report an issue to the development team.
         </Link>
