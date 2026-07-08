@@ -1,12 +1,9 @@
-'use client';
+import { FeedbackLink } from '@/components/feedbackLink';
 import { PageTitle } from '@/components/PageTitle';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 export default function NotFoundPage() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
   return (
     <main className="space-y-4 text-center">
       <PageTitle title="MyProperty — Page Not Found" />
@@ -58,13 +55,9 @@ export default function NotFoundPage() {
       </figure> */}
 
       <p>
-        <Link
-          target="_blank"
-          referrerPolicy="no-referrer"
-          href={`https://survey123.arcgis.com/share/b36071e746fc4dd490331a207d1678c9?field:url=https://myproperty.matsu.gov${pathname}?${searchParams.toString()}`}
-        >
-          Report an issue to the development team.
-        </Link>
+        <Suspense>
+          <FeedbackLink>Report an issue to the development team.</FeedbackLink>
+        </Suspense>
       </p>
     </main>
   );

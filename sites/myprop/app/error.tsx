@@ -1,8 +1,9 @@
 'use client';
-
+import { FeedbackLink } from '@/components/feedbackLink';
 import { PageTitle } from '@/components/PageTitle';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+
+import { Suspense } from 'react';
 
 export default function ErrorPage({
   error,
@@ -10,10 +11,6 @@ export default function ErrorPage({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const url = `https://myproperty.matsu.gov${pathname}?${searchParams.toString()}`;
-
   return (
     <main className="space-y-4 text-center">
       <PageTitle title="Oops!" />
@@ -67,13 +64,11 @@ export default function ErrorPage({
         <code>{error.digest}</code>
       </pre>
       <p>
-        <Link
-          target="_blank"
-          referrerPolicy="no-referrer"
-          href={`https://survey123.arcgis.com/share/b36071e746fc4dd490331a207d1678c9?field:url=${url}`}
-        >
-          Report an issue to the development team.
-        </Link>
+        <Suspense>
+          <FeedbackLink>
+            Report this error to the development team.
+          </FeedbackLink>
+        </Suspense>
       </p>
       <p>
         <Link href="/">Go Home</Link>
