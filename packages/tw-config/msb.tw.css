@@ -19,6 +19,7 @@
   --color-primary-lighter: var(--color-us-blue-10);
   --color-primary-light: var(--color-us-blue-30);
   --color-primary: #3160ad;
+  --color-primary-foreground: var(--color-white);
   --color-primary-vivid: var(--color-us-blue-warm-60v);
   --color-primary-dark: var(--color-us-blue-warm-70v);
   --color-primary-darker: var(--color-us-blue-warm-80v);
@@ -26,6 +27,7 @@
   --color-secondary-lighter: var(--color-us-yellow-10v);
   --color-secondary-light: var(--color-us-yellow-20v);
   --color-secondary: #f9cf0e;
+  --color-secondary-foreground: var(--color-black);
   --color-secondary-vivid: var(--color-us-yellow-cool-30v);
   --color-secondary-dark: var(--color-us-yellow-30v);
   --color-secondary-darker: var(--color-us-yellow-40v);
@@ -33,46 +35,54 @@
   --color-accent-cool-lighter: var(--color-us-blue-cool-5v);
   --color-accent-cool-light: var(--color-us-blue-cool-20v);
   --color-accent-cool: var(--color-us-cyan-30v);
+  --color-accent-cool-foreground: var(--color-black);
   --color-accent-cool-dark: var(--color-us-blue-cool-40v);
   --color-accent-cool-darker: var(--color-us-blue-cool-60v);
 
   --color-accent-warm-lighter: var(--color-us-orange-10);
   --color-accent-warm-light: var(--color-us-orange-20v);
   --color-accent-warm: var(--color-us-orange-30v);
+  --color-accent-warm-foreground: var(--color-black);
   --color-accent-warm-dark: var(--color-us-orange-50v);
   --color-accent-warm-darker: var(--color-us-orange-60);
 
   --color-info-lighter: var(--color-us-cyan-5);
   --color-info-light: var(--color-us-cyan-20);
   --color-info: var(--color-us-cyan-30v);
+  --color-info-foreground: var(--color-black);
   --color-info-dark: var(--color-us-cyan-40v);
   --color-info-darker: var(--color-us-blue-cool-60);
 
   --color-error-lighter: var(--color-us-red-warm-10);
   --color-error-light: var(--color-us-red-warm-30v);
   --color-error: #c9332f;
+  --color-error-foreground: var(--color-white);
   --color-error-dark: var(--color-us-red-60v);
   --color-error-darker: var(--color-us-red-70);
 
   --color-warning-lighter: var(--color-us-yellow-5);
   --color-warning-light: var(--color-us-yellow-10v);
   --color-warning: var(--color-us-gold-20v);
+  --color-warning-foreground: var(--color-black);
   --color-warning-dark: var(--color-us-gold-30v);
   --color-warning-darker: var(--color-us-gold-50v);
 
   --color-success-lighter: var(--color-us-green-cool-5);
   --color-success-light: var(--color-us-green-cool-20v);
   --color-success: var(--color-us-green-cool-40v);
+  --color-success-foreground: var(--color-white);
   --color-success-dark: var(--color-us-green-cool-50v);
   --color-success-darker: var(--color-us-green-cool-60v);
 
   --color-disabled-lighter: var(--color-us-gray-20);
   --color-disabled-light: var(--color-us-gray-40);
-  --color-disabled: var(--color-us-gray-50);
+  --color-disabled: var(--color-us-gray-20);
+  --color-disabled-foreground: var(--color-us-gray-60);
   --color-disabled-dark: var(--color-us-gray-70);
   --color-disabled-darker: var(--color-us-gray-90);
 
   --color-emergency: var(--color-us-red-warm-60v);
+  --color-emergency-foreground: var(--color-white);
   --color-emergency-dark: var(--color-us-red-warm-80);
   /* End Theme aliases */
 

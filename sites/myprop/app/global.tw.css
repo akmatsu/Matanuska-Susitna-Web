@@ -132,21 +132,13 @@ p .msb-md-body {
   background: --value(--color-*);
   border-width: 1;
   border-color: color-mix(in oklch, --value(--color-*) 60%, black);
-  color: contrast-color(--value(--color-*));
+  color: --value(--color-* -foreground);
 
   @variant hover {
     background: color-mix(
       in oklch,
       --value(--color- *) 95%,
-      contrast-color(--value(--color- *))
-    );
-
-    color: contrast-color(
-      color-mix(
-        in oklch,
-        --value(--color- *) 95%,
-        contrast-color(--value(--color- *))
-      )
+      --value(--color- * -foreground)
     );
   }
 }
