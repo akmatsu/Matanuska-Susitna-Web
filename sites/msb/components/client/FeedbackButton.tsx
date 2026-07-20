@@ -1,13 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { LinkButton } from '@/components/static/LinkButton/LinkButton';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { CookieBanner } from '@matsugov/ui/CookieBanner';
 import { Button } from '@matsugov/ui';
 import { useSideNavDrawer } from '@/hooks/SideNavDrawerContext';
 
 export const FeedbackButton = () => {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { open, panelRef } = useSideNavDrawer();
   const [showButton, setShowButton] = useState(false);
 
@@ -45,7 +46,7 @@ export const FeedbackButton = () => {
             MSB Problem Reporter
           </LinkButton>
           <LinkButton
-            href={`https://survey123.arcgis.com/share/b36071e746fc4dd490331a207d1678c9?field:url=${pathname}`}
+            href={`https://survey123.arcgis.com/share/b36071e746fc4dd490331a207d1678c9?field:url=https://matsu.gov${pathname}?${searchParams.toString()}`}
             target="_blank"
             className="before:icon-[mdi--message-alert] before:mr-1 before:-mb-1 before:inline-block before:text-lg"
             color="primary"
