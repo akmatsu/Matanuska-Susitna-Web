@@ -117,6 +117,46 @@ export async function searchPages({
   };
 }
 
+export async function instantSearch({
+  query,
+}: {
+  query: string;
+}): Promise<PageSearchDocument[]> {
+  const trimmedQuery = query.trim();
+
+  // Return empty array for empty queries
+  if (!trimmedQuery) {
+    return [];
+  }
+
+  try {
+    const result = await client
+      .collections(TYPESENSE_COLLECTION)
+      .documents()
+      .search({
+        q: trimmedQuery,
+        query_by: 'title,description,tags,body',
+        query_by_weights: '4,2,2,1',
+        text_match_type: 'max_weight',
+        num_typos: 2,
+        min_len_1typo: 4,
+        min_len_2typo: 8,
+        drop_tokens_threshold: 1,
+        prioritize_exact_match: true,
+        prioritize_token_position: true,
+        sort_by: '_text_match:desc,title:asc',
+        exclude_fields: 'embedding',
+        per_page: 5,
+      });
+
+    return (result.hits?.map((hit: any) => hit.document) ||
+      []) as PageSearchDocument[];
+  } catch (error) {
+    console.error('Failed to perform instant search:', error);
+    return [];
+  }
+}
+
 export async function getPageTypes({
   limit = 100,
 }: {
@@ -155,16 +195,20 @@ export async function getPageTypes({
 }
 
 export async function getPopularSearches({
+  query = '',
   limit = 10,
 }: {
+  query?: string;
   limit?: number;
 } = {}): Promise<PopularQuery[]> {
   try {
+    const trimmedQuery = query.trim();
     const result = await client
       .collections(POPULAR_QUERIES_COLLECTION)
       .documents()
       .search<any>({
-        q: '*',
+        q: trimmedQuery || '*',
+        query_by: 'q',
         sort_by: 'count:desc',
         limit,
       });

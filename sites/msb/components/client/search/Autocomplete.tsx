@@ -9,6 +9,16 @@ type PopularSearchSuggestion = {
   title: string;
   type: string;
   description: string;
+  url?: string;
+};
+
+type InstantSearchResult = {
+  id: string;
+  title: string;
+  description?: string;
+  type?: string;
+  url?: string;
+  slug?: string;
 };
 
 type AutocompleteProps = {
@@ -36,13 +46,18 @@ export function Autocomplete({
   const [popularSearches, setPopularSearches] = useState(
     initialPopularSearches.map((item) => item.q),
   );
+  const [instantResults, setInstantResults] = useState<InstantSearchResult[]>(
+    [],
+  );
   const [error, setError] = useState('');
   const submittedQueryRef = useRef<string | null>(null);
+  const selectedResultRef = useRef<PopularSearchSuggestion | null>(null);
 
   const router = useRouter();
 
+  // Fetch popular searches for non-home variant
   useEffect(() => {
-    if (initialPopularSearches.length) return;
+    if (isHomeVariant || initialPopularSearches.length) return;
 
     const fetchPopularSearches = async () => {
       try {
@@ -57,7 +72,65 @@ export function Autocomplete({
     };
 
     fetchPopularSearches();
-  }, [initialPopularSearches.length]);
+  }, [initialPopularSearches.length, isHomeVariant]);
+
+  // Fetch matching popular searches as user types (default variant only)
+  useEffect(() => {
+    // Only run for default variant when user is typing
+    if (isHomeVariant) return;
+
+    const trimmedQuery = typedQuery.trim();
+
+    const timer = setTimeout(async () => {
+      try {
+        const response = await fetch(
+          `/api/search/popular?q=${encodeURIComponent(trimmedQuery)}`,
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setPopularSearches(data.queries.map((item: any) => item.q));
+        }
+      } catch (error) {
+        console.error('Failed to fetch popular searches:', error);
+      }
+    }, 300); // Debounce by 300ms
+
+    return () => clearTimeout(timer);
+  }, [typedQuery, isHomeVariant]);
+
+  // Fetch instant search results as user types (home variant only)
+  useEffect(() => {
+    // Only run this effect when in home variant and there's a query
+    if (!isHomeVariant) return;
+
+    const trimmedQuery = typedQuery.trim();
+    if (!trimmedQuery) return;
+
+    const timer = setTimeout(async () => {
+      try {
+        const response = await fetch(
+          `/api/search/instant?q=${encodeURIComponent(trimmedQuery)}`,
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setInstantResults(
+            data.results.map((result: InstantSearchResult) => ({
+              ...result,
+              url:
+                result.url ||
+                (result.slug
+                  ? `/${result.slug}`
+                  : `/search?query=${trimmedQuery}`),
+            })),
+          );
+        }
+      } catch (error) {
+        console.error('Failed to fetch instant search results:', error);
+      }
+    }, 300); // Debounce by 300ms
+
+    return () => clearTimeout(timer);
+  }, [typedQuery, isHomeVariant]);
 
   const submitSearch = useCallback(
     (searchQuery: string, searchType: string) => {
@@ -86,28 +159,50 @@ export function Autocomplete({
   );
 
   const suggestions = useMemo(() => {
-    const searchTerm = typedQuery.trim().toLowerCase();
-    const filtered = searchTerm.length
-      ? popularSearches.filter(
-          (item) => item.toLowerCase().includes(searchTerm) && item !== '*',
-        )
-      : popularSearches.filter((item) => item !== '*');
+    // Don't show suggestions until user starts typing
+    const trimmedQuery = typedQuery.trim();
+    if (!trimmedQuery) {
+      return [];
+    }
 
-    return filtered.slice(0, 8).map((item) => ({
-      id: item,
-      title: item,
-      type: 'Popular Search',
-      description: 'Select to fill query',
-    }));
-  }, [typedQuery, popularSearches]);
+    if (isHomeVariant) {
+      // For home variant, show instant search results
+      return instantResults.map((result) => ({
+        id: result.id,
+        title: result.title,
+        type: result.type || 'Page',
+        description: result.description || 'Click to view',
+        url: result.url,
+      }));
+    }
+
+    // For default variant, show popular searches (server-filtered)
+    return popularSearches
+      .filter((item) => item !== '*')
+      .slice(0, 8)
+      .map((item) => ({
+        id: item,
+        title: item,
+        type: 'Popular Search',
+        description: 'Select to fill query',
+      }));
+  }, [popularSearches, isHomeVariant, instantResults, typedQuery]);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const submittedQuery = query.trim();
     const trimmedType = selectedType.trim();
 
+    // If home variant and a result is selected, navigate to that result
+    if (isHomeVariant && selectedResultRef.current?.url) {
+      router.push(selectedResultRef.current.url);
+      return;
+    }
+
     if (!submittedQuery && !trimmedType) {
-      setError('Please enter a search query or select a type to continue.');
+      if (!isHomeVariant) {
+        setError('Please enter a search query or select a type to continue.');
+      }
       return;
     }
 
@@ -120,6 +215,7 @@ export function Autocomplete({
 
   function onChange(value?: PopularSearchSuggestion | null) {
     if (!value?.title) {
+      selectedResultRef.current = null;
       return;
     }
 
@@ -127,11 +223,22 @@ export function Autocomplete({
     submittedQueryRef.current = value.title;
     setTypedQuery(value.title);
     setQuery(value.title);
-    submitSearch(value.title, isHomeVariant ? '' : selectedType);
+    selectedResultRef.current = value;
+
+    if (isHomeVariant) {
+      // For home variant, navigate directly to the URL
+      if (value.url) {
+        router.push(value.url);
+      }
+    } else {
+      // For default variant, fill the query
+      submitSearch(value.title, selectedType);
+    }
   }
 
   function onActiveItemChange(value?: PopularSearchSuggestion | null) {
     if (!value?.title) {
+      selectedResultRef.current = null;
       if (submittedQueryRef.current !== null) {
         setQuery(submittedQueryRef.current);
         setTypedQuery(submittedQueryRef.current);
@@ -142,6 +249,7 @@ export function Autocomplete({
       return;
     }
 
+    selectedResultRef.current = value;
     setQuery(value.title);
   }
 
@@ -165,6 +273,7 @@ export function Autocomplete({
             onChangeQuery={(e) => {
               setError('');
               submittedQueryRef.current = null;
+              selectedResultRef.current = null;
               setQuery(e.target.value);
               setTypedQuery(e.target.value);
             }}

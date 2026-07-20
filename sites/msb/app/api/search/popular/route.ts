@@ -1,9 +1,10 @@
 import { getPopularSearches } from '@/utils/search/typesense';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const queries = await getPopularSearches({ limit: 10 });
+    const query = request.nextUrl.searchParams.get('q') || '';
+    const queries = await getPopularSearches({ query, limit: 10 });
     return NextResponse.json({ queries });
   } catch (error) {
     console.error('Failed to fetch popular searches:', error);
