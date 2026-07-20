@@ -5,11 +5,6 @@ import { ReactNode } from 'react';
 
 export function NotFoundBackButton(props: { children?: ReactNode }) {
   const router = useRouter();
-  // const [canGoBack, setCanGoBack] = useState(false);
-
-  // useEffect(() => {
-  //   setCanGoBack(window.history.length > 1);
-  // }, []);
 
   const canGoBack = typeof window !== 'undefined' && window.history.length > 1;
   // const canGoBack =

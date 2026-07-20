@@ -3,12 +3,12 @@ import type { Metadata } from 'next';
 import { FeedbackButton } from '@/components/client/FeedbackButton';
 import { ApolloWrapper } from '@msb/js-sdk/components';
 import { SiteInfo } from '@/components/static/Header/SiteInfo';
-// import { signIn, signOut, auth } from '@/auth';
 import { CookieBannerProvider } from '@matsugov/ui/CookieBannerContext';
 import { AnalyticsScript } from '@/components/client/AnalyticsScript';
 import { SideNavDrawerProvider } from '../hooks/SideNavDrawerContext';
 import { SiteHeader } from '@/components/static/Header/SiteHeader';
 import { SiteFooter } from '@/components/static/SiteFooter/SiteFooter';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   metadataBase:
@@ -25,8 +25,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const a = await auth();
-
   return (
     <html lang="en" className="scroll-smooth">
       <body>
@@ -38,7 +36,9 @@ export default async function RootLayout({
           </main>
 
           <CookieBannerProvider>
-            <FeedbackButton />
+            <Suspense>
+              <FeedbackButton />
+            </Suspense>
             <SiteFooter />
             {process.env.NODE_ENV === 'production' && <AnalyticsScript />}
           </CookieBannerProvider>
