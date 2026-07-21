@@ -1,6 +1,7 @@
 import { propertyApiCall } from '@msb/property-sdk';
 import { ResultsInfinite } from './ResultsInfinite';
 import { ApiResponseBody, SortParams, toSingleParam } from './types';
+import { redirect } from 'next/navigation';
 
 export async function Results({
   searchParams,
@@ -11,6 +12,13 @@ export async function Results({
 }) {
   const normalizedQuery = toSingleParam(searchParams.query);
   const normalizedMode = toSingleParam(searchParams.mode);
+
+  if (!normalizedQuery) {
+    const queryParams = new URLSearchParams(
+      searchParams as Record<string, string>,
+    );
+    return redirect(`/?${queryParams.toString()}`);
+  }
 
   const data = await propertyApiCall<ApiResponseBody>('/search', {
     query: normalizedQuery,

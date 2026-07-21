@@ -12,13 +12,15 @@ export async function propertyApiCall<T = unknown>(
 ): Promise<T> {
   'use server';
 
-  console.log(path, params);
-
   const normalizedPath = normalizePropertyPath(path);
 
   // Construct the full URL with query parameters if provided
   const url = new URL(`/property${normalizedPath}`, baseUrl);
+
   if (params) {
+    if (!params.query) {
+      throw new Error('Query parameter cannot be "undefined"');
+    }
     const searchParams = new URLSearchParams();
     for (const [key, value] of Object.entries(params)) {
       if (Array.isArray(value)) {
@@ -29,8 +31,6 @@ export async function propertyApiCall<T = unknown>(
     }
     url.search = searchParams.toString();
   }
-
-  console.log(url.toString());
 
   // Make the API call with the appropriate headers and options
 
