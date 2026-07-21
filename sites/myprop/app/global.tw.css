@@ -90,6 +90,13 @@ p .msb-md-body {
 }
 
 @layer components {
+  @media print {
+    .print-preserve-colors {
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+  }
+
   .focus-ring {
     @apply focus:ring-primary focus:ring-4 focus:ring-offset-2 focus:outline-none;
   }
