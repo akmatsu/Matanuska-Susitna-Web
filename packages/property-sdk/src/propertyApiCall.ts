@@ -18,9 +18,6 @@ export async function propertyApiCall<T = unknown>(
   const url = new URL(`/property${normalizedPath}`, baseUrl);
 
   if (params) {
-    if (!params.query) {
-      throw new Error('Query parameter cannot be "undefined"');
-    }
     const searchParams = new URLSearchParams();
     for (const [key, value] of Object.entries(params)) {
       if (Array.isArray(value)) {
