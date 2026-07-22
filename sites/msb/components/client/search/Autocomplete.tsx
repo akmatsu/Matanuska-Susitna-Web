@@ -3,6 +3,8 @@ import { Button } from '@matsugov/ui/Button';
 import { Combobox } from '@matsugov/ui/Combobox';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { plural } from 'pluralize';
+import v from 'voca';
 
 type PopularSearchSuggestion = {
   id: string;
@@ -114,14 +116,33 @@ export function Autocomplete({
         if (response.ok) {
           const data = await response.json();
           setInstantResults(
-            data.results.map((result: InstantSearchResult) => ({
-              ...result,
-              url:
-                result.url ||
-                (result.slug
-                  ? `/${result.slug}`
-                  : `/search?query=${trimmedQuery}`),
-            })),
+            data.results.map((result: InstantSearchResult) => {
+              let url = result.url;
+              if (!url && result.slug && result.type) {
+                const typeSlug = v.slugify(result.type).toLowerCase();
+                // OrgUnits, departments, and divisions all go to /departments
+                if (
+                  typeSlug.includes('org-unit') ||
+                  typeSlug.includes('orgunit') ||
+                  typeSlug.includes('department') ||
+                  typeSlug.includes('division')
+                ) {
+                  url = `/departments/${result.slug}`;
+                } else {
+                  const formattedType = plural(typeSlug);
+                  url =
+                    formattedType === 'topics'
+                      ? `/${result.slug}`
+                      : `/${formattedType}/${result.slug}`;
+                }
+              } else if (!url) {
+                url = `/search?query=${trimmedQuery}`;
+              }
+              return {
+                ...result,
+                url,
+              };
+            }),
           );
         }
       } catch (error) {
