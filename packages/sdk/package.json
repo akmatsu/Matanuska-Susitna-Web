@@ -38,7 +38,8 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "rollup-preserve-directives": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@typescript/native": "catalog:"
   },
   "peerDependencies": {
     "@apollo/client-integration-nextjs": "^0.12.2",

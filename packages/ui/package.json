@@ -56,7 +56,8 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@typescript/native": "catalog:"
   },
   "peerDependencies": {
     "@matsugov/tw-config": "workspace:^",

@@ -43,6 +43,7 @@
     "semantic-release": "catalog:",
     "turbo": "catalog:",
     "typescript": "catalog:",
+    "@typescript/native": "catalog:",
     "typescript-eslint": "catalog:"
   },
   "engines": {
