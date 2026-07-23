@@ -80,7 +80,8 @@
     "install": "^0.13.0",
     "radix-ui": "^1.4.3",
     "resize-observer-polyfill": "^1.5.1",
-    "tailwind-merge": "^3.5.0"
+    "tailwind-merge": "^3.5.0",
+    "voca": "^1.4.1"
   },
   "postcss": {
     "plugins": {

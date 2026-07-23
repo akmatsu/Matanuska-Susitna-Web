@@ -42,18 +42,18 @@ export function PublicNoticeCard({
       {flag ? (
         <>
           <div className="hidden sm:flex">
-            <CardMedia className="relative w-96 max-w-full aspect-video">
+            <CardMedia className="relative aspect-video w-96 max-w-full">
               <Image
                 src={
                   item.heroImage?.split('?')[0] ||
                   'https://d1159zutbdy4l.cloudfront.net/public/uploads/549025a4-d712-4f57-93b9-edcb2f6b1d6aoptimized_images/1920x248_optimized_image.jpg'
                 }
                 alt={item.title!}
-                objectFit="cover"
+                style={{ objectFit: 'cover' }}
                 fill
               />
             </CardMedia>
-            <div className="flex flex-col justify-center p-4 w-full">
+            <div className="flex w-full flex-col justify-center p-4">
               <CardHeader className="mb-4 w-full">
                 <CardTitle>{item.title}</CardTitle>
               </CardHeader>
@@ -63,7 +63,7 @@ export function PublicNoticeCard({
             </div>
           </div>
 
-          <CardMedia className="relative overflow-hidden aspect-[2] sm:hidden">
+          <CardMedia className="relative aspect-[2] overflow-hidden sm:hidden">
             <Image
               src={
                 item.heroImage?.split('?')[0] ||
@@ -71,8 +71,8 @@ export function PublicNoticeCard({
               }
               alt={item.title!}
               loading="lazy"
-              className="aspect-[2] object-cover h-full w-full"
-              objectFit="cover"
+              className="aspect-[2] h-full w-full object-cover"
+              style={{ objectFit: 'cover' }}
               fill
             />
           </CardMedia>

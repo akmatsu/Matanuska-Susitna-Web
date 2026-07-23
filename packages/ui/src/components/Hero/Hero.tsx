@@ -38,19 +38,18 @@ export function Hero({
     return (
       <section
         className={clsx(
-          `w-full h-[150px] md:h-[200px] lg:h-[250px] xl:h-[300px] relative`,
+          `relative h-37.5 w-full md:h-50 lg:h-62.5 xl:h-75`,
           className,
         )}
       >
         <Image
           src={url}
           fill
-          objectFit="cover"
           alt="Hero Image"
-          style={{ objectPosition: pos }}
+          style={{ objectPosition: pos, objectFit: 'cover' }}
           className="absolute top-0 z-0"
         />
-        <div className="relative z-10 w-full h-full flex justify-center items-center">
+        <div className="relative z-10 flex h-full w-full items-center justify-center">
           {children}
         </div>
       </section>
