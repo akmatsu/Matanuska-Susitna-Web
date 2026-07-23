@@ -49,6 +49,8 @@
     "@types/react-dom": "catalog:",
     "@types/voca": "catalog:",
     "postcss": "catalog:",
-    "tailwindcss": "catalog:"
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "@typescript/native": "catalog:"
   }
 }
