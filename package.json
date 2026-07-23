@@ -29,11 +29,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "catalog:",
     "@eslint/js": "catalog:",
-    "@semantic-release/changelog": "catalog:",
-    "@semantic-release/commit-analyzer": "catalog:",
-    "@semantic-release/git": "catalog:",
-    "@semantic-release/github": "catalog:",
-    "@semantic-release/release-notes-generator": "catalog:",
     "@typescript/native": "catalog:",
     "eslint": "catalog:",
     "eslint-config-flat-gitignore": "catalog:",
@@ -42,7 +37,6 @@
     "jiti": "catalog:",
     "prettier": "catalog:",
     "prettier-plugin-tailwindcss": "catalog:",
-    "semantic-release": "catalog:",
     "turbo": "catalog:",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:"
