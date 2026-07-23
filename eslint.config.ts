@@ -31,6 +31,10 @@ export default defineConfig(
     'packages/sdk/src/graphql/**',
   ]),
   {
+    settings: {
+      // Specify the React version since eslint-config-next still relies on legacy `context.getFilename`. See https://github.com/vercel/next.js/issues/89764#issuecomment-3928272828
+      react: { version: '19' },
+    },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off', // Allow 'any' type
       '@typescript-eslint/no-unused-vars': 'warn',

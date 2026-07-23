@@ -41,7 +41,8 @@ catalog:
   '@testing-library/dom': ^10.4.1
   '@testing-library/react': ^16.3.2
   '@types/file-saver': ^2.0.7
-  '@types/node': 22.19.10
+  # We're intentionally using v22 for @types/node to match the Node.js version in use v24 current has some compatibility issues with NextJS
+  '@types/node': ^22.19.10
   '@types/pluralize': ^0.0.33
   '@types/react': ^19.2.17
   '@types/react-dom': ^19.2.3
@@ -82,9 +83,11 @@ catalog:
   tailwind-merge: ^3.6.0
   tailwindcss: ^4.3.3
   turbo: ^2.10.6
+  # TypeScript 7 was recently released but is a transitory phase. Since not all packages have adopted it yet, we are running it alongside v6. See https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-6.0.
   '@typescript/native': npm:typescript@^7.0.2
   typescript: npm:@typescript/typescript6@^6.0.2
   typescript-eslint: ^8.65.0
   typesense: ^3.0.6
   unist-util-visit: ^5.1.0
   voca: ^1.4.1
+  jiti: ^2.7.0
