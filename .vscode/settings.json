@@ -9,8 +9,10 @@
     "Codegen",
     "commonmark",
     "dmeo",
+    "embla",
     "enddt",
     "Entra",
+    "graphqlsp",
     "iconify",
     "Instantsearch",
     "IOIDC",
@@ -26,6 +28,7 @@
     "Parli",
     "Prosemirror",
     "Rehype",
+    "rollup",
     "salestax",
     "startdt",
     "stateabbreviation",
@@ -38,7 +41,9 @@
     "Toolbelt",
     "toploader",
     "trussworks",
+    "unrs",
     "uswds",
+    "vaadin",
     "voca",
     "zutbdy"
   ]
