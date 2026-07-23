@@ -21,7 +21,7 @@ export function Calculator() {
 
   const {
     // Input values
-    propertyValue,
+    // propertyValue,
     grocerySpending,
     marijuanaSpending,
     alcoholSpending,
