@@ -29,7 +29,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "catalog:",
     "@eslint/js": "catalog:",
-    "@typescript/native": "catalog:",
     "eslint": "catalog:",
     "eslint-config-flat-gitignore": "catalog:",
     "eslint-config-next": "catalog:",
@@ -44,5 +43,10 @@
   "engines": {
     "node": ">=22"
   },
-  "packageManager": "pnpm@11.3.0"
+  "packageManager": "pnpm@11.3.0",
+  "overrides": {
+    "graphql-tools": {
+      "typescript": "npm:@typescript/typescript6@^6.0.2"
+    }
+  }
 }

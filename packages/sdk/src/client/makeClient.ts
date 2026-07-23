@@ -100,7 +100,9 @@ export function makeClient({
 
     defaultOptions: {
       query: {
-        errorPolicy: 'all', // This allows partial data to be returned even if there are errors
+        // Temporarily type casting to `any` to avoid bug in Apollo Client's type definitions.
+        // TODO: remove type casting to `any` once Apollo Client's type definitions are fixed.
+        errorPolicy: 'all' as any, // This allows partial data to be returned even if there are errors
       },
     },
   });
