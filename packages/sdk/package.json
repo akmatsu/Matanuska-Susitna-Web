@@ -15,7 +15,8 @@
     "./gql": "./src/graphql/index.ts"
   },
   "scripts": {
-    "codegen": "pnpm exec graphql-codegen --config codegen.ts --verbose",
+    "codegen:debug": "pnpm exec graphql-codegen --config codegen.ts --debug",
+    "codegen": "pnpm exec graphql-codegen --config codegen.ts",
     "codegen:watch": "pnpm exec graphql-codegen --config codegen.ts --watch"
   },
   "keywords": [],
@@ -38,8 +39,7 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "rollup-preserve-directives": "catalog:",
-    "typescript": "catalog:",
-    "@typescript/native": "catalog:"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@apollo/client-integration-nextjs": "^0.12.2",

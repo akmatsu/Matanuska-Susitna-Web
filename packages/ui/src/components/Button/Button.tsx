@@ -1,3 +1,4 @@
+'use client';
 import React, { type JSX } from 'react';
 import clsx from 'clsx';
 import { Slot } from 'radix-ui';

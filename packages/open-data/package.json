@@ -12,7 +12,6 @@
   "packageManager": "pnpm@10.33.2",
   "devDependencies": {
     "@matsugov/tsconfig": "workspace:^",
-    "typescript": "catalog:",
-    "@typescript/native": "catalog:"
+    "typescript": "catalog:"
   }
 }
