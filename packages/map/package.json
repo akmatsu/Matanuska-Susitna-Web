@@ -18,7 +18,8 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@typescript/native": "catalog:"
   },
   "peerDependencies": {
     "react": "^19.1.0",
