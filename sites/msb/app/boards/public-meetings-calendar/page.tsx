@@ -63,7 +63,7 @@ export default function PublicMeetingsCalendar() {
         </p>
         <iframe
           src={iframeSrc}
-          className="h-[650px] w-full border-0"
+          className="h-162.5 w-full border-0"
           title="Public Meetings Calendar"
         />
       </ProseWrapper>
