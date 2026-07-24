@@ -55,7 +55,7 @@ export default function NotFoundPage() {
       </figure> */}
 
       <p>
-        <Suspense>
+        <Suspense fallback={<p>Report an issue to the development team.</p>}>
           <FeedbackLink>Report an issue to the development team.</FeedbackLink>
         </Suspense>
       </p>

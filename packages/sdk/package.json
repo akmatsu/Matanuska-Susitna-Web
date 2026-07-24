@@ -24,6 +24,7 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/client": "catalog:",
+    "@graphql-typed-document-node/core": "catalog:",
     "rxjs": "catalog:"
   },
   "devDependencies": {
@@ -35,12 +36,12 @@
     "@parcel/watcher": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "@typescript/native": "catalog:",
     "graphql": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "rollup-preserve-directives": "catalog:",
-    "typescript": "catalog:",
-    "@typescript/native": "catalog:"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@apollo/client-integration-nextjs": "^0.12.2",

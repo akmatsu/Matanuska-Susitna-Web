@@ -1,7 +1,11 @@
 'use client';
-import { FeedbackLink } from '@/components/feedbackLink';
 import { PageTitle } from '@/components/PageTitle';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+const FeedbackLink = dynamic(
+  () => import('@/components/feedbackLink.js').then((m) => m.FeedbackLink),
+  { ssr: false },
+);
 
 import { Suspense } from 'react';
 
@@ -64,7 +68,7 @@ export default function ErrorPage({
         <code>{error.digest}</code>
       </pre>
       <p>
-        <Suspense>
+        <Suspense fallback={<p>Report this error to the development team.</p>}>
           <FeedbackLink>
             Report this error to the development team.
           </FeedbackLink>

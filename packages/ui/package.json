@@ -52,12 +52,13 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "@types/voca": "catalog:",
+    "@typescript/native": "catalog:",
     "postcss": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:",
-    "@typescript/native": "catalog:"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@matsugov/tw-config": "workspace:^",
