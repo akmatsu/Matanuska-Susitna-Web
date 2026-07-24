@@ -11,6 +11,7 @@
   "scripts": {},
   "devDependencies": {
     "@matsugov/tsconfig": "workspace:^",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@typescript/native": "catalog:"
   }
 }
