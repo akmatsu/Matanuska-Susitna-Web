@@ -43,10 +43,5 @@
   "engines": {
     "node": ">=22"
   },
-  "packageManager": "pnpm@11.3.0",
-  "overrides": {
-    "graphql-tools": {
-      "typescript": "npm:@typescript/typescript6@^6.0.2"
-    }
-  }
+  "packageManager": "pnpm@11.3.0"
 }

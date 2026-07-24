@@ -75,9 +75,7 @@ catalog:
   tailwind-merge: ^3.6.0
   tailwindcss: ^4.3.3
   turbo: ^2.10.6
-  # TypeScript 7 was recently released but is a transitory phase. Since not all packages have adopted it yet, we are running it alongside v6. See https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-6.0.
-  # '@typescript/native': npm:typescript@^7.0.2
-  typescript: ^6.0.3
+  typescript: npm:@typescript/typescript6@^6.0.2
   typescript-eslint: ^8.65.0
   typesense: ^3.0.6
   unist-util-visit: ^5.1.0
