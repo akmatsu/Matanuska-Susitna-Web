@@ -3,6 +3,9 @@ packages:
   - sites/*
 catalogMode: prefer
 cleanupUnusedCatalogs: true
+nodeLinker: hoisted
+engineStrict: true
+autoInstallPeers: true
 
 allowBuilds:
   '@parcel/watcher': true
@@ -53,7 +56,7 @@ catalog:
   graphql: ^16.13.2
   ics: ^3.12.0
   install: ^0.13.0
-  # TODO: Start using next from catalog once AWS Amplify adds support for "catalog:" mode in pnpm
+  # TODO: Start using next from catalog once AWS Amplify adds support for "catalog:" mode in pnpm. See https://github.com/aws-amplify/amplify-hosting/issues/4037
   # next: ^16.2.11
   next-auth: 5.0.0-beta.30
   nextjs-toploader: ^3.9.17
