@@ -34,7 +34,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
                 />
               </div>
             </Link>
-            <Suspense>
+            <Suspense fallback={<p>Loading feedback button...</p>}>
               <FeedbackButton />
             </Suspense>
           </header>

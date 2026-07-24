@@ -7,9 +7,7 @@
         "name": "@0no-co/graphqlsp",
         "schema": "http://localhost:3333/api/graphql"
       }
-    ],
-    "moduleResolution": "node16",
-    "module": "node16"
+    ]
   },
   "include": ["./src/**/*.ts"]
 }
