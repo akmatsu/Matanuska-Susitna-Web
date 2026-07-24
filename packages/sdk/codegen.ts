@@ -3,9 +3,9 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 const config: CodegenConfig = {
   schema: '../../../cms/apps/cms/schema.graphql',
   documents: [
-    './src/**/*.{ts,tsx,graphql}',
-    '../ui/src/**/*.{ts,tsx,graphql}',
-    '../../sites/**/*.{ts,tsx,graphql}',
+    './src/**/!(*.d).{ts,tsx,graphql}',
+    '../ui/src/**/!(*.d).{ts,tsx,graphql}',
+    '../../sites/**/!(*.d).{ts,tsx,graphql}',
   ],
   ignoreNoDocuments: true,
   generates: {
