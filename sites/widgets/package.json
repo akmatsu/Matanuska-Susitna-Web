@@ -10,7 +10,7 @@
   "dependencies": {
     "@matsugov/ui": "workspace:^",
     "@msb/js-sdk": "workspace:^",
-    "next": "catalog:",
+    "next": "^16.2.11",
     "react": "catalog:",
     "react-dom": "catalog:"
   },

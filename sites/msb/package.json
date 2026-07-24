@@ -22,7 +22,7 @@
     "date-fns-tz": "catalog:",
     "file-saver": "catalog:",
     "ics": "catalog:",
-    "next": "catalog:",
+    "next": "^16.2.11",
     "next-auth": "catalog:",
     "pluralize": "catalog:",
     "qs": "catalog:",

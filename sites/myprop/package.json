@@ -13,7 +13,7 @@
     "@msb/property-sdk": "workspace:^",
     "clsx": "catalog:",
     "date-fns": "catalog:",
-    "next": "catalog:",
+    "next": "^16.2.11",
     "nextjs-toploader": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"

@@ -67,7 +67,7 @@
     "react-dom": "^19.2.0"
   },
   "optionalDependencies": {
-    "next": "catalog:"
+    "next": "^16.2.11"
   },
   "dependencies": {
     "@fontsource-variable/public-sans": "catalog:",
