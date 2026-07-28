@@ -43,6 +43,10 @@ const addressSuffixesAndAbbreviations = [
     suffix: 'Way',
     abbreviation: 'Way',
   },
+  {
+    suffice: 'Circle',
+    abbreviation: 'cir',
+  },
 ];
 
 const directionsAndAbbreviations = [
@@ -130,7 +134,6 @@ export async function propertyApiCall<T = unknown>(
   }
 
   // Make the API call with the appropriate headers and options
-
   const data = await fetch(url.toString(), {
     ...options,
     headers: {
