@@ -3,12 +3,14 @@ import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { Link } from '@/components/static/Link';
 import { MeetingsSearch } from './components/MeetingsSearch';
 import { Suspense } from 'react';
+import { NoticeOfPublicHearing } from '../NoticeOfPublicHearing';
 
 export default function PublicMeetingsPage() {
   return (
     <PageContainer size="sm">
       <ProseWrapper>
         <h1>Public Meetings</h1>
+        <NoticeOfPublicHearing />
         <p>
           Prefer to look at a calendar?{' '}
           <Link href="/boards/public-meetings-calendar">

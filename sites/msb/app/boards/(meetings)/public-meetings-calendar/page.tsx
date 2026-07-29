@@ -1,6 +1,7 @@
 import { Link } from '@/components/static/Link';
 import { PageContainer } from '@/components/static/Page';
 import { ProseWrapper } from '@/components/static/ProseWrapper';
+import { NoticeOfPublicHearing } from '../NoticeOfPublicHearing';
 
 export default function PublicMeetingsCalendar() {
   // Pull calendar IDs from env so the embed can combine multiple calendars.
@@ -55,6 +56,7 @@ export default function PublicMeetingsCalendar() {
     <PageContainer size="sm">
       <ProseWrapper>
         <h1>Public Meetings Calendar</h1>
+        <NoticeOfPublicHearing />
         <p>
           Prefer to look at a searchable list?{' '}
           <Link href="/boards/public-meetings">
