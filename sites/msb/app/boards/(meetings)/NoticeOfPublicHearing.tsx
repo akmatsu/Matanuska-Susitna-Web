@@ -4,7 +4,7 @@ import { Callout } from '@matsugov/ui';
 import { gql } from '@msb/js-sdk/gql';
 
 const query = gql(`
-  query GetNoticeOfPublicHearing($date: DateTime!) {
+  query GetNoticeOfPublicHearing($date: DateTime!, $type: String) {
     publicNotices(orderBy:  {
        publishAt: desc
     },where:  {
@@ -16,7 +16,7 @@ const query = gql(`
         },
       ]
        type:  {
-          equals: "AKMATSUGOVSTAGE_NOTICE_OF_PUBLIC_HEARINGS"
+          equals: $type
        }
     }) {
       id
@@ -35,6 +35,9 @@ export async function NoticeOfPublicHearing() {
     query,
     variables: {
       date: new Date().toISOString(),
+      type:
+        process.env.NEXT_PUBLIC_GOVDELIVERY_NOTICE_OF_PUBLIC_HEARING ||
+        'AKMATSUGOV_NOTICE_OF_PUBLIC_HEARINGS',
     },
   });
   if (error) return <p>Error loading public notices: {error.message}</p>;
