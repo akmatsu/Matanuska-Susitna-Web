@@ -16,7 +16,7 @@ const query = gql(`
         },
       ]
        type:  {
-          equals: "AKMATSUGOV_ASSEMBLY"
+          equals: "AKMATSUGOVSTAGE_NOTICE_OF_PUBLIC_HEARINGS"
        }
     }) {
       id
