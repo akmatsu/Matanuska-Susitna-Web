@@ -1,4 +1,6 @@
+import { LinkButton } from '@/components/static/LinkButton';
 import { getClientHandler } from '@/utils/apollo/utils';
+import { Callout } from '@matsugov/ui';
 import { gql } from '@msb/js-sdk/gql';
 
 const query = gql(`
@@ -12,11 +14,6 @@ const query = gql(`
             gte: $date
           }
         },
-        {
-          unpublishAt: {
-            equals: null
-          }
-        }
       ]
        type:  {
           equals: "AKMATSUGOV_ASSEMBLY"
@@ -44,13 +41,21 @@ export async function NoticeOfPublicHearing() {
   if (data?.publicNotices?.length) {
     const notice = data.publicNotices[0];
     return (
-      <ul>
-        <li key={notice.id}>
-          <h3>{notice.title}</h3>
-          <p>{notice.description}</p>
-          <p>Slug: {notice.slug}</p>
-        </li>
-      </ul>
+      <Callout color="info" className="not-prose space-y-4">
+        <p className="text-xl font-bold">
+          <span
+            className="icon-[mdi--announcement] mr-2 -mb-1 size-6"
+            aria-hidden="true"
+          />
+          {notice.title}
+        </p>
+        <p>{notice.description}</p>
+        {/* <div className="flex justify-end"> */}
+        <LinkButton href={`/public-notices/${notice.slug}`} color="primary">
+          Learn More
+        </LinkButton>
+        {/* </div> */}
+      </Callout>
     );
   }
 }
