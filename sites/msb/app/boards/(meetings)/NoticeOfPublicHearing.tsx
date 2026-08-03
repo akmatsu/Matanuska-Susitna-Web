@@ -55,7 +55,7 @@ export async function NoticeOfPublicHearing() {
         <p>{notice.description}</p>
         {/* <div className="flex justify-end"> */}
         <LinkButton href={`/public-notices/${notice.slug}`} color="primary">
-          Learn More
+          View Public Hearing Items
         </LinkButton>
         {/* </div> */}
       </Callout>
