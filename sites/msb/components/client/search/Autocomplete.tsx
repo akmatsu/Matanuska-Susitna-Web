@@ -247,9 +247,12 @@ export function Autocomplete({
     selectedResultRef.current = value;
 
     if (isHomeVariant) {
-      // For home variant, navigate directly to the URL
+      // For home variant, navigate directly to the URL if we have one
+      // (a real instant result), otherwise fall back to a query search
       if (value.url) {
         router.push(value.url);
+      } else {
+        submitSearch(value.title, selectedType);
       }
     } else {
       // For default variant, fill the query

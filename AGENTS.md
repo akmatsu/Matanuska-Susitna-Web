@@ -12,9 +12,15 @@ This is a Turborepo + pnpm workspace running Next.js 16 (App Router) and React 1
 
 ## Quick map
 
+- `sites/` - These are full websites, each built in its own Next.js app. They share components and libraries from `packages/`.
 - `sites/msb` — main public site (port 3000).
 - `sites/widgets` — embeddable widgets, e.g. ArcGIS map and document collections (port 3001).
 - `sites/myprop` — `myproperty.matsugov.us`-style property explorer (port 3002, uses Next 16 `cacheComponents`).
+- `packages/` - These are shared libraries and components, consumed by the apps above.
+- `packages/open-data` (`@msb/open-data`) — shared data-fetching and utility functions from our ESRI open-data endpoints.
+- `packages/property-sdk` (`@msb/property-sdk`) — shared data-fetching and utility functions from our local property API which pulls data from GOVERN.
+- `packages/tsconfig` — shared TypeScript configurations.
+- `packages/app-config` — shared app configurations.
 - `packages/ui` (`@matsugov/ui`) — shared React/Tailwind component library.
 - `packages/sdk` (`@msb/js-sdk`) — Apollo client + generated GraphQL types against the MSB CMS.
 - `packages/map` (`@msb/map`) — ArcGIS wrapper used by the widgets map.
@@ -51,3 +57,10 @@ This frontend is decoupled from its CMS, and the CMS is mid-migration. Keep both
 - Both pipelines may run in parallel during the cutover. Don't rip out Apollo/Markdown code until the migration is announced, but call out new Keystone-only work as migration debt in PR descriptions.
 
 When in doubt about a Next.js API, open the matching file under `node_modules/next/dist/docs/01-app/` instead of guessing.
+
+## General Instructions
+
+- **Very IMPORTANT: NEVER use emojis. Especially in file names or commit messages.**
+- Before creating a new component or function, search for one that already exists — check `packages/ui` for existing components. Check `packages/open-data`, `packages/sdk`, and `packages/property-sdk` for existing API functions. Check `packages/tw-config` for existing Tailwind tokens. Check `packages/tsconfig` for existing TypeScript configurations. Check `packages/app-config` for other shared variables/configurations. If you find one, reuse it rather than creating a new one.
+- When styling with tailwindcss refer to `packages/tw-config` for existing tokens and to view our existing design system and color theme.
+- If the same logic is needed in a second place, extract it to the appropriate location above rather than duplicating it — don't force an abstraction on first use.
