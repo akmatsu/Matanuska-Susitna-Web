@@ -84,6 +84,17 @@ catalog:
   typescript-eslint: ^8.65.0
   typesense: ^3.0.6
   unist-util-visit: ^5.1.0
+  vitest: ^4.1.11
   voca: ^1.4.1
   jiti: ^2.7.0
   '@graphql-typed-document-node/core': ^3.2.0
+
+minimumReleaseAgeExclude:
+  - '@vitest/expect@4.1.11'
+  - '@vitest/mocker@4.1.11'
+  - '@vitest/pretty-format@4.1.11'
+  - '@vitest/runner@4.1.11'
+  - '@vitest/snapshot@4.1.11'
+  - '@vitest/spy@4.1.11'
+  - '@vitest/utils@4.1.11'
+  - vitest@4.1.11
