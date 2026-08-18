@@ -129,8 +129,8 @@ export default async function BoardsPage() {
                   To apply for a board or commission, please fill out and submit
                   the Boards & Commissions Application. Completed applications
                   can be emailed to{' '}
-                  <Link href="mailto:jamie.jokhy@matsugov.us">
-                    jamie.jokhy@matsugov.us
+                  <Link href="mailto:jamie.jokhy@matsu.gov">
+                    jamie.jokhy@matsu.gov
                   </Link>
                   , delivered or mail to the Mat-Su Borough Clerk&apos;s Office,
                   350 E. Dahlia Ave, Palmer AK, 99645, or Faxed to 907-861-7845.
