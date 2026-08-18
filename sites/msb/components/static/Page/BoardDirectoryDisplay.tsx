@@ -9,11 +9,10 @@ import { Text } from '@matsugov/ui/Text';
 import { FC } from 'react';
 import { Link } from '../Link';
 import { PhoneLink } from '../PhoneLink';
-import { DateTime } from '@/components/client/DateTime';
 import { gql } from '@msb/js-sdk/gql';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { LinkButton } from '../LinkButton';
-import { add } from 'date-fns';
+import { parseSpreadsheetDate, formatCalendarDate } from './boardDirectoryDates';
 
 const query = gql(`
   query GetBoardApplication {
@@ -52,8 +51,6 @@ interface DirectoryMember {
   'Middle Initial'?: string;
 }
 
-const dateFormat = 'M/d/yy';
-
 interface BoardDirectoryDisplayProps {
   data: DirectoryMember[];
 }
@@ -86,14 +83,8 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
     .join(', ')
     .replace(', ,', ',');
 
-  const termBegins =
-    typeof member.TermBegins === 'number'
-      ? add(new Date((member.TermBegins - 25569) * 86400 * 1000), { hours: 9 })
-      : member.TermBegins;
-  const termEnds =
-    typeof member.TermEnds === 'number'
-      ? add(new Date((member.TermEnds - 25569) * 86400 * 1000), { hours: 9 })
-      : member.TermEnds;
+  const termBegins = formatCalendarDate(parseSpreadsheetDate(member.TermBegins));
+  const termEnds = formatCalendarDate(parseSpreadsheetDate(member.TermEnds));
 
   if (isVacancy) {
     const { data } = await getClientHandler({
@@ -122,34 +113,20 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
                 {member.TypeOfTerm && `Type: ${member.TypeOfTerm}`}
                 {member.TypeOfTerm && member.NumberOfTerms ? ' · ' : ''}
                 {member.NumberOfTerms && `Terms: ${member.NumberOfTerms}`}
-                {(member.TypeOfTerm || member.NumberOfTerms) && (
-                  <DateTime
-                    date={termBegins || termEnds}
-                    formatStr={dateFormat}
-                    className="font-semibold"
-                  />
-                )
+                {(member.TypeOfTerm || member.NumberOfTerms) &&
+                (termBegins || termEnds)
                   ? ' · '
                   : ''}
                 {termBegins && (
                   <>
-                    Begins:{' '}
-                    <DateTime
-                      date={termBegins}
-                      formatStr={dateFormat}
-                      className="font-semibold"
-                    />
+                    Begins: <span className="font-semibold">{termBegins}</span>
                   </>
                 )}
                 {termBegins && termEnds ? ' · ' : ''}
                 {termEnds && (
                   <>
                     Term Ends:{' '}
-                    <DateTime
-                      date={termEnds}
-                      formatStr={dateFormat}
-                      className="font-semibold"
-                    />
+                    <span className="font-semibold">{termEnds}</span>
                   </>
                 )}
               </span>
@@ -200,34 +177,19 @@ const DirectoryCard: FC<{ member: DirectoryMember }> = async ({ member }) => {
               {member.TypeOfTerm && `Type: ${member.TypeOfTerm}`}
               {member.TypeOfTerm && member.NumberOfTerms ? ' · ' : ''}
               {member.NumberOfTerms && `Terms: ${member.NumberOfTerms}`}
-              {(member.TypeOfTerm || member.NumberOfTerms) && (
-                <DateTime
-                  date={termBegins || termEnds}
-                  formatStr={dateFormat}
-                  className="font-semibold"
-                />
-              )
+              {(member.TypeOfTerm || member.NumberOfTerms) &&
+              (termBegins || termEnds)
                 ? ' · '
                 : ''}
               {termBegins && (
                 <>
-                  Started:{' '}
-                  <DateTime
-                    date={termBegins}
-                    formatStr={dateFormat}
-                    className="font-semibold"
-                  />
+                  Started: <span className="font-semibold">{termBegins}</span>
                 </>
               )}
               {termBegins && termEnds ? ' · ' : ''}
               {termEnds && (
                 <>
-                  Ends:{' '}
-                  <DateTime
-                    date={termEnds}
-                    formatStr={dateFormat}
-                    className="font-semibold"
-                  />
+                  Ends: <span className="font-semibold">{termEnds}</span>
                 </>
               )}
             </span>
