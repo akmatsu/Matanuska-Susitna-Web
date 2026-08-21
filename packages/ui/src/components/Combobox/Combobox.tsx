@@ -8,6 +8,24 @@ import {
 import clsx from 'clsx';
 import React, { Key } from 'react';
 
+function ActiveOptionEffect<T>({
+  active,
+  item,
+  onActiveItemChange,
+}: {
+  active: boolean;
+  item: T;
+  onActiveItemChange?: (value?: T | null) => void;
+}) {
+  React.useEffect(() => {
+    if (active) {
+      onActiveItemChange?.(item);
+    }
+  }, [active, item, onActiveItemChange]);
+
+  return null;
+}
+
 export function Combobox<T = any>(props: {
   label?: string;
   value?: T | null;
@@ -35,7 +53,9 @@ export function Combobox<T = any>(props: {
 
   return (
     <HeadlessCombobox<T>
-      value={props.value || undefined}
+      // Headless UI's types omit `null`, but its runtime treats any defined
+      // value (including null) as controlled — only `undefined` is uncontrolled.
+      value={(props.value ?? null) as T | undefined}
       onChange={props.onChange}
       onClose={() => {
         props.onActiveItemChange?.(null);
@@ -62,20 +82,19 @@ export function Combobox<T = any>(props: {
           value={{ [props.displayValueKey]: queryOptionValue }}
           className="border-b-base-lightest group data-focus:bg-primary-light/10 data-selected:bg-light-/20 cursor-default border-b px-4 py-2 select-none last:border-none"
         >
-          {({ focus }) => {
-            if (focus) {
-              props.onActiveItemChange?.({
-                [props.displayValueKey]: queryOptionValue,
-              } as T);
-            }
-
-            return (
+          {({ focus }) => (
+            <>
+              <ActiveOptionEffect
+                active={focus}
+                item={{ [props.displayValueKey]: queryOptionValue } as T}
+                onActiveItemChange={props.onActiveItemChange}
+              />
               <p className="text-msb-base-darker text-sm">
                 Search for {queryOptionValue}{' '}
                 <span className="icon-[mdi--arrow-right] size-2"></span>
               </p>
-            );
-          }}
+            </>
+          )}
         </ComboboxOption>
         {props.items?.map((item, index) => (
           <ComboboxOption
@@ -83,13 +102,16 @@ export function Combobox<T = any>(props: {
             value={item}
             className="border-b-base-lightest group data-focus:bg-primary-light/10 data-selected:bg-light-/20 cursor-default border-b px-4 py-2 select-none last:border-none"
           >
-            {({ focus }) => {
-              if (focus) {
-                props.onActiveItemChange?.(item);
-              }
-
-              return <p>{item?.[props.displayValueKey] as React.ReactNode} </p>;
-            }}
+            {({ focus }) => (
+              <>
+                <ActiveOptionEffect
+                  active={focus}
+                  item={item}
+                  onActiveItemChange={props.onActiveItemChange}
+                />
+                <p>{item?.[props.displayValueKey] as React.ReactNode} </p>
+              </>
+            )}
           </ComboboxOption>
         ))}
       </ComboboxOptions>
