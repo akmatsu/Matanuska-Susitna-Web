@@ -68,9 +68,9 @@ export function DocumentLink<C extends ElementType = typeof Link>({
       {children ||
         (data?.title || data?.file?.filename)?.replace(/^\d+\s?-?.?\s/g, '')}
       {isArchive && (
-        <div className="bg-secondary ml-1 flex items-center justify-center rounded px-1 text-xs text-black">
+        <span className="bg-secondary ml-1 flex items-center justify-center rounded px-1 text-xs text-black">
           Archive
-        </div>
+        </span>
       )}
     </Comp>
   );
