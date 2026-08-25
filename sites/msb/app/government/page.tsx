@@ -44,7 +44,7 @@ export async function generateMetadata() {
 }
 
 const query = gql(`
-  query GovernmentPage {
+  query GovernmentPage($date: DateTime!) {
     landingPage(where:  {
        title: "Government"
     }) {
@@ -94,7 +94,7 @@ const query = gql(`
       description
     }
 
-    publicNotices(take: 5, orderBy: { urgency: desc }) {
+    publicNotices(take: 5, orderBy: { urgency: desc }, where: { OR: [{ unpublishAt: { gte: $date } }, { unpublishAt: { equals: null} }] } ) {
       ...PublicNoticeList
     }
   }
@@ -103,6 +103,9 @@ const query = gql(`
 export default async function GovernmentPage() {
   const { data } = await getClientHandler({
     query,
+    variables: {
+      date: new Date().toISOString(),
+    },
   });
 
   if (!data) {

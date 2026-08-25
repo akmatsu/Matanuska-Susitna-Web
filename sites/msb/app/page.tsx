@@ -9,7 +9,7 @@ import { PageToolbelt } from '@/components/static/Page/PageToolbelt';
 import { HomePageHighlights } from '@/components/static/landing/HomePageHighlights';
 
 const getHomePage = gql(`
-  query GetHomePage($take: Int, $orderBy: [PublicNoticeOrderByInput!]!) {
+  query GetHomePage($take: Int, $orderBy: [PublicNoticeOrderByInput!]!, $date: DateTime!) {
     homePage {
       id
       title
@@ -18,7 +18,7 @@ const getHomePage = gql(`
       ...ToolbeltItems
     }
 
-    publicNotices(take: $take, orderBy: $orderBy) {
+    publicNotices(take: $take, orderBy: $orderBy, where: { OR: [{ unpublishAt: { gte: $date } }, { unpublishAt: { equals: null} }] }) {
       ...PublicNoticeList
     }
 
@@ -36,6 +36,7 @@ export default async function Home() {
           urgency: 'desc',
         },
       ],
+      date: new Date().toISOString(),
     },
   });
 
