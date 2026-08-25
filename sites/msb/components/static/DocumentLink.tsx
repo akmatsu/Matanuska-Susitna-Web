@@ -42,8 +42,7 @@ export function DocumentLink<C extends ElementType = typeof Link>({
 
   const fileType = getFileType(data?.file?.filename);
   const isInternal = checkIsInternal(data?.file?.url);
-  // const isArchive = data?.tagsCount ? data.tagsCount > 0 : false;
-  const isArchive = true;
+  const isArchive = data?.tagsCount ? data.tagsCount > 0 : false;
 
   const Comp = as ?? Link;
 
