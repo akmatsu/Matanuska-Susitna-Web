@@ -90,7 +90,7 @@ function Document({
     'justify-between': !centerLabel,
   });
 
-  const isArchive = doc.tagsCount ? doc.tagsCount > 0 : false;
+  // const isArchive = doc.tagsCount ? doc.tagsCount > 0 : false;
 
   return (
     <li className="my-2">
@@ -110,11 +110,7 @@ function Document({
             {doc.file?.filesize && formatFileSize(doc.file?.filesize)})
           </span>
         </span>
-        {isArchive && (
-          <span className="bg-secondary ml-1 flex items-center justify-center rounded px-1 text-xs text-black">
-            Archive
-          </span>
-        )}
+
         <span
           className={clsx('flex-none', {
             'icon-[mdi--download]': fileType !== 'PDF',

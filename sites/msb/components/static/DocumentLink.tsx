@@ -42,7 +42,7 @@ export function DocumentLink<C extends ElementType = typeof Link>({
 
   const fileType = getFileType(data?.file?.filename);
   const isInternal = checkIsInternal(data?.file?.url);
-  const isArchive = data?.tagsCount ? data.tagsCount > 0 : false;
+  // const isArchive = data?.tagsCount ? data.tagsCount > 0 : false;
 
   const Comp = as ?? Link;
 
@@ -68,11 +68,6 @@ export function DocumentLink<C extends ElementType = typeof Link>({
     >
       {children ||
         (data?.title || data?.file?.filename)?.replace(/^\d+\s?-?.?\s/g, '')}
-      {isArchive && (
-        <span className="bg-secondary ml-1 flex items-center justify-center rounded px-1 py-0.5 text-xs text-black">
-          Archive
-        </span>
-      )}
     </Comp>
   );
 }
