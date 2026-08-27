@@ -54,7 +54,6 @@ export function DocumentLink<C extends ElementType = typeof Link>({
       rel={rel}
       hideExternalIcon
       className={clsx(
-        'flex items-center',
         {
           'after:-mb-0.5 after:ml-1': !hideIcon,
           'after:icon-[mdi--download]': fileType !== 'PDF' && !hideIcon,
