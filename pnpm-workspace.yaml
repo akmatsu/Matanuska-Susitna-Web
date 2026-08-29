@@ -58,7 +58,7 @@ catalog:
   install: ^0.13.0
   # TODO: Start using next from catalog once AWS Amplify adds support for "catalog:" mode in pnpm. See https://github.com/aws-amplify/amplify-hosting/issues/4037
   # next: ^16.2.11
-  next-auth: 5.0.0-beta.30
+  next-auth: 5.0.0-beta.32
   nextjs-toploader: ^3.9.17
   pluralize: ^8.0.0
   postcss: ^8.5.22
