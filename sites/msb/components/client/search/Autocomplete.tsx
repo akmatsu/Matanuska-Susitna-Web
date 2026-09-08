@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { plural } from 'pluralize';
 import v from 'voca';
 
-type PopularSearchSuggestion = {
+type PageSuggestion = {
   id: string;
   title: string;
   type: string;
@@ -27,7 +27,6 @@ type AutocompleteProps = {
   defaultQuery?: string;
   defaultType?: string;
   autoFocus?: boolean;
-  initialPopularSearches?: Array<{ q: string; count: number }>;
   availableTypes?: string[];
   variant?: 'default' | 'home';
 };
@@ -36,7 +35,6 @@ export function Autocomplete({
   defaultQuery = '',
   defaultType = '',
   autoFocus = false,
-  initialPopularSearches = [],
   availableTypes = [],
   variant = 'default',
 }: AutocompleteProps) {
@@ -45,66 +43,17 @@ export function Autocomplete({
   const [query, setQuery] = useState(defaultQuery);
   const [typedQuery, setTypedQuery] = useState(defaultQuery);
   const [selectedType, setSelectedType] = useState(defaultType);
-  const [popularSearches, setPopularSearches] = useState(
-    initialPopularSearches.map((item) => item.q),
-  );
   const [instantResults, setInstantResults] = useState<InstantSearchResult[]>(
     [],
   );
   const [error, setError] = useState('');
   const submittedQueryRef = useRef<string | null>(null);
-  const selectedResultRef = useRef<PopularSearchSuggestion | null>(null);
+  const selectedResultRef = useRef<PageSuggestion | null>(null);
 
   const router = useRouter();
 
-  // Fetch popular searches for non-home variant
+  // Fetch matching page suggestions as the user types
   useEffect(() => {
-    if (isHomeVariant || initialPopularSearches.length) return;
-
-    const fetchPopularSearches = async () => {
-      try {
-        const response = await fetch('/api/search/popular');
-        if (response.ok) {
-          const data = await response.json();
-          setPopularSearches(data.queries.map((item: any) => item.q));
-        }
-      } catch (error) {
-        console.error('Failed to fetch popular searches:', error);
-      }
-    };
-
-    fetchPopularSearches();
-  }, [initialPopularSearches.length, isHomeVariant]);
-
-  // Fetch matching popular searches as user types (default variant only)
-  useEffect(() => {
-    // Only run for default variant when user is typing
-    if (isHomeVariant) return;
-
-    const trimmedQuery = typedQuery.trim();
-
-    const timer = setTimeout(async () => {
-      try {
-        const response = await fetch(
-          `/api/search/popular?q=${encodeURIComponent(trimmedQuery)}`,
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setPopularSearches(data.queries.map((item: any) => item.q));
-        }
-      } catch (error) {
-        console.error('Failed to fetch popular searches:', error);
-      }
-    }, 300); // Debounce by 300ms
-
-    return () => clearTimeout(timer);
-  }, [typedQuery, isHomeVariant]);
-
-  // Fetch instant search results as user types (home variant only)
-  useEffect(() => {
-    // Only run this effect when in home variant and there's a query
-    if (!isHomeVariant) return;
-
     const trimmedQuery = typedQuery.trim();
     if (!trimmedQuery) return;
 
@@ -151,7 +100,7 @@ export function Autocomplete({
     }, 300); // Debounce by 300ms
 
     return () => clearTimeout(timer);
-  }, [typedQuery, isHomeVariant]);
+  }, [typedQuery]);
 
   const submitSearch = useCallback(
     (searchQuery: string, searchType: string) => {
@@ -186,36 +135,22 @@ export function Autocomplete({
       return [];
     }
 
-    if (isHomeVariant) {
-      // For home variant, show instant search results
-      return instantResults.map((result) => ({
-        id: result.id,
-        title: result.title,
-        type: result.type || 'Page',
-        description: result.description || 'Click to view',
-        url: result.url,
-      }));
-    }
-
-    // For default variant, show popular searches (server-filtered)
-    return popularSearches
-      .filter((item) => item !== '*')
-      .slice(0, 8)
-      .map((item) => ({
-        id: item,
-        title: item,
-        type: 'Popular Search',
-        description: 'Select to fill query',
-      }));
-  }, [popularSearches, isHomeVariant, instantResults, typedQuery]);
+    return instantResults.map((result) => ({
+      id: result.id,
+      title: result.title,
+      type: result.type || 'Page',
+      description: result.description || 'Click to view',
+      url: result.url,
+    }));
+  }, [instantResults, typedQuery]);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const submittedQuery = query.trim();
     const trimmedType = selectedType.trim();
 
-    // If home variant and a result is selected, navigate to that result
-    if (isHomeVariant && selectedResultRef.current?.url) {
+    // If a suggested page is selected, navigate to it directly
+    if (selectedResultRef.current?.url) {
       router.push(selectedResultRef.current.url);
       return;
     }
@@ -234,7 +169,7 @@ export function Autocomplete({
     submitSearch(submittedQuery, selectedType);
   }
 
-  function onChange(value?: PopularSearchSuggestion | null) {
+  function onChange(value?: PageSuggestion | null) {
     if (!value?.title) {
       selectedResultRef.current = null;
       return;
@@ -246,21 +181,16 @@ export function Autocomplete({
     setQuery(value.title);
     selectedResultRef.current = value;
 
-    if (isHomeVariant) {
-      // For home variant, navigate directly to the URL if we have one
-      // (a real instant result), otherwise fall back to a query search
-      if (value.url) {
-        router.push(value.url);
-      } else {
-        submitSearch(value.title, selectedType);
-      }
+    // Navigate directly to the suggested page if we have one, otherwise
+    // fall back to a query search
+    if (value.url) {
+      router.push(value.url);
     } else {
-      // For default variant, fill the query
       submitSearch(value.title, selectedType);
     }
   }
 
-  function onActiveItemChange(value?: PopularSearchSuggestion | null) {
+  function onActiveItemChange(value?: PageSuggestion | null) {
     if (!value?.title) {
       selectedResultRef.current = null;
       if (submittedQueryRef.current !== null) {
@@ -287,7 +217,7 @@ export function Autocomplete({
         }
       >
         <div className={isHomeVariant ? 'min-w-0 flex-1' : ''}>
-          <Combobox<PopularSearchSuggestion>
+          <Combobox<PageSuggestion>
             label="Search website"
             displayValueKey="title"
             displayTypeKey="type"
@@ -309,7 +239,7 @@ export function Autocomplete({
                 : 'Search website'
             }
             autoFocus={autoFocus}
-            value={query ? ({ title: query } as PopularSearchSuggestion) : null}
+            value={query ? ({ title: query } as PageSuggestion) : null}
             queryOptionValue={typedQuery}
             inputClassName={
               isHomeVariant

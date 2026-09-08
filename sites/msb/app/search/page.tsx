@@ -2,7 +2,7 @@ import { Autocomplete } from '@/components/client/search/Autocomplete';
 import { QuerySearchResults } from '@/components/static/search/QuerySearchResults';
 import { PageContainer } from '@/components/static/Page/PageContainer';
 import { Metadata } from 'next';
-import { getPageTypes, getPopularSearches } from '@/utils/search/typesense';
+import { getPageTypes } from '@/utils/search/typesense';
 
 export const dynamic = 'force-dynamic';
 
@@ -39,10 +39,7 @@ export default async function SearchPage(props: PageProps<'/search'>) {
     ? Math.max(1, Number(pageParam))
     : 1;
 
-  const [popularSearches, pageTypes] = await Promise.all([
-    getPopularSearches({ limit: 10 }),
-    getPageTypes({ limit: 100 }),
-  ]);
+  const pageTypes = await getPageTypes({ limit: 100 });
 
   const availableTypes = pageTypes.map((item) => item.value);
   const defaultType =
@@ -56,7 +53,6 @@ export default async function SearchPage(props: PageProps<'/search'>) {
         defaultType={defaultType}
         availableTypes={availableTypes}
         autoFocus
-        initialPopularSearches={popularSearches}
       />
       {query || type ? (
         <QuerySearchResults
