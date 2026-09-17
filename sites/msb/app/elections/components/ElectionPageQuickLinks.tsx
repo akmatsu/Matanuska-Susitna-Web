@@ -91,6 +91,11 @@ export function ElectionPageQuickLinks(props: {
             <DocumentLinkButton data={doc} key={doc.id} color="primary" block />
           ))}
         <DocumentLinkButton data={data.candidates} color="primary" block />
+        {!!data.propositionsCount && (
+          <LinkButton href="#ballot-propositions" color="primary" block>
+            Propositions
+          </LinkButton>
+        )}
 
         <ExternalActionButton
           action={electionOfficialData?.electionOfficialApplicationUrl}
@@ -143,11 +148,6 @@ export function ElectionPageQuickLinks(props: {
         >
           Early and Absentee Voting Information
         </LinkButton>
-        {!!data.propositionsCount && (
-          <LinkButton href="#ballot-propositions" color="primary" block>
-            Propositions
-          </LinkButton>
-        )}
       </div>
     </PageSection>
   );
