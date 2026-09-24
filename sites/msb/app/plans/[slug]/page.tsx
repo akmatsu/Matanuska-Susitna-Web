@@ -29,6 +29,7 @@ const PlanQuery = gql(`
   query GetPlan($slug: String!, $now: DateTime!) {
     plan(where: { slug: $slug }) {
       ...BasePageInfo
+      type
       parent {
         ...PageItem
       }
@@ -107,13 +108,16 @@ export default async function PlanPage(props: {
   if (!!page.autoRedirectToExternalWebsite && page.effort?.url?.url)
     return redirect(page.effort.url.url);
 
+  const currentDocumentLabel =
+    page.type === 'strategic' ? 'Current Plan' : 'Current Adopted Plan';
+
   return (
     <BasePage
       data={page}
       rightSide={
         <>
           {page.currentDocument?.document && (
-            <PageSection title="Current Adopted Plan">
+            <PageSection title={currentDocumentLabel}>
               <DocumentLinkButton data={page.currentDocument.document} block>
                 {page.currentDocument.label}
               </DocumentLinkButton>
