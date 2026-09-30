@@ -1,3 +1,5 @@
+'use client';
+
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Button, ButtonProps } from './Button';
 import React, { ReactNode } from 'react';
