@@ -86,6 +86,11 @@ export function ElectionPageQuickLinks(props: {
   return (
     <PageSection title="Quick Links">
       <div className="flex flex-col gap-2">
+        <DocumentLinkButton
+          data={data.result?.document}
+          color="primary"
+          block
+        />
         {!!data.documents?.length &&
           data.documents.map((doc) => (
             <>
@@ -142,12 +147,6 @@ export function ElectionPageQuickLinks(props: {
         />
         <DocumentLinkButton
           data={data.absenteeVotingApplication}
-          color="primary"
-          block
-        />
-
-        <DocumentLinkButton
-          data={data.result?.document}
           color="primary"
           block
         />
