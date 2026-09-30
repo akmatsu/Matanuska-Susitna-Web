@@ -4,6 +4,7 @@ import { ExternalActionButton } from '@/components/static/Page/ExternalActionBut
 import { PageSection } from '@/components/static/Page/PageSection';
 import { DropdownButton } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
+import { Fragment } from 'react';
 
 const ElectionPageQuickLinksFragment = gql(`
   fragment ElectionPageQuickLinks on Election {
@@ -93,13 +94,8 @@ export function ElectionPageQuickLinks(props: {
         />
         {!!data.documents?.length &&
           data.documents.map((doc) => (
-            <>
-              <DocumentLinkButton
-                data={doc}
-                key={doc.id}
-                color="primary"
-                block
-              />
+            <Fragment key={doc.id}>
+              <DocumentLinkButton data={doc} color="primary" block />
 
               {doc.title === 'Notice of Election' &&
                 documents.map((doc, index) => {
@@ -130,7 +126,7 @@ export function ElectionPageQuickLinks(props: {
                     );
                   }
                 })}
-            </>
+            </Fragment>
           ))}
 
         <DocumentLinkButton data={data.candidates} color="primary" block />
