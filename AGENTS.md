@@ -15,7 +15,7 @@ This is a Turborepo + pnpm workspace running Next.js 16 (App Router) and React 1
 - `sites/` - These are full websites, each built in its own Next.js app. They share components and libraries from `packages/`.
 - `sites/msb` — main public site (port 3000).
 - `sites/widgets` — embeddable widgets, e.g. ArcGIS map and document collections (port 3001).
-- `sites/myprop` — `myproperty.matsugov.us`-style property explorer (port 3002, uses Next 16 `cacheComponents`).
+- `sites/myprop` — MyProperty property explorer at `myproperty.matsu.gov` (port 3002, uses Next 16 `cacheComponents`).
 - `packages/` - These are shared libraries and components, consumed by the apps above.
 - `packages/open-data` (`@msb/open-data`) — shared data-fetching and utility functions from our ESRI open-data endpoints.
 - `packages/property-sdk` (`@msb/property-sdk`) — shared data-fetching and utility functions from our local property API which pulls data from GOVERN.
@@ -26,6 +26,10 @@ This is a Turborepo + pnpm workspace running Next.js 16 (App Router) and React 1
 - `packages/map` (`@msb/map`) — ArcGIS wrapper used by the widgets map.
 - `packages/search-sdk` — TypeSense adapter shared across search UIs.
 - `packages/tw-config` — shared Tailwind v4 tokens (`msb.tw.css`, `uswds-colors.tw.css`).
+
+## Per-app instructions
+
+A site or package may have its own `AGENTS.md` (with a `CLAUDE.md` that imports it). Agents load it when working in that directory, and its rules take precedence for that app. Currently: [sites/myprop/AGENTS.md](sites/myprop/AGENTS.md).
 
 ## Commands
 
