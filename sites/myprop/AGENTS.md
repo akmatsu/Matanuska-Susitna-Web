@@ -46,7 +46,7 @@ Next.js is hoisted to the repo root, so the bundled docs are at `../../node_modu
 ## UI
 
 - Server Components by default; `'use client'` only for interactivity. Myprop doesn't use the msb `components/client|server` barrel split: client components sit next to their route or in `components/`.
-- Reuse `@matsugov/ui` (e.g. `Dialog`, `cn` from `@matsugov/ui/lib`) and the local `components/Tables` before adding markup.
+- MyProperty intentionally keeps the legacy site's look, so don't use `@matsugov/ui` components for new UI. Build it locally (reuse `components/Tables` and other `components/` first). Utilities like `cn` from `@matsugov/ui/lib` are fine, and the existing `Dialog` in `MapModal` stays.
 - Tailwind v4 tokens and the `msb-btn-*` utility live in `app/global.tw.css`. Icons use Iconify classes (`icon-[mdi--...]`).
 - Print is a supported output: parcel pages get printed. Keep `print:` variants working and mark interactive controls `print:hidden`.
 - Icon-only links and buttons need `sr-only` text; decorative icons get `aria-hidden`.
