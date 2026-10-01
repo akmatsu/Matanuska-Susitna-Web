@@ -9,6 +9,7 @@ import {
 import { propertyApiCall } from '@msb/property-sdk';
 import { format } from 'date-fns';
 import { Metadata } from 'next';
+import { Notice } from '@/components/Notice';
 import { MapModal } from './MapModal';
 import Link from 'next/link';
 
@@ -59,6 +60,13 @@ export default async function MyParcelDetailPage(
             Last Updated:{' '}
             {format(new Date(data.LAST_UPDATED), 'M/d/yyyy h:mm aa')}
           </p>
+
+          <Notice className="print:hidden">
+            <strong>Data updates paused: </strong> Information will not update
+            from October 8 through October 20 while we transition to a new Tax
+            &amp; Assessment system.
+          </Notice>
+
           <section>
             <SectionHeader title="Site Information" />
             <TwoColumnWrapper>
@@ -501,6 +509,7 @@ export default async function MyParcelDetailPage(
               />
             </DataTable>
           </section>
+
           <ol className="mt-4 space-y-1 text-xs print:text-[10px]">
             <li
               id="footnote-1"
