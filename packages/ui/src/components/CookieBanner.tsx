@@ -35,8 +35,9 @@ export function CookieBanner(props: {
       </CardHeader>
       <CardBody>
         <p>
-          This website uses cookies for analytics to improve your experience. By
-          accepting all cookies you are agreeing to our{' '}
+          This website uses cookies for analytics to improve your experience.
+          Analytics cookies are enabled by default, and you can opt out at any
+          time. Learn more in our{' '}
           <Link
             href={props.linkHref || '/policies/cookie-policy'}
             className="text-secondary"
