@@ -40,11 +40,14 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           </header>
           {props.children}
         </div>
-        <Script
-          src="//script.crazyegg.com/pages/scripts/0127/8089.js"
-          async
-          type="text/javascript"
-        />
+        {/* Only track production traffic so stage and local visits don't skew the heatmaps. */}
+        {process.env.DEPLOY_ENV === 'production' && (
+          <Script
+            src="//script.crazyegg.com/pages/scripts/0127/8089.js"
+            async
+            type="text/javascript"
+          />
+        )}
       </body>
     </html>
   );

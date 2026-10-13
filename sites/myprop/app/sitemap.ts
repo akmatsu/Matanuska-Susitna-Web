@@ -8,6 +8,8 @@ function toAbsoluteUrl(pathname: string): string {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (process.env.DEPLOY_ENV !== 'production') return [];
+
   const lastModified = new Date();
 
   return [
