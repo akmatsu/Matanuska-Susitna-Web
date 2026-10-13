@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - stage
     paths:
       - sites/myprop/**
       - packages/ui/**
@@ -37,4 +38,4 @@ jobs:
 
       - name: Trigger AWS Amplify Build
         run: |
-          aws amplify start-job --app-id d33k8nn71c973y --branch-name main --job-type RELEASE --region us-west-2
+          aws amplify start-job --app-id d33k8nn71c973y --branch-name ${{ github.ref_name }} --job-type RELEASE --region us-west-2
