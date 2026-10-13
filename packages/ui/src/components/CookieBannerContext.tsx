@@ -3,6 +3,9 @@ import { createContext, useContext, useState } from 'react';
 
 type CookieConsent = 'accepted' | 'declined' | null;
 
+// Bump the version to reset everyone's saved choice.
+const CONSENT_KEY = 'cookie-consent-v2';
+
 const CookieBannerContext = createContext<{
   shouldShowCookieBanner: boolean;
   consent: CookieConsent;
@@ -24,13 +27,10 @@ export function CookieBannerProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [shouldShowCookieBanner, setShouldShowCookieBanner] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return !localStorage.getItem('cookie-consent');
-  });
+  const [shouldShowCookieBanner, setShouldShowCookieBanner] = useState(false);
   const [consent, setConsent] = useState<CookieConsent>(() => {
     if (typeof window === 'undefined') return null;
-    const stored = localStorage.getItem('cookie-consent');
+    const stored = localStorage.getItem(CONSENT_KEY);
     return (stored as CookieConsent) || null;
   });
 
@@ -43,12 +43,12 @@ export function CookieBannerProvider({
   }
 
   function acceptCookies() {
-    localStorage.setItem('cookie-consent', 'accepted');
+    localStorage.setItem(CONSENT_KEY, 'accepted');
     setConsent('accepted');
   }
 
   function declineCookies() {
-    localStorage.setItem('cookie-consent', 'declined');
+    localStorage.setItem(CONSENT_KEY, 'declined');
     setConsent('declined');
   }
 

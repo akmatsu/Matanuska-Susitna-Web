@@ -29,14 +29,18 @@ export function CookieBanner(props: {
   }
 
   return (
-    <Card className="absolute bottom-0 left-0 z-1 ml-2 max-w-132.5" dark>
+    <Card
+      className="pointer-events-auto absolute bottom-0 left-0 z-1 ml-2 max-w-132.5"
+      dark
+    >
       <CardHeader>
         <CardTitle>We Use Cookies</CardTitle>
       </CardHeader>
       <CardBody>
         <p>
-          This website uses cookies for analytics to improve your experience. By
-          accepting all cookies you are agreeing to our{' '}
+          This website uses cookies for analytics to improve your experience.
+          Analytics cookies are enabled by default, and you can opt out at any
+          time. Learn more in our{' '}
           <Link
             href={props.linkHref || '/policies/cookie-policy'}
             className="text-secondary"
