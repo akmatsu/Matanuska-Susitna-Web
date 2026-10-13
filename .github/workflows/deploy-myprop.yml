@@ -10,6 +10,7 @@ on:
       - packages/ui/**
       - packages/tw-config/**
       - packages/property-sdk/**
+      - amplify.yml
       - .github/workflows/deploy-myprop.yml
 
 permissions:

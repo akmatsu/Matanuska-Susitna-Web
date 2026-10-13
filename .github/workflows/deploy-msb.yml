@@ -9,6 +9,7 @@ on:
       - packages/sdk/**
       - packages/ui/**
       - packages/tw-config/**
+      - amplify.yml
       - .github/workflows/deploy-msb.yml
 
 permissions:
