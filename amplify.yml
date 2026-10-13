@@ -1,0 +1,126 @@
+# Build settings for every Amplify app in this repo.
+# Amplify reads this file instead of the build settings saved in the console.
+# Each app picks the entry whose appRoot matches its AMPLIFY_MONOREPO_APP_ROOT
+# environment variable.
+#
+# Secret values never go in this file. Set them as environment variables on the
+# Amplify app, and copy them into the site's .env file during the build.
+version: 1
+applications:
+  - appRoot: sites/msb
+    frontend:
+      buildPath: /
+      phases:
+        preBuild:
+          commands:
+            - npm i -g pnpm@11.3.0
+            - pnpm i --filter msb... --workspace-root
+        build:
+          commands:
+            - echo "AUTH_SECRET=$AUTH_SECRET" >> ./sites/msb/.env
+            - echo "AUTH_MICROSOFT_ENTRA_ID_SECRET=$AUTH_MICROSOFT_ENTRA_ID_SECRET" >> ./sites/msb/.env
+            - echo "AUTH_MICROSOFT_ENTRA_ID_ID=$AUTH_MICROSOFT_ENTRA_ID_ID" >> ./sites/msb/.env
+            - echo "AUTH_MICROSOFT_ENTRA_ID_TENANT_ID=$AUTH_MICROSOFT_ENTRA_ID_TENANT_ID" >> ./sites/msb/.env
+            - echo "AUTH_MICROSOFT_ENTRA_ID_ISSUER=$AUTH_MICROSOFT_ENTRA_ID_ISSUER" >> ./sites/msb/.env
+            - |
+              if [ "$AWS_BRANCH" = "stage" ]; then
+                echo "AUTH_URL=$STAGE_AUTH_URL" >> ./sites/msb/.env
+              else
+                echo "AUTH_URL=$PROD_AUTH_URL" >> ./sites/msb/.env
+              fi
+            - |
+              if [ "$AWS_BRANCH" = "stage" ]; then
+                echo "NEXT_PUBLIC_API_URL=$STAGE_API_URL" >> ./sites/msb/.env
+              else
+                echo "NEXT_PUBLIC_API_URL=$PROD_API_URL" >> ./sites/msb/.env
+              fi
+            - |
+              if [ "$AWS_BRANCH" = "stage" ]; then
+                echo "NEXT_PUBLIC_TYPESENSE_API_KEY=$STAGE_TYPESENSE_API_KEY" >> ./sites/msb/.env
+              else
+                echo "NEXT_PUBLIC_TYPESENSE_API_KEY=$PROD_TYPESENSE_API_KEY" >> ./sites/msb/.env
+              fi
+            - |
+              if [ "$AWS_BRANCH" = "stage" ]; then
+                echo "NEXT_PUBLIC_TYPESENSE_HOST=$STAGE_TYPESENSE_HOST" >> ./sites/msb/.env
+              else
+                echo "NEXT_PUBLIC_TYPESENSE_HOST=$PROD_TYPESENSE_HOST" >> ./sites/msb/.env
+              fi
+            - echo "NEXT_PUBLIC_TYPESENSE_PORT=$TYPESENSE_PORT" >> ./sites/msb/.env
+            - echo "NEXT_PUBLIC_TYPESENSE_PROTOCOL=$TYPESENSE_PROTOCOL" >> ./sites/msb/.env
+            - echo "NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY=$GOOGLE_CALENDAR_API_KEY" >> ./sites/msb/.env
+            - echo "NEXT_PUBLIC_GOOGLE_CALENDAR_MAIN_ID=$GOOGLE_CALENDAR_MAIN_ID" >> ./sites/msb/.env
+            - echo "NEXT_PUBLIC_GOOGLE_CALENDAR_ASSEMBLY_ID=$GOOGLE_CALENDAR_ASSEMBLY_ID" >> ./sites/msb/.env
+            - echo "NEXT_PUBLIC_GOOGLE_CALENDAR_PLANNING_ID=$GOOGLE_CALENDAR_PLANNING_ID" >> ./sites/msb/.env
+            - echo "NEXT_PUBLIC_GOOGLE_CALENDAR_COMMUNITY_ID=$GOOGLE_CALENDAR_COMMUNITY_ID" >> ./sites/msb/.env
+            - |
+              if [ "$AWS_BRANCH" = "stage" ]; then
+                echo "NEXT_PUBLIC_BASE_URL=https://stage.matsu.gov" >> ./sites/msb/.env
+              else
+                echo "NEXT_PUBLIC_BASE_URL=https://matsu.gov" >> ./sites/msb/.env
+              fi
+            - |
+              if [ "$AWS_BRANCH" = "stage" ]; then
+                echo "DEPLOY_ENV=stage" >> ./sites/msb/.env
+              else
+                echo "DEPLOY_ENV=production" >> ./sites/msb/.env
+              fi
+            - pnpm run msb:build
+      artifacts:
+        baseDirectory: sites/msb/.next
+        files:
+          - '**/*'
+      cache:
+        # Build cache is turned off for this app on purpose.
+        paths: []
+
+  - appRoot: sites/widgets
+    frontend:
+      buildPath: /
+      phases:
+        preBuild:
+          commands:
+            - npm i -g pnpm@11.3.0
+            - pnpm i --filter widgets... --workspace-root
+        build:
+          commands:
+            - echo "MSB_API_URL=$MSB_API_URL" >> ./sites/widgets/.env
+            - echo "MSB_API_KEY=$MSB_API_KEY" >> ./sites/widgets/.env
+            - pnpm run wid:build
+      artifacts:
+        baseDirectory: sites/widgets/.next
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - .next/cache/**/*
+          - node_modules/**/*
+
+  - appRoot: sites/myprop
+    frontend:
+      buildPath: /
+      phases:
+        preBuild:
+          commands:
+            - npm i -g pnpm@11.3.0
+            - pnpm i --filter myprop... --workspace-root
+        build:
+          commands:
+            - echo "API_URL=$API_URL" >> ./sites/myprop/.env
+            - echo "API_KEY=$API_KEY" >> ./sites/myprop/.env
+            # Anything other than "production" blocks crawlers and analytics.
+            - |
+              if [ "$AWS_BRANCH" = "stage" ]; then
+                echo "DEPLOY_ENV=stage" >> ./sites/myprop/.env
+              else
+                echo "DEPLOY_ENV=production" >> ./sites/myprop/.env
+              fi
+            - pnpm run myp:build
+      artifacts:
+        baseDirectory: sites/myprop/.next
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - .next/cache/**/*
+          - node_modules/**/*
