@@ -54,7 +54,7 @@ export async function fetchPropertySearch(
   query: string,
   mode = 'wild',
 ): Promise<ParcelSearchResponse> {
-  const url = new URL('/property/search', BASE_URL);
+  const url = new URL('/property/search2', BASE_URL);
   url.searchParams.set('query', query);
   url.searchParams.set('mode', mode);
 
@@ -81,7 +81,7 @@ export async function fetchParcelDetail(
     throw new Error('Invalid parcel ID');
   }
 
-  const url = new URL(`/property/detail/${encodeURIComponent(pid)}`, BASE_URL);
+  const url = new URL(`/property/detail2/${encodeURIComponent(pid)}`, BASE_URL);
 
   const response = await fetch(url.toString(), {
     headers: { ApiKey: API_KEY },
