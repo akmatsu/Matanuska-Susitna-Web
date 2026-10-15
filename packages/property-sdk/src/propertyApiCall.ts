@@ -92,7 +92,7 @@ export async function propertyApiCall<T = unknown>(
   const normalizedPath = normalizePropertyPath(path);
 
   // Construct the full URL with query parameters if provided
-  const url = new URL(`/property${normalizedPath}`, baseUrl);
+  const url = new URL(`/property/v2${normalizedPath}`, baseUrl);
 
   if (params) {
     // Wee need to modify the query param
