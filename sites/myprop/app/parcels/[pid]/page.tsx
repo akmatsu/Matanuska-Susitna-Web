@@ -414,7 +414,7 @@ export default async function MyParcelDetailPage(
               )}
             </section>
           </div>
-          <section className="print:hidden">
+          <section>
             <SectionHeader
               title={
                 <>
@@ -429,9 +429,8 @@ export default async function MyParcelDetailPage(
                 </>
               }
             />
-            {/* Balances now live in Property Access, so link there instead of showing them here. */}
-            <div className="flex p-2">
-              {parId ? (
+            {parId && (
+              <div className="flex px-1 pb-1 print:hidden">
                 <Link
                   className="msb-btn-primary"
                   href={propertyAccessUrl('taxesdue', parId)}
@@ -443,10 +442,46 @@ export default async function MyParcelDetailPage(
                   />
                   Pay Taxes
                 </Link>
-              ) : (
-                <p>No tax account available for this parcel.</p>
-              )}
-            </div>
+              </div>
+            )}
+            <DataTable
+              headers={[
+                { label: 'Status' },
+                { label: 'Tax Balance' },
+                { label: 'Farm' },
+                { label: 'Disabled Veteran' },
+                { label: 'Senior' },
+                {
+                  label: (
+                    <>
+                      Total{' '}
+                      <a
+                        href="#footnote-3"
+                        id="footnote-ref-3"
+                        aria-label="See footnote 3"
+                        className="text-white"
+                      >
+                        <sup>3</sup>
+                      </a>
+                    </>
+                  ),
+                },
+                { label: 'LID Exists' },
+              ]}
+            >
+              <DataTableRow
+                cells={[
+                  { value: data.STATUS },
+                  { value: formatCurrency(data.BALANCE) },
+                  { value: formatCurrency(data.FARM_DEFERMENT) },
+                  { value: formatCurrency(data.DISABLED_VET) },
+                  { value: formatCurrency(data.SENIOR) },
+                  { value: formatCurrency(data.TOTAL) },
+                  { value: data.LID },
+                ]}
+                isLast
+              />
+            </DataTable>
           </section>
           <section>
             <SectionHeader title="Land and Miscellaneous" />
@@ -524,7 +559,7 @@ export default async function MyParcelDetailPage(
             </li>
             <li
               id="footnote-2"
-              className="focus-ring transition-colors target:bg-yellow-200 print:hidden"
+              className="focus-ring transition-colors target:bg-yellow-200"
             >
               <a
                 href="#footnote-ref-2"
@@ -534,6 +569,20 @@ export default async function MyParcelDetailPage(
                 <sup>2</sup>
               </a>
               If account is in foreclosure, payment must be in certified funds.
+            </li>
+            <li
+              id="footnote-3"
+              className="focus-ring transition-colors target:bg-yellow-200"
+            >
+              <a
+                href="#footnote-ref-3"
+                aria-label="back to reference"
+                className="mr-2"
+              >
+                <sup>3</sup>
+              </a>
+              If you reside within the city limits of Palmer or Houston, your
+              exemption amount may be different.
             </li>
           </ol>
         </div>
