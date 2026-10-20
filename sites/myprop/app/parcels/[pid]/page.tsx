@@ -62,9 +62,9 @@ export default async function MyParcelDetailPage(
           </p>
 
           <Notice className="print:hidden">
-            <strong>Data updates paused: </strong> Information will not update
-            from October 8 through October 20 while we transition to a new Tax
-            &amp; Assessment system.
+            <strong>Data updates paused: </strong> The Borough is upgrading the
+            Tax &amp; Assessment system that supplies MyProperty&apos;s data. We
+            hope to restore updates by October 30.
           </Notice>
 
           <section>
