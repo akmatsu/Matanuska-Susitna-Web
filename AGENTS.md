@@ -49,7 +49,8 @@ Run from the repo root unless noted.
 - All GraphQL goes through `@msb/js-sdk`; never instantiate Apollo directly in app code.
 - All TypeSense/InstantSearch UI goes through `sites/msb/components/static/search/InstantSearchWrapper.tsx`.
 - Format with Prettier (`prettier-plugin-tailwindcss` sorts Tailwind classes — don't reorder by hand).
-- Commits follow Conventional Commits; releases are automated via semantic-release.
+- Commits follow Conventional Commits.
+- Deploys happen on merge to `main` (and on push to `stage` for the stage environment), through the path-filtered `.github/workflows/deploy-*.yml` workflows. A release is cut by pushing an annotated `vX.Y.Z` tag on a commit in `main`; [.github/workflows/release.yml](.github/workflows/release.yml) then creates the GitHub release with generated notes. Tags don't deploy anything.
 
 ## Backend & roadmap (decoupled architecture)
 
