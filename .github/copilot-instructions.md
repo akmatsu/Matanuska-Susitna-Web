@@ -59,7 +59,7 @@ These are always-on instructions for the Matanuska-Susitna Borough public web mo
 
 - Format with Prettier ([.prettierrc](../.prettierrc)) — single quotes, trailing commas, LF line endings, Tailwind class sorting via `prettier-plugin-tailwindcss`. Don't reorder Tailwind classes manually.
 - Lint with `pnpm lint` before sending changes; use `pnpm lint:fix` for autofixable items.
-- Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) — `feat:`, `fix:`, `chore:`, etc. Releases are automated via semantic-release ([.releaserc.json](../.releaserc.json)), so the commit subject drives the changelog.
+- Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) — `feat:`, `fix:`, `chore:`, etc. Releases are cut by pushing a `vX.Y.Z` tag on a commit in `main`; [workflows/release.yml](workflows/release.yml) creates the GitHub release with notes generated from merged PRs. Merging to `main` is what deploys, not the tag.
 - Branch naming: `feature/...`, `fix/...`, `hotfix/...`.
 - TypeScript is strict; don't add `any` to silence errors — narrow the type or fix the call site.
 - New tsconfigs extend a preset from [packages/tsconfig](../packages/tsconfig/) (`@matsugov/tsconfig/nextjs.json` for Next.js apps, `@matsugov/tsconfig/library.json` for React/SDK packages, `@matsugov/tsconfig/base.json` for plain TS). Override only paths, includes, and package-specific plugins.
