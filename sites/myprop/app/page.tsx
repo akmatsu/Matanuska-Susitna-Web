@@ -10,8 +10,8 @@ export default function RootPage() {
       <div className="mb-6">
         <Notice>
           The Borough is upgrading the Tax &amp; Assessment system that supplies
-          MyProperty&apos;s data. MyProperty is not going away but updates will
-          pause on October 8, and resume after October 20.
+          MyProperty&apos;s data. Updates are currently paused; we hope to
+          restore updates by October 30.
         </Notice>
       </div>
       <SearchField />
