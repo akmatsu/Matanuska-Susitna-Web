@@ -9,7 +9,8 @@ import {
 import { propertyApiCall } from '@msb/property-sdk';
 import { format } from 'date-fns';
 import { Metadata } from 'next';
-import { Notice } from '@/components/Notice';
+import { PropertyAccessNotice } from '@/components/PropertyAccessNotice';
+import { propertyAccessUrl } from '@/utils/propertyAccess';
 import { MapModal } from './MapModal';
 import Link from 'next/link';
 
@@ -29,6 +30,9 @@ export default async function MyParcelDetailPage(
   const { data } = await propertyApiCall<{ data: ParcelDetails }>(
     `/detail/${encodeURIComponent(pid)}`,
   );
+
+  // Property Access identifies parcels by PARID, which is the tax ID without its first character.
+  const parId = data.TAX_ID?.substring(1);
 
   const formatCurrency = (value: number | null) => {
     if (value == null) return '--';
@@ -61,11 +65,10 @@ export default async function MyParcelDetailPage(
             {format(new Date(data.LAST_UPDATED), 'M/d/yyyy h:mm aa')}
           </p>
 
-          <Notice className="print:hidden">
-            <strong>Data updates paused: </strong> Information will not update
-            from October 8 through October 20 while we transition to a new Tax
-            &amp; Assessment system.
-          </Notice>
+          <PropertyAccessNotice
+            className="print:hidden"
+            href={parId ? propertyAccessUrl('datalet', parId) : undefined}
+          />
 
           <section>
             <SectionHeader title="Site Information" />
@@ -108,6 +111,19 @@ export default async function MyParcelDetailPage(
                         <span className="icon-[mdi--id-card] mr-1 size-5" />
                         View Permits
                       </Link>
+                      {parId && (
+                        <Link
+                          className="msb-btn-primary"
+                          href={propertyAccessUrl('datalet', parId)}
+                          title="View this property on the Property Access site"
+                        >
+                          <span
+                            className="icon-[mdi--open-in-new] mr-1 size-5"
+                            aria-hidden="true"
+                          />
+                          Property Access
+                        </Link>
+                      )}
                       <MapModal
                         pid={data.PARCEL_ID}
                         map={data.MAP}
@@ -398,7 +414,7 @@ export default async function MyParcelDetailPage(
               )}
             </section>
           </div>
-          <section>
+          <section className="print:hidden">
             <SectionHeader
               title={
                 <>
@@ -413,44 +429,24 @@ export default async function MyParcelDetailPage(
                 </>
               }
             />
-            <DataTable
-              headers={[
-                { label: 'Status' },
-                { label: 'Tax Balance' },
-                { label: 'Farm' },
-                { label: 'Disabled Veteran' },
-                { label: 'Senior' },
-                {
-                  label: (
-                    <>
-                      Total{' '}
-                      <a
-                        href="#footnote-3"
-                        id="footnote-ref-3"
-                        aria-label="See footnote 3"
-                        className="text-white"
-                      >
-                        <sup>3</sup>
-                      </a>
-                    </>
-                  ),
-                },
-                { label: 'LID Exists' },
-              ]}
-            >
-              <DataTableRow
-                cells={[
-                  { value: data.STATUS },
-                  { value: formatCurrency(data.BALANCE) },
-                  { value: formatCurrency(data.FARM_DEFERMENT) },
-                  { value: formatCurrency(data.DISABLED_VET) },
-                  { value: formatCurrency(data.SENIOR) },
-                  { value: formatCurrency(data.TOTAL) },
-                  { value: data.LID },
-                ]}
-                isLast
-              />
-            </DataTable>
+            {/* Balances now live in Property Access, so link there instead of showing them here. */}
+            <div className="flex p-2">
+              {parId ? (
+                <Link
+                  className="msb-btn-primary"
+                  href={propertyAccessUrl('taxesdue', parId)}
+                  title="View taxes due and pay on the Property Access site"
+                >
+                  <span
+                    className="icon-[mdi--credit-card-outline] mr-1 size-5"
+                    aria-hidden="true"
+                  />
+                  Pay Taxes
+                </Link>
+              ) : (
+                <p>No tax account available for this parcel.</p>
+              )}
+            </div>
           </section>
           <section>
             <SectionHeader title="Land and Miscellaneous" />
@@ -528,7 +524,7 @@ export default async function MyParcelDetailPage(
             </li>
             <li
               id="footnote-2"
-              className="focus-ring transition-colors target:bg-yellow-200"
+              className="focus-ring transition-colors target:bg-yellow-200 print:hidden"
             >
               <a
                 href="#footnote-ref-2"
@@ -538,20 +534,6 @@ export default async function MyParcelDetailPage(
                 <sup>2</sup>
               </a>
               If account is in foreclosure, payment must be in certified funds.
-            </li>
-            <li
-              id="footnote-3"
-              className="focus-ring transition-colors target:bg-yellow-200"
-            >
-              <a
-                href="#footnote-ref-3"
-                aria-label="back to reference"
-                className="mr-2"
-              >
-                <sup>3</sup>
-              </a>
-              If you reside within the city limits of Palmer or Houston, your
-              exemption amount may be different.
             </li>
           </ol>
         </div>
