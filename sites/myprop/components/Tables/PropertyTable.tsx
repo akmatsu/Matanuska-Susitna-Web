@@ -1,5 +1,5 @@
 export const PropertyTable = ({ children }: { children: React.ReactNode }) => (
-  <table className="border-table-border w-full border print:border-collapse print:border-black">
+  <table className="border-table-border print:border-table-border-print w-full border print:border-collapse">
     <tbody>{children}</tbody>
   </table>
 );

@@ -31,6 +31,8 @@
   --color-surface-dark: var(--color-primary);
   --color-border: var(--color-msb-base-darkest);
   --color-table-border: var(--color-background);
+  /* Light gray so printed tables use less black ink than solid black rules. */
+  --color-table-border-print: var(--color-gray-400);
   --color-input: var(--color-msb-base-light);
   --color-input-hover: var(--color-msb-base-dark);
   --color-input-active: var(--color-msb-base-darker-2);
