@@ -147,7 +147,7 @@ export default async function MyParcelDetailPage(
                 />
               </PropertyTable>
               <PropertyTable>
-                <PropertyRow label="Buyers" value={data.BUYER} />
+                <PropertyRow label="Buyer/Lessee" value={data.BUYER} />
                 <PropertyRow
                   label="Buyer's Primary Address"
                   value={data.BUYER_ADDRESS}
