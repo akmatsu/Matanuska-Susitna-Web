@@ -1,3 +1,4 @@
+import { PropertyAccessNotice } from '@/components/PropertyAccessNotice';
 import { SearchField } from '@/components/SearchField';
 import { TaxMapMap } from './components/Taxmap/TaxmapMap';
 import { TaxMapTable } from './components/TaxMapTable';
@@ -16,6 +17,7 @@ export default function TaxMapsPage() {
         <h1 className="text-center text-xl font-bold">
           MSB Tax Map PDF / DXF Downloads
         </h1>
+        <PropertyAccessNotice className="my-6" />
         <div className="flex flex-col items-start md:flex-row print:flex-row">
           <TaxMapMap />
           <SearchField />
