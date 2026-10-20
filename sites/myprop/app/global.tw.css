@@ -97,6 +97,11 @@ p .msb-md-body {
       print-color-adjust: exact;
       -webkit-print-color-adjust: exact;
     }
+
+    /* Set by PrintButtons when the user picks the borderless printout. */
+    [data-print-borders='none'] {
+      --color-table-border-print: transparent;
+    }
   }
 
   .focus-ring {

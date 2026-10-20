@@ -11,6 +11,7 @@ import { format } from 'date-fns';
 import { Metadata } from 'next';
 import { Notice } from '@/components/Notice';
 import { MapModal } from './MapModal';
+import { PrintButtons } from './PrintButtons';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -61,6 +62,7 @@ export default async function MyParcelDetailPage(
             {format(new Date(data.LAST_UPDATED), 'M/d/yyyy h:mm aa')}
           </p>
 
+          <PrintButtons />
           <Notice className="print:hidden">
             <strong>Data updates paused: </strong> The Borough is upgrading the
             Tax &amp; Assessment system that supplies MyProperty&apos;s data. We
