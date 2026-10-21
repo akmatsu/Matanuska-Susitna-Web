@@ -12,6 +12,7 @@ import { Metadata } from 'next';
 import { PropertyAccessNotice } from '@/components/PropertyAccessNotice';
 import { propertyAccessUrl } from '@/utils/propertyAccess';
 import { MapModal } from './MapModal';
+import { PrintButtons } from './PrintButtons';
 import Link from 'next/link';
 
 export const metadata: Metadata = {

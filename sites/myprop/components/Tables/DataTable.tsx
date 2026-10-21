@@ -11,7 +11,7 @@ export const DataTable = ({
   className?: string;
 }) => (
   <div className={cn('overflow-x-auto', className)}>
-    <table className="border-table-border w-full border print:border-collapse print:border-black">
+    <table className="border-table-border print:border-table-border-print w-full border print:border-collapse">
       <DataTableHeader headers={headers} />
       <tbody>{children}</tbody>
     </table>
