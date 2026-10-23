@@ -32,7 +32,7 @@ export default async function MyParcelDetailPage(
   );
 
   // Property Access identifies parcels by PARID, which is the tax ID without its first character.
-  const parId = data.TAX_ID?.substring(1);
+  const parId = data.TAX_ID;
 
   const formatCurrency = (value: number | null) => {
     if (value == null) return '--';
