@@ -12,7 +12,6 @@ import { Metadata } from 'next';
 import { PropertyAccessNotice } from '@/components/PropertyAccessNotice';
 import { propertyAccessUrl } from '@/utils/propertyAccess';
 import { MapModal } from './MapModal';
-import { PrintButtons } from './PrintButtons';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -172,7 +171,7 @@ export default async function MyParcelDetailPage(
               </PropertyTable>
             </TwoColumnWrapper>
           </section>
-          <TwoColumnWrapper>
+          <section>
             {data.APPRAISALS && data.APPRAISALS.length > 0 && (
               <section>
                 <SectionHeader title="Appraisal Information" />
@@ -183,6 +182,7 @@ export default async function MyParcelDetailPage(
                     { label: 'Land Value', right: true },
                     { label: 'Building Value', right: true },
                     { label: 'Total Appraisal', right: true },
+                    { label: 'Total Assessed', right: true },
                   ]}
                 >
                   {data.APPRAISALS.map((appraisal, idx) => (
@@ -202,6 +202,10 @@ export default async function MyParcelDetailPage(
                           value: formatCurrency(appraisal.TOTAL_APR),
                           right: true,
                         },
+                        {
+                          value: formatCurrency(appraisal.TOTAL_ASM),
+                          right: true,
+                        },
                       ]}
                       isLast={idx === data.APPRAISALS.length - 1}
                     />
@@ -209,58 +213,7 @@ export default async function MyParcelDetailPage(
                 </DataTable>
               </section>
             )}
-
-            {data.ASSESSMENTS && data.ASSESSMENTS.length > 0 && (
-              <section>
-                <SectionHeader title="Assessments" />
-                <DataTable
-                  headers={[
-                    { label: 'Year' },
-                    { label: 'Land Assessed', right: true },
-                    { label: 'Building Assessed', right: true },
-                    {
-                      label: (
-                        <>
-                          Total Assessed
-                          <a
-                            href="#footnote-1"
-                            id="footnote-ref-1"
-                            aria-label="see footnote 1"
-                            className="ml-1 text-white group-target:text-black"
-                          >
-                            <sup>1</sup>
-                          </a>
-                        </>
-                      ),
-                      right: true,
-                    },
-                  ]}
-                >
-                  {data.ASSESSMENTS.map((assessment, idx) => (
-                    <DataTableRow
-                      key={idx}
-                      cells={[
-                        { value: assessment.YEAR_ID },
-                        {
-                          value: formatCurrency(assessment.LAND_ASM),
-                          right: true,
-                        },
-                        {
-                          value: formatCurrency(assessment.BLDG_ASM),
-                          right: true,
-                        },
-                        {
-                          value: formatCurrency(assessment.TOTAL_ASM),
-                          right: true,
-                        },
-                      ]}
-                      isLast={idx === data.ASSESSMENTS.length - 1}
-                    />
-                  ))}
-                </DataTable>
-              </section>
-            )}
-          </TwoColumnWrapper>
+          </section>
           {data.STRUCTURES && data.STRUCTURES.length > 0 && (
             <section>
               <details>
