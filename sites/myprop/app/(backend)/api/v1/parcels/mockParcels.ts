@@ -225,8 +225,7 @@ function createRecordedDocuments(): ParcelRecordedDocument[] {
         DEED_TYPE: deedType,
         DOC_LABEL: `Palmer  Bk: ${book} Pg: ${page}`,
         DOC_URL: `&SearchType=book&Book=${book}&Page=${page}`,
-        district: 'Palmer',
-        districtCode: '111',
+        DISTRICT_CODE: '111',
       };
     }
 
@@ -235,8 +234,7 @@ function createRecordedDocuments(): ParcelRecordedDocument[] {
       DEED_TYPE: deedType,
       DOC_LABEL: `Palmer ${serial}`,
       DOC_URL: `&SearchType=doc&SerialNumber=${serial}`,
-      district: 'Palmer',
-      districtCode: '111',
+      DISTRICT_CODE: '111',
     };
   });
 }
