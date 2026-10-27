@@ -33,7 +33,7 @@ export default function PublicMeetingsCalendar() {
     ['wkst', '1'],
     ['bgcolor', '#FFFFFF'],
     ['ctz', 'America/Anchorage'],
-    ['showTabs', '0'],
+    ['showTabs', '1'],
     ['showPrint', '0'],
   ];
 
