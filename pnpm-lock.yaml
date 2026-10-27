@@ -165,6 +165,9 @@ catalogs:
     react:
       specifier: ^19.2.8
       version: 19.2.8
+    react-day-picker:
+      specifier: ^10.0.2
+      version: 10.0.2
     react-dom:
       specifier: ^19.2.8
       version: 19.2.8
@@ -449,6 +452,9 @@ importers:
       radix-ui:
         specifier: 'catalog:'
         version: 1.6.5(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react-day-picker:
+        specifier: 'catalog:'
+        version: 10.0.2(@types/react@19.2.17)(react@19.2.8)
       resize-observer-polyfill:
         specifier: 'catalog:'
         version: 1.5.1
@@ -813,9 +819,11 @@ packages:
 
   '@arcgis/core@5.1.14':
     resolution: {integrity: sha512-PADeK9MgN1oxcP7xK1B7Ou7efseOHzOT2dm7Hy/HqG1IXrI0FWgUrKWQ4jG+OaQT860r0V2gLFNuhZ8jM0cjiA==}
+    deprecated: This version is no longer supported. Upgrade to @latest
 
   '@arcgis/lumina@5.1.14':
     resolution: {integrity: sha512-B0GHqWtdk94kdty6/8NwogDQKjDiQhrIfD6KIAe8Xc8DoMej5eQbZsGwNJs7anAhmVjPzRg87kbNblpJA1sIbw==}
+    deprecated: This version is no longer supported. Upgrade to @latest
     peerDependencies:
       '@lit/context': ^1.1.6
       lit: ^3.3.0
@@ -825,6 +833,7 @@ packages:
 
   '@arcgis/toolkit@5.1.14':
     resolution: {integrity: sha512-ojDHX/SMfGUbJwajF4VQ+zMGqlPC6OI1+yHr+YUEZGps2IOQP09C1wzPxI7YiI/jpsnOwLMJWu7vD0sOCURO5w==}
+    deprecated: This version is no longer supported. Upgrade to @latest
 
   '@ardatan/relay-compiler@13.0.2':
     resolution: {integrity: sha512-VFpv9UP820SiwDUPYtq7PmD3jifzZlevkQ26bhbSzFeruSTys0eHzQCZyKg+IhgmZzwPI9AFjPe26ABNjGeIKg==}
@@ -5896,6 +5905,16 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
       react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
+  react-day-picker@10.0.2:
+    resolution: {integrity: sha512-QetiKtZWE9Uaw/pM/SYNv6WPYOTRnSJ2puL0GgwkmUFMIwiY0dtjH1W4B7DOVXVNQM0ZOClGpH/heOfBSzWeiA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@types/react': '>=16.8.0'
+      react: '>=16.8.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   react-dom@19.2.8:
     resolution: {integrity: sha512-rVprimfGBG3DR+Tq0IQG2DT5PxKth1WIGDmj5yPmlzr4YBe7uyE+Du4oVqTDXZSHGGGXRtTJEGSSePyQCMBglQ==}
@@ -12346,6 +12365,14 @@ snapshots:
       react-dom: 19.2.8(react@19.2.8)
       react-stately: 3.48.0(react@19.2.8)
       use-sync-external-store: 1.6.0(react@19.2.8)
+
+  react-day-picker@10.0.2(@types/react@19.2.17)(react@19.2.8):
+    dependencies:
+      '@date-fns/tz': 1.5.0
+      date-fns: 4.4.0
+      react: 19.2.8
+    optionalDependencies:
+      '@types/react': 19.2.17
 
   react-dom@19.2.8(react@19.2.8):
     dependencies:
