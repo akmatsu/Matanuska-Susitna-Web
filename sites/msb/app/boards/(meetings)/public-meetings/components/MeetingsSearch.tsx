@@ -9,8 +9,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@matsugov/ui';
+import { DateRangePicker, type DateRange } from '@matsugov/ui/Calendar';
 import { TextField } from '@matsugov/ui/TextField';
-import { format, parse, startOfDay } from 'date-fns';
+import { addYears, endOfDay, endOfYear, startOfDay, subYears } from 'date-fns';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
@@ -19,10 +20,9 @@ export function MeetingsSearch() {
   const [meetings, setMeetings] = useState<CalendarMeeting[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>(params.get('q') || '');
-  const [timeMin, setTimeMin] = useState<string>(
-    format(startOfDay(new Date()), 'yyyy-MM-dd'),
-  );
-  const [timeMax, setTimeMax] = useState<string>('');
+  const [range, setRange] = useState<DateRange | undefined>({
+    from: startOfDay(new Date()),
+  });
 
   const limit = 25;
 
@@ -30,19 +30,12 @@ export function MeetingsSearch() {
     try {
       setLoading(true);
 
-      const timeMinUtc = startOfDay(
-        parse(timeMin, 'yyyy-MM-dd', new Date()),
-      ).toISOString();
-
-      const timeMaxUTC =
-        timeMax.length > 0
-          ? startOfDay(parse(timeMax, 'yyyy-MM-dd', new Date())).toISOString()
-          : '';
-
+      // An empty timeMin makes the API default to today. timeMax uses the
+      // end of the day so meetings on the last selected day are included.
       const params = new URLSearchParams({
         query,
-        timeMin: timeMinUtc,
-        timeMax: timeMaxUTC,
+        timeMin: range?.from ? startOfDay(range.from).toISOString() : '',
+        timeMax: range?.to ? endOfDay(range.to).toISOString() : '',
         limit: limit.toString(),
       });
 
@@ -56,7 +49,7 @@ export function MeetingsSearch() {
     } finally {
       setLoading(false);
     }
-  }, [timeMin, timeMax, limit, query]);
+  }, [range, limit, query]);
 
   useDebounce(getMeetings, 500);
 
@@ -74,21 +67,18 @@ export function MeetingsSearch() {
             placeholder="Start typing to search for meetings..."
           />
         </div>
-        <div className="col-span-2 md:col-span-1">
-          <TextField
-            id="min-start"
-            type="date"
-            value={timeMin}
-            onChange={(e) => setTimeMin(e.target.value)}
-            label="Min Date"
-          />
-        </div>
-        <div className="col-span-2 md:col-span-1">
-          <TextField
-            id="max-start"
-            type="date"
-            onChange={(e) => setTimeMax(e.target.value)}
-            label="Max Date"
+        <div className="col-span-4 md:col-span-2">
+          <DateRangePicker
+            id="meetings-date-range"
+            label="Meeting Dates"
+            value={range}
+            onChange={setRange}
+            placeholder="Upcoming meetings"
+            calendarProps={{
+              captionLayout: 'dropdown',
+              startMonth: subYears(new Date(), 10),
+              endMonth: endOfYear(addYears(new Date(), 1)),
+            }}
           />
         </div>
       </form>
