@@ -350,7 +350,7 @@ export default async function MyParcelDetailPage(
                             <a
                               target="_blank"
                               rel="noopener noreferrer"
-                              href={`https://dnr.alaska.gov/ssd/recoff/search/cad_search?District=${doc.districtCode}${doc.DOC_URL}`}
+                              href={`https://dnr.alaska.gov/ssd/recoff/search/cad_search?District=${doc.DISTRICT_CODE}${doc.DOC_URL}`}
                             >
                               {doc.DOC_LABEL}
                             </a>
