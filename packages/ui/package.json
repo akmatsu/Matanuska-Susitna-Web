@@ -11,6 +11,7 @@
     "./Alert": "./src/components/Alert/index.ts",
     "./Banner": "./src/components/Banner/index.ts",
     "./Button": "./src/components/Button/index.ts",
+    "./Calendar": "./src/components/Calendar/index.ts",
     "./Card": "./src/components/Card/index.ts",
     "./Checkbox": "./src/components/Checkbox/index.ts",
     "./Combobox": "./src/components/Combobox/index.ts",
@@ -80,6 +81,7 @@
     "embla-carousel-react": "catalog:",
     "install": "catalog:",
     "radix-ui": "catalog:",
+    "react-day-picker": "catalog:",
     "resize-observer-polyfill": "catalog:",
     "tailwind-merge": "catalog:",
     "voca": "catalog:"
