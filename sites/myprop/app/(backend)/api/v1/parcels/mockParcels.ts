@@ -22,8 +22,7 @@ export type ParcelRecordedDocument = {
   DEED_TYPE: string | null;
   DOC_LABEL: string | null;
   DOC_URL: string | null;
-  district: string | null;
-  districtCode: string | null;
+  DISTRICT_CODE: string | null;
 };
 
 export type ParcelStructure = {
