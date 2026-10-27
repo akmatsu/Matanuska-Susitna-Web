@@ -33,6 +33,13 @@ const TYPESENSE_COLLECTION = 'pages';
 const POPULAR_QUERIES_COLLECTION = 'popular_queries';
 const DEFAULT_PER_PAGE = 12;
 
+// Hides items whose end date has passed. The CMS gives every doc an
+// `end_date`, using a far-future value when an item has no end date,
+// because TypeSense can't filter on a missing field.
+function notEndedFilter() {
+  return `end_date:>${Math.floor(Date.now() / 1000)}`;
+}
+
 const client = new Typesense.Client({
   apiKey: process.env.NEXT_PUBLIC_TYPESENSE_API_KEY || 'xyz',
   nodes: [
@@ -95,11 +102,12 @@ export async function searchPages({
       }),
       sort_by: trimmedQuery ? '_text_match:desc,title:asc' : 'title:asc',
       exclude_fields: 'embedding',
-      ...(trimmedType
-        ? {
-            filter_by: `type:=\`${trimmedType.replace(/[`\\]/g, '\\$&')}\``,
-          }
-        : {}),
+      filter_by: [
+        notEndedFilter(),
+        trimmedType && `type:=\`${trimmedType.replace(/[`\\]/g, '\\$&')}\``,
+      ]
+        .filter(Boolean)
+        .join(' && '),
       page,
       per_page: perPage,
     });
@@ -145,6 +153,7 @@ export async function instantSearch({
         prioritize_exact_match: true,
         prioritize_token_position: true,
         sort_by: '_text_match:desc,title:asc',
+        filter_by: notEndedFilter(),
         exclude_fields: 'embedding',
         per_page: 5,
       });
@@ -169,6 +178,7 @@ export async function getPageTypes({
       .search<any>({
         q: '*',
         facet_by: 'type',
+        filter_by: notEndedFilter(),
         max_facet_values: limit,
         per_page: 0,
       });
