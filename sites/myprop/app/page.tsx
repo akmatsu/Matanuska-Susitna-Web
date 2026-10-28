@@ -1,5 +1,5 @@
-import { Notice } from '@/components/Notice';
 import { PageTitle } from '@/components/PageTitle';
+import { PropertyAccessNotice } from '@/components/PropertyAccessNotice';
 import { SearchField } from '@/components/SearchField';
 import Link from 'next/link';
 
@@ -8,11 +8,7 @@ export default function RootPage() {
     <main>
       <PageTitle title="MyProperty" />
       <div className="mb-6">
-        <Notice>
-          The Borough is upgrading the Tax &amp; Assessment system that supplies
-          MyProperty&apos;s data. Updates are currently paused; we hope to
-          restore updates by October 30.
-        </Notice>
+        <PropertyAccessNotice />
       </div>
       <SearchField />
 

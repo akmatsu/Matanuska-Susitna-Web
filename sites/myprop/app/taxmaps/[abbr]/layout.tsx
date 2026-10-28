@@ -1,4 +1,5 @@
 import { PageTitle } from '@/components/PageTitle';
+import { PropertyAccessNotice } from '@/components/PropertyAccessNotice';
 import Link from 'next/link';
 
 export default function TaxmapPageLayout(props: { children: React.ReactNode }) {
@@ -18,6 +19,7 @@ export default function TaxmapPageLayout(props: { children: React.ReactNode }) {
       </nav>
       <main>
         <PageTitle title="TaxMap Downloads" />
+        <PropertyAccessNotice className="mb-6" />
         {props.children}
       </main>
     </>

@@ -9,9 +9,9 @@ import {
 import { propertyApiCall } from '@msb/property-sdk';
 import { format } from 'date-fns';
 import { Metadata } from 'next';
-import { Notice } from '@/components/Notice';
+import { PropertyAccessNotice } from '@/components/PropertyAccessNotice';
+import { propertyAccessUrl } from '@/utils/propertyAccess';
 import { MapModal } from './MapModal';
-import { PrintButtons } from './PrintButtons';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -30,6 +30,9 @@ export default async function MyParcelDetailPage(
   const { data } = await propertyApiCall<{ data: ParcelDetails }>(
     `/detail/${encodeURIComponent(pid)}`,
   );
+
+  // Property Access identifies parcels by PARID, which is the tax ID without its first character.
+  const parId = data.TAX_ID;
 
   const formatCurrency = (value: number | null) => {
     if (value == null) return '--';
@@ -62,12 +65,10 @@ export default async function MyParcelDetailPage(
             {format(new Date(data.LAST_UPDATED), 'M/d/yyyy h:mm aa')}
           </p>
 
-          <PrintButtons />
-          <Notice className="print:hidden">
-            <strong>Data updates paused: </strong> The Borough is upgrading the
-            Tax &amp; Assessment system that supplies MyProperty&apos;s data. We
-            hope to restore updates by October 30.
-          </Notice>
+          <PropertyAccessNotice
+            className="print:hidden"
+            href={parId ? propertyAccessUrl('datalet', parId) : undefined}
+          />
 
           <section>
             <SectionHeader title="Site Information" />
@@ -110,6 +111,19 @@ export default async function MyParcelDetailPage(
                         <span className="icon-[mdi--id-card] mr-1 size-5" />
                         View Permits
                       </Link>
+                      {parId && (
+                        <Link
+                          className="msb-btn-primary"
+                          href={propertyAccessUrl('datalet', parId)}
+                          title="View this property on the Property Access site"
+                        >
+                          <span
+                            className="icon-[mdi--open-in-new] mr-1 size-5"
+                            aria-hidden="true"
+                          />
+                          Property Access
+                        </Link>
+                      )}
                       <MapModal
                         pid={data.PARCEL_ID}
                         map={data.MAP}
@@ -149,7 +163,7 @@ export default async function MyParcelDetailPage(
                 />
               </PropertyTable>
               <PropertyTable>
-                <PropertyRow label="Buyers" value={data.BUYER} />
+                <PropertyRow label="Buyer/Lessee" value={data.BUYER} />
                 <PropertyRow
                   label="Buyer's Primary Address"
                   value={data.BUYER_ADDRESS}
@@ -157,7 +171,7 @@ export default async function MyParcelDetailPage(
               </PropertyTable>
             </TwoColumnWrapper>
           </section>
-          <TwoColumnWrapper>
+          <section>
             {data.APPRAISALS && data.APPRAISALS.length > 0 && (
               <section>
                 <SectionHeader title="Appraisal Information" />
@@ -168,6 +182,7 @@ export default async function MyParcelDetailPage(
                     { label: 'Land Value', right: true },
                     { label: 'Building Value', right: true },
                     { label: 'Total Appraisal', right: true },
+                    { label: 'Total Assessed', right: true },
                   ]}
                 >
                   {data.APPRAISALS.map((appraisal, idx) => (
@@ -187,6 +202,10 @@ export default async function MyParcelDetailPage(
                           value: formatCurrency(appraisal.TOTAL_APR),
                           right: true,
                         },
+                        {
+                          value: formatCurrency(appraisal.TOTAL_ASM),
+                          right: true,
+                        },
                       ]}
                       isLast={idx === data.APPRAISALS.length - 1}
                     />
@@ -194,58 +213,7 @@ export default async function MyParcelDetailPage(
                 </DataTable>
               </section>
             )}
-
-            {data.ASSESSMENTS && data.ASSESSMENTS.length > 0 && (
-              <section>
-                <SectionHeader title="Assessments" />
-                <DataTable
-                  headers={[
-                    { label: 'Year' },
-                    { label: 'Land Assessed', right: true },
-                    { label: 'Building Assessed', right: true },
-                    {
-                      label: (
-                        <>
-                          Total Assessed
-                          <a
-                            href="#footnote-1"
-                            id="footnote-ref-1"
-                            aria-label="see footnote 1"
-                            className="ml-1 text-white group-target:text-black"
-                          >
-                            <sup>1</sup>
-                          </a>
-                        </>
-                      ),
-                      right: true,
-                    },
-                  ]}
-                >
-                  {data.ASSESSMENTS.map((assessment, idx) => (
-                    <DataTableRow
-                      key={idx}
-                      cells={[
-                        { value: assessment.YEAR_ID },
-                        {
-                          value: formatCurrency(assessment.LAND_ASM),
-                          right: true,
-                        },
-                        {
-                          value: formatCurrency(assessment.BLDG_ASM),
-                          right: true,
-                        },
-                        {
-                          value: formatCurrency(assessment.TOTAL_ASM),
-                          right: true,
-                        },
-                      ]}
-                      isLast={idx === data.ASSESSMENTS.length - 1}
-                    />
-                  ))}
-                </DataTable>
-              </section>
-            )}
-          </TwoColumnWrapper>
+          </section>
           {data.STRUCTURES && data.STRUCTURES.length > 0 && (
             <section>
               <details>
@@ -382,7 +350,7 @@ export default async function MyParcelDetailPage(
                             <a
                               target="_blank"
                               rel="noopener noreferrer"
-                              href={`https://dnr.alaska.gov/ssd/recoff/search/cad_search?District=${doc.districtCode}${doc.DOC_URL}`}
+                              href={`https://dnr.alaska.gov/ssd/recoff/search/cad_search?District=${doc.DISTRICT_CODE}${doc.DOC_URL}`}
                             >
                               {doc.DOC_LABEL}
                             </a>
@@ -415,6 +383,21 @@ export default async function MyParcelDetailPage(
                 </>
               }
             />
+            {parId && (
+              <div className="flex px-1 pb-1 print:hidden">
+                <Link
+                  className="msb-btn-primary"
+                  href={propertyAccessUrl('taxesdue', parId)}
+                  title="View taxes due and pay on the Property Access site"
+                >
+                  <span
+                    className="icon-[mdi--credit-card-outline] mr-1 size-5"
+                    aria-hidden="true"
+                  />
+                  Pay Taxes
+                </Link>
+              </div>
+            )}
             <DataTable
               headers={[
                 { label: 'Status' },
@@ -425,7 +408,7 @@ export default async function MyParcelDetailPage(
                 {
                   label: (
                     <>
-                      Total{' '}
+                      Exemption Total{' '}
                       <a
                         href="#footnote-3"
                         id="footnote-ref-3"
@@ -524,7 +507,7 @@ export default async function MyParcelDetailPage(
               >
                 <sup>1</sup>
               </a>
-              Total Assessed is net of exemptions and deferments.rest,
+              Total Assessed is net of exemptions and deferments. Interest,
               penalties, and other charges posted after Last Update Date are not
               reflected in balances.
             </li>

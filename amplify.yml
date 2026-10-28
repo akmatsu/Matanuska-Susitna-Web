@@ -108,6 +108,12 @@ applications:
           commands:
             - echo "API_URL=$API_URL" >> ./sites/myprop/.env
             - echo "API_KEY=$API_KEY" >> ./sites/myprop/.env
+            - |
+              if [ "$AWS_BRANCH" = "stage" ]; then
+                echo "PROPERTY_ACCESS_URL=$STAGE_PROPERTY_ACCESS_URL" >> ./sites/myprop/.env
+              else
+                echo "PROPERTY_ACCESS_URL=$PROD_PROPERTY_ACCESS_URL" >> ./sites/myprop/.env
+              fi
             # Anything other than "production" blocks crawlers and analytics.
             - |
               if [ "$AWS_BRANCH" = "stage" ]; then

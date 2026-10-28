@@ -5,12 +5,6 @@ export type ParcelAppraisal = {
   LAND_APR: number | null; // monetary value
   BLDG_APR: number | null; // monetary value
   TOTAL_APR: number | null; // monetary value
-};
-
-export type ParcelAssessment = {
-  YEAR_ID: number | null;
-  LAND_ASM: number | null; // monetary value
-  BLDG_ASM: number | null; // monetary value
   TOTAL_ASM: number | null; // monetary value
 };
 
@@ -28,8 +22,7 @@ export type ParcelRecordedDocument = {
   DEED_TYPE: string | null;
   DOC_LABEL: string | null;
   DOC_URL: string | null;
-  district: string | null;
-  districtCode: string | null;
+  DISTRICT_CODE: string | null;
 };
 
 export type ParcelStructure = {
@@ -86,7 +79,6 @@ export type ParcelDetails = {
   LAST_UPDATED: string | null;
   ADDRESSES?: Array<{ FULL_ADDRESS: string }> | null;
   APPRAISALS?: ParcelAppraisal[] | null;
-  ASSESSMENTS?: ParcelAssessment[] | null;
   TAX_BILLING?: ParcelTaxBilling[] | null;
   RECORDED_DOCUMENTS?: ParcelRecordedDocument[] | null;
   STRUCTURES?: ParcelStructure[] | null;
@@ -184,17 +176,9 @@ function createAppraisals(
       LAND_APR: landApr,
       BLDG_APR: bldgApr,
       TOTAL_APR: landApr + bldgApr,
+      TOTAL_ASM: null, // initialize TOTAL_ASM as null
     };
   });
-}
-
-function createAssessments(appraisals: ParcelAppraisal[]): ParcelAssessment[] {
-  return appraisals.map((appraisal) => ({
-    YEAR_ID: appraisal.YEAR_ID,
-    LAND_ASM: appraisal.LAND_APR,
-    BLDG_ASM: appraisal.BLDG_APR,
-    TOTAL_ASM: appraisal.TOTAL_APR,
-  }));
 }
 
 function createTaxBilling(appraisals: ParcelAppraisal[]): ParcelTaxBilling[] {
@@ -241,8 +225,7 @@ function createRecordedDocuments(): ParcelRecordedDocument[] {
         DEED_TYPE: deedType,
         DOC_LABEL: `Palmer  Bk: ${book} Pg: ${page}`,
         DOC_URL: `&SearchType=book&Book=${book}&Page=${page}`,
-        district: 'Palmer',
-        districtCode: '111',
+        DISTRICT_CODE: '111',
       };
     }
 
@@ -251,8 +234,7 @@ function createRecordedDocuments(): ParcelRecordedDocument[] {
       DEED_TYPE: deedType,
       DOC_LABEL: `Palmer ${serial}`,
       DOC_URL: `&SearchType=doc&SerialNumber=${serial}`,
-      district: 'Palmer',
-      districtCode: '111',
+      DISTRICT_CODE: '111',
     };
   });
 }
@@ -316,7 +298,6 @@ function createParcel(index: number): ParcelDetails {
   const landBase = faker.number.int({ min: 12000, max: 65000 });
   const bldgBase = faker.number.int({ min: 90000, max: 620000 });
   const appraisals = createAppraisals(landBase, bldgBase);
-  const assessments = createAssessments(appraisals);
   const taxBilling = createTaxBilling(appraisals);
 
   return {
@@ -360,7 +341,6 @@ function createParcel(index: number): ParcelDetails {
       }),
     ),
     APPRAISALS: appraisals,
-    ASSESSMENTS: assessments,
     TAX_BILLING: taxBilling,
     RECORDED_DOCUMENTS: createRecordedDocuments(),
     STRUCTURES: createStructures(),
