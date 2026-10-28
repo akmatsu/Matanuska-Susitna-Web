@@ -408,7 +408,7 @@ export default async function MyParcelDetailPage(
                 {
                   label: (
                     <>
-                      Total{' '}
+                      Exemption Total{' '}
                       <a
                         href="#footnote-3"
                         id="footnote-ref-3"
@@ -507,7 +507,7 @@ export default async function MyParcelDetailPage(
               >
                 <sup>1</sup>
               </a>
-              Total Assessed is net of exemptions and deferments.rest,
+              Total Assessed is net of exemptions and deferments. Interest,
               penalties, and other charges posted after Last Update Date are not
               reflected in balances.
             </li>
