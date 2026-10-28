@@ -1,7 +1,7 @@
-// Default to the Tyler test site until Property Access goes live.
+// Default to the live Property Access site. Set PROPERTY_ACCESS_URL to point
+// somewhere else, such as the Tyler test site on stage.
 export const propertyAccessBaseUrl =
-  process.env.PROPERTY_ACCESS_URL ||
-  'https://matanuskasusitnaboroughakpa-test.tylerhost.net/';
+  process.env.PROPERTY_ACCESS_URL || 'https://property.matsu.gov/';
 
 /**
  * Builds a link to a parcel page on the Property Access site.
