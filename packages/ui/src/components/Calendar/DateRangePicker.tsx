@@ -25,7 +25,7 @@ const dateFormat = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 
 function formatRange(range: DateRange | undefined) {
   if (!range?.from) return undefined;
-  if (!range.to) return `${dateFormat.format(range.from)} onward`;
+  if (!range.to) return `${dateFormat.format(range.from)}, and onward`;
   return dateFormat.formatRange(range.from, range.to);
 }
 
