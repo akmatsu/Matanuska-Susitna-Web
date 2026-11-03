@@ -32,6 +32,10 @@ export function PropertyAccessMoved(props: { href?: string }) {
         Be sure to bookmark the new Property Access page for future use.
       </p>
       <p>
+        Looking for DXF &amp; PDF tax maps?{' '}
+        <Link href="/taxmaps">Search Tax Maps</Link>
+      </p>
+      <p>
         If you have questions or concerns, please contact our{' '}
         <Link href="https://matsu.gov/departments/assessments">
           Assessments Division
