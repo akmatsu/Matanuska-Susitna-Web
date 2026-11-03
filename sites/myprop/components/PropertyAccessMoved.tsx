@@ -11,12 +11,8 @@ export function PropertyAccessMoved(props: { href?: string }) {
     <main className="mx-auto max-w-2xl space-y-4 text-center">
       <PageTitle title="MyProperty Has Moved!" />
       <p>
-        We are transitioning to our new Property Access website for property
-        assessment information.
-      </p>
-      <p>
-        Please click the button below to access Property Access and view your
-        assessment information.
+        Please visit our new Property Access website to view your assessment
+        information.
       </p>
       <Link
         href={props.href ?? propertyAccessBaseUrl}
@@ -36,7 +32,7 @@ export function PropertyAccessMoved(props: { href?: string }) {
         <Link href="/taxmaps">Search Tax Maps</Link>
       </p>
       <p>
-        If you have questions or concerns, please contact our{' '}
+        Questions or need assistance? Please contact our{' '}
         <Link href="https://matsu.gov/departments/assessments">
           Assessments Division
         </Link>
