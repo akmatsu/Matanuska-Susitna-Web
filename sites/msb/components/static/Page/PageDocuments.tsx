@@ -1,5 +1,9 @@
 import { DropdownButton } from '@matsugov/ui';
-import { DocumentLinkButton } from '../DocumentLink';
+import {
+  DocumentLinkButtonView,
+  toDocumentLinkData,
+  type DocumentLinkData,
+} from '../DocumentLink';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 
 const documentListFragment = gql(`
@@ -13,17 +17,19 @@ const documentListFragment = gql(`
   }
 `);
 
-export function PageDocuments(props: {
-  documents?: FragmentType<typeof documentListFragment>[] | null;
+export type DocumentListData = DocumentLinkData & { id: string };
+
+export function PageDocumentsView(props: {
+  documents?: DocumentListData[] | null;
 }) {
-  const documents = getFragmentData(documentListFragment, props.documents);
+  const { documents } = props;
   if (!documents?.length) return null;
 
   if (documents.length <= 2)
     return (
       <ul className="flex flex-col gap-2">
         {documents.map((doc) => (
-          <DocumentLinkButton key={doc.id} data={doc} block />
+          <DocumentLinkButtonView key={doc.id} document={doc} block />
         ))}
       </ul>
     );
@@ -36,9 +42,23 @@ export function PageDocuments(props: {
       label="View Documents"
       items={documents.map((doc) => ({
         label: doc.title || '',
-        href: doc.file?.url,
+        href: doc.url ?? undefined,
         value: doc.id,
       }))}
     />
+  );
+}
+
+type DocumentListRef = FragmentType<typeof documentListFragment>;
+
+/** Maps the Keystone GraphQL document list fragment to view data. */
+export function toDocumentListData(ref: DocumentListRef): DocumentListData {
+  const doc = getFragmentData(documentListFragment, ref);
+  return { id: doc.id, ...toDocumentLinkData(doc) };
+}
+
+export function PageDocuments(props: { documents?: DocumentListRef[] | null }) {
+  return (
+    <PageDocumentsView documents={props.documents?.map(toDocumentListData)} />
   );
 }

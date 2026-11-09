@@ -560,6 +560,9 @@ importers:
       '@matsugov/ui':
         specifier: workspace:^
         version: link:../../packages/ui
+      '@msb/cms-sdk':
+        specifier: workspace:^
+        version: link:../../packages/cms-sdk
       '@msb/js-sdk':
         specifier: workspace:^
         version: link:../../packages/sdk

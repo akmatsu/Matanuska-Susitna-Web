@@ -1,4 +1,3 @@
-import { Tooltip } from '@matsugov/ui/Tooltip';
 import clsx from 'clsx';
 
 import { gql } from '@msb/js-sdk/gql';
@@ -6,6 +5,7 @@ import { getClientHandler } from '@/utils/apollo/utils';
 import { getRedirectUrl } from '@/utils/stringHelpers';
 import { Link } from '@/components/static/Link';
 import { LinkButton } from '@/components/static/LinkButton';
+import { BrokenLink } from '@/components/static/BrokenLink';
 
 const getInternalLinkData = gql(`
   query GetInternalLinkData($id: ID!, $list: String!) {
@@ -87,14 +87,5 @@ export async function InternalLink(props: {
       );
   }
 
-  return (
-    <Tooltip
-      content="Oops! Looks like this link is broken. We are working on it!"
-      className="text-center"
-    >
-      <span className="text-error! cursor-not-allowed! line-through!">
-        {props.children} <span className="icon-[mdi--error] -mb-0.5" />
-      </span>
-    </Tooltip>
-  );
+  return <BrokenLink>{props.children}</BrokenLink>;
 }

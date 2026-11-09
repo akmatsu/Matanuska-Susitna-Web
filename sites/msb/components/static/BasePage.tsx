@@ -1,19 +1,19 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { PageHeroImage } from './Page/PageHeroImage';
+import React from 'react';
+import { MarkdownRenderer } from '@components/server/MarkdownRenderer';
+import { toHeroImage } from './Page/PageHeroImage';
+import { InternalActionsList, toExternalActionData } from './Page/PageActions';
+import { toPageBodyData } from './Page/PageBody';
+import { toContactListData } from './Page/PageContacts';
+import { toDocumentListData } from './Page/PageDocuments';
+import { toPageEventsData } from './Page/PageEvents';
+import { toPageListData } from './Page/PageListItems';
+import { toPagePublicNoticesData } from './Page/PagePublicNotices';
+import { toTopicListData } from './Page/PageTopics';
 import {
-  PageActions,
-  PageBody,
-  PageContacts,
-  PageDocuments,
-  PageEvents,
-  PageListItems,
-  PagePublicNotices,
-} from './Page';
-import React, { ComponentProps, ReactNode } from 'react';
-import clsx from 'clsx';
-import { PageViewTracker } from '../client/PageViewTracker';
-import { PageTopics } from './Page/PageTopics';
-import { PageColumnController } from '../client/PageColumnController';
+  ContentPageLayout,
+  type ContentPageLayoutProps,
+} from './ContentPageLayout';
 
 const BasePageFragment = gql(`
   fragment BasePageInfo on BasePageWithSlug {
@@ -96,19 +96,21 @@ const BasePageFragment = gql(`
   }
 `);
 
-export function BasePage(props: {
-  data?: FragmentType<typeof BasePageFragment> | null;
-  children?: React.ReactNode;
-  rightSide?: React.ReactNode;
-  hideHero?: boolean;
-  mapSlot?: React.ReactNode;
-  pageContainerProps?: Omit<
-    ComponentProps<typeof PageColumnController>,
-    'children'
-  >;
-  pageBodyProps?: Omit<ComponentProps<typeof PageBody>, 'page'>;
-}) {
-  const page = getFragmentData(BasePageFragment, props.data);
+/**
+ * The standard content page for Keystone GraphQL pages. It maps the
+ * `BasePageInfo` fragment to `ContentPageLayout`, which REST pages use
+ * directly.
+ */
+export function BasePage(
+  props: {
+    data?: FragmentType<typeof BasePageFragment> | null;
+  } & Omit<
+    ContentPageLayoutProps,
+    'page' | 'body' | 'internalActions' | 'hasInternalActions'
+  >,
+) {
+  const { data, ...layoutProps } = props;
+  const page = getFragmentData(BasePageFragment, data);
 
   if (!page) return null;
 
@@ -130,106 +132,38 @@ export function BasePage(props: {
   const topics = 'topics' in page ? page.topics : null;
   const plans = 'plans' in page ? page.plans : null;
 
-  const hasSideColumnContent = !!(
-    props.rightSide ||
-    props.mapSlot ||
-    primaryContact ||
-    primaryAction ||
-    actions?.length ||
-    secondaryActions?.length ||
-    page.documents?.length ||
-    page.contacts?.length ||
-    services?.length ||
-    communities?.length ||
-    orgUnits?.length
-  );
+  const { body, ...bodyData } = toPageBodyData(page);
 
   return (
-    <>
-      {!props.hideHero && <PageHeroImage page={page} />}
-      <PageColumnController
-        {...props.pageContainerProps}
-        showSideNav={!page.hideSideNav}
-        right={
-          hasSideColumnContent && (
-            <>
-              {props.mapSlot}
-              <PageActions
-                actions={actions}
-                primaryAction={primaryAction}
-                secondaryActions={secondaryActions}
-              />
-              <PageDocuments documents={page.documents} />
-
-              <PageListItems
-                title="Assembly Districts"
-                items={assemblyDistricts}
-              />
-              {props.rightSide}
-              {/* <PageListItems title="Communities" items={communities} /> */}
-              <PageListItems title="Plans" items={plans} />
-              <PageListItems title="Departments & Divisions" items={orgUnits} />
-
-              <PageContacts
-                contacts={page.contacts}
-                primaryContact={primaryContact}
-              />
-              <PageTopics topics={topics} />
-            </>
-          )
-        }
-      >
-        <PageBody
-          page={page}
-          {...props.pageBodyProps}
-          actionSlot={
-            <div className="flex flex-col gap-2">
-              {props.pageBodyProps?.actionSlot}
-              <HideOnDesktop className="not-prose flex flex-col gap-2">
-                {props.mapSlot}
-                <PageActions
-                  actions={actions}
-                  primaryAction={primaryAction}
-                  secondaryActions={secondaryActions}
-                />
-                <PageDocuments documents={page.documents} />
-              </HideOnDesktop>
-            </div>
-          }
-        />
-        <PageListItems title="Services" items={services} />
-        {props.children}
-
-        <HideOnDesktop className="flex flex-col gap-8">
-          {props.rightSide}
-
-          <PageListItems title="Assembly Districts" items={assemblyDistricts} />
-
-          <PageListItems title="Departments & Divisions" items={orgUnits} />
-        </HideOnDesktop>
-
-        <PageListItems title="Communities" items={communities} />
-        <PageEvents data={page as any} />
-        <PagePublicNotices data={page as any} />
-
-        <HideOnDesktop>
-          <PageContacts
-            contacts={page.contacts}
-            primaryContact={primaryContact}
-          />
-          <PageTopics topics={topics} />
-        </HideOnDesktop>
-      </PageColumnController>
-
-      {process.env.NODE_ENV === 'production' && (
-        <PageViewTracker pageId={page.id} pageType={page.__typename} />
-      )}
-    </>
-  );
-}
-
-function HideOnDesktop(props: { children: ReactNode; className?: string }) {
-  return (
-    <div className={clsx('lg:hidden', props.className)}>{props.children}</div>
+    <ContentPageLayout
+      {...layoutProps}
+      page={{
+        id: page.id,
+        pageType: page.__typename,
+        ...bodyData,
+        heroImage: toHeroImage(page),
+        hideSideNav: page.hideSideNav,
+        primaryAction: primaryAction
+          ? toExternalActionData(primaryAction)
+          : null,
+        secondaryActions: secondaryActions?.map(toExternalActionData),
+        documents: page.documents?.map(toDocumentListData),
+        primaryContact: primaryContact
+          ? toContactListData(primaryContact)
+          : null,
+        contacts: page.contacts?.map(toContactListData),
+        events: toPageEventsData(page as any),
+        publicNotices: toPagePublicNoticesData(page as any),
+        topics: topics?.map(toTopicListData),
+        services: services?.map(toPageListData),
+        communities: communities?.map(toPageListData),
+        orgUnits: orgUnits?.map(toPageListData),
+        assemblyDistricts: assemblyDistricts?.map(toPageListData),
+        plans: plans?.map(toPageListData),
+      }}
+      body={body ? <MarkdownRenderer>{body}</MarkdownRenderer> : null}
+      internalActions={<InternalActionsList actions={actions} />}
+      hasInternalActions={!!actions?.length}
+    />
   );
 }

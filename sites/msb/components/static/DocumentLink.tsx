@@ -3,6 +3,7 @@ import React, { ComponentProps, ElementType } from 'react';
 import { LinkButton } from './LinkButton';
 import { Link } from './Link';
 import clsx from 'clsx';
+import type { CmsDocument } from '@msb/cms-sdk';
 
 const documentLinkFragment = gql(`
   fragment DocumentLink on Document {
@@ -19,36 +20,44 @@ const documentLinkFragment = gql(`
   }
 `);
 
-type DocumentLinkProps<C extends ElementType> = {
+/** The document fields a link shows. Shaped like the CMS REST API's document. */
+export type DocumentLinkData = Pick<CmsDocument, 'title' | 'url' | 'filename'>;
+
+type DocumentLinkBaseProps<C extends ElementType> = {
   as?: C;
-  data?: FragmentType<typeof documentLinkFragment> | null;
   hideIcon?: boolean;
 } & Omit<ComponentProps<C>, 'href' | 'hideExternalIcon'>;
 
-export function DocumentLink<C extends ElementType = typeof Link>({
-  data: propsData,
+type DocumentLinkViewProps<C extends ElementType> = DocumentLinkBaseProps<C> & {
+  document?: DocumentLinkData | null;
+};
+
+type DocumentLinkProps<C extends ElementType> = DocumentLinkBaseProps<C> & {
+  data?: FragmentType<typeof documentLinkFragment> | null;
+};
+
+export function DocumentLinkView<C extends ElementType = typeof Link>({
+  document,
   target = '_blank',
   rel = 'noopener noreferrer',
   hideIcon = false,
   children,
   as,
   ...props
-}: DocumentLinkProps<C>) {
-  const data = getFragmentData(documentLinkFragment, propsData);
-
-  if (!data?.file?.url) {
+}: DocumentLinkViewProps<C>) {
+  if (!document?.url) {
     return null;
   }
 
-  const fileType = getFileType(data?.file?.filename);
-  const isInternal = checkIsInternal(data?.file?.url);
+  const fileType = getFileType(document.filename);
+  const isInternal = checkIsInternal(document.url);
   // const isArchive = data?.tagsCount ? data.tagsCount > 0 : false;
 
   const Comp = as ?? Link;
 
   return (
     <Comp
-      href={data?.file?.url}
+      href={document.url}
       {...props}
       target={target}
       rel={rel}
@@ -66,8 +75,32 @@ export function DocumentLink<C extends ElementType = typeof Link>({
       )}
     >
       {children ||
-        (data?.title || data?.file?.filename)?.replace(/^\d+\s?-?.?\s/g, '')}
+        (document.title || document.filename)?.replace(/^\d+\s?-?.?\s/g, '')}
     </Comp>
+  );
+}
+
+/** Maps the Keystone GraphQL document fragment to view data. */
+export function toDocumentLinkData(
+  data: FragmentType<typeof documentLinkFragment>,
+): DocumentLinkData {
+  const doc = getFragmentData(documentLinkFragment, data);
+  return {
+    title: doc.title ?? '',
+    url: doc.file?.url ?? null,
+    filename: doc.file?.filename ?? null,
+  };
+}
+
+export function DocumentLink<C extends ElementType = typeof Link>({
+  data,
+  ...props
+}: DocumentLinkProps<C>) {
+  return (
+    <DocumentLinkView<C>
+      {...(props as DocumentLinkBaseProps<C>)}
+      document={data ? toDocumentLinkData(data) : null}
+    />
   );
 }
 
@@ -76,6 +109,16 @@ type DocumentLinkButtonProps = Omit<ComponentProps<typeof LinkButton>, 'href'> &
 
 export function DocumentLinkButton(props: DocumentLinkButtonProps) {
   return <DocumentLink as={LinkButton} {...props} />;
+}
+
+type DocumentLinkButtonViewProps = Omit<
+  ComponentProps<typeof LinkButton>,
+  'href'
+> &
+  DocumentLinkViewProps<typeof LinkButton>;
+
+export function DocumentLinkButtonView(props: DocumentLinkButtonViewProps) {
+  return <DocumentLinkView as={LinkButton} {...props} />;
 }
 
 function checkIsInternal(url?: string | null) {
