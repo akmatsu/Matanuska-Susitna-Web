@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - stage
     paths:
       - sites/msb/**
       - packages/sdk/**
+      - packages/cms-sdk/**
       - packages/ui/**
       - packages/tw-config/**
       - amplify.yml
