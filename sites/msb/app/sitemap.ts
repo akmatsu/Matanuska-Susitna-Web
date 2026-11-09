@@ -1,6 +1,9 @@
 import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
+import { listAllServices } from '@msb/cms-sdk';
 import { MetadataRoute } from 'next';
+
+const SITEMAP_REVALIDATE = 60 * 60 * 24; // revalidate once a day
 
 const query = gql(`
   query GetAllPages {
@@ -37,10 +40,6 @@ const query = gql(`
       slug
       updatedAt
     }
-    services {
-      slug
-      updatedAt
-    }
     topics {
       slug,
       updatedAt
@@ -61,14 +60,18 @@ function getLastModified(value: unknown): string | Date {
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://matsu.gov';
-  const { data } = await getClientHandler({
-    query,
-    context: {
-      fetchOptions: {
-        next: { revalidate: 60 * 60 * 24 }, // revalidate once a day
+  const [{ data }, services] = await Promise.all([
+    getClientHandler({
+      query,
+      context: {
+        fetchOptions: {
+          next: { revalidate: SITEMAP_REVALIDATE },
+        },
       },
-    },
-  });
+    }),
+    // Services come from the Laravel CMS REST API; other pages still use Keystone.
+    listAllServices({ revalidate: SITEMAP_REVALIDATE }),
+  ]);
 
   const pages = [
     {
@@ -151,15 +154,14 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  if (data?.services)
-    data?.services.forEach((s) => {
-      pages.push({
-        url: `${baseUrl}/services/${s.slug}`,
-        lastModified: getLastModified(s.updatedAt),
-        changeFrequency: 'monthly',
-        priority: 0.9,
-      });
+  services.forEach((s) => {
+    pages.push({
+      url: `${baseUrl}/services/${s.slug}`,
+      lastModified: getLastModified(s.updatedAt),
+      changeFrequency: 'monthly',
+      priority: 0.9,
     });
+  });
 
   if (data?.topics)
     data?.topics.forEach((t) => {
