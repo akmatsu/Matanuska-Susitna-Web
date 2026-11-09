@@ -34,6 +34,15 @@ applications:
               else
                 echo "NEXT_PUBLIC_API_URL=$PROD_API_URL" >> ./sites/msb/.env
               fi
+            # Laravel CMS REST API (server only; used by @msb/cms-sdk).
+            - |
+              if [ "$AWS_BRANCH" = "stage" ]; then
+                echo "CMS_API_URL=$STAGE_CMS_API_URL" >> ./sites/msb/.env
+                echo "CMS_API_KEY=$STAGE_CMS_API_KEY" >> ./sites/msb/.env
+              else
+                echo "CMS_API_URL=$PROD_CMS_API_URL" >> ./sites/msb/.env
+                echo "CMS_API_KEY=$PROD_CMS_API_KEY" >> ./sites/msb/.env
+              fi
             - |
               if [ "$AWS_BRANCH" = "stage" ]; then
                 echo "NEXT_PUBLIC_TYPESENSE_API_KEY=$STAGE_TYPESENSE_API_KEY" >> ./sites/msb/.env

@@ -1,79 +1,66 @@
-import { BasePage } from '@/components/static/BasePage';
-import { gql } from '@msb/js-sdk/gql';
+import { ContentPageLayout } from '@/components/static/ContentPageLayout';
+import { PageListItemsView } from '@/components/static/Page/PageListItems';
+import { RichContent, hasRichContent } from '@/components/server/RichContent';
+import { NEXT_DEFAULT_REVALIDATE } from '@/configs/config';
+import { getService } from '@msb/cms-sdk';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getClientHandler } from '@/utils/apollo/utils';
-import { PageListItems } from '@/components/static/Page';
-import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+import { SERVICE_INCLUDES } from './serviceIncludes';
+import { toContentPageData, toServiceSideLists } from './toContentPageData';
 
-const metaQuery = gql(`
-  query GetServiceMeta($slug: String!) {
-    service(where: { slug: $slug }) {
-      title
-      description
-    }
-  }
-`);
+type Props = { params: Promise<{ slug: string }> };
 
-export const generateMetadata: GenerateMetadataFunction = async ({
-  params,
-}) => {
-  const { slug } = await params;
-  return getPageMeta('service', metaQuery, slug);
-};
-
-const getService = gql(`
-  query GetService($slug: String!, $now: DateTime!) {
-    service(where: { slug: $slug}) {
-      ...BasePageInfo
-      trails {
-        ...PageList
-      }
-      facilities {
-        ...PageList
-      }
-      parks {
-        ...PageList
-      }
-      boards {
-        ...PageList
-      } 
-    }
-  }
-`);
-
-export default async function ServicePage(props: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await props.params;
-
-  const { data, error } = await getClientHandler({
-    query: getService,
-    variables: {
-      slug,
-      now: new Date().toISOString(),
-    },
+/**
+ * Services come from the Laravel CMS REST API. Metadata and the page make
+ * the same request, and Next memoizes it, so the CMS is called once.
+ */
+function loadService(slug: string) {
+  return getService(slug, {
+    include: SERVICE_INCLUDES,
+    revalidate: NEXT_DEFAULT_REVALIDATE,
   });
+}
 
-  if (error) {
-    console.error('Error fetching service page data:', error);
-    throw error;
-  }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const result = await loadService(slug);
+  if (!result) return {};
 
-  if (!data?.service) {
+  return {
+    title: `MSB - ${result.data.title}`,
+    description: result.data.description,
+  };
+}
+
+export default async function ServicePage({ params }: Props) {
+  const { slug } = await params;
+  const result = await loadService(slug);
+
+  if (!result) {
     return notFound();
   }
 
-  const page = data.service;
+  const { data: service, references, documentCollections } = result;
+  const sideLists = toServiceSideLists(service);
 
   return (
-    <BasePage
-      data={page}
+    <ContentPageLayout
+      page={toContentPageData(service)}
+      body={
+        hasRichContent(service.content) ? (
+          <RichContent
+            doc={service.content}
+            references={references}
+            documentCollections={documentCollections}
+          />
+        ) : null
+      }
       rightSide={
         <>
-          <PageListItems items={page.parks} title="Parks" />
-          <PageListItems items={page.trails} title="Trails" />
-          <PageListItems items={page.facilities} title="Facilities" />
-          <PageListItems items={page.boards} title="Boards" />
+          <PageListItemsView items={sideLists.parks} title="Parks" />
+          <PageListItemsView items={sideLists.trails} title="Trails" />
+          <PageListItemsView items={sideLists.facilities} title="Facilities" />
+          <PageListItemsView items={sideLists.boards} title="Boards" />
         </>
       }
     />

@@ -30,7 +30,11 @@ const nextConfig = {
       new URL('https://services.arcgis.com/**'),
       new URL('https://loremflickr.com/**'),
       ...(process.env.NODE_ENV === 'development'
-        ? [new URL('http://localhost:3333/**')]
+        ? [
+            new URL('http://localhost:3333/**'),
+            // Images uploaded to a local Laravel CMS.
+            new URL('http://localhost:8000/**'),
+          ]
         : []),
     ],
   },
