@@ -18,6 +18,8 @@
     "@matsugov/ui": "workspace:^",
     "@msb/cms-sdk": "workspace:^",
     "@msb/js-sdk": "workspace:^",
+    "@tiptap/core": "catalog:",
+    "@tiptap/static-renderer": "catalog:",
     "@types/file-saver": "catalog:",
     "clsx": "catalog:",
     "date-fns": "catalog:",
