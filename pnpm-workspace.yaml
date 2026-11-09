@@ -36,6 +36,10 @@ catalog:
   '@tailwindcss/typography': ^0.5.20
   '@testing-library/dom': ^10.4.1
   '@testing-library/react': ^16.3.2
+  # @tiptap/static-renderer pins its @tiptap/core and @tiptap/pm peers to its own exact version,
+  # so these two must be upgraded together, to the same version.
+  '@tiptap/core': 3.33.0
+  '@tiptap/static-renderer': 3.33.0
   '@types/file-saver': ^2.0.7
   # We're intentionally using v22 for @types/node to match the Node.js version in use. NodeJS v24 currently has some compatibility issues with NextJS 16
   '@types/node': ^22.19.10
