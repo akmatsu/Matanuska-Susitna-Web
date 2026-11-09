@@ -21,7 +21,8 @@
     "lint:errors": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
     "codegen": "pnpm turbo run codegen --filter=@msb/js-sdk",
-    "codegen:watch": "pnpm turbo run codegen:watch --filter=@msb/js-sdk"
+    "codegen:watch": "pnpm turbo run codegen:watch --filter=@msb/js-sdk",
+    "cms:codegen": "pnpm --filter @msb/cms-sdk codegen"
   },
   "keywords": [],
   "author": "",

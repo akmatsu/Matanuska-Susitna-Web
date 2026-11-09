@@ -1,0 +1,26 @@
+{
+  "name": "@msb/cms-sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "codegen": "openapi-typescript ../../../laravel-based-cms/openapi/sites.json -o src/generated/sites.d.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "server-only": "catalog:"
+  },
+  "devDependencies": {
+    "@matsugov/tsconfig": "workspace:^",
+    "@types/node": "catalog:",
+    "@typescript/native": "catalog:",
+    "openapi-typescript": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
