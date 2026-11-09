@@ -29,6 +29,7 @@ export default defineConfig(
     'gql.ts',
     'graphql.ts',
     'packages/sdk/src/graphql/**',
+    'packages/cms-sdk/src/generated/**',
   ]),
   {
     settings: {

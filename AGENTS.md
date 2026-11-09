@@ -23,6 +23,7 @@ This is a Turborepo + pnpm workspace running Next.js 16 (App Router) and React 1
 - `packages/app-config` — shared app configurations.
 - `packages/ui` (`@matsugov/ui`) — shared React/Tailwind component library.
 - `packages/sdk` (`@msb/js-sdk`) — Apollo client + generated GraphQL types against the MSB CMS.
+- `packages/cms-sdk` (`@msb/cms-sdk`) — typed REST client for the new Laravel CMS, with types generated from its OpenAPI spec (`pnpm cms:codegen`). Server only. Services are the first page type using it; see its README.
 - `packages/map` (`@msb/map`) — ArcGIS wrapper used by the widgets map.
 - `packages/search-sdk` — TypeSense adapter shared across search UIs.
 - `packages/tw-config` — shared Tailwind v4 tokens (`msb.tw.css`, `uswds-colors.tw.css`).
