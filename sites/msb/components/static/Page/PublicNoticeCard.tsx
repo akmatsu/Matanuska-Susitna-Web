@@ -7,6 +7,7 @@ import {
 } from '@matsugov/ui';
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
 import clsx from 'clsx';
+import type { PublicNoticeSummary } from '@msb/cms-sdk';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -21,14 +22,18 @@ const PublicNoticeFields = gql(`
   }
 `);
 
-export function PublicNoticeCard({
-  publicNotice,
+export type PublicNoticeCardData = Pick<
+  PublicNoticeSummary,
+  'id' | 'title' | 'description' | 'slug' | 'heroImage'
+>;
+
+export function PublicNoticeCardView({
+  publicNotice: item,
   flag,
 }: {
-  publicNotice: FragmentType<typeof PublicNoticeFields>;
+  publicNotice: PublicNoticeCardData;
   flag?: boolean;
 }) {
-  const item = getFragmentData(PublicNoticeFields, publicNotice);
   return (
     <LinkCard
       key={item.id}
@@ -48,7 +53,7 @@ export function PublicNoticeCard({
                   item.heroImage?.split('?')[0] ||
                   'https://d1159zutbdy4l.cloudfront.net/public/uploads/549025a4-d712-4f57-93b9-edcb2f6b1d6aoptimized_images/1920x248_optimized_image.jpg'
                 }
-                alt={item.title!}
+                alt={item.title}
                 style={{ objectFit: 'cover' }}
                 fill
               />
@@ -69,7 +74,7 @@ export function PublicNoticeCard({
                 item.heroImage?.split('?')[0] ||
                 'https://d1159zutbdy4l.cloudfront.net/public/uploads/549025a4-d712-4f57-93b9-edcb2f6b1d6aoptimized_images/1920x248_optimized_image.jpg'
               }
-              alt={item.title!}
+              alt={item.title}
               loading="lazy"
               className="aspect-[2] h-full w-full object-cover"
               style={{ objectFit: 'cover' }}
@@ -94,5 +99,34 @@ export function PublicNoticeCard({
         </>
       )}
     </LinkCard>
+  );
+}
+
+/** Maps the Keystone GraphQL public notice fragment to view data. */
+export function toPublicNoticeCardData(
+  ref: FragmentType<typeof PublicNoticeFields>,
+): PublicNoticeCardData {
+  const item = getFragmentData(PublicNoticeFields, ref);
+  return {
+    id: item.id,
+    title: item.title ?? '',
+    description: item.description ?? '',
+    slug: item.slug ?? '',
+    heroImage: item.heroImage ?? null,
+  };
+}
+
+export function PublicNoticeCard({
+  publicNotice,
+  flag,
+}: {
+  publicNotice: FragmentType<typeof PublicNoticeFields>;
+  flag?: boolean;
+}) {
+  return (
+    <PublicNoticeCardView
+      publicNotice={toPublicNoticeCardData(publicNotice)}
+      flag={flag}
+    />
   );
 }

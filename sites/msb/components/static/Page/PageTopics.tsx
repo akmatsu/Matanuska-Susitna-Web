@@ -1,5 +1,9 @@
 import { FragmentType, getFragmentData, gql } from '@msb/js-sdk/gql';
-import { TopicItem } from './TopicCard';
+import {
+  TopicItemView,
+  toTopicItemData,
+  type TopicItemData,
+} from './TopicCard';
 import { PageSection } from './PageSection';
 
 const topicListFragment = gql(`
@@ -9,19 +13,31 @@ const topicListFragment = gql(`
   }
 `);
 
-export function PageTopics(props: {
-  topics?: FragmentType<typeof topicListFragment>[] | null;
-}) {
-  const topics = getFragmentData(topicListFragment, props.topics);
+export type TopicListData = TopicItemData & { id: string };
+
+export function PageTopicsView(props: { topics?: TopicListData[] | null }) {
+  const { topics } = props;
   if (!topics?.length) return null;
 
   return (
     <PageSection title="Related Topics">
       <ul>
         {topics.map((topic) => (
-          <TopicItem topic={topic} key={topic.id} className="my-2" />
+          <TopicItemView topic={topic} key={topic.id} />
         ))}
       </ul>
     </PageSection>
   );
+}
+
+type TopicListRef = FragmentType<typeof topicListFragment>;
+
+/** Maps the Keystone GraphQL topic list fragment to view data. */
+export function toTopicListData(ref: TopicListRef): TopicListData {
+  const topic = getFragmentData(topicListFragment, ref);
+  return { id: topic.id, ...toTopicItemData(topic) };
+}
+
+export function PageTopics(props: { topics?: TopicListRef[] | null }) {
+  return <PageTopicsView topics={props.topics?.map(toTopicListData)} />;
 }

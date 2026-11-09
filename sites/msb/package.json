@@ -16,6 +16,7 @@
     "@googleapis/calendar": "catalog:",
     "@matsugov/app-config": "workspace:^",
     "@matsugov/ui": "workspace:^",
+    "@msb/cms-sdk": "workspace:^",
     "@msb/js-sdk": "workspace:^",
     "@types/file-saver": "catalog:",
     "clsx": "catalog:",
