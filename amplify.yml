@@ -17,44 +17,21 @@ applications:
             - pnpm i --filter msb... --workspace-root
         build:
           commands:
+            # Every branch, stage included, builds against production
+            # services and settings, so stage shows exactly what
+            # production will.
             - echo "AUTH_SECRET=$AUTH_SECRET" >> ./sites/msb/.env
             - echo "AUTH_MICROSOFT_ENTRA_ID_SECRET=$AUTH_MICROSOFT_ENTRA_ID_SECRET" >> ./sites/msb/.env
             - echo "AUTH_MICROSOFT_ENTRA_ID_ID=$AUTH_MICROSOFT_ENTRA_ID_ID" >> ./sites/msb/.env
             - echo "AUTH_MICROSOFT_ENTRA_ID_TENANT_ID=$AUTH_MICROSOFT_ENTRA_ID_TENANT_ID" >> ./sites/msb/.env
             - echo "AUTH_MICROSOFT_ENTRA_ID_ISSUER=$AUTH_MICROSOFT_ENTRA_ID_ISSUER" >> ./sites/msb/.env
-            - |
-              if [ "$AWS_BRANCH" = "stage" ]; then
-                echo "AUTH_URL=$STAGE_AUTH_URL" >> ./sites/msb/.env
-              else
-                echo "AUTH_URL=$PROD_AUTH_URL" >> ./sites/msb/.env
-              fi
-            - |
-              if [ "$AWS_BRANCH" = "stage" ]; then
-                echo "NEXT_PUBLIC_API_URL=$STAGE_API_URL" >> ./sites/msb/.env
-              else
-                echo "NEXT_PUBLIC_API_URL=$PROD_API_URL" >> ./sites/msb/.env
-              fi
+            - echo "AUTH_URL=$PROD_AUTH_URL" >> ./sites/msb/.env
+            - echo "NEXT_PUBLIC_API_URL=$PROD_API_URL" >> ./sites/msb/.env
             # Laravel CMS REST API (server only; used by @msb/cms-sdk).
-            # Stage and production share one CMS API key.
             - echo "CMS_API_KEY=$CMS_API_KEY" >> ./sites/msb/.env
-            - |
-              if [ "$AWS_BRANCH" = "stage" ]; then
-                echo "CMS_API_URL=$STAGE_CMS_API_URL" >> ./sites/msb/.env
-              else
-                echo "CMS_API_URL=$PROD_CMS_API_URL" >> ./sites/msb/.env
-              fi
-            - |
-              if [ "$AWS_BRANCH" = "stage" ]; then
-                echo "NEXT_PUBLIC_TYPESENSE_API_KEY=$STAGE_TYPESENSE_API_KEY" >> ./sites/msb/.env
-              else
-                echo "NEXT_PUBLIC_TYPESENSE_API_KEY=$PROD_TYPESENSE_API_KEY" >> ./sites/msb/.env
-              fi
-            - |
-              if [ "$AWS_BRANCH" = "stage" ]; then
-                echo "NEXT_PUBLIC_TYPESENSE_HOST=$STAGE_TYPESENSE_HOST" >> ./sites/msb/.env
-              else
-                echo "NEXT_PUBLIC_TYPESENSE_HOST=$PROD_TYPESENSE_HOST" >> ./sites/msb/.env
-              fi
+            - echo "CMS_API_URL=$PROD_CMS_API_URL" >> ./sites/msb/.env
+            - echo "NEXT_PUBLIC_TYPESENSE_API_KEY=$PROD_TYPESENSE_API_KEY" >> ./sites/msb/.env
+            - echo "NEXT_PUBLIC_TYPESENSE_HOST=$PROD_TYPESENSE_HOST" >> ./sites/msb/.env
             - echo "NEXT_PUBLIC_TYPESENSE_PORT=$TYPESENSE_PORT" >> ./sites/msb/.env
             - echo "NEXT_PUBLIC_TYPESENSE_PROTOCOL=$TYPESENSE_PROTOCOL" >> ./sites/msb/.env
             - echo "NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY=$GOOGLE_CALENDAR_API_KEY" >> ./sites/msb/.env
@@ -62,18 +39,8 @@ applications:
             - echo "NEXT_PUBLIC_GOOGLE_CALENDAR_ASSEMBLY_ID=$GOOGLE_CALENDAR_ASSEMBLY_ID" >> ./sites/msb/.env
             - echo "NEXT_PUBLIC_GOOGLE_CALENDAR_PLANNING_ID=$GOOGLE_CALENDAR_PLANNING_ID" >> ./sites/msb/.env
             - echo "NEXT_PUBLIC_GOOGLE_CALENDAR_COMMUNITY_ID=$GOOGLE_CALENDAR_COMMUNITY_ID" >> ./sites/msb/.env
-            - |
-              if [ "$AWS_BRANCH" = "stage" ]; then
-                echo "NEXT_PUBLIC_BASE_URL=https://stage.matsu.gov" >> ./sites/msb/.env
-              else
-                echo "NEXT_PUBLIC_BASE_URL=https://matsu.gov" >> ./sites/msb/.env
-              fi
-            - |
-              if [ "$AWS_BRANCH" = "stage" ]; then
-                echo "DEPLOY_ENV=stage" >> ./sites/msb/.env
-              else
-                echo "DEPLOY_ENV=production" >> ./sites/msb/.env
-              fi
+            - echo "NEXT_PUBLIC_BASE_URL=https://matsu.gov" >> ./sites/msb/.env
+            - echo "DEPLOY_ENV=production" >> ./sites/msb/.env
             - pnpm run msb:build
       artifacts:
         baseDirectory: sites/msb/.next
