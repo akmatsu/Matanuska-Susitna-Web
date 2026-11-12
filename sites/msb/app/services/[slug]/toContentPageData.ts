@@ -3,7 +3,10 @@ import type { ServiceDetail } from '@msb/cms-sdk';
 import { topPublicNotices, upcomingEvents } from '@/utils/cmsPageHelpers';
 import { SERVICE_INCLUDES } from './serviceIncludes';
 
-type ServiceData = ServiceDetail<(typeof SERVICE_INCLUDES)[number]>['data'];
+export type ServicePageResult = ServiceDetail<
+  (typeof SERVICE_INCLUDES)[number]
+>;
+type ServiceData = ServicePageResult['data'];
 
 function byTitle<T extends { title: string }>(items: T[]) {
   return [...items].sort((a, b) => a.title.localeCompare(b.title));

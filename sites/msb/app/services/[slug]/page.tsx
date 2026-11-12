@@ -1,12 +1,9 @@
-import { ContentPageLayout } from '@/components/static/ContentPageLayout';
-import { PageListItemsView } from '@/components/static/Page/PageListItems';
-import { RichContent, hasRichContent } from '@/components/server/RichContent';
 import { NEXT_DEFAULT_REVALIDATE } from '@/configs/config';
 import { getService } from '@msb/cms-sdk';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SERVICE_INCLUDES } from './serviceIncludes';
-import { toContentPageData, toServiceSideLists } from './toContentPageData';
+import { ServiceView } from './ServiceView';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -40,29 +37,5 @@ export default async function ServicePage({ params }: Props) {
     return notFound();
   }
 
-  const { data: service, references, documentCollections } = result;
-  const sideLists = toServiceSideLists(service);
-
-  return (
-    <ContentPageLayout
-      page={toContentPageData(service)}
-      body={
-        hasRichContent(service.content) ? (
-          <RichContent
-            doc={service.content}
-            references={references}
-            documentCollections={documentCollections}
-          />
-        ) : null
-      }
-      rightSide={
-        <>
-          <PageListItemsView items={sideLists.parks} title="Parks" />
-          <PageListItemsView items={sideLists.trails} title="Trails" />
-          <PageListItemsView items={sideLists.facilities} title="Facilities" />
-          <PageListItemsView items={sideLists.boards} title="Boards" />
-        </>
-      }
-    />
-  );
+  return <ServiceView result={result} />;
 }
