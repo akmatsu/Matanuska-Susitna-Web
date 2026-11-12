@@ -4,7 +4,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 vi.mock('server-only', () => ({}));
 
 import { CmsApiError } from './core/client';
-import { getService, listAllServices, listServices } from './services';
+import {
+  getService,
+  getServiceDraft,
+  listAllServices,
+  listServices,
+} from './services';
 import type { ServiceWith } from './services';
 
 const fetchMock = vi.fn();
@@ -123,6 +128,38 @@ describe('getService', () => {
     vi.stubEnv('CMS_API_KEY', '');
     await expect(getService('x')).rejects.toThrow(/CMS_API_KEY is not set/);
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+});
+
+describe('getServiceDraft', () => {
+  const link = { id: '01jabc', expires: 1763000000, signature: 'abc123' };
+
+  it('forwards the signed link and is never cached', async () => {
+    fetchMock.mockResolvedValue(
+      jsonResponse({ data: {}, references: {}, documentCollections: {} }),
+    );
+
+    await getServiceDraft(link, { include: ['contacts'] });
+
+    const [url, init] = fetchMock.mock.calls[0];
+    const parsed = new URL(url);
+    // The CMS signs this exact path, so it must not change.
+    expect(parsed.pathname).toBe('/api/sites/v1/service-drafts/01jabc');
+    expect(Object.fromEntries(parsed.searchParams)).toEqual({
+      expires: '1763000000',
+      signature: 'abc123',
+      include: 'contacts',
+    });
+    expect(init.cache).toBe('no-store');
+    expect(init.next).toBeUndefined();
+  });
+
+  it('returns null when the draft is gone, and throws 403 for a bad link', async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse({ message: 'Gone.' }, 404));
+    await expect(getServiceDraft(link)).resolves.toBeNull();
+
+    fetchMock.mockResolvedValueOnce(jsonResponse({ message: 'Bad.' }, 403));
+    await expect(getServiceDraft(link)).rejects.toMatchObject({ status: 403 });
   });
 });
 

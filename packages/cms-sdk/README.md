@@ -2,7 +2,7 @@
 
 A typed client for the sites REST API of the Laravel/Filament CMS (`laravel-based-cms`).
 
-This package replaces `@msb/js-sdk` (Keystone GraphQL) one page type at a time. Services is the first page type to use it.
+This package replaces `@msb/js-sdk` (Keystone GraphQL) one page type at a time. Services and topics use it so far.
 
 ## Server only
 
@@ -36,15 +36,25 @@ result.data.contacts; // typed as present, because it was included
 result.data.tags; // type error: not included
 ```
 
-- **`getService()`** returns `null` on a 404. Other non-2xx responses throw a `CmsApiError` with `status`, `path` and, for a 422, `errors`.
-- **`listServices()`** returns one page.
-- **`listAllServices()`** walks every page.
+- **`getService()`** / **`getTopic()`** return `null` on a 404. Other non-2xx responses throw a `CmsApiError` with `status`, `path` and, for a 422, `errors`.
+- **`listServices()`** / **`listTopics()`** return one page.
+- **`listAllServices()`** / **`listAllTopics()`** walk every page.
+
+## Draft previews
+
+**`getTopicDraft()`** and **`getServiceDraft()`** load a draft. Both take `({ id, expires, signature }, { include })`. The CMS's Preview button makes a signed link to the site's draft page, and the page passes the link's `id`, `expires` and `signature` through unchanged.
+
+- The response has the same shape as the live record's (`getTopic()`, `getService()`), so the page can render a draft with the live page's code.
+- They return `null` when the draft is gone (usually because it was published).
+- They throw a `CmsApiError` with status 403 when the link is invalid or expired.
+- They are never cached (`cache: 'no-store'`).
+- The CMS signs the request path (`/api/sites/v1/<type>-drafts/{id}`), so don't rewrite that path in a proxy.
 
 ## Caching
 
 Requests use the Next.js data cache through `fetch`'s `next` option. The default is `revalidate: 60`.
 
-Every request is tagged (`cms`, `cms:services` and `cms:services:<slug>`), so a future publish webhook can call `revalidateTag()`. In apps with `cacheComponents` turned on, wrap calls in `'use cache'`.
+Every request (except draft previews) is tagged, e.g. `cms`, `cms:services` and `cms:services:<slug>`, so a future publish webhook can call `revalidateTag()`. In apps with `cacheComponents` turned on, wrap calls in `'use cache'`.
 
 ## Types
 
@@ -61,8 +71,11 @@ This needs the `laravel-based-cms` repo checked out next to this one (`../larave
 ## Adding a page type
 
 1. Regenerate the types once the CMS has the new endpoint.
-2. Add `src/<resource>.ts` following `services.ts`. It should:
+2. Add `src/<resource>.ts` following `services.ts` or `topics.ts`. It should:
    - call `cmsGet()` with the path,
    - use `cacheConfig()` with `cmsTags`,
-   - use `WithIncludes` for the included relations.
+   - wrap single-record requests in `nullOn404()`,
+   - use `WithIncludes` for the included relations,
+   - add a `get<Resource>Draft()` for the CMS's `/<type>-drafts/{id}` endpoint, with `cache: 'no-store'` and no cache tags.
 3. Export it from `src/index.ts`.
+4. In the site, add a `draft/page.tsx` next to the live page. Use `DraftPreview` from `sites/msb/components/server/DraftPreview.tsx`.
