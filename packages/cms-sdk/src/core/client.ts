@@ -36,6 +36,11 @@ export type CmsCacheConfig = {
 export type CmsGetOptions<P extends CmsGetPath> = {
   query?: CmsQuery<P>;
   next?: CmsCacheConfig;
+  /**
+   * Passed to `fetch`. Use `'no-store'` for responses that must never be
+   * cached, like draft previews.
+   */
+  cache?: RequestCache;
 } & ([CmsPathParams<P>] extends [never]
   ? { path?: never }
   : { path: CmsPathParams<P> });
@@ -142,6 +147,7 @@ export async function cmsGet<P extends CmsGetPath>(
     // wrong server (often a sign-in page), so fail instead of following it
     // and sending the API key along.
     redirect: 'manual',
+    ...(options.cache ? { cache: options.cache } : {}),
     // `next` is a Next.js extension to RequestInit.
     ...(options.next ? { next: options.next } : {}),
   } as RequestInit);
@@ -174,4 +180,17 @@ export async function cmsGet<P extends CmsGetPath>(
   }
 
   return (await res.json()) as CmsResponse<P>;
+}
+
+/**
+ * Waits for a CMS request and returns `null` when the CMS answers 404
+ * (the record doesn't exist or isn't published). Other errors are thrown.
+ */
+export async function nullOn404<T>(request: Promise<T>): Promise<T | null> {
+  try {
+    return await request;
+  } catch (error) {
+    if (error instanceof CmsApiError && error.status === 404) return null;
+    throw error;
+  }
 }

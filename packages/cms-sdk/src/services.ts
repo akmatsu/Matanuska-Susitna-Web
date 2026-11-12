@@ -1,5 +1,6 @@
-import { cmsGet, CmsApiError, type CmsQuery } from './core/client';
+import { cmsGet, nullOn404, type CmsQuery } from './core/client';
 import { cacheConfig, cmsTags, type CacheOptions } from './core/cache';
+import type { DraftPreviewLink } from './core/drafts';
 import type { WithIncludes } from './core/includes';
 import { fetchAllPages, MAX_PER_PAGE, type Paginated } from './core/pagination';
 import type { ContentDocumentCollections, ContentReferences } from './tiptap';
@@ -34,22 +35,49 @@ export async function getService<
   slug: string,
   options: { include?: I } & CacheOptions = {},
 ): Promise<ServiceDetail<I[number]> | null> {
-  try {
-    const res = await cmsGet('/services/{slug}', {
+  const res = await nullOn404(
+    cmsGet('/services/{slug}', {
       path: { slug },
       query: { include: options.include ? [...options.include] : undefined },
       next: cacheConfig(
         [cmsTags.list(RESOURCE), cmsTags.item(RESOURCE, slug)],
         options,
       ),
-    });
-    // The cast narrows the spec's generic `content` node to our TipTap
-    // union, and marks the requested relations as present.
-    return res as unknown as ServiceDetail<I[number]>;
-  } catch (error) {
-    if (error instanceof CmsApiError && error.status === 404) return null;
-    throw error;
-  }
+    }),
+  );
+  // The cast narrows the spec's generic `content` node to our TipTap
+  // union, and marks the requested relations as present.
+  return res as unknown as ServiceDetail<I[number]> | null;
+}
+
+/**
+ * Gets a service draft through a signed preview link from the CMS's Preview
+ * button. The response has the same shape as `getService()`.
+ *
+ * - Returns `null` when the draft no longer exists (usually because it was
+ *   published).
+ * - Throws a `CmsApiError` with status 403 when the link is invalid or
+ *   expired.
+ * - Never cached, so every preview shows the latest saved draft.
+ */
+export async function getServiceDraft<
+  const I extends readonly ServiceInclude[] = [],
+>(
+  link: DraftPreviewLink,
+  options: { include?: I } = {},
+): Promise<ServiceDetail<I[number]> | null> {
+  const res = await nullOn404(
+    cmsGet('/service-drafts/{id}', {
+      path: { id: link.id },
+      query: {
+        expires: link.expires,
+        signature: link.signature,
+        include: options.include ? [...options.include] : undefined,
+      },
+      cache: 'no-store',
+    }),
+  );
+  return res as unknown as ServiceDetail<I[number]> | null;
 }
 
 export type ListServicesOptions<I extends readonly ServiceInclude[]> = {
