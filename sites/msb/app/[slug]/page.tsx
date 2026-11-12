@@ -1,81 +1,43 @@
-import { BasePage } from '@/components/static/BasePage';
-import { PageListItems } from '@/components/static/Page';
-import { PageFacilities } from '@/components/static/Page/PageFacilities/PageFacilities';
-import { getClientHandler } from '@/utils/apollo/utils';
-import { gql } from '@msb/js-sdk/gql';
+import { NEXT_DEFAULT_REVALIDATE } from '@/configs/config';
+import { getTopic } from '@msb/cms-sdk';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+import { TOPIC_INCLUDES } from './topicIncludes';
+import { TopicView } from './TopicView';
 
-const metaQuery = gql(`
-  query GetTopicMeta($slug: String!) {
-    topic(where: { slug: $slug }) {
-      title
-      description
-    }
-  }
-`);
+type Props = { params: Promise<{ slug: string }> };
 
-export const generateMetadata: GenerateMetadataFunction = async ({
-  params,
-}) => {
-  const { slug } = await params;
-  return getPageMeta('topic', metaQuery, slug);
-};
-
-const query = gql(`
-  query GetTopicPage($slug: String, $now: DateTime!) {
-    topic(where: { slug: $slug }) {
-      ...BasePageInfo 
-      boards {
-        ...PageList
-      }
-      trails {
-        ...PageList
-      }
-      parks {
-        ...PageList
-      }
-      facilities(orderBy:  {
-         title: asc
-      }) {
-        ...FacilitiesList
-      }            
-    }
-  }
-`);
-
-interface Props {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+/**
+ * Topics come from the Laravel CMS REST API. They live at the site root,
+ * so this route also answers every root path that isn't a topic (with a
+ * 404). Metadata and the page make the same request, and Next memoizes it,
+ * so the CMS is called once.
+ */
+function loadTopic(slug: string) {
+  return getTopic(slug, {
+    include: TOPIC_INCLUDES,
+    revalidate: NEXT_DEFAULT_REVALIDATE,
+  });
 }
 
-export default async function page(props: Props) {
-  const params = await props.params;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const result = await loadTopic(slug);
+  if (!result) return {};
 
-  const { data } = await getClientHandler({
-    query,
-    variables: {
-      slug: params.slug,
-      now: new Date().toISOString(),
-    },
-  });
+  return {
+    title: `MSB - ${result.data.title}`,
+    description: result.data.description,
+  };
+}
 
-  const topic = data?.topic;
+export default async function TopicPage({ params }: Props) {
+  const { slug } = await params;
+  const result = await loadTopic(slug);
 
-  if (!topic) return notFound();
+  if (!result) {
+    return notFound();
+  }
 
-  return (
-    <BasePage
-      data={topic}
-      rightSide={
-        <>
-          <PageFacilities facilities={topic.facilities} />
-          <PageListItems items={topic.trails} title="Trails" />
-          <PageListItems items={topic.parks} title="Parks" />
-        </>
-      }
-    >
-      <PageListItems items={topic.boards} title="Boards" />
-    </BasePage>
-  );
+  return <TopicView result={result} />;
 }
