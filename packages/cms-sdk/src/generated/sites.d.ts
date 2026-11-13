@@ -4,6 +4,72 @@
  */
 
 export interface paths {
+    "/org-units": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List published org units */
+        get: operations["sites.v1.org-units.index"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/org-units/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get one published org unit by its slug
+         * @description Next to `data`, the response has the records that the org unit's
+         *     `content` links to (`references`) and the document lists it shows
+         *     (`documentCollections`).
+         */
+        get: operations["sites.v1.org-units.show"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/org-unit-drafts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Preview an org unit draft
+         * @description Works only with a preview link from the CMS's Preview button, which
+         *     signs the `expires` and `signature` values for one draft. A missing,
+         *     changed, or expired link returns 403, and a draft that no longer
+         *     exists (for example, because it was published) returns 404. The
+         *     response has the same shape as a published org unit, so a website can
+         *     show the draft with the same code. `id` is the draft's id. Included
+         *     records are the draft's own, and only published ones are returned,
+         *     like on a published org unit.
+         */
+        get: operations["sites.v1.org-unit-drafts.show"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/services": {
         parameters: {
             query?: never;
@@ -195,6 +261,62 @@ export interface components {
                 url: string | null;
             } | null;
         };
+        /** OrgUnitResource */
+        OrgUnitResource: {
+            id: string;
+            /** @constant */
+            type: "orgUnit";
+            slug: string;
+            path: string | null;
+            title: string;
+            description: string;
+            body: string | null;
+            /**
+             * @description The rich text as TipTap JSON. `body` holds the same content as
+             *     markdown.
+             */
+            content: {
+                [key: string]: unknown;
+            } | null;
+            heroImage: string | null;
+            hideSideNav: boolean;
+            /**
+             * @description The kind of org unit. Named `unitType` because `type` is the
+             *     page type.
+             * @enum {string|null}
+             */
+            unitType: "office" | "department" | "division" | null;
+            /** @description An Iconify class, like `icon-[mdi--map]`. */
+            icon: string | null;
+            /**
+             * @description Whether the org unit has its own page on the website. Keystone
+             *     stores 'yes', 'no', or nothing, and only 'no' hides the page.
+             */
+            showPage: boolean;
+            /** @description The heading above the children list, like "Divisions". */
+            childrenLabel: string;
+            /** Format: date-time */
+            publishAt: string | null;
+            /** Format: date-time */
+            updatedAt: string | null;
+            parent?: components["schemas"]["PageSummaryResource"] | null;
+            children?: components["schemas"]["PageSummaryResource"][];
+            actions?: components["schemas"]["InternalLinkResource"][];
+            contacts?: components["schemas"]["ContactResource"][];
+            documents?: components["schemas"]["DocumentResource"][];
+            upcomingEvents?: components["schemas"]["EventSummaryResource"][];
+            publicNotices?: components["schemas"]["PublicNoticeSummaryResource"][];
+            tags?: components["schemas"]["TagResource"][];
+            topics?: components["schemas"]["PageSummaryResource"][];
+            services?: components["schemas"]["PageSummaryResource"][];
+            communities?: components["schemas"]["PageSummaryResource"][];
+            assemblyDistricts?: components["schemas"]["PageSummaryResource"][];
+            plans?: components["schemas"]["PageSummaryResource"][];
+            boards?: components["schemas"]["PageSummaryResource"][];
+            trails?: components["schemas"]["PageSummaryResource"][];
+            parks?: components["schemas"]["PageSummaryResource"][];
+            facilities?: components["schemas"]["PageSummaryResource"][];
+        };
         /** PageSummaryResource */
         PageSummaryResource: {
             id: string;
@@ -364,6 +486,177 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    "sites.v1.org-units.index": {
+        parameters: {
+            query?: {
+                /** @description The number of org units per page. */
+                per_page?: number;
+                /**
+                 * @description Related records to include, separated by commas.
+                 * @example [
+                 *       "parent",
+                 *       "children"
+                 *     ]
+                 */
+                include?: ("actions" | "contacts" | "documents" | "upcomingEvents" | "publicNotices" | "tags" | "parent" | "children" | "topics" | "services" | "communities" | "assemblyDistricts" | "plans" | "boards" | "trails" | "parks" | "facilities")[];
+                /** @description Comma-separated org unit slugs. */
+                "filter[slug]"?: string;
+                /** @description Comma-separated tag IDs. Matches org units with any of them. */
+                "filter[tags]"?: string;
+                /**
+                 * @description Comma-separated org unit types: office, department, or division.
+                 * @example department,office
+                 */
+                "filter[unitType]"?: string;
+                /** @description Only org units that have (true) or don't have (false) their own page. */
+                "filter[showPage]"?: boolean;
+                /** @description Add a leading - to sort descending. */
+                sort?: "title" | "-title" | "updatedAt" | "-updatedAt" | "publishAt" | "-publishAt";
+                /** @description The page number. */
+                page?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Paginated set of `OrgUnitResource` */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["OrgUnitResource"][];
+                        links: {
+                            first: string | null;
+                            last: string | null;
+                            prev: string | null;
+                            next: string | null;
+                        };
+                        meta: {
+                            current_page: number;
+                            from: number | null;
+                            last_page: number;
+                            /** @description Generated paginator links. */
+                            links: {
+                                url: string | null;
+                                label: string;
+                                active: boolean;
+                            }[];
+                            /** @description Base path for paginator generated URLs. */
+                            path: string | null;
+                            /** @description Number of items shown per page. */
+                            per_page: number;
+                            /** @description Number of the last item in the slice. */
+                            to: number | null;
+                            /** @description Total number of items being paginated. */
+                            total: number;
+                        };
+                    };
+                };
+            };
+            401: components["responses"]["AuthenticationException"];
+            422: components["responses"]["ValidationException"];
+        };
+    };
+    "sites.v1.org-units.show": {
+        parameters: {
+            query?: {
+                /**
+                 * @description Related records to include, separated by commas.
+                 * @example [
+                 *       "parent",
+                 *       "children"
+                 *     ]
+                 */
+                include?: ("actions" | "contacts" | "documents" | "upcomingEvents" | "publicNotices" | "tags" | "parent" | "children" | "topics" | "services" | "communities" | "assemblyDistricts" | "plans" | "boards" | "trails" | "parks" | "facilities")[];
+            };
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description `OrgUnitResource` */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["OrgUnitResource"];
+                        references: {
+                            [key: string]: {
+                                type: string;
+                                id: string;
+                                title: string;
+                                path: string | null;
+                                url: string | null;
+                            } | null;
+                        };
+                        documentCollections: {
+                            [key: string]: components["schemas"]["DocumentCollectionResource"] | null;
+                        };
+                    };
+                };
+            };
+            401: components["responses"]["AuthenticationException"];
+        };
+    };
+    "sites.v1.org-unit-drafts.show": {
+        parameters: {
+            query: {
+                /** @description When the preview link expires, as a Unix timestamp. Copy it from the preview link. */
+                expires: number;
+                /** @description The preview link signature. Copy it from the preview link. */
+                signature: string;
+                /**
+                 * @description Related records to include, separated by commas.
+                 * @example [
+                 *       "parent",
+                 *       "children"
+                 *     ]
+                 */
+                include?: ("actions" | "contacts" | "documents" | "upcomingEvents" | "publicNotices" | "tags" | "parent" | "children" | "topics" | "services" | "communities" | "assemblyDistricts" | "plans" | "boards" | "trails" | "parks" | "facilities")[];
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description `OrgUnitResource` */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["OrgUnitResource"];
+                        references: {
+                            [key: string]: {
+                                type: string;
+                                id: string;
+                                title: string;
+                                path: string | null;
+                                url: string | null;
+                            } | null;
+                        };
+                        documentCollections: {
+                            [key: string]: components["schemas"]["DocumentCollectionResource"] | null;
+                        };
+                    };
+                };
+            };
+            401: components["responses"]["AuthenticationException"];
+        };
+    };
     "sites.v1.services.index": {
         parameters: {
             query?: {
