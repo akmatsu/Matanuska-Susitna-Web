@@ -9,6 +9,8 @@ import { getClientHandler } from '@/utils/apollo/utils';
 import { Hero } from '@matsugov/ui';
 import { Text } from '@matsugov/ui/Text';
 import { gql } from '@msb/js-sdk/gql';
+import { listAllOrgUnits } from '@msb/cms-sdk';
+import { NEXT_DEFAULT_REVALIDATE } from '@/configs/config';
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
@@ -62,24 +64,6 @@ const query = gql(`
       }
     }
 
-    orgUnits(where: {
-      AND: [
-        {type:  {
-          equals: "office"
-        }},
-        {showPage:  {
-          equals: "yes"
-        }}
-      ]
-    }) {
-      id
-      title
-      description
-      slug
-      type
-      icon
-    },
-
     topic(where: {
       slug: "mayor"
     }) {
@@ -101,12 +85,20 @@ const query = gql(`
 `);
 
 export default async function GovernmentPage() {
-  const { data } = await getClientHandler({
-    query,
-    variables: {
-      date: new Date().toISOString(),
-    },
-  });
+  // The page text still comes from Keystone. The offices come from the
+  // Laravel CMS, sorted by title.
+  const [{ data }, offices] = await Promise.all([
+    getClientHandler({
+      query,
+      variables: {
+        date: new Date().toISOString(),
+      },
+    }),
+    listAllOrgUnits({
+      filter: { unitType: ['office'], showPage: true },
+      revalidate: NEXT_DEFAULT_REVALIDATE,
+    }),
+  ]);
 
   if (!data) {
     return notFound();
@@ -114,7 +106,6 @@ export default async function GovernmentPage() {
 
   const page = data.landingPage;
   const publicNotices = data.publicNotices;
-  const offices = data.orgUnits;
   if (!page) return notFound();
 
   const highlights = page.highlights;
@@ -176,7 +167,7 @@ export default async function GovernmentPage() {
                     {offices?.map((o) => (
                       <DarkFlatCard
                         key={o.id}
-                        title={o.title!}
+                        title={o.title}
                         icon={o.icon}
                         href={`/departments/${o.slug}`}
                         description={o.description || null}

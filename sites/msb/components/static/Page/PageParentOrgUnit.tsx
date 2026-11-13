@@ -1,15 +1,12 @@
 import { PageSection } from './PageSection';
-import { OrgUnitFieldsFragmentDoc } from '@msb/js-sdk/graphql';
-import { OrgUnitCard } from './OrgUnitCard';
-import { FragmentType } from '@msb/js-sdk/gql';
+import { PageListItemView, type PageListItemData } from './PageListItem';
 
-export function PageParentOrgUnit(props: {
-  item?: FragmentType<typeof OrgUnitFieldsFragmentDoc> | null;
-}) {
+/** The department an org unit belongs to, when it has one. */
+export function PageParentOrgUnit(props: { item?: PageListItemData | null }) {
   if (props.item) {
     return (
       <PageSection title="Parent Department">
-        <OrgUnitCard orgUnit={props.item} />
+        <PageListItemView item={props.item} />
       </PageSection>
     );
   }
