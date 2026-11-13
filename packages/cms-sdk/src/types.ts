@@ -19,6 +19,17 @@ export type Topic = Omit<Schemas['TopicResource'], 'content'> & {
   content: TipTapDoc | null;
 };
 
+/**
+ * An org unit (a department, office or division). `content` is typed with
+ * the hand-written TipTap node union instead of the spec's generic node.
+ */
+export type OrgUnit = Omit<Schemas['OrgUnitResource'], 'content'> & {
+  content: TipTapDoc | null;
+};
+
+/** What kind of org unit it is. Null when it isn't set in the CMS. */
+export type OrgUnitType = NonNullable<OrgUnit['unitType']>;
+
 export type Contact = Schemas['ContactResource'];
 /** Named CmsDocument so it doesn't clash with the DOM `Document` type. */
 export type CmsDocument = Schemas['DocumentResource'];

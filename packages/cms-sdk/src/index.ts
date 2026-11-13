@@ -7,3 +7,4 @@ export * from './tiptap';
 export * from './types';
 export * from './services';
 export * from './topics';
+export * from './orgUnits';
