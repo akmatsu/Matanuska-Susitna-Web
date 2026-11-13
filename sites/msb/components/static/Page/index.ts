@@ -11,6 +11,5 @@ export * from './PageHours';
 export * from './PageDistricts';
 export * from './PageAddress';
 export * from './PageParentOrgUnit';
-export * from './PageChildrenOrgUnits';
 export * from './PageSection';
 export * from './PageContainer';

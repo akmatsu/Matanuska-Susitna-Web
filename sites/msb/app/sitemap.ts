@@ -1,6 +1,6 @@
 import { getClientHandler } from '@/utils/apollo/utils';
 import { gql } from '@msb/js-sdk/gql';
-import { listAllServices, listAllTopics } from '@msb/cms-sdk';
+import { listAllOrgUnits, listAllServices, listAllTopics } from '@msb/cms-sdk';
 import { MetadataRoute } from 'next';
 
 const SITEMAP_REVALIDATE = 60 * 60 * 24; // revalidate once a day
@@ -22,10 +22,6 @@ const query = gql(`
       updatedAt
     }
     homePage {
-      updatedAt
-    }
-    orgUnits {
-      slug
       updatedAt
     }
     parks {
@@ -56,7 +52,7 @@ function getLastModified(value: unknown): string | Date {
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://matsu.gov';
-  const [{ data }, services, topics] = await Promise.all([
+  const [{ data }, services, topics, orgUnits] = await Promise.all([
     getClientHandler({
       query,
       context: {
@@ -65,10 +61,15 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       },
     }),
-    // Services and topics come from the Laravel CMS REST API; other pages
-    // still use Keystone.
+    // Services, topics and org units come from the Laravel CMS REST API;
+    // other pages still use Keystone.
     listAllServices({ revalidate: SITEMAP_REVALIDATE }),
     listAllTopics({ revalidate: SITEMAP_REVALIDATE }),
+    // Org units with showPage turned off have no page, so leave them out.
+    listAllOrgUnits({
+      filter: { showPage: true },
+      revalidate: SITEMAP_REVALIDATE,
+    }),
   ]);
 
   const pages = [
@@ -112,15 +113,14 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-  if (data?.orgUnits)
-    data?.orgUnits.forEach((o) => {
-      pages.push({
-        url: `${baseUrl}/departments/${o.slug}`,
-        lastModified: getLastModified(o.updatedAt),
-        changeFrequency: 'monthly',
-        priority: 0.5,
-      });
+  orgUnits.forEach((o) => {
+    pages.push({
+      url: `${baseUrl}/departments/${o.slug}`,
+      lastModified: getLastModified(o.updatedAt),
+      changeFrequency: 'monthly',
+      priority: 0.5,
     });
+  });
 
   if (data?.parks)
     data?.parks.forEach((p) => {

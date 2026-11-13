@@ -1,98 +1,46 @@
-import { BasePage } from '@/components/static/BasePage';
-import {
-  PageChildrenOrgUnits,
-  PageListItems,
-  PageParentOrgUnit,
-} from '@/components/static/Page';
-import { gql } from '@msb/js-sdk/gql';
+import { NEXT_DEFAULT_REVALIDATE } from '@/configs/config';
+import { getOrgUnit } from '@msb/cms-sdk';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getClientHandler } from '@/utils/apollo/utils';
+import { ORG_UNIT_INCLUDES } from './orgUnitIncludes';
+import { OrgUnitView } from './OrgUnitView';
 
-import { GenerateMetadataFunction, getPageMeta } from '@/utils/pageHelpers';
+type Props = { params: Promise<{ slug: string }> };
 
-const metaQuery = gql(`
-  query GetOrgUnitMeta($slug: String!) {
-    orgUnit(where: { slug: $slug }) {
-      title
-      description
-    }
-  }
-`);
-
-export const generateMetadata: GenerateMetadataFunction = async ({
-  params,
-}) => {
-  const { slug } = await params;
-  return getPageMeta('orgUnit', metaQuery, slug);
-};
-
-const getOrgUnit = gql(`
-  query GetOrgUnit(
-    $slug: String!
-    $now: DateTime!
-  ) {
-    orgUnit(where: { slug: $slug }) {
-      ...BasePageInfo
-      showPage
-      children {
-        ...ChildrenOrgUnits
-      }
-      parent {
-        ...OrgUnitFields
-      }
-      parks {
-        ...PageList
-      }
-      facilities {
-        ...PageList
-      }
-      trails {
-        ...PageList
-      }
-      boards {
-        ...PageList
-      }
-    }
-  }
-  `);
-
-export default async function DepartmentPage(props: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await props.params;
-  const { data, error } = await getClientHandler({
-    query: getOrgUnit,
-    variables: {
-      slug,
-      now: new Date().toISOString(),
-    },
+/**
+ * Org units (departments, offices and divisions) come from the Laravel CMS
+ * REST API. Metadata and the page make the same request, and Next memoizes
+ * it, so the CMS is called once.
+ *
+ * An org unit with `showPage` turned off exists only as a link target in
+ * the CMS, so it has no page here.
+ */
+async function loadOrgUnit(slug: string) {
+  const result = await getOrgUnit(slug, {
+    include: ORG_UNIT_INCLUDES,
+    revalidate: NEXT_DEFAULT_REVALIDATE,
   });
+  return result?.data.showPage ? result : null;
+}
 
-  if (error) {
-    console.error('Error fetching org unit data:', error);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const result = await loadOrgUnit(slug);
+  if (!result) return {};
+
+  return {
+    title: `MSB - ${result.data.title}`,
+    description: result.data.description,
+  };
+}
+
+export default async function DepartmentPage({ params }: Props) {
+  const { slug } = await params;
+  const result = await loadOrgUnit(slug);
+
+  if (!result) {
     return notFound();
   }
 
-  if (!data?.orgUnit || data.orgUnit?.showPage === 'no') {
-    console.error('Org Unit not found for slug:', slug);
-    return notFound();
-  }
-
-  const page = data.orgUnit;
-
-  return (
-    <BasePage
-      data={page}
-      rightSide={
-        <>
-          <PageParentOrgUnit item={page.parent} />
-          <PageChildrenOrgUnits items={page.children} />
-          <PageListItems items={page.facilities} title="Facilities" />
-          <PageListItems items={page.parks} title="Parks" />
-          <PageListItems items={page.trails} title="Trails" />
-          <PageListItems items={page.boards} title="Boards" />
-        </>
-      }
-    />
-  );
+  return <OrgUnitView result={result} />;
 }

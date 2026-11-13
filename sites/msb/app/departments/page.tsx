@@ -4,6 +4,8 @@ import { ProseWrapper } from '@/components/static/ProseWrapper';
 import { gql } from '@msb/js-sdk/gql';
 import { Text } from '@matsugov/ui/Text';
 import { notFound } from 'next/navigation';
+import { listAllOrgUnits } from '@msb/cms-sdk';
+import { NEXT_DEFAULT_REVALIDATE } from '@/configs/config';
 import { getClientHandler } from '@/utils/apollo/utils';
 import { LinkIconCard } from '@/components/static/LinkIconCard';
 import { DarkFlatCard } from '@/components/static/LandingPage/ProminentCard';
@@ -49,41 +51,23 @@ const query = gql(`
       description
       body
     }
-
-    orgUnits(where: {
-      AND: [
-        {
-          OR: [
-            { type: { equals: "department" } },
-            { type: { equals: "office" } }
-          ]
-        },
-        {
-          showPage: { equals: "yes" }
-        }
-      ]
-    }, orderBy:  {
-       title: asc
-    }) {
-      id
-      title
-      description
-      slug
-      type
-      icon
-    }
   }
 `);
 
 export default async function DepartmentsPage() {
-  const { data } = await getClientHandler({
-    query,
-  });
+  // The page text still comes from Keystone. The org units come from the
+  // Laravel CMS, sorted by title.
+  const [{ data }, orgUnits] = await Promise.all([
+    getClientHandler({ query }),
+    listAllOrgUnits({
+      filter: { unitType: ['department', 'office'], showPage: true },
+      revalidate: NEXT_DEFAULT_REVALIDATE,
+    }),
+  ]);
   const page = data?.landingPage;
 
-  const offices = data?.orgUnits?.filter((d) => d.type === 'office') || [];
-  const departments =
-    data?.orgUnits?.filter((d) => d.type === 'department') || [];
+  const offices = orgUnits.filter((o) => o.unitType === 'office');
+  const departments = orgUnits.filter((o) => o.unitType === 'department');
 
   if (!page) return notFound();
 
@@ -95,14 +79,14 @@ export default async function DepartmentsPage() {
           <MarkdownRenderer>{page.body}</MarkdownRenderer>
         </ProseWrapper>
       </PageContainer>
-      <section className="bg-surface-primary text-white pb-8">
+      <section className="bg-surface-primary pb-8 text-white">
         <PageContainer size={pageSize}>
           <Text type="heading2">Officers</Text>
-          <div className="flex gap-4 flex-wrap items-stretch justify-center">
+          <div className="flex flex-wrap items-stretch justify-center gap-4">
             {offices.map((o) => (
               <DarkFlatCard
                 key={o.id}
-                title={o.title!}
+                title={o.title}
                 icon={o.icon}
                 description={o.description}
                 href={`/departments/${o.slug}`}
@@ -114,7 +98,7 @@ export default async function DepartmentsPage() {
       <section>
         <PageContainer size={pageSize}>
           <Text type="heading2">Departments</Text>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {departments.map((d) => (
               <LinkIconCard
                 key={d.id}
